@@ -3,6 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script>window.__resources={
+  "https://unpkg.com/react@18.3.1/umd/react.production.min.js":"./vendor/react.production.min.js",
+  "https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js":"./vendor/react-dom.production.min.js",
+  "https://unpkg.com/@babel/standalone@7.29.0/babel.min.js":"./vendor/babel.min.js"
+};</script>
 <script src="./support.js"></script>
 </head>
 <body>
@@ -3256,7 +3261,7 @@ const PRACTICE_U7 = [
   {id:"u7p3",label:"1.3",title:"When the Average Lies",note:"One extreme value. Watch carefully which measures move and which do not.",
    items:[
      {t:0,q:"Mean of 5, 5, 5, 5",a:"5"},{t:0,q:"Median of 5, 5, 5, 5",a:"5"},{t:0,q:"Mean of 5, 5, 5, 25",a:"10"},{t:0,q:"Median of 5, 5, 5, 25",a:"5"},{t:0,q:"Range of 5, 5, 5, 25",a:"20"},{t:0,q:"Mode of 5, 5, 5, 25",a:"5"},
-     {t:1,q:"Four people earn 10 each, a fifth earns 60 — mean",a:"20",hint:"100 ÷ 5"},{t:1,q:"Those same five people — median",a:"10"},{t:1,q:"Those same five people — range",a:"50"},{t:1,q:"Remove the 60. Mean of the four left",a:"10"},{t:1,q:"Type the measure that describes a typical one of those five people",a:"10",hint:"The median, 10 — the mean of 20 describes nobody"},
+     {t:1,q:"Four people earn 10 each, a fifth earns 60 — mean",a:"20",hint:"100 ÷ 5"},{t:1,q:"Those same five people — median",a:"10"},{t:1,q:"Those same five people — range",a:"50"},{t:1,q:"Remove the 60. Mean of the four left",a:"10"},{t:1,q:"Type the value of the measure that best describes a typical one of those five people",a:"10",hint:"The median, 10 — the mean of 20 describes nobody"},
      {t:2,q:"Six houses cost 200 each and one costs 900 — mean",a:"300",hint:"2100 ÷ 7"},{t:2,q:"Those same seven houses — median",a:"200"}
    ]},
   {id:"u7p4",label:"1.4",title:"Chance as a Number",note:"Chance is a count out of a total. Type the count that is asked for.",
@@ -3302,7 +3307,7 @@ const PRACTICE_U8 = [
    items:[
      {t:0,q:"Stops on a ten-stop trail",a:"10"},{t:0,q:"x + 9 = 9",a:"0"},
      {t:1,q:"Trail rule × 2 + 3. Stop number 6 gives",a:"15"},{t:1,q:"Ten stops, 3 minutes each — total minutes",a:"30"},
-     {t:2,q:"In 5 gives 23, in 8 gives 35. In 10 gives",a:"43",hint:"The rule is × 4 + 3"},{t:2,q:"2x + 2x = 40",a:"10",hint:"That's 4x"},{t:2,q:"A rule turns 4 into 4 and 6 into 8. Put in 10",a:"12",hint:"× 2 − 4"}
+     {t:2,q:"In 5 gives 23, in 8 gives 35. In 10 gives",a:"43",hint:"The rule is × 4 + 3"},{t:2,q:"2x + 2x = 40",a:"10",hint:"That's 4x"},{t:2,q:"A rule turns 4 into 4 and 6 into 8. Put in 10",a:"16",hint:"× 2 − 4"}
    ]}
 ];
 
@@ -3651,7 +3656,7 @@ const AVATAR_COLORS = ["#FF9F1C","#2DD4BF","#A78BFA","#F472B6","#A3E635","#60A5F
 /* BACKEND CONFIG — paste a Firebase project id here to turn on cloud saves
  * (name + secret code, progress follows the pilot to any device). With ""
  * the app is local-only, exactly as before. Setup steps: BACKEND.md. */
-const REMOTE_PROJECT_ID = "";
+const REMOTE_PROJECT_ID = "big-math-adventures";
 
 const SESSION_KEY = "abm.session.v1";
 const Remote = {
@@ -3912,7 +3917,7 @@ class Component extends DCLogic {
   profileVals(){
     const st=this.state;
     const active=st.profiles.find(p=>p.id===st.activeId)||null;
-    const norm=v=>String(v==null?"":v).replace(/[\s,]/g,"");
+    const norm=v=>String(v==null?"":v).replace(/[\s,]/g,"").replace(/^0+(?=\d)/,"");
     const progressFor=pid=>{
       const d=this.store.data[pid]||{}, ans=d.pAns||{};
       let done=0, correct=0, totalItems=0; const missed=[];
@@ -4036,7 +4041,7 @@ class Component extends DCLogic {
       lDotsRows:step.dots?step.dots.r:0,
       lPips:L.steps.map((s,k)=>({
         go:()=>this.setState(z=>({lstep:{...z.lstep,[id]:k},playing:false})),
-        style:`width:${k===i?22:9}px;height:9px;border-radius:999px;border:0;cursor:pointer;padding:0;transition:.3s;background:${k===i?"#38BDF8":k<i?"rgba(56,189,248,.4)":"rgba(255,255,255,.16)"}`
+        style:`width:${k===i?22:9}px;height:9px;box-sizing:content-box;border-radius:999px;border:12px solid transparent;background-clip:padding-box;cursor:pointer;padding:0;transition:.3s;background-color:${k===i?"#38BDF8":k<i?"rgba(56,189,248,.4)":"rgba(255,255,255,.16)"}`
       })),
       lNext:()=>this.saveState(s=>({lstep:{...s.lstep,[id]:Math.min(n-1,(s.lstep[id]||0)+1)},playing:false})),
       lPrev:()=>this.saveState(s=>({lstep:{...s.lstep,[id]:Math.max(0,(s.lstep[id]||0)-1)},playing:false})),
@@ -4053,7 +4058,7 @@ class Component extends DCLogic {
     const set=this.curSet();
     const tf=st.pTier, key=set.id+"|"+(tf==null?"all":tf);
     const ans=st.pAns[set.id]||{}, checked=!!st.pChecked[key], runs=st.pRuns[key]||0;
-    const norm=v=>String(v==null?"":v).replace(/[\s,]/g,"");
+    const norm=v=>String(v==null?"":v).replace(/[\s,]/g,"").replace(/^0+(?=\d)/,"");
     const isRight=(i,it)=>norm(ans[i])!=="" && norm(ans[i])===it.a;
     const visible=set.items.map((it,i)=>({it,i})).filter(x=>tf==null||x.it.t===tf);
     const score=visible.filter(x=>isRight(x.i,x.it)).length;
@@ -4095,7 +4100,7 @@ class Component extends DCLogic {
         const v=ans[i]==null?"":ans[i], right=isRight(i,it), shown=checked;
         const tier=TIERS[it.t];
         return {q:it.q, value:v, tierIcon:tier.icon, tierName:tier.name,
-          set:e=>{const v=e.target.value.replace(/[^0-9]/g,"").slice(0,5);
+          set:e=>{const v=e.target.value.replace(/[^0-9]/g,"").slice(0,7);
             this.saveState(s=>({pAns:{...s.pAns,[set.id]:{...(s.pAns[set.id]||{}),[i]:v}}}));},
           mark: shown ? (right?"✓":"✗") : "",
           markColor: right?"#4ADE80":"#FB7185",
@@ -4503,7 +4508,7 @@ class Component extends DCLogic {
         style:(()=>{
           const on=st.week===w.n;
           const c=st.uview===6?"96,165,250":st.uview===5?"163,230,53":st.uview===4?"244,114,182":st.uview===3?"167,139,250":st.uview===2?"45,212,191":"255,159,28";
-          const hex=st.uview===6?"#60A5FA":st.uview===5?"#A3E635":st.uview===4?"#F472B6":st.uview===3?"#A78BFA":st.uview===2?"#2DD4BF":"#FF9F1C";
+          const hex=st.uview===8?"#FCD34D":st.uview===7?"#FB7185":st.uview===6?"#60A5FA":st.uview===5?"#A3E635":st.uview===4?"#F472B6":st.uview===3?"#A78BFA":st.uview===2?"#2DD4BF":"#FF9F1C";
           return "background:"+(on?`rgba(${c},.18)`:"rgba(255,255,255,.04)")+
             ";border:1px solid "+(on?`rgba(${c},.5)`:"rgba(255,255,255,.1)")+
             ";border-radius:14px;padding:11px 18px;cursor:pointer;text-align:left;color:"+(on?hex:"rgba(238,242,255,.7)")+";transition:.15s";

@@ -1,0 +1,18 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // A student doc id bakes the pilot's secret code into an unguessable
+    // hash — knowing the id IS the login. Listing is denied, so ids can't
+    // be discovered.
+    match /students/{id} {
+      allow get, create, update: if true;
+      allow list, delete: if false;
+    }
+    // Name registry so the gate can say "wrong code" instead of silently
+    // creating a duplicate pilot. Contains no secrets.
+    match /names/{id} {
+      allow get, create, update: if true;
+      allow list, delete: if false;
+    }
+  }
+}

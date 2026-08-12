@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700;6..12,800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  body{margin:0;font-family:"Nunito Sans",system-ui,sans-serif;color:#17130B}
+  a{color:#A16207;text-decoration:none}
+  a:hover{color:#CA8A04}
+  *{box-sizing:border-box}
+</style>
+<script src="./doc-page.js"></script>
+</helmet>
+
+<doc-page size="letter">
+
+<!-- ============ P1 · COVER ============ -->
+<section class="page" data-screen-label="01 Cover" style="background:#191203;color:#FFFBEB;padding:0;display:flex;flex-direction:column;position:relative;overflow:hidden">
+  <div style="position:absolute;inset:0;background:radial-gradient(680px 420px at 78% 8%, rgba(252,211,77,.3), transparent 62%),radial-gradient(560px 380px at 10% 88%, rgba(163,230,53,.2), transparent 62%)"></div>
+  <div style="position:absolute;inset:0;background-image:radial-gradient(1.6px 1.6px at 14% 22%,#fff,transparent),radial-gradient(1.4px 1.4px at 32% 66%,#fff,transparent),radial-gradient(1.8px 1.8px at 52% 14%,#fff,transparent),radial-gradient(1.3px 1.3px at 68% 78%,#fff,transparent),radial-gradient(1.7px 1.7px at 86% 36%,#fff,transparent),radial-gradient(1.4px 1.4px at 22% 90%,#fff,transparent),radial-gradient(1.5px 1.5px at 92% 66%,#fff,transparent);opacity:.7"></div>
+
+  <div style="position:relative;padding:62px 62px 0;flex:1;display:flex;flex-direction:column">
+    <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:#FDE68A">Adventures in Big Math · Year One</div>
+    <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:rgba(255,251,235,.5);margin-top:8px">Mission 08 of 08 · Weeks 33–36 · The capstone</div>
+
+    <div style="margin-top:54px;display:flex;align-items:center;gap:30px">
+      <div style="flex:none;width:128px;height:128px;border-radius:50%;background:radial-gradient(circle at 32% 28%,#FCD34D,#A16207 70%);box-shadow:0 0 0 10px rgba(252,211,77,.16),0 22px 60px rgba(161,98,7,.5);display:grid;place-items:center;position:relative">
+        <div style="position:absolute;inset:-14% -32%;border:3px solid rgba(252,211,77,.45);border-radius:50%;transform:rotate(-18deg) scaleY(.28)"></div>
+        <span style="position:relative;font-family:Fredoka,sans-serif;font-size:58px;color:#241A03">x</span>
+      </div>
+      <div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:66px;line-height:.98;margin:0;letter-spacing:-1px;color:#FCD34D">Algebra<br>Sparks</h1>
+        <div style="font-size:18px;margin-top:14px;color:rgba(255,251,235,.78)">The mission that names what you've been doing since Mission 01.</div>
+      </div>
+    </div>
+
+    <div style="margin-top:46px;background:rgba(255,255,255,.06);border:1px solid rgba(252,211,77,.4);border-radius:20px;padding:26px 30px">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#FDE68A;margin-bottom:10px">The Big Question</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:29px;line-height:1.2">What does a letter in a math problem actually stand for?</div>
+    </div>
+
+    <div style="margin-top:34px;display:grid;grid-template-columns:1fr 1fr;gap:18px">
+      <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);border-radius:16px;padding:20px 22px">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,251,235,.5);margin-bottom:8px">Capstone project</div>
+        <div style="font-family:Fredoka,sans-serif;font-size:19px;line-height:1.2;margin-bottom:7px">The Math Trail</div>
+        <div style="font-size:13.5px;line-height:1.5;color:rgba(255,251,235,.72)">A numbered trail through your own house where every stop is a problem you wrote. Mom walks it, and you mark her work.</div>
+      </div>
+      <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);border-radius:16px;padding:20px 22px">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,251,235,.5);margin-bottom:8px">Fluency game</div>
+        <div style="font-family:Fredoka,sans-serif;font-size:19px;line-height:1.2;margin-bottom:7px">Guess My Rule</div>
+        <div style="font-size:13.5px;line-height:1.5;color:rgba(255,251,235,.72)">One person runs the machine, the other cracks the rule in five inputs or fewer.</div>
+      </div>
+    </div>
+
+    <div style="margin-top:auto;display:flex;align-items:flex-end;gap:18px;padding-bottom:46px">
+      <div style="flex:none;width:66px;height:66px;border-radius:20px;background:linear-gradient(160deg,#C7D2FE,#818CF8);position:relative;box-shadow:0 12px 30px rgba(129,140,248,.4)">
+        <div style="position:absolute;top:-13px;left:50%;width:2px;height:13px;background:#818CF8"></div>
+        <div style="position:absolute;top:-20px;left:50%;transform:translateX(-50%);width:10px;height:10px;border-radius:50%;background:#FBBF24"></div>
+        <div style="position:absolute;top:22px;left:13px;width:14px;height:14px;border-radius:50%;background:#111938"></div>
+        <div style="position:absolute;top:22px;right:13px;width:14px;height:14px;border-radius:50%;background:#111938"></div>
+        <div style="position:absolute;bottom:12px;left:50%;transform:translateX(-50%);width:26px;height:4px;border-radius:3px;background:rgba(17,25,56,.45)"></div>
+      </div>
+      <div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:18px;border-bottom-left-radius:4px;padding:18px 22px">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:#A5B4FC;margin-bottom:7px">AXIOM · Mission Commander, nine tours</div>
+        <div style="font-family:Fredoka,sans-serif;font-size:18px;line-height:1.35">“Brock — you've been finding the number in the gap all year. This mission just gives it a letter. Last leg.”</div>
+      </div>
+    </div>
+  </div>
+  <div style="position:relative;height:12px;background:linear-gradient(90deg,#FCD34D,#A3E635,#38BDF8)"></div>
+</section>
+
+<!-- ============ P2 · PRE-ASSESSMENT ============ -->
+<section class="page" data-screen-label="02 Pre-assessment" style="background:#FFFBF2;padding:0;display:flex;flex-direction:column">
+  <div style="height:10px;background:linear-gradient(90deg,#FCD34D,#A3E635)"></div>
+  <div style="padding:34px 52px 0;flex:1;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:24px;border-bottom:2px solid rgba(23,19,11,.14);padding-bottom:16px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:#A16207">Mission 08 · Before we launch</div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:36px;margin:6px 0 4px;line-height:1">Pre-Assessment</h1>
+        <div style="font-size:13.5px;color:rgba(23,19,11,.6)">Twelve items, six strands. Anything you already own, we skip.</div>
+      </div>
+      <div style="flex:none;text-align:right;font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(23,19,11,.55);line-height:2.1">
+        <div>NAME ______________</div>
+        <div>DATE ______________</div>
+      </div>
+    </div>
+
+    <div style="background:rgba(252,211,77,.16);border:1.5px solid rgba(161,98,7,.28);border-radius:14px;padding:14px 18px;margin:18px 0 20px;font-size:13.5px;line-height:1.5">
+      <strong>This is not a test.</strong> Nothing here counts for a grade. If you have never seen a letter used in place of a number, say so — that is useful information, not a wrong answer.
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:14px;flex:1">
+      <div style="display:grid;grid-template-columns:118px 1fr;gap:18px;align-items:start">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#15803D;padding-top:6px">Strand A<br><span style="color:rgba(23,19,11,.45)">Patterns</span></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+          <div style="border:1.5px solid rgba(23,19,11,.16);border-radius:12px;padding:12px 16px"><div style="font-size:13px;margin-bottom:9px"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(23,19,11,.4)">A1</span> &nbsp;What comes next: 4, 9, 14, 19, ___ ?</div><div style="border-bottom:2px dotted rgba(23,19,11,.3);height:22px"></div></div>
+          <div style="border:1.5px solid rgba(23,19,11,.16);border-radius:12px;padding:12px 16px"><div style="font-size:13px;margin-bottom:9px"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(23,19,11,.4)">A2</span> &nbsp;Say the rule of that pattern in words.</div><div style="border-bottom:2px dotted rgba(23,19,11,.3);height:22px"></div></div>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:118px 1fr;gap:18px;align-items:start">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#0369A1;padding-top:6px">Strand B<br><span style="color:rgba(23,19,11,.45)">Machines</span></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+          <div style="border:1.5px solid rgba(23,19,11,.16);border-radius:12px;padding:12px 16px"><div style="font-size:13px;margin-bottom:9px"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(23,19,11,.4)">B1</span> &nbsp;A machine multiplies by 3. Put in 7. What comes out?</div><div style="border-bottom:2px dotted rgba(23,19,11,.3);height:22px"></div></div>
+          <div style="border:1.5px solid rgba(23,19,11,.16);border-radius:12px;padding:12px 16px"><div style="font-size:13px;margin-bottom:9px"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(23,19,11,.4)">B2</span> &nbsp;The same machine gives out 24. What went in?</div><div style="border-bottom:2px dotted rgba(23,19,11,.3);height:22px"></div></div>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:118px 1fr;gap:18px;align-items:start">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#0369A1;padding-top:6px">Strand C<br><span style="color:rgba(23,19,11,.45)">Two-step rules</span></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+          <div style="border:1.5px solid rgba(23,19,11,.16);border-radius:12px;padding:12px 16px"><div style="font-size:13px;margin-bottom:9px"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(23,19,11,.4)">C1</span> &nbsp;Rule: × 2 then + 5. Put in 6.</div><div style="border-bottom:2px dotted rgba(23,19,11,.3);height:22px"></div></div>
+          <div style="border:1.5px solid rgba(23,19,11,.16);border-radius:12px;padding:12px 16px"><div style="font-size:13px;margin-bottom:9px"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(23,19,11,.4)">C2</span> &nbsp;Does + 5 then × 2 give the same answer? Show both.</div><div style="border-bottom:2px dotted rgba(23,19,11,.3);height:22px"></div></div>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:118px 1fr;gap:18px;align-items:start">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#B45309;padding-top:6px">Strand D<br><span style="color:rgba(23,19,11,.45)">Letters</span></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+          <div style="border:1.5px solid rgba(23,19,11,.16);border-radius:12px;padding:12px 16px"><div style="font-size:13px;margin-bottom:9px"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(23,19,11,.4)">D1</span> &nbsp;If n = 5, what is 3n?</div><div style="border-bottom:2px dotted rgba(23,19,11,.3);height:22px"></div></div>
+          <div style="border:1.5px solid rgba(23,19,11,.16);border-radius:12px;padding:12px 16px"><div style="font-size:13px;margin-bottom:9px"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(23,19,11,.4)">D2</span> &nbsp;If n = 5, what is 2n + 4?</div><div style="border-bottom:2px dotted rgba(23,19,11,.3);height:22px"></div></div>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:118px 1fr;gap:18px;align-items:start">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#B45309;padding-top:6px">Strand E<br><span style="color:rgba(23,19,11,.45)">Equations</span></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+          <div style="border:1.5px solid rgba(23,19,11,.16);border-radius:12px;padding:12px 16px"><div style="font-size:13px;margin-bottom:9px"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(23,19,11,.4)">E1</span> &nbsp;Find x: x + 6 = 14</div><div style="border-bottom:2px dotted rgba(23,19,11,.3);height:22px"></div></div>
+          <div style="border:1.5px solid rgba(23,19,11,.16);border-radius:12px;padding:12px 16px"><div style="font-size:13px;margin-bottom:9px"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(23,19,11,.4)">E2</span> &nbsp;Find x: 5x = 35</div><div style="border-bottom:2px dotted rgba(23,19,11,.3);height:22px"></div></div>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:118px 1fr;gap:18px;align-items:start">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#B45309;padding-top:6px">Strand F<br><span style="color:rgba(23,19,11,.45)">Meaning</span></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+          <div style="border:1.5px solid rgba(23,19,11,.16);border-radius:12px;padding:12px 16px"><div style="font-size:13px;margin-bottom:9px"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(23,19,11,.4)">F1</span> &nbsp;What does the equals sign claim about the two sides?</div><div style="border-bottom:2px dotted rgba(23,19,11,.3);height:22px"></div></div>
+          <div style="border:1.5px solid rgba(23,19,11,.16);border-radius:12px;padding:12px 16px"><div style="font-size:13px;margin-bottom:9px"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(23,19,11,.4)">F2</span> &nbsp;Is 2n the same as n²? Test both at n = 5.</div><div style="border-bottom:2px dotted rgba(23,19,11,.3);height:22px"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="border-top:2px solid rgba(23,19,11,.12);margin-top:14px;padding:12px 0 26px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(23,19,11,.45)">
+      <span>Adventures in Big Math · Mission 08</span><span>Pre-assessment · page 2</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ P3 · SKIP CHART ============ -->
+<section class="page" data-screen-label="03 Skip chart" style="background:#FFFBF2;padding:0;display:flex;flex-direction:column">
+  <div style="height:10px;background:linear-gradient(90deg,#4ADE80,#0EA5E9)"></div>
+  <div style="padding:34px 52px 0;flex:1;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:24px;border-bottom:2px solid rgba(23,19,11,.14);padding-bottom:16px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:#15803D">Teacher page · do not hand to student</div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:36px;margin:6px 0 4px;line-height:1">Skip Chart</h1>
+        <div style="font-size:13.5px;color:rgba(23,19,11,.6)">Score the pre-assessment, then cross days off the four-week calendar.</div>
+      </div>
+      <div style="flex:none;background:rgba(74,222,128,.14);border:1.5px solid rgba(21,128,61,.3);border-radius:12px;padding:12px 16px;font-family:'JetBrains Mono',monospace;font-size:10.5px;line-height:1.9;color:#15803D">
+        <div>2 / 2 → SKIP</div>
+        <div>1 / 2 → COMPRESS</div>
+        <div>0 / 2 → TEACH</div>
+      </div>
+    </div>
+
+    <table style="width:100%;border-collapse:collapse;margin-top:22px;font-size:13.5px">
+      <thead>
+        <tr style="background:rgba(23,19,11,.06)">
+          <th style="text-align:left;padding:11px 12px;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(23,19,11,.55);border-bottom:2px solid rgba(23,19,11,.15)">Strand</th>
+          <th style="text-align:left;padding:11px 12px;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(23,19,11,.55);border-bottom:2px solid rgba(23,19,11,.15)">Items</th>
+          <th style="text-align:left;padding:11px 12px;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(23,19,11,.55);border-bottom:2px solid rgba(23,19,11,.15)">Covers</th>
+          <th style="text-align:center;padding:11px 12px;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(23,19,11,.55);border-bottom:2px solid rgba(23,19,11,.15)">Score</th>
+          <th style="text-align:left;padding:11px 12px;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(23,19,11,.55);border-bottom:2px solid rgba(23,19,11,.15)">If 2/2, remove</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(23,19,11,.1)"><strong>A · Patterns</strong></td>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(23,19,11,.1);font-family:'JetBrains Mono',monospace;font-size:12px">A1 A2</td>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(23,19,11,.1)">Week 1 · lesson 1.1</td>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(23,19,11,.1);text-align:center;font-family:'JetBrains Mono',monospace">___ / 2</td>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(23,19,11,.1)">The Warm-Up and Core of 1.1. Keep the Challenge — the nth-term work is the whole point.</td>
+        </tr>
+        <tr>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(23,19,11,.1)"><strong>B · Machines</strong></td>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(23,19,11,.1);font-family:'JetBrains Mono',monospace;font-size:12px">B1 B2</td>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(23,19,11,.1)">Week 1 · lesson 1.2</td>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(23,19,11,.1);text-align:center;font-family:'JetBrains Mono',monospace">___ / 2</td>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(23,19,11,.1)">Day 1.2. Move Guess My Rule up to Tuesday.</td>
+        </tr>
+        <tr>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(23,19,11,.1)"><strong>C · Two-step rules</strong></td>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(23,19,11,.1);font-family:'JetBrains Mono',monospace;font-size:12px">C1 C2</td>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(23,19,11,.1)">Week 1 · lessons 1.3 and 1.4</td>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(23,19,11,.1);text-align:center;font-family:'JetBrains Mono',monospace">___ / 2</td>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(23,19,11,.1)">Nothing. If C2 is right he has order of operations from Mission 03 — say so out loud, it links the year together.</td>
+        </tr>
+        <tr>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(23,19,11,.1)"><strong>D · Letters</strong></td>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(23,19,11,.1);font-family:'JetBrains Mono',monospace;font-size:12px">D1 D2</td>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(23,19,11,.1)">Week 2 · lessons 2.1 and 2.2</td>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(23,19,11,.1);text-align:center;font-family:'JetBrains Mono',monospace">___ / 2</td>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(23,19,11,.1)">Compress Week 2 to three days and spend the extra two on the trail.</td>
+        </tr>
+        <tr>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(23,19,11,.1)"><strong>E · Equations</strong></td>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(23,19,11,.1);font-family:'JetBrains Mono',monospace;font-size:12px">E1 E2</td>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(23,19,11,.1)">Week 3 · lessons 3.1 and 3.2</td>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(23,19,11,.1);text-align:center;font-family:'JetBrains Mono',monospace">___ / 2</td>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(23,19,11,.1)">Nothing — but move to two-step equations (2x + 5 = 19) on Wednesday of Week 3.</td>
+        </tr>
+        <tr>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(23,19,11,.1)"><strong>F · Meaning</strong></td>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(23,19,11,.1);font-family:'JetBrains Mono',monospace;font-size:12px">F1 F2</td>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(23,19,11,.1)">Week 2 · lesson 2.1 · Week 3 · lesson 3.1</td>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(23,19,11,.1);text-align:center;font-family:'JetBrains Mono',monospace">___ / 2</td>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(23,19,11,.1)">Nothing, ever. These two ideas are what the whole mission is for.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div style="background:rgba(252,211,77,.16);border:1.5px solid rgba(161,98,7,.28);border-radius:14px;padding:16px 20px;margin-top:24px">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:#A16207;margin-bottom:9px">Before the last week</div>
+      <div style="font-size:13.5px;line-height:1.55">Week 4 is the Math Trail and it needs one thing from you: walk it as a genuine student. Get things wrong. Ask him to explain his own ambiguous wording. A capstone he has to defend is worth more than one you praise.</div>
+    </div>
+
+    <div style="border-top:2px solid rgba(23,19,11,.12);margin-top:auto;padding:12px 0 26px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(23,19,11,.45)">
+      <span>Teacher page</span><span>Skip chart · page 3</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ P4 · DAY 1.1 ============ -->
+<section class="page" data-screen-label="04 Lesson 1.1" style="background:#FFFBF2;padding:0;display:flex;flex-direction:column">
+  <div style="height:10px;background:linear-gradient(90deg,#FCD34D,#A3E635)"></div>
+  <div style="padding:30px 52px 0;flex:1;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:24px;border-bottom:2px solid rgba(23,19,11,.14);padding-bottom:14px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:#A16207">Mission 08 · Week 1 · Monday · Lesson 1.1</div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:34px;margin:6px 0 3px;line-height:1">Find the Rule</h1>
+        <div style="font-size:13px;color:rgba(23,19,11,.6)">Extend the pattern, then name the rule in one sentence.</div>
+      </div>
+      <div style="flex:none;text-align:right;font-family:'JetBrains Mono',monospace;font-size:10.5px;color:rgba(23,19,11,.55);line-height:2">
+        <div>NAME ___________</div><div>DATE ___________</div>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:11px;margin:16px 0 9px">
+      <div style="width:26px;height:26px;border-radius:8px;background:#22C55E;color:#052E12;display:grid;place-items:center;font-size:13px">✦</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:21px;color:#15803D">Warm-Up</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(23,19,11,.45)">Write the next number</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:10px">
+      <div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:11px 6px;text-align:center"><div style="font-size:12.5px;line-height:1.3">3, 6, 9, 12</div><div style="border-bottom:2px solid rgba(23,19,11,.25);height:22px;margin-top:8px"></div></div>
+      <div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:11px 6px;text-align:center"><div style="font-size:12.5px;line-height:1.3">5, 10, 15, 20</div><div style="border-bottom:2px solid rgba(23,19,11,.25);height:22px;margin-top:8px"></div></div>
+      <div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:11px 6px;text-align:center"><div style="font-size:12.5px;line-height:1.3">2, 4, 8, 16</div><div style="border-bottom:2px solid rgba(23,19,11,.25);height:22px;margin-top:8px"></div></div>
+      <div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:11px 6px;text-align:center"><div style="font-size:12.5px;line-height:1.3">20, 17, 14, 11</div><div style="border-bottom:2px solid rgba(23,19,11,.25);height:22px;margin-top:8px"></div></div>
+      <div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:11px 6px;text-align:center"><div style="font-size:12.5px;line-height:1.3">1, 4, 7, 10</div><div style="border-bottom:2px solid rgba(23,19,11,.25);height:22px;margin-top:8px"></div></div>
+      <div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:11px 6px;text-align:center"><div style="font-size:12.5px;line-height:1.3">100, 90, 80</div><div style="border-bottom:2px solid rgba(23,19,11,.25);height:22px;margin-top:8px"></div></div>
+    </div>
+
+    <div style="background:rgba(252,211,77,.16);border:1.5px solid rgba(161,98,7,.28);border-radius:14px;padding:14px 18px;margin-top:16px">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:#A16207;margin-bottom:12px">Why a named rule beats counting</div>
+      <div style="display:flex;gap:24px;align-items:center;flex-wrap:wrap">
+        <div style="display:flex;align-items:flex-end;gap:9px">
+          <div style="text-align:center"><div style="width:34px;height:22px;background:rgba(252,211,77,.5);border:1.5px solid rgba(161,98,7,.5);border-radius:3px"></div><div style="font-family:'JetBrains Mono',monospace;font-size:10.5px;margin-top:5px">4</div></div>
+          <div style="text-align:center"><div style="width:34px;height:44px;background:rgba(252,211,77,.5);border:1.5px solid rgba(161,98,7,.5);border-radius:3px"></div><div style="font-family:'JetBrains Mono',monospace;font-size:10.5px;margin-top:5px">9</div></div>
+          <div style="text-align:center"><div style="width:34px;height:66px;background:rgba(252,211,77,.5);border:1.5px solid rgba(161,98,7,.5);border-radius:3px"></div><div style="font-family:'JetBrains Mono',monospace;font-size:10.5px;margin-top:5px">14</div></div>
+          <div style="text-align:center"><div style="width:34px;height:88px;background:rgba(252,211,77,.5);border:1.5px solid rgba(161,98,7,.5);border-radius:3px"></div><div style="font-family:'JetBrains Mono',monospace;font-size:10.5px;margin-top:5px">19</div></div>
+        </div>
+        <div style="flex:1;min-width:230px;font-size:12.5px;line-height:1.6;color:rgba(23,19,11,.78)">Start at 4 and add 5. Every bar is one jump taller than the last, and the jumps are all the same size.<br><br>To reach the <strong>tenth</strong> number you add 5 nine times — not ten, because the 4 is already there. 4 + 45 = 49.</div>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:11px;margin:14px 0 9px">
+      <div style="width:26px;height:26px;border-radius:8px;background:#0EA5E9;color:#04283A;display:grid;place-items:center;font-size:12px">◆</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:21px;color:#0369A1">Core</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:9px">
+      <div style="border:1.5px solid rgba(3,105,161,.28);border-radius:13px;padding:11px 16px;background:rgba(14,165,233,.06);display:grid;grid-template-columns:1fr 160px;gap:16px;align-items:center"><span style="font-size:13.5px">1. &nbsp;Rule × 3, starting at 2. Write the first four numbers.</span><span style="border-bottom:2px dotted rgba(23,19,11,.3);height:20px"></span></div>
+      <div style="border:1.5px solid rgba(3,105,161,.28);border-radius:13px;padding:11px 16px;background:rgba(14,165,233,.06);display:grid;grid-template-columns:1fr 160px;gap:16px;align-items:center"><span style="font-size:13.5px">2. &nbsp;1, 3, 7, 15, ___ — and say the rule.</span><span style="border-bottom:2px dotted rgba(23,19,11,.3);height:20px"></span></div>
+      <div style="border:1.5px solid rgba(3,105,161,.28);border-radius:13px;padding:11px 16px;background:rgba(14,165,233,.06);display:grid;grid-template-columns:1fr 160px;gap:16px;align-items:center"><span style="font-size:13.5px">3. &nbsp;4, 9, 14, 19 — the tenth number.</span><span style="border-bottom:2px dotted rgba(23,19,11,.3);height:20px"></span></div>
+      <div style="border:1.5px solid rgba(3,105,161,.28);border-radius:13px;padding:11px 16px;background:rgba(14,165,233,.06);display:grid;grid-template-columns:1fr 160px;gap:16px;align-items:center"><span style="font-size:13.5px">4. &nbsp;2, 5, 10, 17, ___ — the gaps are not equal. What are they doing?</span><span style="border-bottom:2px dotted rgba(23,19,11,.3);height:20px"></span></div>
+      <div style="border:1.5px solid rgba(3,105,161,.28);border-radius:13px;padding:11px 16px;background:rgba(14,165,233,.06);display:grid;grid-template-columns:1fr 160px;gap:16px;align-items:center"><span style="font-size:13.5px">5. &nbsp;A pattern starts at 6 and adds 5. Write its twentieth number.</span><span style="border-bottom:2px dotted rgba(23,19,11,.3);height:20px"></span></div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:11px;margin:14px 0 9px">
+      <div style="width:26px;height:26px;border-radius:8px;background:#F59E0B;color:#3A2405;display:grid;place-items:center;font-size:13px">★</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:21px;color:#B45309">Challenge</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(23,19,11,.45)">Not graded</div>
+    </div>
+    <div style="background:rgba(245,158,11,.1);border:1.5px solid rgba(180,83,9,.32);border-radius:14px;padding:12px 18px;flex:1;display:flex;flex-direction:column;gap:8px">
+      <div style="font-size:14px;line-height:1.5"><strong>C1.</strong> Write a rule that turns 3 into 10 and 5 into 16. Then test it on 7.</div>
+      <div style="border-bottom:2px dotted rgba(23,19,11,.28);height:20px"></div>
+      <div style="font-size:14px;line-height:1.5"><strong>C2.</strong> Two patterns start at 1. One adds 4, the other multiplies by 2. Which is bigger at the fifth number, and does the answer change by the tenth?</div>
+      <div style="border-bottom:2px dotted rgba(23,19,11,.28);height:20px"></div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:14px;background:rgba(129,140,248,.12);border:1.5px solid rgba(99,102,241,.28);border-radius:14px;padding:11px 16px;margin-top:12px">
+      <div style="flex:none;width:32px;height:32px;border-radius:10px;background:linear-gradient(160deg,#C7D2FE,#818CF8);position:relative">
+        <div style="position:absolute;top:10px;left:7px;width:7px;height:7px;border-radius:50%;background:#111938"></div>
+        <div style="position:absolute;top:10px;right:7px;width:7px;height:7px;border-radius:50%;background:#111938"></div>
+      </div>
+      <div style="font-size:13.5px;line-height:1.45"><strong>AXIOM:</strong> Say the rule out loud before you write anything. If you can't say it, you haven't found it — you've just guessed the next number correctly.</div>
+    </div>
+
+    <div style="border-top:2px solid rgba(23,19,11,.12);margin-top:12px;padding:11px 0 24px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(23,19,11,.45)">
+      <span>Error journal: one sentence per mistake</span><span>Lesson 1.1 · page 4</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ P5 · DAY 1.2 ============ -->
+<section class="page" data-screen-label="05 Lesson 1.2" style="background:#FFFBF2;padding:0;display:flex;flex-direction:column">
+  <div style="height:10px;background:linear-gradient(90deg,#FCD34D,#A3E635)"></div>
+  <div style="padding:30px 52px 0;flex:1;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:24px;border-bottom:2px solid rgba(23,19,11,.14);padding-bottom:14px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:#A16207">Mission 08 · Week 1 · Tuesday · Lesson 1.2</div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:34px;margin:6px 0 3px;line-height:1">Function Machines</h1>
+        <div style="font-size:13px;color:rgba(23,19,11,.6)">In goes a number, out comes a number, and the machine never changes its mind.</div>
+      </div>
+      <div style="flex:none;text-align:right;font-family:'JetBrains Mono',monospace;font-size:10.5px;color:rgba(23,19,11,.55);line-height:2">
+        <div>NAME ___________</div><div>DATE ___________</div>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:11px;margin:16px 0 9px">
+      <div style="width:26px;height:26px;border-radius:8px;background:#22C55E;color:#052E12;display:grid;place-items:center;font-size:13px">✦</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:21px;color:#15803D">Warm-Up</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(23,19,11,.45)">One-step machines</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:10px">
+      <div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:11px 6px;text-align:center"><div style="font-size:12.5px;line-height:1.3">+ 8, in 5</div><div style="border-bottom:2px solid rgba(23,19,11,.25);height:22px;margin-top:8px"></div></div>
+      <div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:11px 6px;text-align:center"><div style="font-size:12.5px;line-height:1.3">× 6, in 4</div><div style="border-bottom:2px solid rgba(23,19,11,.25);height:22px;margin-top:8px"></div></div>
+      <div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:11px 6px;text-align:center"><div style="font-size:12.5px;line-height:1.3">− 7, in 20</div><div style="border-bottom:2px solid rgba(23,19,11,.25);height:22px;margin-top:8px"></div></div>
+      <div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:11px 6px;text-align:center"><div style="font-size:12.5px;line-height:1.3">× 10, in 9</div><div style="border-bottom:2px solid rgba(23,19,11,.25);height:22px;margin-top:8px"></div></div>
+      <div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:11px 6px;text-align:center"><div style="font-size:12.5px;line-height:1.3">÷ 2, in 18</div><div style="border-bottom:2px solid rgba(23,19,11,.25);height:22px;margin-top:8px"></div></div>
+      <div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:11px 6px;text-align:center"><div style="font-size:12.5px;line-height:1.3">+ 15, in 15</div><div style="border-bottom:2px solid rgba(23,19,11,.25);height:22px;margin-top:8px"></div></div>
+    </div>
+
+    <div style="background:rgba(252,211,77,.16);border:1.5px solid rgba(161,98,7,.28);border-radius:14px;padding:14px 18px;margin-top:16px">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:#A16207;margin-bottom:12px">Fill the table · the machine is × 3 + 1</div>
+      <div style="display:flex;gap:22px;align-items:center;flex-wrap:wrap">
+        <table style="border-collapse:collapse;font-family:'JetBrains Mono',monospace;font-size:13.5px;background:rgba(255,255,255,.7)">
+          <tr>
+            <td style="border:1.5px solid rgba(161,98,7,.4);padding:8px 18px;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(23,19,11,.5)">in</td>
+            <td style="border:1.5px solid rgba(161,98,7,.4);padding:8px 18px;text-align:center">1</td>
+            <td style="border:1.5px solid rgba(161,98,7,.4);padding:8px 18px;text-align:center">2</td>
+            <td style="border:1.5px solid rgba(161,98,7,.4);padding:8px 18px;text-align:center">3</td>
+            <td style="border:1.5px solid rgba(161,98,7,.4);padding:8px 18px;text-align:center">4</td>
+            <td style="border:1.5px solid rgba(161,98,7,.4);padding:8px 18px;text-align:center">10</td>
+          </tr>
+          <tr>
+            <td style="border:1.5px solid rgba(161,98,7,.4);padding:8px 18px;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(23,19,11,.5)">out</td>
+            <td style="border:1.5px solid rgba(161,98,7,.4);padding:8px 18px;text-align:center">4</td>
+            <td style="border:1.5px solid rgba(161,98,7,.4);padding:8px 18px;text-align:center">7</td>
+            <td style="border:1.5px solid rgba(161,98,7,.4);padding:12px 18px"></td>
+            <td style="border:1.5px solid rgba(161,98,7,.4);padding:12px 18px"></td>
+            <td style="border:1.5px solid rgba(161,98,7,.4);padding:12px 18px"></td>
+          </tr>
+        </table>
+        <div style="flex:1;min-width:200px;font-size:12.5px;line-height:1.6;color:rgba(23,19,11,.78)">Notice the outputs climb in threes while the + 1 stays put. That jump <em>is</em> the multiplier, and spotting it is how you crack a rule on Friday.</div>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:11px;margin:14px 0 9px">
+      <div style="width:26px;height:26px;border-radius:8px;background:#0EA5E9;color:#04283A;display:grid;place-items:center;font-size:12px">◆</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:21px;color:#0369A1">Core</div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+      <div style="border:1.5px solid rgba(3,105,161,.28);border-radius:13px;padding:11px 16px;background:rgba(14,165,233,.06);display:flex;align-items:center;gap:14px"><span style="font-size:13px;flex:1">1. Machine × 3 + 4. In 6.</span><span style="width:80px;border-bottom:2px dotted rgba(23,19,11,.3);height:20px"></span></div>
+      <div style="border:1.5px solid rgba(3,105,161,.28);border-radius:13px;padding:11px 16px;background:rgba(14,165,233,.06);display:flex;align-items:center;gap:14px"><span style="font-size:13px;flex:1">2. Machine × 5 − 2. In 7.</span><span style="width:80px;border-bottom:2px dotted rgba(23,19,11,.3);height:20px"></span></div>
+      <div style="border:1.5px solid rgba(3,105,161,.28);border-radius:13px;padding:11px 16px;background:rgba(14,165,233,.06);display:flex;align-items:center;gap:14px"><span style="font-size:13px;flex:1">3. Machine × 2 + 9. In 12.</span><span style="width:80px;border-bottom:2px dotted rgba(23,19,11,.3);height:20px"></span></div>
+      <div style="border:1.5px solid rgba(3,105,161,.28);border-radius:13px;padding:11px 16px;background:rgba(14,165,233,.06);display:flex;align-items:center;gap:14px"><span style="font-size:13px;flex:1">4. Machine × 3 + 4 gives out 25. In?</span><span style="width:80px;border-bottom:2px dotted rgba(23,19,11,.3);height:20px"></span></div>
+    </div>
+    <div style="border:1.5px solid rgba(3,105,161,.28);border-radius:13px;padding:11px 16px;background:rgba(14,165,233,.06);margin-top:10px">
+      <div style="font-size:13.5px">5. &nbsp;A machine turns 2 into 7, 3 into 10 and 4 into 13. Write the rule, then use it on 10.</div>
+      <div style="border-bottom:2px dotted rgba(23,19,11,.3);height:22px;margin-top:8px"></div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:11px;margin:14px 0 9px">
+      <div style="width:26px;height:26px;border-radius:8px;background:#F59E0B;color:#3A2405;display:grid;place-items:center;font-size:13px">★</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:21px;color:#B45309">Challenge</div>
+    </div>
+    <div style="background:rgba(245,158,11,.1);border:1.5px solid rgba(180,83,9,.32);border-radius:14px;padding:12px 18px;flex:1;display:flex;flex-direction:column;gap:8px">
+      <div style="font-size:14px;line-height:1.5"><strong>C1.</strong> A machine turns 1 into 5, 2 into 9 and 3 into 13. What does it do to 12?</div>
+      <div style="border-bottom:2px dotted rgba(23,19,11,.28);height:20px"></div>
+      <div style="font-size:14px;line-height:1.5"><strong>C2.</strong> Build a machine that turns any number into itself. Write its rule two different ways.</div>
+      <div style="border-bottom:2px dotted rgba(23,19,11,.28);height:20px"></div>
+    </div>
+
+    <div style="border-top:2px solid rgba(23,19,11,.12);margin-top:12px;padding:11px 0 24px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(23,19,11,.45)">
+      <span>Error journal: one sentence per mistake</span><span>Lesson 1.2 · page 5</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ P6 · DAY 1.3 ============ -->
+<section class="page" data-screen-label="06 Lesson 1.3" style="background:#FFFBF2;padding:0;display:flex;flex-direction:column">
+  <div style="height:10px;background:linear-gradient(90deg,#FCD34D,#A3E635)"></div>
+  <div style="padding:30px 52px 0;flex:1;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:24px;border-bottom:2px solid rgba(23,19,11,.14);padding-bottom:14px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:#A16207">Mission 08 · Week 1 · Wednesday · Lesson 1.3</div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:34px;margin:6px 0 3px;line-height:1">Two-Step Rules</h1>
+        <div style="font-size:13px;color:rgba(23,19,11,.6)">× 3 then + 2 is not the same machine as + 2 then × 3.</div>
+      </div>
+      <div style="flex:none;text-align:right;font-family:'JetBrains Mono',monospace;font-size:10.5px;color:rgba(23,19,11,.55);line-height:2">
+        <div>NAME ___________</div><div>DATE ___________</div>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:11px;margin:16px 0 9px">
+      <div style="width:26px;height:26px;border-radius:8px;background:#22C55E;color:#052E12;display:grid;place-items:center;font-size:13px">✦</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:21px;color:#15803D">Warm-Up</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(23,19,11,.45)">Multiply first, every time</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:10px">
+      <div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:11px 6px;text-align:center"><div style="font-size:12.5px;line-height:1.3">2 × 4 + 1</div><div style="border-bottom:2px solid rgba(23,19,11,.25);height:22px;margin-top:8px"></div></div>
+      <div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:11px 6px;text-align:center"><div style="font-size:12.5px;line-height:1.3">3 × 5 + 2</div><div style="border-bottom:2px solid rgba(23,19,11,.25);height:22px;margin-top:8px"></div></div>
+      <div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:11px 6px;text-align:center"><div style="font-size:12.5px;line-height:1.3">4 × 6 − 4</div><div style="border-bottom:2px solid rgba(23,19,11,.25);height:22px;margin-top:8px"></div></div>
+      <div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:11px 6px;text-align:center"><div style="font-size:12.5px;line-height:1.3">5 × 3 + 5</div><div style="border-bottom:2px solid rgba(23,19,11,.25);height:22px;margin-top:8px"></div></div>
+      <div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:11px 6px;text-align:center"><div style="font-size:12.5px;line-height:1.3">(2 + 4) × 3</div><div style="border-bottom:2px solid rgba(23,19,11,.25);height:22px;margin-top:8px"></div></div>
+      <div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:11px 6px;text-align:center"><div style="font-size:12.5px;line-height:1.3">2 + 4 × 3</div><div style="border-bottom:2px solid rgba(23,19,11,.25);height:22px;margin-top:8px"></div></div>
+    </div>
+
+    <div style="background:rgba(252,211,77,.16);border:1.5px solid rgba(161,98,7,.28);border-radius:14px;padding:14px 18px;margin-top:16px">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:#A16207;margin-bottom:12px">Same two steps, two different machines · put in 4</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+        <div style="background:rgba(255,255,255,.75);border:1.5px solid rgba(161,98,7,.3);border-radius:12px;padding:13px 16px">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:13px;line-height:1.9">4 &nbsp;→ &nbsp;× 3 &nbsp;→ &nbsp;12 &nbsp;→ &nbsp;+ 2 &nbsp;→ &nbsp;<strong>14</strong></div>
+          <div style="font-size:12.5px;line-height:1.5;margin-top:6px;color:rgba(23,19,11,.7)">Multiply first. The + 2 is added once, at the end.</div>
+        </div>
+        <div style="background:rgba(255,255,255,.75);border:1.5px solid rgba(161,98,7,.3);border-radius:12px;padding:13px 16px">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:13px;line-height:1.9">4 &nbsp;→ &nbsp;+ 2 &nbsp;→ &nbsp;6 &nbsp;→ &nbsp;× 3 &nbsp;→ &nbsp;<strong>18</strong></div>
+          <div style="font-size:12.5px;line-height:1.5;margin-top:6px;color:rgba(23,19,11,.7)">Add first and the 2 gets multiplied too — which is where the extra 4 comes from.</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:11px;margin:14px 0 9px">
+      <div style="width:26px;height:26px;border-radius:8px;background:#0EA5E9;color:#04283A;display:grid;place-items:center;font-size:12px">◆</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:21px;color:#0369A1">Core</div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+      <div style="border:1.5px solid rgba(3,105,161,.28);border-radius:13px;padding:11px 16px;background:rgba(14,165,233,.06);display:flex;align-items:center;gap:14px"><span style="font-size:13px;flex:1">1. × 4 + 3, in 7</span><span style="width:80px;border-bottom:2px dotted rgba(23,19,11,.3);height:20px"></span></div>
+      <div style="border:1.5px solid rgba(3,105,161,.28);border-radius:13px;padding:11px 16px;background:rgba(14,165,233,.06);display:flex;align-items:center;gap:14px"><span style="font-size:13px;flex:1">2. + 3 then × 4, in 7</span><span style="width:80px;border-bottom:2px dotted rgba(23,19,11,.3);height:20px"></span></div>
+      <div style="border:1.5px solid rgba(3,105,161,.28);border-radius:13px;padding:11px 16px;background:rgba(14,165,233,.06);display:flex;align-items:center;gap:14px"><span style="font-size:13px;flex:1">3. × 2 + 6, in 9</span><span style="width:80px;border-bottom:2px dotted rgba(23,19,11,.3);height:20px"></span></div>
+      <div style="border:1.5px solid rgba(3,105,161,.28);border-radius:13px;padding:11px 16px;background:rgba(14,165,233,.06);display:flex;align-items:center;gap:14px"><span style="font-size:13px;flex:1">4. × 6 − 5, in 8</span><span style="width:80px;border-bottom:2px dotted rgba(23,19,11,.3);height:20px"></span></div>
+    </div>
+    <div style="border:1.5px solid rgba(3,105,161,.28);border-radius:13px;padding:11px 16px;background:rgba(14,165,233,.06);margin-top:10px">
+      <div style="font-size:13.5px">5. &nbsp;Is there any input where × 3 + 2 and + 2 then × 3 agree? Try three inputs before you answer.</div>
+      <div style="border-bottom:2px dotted rgba(23,19,11,.3);height:22px;margin-top:8px"></div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:11px;margin:14px 0 9px">
+      <div style="width:26px;height:26px;border-radius:8px;background:#F59E0B;color:#3A2405;display:grid;place-items:center;font-size:13px">★</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:21px;color:#B45309">Challenge</div>
+    </div>
+    <div style="background:rgba(245,158,11,.1);border:1.5px solid rgba(180,83,9,.32);border-radius:14px;padding:12px 18px;flex:1;display:flex;flex-direction:column;gap:8px">
+      <div style="font-size:14px;line-height:1.5"><strong>C1.</strong> A machine is × 2 + 3. Feed its own output back in. Starting at 1, write the first four numbers you get.</div>
+      <div style="border-bottom:2px dotted rgba(23,19,11,.28);height:20px"></div>
+      <div style="font-size:14px;line-height:1.5"><strong>C2.</strong> Write a two-step rule that turns 5 into 5 but does not leave every number alone.</div>
+      <div style="border-bottom:2px dotted rgba(23,19,11,.28);height:20px"></div>
+    </div>
+
+    <div style="border-top:2px solid rgba(23,19,11,.12);margin-top:12px;padding:11px 0 24px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(23,19,11,.45)">
+      <span>Error journal: one sentence per mistake</span><span>Lesson 1.3 · page 6</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ P7 · DAY 1.4 ============ -->
+<section class="page" data-screen-label="07 Lesson 1.4" style="background:#FFFBF2;padding:0;display:flex;flex-direction:column">
+  <div style="height:10px;background:linear-gradient(90deg,#FCD34D,#A3E635)"></div>
+  <div style="padding:30px 52px 0;flex:1;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:24px;border-bottom:2px solid rgba(23,19,11,.14);padding-bottom:14px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:#A16207">Mission 08 · Week 1 · Thursday · Lesson 1.4</div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:34px;margin:6px 0 3px;line-height:1">Working Backwards</h1>
+        <div style="font-size:13px;color:rgba(23,19,11,.6)">Given the output, undo the machine — last step first.</div>
+      </div>
+      <div style="flex:none;text-align:right;font-family:'JetBrains Mono',monospace;font-size:10.5px;color:rgba(23,19,11,.55);line-height:2">
+        <div>NAME ___________</div><div>DATE ___________</div>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:11px;margin:16px 0 9px">
+      <div style="width:26px;height:26px;border-radius:8px;background:#22C55E;color:#052E12;display:grid;place-items:center;font-size:13px">✦</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:21px;color:#15803D">Warm-Up</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(23,19,11,.45)">What undoes what</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:10px">
+      <div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:11px 6px;text-align:center"><div style="font-size:12.5px;line-height:1.3">undo + 7</div><div style="border-bottom:2px solid rgba(23,19,11,.25);height:22px;margin-top:8px"></div></div>
+      <div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:11px 6px;text-align:center"><div style="font-size:12.5px;line-height:1.3">undo × 5</div><div style="border-bottom:2px solid rgba(23,19,11,.25);height:22px;margin-top:8px"></div></div>
+      <div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:11px 6px;text-align:center"><div style="font-size:12.5px;line-height:1.3">undo − 4</div><div style="border-bottom:2px solid rgba(23,19,11,.25);height:22px;margin-top:8px"></div></div>
+      <div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:11px 6px;text-align:center"><div style="font-size:12.5px;line-height:1.3">undo ÷ 3</div><div style="border-bottom:2px solid rgba(23,19,11,.25);height:22px;margin-top:8px"></div></div>
+      <div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:11px 6px;text-align:center"><div style="font-size:12.5px;line-height:1.3">+ 6 gave 13, in?</div><div style="border-bottom:2px solid rgba(23,19,11,.25);height:22px;margin-top:8px"></div></div>
+      <div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:11px 6px;text-align:center"><div style="font-size:12.5px;line-height:1.3">× 4 gave 28, in?</div><div style="border-bottom:2px solid rgba(23,19,11,.25);height:22px;margin-top:8px"></div></div>
+    </div>
+
+    <div style="background:rgba(252,211,77,.16);border:1.5px solid rgba(161,98,7,.28);border-radius:14px;padding:14px 18px;margin-top:16px">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:#A16207;margin-bottom:12px">The machine × 3 + 1 gave out 22. Run it in reverse.</div>
+      <div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap">
+        <div style="background:rgba(255,255,255,.78);border:1.5px solid rgba(161,98,7,.3);border-radius:12px;padding:12px 16px;font-family:'JetBrains Mono',monospace;font-size:13px;line-height:1.9">
+          out 22 &nbsp;→ &nbsp;take off the 1 &nbsp;→ &nbsp;21<br>
+          21 &nbsp;→ &nbsp;divide by 3 &nbsp;→ &nbsp;<strong>in 7</strong>
+        </div>
+        <div style="flex:1;min-width:220px;font-size:12.5px;line-height:1.55;color:rgba(23,19,11,.78)">Forwards you multiply then add. Backwards you subtract then divide — the opposite operations, in the opposite order. Get the order wrong and 22 becomes 7⅓ instead of 7.</div>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:11px;margin:14px 0 9px">
+      <div style="width:26px;height:26px;border-radius:8px;background:#0EA5E9;color:#04283A;display:grid;place-items:center;font-size:12px">◆</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:21px;color:#0369A1">Core</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(23,19,11,.45)">Find the input</div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+      <div style="border:1.5px solid rgba(3,105,161,.28);border-radius:13px;padding:11px 16px;background:rgba(14,165,233,.06);display:flex;align-items:center;gap:14px"><span style="font-size:13px;flex:1">1. × 4 − 1 gave 27</span><span style="width:80px;border-bottom:2px dotted rgba(23,19,11,.3);height:20px"></span></div>
+      <div style="border:1.5px solid rgba(3,105,161,.28);border-radius:13px;padding:11px 16px;background:rgba(14,165,233,.06);display:flex;align-items:center;gap:14px"><span style="font-size:13px;flex:1">2. × 5 + 3 gave 38</span><span style="width:80px;border-bottom:2px dotted rgba(23,19,11,.3);height:20px"></span></div>
+      <div style="border:1.5px solid rgba(3,105,161,.28);border-radius:13px;padding:11px 16px;background:rgba(14,165,233,.06);display:flex;align-items:center;gap:14px"><span style="font-size:13px;flex:1">3. × 2 + 9 gave 33</span><span style="width:80px;border-bottom:2px dotted rgba(23,19,11,.3);height:20px"></span></div>
+      <div style="border:1.5px solid rgba(3,105,161,.28);border-radius:13px;padding:11px 16px;background:rgba(14,165,233,.06);display:flex;align-items:center;gap:14px"><span style="font-size:13px;flex:1">4. ÷ 2 + 4 gave 12</span><span style="width:80px;border-bottom:2px dotted rgba(23,19,11,.3);height:20px"></span></div>
+    </div>
+    <div style="border:1.5px solid rgba(3,105,161,.28);border-radius:13px;padding:11px 16px;background:rgba(14,165,233,.06);margin-top:10px">
+      <div style="font-size:13.5px">5. &nbsp;A machine × 3 + 5 gave out 5. What went in, and why is that answer surprising?</div>
+      <div style="border-bottom:2px dotted rgba(23,19,11,.3);height:22px;margin-top:8px"></div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:11px;margin:14px 0 9px">
+      <div style="width:26px;height:26px;border-radius:8px;background:#F59E0B;color:#3A2405;display:grid;place-items:center;font-size:13px">★</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:21px;color:#B45309">Challenge</div>
+    </div>
+    <div style="background:rgba(245,158,11,.1);border:1.5px solid rgba(180,83,9,.32);border-radius:14px;padding:12px 18px;flex:1;display:flex;flex-direction:column;gap:8px">
+      <div style="font-size:14px;line-height:1.5"><strong>C1.</strong> Write “undo the machine × 3 + 1” as an equation with a letter in it, then solve it for an output of 22.</div>
+      <div style="border-bottom:2px dotted rgba(23,19,11,.28);height:20px"></div>
+      <div style="font-size:14px;line-height:1.5"><strong>C2.</strong> Which machines cannot be undone? Try × 0 and see what goes wrong.</div>
+      <div style="border-bottom:2px dotted rgba(23,19,11,.28);height:20px"></div>
+    </div>
+
+    <div style="border-top:2px solid rgba(23,19,11,.12);margin-top:12px;padding:11px 0 24px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(23,19,11,.45)">
+      <span>Error journal: one sentence per mistake</span><span>Lesson 1.4 · page 7</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ P8 · FRIDAY ============ -->
+<section class="page" data-screen-label="08 Friday enrichment" style="background:#FFFBF2;padding:0;display:flex;flex-direction:column">
+  <div style="height:10px;background:#F59E0B"></div>
+  <div style="padding:30px 52px 0;flex:1;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:24px;border-bottom:2px solid rgba(23,19,11,.14);padding-bottom:14px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:#B45309">Mission 08 · Week 1 · Friday · Enrichment</div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:34px;margin:6px 0 3px;line-height:1">Guess My Rule</h1>
+        <div style="font-size:13px;color:rgba(23,19,11,.6)">Five inputs to crack the machine. Choose them well and you'll need two.</div>
+      </div>
+      <div style="flex:none;text-align:right;font-family:'JetBrains Mono',monospace;font-size:10.5px;color:rgba(23,19,11,.55);line-height:2">
+        <div>NAME ___________</div><div>DATE ___________</div>
+      </div>
+    </div>
+
+    <div style="background:rgba(245,158,11,.12);border:1.5px solid rgba(180,83,9,.3);border-radius:14px;padding:14px 18px;margin-top:16px;font-size:13.5px;line-height:1.55">
+      <strong>How to play:</strong> one person writes a secret rule of the form × ___ + ___ and keeps it covered. The other calls out inputs, one at a time, and records the outputs. Crack the rule in five inputs or fewer and you win the round. Then swap.
+    </div>
+
+    <div style="background:rgba(252,211,77,.16);border:1.5px solid rgba(161,98,7,.28);border-radius:14px;padding:14px 18px;margin-top:14px">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:#A16207;margin-bottom:10px">The strategy, in two moves</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+        <div style="background:rgba(255,255,255,.78);border:1.5px solid rgba(161,98,7,.3);border-radius:12px;padding:13px 16px">
+          <div style="font-family:Fredoka,sans-serif;font-size:16px;margin-bottom:5px">Ask for 1, then 2</div>
+          <div style="font-size:12.5px;line-height:1.5">The jump between those two outputs is the multiplier, on its own, with the add cancelled out.</div>
+        </div>
+        <div style="background:rgba(255,255,255,.78);border:1.5px solid rgba(161,98,7,.3);border-radius:12px;padding:13px 16px">
+          <div style="font-family:Fredoka,sans-serif;font-size:16px;margin-bottom:5px">Then work out the add</div>
+          <div style="font-size:12.5px;line-height:1.5">Multiply 1 by what you found. The difference between that and the real output is the add.</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:11px;margin:16px 0 9px">
+      <div style="width:26px;height:26px;border-radius:8px;background:#0EA5E9;color:#04283A;display:grid;place-items:center;font-size:12px">◆</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:21px;color:#0369A1">Play four rounds</div>
+    </div>
+    <table style="width:100%;border-collapse:collapse;font-size:13.5px">
+      <thead>
+        <tr style="background:rgba(23,19,11,.05)">
+          <th style="text-align:left;padding:9px 12px;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(23,19,11,.55);border-bottom:2px solid rgba(23,19,11,.15)">Round</th>
+          <th style="text-align:left;padding:9px 12px;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(23,19,11,.55);border-bottom:2px solid rgba(23,19,11,.15)">Inputs I chose</th>
+          <th style="text-align:left;padding:9px 12px;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(23,19,11,.55);border-bottom:2px solid rgba(23,19,11,.15)">Outputs</th>
+          <th style="text-align:left;padding:9px 12px;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(23,19,11,.55);border-bottom:2px solid rgba(23,19,11,.15)">The rule</th>
+          <th style="text-align:center;padding:9px 12px;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(23,19,11,.55);border-bottom:2px solid rgba(23,19,11,.15)">Inputs used</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td style="padding:16px 12px;border-bottom:1px solid rgba(23,19,11,.1);font-family:Fredoka,sans-serif;font-size:17px">1</td><td style="border-bottom:1px solid rgba(23,19,11,.1)"></td><td style="border-bottom:1px solid rgba(23,19,11,.1)"></td><td style="border-bottom:1px solid rgba(23,19,11,.1)"></td><td style="border-bottom:1px solid rgba(23,19,11,.1)"></td></tr>
+        <tr><td style="padding:16px 12px;border-bottom:1px solid rgba(23,19,11,.1);font-family:Fredoka,sans-serif;font-size:17px">2</td><td style="border-bottom:1px solid rgba(23,19,11,.1)"></td><td style="border-bottom:1px solid rgba(23,19,11,.1)"></td><td style="border-bottom:1px solid rgba(23,19,11,.1)"></td><td style="border-bottom:1px solid rgba(23,19,11,.1)"></td></tr>
+        <tr><td style="padding:16px 12px;border-bottom:1px solid rgba(23,19,11,.1);font-family:Fredoka,sans-serif;font-size:17px">3</td><td style="border-bottom:1px solid rgba(23,19,11,.1)"></td><td style="border-bottom:1px solid rgba(23,19,11,.1)"></td><td style="border-bottom:1px solid rgba(23,19,11,.1)"></td><td style="border-bottom:1px solid rgba(23,19,11,.1)"></td></tr>
+        <tr><td style="padding:16px 12px;border-bottom:1px solid rgba(23,19,11,.1);font-family:Fredoka,sans-serif;font-size:17px">4</td><td style="border-bottom:1px solid rgba(23,19,11,.1)"></td><td style="border-bottom:1px solid rgba(23,19,11,.1)"></td><td style="border-bottom:1px solid rgba(23,19,11,.1)"></td><td style="border-bottom:1px solid rgba(23,19,11,.1)"></td></tr>
+      </tbody>
+    </table>
+
+    <div style="display:flex;align-items:center;gap:11px;margin:16px 0 9px">
+      <div style="width:26px;height:26px;border-radius:8px;background:#F59E0B;color:#3A2405;display:grid;place-items:center;font-size:13px">★</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:21px;color:#B45309">Challenge</div>
+    </div>
+    <div style="background:rgba(245,158,11,.1);border:1.5px solid rgba(180,83,9,.32);border-radius:14px;padding:12px 18px;flex:1;display:flex;flex-direction:column;gap:8px">
+      <div style="font-size:14px;line-height:1.5"><strong>C1.</strong> Which single input tells you the least about a rule, and why?</div>
+      <div style="border-bottom:2px dotted rgba(23,19,11,.28);height:20px"></div>
+      <div style="font-size:14px;line-height:1.5"><strong>C2.</strong> Invent a rule your opponent cannot crack in five inputs. Then explain why it isn't a fair machine.</div>
+      <div style="border-bottom:2px dotted rgba(23,19,11,.28);height:20px"></div>
+    </div>
+
+    <div style="border-top:2px solid rgba(23,19,11,.12);margin-top:12px;padding:11px 0 24px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(23,19,11,.45)">
+      <span>Enrichment · not graded</span><span>Friday · page 8</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ P9 · WEEKS 2–4 PLAN ============ -->
+<section class="page" data-screen-label="09 Weeks 2-4 plan" style="background:#FFFBF2;padding:0;display:flex;flex-direction:column">
+  <div style="height:10px;background:linear-gradient(90deg,#38BDF8,#818CF8)"></div>
+  <div style="padding:34px 52px 0;flex:1;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:24px;border-bottom:2px solid rgba(23,19,11,.14);padding-bottom:16px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:#0369A1">Teacher page · the rest of the mission</div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:36px;margin:6px 0 4px;line-height:1">Weeks 2–4</h1>
+        <div style="font-size:13.5px;color:rgba(23,19,11,.6)">Outlined, not written out. Week 1's five worksheets are the model.</div>
+      </div>
+      <div style="flex:none;background:rgba(56,189,248,.14);border:1.5px solid rgba(3,105,161,.3);border-radius:12px;padding:12px 16px;font-family:'JetBrains Mono',monospace;font-size:10.5px;line-height:1.9;color:#0369A1">
+        <div>QUIZ · end of week 3</div>
+        <div>TEST · end of week 4</div>
+      </div>
+    </div>
+
+    <div style="margin-top:20px;background:rgba(56,189,248,.09);border:1.5px solid rgba(3,105,161,.25);border-radius:16px;padding:16px 20px">
+      <div style="display:flex;align-items:baseline;gap:12px;margin-bottom:5px">
+        <div style="font-family:Fredoka,sans-serif;font-size:22px">Week 2 · Variables &amp; Expressions</div>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:#0369A1">Outlined</span>
+      </div>
+      <div style="font-size:13px;line-height:1.5;color:rgba(23,19,11,.75);margin-bottom:12px">The letter is not a mystery and not a label — it is a number that hasn't been named yet.</div>
+      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:9px">
+        <div style="background:rgba(255,255,255,.8);border:1px solid rgba(23,19,11,.14);border-radius:11px;padding:10px 11px"><div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#0369A1">Mon 2.1</div><div style="font-family:Fredoka,sans-serif;font-size:14px;margin:5px 0 4px;line-height:1.15">What a letter is</div><div style="font-size:11.5px;line-height:1.4;color:rgba(23,19,11,.65)">n is a seat a number sits in. 3n is three of them.</div></div>
+        <div style="background:rgba(255,255,255,.8);border:1px solid rgba(23,19,11,.14);border-radius:11px;padding:10px 11px"><div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#0369A1">Tue 2.2</div><div style="font-family:Fredoka,sans-serif;font-size:14px;margin:5px 0 4px;line-height:1.15">Evaluate it</div><div style="font-size:11.5px;line-height:1.4;color:rgba(23,19,11,.65)">Substitute, then work out. One step at a time.</div></div>
+        <div style="background:rgba(255,255,255,.8);border:1px solid rgba(23,19,11,.14);border-radius:11px;padding:10px 11px"><div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#0369A1">Wed 2.3</div><div style="font-family:Fredoka,sans-serif;font-size:14px;margin:5px 0 4px;line-height:1.15">Write the expression</div><div style="font-size:11.5px;line-height:1.4;color:rgba(23,19,11,.65)">“Five more than double n” becomes 2n + 5.</div></div>
+        <div style="background:rgba(255,255,255,.8);border:1px solid rgba(23,19,11,.14);border-radius:11px;padding:10px 11px"><div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#0369A1">Thu 2.4</div><div style="font-family:Fredoka,sans-serif;font-size:14px;margin:5px 0 4px;line-height:1.15">Two letters</div><div style="font-size:11.5px;line-height:1.4;color:rgba(23,19,11,.65)">4a + b. Substitute both before simplifying.</div></div>
+        <div style="background:rgba(245,158,11,.14);border:1px solid rgba(180,83,9,.3);border-radius:11px;padding:10px 11px"><div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#B45309">Fri</div><div style="font-family:Fredoka,sans-serif;font-size:14px;margin:5px 0 4px;line-height:1.15">Perimeter as a rule</div><div style="font-size:11.5px;line-height:1.4;color:rgba(23,19,11,.65)">Any square's perimeter is 4s. Test it on three.</div></div>
+      </div>
+    </div>
+
+    <div style="margin-top:14px;background:rgba(56,189,248,.09);border:1.5px solid rgba(3,105,161,.25);border-radius:16px;padding:16px 20px">
+      <div style="display:flex;align-items:baseline;gap:12px;margin-bottom:5px">
+        <div style="font-family:Fredoka,sans-serif;font-size:22px">Week 3 · One-Step Equations</div>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:#B45309">Quiz Friday</span>
+      </div>
+      <div style="font-size:13px;line-height:1.5;color:rgba(23,19,11,.75);margin-bottom:12px">Equations are scales that must stay level. Whatever you do to one side you do to the other.</div>
+      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:9px">
+        <div style="background:rgba(255,255,255,.8);border:1px solid rgba(23,19,11,.14);border-radius:11px;padding:10px 11px"><div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#0369A1">Mon 3.1</div><div style="font-family:Fredoka,sans-serif;font-size:14px;margin:5px 0 4px;line-height:1.15">Keep it level</div><div style="font-size:11.5px;line-height:1.4;color:rgba(23,19,11,.65)">x + 7 = 19. Take 7 from both sides.</div></div>
+        <div style="background:rgba(255,255,255,.8);border:1px solid rgba(23,19,11,.14);border-radius:11px;padding:10px 11px"><div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#0369A1">Tue 3.2</div><div style="font-family:Fredoka,sans-serif;font-size:14px;margin:5px 0 4px;line-height:1.15">Multiply and divide</div><div style="font-size:11.5px;line-height:1.4;color:rgba(23,19,11,.65)">3x = 21. Divide both sides by 3.</div></div>
+        <div style="background:rgba(255,255,255,.8);border:1px solid rgba(23,19,11,.14);border-radius:11px;padding:10px 11px"><div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#0369A1">Wed 3.3</div><div style="font-family:Fredoka,sans-serif;font-size:14px;margin:5px 0 4px;line-height:1.15">Check your answer</div><div style="font-size:11.5px;line-height:1.4;color:rgba(23,19,11,.65)">Substitute it back. Both sides match or you're not done.</div></div>
+        <div style="background:rgba(255,255,255,.8);border:1px solid rgba(23,19,11,.14);border-radius:11px;padding:10px 11px"><div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#0369A1">Thu 3.4</div><div style="font-family:Fredoka,sans-serif;font-size:14px;margin:5px 0 4px;line-height:1.15">Word to equation</div><div style="font-size:11.5px;line-height:1.4;color:rgba(23,19,11,.65)">Turn a real situation into an equation, then solve it.</div></div>
+        <div style="background:rgba(245,158,11,.14);border:1px solid rgba(180,83,9,.3);border-radius:11px;padding:10px 11px"><div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#B45309">Fri</div><div style="font-family:Fredoka,sans-serif;font-size:14px;margin:5px 0 4px;line-height:1.15">Mid-unit quiz</div><div style="font-size:11.5px;line-height:1.4;color:rgba(23,19,11,.65)">Page 10. Eight items, 85% to advance.</div></div>
+      </div>
+    </div>
+
+    <div style="margin-top:14px;background:rgba(252,211,77,.14);border:1.5px solid rgba(161,98,7,.25);border-radius:16px;padding:16px 20px">
+      <div style="display:flex;align-items:baseline;gap:12px;margin-bottom:5px">
+        <div style="font-family:Fredoka,sans-serif;font-size:22px">Week 4 · The Math Trail</div>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:#A16207">Capstone + unit test</span>
+      </div>
+      <div style="font-size:13px;line-height:1.5;color:rgba(23,19,11,.75);margin-bottom:12px">Ten stops through the house, one problem per stop in his handwriting, every mission of the year represented somewhere.</div>
+      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:9px">
+        <div style="background:rgba(255,255,255,.8);border:1px solid rgba(23,19,11,.14);border-radius:11px;padding:10px 11px"><div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#A16207">Mon 4.1</div><div style="font-family:Fredoka,sans-serif;font-size:14px;margin:5px 0 4px;line-height:1.15">Design the trail</div><div style="font-size:11.5px;line-height:1.4;color:rgba(23,19,11,.65)">Map it first. Ten stops, numbered, on paper.</div></div>
+        <div style="background:rgba(255,255,255,.8);border:1px solid rgba(23,19,11,.14);border-radius:11px;padding:10px 11px"><div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#A16207">Tue 4.2</div><div style="font-family:Fredoka,sans-serif;font-size:14px;margin:5px 0 4px;line-height:1.15">Write the problems</div><div style="font-size:11.5px;line-height:1.4;color:rgba(23,19,11,.65)">Each stop gets a problem and a hidden answer key.</div></div>
+        <div style="background:rgba(255,255,255,.8);border:1px solid rgba(23,19,11,.14);border-radius:11px;padding:10px 11px"><div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#A16207">Wed 4.3</div><div style="font-family:Fredoka,sans-serif;font-size:14px;margin:5px 0 4px;line-height:1.15">Mom walks it</div><div style="font-size:11.5px;line-height:1.4;color:rgba(23,19,11,.65)">He marks her work. Ambiguous wording gets rewritten.</div></div>
+        <div style="background:rgba(255,255,255,.8);border:1px solid rgba(23,19,11,.14);border-radius:11px;padding:10px 11px"><div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#15803D">Thu</div><div style="font-family:Fredoka,sans-serif;font-size:14px;margin:5px 0 4px;line-height:1.15">Year-end sweep</div><div style="font-size:11.5px;line-height:1.4;color:rgba(23,19,11,.65)">All eight error journals. Name the habit that fixed itself.</div></div>
+        <div style="background:rgba(252,211,77,.22);border:1px solid rgba(161,98,7,.32);border-radius:11px;padding:10px 11px"><div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#A16207">Fri</div><div style="font-family:Fredoka,sans-serif;font-size:14px;margin:5px 0 4px;line-height:1.15">Mission 08 test</div><div style="font-size:11.5px;line-height:1.4;color:rgba(23,19,11,.65)">Pages 11–12, plus the completed trail.</div></div>
+      </div>
+    </div>
+
+    <div style="border-top:2px solid rgba(23,19,11,.12);margin-top:auto;padding:12px 0 26px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(23,19,11,.45)">
+      <span>Teacher page</span><span>Weeks 2–4 · page 9</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ P10 · MID-UNIT QUIZ ============ -->
+<section class="page" data-screen-label="10 Mid-unit quiz" style="background:#FFFBF2;padding:0;display:flex;flex-direction:column">
+  <div style="height:10px;background:#F59E0B"></div>
+  <div style="padding:34px 52px 0;flex:1;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:24px;border-bottom:2px solid rgba(23,19,11,.14);padding-bottom:16px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:#B45309">Mission 08 · End of week 3</div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:36px;margin:6px 0 4px;line-height:1">Mid-Unit Quiz</h1>
+        <div style="font-size:13.5px;color:rgba(23,19,11,.6)">Eight items from Weeks 1 to 3. 85% to keep flying — that's 7 out of 8.</div>
+      </div>
+      <div style="flex:none;text-align:right;font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(23,19,11,.55);line-height:2.1">
+        <div>NAME ______________</div>
+        <div>SCORE ______ / 8</div>
+      </div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:12px;margin-top:20px;flex:1">
+      <div style="border:1.5px solid rgba(23,19,11,.16);border-radius:13px;padding:13px 18px;display:grid;grid-template-columns:1fr 150px;gap:16px;align-items:center"><span style="font-size:14px"><strong>1.</strong> &nbsp;What comes next: 6, 11, 16, 21, ___ ?</span><span style="border-bottom:2px dotted rgba(23,19,11,.3);height:22px"></span></div>
+      <div style="border:1.5px solid rgba(23,19,11,.16);border-radius:13px;padding:13px 18px;display:grid;grid-template-columns:1fr 150px;gap:16px;align-items:center"><span style="font-size:14px"><strong>2.</strong> &nbsp;A machine is × 4 + 2. Put in 9.</span><span style="border-bottom:2px dotted rgba(23,19,11,.3);height:22px"></span></div>
+      <div style="border:1.5px solid rgba(23,19,11,.16);border-radius:13px;padding:13px 18px;display:grid;grid-template-columns:1fr 150px;gap:16px;align-items:center"><span style="font-size:14px"><strong>3.</strong> &nbsp;The same machine gives out 30. What went in?</span><span style="border-bottom:2px dotted rgba(23,19,11,.3);height:22px"></span></div>
+      <div style="border:1.5px solid rgba(23,19,11,.16);border-radius:13px;padding:13px 18px;display:grid;grid-template-columns:1fr 150px;gap:16px;align-items:center"><span style="font-size:14px"><strong>4.</strong> &nbsp;If n = 7, what is 3n − 4?</span><span style="border-bottom:2px dotted rgba(23,19,11,.3);height:22px"></span></div>
+      <div style="border:1.5px solid rgba(23,19,11,.16);border-radius:13px;padding:13px 18px;display:grid;grid-template-columns:1fr 150px;gap:16px;align-items:center"><span style="font-size:14px"><strong>5.</strong> &nbsp;Find x: x + 18 = 45</span><span style="border-bottom:2px dotted rgba(23,19,11,.3);height:22px"></span></div>
+      <div style="border:1.5px solid rgba(23,19,11,.16);border-radius:13px;padding:13px 18px;display:grid;grid-template-columns:1fr 150px;gap:16px;align-items:center"><span style="font-size:14px"><strong>6.</strong> &nbsp;Find x: 7x = 63</span><span style="border-bottom:2px dotted rgba(23,19,11,.3);height:22px"></span></div>
+      <div style="border:1.5px solid rgba(23,19,11,.16);border-radius:13px;padding:13px 18px;display:grid;grid-template-columns:1fr 150px;gap:16px;align-items:center"><span style="font-size:14px"><strong>7.</strong> &nbsp;A pattern starts at 3 and adds 4. What is its tenth number?</span><span style="border-bottom:2px dotted rgba(23,19,11,.3);height:22px"></span></div>
+      <div style="border:1.5px solid rgba(245,158,11,.5);background:rgba(245,158,11,.09);border-radius:13px;padding:13px 18px">
+        <div style="font-size:14px;margin-bottom:9px"><strong>8.</strong> &nbsp;A machine turns 2 into 9, 3 into 13 and 4 into 17. Write its rule, then check your rule on 4 in writing.</div>
+        <div style="border-bottom:2px dotted rgba(23,19,11,.3);height:22px"></div>
+        <div style="border-bottom:2px dotted rgba(23,19,11,.3);height:22px;margin-top:8px"></div>
+      </div>
+    </div>
+
+    <div style="background:rgba(23,19,11,.05);border-radius:12px;padding:13px 18px;margin-top:16px;font-size:13px;line-height:1.5;color:rgba(23,19,11,.7)">
+      <strong>Marking note:</strong> on items 5 and 6, a right answer with no working still scores — but ask him to show the both-sides step out loud before you move on. That step is what makes two-step equations possible next week.
+    </div>
+
+    <div style="border-top:2px solid rgba(23,19,11,.12);margin-top:14px;padding:12px 0 26px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(23,19,11,.45)">
+      <span>Answers on page 15</span><span>Mid-unit quiz · page 10</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ P11 · UNIT TEST A ============ -->
+<section class="page" data-screen-label="11 Unit test A" style="background:#FFFBF2;padding:0;display:flex;flex-direction:column">
+  <div style="height:10px;background:linear-gradient(90deg,#A16207,#FCD34D)"></div>
+  <div style="padding:34px 52px 0;flex:1;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:24px;border-bottom:2px solid rgba(23,19,11,.14);padding-bottom:16px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:#A16207">Mission 08 · End of week 4 · Final test of Year One</div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:36px;margin:6px 0 4px;line-height:1">Unit Test · Part 1</h1>
+        <div style="font-size:13.5px;color:rgba(23,19,11,.6)">Items 1–8. No time limit. Check every equation by substituting your answer back in.</div>
+      </div>
+      <div style="flex:none;text-align:right;font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(23,19,11,.55);line-height:2.1">
+        <div>NAME ______________</div>
+        <div>DATE ______________</div>
+      </div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:12px;margin-top:20px;flex:1">
+      <div style="border:1.5px solid rgba(23,19,11,.16);border-radius:13px;padding:13px 18px;display:grid;grid-template-columns:1fr 150px;gap:16px;align-items:center"><span style="font-size:14px"><strong>1.</strong> &nbsp;What comes next: 2, 6, 18, 54, ___ ?</span><span style="border-bottom:2px dotted rgba(23,19,11,.3);height:22px"></span></div>
+      <div style="border:1.5px solid rgba(23,19,11,.16);border-radius:13px;padding:13px 18px;display:grid;grid-template-columns:1fr 150px;gap:16px;align-items:center"><span style="font-size:14px"><strong>2.</strong> &nbsp;A pattern starts at 5 and adds 6. Its twelfth number?</span><span style="border-bottom:2px dotted rgba(23,19,11,.3);height:22px"></span></div>
+      <div style="border:1.5px solid rgba(23,19,11,.16);border-radius:13px;padding:13px 18px;display:grid;grid-template-columns:1fr 150px;gap:16px;align-items:center"><span style="font-size:14px"><strong>3.</strong> &nbsp;Machine × 5 + 3. Put in 8.</span><span style="border-bottom:2px dotted rgba(23,19,11,.3);height:22px"></span></div>
+      <div style="border:1.5px solid rgba(23,19,11,.16);border-radius:13px;padding:13px 18px;display:grid;grid-template-columns:1fr 150px;gap:16px;align-items:center"><span style="font-size:14px"><strong>4.</strong> &nbsp;Machine × 6 − 4 gives out 32. What went in?</span><span style="border-bottom:2px dotted rgba(23,19,11,.3);height:22px"></span></div>
+      <div style="border:1.5px solid rgba(23,19,11,.16);border-radius:13px;padding:13px 18px;display:grid;grid-template-columns:1fr 150px;gap:16px;align-items:center"><span style="font-size:14px"><strong>5.</strong> &nbsp;If n = 9, what is 4n + 7?</span><span style="border-bottom:2px dotted rgba(23,19,11,.3);height:22px"></span></div>
+      <div style="border:1.5px solid rgba(23,19,11,.16);border-radius:13px;padding:13px 18px;display:grid;grid-template-columns:1fr 150px;gap:16px;align-items:center"><span style="font-size:14px"><strong>6.</strong> &nbsp;If a = 4 and b = 6, what is 3a + 2b?</span><span style="border-bottom:2px dotted rgba(23,19,11,.3);height:22px"></span></div>
+      <div style="border:1.5px solid rgba(23,19,11,.16);border-radius:13px;padding:13px 18px;display:grid;grid-template-columns:1fr 150px;gap:16px;align-items:center"><span style="font-size:14px"><strong>7.</strong> &nbsp;Find x: x − 26 = 19</span><span style="border-bottom:2px dotted rgba(23,19,11,.3);height:22px"></span></div>
+      <div style="border:1.5px solid rgba(23,19,11,.16);border-radius:13px;padding:13px 18px;display:grid;grid-template-columns:1fr 150px;gap:16px;align-items:center"><span style="font-size:14px"><strong>8.</strong> &nbsp;Find x: 9x = 108</span><span style="border-bottom:2px dotted rgba(23,19,11,.3);height:22px"></span></div>
+    </div>
+
+    <div style="border-top:2px solid rgba(23,19,11,.12);margin-top:14px;padding:12px 0 26px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(23,19,11,.45)">
+      <span>Continues on page 12</span><span>Unit test · page 11</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ P12 · UNIT TEST B ============ -->
+<section class="page" data-screen-label="12 Unit test B" style="background:#FFFBF2;padding:0;display:flex;flex-direction:column">
+  <div style="height:10px;background:linear-gradient(90deg,#A16207,#FCD34D)"></div>
+  <div style="padding:34px 52px 0;flex:1;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:24px;border-bottom:2px solid rgba(23,19,11,.14);padding-bottom:16px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:#A16207">Mission 08 · End of week 4</div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:36px;margin:6px 0 4px;line-height:1">Unit Test · Part 2</h1>
+        <div style="font-size:13.5px;color:rgba(23,19,11,.6)">Items 9–12, the Big Question, and the trail sign-off.</div>
+      </div>
+      <div style="flex:none;text-align:right;font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(23,19,11,.55);line-height:2.1">
+        <div>SCORE ______ / 12</div>
+        <div>BAND ______________</div>
+      </div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:11px;margin-top:18px">
+      <div style="border:1.5px solid rgba(23,19,11,.16);border-radius:13px;padding:13px 18px;display:grid;grid-template-columns:1fr 150px;gap:16px;align-items:center"><span style="font-size:14px"><strong>9.</strong> &nbsp;Find x: 2x + 5 = 19</span><span style="border-bottom:2px dotted rgba(23,19,11,.3);height:22px"></span></div>
+      <div style="border:1.5px solid rgba(23,19,11,.16);border-radius:13px;padding:13px 18px;display:grid;grid-template-columns:1fr 150px;gap:16px;align-items:center"><span style="font-size:14px"><strong>10.</strong> &nbsp;A machine turns 5 into 23 and 8 into 35. What does it do to 10?</span><span style="border-bottom:2px dotted rgba(23,19,11,.3);height:22px"></span></div>
+      <div style="border:1.5px solid rgba(23,19,11,.16);border-radius:13px;padding:13px 18px">
+        <div style="font-size:14px;margin-bottom:9px"><strong>11.</strong> &nbsp;Write “seven more than triple a number” as an expression, then find its value when the number is 8.</div>
+        <div style="border-bottom:2px dotted rgba(23,19,11,.3);height:22px"></div>
+      </div>
+      <div style="border:1.5px solid rgba(23,19,11,.16);border-radius:13px;padding:13px 18px">
+        <div style="font-size:14px;margin-bottom:9px"><strong>12.</strong> &nbsp;A bag of marbles is shared equally between 4 people and each gets 13. Write this as an equation using a letter, then solve it.</div>
+        <div style="border-bottom:2px dotted rgba(23,19,11,.3);height:22px"></div>
+      </div>
+    </div>
+
+    <div style="margin-top:14px;background:rgba(252,211,77,.16);border:1.5px solid rgba(161,98,7,.3);border-radius:16px;padding:16px 20px;flex:1;display:flex;flex-direction:column">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:#A16207;margin-bottom:8px">Explain your thinking · the Big Question</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:22px;line-height:1.25;margin-bottom:6px">What does a letter in a math problem actually stand for?</div>
+      <div style="font-size:13.5px;line-height:1.5;color:rgba(23,19,11,.72);margin-bottom:10px">Answer without using the word “mystery.” Use one equation of your own as the example.</div>
+      <div style="flex:1;display:flex;flex-direction:column;gap:15px;padding-top:2px">
+        <div style="border-bottom:2px dotted rgba(23,19,11,.3)"></div>
+        <div style="border-bottom:2px dotted rgba(23,19,11,.3)"></div>
+        <div style="border-bottom:2px dotted rgba(23,19,11,.3)"></div>
+        <div style="border-bottom:2px dotted rgba(23,19,11,.3)"></div>
+        <div style="border-bottom:2px dotted rgba(23,19,11,.3)"></div>
+      </div>
+    </div>
+
+    <div style="margin-top:14px;display:grid;grid-template-columns:1.1fr 1fr;gap:14px">
+      <div style="border:1.5px solid rgba(161,98,7,.3);background:rgba(252,211,77,.1);border-radius:14px;padding:14px 18px">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:#A16207;margin-bottom:8px">Math Trail sign-off</div>
+        <div style="font-size:13px;line-height:1.55;margin-bottom:10px">Ten stops built · Mom walked it · every problem solvable</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:11px;line-height:2.4;color:rgba(23,19,11,.6)">STOPS COMPLETED ______ / 10<br>WALKED BY ______________<br>SIGNED ______________</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:9px">
+        <div style="background:rgba(74,222,128,.12);border:1.5px solid rgba(21,128,61,.3);border-radius:12px;padding:10px 14px;display:flex;align-items:baseline;gap:12px"><div style="font-family:Fredoka,sans-serif;font-size:19px;color:#15803D">11–12</div><div style="font-size:12.5px;line-height:1.4">Gold. The Unknown Badge, and Year One is finished.</div></div>
+        <div style="background:rgba(56,189,248,.12);border:1.5px solid rgba(3,105,161,.3);border-radius:12px;padding:10px 14px;display:flex;align-items:baseline;gap:12px"><div style="font-family:Fredoka,sans-serif;font-size:19px;color:#0369A1">9–10</div><div style="font-size:12.5px;line-height:1.4">Silver. One reteach day, then the badge.</div></div>
+        <div style="background:rgba(245,158,11,.12);border:1.5px solid rgba(180,83,9,.3);border-radius:12px;padding:10px 14px;display:flex;align-items:baseline;gap:12px"><div style="font-family:Fredoka,sans-serif;font-size:19px;color:#B45309">≤ 8</div><div style="font-size:12.5px;line-height:1.4">Bronze. Retest the weak strand only — the trail still counts.</div></div>
+      </div>
+    </div>
+
+    <div style="border-top:2px solid rgba(23,19,11,.12);margin-top:12px;padding:12px 0 26px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(23,19,11,.45)">
+      <span>The Unknown Badge</span><span>Unit test · page 12</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ P13 · ANSWER KEY A ============ -->
+<section class="page" data-screen-label="13 Answer key A" style="background:#FFFBF2;padding:0;display:flex;flex-direction:column">
+  <div style="height:10px;background:#15803D"></div>
+  <div style="padding:34px 52px 0;flex:1;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:24px;border-bottom:2px solid rgba(23,19,11,.14);padding-bottom:16px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:#15803D">Teacher page · answer key</div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:36px;margin:6px 0 4px;line-height:1">Key A</h1>
+        <div style="font-size:13.5px;color:rgba(23,19,11,.6)">Pre-assessment, Lesson 1.1 and Lesson 1.2.</div>
+      </div>
+      <div style="flex:none;background:rgba(74,222,128,.14);border:1.5px solid rgba(21,128,61,.3);border-radius:12px;padding:12px 16px;font-size:12.5px;line-height:1.6;max-width:210px;color:#15803D">Mark the reasoning, not the handwriting. Any correct method counts.</div>
+    </div>
+
+    <div style="margin-top:20px;display:flex;flex-direction:column;gap:16px;flex:1">
+      <div style="border:1.5px solid rgba(21,128,61,.25);border-radius:14px;padding:16px 20px;background:rgba(74,222,128,.06)">
+        <div style="font-family:Fredoka,sans-serif;font-size:20px;margin-bottom:10px">Pre-assessment</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:13px;line-height:2.1">
+          A1 · 24 &nbsp;|&nbsp; A2 · start at 4, add 5 &nbsp;|&nbsp; B1 · 21 &nbsp;|&nbsp; B2 · 8<br>
+          C1 · 17 &nbsp;|&nbsp; C2 · no — 22 the other way &nbsp;|&nbsp; D1 · 15 &nbsp;|&nbsp; D2 · 14<br>
+          E1 · 8 &nbsp;|&nbsp; E2 · 7 &nbsp;|&nbsp; F1 · both sides are the same amount &nbsp;|&nbsp; F2 · no — 10 and 25
+        </div>
+      </div>
+
+      <div style="border:1.5px solid rgba(21,128,61,.25);border-radius:14px;padding:16px 20px;background:rgba(74,222,128,.06)">
+        <div style="font-family:Fredoka,sans-serif;font-size:20px;margin-bottom:10px">Lesson 1.1 · Find the Rule</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:13px;line-height:2.1">
+          Warm-Up · 15 &nbsp;|&nbsp; 25 &nbsp;|&nbsp; 32 &nbsp;|&nbsp; 8 &nbsp;|&nbsp; 13 &nbsp;|&nbsp; 70<br>
+          Core · 1 · 2, 6, 18, 54 &nbsp;|&nbsp; 2 · 31, double and add one &nbsp;|&nbsp; 3 · 49 &nbsp;|&nbsp; 4 · 26, the gaps go 3, 5, 7, 9 &nbsp;|&nbsp; 5 · 101
+        </div>
+        <div style="font-size:12.5px;line-height:1.5;margin-top:10px;color:rgba(23,19,11,.7)">C1 · × 3 + 1, which sends 7 to 22. C2 · adding 4 is ahead at the fifth number (17 against 16) and far behind by the tenth (37 against 512) — doubling always wins eventually.</div>
+      </div>
+
+      <div style="border:1.5px solid rgba(21,128,61,.25);border-radius:14px;padding:16px 20px;background:rgba(74,222,128,.06)">
+        <div style="font-family:Fredoka,sans-serif;font-size:20px;margin-bottom:10px">Lesson 1.2 · Function Machines</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:13px;line-height:2.1">
+          Warm-Up · 13 &nbsp;|&nbsp; 24 &nbsp;|&nbsp; 13 &nbsp;|&nbsp; 90 &nbsp;|&nbsp; 9 &nbsp;|&nbsp; 30<br>
+          Table · out 10, 13, 31 &nbsp;&nbsp;&nbsp; Core · 1 · 22 &nbsp;|&nbsp; 2 · 33 &nbsp;|&nbsp; 3 · 33 &nbsp;|&nbsp; 4 · 7 &nbsp;|&nbsp; 5 · × 3 + 1, so 10 gives 31
+        </div>
+        <div style="font-size:12.5px;line-height:1.5;margin-top:10px;color:rgba(23,19,11,.7)">C1 · × 4 + 1, so 12 gives 49. C2 · × 1, or + 0 — accept either, and both is better.</div>
+      </div>
+    </div>
+
+    <div style="border-top:2px solid rgba(23,19,11,.12);margin-top:14px;padding:12px 0 26px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(23,19,11,.45)">
+      <span>Teacher page</span><span>Answer key A · page 13</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ P14 · ANSWER KEY B ============ -->
+<section class="page" data-screen-label="14 Answer key B" style="background:#FFFBF2;padding:0;display:flex;flex-direction:column">
+  <div style="height:10px;background:#15803D"></div>
+  <div style="padding:34px 52px 0;flex:1;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:24px;border-bottom:2px solid rgba(23,19,11,.14);padding-bottom:16px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:#15803D">Teacher page · answer key</div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:36px;margin:6px 0 4px;line-height:1">Key B</h1>
+        <div style="font-size:13.5px;color:rgba(23,19,11,.6)">Lesson 1.3, Lesson 1.4 and Friday's game.</div>
+      </div>
+      <div style="flex:none;background:rgba(74,222,128,.14);border:1.5px solid rgba(21,128,61,.3);border-radius:12px;padding:12px 16px;font-size:12.5px;line-height:1.6;max-width:210px;color:#15803D">Where a question asks him to name the rule, the words matter as much as the number.</div>
+    </div>
+
+    <div style="margin-top:20px;display:flex;flex-direction:column;gap:16px;flex:1">
+      <div style="border:1.5px solid rgba(21,128,61,.25);border-radius:14px;padding:16px 20px;background:rgba(74,222,128,.06)">
+        <div style="font-family:Fredoka,sans-serif;font-size:20px;margin-bottom:10px">Lesson 1.3 · Two-Step Rules</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:13px;line-height:2.1">
+          Warm-Up · 9 &nbsp;|&nbsp; 17 &nbsp;|&nbsp; 20 &nbsp;|&nbsp; 20 &nbsp;|&nbsp; 18 &nbsp;|&nbsp; 14<br>
+          Core · 1 · 31 &nbsp;|&nbsp; 2 · 40 &nbsp;|&nbsp; 3 · 24 &nbsp;|&nbsp; 4 · 43 &nbsp;|&nbsp; 5 · they never agree
+        </div>
+        <div style="font-size:12.5px;line-height:1.5;margin-top:10px;color:rgba(23,19,11,.7)">Item 5 · the second machine is always 4 more, whatever goes in, because the 2 gets multiplied as well. Accept any answer that shows three inputs and spots the constant gap. C1 · 1, 5, 13, 29. C2 · × 2 − 5 sends 5 to 5 but moves everything else.</div>
+      </div>
+
+      <div style="border:1.5px solid rgba(21,128,61,.25);border-radius:14px;padding:16px 20px;background:rgba(74,222,128,.06)">
+        <div style="font-family:Fredoka,sans-serif;font-size:20px;margin-bottom:10px">Lesson 1.4 · Working Backwards</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:13px;line-height:2.1">
+          Warm-Up · − 7 &nbsp;|&nbsp; ÷ 5 &nbsp;|&nbsp; + 4 &nbsp;|&nbsp; × 3 &nbsp;|&nbsp; 7 &nbsp;|&nbsp; 7<br>
+          Core · 1 · 7 &nbsp;|&nbsp; 2 · 7 &nbsp;|&nbsp; 3 · 12 &nbsp;|&nbsp; 4 · 16 &nbsp;|&nbsp; 5 · 0
+        </div>
+        <div style="font-size:12.5px;line-height:1.5;margin-top:10px;color:rgba(23,19,11,.7)">Item 5 · zero surprises most students because “nothing went in” still counts as an input. C1 · 3x + 1 = 22, so x = 7. C2 · × 0 destroys the input — every number becomes 0, so there is nothing left to undo.</div>
+      </div>
+
+      <div style="border:1.5px solid rgba(21,128,61,.25);border-radius:14px;padding:16px 20px;background:rgba(74,222,128,.06)">
+        <div style="font-family:Fredoka,sans-serif;font-size:20px;margin-bottom:10px">Friday · Guess My Rule</div>
+        <div style="font-size:13px;line-height:1.6">His own rounds, so no key — but the table should show inputs of 1 and 2 early on, and “inputs used” should fall as the rounds go on. That falling number <em>is</em> the learning.</div>
+        <div style="font-size:12.5px;line-height:1.5;margin-top:10px;color:rgba(23,19,11,.7)">C1 · zero tells you the least about the multiplier, since × anything leaves it at 0 — though it hands you the add for free. C2 · anything not of the form × ___ + ___, such as “square it,” or a rule that changes between inputs, which is not a machine at all.</div>
+      </div>
+    </div>
+
+    <div style="border-top:2px solid rgba(23,19,11,.12);margin-top:14px;padding:12px 0 26px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(23,19,11,.45)">
+      <span>Teacher page</span><span>Answer key B · page 14</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ P15 · ANSWER KEY C + JOURNAL ============ -->
+<section class="page" data-screen-label="15 Answer key C" style="background:#FFFBF2;padding:0;display:flex;flex-direction:column">
+  <div style="height:10px;background:#15803D"></div>
+  <div style="padding:34px 52px 0;flex:1;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:24px;border-bottom:2px solid rgba(23,19,11,.14);padding-bottom:16px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:#15803D">Teacher page · answer key</div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:36px;margin:6px 0 4px;line-height:1">Key C</h1>
+        <div style="font-size:13.5px;color:rgba(23,19,11,.6)">Mid-unit quiz, unit test, and the year-end journal sheet.</div>
+      </div>
+      <div style="flex:none;background:rgba(74,222,128,.14);border:1.5px solid rgba(21,128,61,.3);border-radius:12px;padding:12px 16px;font-size:12.5px;line-height:1.6;max-width:210px;color:#15803D">Quiz is out of 8, test out of 12. 85% is 7/8 and 11/12.</div>
+    </div>
+
+    <div style="margin-top:18px;display:grid;grid-template-columns:1fr 1fr;gap:16px">
+      <div style="border:1.5px solid rgba(21,128,61,.25);border-radius:14px;padding:15px 20px;background:rgba(74,222,128,.06)">
+        <div style="font-family:Fredoka,sans-serif;font-size:20px;margin-bottom:8px">Mid-unit quiz</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:13px;line-height:2">
+          1 · 26<br>2 · 38<br>3 · 7<br>4 · 17<br>5 · 27<br>6 · 9<br>7 · 39<br>8 · × 4 + 1 &nbsp;(4 × 4 + 1 = 17 ✓)
+        </div>
+      </div>
+      <div style="border:1.5px solid rgba(21,128,61,.25);border-radius:14px;padding:15px 20px;background:rgba(74,222,128,.06)">
+        <div style="font-family:Fredoka,sans-serif;font-size:20px;margin-bottom:8px">Unit test</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:13px;line-height:2">
+          1 · 162<br>2 · 71<br>3 · 43<br>4 · 6<br>5 · 43<br>6 · 24<br>7 · 45<br>8 · 12<br>9 · 7<br>10 · 43
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:14px;border:1.5px solid rgba(21,128,61,.25);border-radius:14px;padding:15px 20px;background:rgba(74,222,128,.06)">
+      <div style="font-family:Fredoka,sans-serif;font-size:20px;margin-bottom:8px">Items 11, 12 and the Big Question</div>
+      <div style="font-size:13px;line-height:1.6"><strong>11 ·</strong> 3n + 7, which is 31 when n = 8. <strong>12 ·</strong> m ÷ 4 = 13, so m = 52 — accept 4 × 13 = m as an equivalent equation. <strong>Big Question ·</strong> full marks for any answer saying the letter is a number that has not been named yet, and that the equation is a statement about which number it must be. “It stands for something we can work out” earns the mark; “it stands for anything” does not.</div>
+    </div>
+
+    <div style="margin-top:14px;border:1.5px solid rgba(23,19,11,.18);border-radius:14px;padding:15px 20px;flex:1;display:flex;flex-direction:column">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px">
+        <div style="font-family:Fredoka,sans-serif;font-size:20px">Year One · closing sweep</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(23,19,11,.45)">Student page · last one</div>
+      </div>
+      <div style="font-size:12.5px;line-height:1.5;color:rgba(23,19,11,.65);margin:6px 0 10px">Read all eight error journals. Write the one habit that fixed itself, and the one still worth watching.</div>
+      <div style="flex:1;display:flex;flex-direction:column;gap:0">
+        <div style="display:grid;grid-template-columns:104px 1fr;gap:14px;border-bottom:1.5px solid rgba(23,19,11,.14);padding:10px 0"><span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:rgba(23,19,11,.4)">MISSION</span><span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:rgba(23,19,11,.4)">WHAT I'D TELL MYSELF AT THE START OF IT</span></div>
+        <div style="border-bottom:1.5px solid rgba(23,19,11,.14);height:30px"></div>
+        <div style="border-bottom:1.5px solid rgba(23,19,11,.14);height:30px"></div>
+        <div style="border-bottom:1.5px solid rgba(23,19,11,.14);height:30px"></div>
+        <div style="border-bottom:1.5px solid rgba(23,19,11,.14);height:30px"></div>
+        <div style="border-bottom:1.5px solid rgba(23,19,11,.14);height:30px"></div>
+      </div>
+    </div>
+
+    <div style="border-top:2px solid rgba(23,19,11,.12);margin-top:12px;padding:12px 0 26px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(23,19,11,.45)">
+      <span>Adventures in Big Math · Mission 08 · Algebra Sparks</span><span>Answer key C · page 15</span>
+    </div>
+  </div>
+</section>
+
+</doc-page>
+</x-dc>
+</body>
+</html>

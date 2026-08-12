@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700;6..12,800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  body{margin:0;font-family:"Nunito Sans",system-ui,sans-serif;color:#17130B}
+  a{color:#BE123C;text-decoration:none}
+  a:hover{color:#E11D48}
+  *{box-sizing:border-box}
+</style>
+<script src="./doc-page.js"></script>
+</helmet>
+
+<doc-page size="letter">
+
+<!-- ============ P1 · COVER ============ -->
+<section class="page" data-screen-label="01 Cover" style="background:#1A0A12;color:#FFF5F7;padding:0;display:flex;flex-direction:column;position:relative;overflow:hidden">
+  <div style="position:absolute;inset:0;background:radial-gradient(680px 420px at 78% 8%, rgba(251,113,133,.3), transparent 62%),radial-gradient(560px 380px at 10% 88%, rgba(251,191,36,.2), transparent 62%)"></div>
+  <div style="position:absolute;inset:0;background-image:radial-gradient(1.6px 1.6px at 14% 22%,#fff,transparent),radial-gradient(1.4px 1.4px at 32% 66%,#fff,transparent),radial-gradient(1.8px 1.8px at 52% 14%,#fff,transparent),radial-gradient(1.3px 1.3px at 68% 78%,#fff,transparent),radial-gradient(1.7px 1.7px at 86% 36%,#fff,transparent),radial-gradient(1.4px 1.4px at 22% 90%,#fff,transparent),radial-gradient(1.5px 1.5px at 92% 66%,#fff,transparent);opacity:.7"></div>
+
+  <div style="position:relative;padding:62px 62px 0;flex:1;display:flex;flex-direction:column">
+    <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:#FDA4AF">Adventures in Big Math · Year One</div>
+    <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:rgba(255,245,247,.5);margin-top:8px">Mission 07 of 08 · Weeks 30–32</div>
+
+    <div style="margin-top:54px;display:flex;align-items:center;gap:30px">
+      <div style="flex:none;width:128px;height:128px;border-radius:50%;background:radial-gradient(circle at 32% 28%,#FB7185,#9F1239 70%);box-shadow:0 0 0 10px rgba(251,113,133,.16),0 22px 60px rgba(159,18,57,.5);display:grid;place-items:center;position:relative">
+        <div style="position:absolute;inset:-14% -32%;border:3px solid rgba(251,113,133,.45);border-radius:50%;transform:rotate(-18deg) scaleY(.28)"></div>
+        <div style="position:relative;display:flex;align-items:flex-end;gap:5px;height:52px">
+          <div style="width:11px;height:24px;background:#2C0812;border-radius:2px"></div>
+          <div style="width:11px;height:44px;background:#2C0812;border-radius:2px"></div>
+          <div style="width:11px;height:33px;background:#2C0812;border-radius:2px"></div>
+        </div>
+      </div>
+      <div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:66px;line-height:.98;margin:0;letter-spacing:-1px;color:#FB7185">Data<br>Detective</h1>
+        <div style="font-size:18px;margin-top:14px;color:rgba(255,245,247,.78)">The mission where every graph turns into a claim you can check.</div>
+      </div>
+    </div>
+
+    <div style="margin-top:46px;background:rgba(255,255,255,.06);border:1px solid rgba(251,113,133,.4);border-radius:20px;padding:26px 30px">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#FDA4AF;margin-bottom:10px">The Big Question</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:29px;line-height:1.2">Can a true average tell a false story?</div>
+    </div>
+
+    <div style="margin-top:34px;display:grid;grid-template-columns:1fr 1fr;gap:18px">
+      <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);border-radius:16px;padding:20px 22px">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,245,247,.5);margin-bottom:8px">Hands-on project</div>
+        <div style="font-family:Fredoka,sans-serif;font-size:19px;line-height:1.2;margin-bottom:7px">Ask 20 People</div>
+        <div style="font-size:13.5px;line-height:1.5;color:rgba(255,245,247,.72)">Write a real survey question, collect twenty real answers, and publish the findings with one honest limitation.</div>
+      </div>
+      <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);border-radius:16px;padding:20px 22px">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,245,247,.5);margin-bottom:8px">Fluency game</div>
+        <div style="font-family:Fredoka,sans-serif;font-size:19px;line-height:1.2;margin-bottom:7px">Predict the Roll</div>
+        <div style="font-size:13.5px;line-height:1.5;color:rgba(255,245,247,.72)">Call the outcome in writing, tally fifty trials, then explain the gap between prediction and result.</div>
+      </div>
+    </div>
+
+    <div style="margin-top:auto;display:flex;align-items:flex-end;gap:18px;padding-bottom:46px">
+      <div style="flex:none;width:66px;height:66px;border-radius:20px;background:linear-gradient(160deg,#C7D2FE,#818CF8);position:relative;box-shadow:0 12px 30px rgba(129,140,248,.4)">
+        <div style="position:absolute;top:-13px;left:50%;width:2px;height:13px;background:#818CF8"></div>
+        <div style="position:absolute;top:-20px;left:50%;transform:translateX(-50%);width:10px;height:10px;border-radius:50%;background:#FBBF24"></div>
+        <div style="position:absolute;top:22px;left:13px;width:14px;height:14px;border-radius:50%;background:#111938"></div>
+        <div style="position:absolute;top:22px;right:13px;width:14px;height:14px;border-radius:50%;background:#111938"></div>
+        <div style="position:absolute;bottom:12px;left:50%;transform:translateX(-50%);width:26px;height:4px;border-radius:3px;background:rgba(17,25,56,.45)"></div>
+      </div>
+      <div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:18px;border-bottom-left-radius:4px;padding:18px 22px">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:#A5B4FC;margin-bottom:7px">AXIOM · Mission Commander, nine tours</div>
+        <div style="font-family:Fredoka,sans-serif;font-size:18px;line-height:1.35">“Brock — every briefing arrives with an average on it. Your job is to ask what got averaged.”</div>
+      </div>
+    </div>
+  </div>
+  <div style="position:relative;height:12px;background:linear-gradient(90deg,#FB7185,#FBBF24,#38BDF8)"></div>
+</section>
+
+<!-- ============ P2 · PRE-ASSESSMENT ============ -->
+<section class="page" data-screen-label="02 Pre-assessment" style="background:#FFFBF2;padding:0;display:flex;flex-direction:column">
+  <div style="height:10px;background:linear-gradient(90deg,#FB7185,#FBBF24)"></div>
+  <div style="padding:34px 52px 0;flex:1;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:24px;border-bottom:2px solid rgba(23,19,11,.14);padding-bottom:16px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:#BE123C">Mission 07 · Before we launch</div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:36px;margin:6px 0 4px;line-height:1">Pre-Assessment</h1>
+        <div style="font-size:13.5px;color:rgba(23,19,11,.6)">Twelve items, six strands. Anything you already own, we skip.</div>
+      </div>
+      <div style="flex:none;text-align:right;font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(23,19,11,.55);line-height:2.1">
+        <div>NAME ______________</div>
+        <div>DATE ______________</div>
+      </div>
+    </div>
+
+    <div style="background:rgba(251,113,133,.13);border:1.5px solid rgba(190,18,60,.28);border-radius:14px;padding:14px 18px;margin:18px 0 20px;font-size:13.5px;line-height:1.5">
+      <strong>This is not a test.</strong> Nothing here counts for a grade. Two of these ask you to explain rather than calculate — write the sentence anyway.
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:14px;flex:1">
+      <div style="display:grid;grid-template-columns:118px 1fr;gap:18px;align-items:start">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#15803D;padding-top:6px">Strand A<br><span style="color:rgba(23,19,11,.45)">Reading graphs</span></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+          <div style="border:1.5px solid rgba(23,19,11,.16);border-radius:12px;padding:12px 16px"><div style="font-size:13px;margin-bottom:9px"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(23,19,11,.4)">A1</span> &nbsp;On a pictograph each ★ = 5 books. A row has 6 ★. How many books?</div><div style="border-bottom:2px dotted rgba(23,19,11,.3);height:22px"></div></div>
+          <div style="border:1.5px solid rgba(23,19,11,.16);border-radius:12px;padding:12px 16px"><div style="font-size:13px;margin-bottom:9px"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(23,19,11,.4)">A2</span> &nbsp;A bar chart is marked every 10. A bar stops halfway between 20 and 30. Its value?</div><div style="border-bottom:2px dotted rgba(23,19,11,.3);height:22px"></div></div>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:118px 1fr;gap:18px;align-items:start">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#0369A1;padding-top:6px">Strand B<br><span style="color:rgba(23,19,11,.45)">Making a graph</span></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+          <div style="border:1.5px solid rgba(23,19,11,.16);border-radius:12px;padding:12px 16px"><div style="font-size:13px;margin-bottom:9px"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(23,19,11,.4)">B1</span> &nbsp;Your biggest value is 46. What scale would you mark the axis in?</div><div style="border-bottom:2px dotted rgba(23,19,11,.3);height:22px"></div></div>
+          <div style="border:1.5px solid rgba(23,19,11,.16);border-radius:12px;padding:12px 16px"><div style="font-size:13px;margin-bottom:9px"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(23,19,11,.4)">B2</span> &nbsp;Name the two things every graph must have or it proves nothing.</div><div style="border-bottom:2px dotted rgba(23,19,11,.3);height:22px"></div></div>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:118px 1fr;gap:18px;align-items:start">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#0369A1;padding-top:6px">Strand C<br><span style="color:rgba(23,19,11,.45)">Mean &amp; median</span></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+          <div style="border:1.5px solid rgba(23,19,11,.16);border-radius:12px;padding:12px 16px"><div style="font-size:13px;margin-bottom:9px"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(23,19,11,.4)">C1</span> &nbsp;Mean of 4, 6 and 8?</div><div style="border-bottom:2px dotted rgba(23,19,11,.3);height:22px"></div></div>
+          <div style="border:1.5px solid rgba(23,19,11,.16);border-radius:12px;padding:12px 16px"><div style="font-size:13px;margin-bottom:9px"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(23,19,11,.4)">C2</span> &nbsp;Median of 9, 2, 5?</div><div style="border-bottom:2px dotted rgba(23,19,11,.3);height:22px"></div></div>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:118px 1fr;gap:18px;align-items:start">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#B45309;padding-top:6px">Strand D<br><span style="color:rgba(23,19,11,.45)">Mode &amp; range</span></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+          <div style="border:1.5px solid rgba(23,19,11,.16);border-radius:12px;padding:12px 16px"><div style="font-size:13px;margin-bottom:9px"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(23,19,11,.4)">D1</span> &nbsp;Mode of 5, 7, 7, 9?</div><div style="border-bottom:2px dotted rgba(23,19,11,.3);height:22px"></div></div>
+          <div style="border:1.5px solid rgba(23,19,11,.16);border-radius:12px;padding:12px 16px"><div style="font-size:13px;margin-bottom:9px"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(23,19,11,.4)">D2</span> &nbsp;Range of 3, 9, 12?</div><div style="border-bottom:2px dotted rgba(23,19,11,.3);height:22px"></div></div>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:118px 1fr;gap:18px;align-items:start">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#B45309;padding-top:6px">Strand E<br><span style="color:rgba(23,19,11,.45)">Outliers</span></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+          <div style="border:1.5px solid rgba(23,19,11,.16);border-radius:12px;padding:12px 16px"><div style="font-size:13px;margin-bottom:9px"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(23,19,11,.4)">E1</span> &nbsp;Mean of 5, 5, 5, 25?</div><div style="border-bottom:2px dotted rgba(23,19,11,.3);height:22px"></div></div>
+          <div style="border:1.5px solid rgba(23,19,11,.16);border-radius:12px;padding:12px 16px"><div style="font-size:13px;margin-bottom:9px"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(23,19,11,.4)">E2</span> &nbsp;Median of the same four numbers. Why is it so different?</div><div style="border-bottom:2px dotted rgba(23,19,11,.3);height:22px"></div></div>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:118px 1fr;gap:18px;align-items:start">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#B45309;padding-top:6px">Strand F<br><span style="color:rgba(23,19,11,.45)">Chance</span></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+          <div style="border:1.5px solid rgba(23,19,11,.16);border-radius:12px;padding:12px 16px"><div style="font-size:13px;margin-bottom:9px"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(23,19,11,.4)">F1</span> &nbsp;How many ways can one die land on an even number?</div><div style="border-bottom:2px dotted rgba(23,19,11,.3);height:22px"></div></div>
+          <div style="border:1.5px solid rgba(23,19,11,.16);border-radius:12px;padding:12px 16px"><div style="font-size:13px;margin-bottom:9px"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(23,19,11,.4)">F2</span> &nbsp;A bag holds 3 red and 5 blue. Is drawing red likely or unlikely?</div><div style="border-bottom:2px dotted rgba(23,19,11,.3);height:22px"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="border-top:2px solid rgba(23,19,11,.12);margin-top:14px;padding:12px 0 26px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(23,19,11,.45)">
+      <span>Adventures in Big Math · Mission 07</span><span>Pre-assessment · page 2</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ P3 · SKIP CHART ============ -->
+<section class="page" data-screen-label="03 Skip chart" style="background:#FFFBF2;padding:0;display:flex;flex-direction:column">
+  <div style="height:10px;background:linear-gradient(90deg,#4ADE80,#0EA5E9)"></div>
+  <div style="padding:34px 52px 0;flex:1;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:24px;border-bottom:2px solid rgba(23,19,11,.14);padding-bottom:16px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:#15803D">Teacher page · do not hand to student</div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:36px;margin:6px 0 4px;line-height:1">Skip Chart</h1>
+        <div style="font-size:13.5px;color:rgba(23,19,11,.6)">Score the pre-assessment, then cross days off the three-week calendar.</div>
+      </div>
+      <div style="flex:none;background:rgba(74,222,128,.14);border:1.5px solid rgba(21,128,61,.3);border-radius:12px;padding:12px 16px;font-family:'JetBrains Mono',monospace;font-size:10.5px;line-height:1.9;color:#15803D">
+        <div>2 / 2 → SKIP</div>
+        <div>1 / 2 → COMPRESS</div>
+        <div>0 / 2 → TEACH</div>
+      </div>
+    </div>
+
+    <table style="width:100%;border-collapse:collapse;margin-top:22px;font-size:13.5px">
+      <thead>
+        <tr style="background:rgba(23,19,11,.06)">
+          <th style="text-align:left;padding:11px 12px;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(23,19,11,.55);border-bottom:2px solid rgba(23,19,11,.15)">Strand</th>
+          <th style="text-align:left;padding:11px 12px;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(23,19,11,.55);border-bottom:2px solid rgba(23,19,11,.15)">Items</th>
+          <th style="text-align:left;padding:11px 12px;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(23,19,11,.55);border-bottom:2px solid rgba(23,19,11,.15)">Covers</th>
+          <th style="text-align:center;padding:11px 12px;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(23,19,11,.55);border-bottom:2px solid rgba(23,19,11,.15)">Score</th>
+          <th style="text-align:left;padding:11px 12px;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(23,19,11,.55);border-bottom:2px solid rgba(23,19,11,.15)">If 2/2, remove</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(23,19,11,.1)"><strong>A · Reading graphs</strong></td>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(23,19,11,.1);font-family:'JetBrains Mono',monospace;font-size:12px">A1 A2</td>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(23,19,11,.1)">Week 1 · lesson 1.1</td>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(23,19,11,.1);text-align:center;font-family:'JetBrains Mono',monospace">___ / 2</td>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(23,19,11,.1)">Day 1.1. Warm-Up tier drops to 3 items all unit.</td>
+        </tr>
+        <tr>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(23,19,11,.1)"><strong>B · Making a graph</strong></td>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(23,19,11,.1);font-family:'JetBrains Mono',monospace;font-size:12px">B1 B2</td>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(23,19,11,.1)">Week 1 · lesson 1.2</td>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(23,19,11,.1);text-align:center;font-family:'JetBrains Mono',monospace">___ / 2</td>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(23,19,11,.1)">The Warm-Up half of 1.2 only. He still draws his own survey graph in Week 2.</td>
+        </tr>
+        <tr>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(23,19,11,.1)"><strong>C · Mean &amp; median</strong></td>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(23,19,11,.1);font-family:'JetBrains Mono',monospace;font-size:12px">C1 C2</td>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(23,19,11,.1)">Week 1 · lesson 1.3</td>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(23,19,11,.1);text-align:center;font-family:'JetBrains Mono',monospace">___ / 2</td>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(23,19,11,.1)">Nothing. Keep 1.3 whatever he scores — the Big Question is built on it.</td>
+        </tr>
+        <tr>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(23,19,11,.1)"><strong>D · Mode &amp; range</strong></td>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(23,19,11,.1);font-family:'JetBrains Mono',monospace;font-size:12px">D1 D2</td>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(23,19,11,.1)">Week 1 · lesson 1.3 Warm-Up</td>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(23,19,11,.1);text-align:center;font-family:'JetBrains Mono',monospace">___ / 2</td>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(23,19,11,.1)">The Warm-Up row on 1.3. Go straight to the Core.</td>
+        </tr>
+        <tr>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(23,19,11,.1)"><strong>E · Outliers</strong></td>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(23,19,11,.1);font-family:'JetBrains Mono',monospace;font-size:12px">E1 E2</td>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(23,19,11,.1)">Week 1 · lesson 1.4</td>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(23,19,11,.1);text-align:center;font-family:'JetBrains Mono',monospace">___ / 2</td>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(23,19,11,.1)">Nothing — but if he explains E2 well, move 1.4 to Challenge only and spend Thursday on Week 3's misleading graph.</td>
+        </tr>
+        <tr>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(23,19,11,.1)"><strong>F · Chance</strong></td>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(23,19,11,.1);font-family:'JetBrains Mono',monospace;font-size:12px">F1 F2</td>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(23,19,11,.1)">Friday enrichment · Week 2 lesson 2.4</td>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(23,19,11,.1);text-align:center;font-family:'JetBrains Mono',monospace">___ / 2</td>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(23,19,11,.1)">Nothing. Predict the Roll stays — it is fifty rolls and it teaches the gap between theory and result.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div style="background:rgba(251,113,133,.12);border:1.5px solid rgba(190,18,60,.28);border-radius:14px;padding:16px 20px;margin-top:24px">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:#BE123C;margin-bottom:9px">One note before you start</div>
+      <div style="font-size:13.5px;line-height:1.55">This mission is three weeks, not five, because the project does the teaching. If the survey stalls — nobody home, nobody willing — let him survey the same twenty people about something else rather than lose the week. The maths is in the analysis, not the topic.</div>
+    </div>
+
+    <div style="border-top:2px solid rgba(23,19,11,.12);margin-top:auto;padding:12px 0 26px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(23,19,11,.45)">
+      <span>Teacher page</span><span>Skip chart · page 3</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ P4 · DAY 1.1 ============ -->
+<section class="page" data-screen-label="04 Lesson 1.1" style="background:#FFFBF2;padding:0;display:flex;flex-direction:column">
+  <div style="height:10px;background:linear-gradient(90deg,#FB7185,#FBBF24)"></div>
+  <div style="padding:30px 52px 0;flex:1;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:24px;border-bottom:2px solid rgba(23,19,11,.14);padding-bottom:14px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:#BE123C">Mission 07 · Week 1 · Monday · Lesson 1.1</div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:34px;margin:6px 0 3px;line-height:1">Reading a Graph</h1>
+        <div style="font-size:13px;color:rgba(23,19,11,.6)">Find the scale first. Everything else depends on it.</div>
+      </div>
+      <div style="flex:none;text-align:right;font-family:'JetBrains Mono',monospace;font-size:10.5px;color:rgba(23,19,11,.55);line-height:2">
+        <div>NAME ___________</div><div>DATE ___________</div>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:11px;margin:16px 0 9px">
+      <div style="width:26px;height:26px;border-radius:8px;background:#22C55E;color:#052E12;display:grid;place-items:center;font-size:13px">✦</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:21px;color:#15803D">Warm-Up</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(23,19,11,.45)">Each ★ = 5 books</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:10px">
+      <div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:11px 6px;text-align:center"><div style="font-size:12.5px;line-height:1.3">3 ★ = ? books</div><div style="border-bottom:2px solid rgba(23,19,11,.25);height:22px;margin-top:8px"></div></div>
+      <div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:11px 6px;text-align:center"><div style="font-size:12.5px;line-height:1.3">6 ★ = ? books</div><div style="border-bottom:2px solid rgba(23,19,11,.25);height:22px;margin-top:8px"></div></div>
+      <div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:11px 6px;text-align:center"><div style="font-size:12.5px;line-height:1.3">40 books = ? ★</div><div style="border-bottom:2px solid rgba(23,19,11,.25);height:22px;margin-top:8px"></div></div>
+      <div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:11px 6px;text-align:center"><div style="font-size:12.5px;line-height:1.3">half a ★ = ? books</div><div style="border-bottom:2px solid rgba(23,19,11,.25);height:22px;margin-top:8px"></div></div>
+      <div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:11px 6px;text-align:center"><div style="font-size:12.5px;line-height:1.3">2½ ★ = ? books</div><div style="border-bottom:2px solid rgba(23,19,11,.25);height:22px;margin-top:8px"></div></div>
+      <div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:11px 6px;text-align:center"><div style="font-size:12.5px;line-height:1.3">90 books = ? ★</div><div style="border-bottom:2px solid rgba(23,19,11,.25);height:22px;margin-top:8px"></div></div>
+    </div>
+
+    <div style="background:rgba(251,113,133,.13);border:1.5px solid rgba(190,18,60,.28);border-radius:14px;padding:14px 18px;margin-top:16px">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:#BE123C;margin-bottom:12px">Books read this week · the graph you'll be asked about</div>
+      <div style="display:flex;gap:26px;align-items:flex-end;flex-wrap:wrap">
+        <div style="display:flex;align-items:flex-end;gap:16px;height:120px">
+          <div style="text-align:center"><div style="width:44px;height:60px;background:rgba(251,113,133,.45);border:1.5px solid rgba(190,18,60,.5);border-radius:3px 3px 0 0"></div><div style="font-family:'JetBrains Mono',monospace;font-size:10.5px;margin-top:6px">Mon</div></div>
+          <div style="text-align:center"><div style="width:44px;height:45px;background:rgba(251,113,133,.45);border:1.5px solid rgba(190,18,60,.5);border-radius:3px 3px 0 0"></div><div style="font-family:'JetBrains Mono',monospace;font-size:10.5px;margin-top:6px">Tue</div></div>
+          <div style="text-align:center"><div style="width:44px;height:75px;background:rgba(251,113,133,.45);border:1.5px solid rgba(190,18,60,.5);border-radius:3px 3px 0 0"></div><div style="font-family:'JetBrains Mono',monospace;font-size:10.5px;margin-top:6px">Wed</div></div>
+          <div style="text-align:center"><div style="width:44px;height:0"></div><div style="font-family:'JetBrains Mono',monospace;font-size:10.5px;margin-top:6px">Thu</div></div>
+          <div style="text-align:center"><div style="width:44px;height:90px;background:rgba(251,113,133,.45);border:1.5px solid rgba(190,18,60,.5);border-radius:3px 3px 0 0"></div><div style="font-family:'JetBrains Mono',monospace;font-size:10.5px;margin-top:6px">Fri</div></div>
+        </div>
+        <div style="flex:1;min-width:200px;font-size:12.5px;line-height:1.55;color:rgba(23,19,11,.75)">The axis is marked every 3 pages. Mon 12, Tue 9, Wed 15, Thu 0, Fri 18. Thursday counts as a day even though the bar is empty — leaving it out is the commonest way to make data lie.</div>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:11px;margin:14px 0 9px">
+      <div style="width:26px;height:26px;border-radius:8px;background:#0EA5E9;color:#04283A;display:grid;place-items:center;font-size:12px">◆</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:21px;color:#0369A1">Core</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(23,19,11,.45)">Use the graph above</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:9px">
+      <div style="border:1.5px solid rgba(3,105,161,.28);border-radius:13px;padding:11px 16px;background:rgba(14,165,233,.06);display:grid;grid-template-columns:1fr 160px;gap:16px;align-items:center"><span style="font-size:13.5px">1. &nbsp;Pages read across the whole week</span><span style="border-bottom:2px dotted rgba(23,19,11,.3);height:20px"></span></div>
+      <div style="border:1.5px solid rgba(3,105,161,.28);border-radius:13px;padding:11px 16px;background:rgba(14,165,233,.06);display:grid;grid-template-columns:1fr 160px;gap:16px;align-items:center"><span style="font-size:13.5px">2. &nbsp;How many more on Friday than on Tuesday</span><span style="border-bottom:2px dotted rgba(23,19,11,.3);height:20px"></span></div>
+      <div style="border:1.5px solid rgba(3,105,161,.28);border-radius:13px;padding:11px 16px;background:rgba(14,165,233,.06);display:grid;grid-template-columns:1fr 160px;gap:16px;align-items:center"><span style="font-size:13.5px">3. &nbsp;The mean number of pages per day, counting Thursday</span><span style="border-bottom:2px dotted rgba(23,19,11,.3);height:20px"></span></div>
+      <div style="border:1.5px solid rgba(3,105,161,.28);border-radius:13px;padding:11px 16px;background:rgba(14,165,233,.06);display:grid;grid-template-columns:1fr 160px;gap:16px;align-items:center"><span style="font-size:13.5px">4. &nbsp;The mean if you leave Thursday out altogether</span><span style="border-bottom:2px dotted rgba(23,19,11,.3);height:20px"></span></div>
+      <div style="border:1.5px solid rgba(3,105,161,.28);border-radius:13px;padding:11px 16px;background:rgba(14,165,233,.06);display:grid;grid-template-columns:1fr 160px;gap:16px;align-items:center"><span style="font-size:13.5px">5. &nbsp;Which of those two means would you put in a report, and why?</span><span style="border-bottom:2px dotted rgba(23,19,11,.3);height:20px"></span></div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:11px;margin:14px 0 9px">
+      <div style="width:26px;height:26px;border-radius:8px;background:#F59E0B;color:#3A2405;display:grid;place-items:center;font-size:13px">★</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:21px;color:#B45309">Challenge</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(23,19,11,.45)">Not graded</div>
+    </div>
+    <div style="background:rgba(245,158,11,.1);border:1.5px solid rgba(180,83,9,.32);border-radius:14px;padding:12px 18px;flex:1;display:flex;flex-direction:column;gap:8px">
+      <div style="font-size:14px;line-height:1.5"><strong>C1.</strong> A pictograph has four rows and each ★ = 5. The rows total 90 books. How many stars are drawn altogether?</div>
+      <div style="border-bottom:2px dotted rgba(23,19,11,.28);height:20px"></div>
+      <div style="font-size:14px;line-height:1.5"><strong>C2.</strong> Redraw Monday to Friday as a pictograph where each ★ = 6 pages. Which days need a part-star, and how would you draw it?</div>
+      <div style="border-bottom:2px dotted rgba(23,19,11,.28);height:20px"></div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:14px;background:rgba(129,140,248,.12);border:1.5px solid rgba(99,102,241,.28);border-radius:14px;padding:11px 16px;margin-top:12px">
+      <div style="flex:none;width:32px;height:32px;border-radius:10px;background:linear-gradient(160deg,#C7D2FE,#818CF8);position:relative">
+        <div style="position:absolute;top:10px;left:7px;width:7px;height:7px;border-radius:50%;background:#111938"></div>
+        <div style="position:absolute;top:10px;right:7px;width:7px;height:7px;border-radius:50%;background:#111938"></div>
+      </div>
+      <div style="font-size:13.5px;line-height:1.45"><strong>AXIOM:</strong> Read the scale out loud before you read a single bar. Half the wrong answers in this mission come from assuming one square means one thing.</div>
+    </div>
+
+    <div style="border-top:2px solid rgba(23,19,11,.12);margin-top:12px;padding:11px 0 24px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(23,19,11,.45)">
+      <span>Error journal: one sentence per mistake</span><span>Lesson 1.1 · page 4</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ P5 · DAY 1.2 ============ -->
+<section class="page" data-screen-label="05 Lesson 1.2" style="background:#FFFBF2;padding:0;display:flex;flex-direction:column">
+  <div style="height:10px;background:linear-gradient(90deg,#FB7185,#FBBF24)"></div>
+  <div style="padding:30px 52px 0;flex:1;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:24px;border-bottom:2px solid rgba(23,19,11,.14);padding-bottom:14px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:#BE123C">Mission 07 · Week 1 · Tuesday · Lesson 1.2</div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:34px;margin:6px 0 3px;line-height:1">Building a Graph</h1>
+        <div style="font-size:13px;color:rgba(23,19,11,.6)">Tally, choose a scale, draw the bars, label both axes.</div>
+      </div>
+      <div style="flex:none;text-align:right;font-family:'JetBrains Mono',monospace;font-size:10.5px;color:rgba(23,19,11,.55);line-height:2">
+        <div>NAME ___________</div><div>DATE ___________</div>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:11px;margin:16px 0 9px">
+      <div style="width:26px;height:26px;border-radius:8px;background:#22C55E;color:#052E12;display:grid;place-items:center;font-size:13px">✦</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:21px;color:#15803D">Warm-Up</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(23,19,11,.45)">Turn each tally into a number</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:10px">
+      <div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:11px 6px;text-align:center"><div style="font-family:'JetBrains Mono',monospace;font-size:13px;line-height:1.3">||||</div><div style="border-bottom:2px solid rgba(23,19,11,.25);height:22px;margin-top:8px"></div></div>
+      <div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:11px 6px;text-align:center"><div style="font-family:'JetBrains Mono',monospace;font-size:13px;line-height:1.3">two fives</div><div style="border-bottom:2px solid rgba(23,19,11,.25);height:22px;margin-top:8px"></div></div>
+      <div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:11px 6px;text-align:center"><div style="font-family:'JetBrains Mono',monospace;font-size:13px;line-height:1.3">three fives + 2</div><div style="border-bottom:2px solid rgba(23,19,11,.25);height:22px;margin-top:8px"></div></div>
+      <div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:11px 6px;text-align:center"><div style="font-family:'JetBrains Mono',monospace;font-size:13px;line-height:1.3">four fives + 3</div><div style="border-bottom:2px solid rgba(23,19,11,.25);height:22px;margin-top:8px"></div></div>
+      <div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:11px 6px;text-align:center"><div style="font-family:'JetBrains Mono',monospace;font-size:13px;line-height:1.3">20 as fives</div><div style="border-bottom:2px solid rgba(23,19,11,.25);height:22px;margin-top:8px"></div></div>
+      <div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:11px 6px;text-align:center"><div style="font-family:'JetBrains Mono',monospace;font-size:13px;line-height:1.3">17 as fives + ?</div><div style="border-bottom:2px solid rgba(23,19,11,.25);height:22px;margin-top:8px"></div></div>
+    </div>
+
+    <div style="background:rgba(251,113,133,.13);border:1.5px solid rgba(190,18,60,.28);border-radius:14px;padding:14px 18px;margin-top:16px">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:#BE123C;margin-bottom:10px">The data · favourite fruit, 30 people asked</div>
+      <div style="display:flex;gap:22px;flex-wrap:wrap;align-items:center">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:13.5px;line-height:2">
+          apple &nbsp;&nbsp;<strong>12</strong><br>
+          banana &nbsp;<strong>8</strong><br>
+          grape &nbsp;&nbsp;<strong>6</strong><br>
+          pear &nbsp;&nbsp;&nbsp;<strong>4</strong>
+        </div>
+        <div style="flex:1;min-width:220px;font-size:12.5px;line-height:1.55;color:rgba(23,19,11,.75)">Draw this as a bar graph in the grid below. Pick a scale that fits: going up in ones needs twelve squares, going up in twos needs six. Label the vertical axis with your scale and the horizontal axis with the fruit.</div>
+      </div>
+      <div style="height:150px;margin-top:12px;border-radius:8px;background-image:linear-gradient(rgba(23,19,11,.12) 1px,transparent 1px),linear-gradient(90deg,rgba(23,19,11,.12) 1px,transparent 1px);background-size:18px 18px;border:1.5px solid rgba(190,18,60,.35)"></div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:11px;margin:14px 0 9px">
+      <div style="width:26px;height:26px;border-radius:8px;background:#0EA5E9;color:#04283A;display:grid;place-items:center;font-size:12px">◆</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:21px;color:#0369A1">Core</div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+      <div style="border:1.5px solid rgba(3,105,161,.28);border-radius:13px;padding:11px 16px;background:rgba(14,165,233,.06);display:flex;align-items:center;gap:14px"><span style="font-size:13px;flex:1">1. People asked altogether</span><span style="width:80px;border-bottom:2px dotted rgba(23,19,11,.3);height:20px"></span></div>
+      <div style="border:1.5px solid rgba(3,105,161,.28);border-radius:13px;padding:11px 16px;background:rgba(14,165,233,.06);display:flex;align-items:center;gap:14px"><span style="font-size:13px;flex:1">2. The mode of this data</span><span style="width:80px;border-bottom:2px dotted rgba(23,19,11,.3);height:20px"></span></div>
+      <div style="border:1.5px solid rgba(3,105,161,.28);border-radius:13px;padding:11px 16px;background:rgba(14,165,233,.06);display:flex;align-items:center;gap:14px"><span style="font-size:13px;flex:1">3. Apple votes minus pear votes</span><span style="width:80px;border-bottom:2px dotted rgba(23,19,11,.3);height:20px"></span></div>
+      <div style="border:1.5px solid rgba(3,105,161,.28);border-radius:13px;padding:11px 16px;background:rgba(14,165,233,.06);display:flex;align-items:center;gap:14px"><span style="font-size:13px;flex:1">4. Mean votes per fruit</span><span style="width:80px;border-bottom:2px dotted rgba(23,19,11,.3);height:20px"></span></div>
+    </div>
+    <div style="border:1.5px solid rgba(3,105,161,.28);border-radius:13px;padding:11px 16px;background:rgba(14,165,233,.06);margin-top:10px">
+      <div style="font-size:13.5px">5. &nbsp;Out of 100 people, how many would you expect to pick apple? Show the reasoning in one line.</div>
+      <div style="border-bottom:2px dotted rgba(23,19,11,.3);height:22px;margin-top:8px"></div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:11px;margin:14px 0 9px">
+      <div style="width:26px;height:26px;border-radius:8px;background:#F59E0B;color:#3A2405;display:grid;place-items:center;font-size:13px">★</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:21px;color:#B45309">Challenge</div>
+    </div>
+    <div style="background:rgba(245,158,11,.1);border:1.5px solid rgba(180,83,9,.32);border-radius:14px;padding:12px 18px;flex:1;display:flex;flex-direction:column;gap:8px">
+      <div style="font-size:14px;line-height:1.5"><strong>C1.</strong> Someone draws this graph with the vertical axis starting at 4 instead of 0. What happens to the pear bar, and is the graph still honest?</div>
+      <div style="border-bottom:2px dotted rgba(23,19,11,.28);height:20px"></div>
+      <div style="font-size:14px;line-height:1.5"><strong>C2.</strong> Only 30 people were asked. Write one sentence saying what this graph <em>cannot</em> prove.</div>
+      <div style="border-bottom:2px dotted rgba(23,19,11,.28);height:20px"></div>
+    </div>
+
+    <div style="border-top:2px solid rgba(23,19,11,.12);margin-top:12px;padding:11px 0 24px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(23,19,11,.45)">
+      <span>Error journal: one sentence per mistake</span><span>Lesson 1.2 · page 5</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ P6 · DAY 1.3 ============ -->
+<section class="page" data-screen-label="06 Lesson 1.3" style="background:#FFFBF2;padding:0;display:flex;flex-direction:column">
+  <div style="height:10px;background:linear-gradient(90deg,#FB7185,#FBBF24)"></div>
+  <div style="padding:30px 52px 0;flex:1;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:24px;border-bottom:2px solid rgba(23,19,11,.14);padding-bottom:14px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:#BE123C">Mission 07 · Week 1 · Wednesday · Lesson 1.3</div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:34px;margin:6px 0 3px;line-height:1">The Four Measures</h1>
+        <div style="font-size:13px;color:rgba(23,19,11,.6)">Mean, median, mode, range — on one set of numbers, side by side.</div>
+      </div>
+      <div style="flex:none;text-align:right;font-family:'JetBrains Mono',monospace;font-size:10.5px;color:rgba(23,19,11,.55);line-height:2">
+        <div>NAME ___________</div><div>DATE ___________</div>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:11px;margin:16px 0 9px">
+      <div style="width:26px;height:26px;border-radius:8px;background:#22C55E;color:#052E12;display:grid;place-items:center;font-size:13px">✦</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:21px;color:#15803D">Warm-Up</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(23,19,11,.45)">Small sets, whole answers</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:10px">
+      <div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:11px 6px;text-align:center"><div style="font-size:12.5px;line-height:1.3">mean of 4, 6, 8</div><div style="border-bottom:2px solid rgba(23,19,11,.25);height:22px;margin-top:8px"></div></div>
+      <div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:11px 6px;text-align:center"><div style="font-size:12.5px;line-height:1.3">median of 2, 5, 9</div><div style="border-bottom:2px solid rgba(23,19,11,.25);height:22px;margin-top:8px"></div></div>
+      <div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:11px 6px;text-align:center"><div style="font-size:12.5px;line-height:1.3">mode of 5, 7, 7, 9</div><div style="border-bottom:2px solid rgba(23,19,11,.25);height:22px;margin-top:8px"></div></div>
+      <div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:11px 6px;text-align:center"><div style="font-size:12.5px;line-height:1.3">range of 3, 9, 12</div><div style="border-bottom:2px solid rgba(23,19,11,.25);height:22px;margin-top:8px"></div></div>
+      <div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:11px 6px;text-align:center"><div style="font-size:12.5px;line-height:1.3">mean of 10 and 20</div><div style="border-bottom:2px solid rgba(23,19,11,.25);height:22px;margin-top:8px"></div></div>
+      <div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:11px 6px;text-align:center"><div style="font-size:12.5px;line-height:1.3">total of 6, 7, 8, 9</div><div style="border-bottom:2px solid rgba(23,19,11,.25);height:22px;margin-top:8px"></div></div>
+    </div>
+
+    <div style="background:rgba(251,113,133,.13);border:1.5px solid rgba(190,18,60,.28);border-radius:14px;padding:14px 18px;margin-top:16px">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:#BE123C;margin-bottom:10px">The method, once — then use it all week</div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px">
+        <div style="background:rgba(255,255,255,.7);border:1.5px solid rgba(190,18,60,.25);border-radius:11px;padding:11px 13px">
+          <div style="font-family:Fredoka,sans-serif;font-size:17px;color:#BE123C;margin-bottom:5px">Mean</div>
+          <div style="font-size:12.5px;line-height:1.45">Add them all up, divide by how many. It levels the set off.</div>
+        </div>
+        <div style="background:rgba(255,255,255,.7);border:1.5px solid rgba(190,18,60,.25);border-radius:11px;padding:11px 13px">
+          <div style="font-family:Fredoka,sans-serif;font-size:17px;color:#0369A1;margin-bottom:5px">Median</div>
+          <div style="font-size:12.5px;line-height:1.45">Put them in order. Take the middle one. Two middles? Halfway between.</div>
+        </div>
+        <div style="background:rgba(255,255,255,.7);border:1.5px solid rgba(190,18,60,.25);border-radius:11px;padding:11px 13px">
+          <div style="font-family:Fredoka,sans-serif;font-size:17px;color:#B45309;margin-bottom:5px">Mode</div>
+          <div style="font-size:12.5px;line-height:1.45">The value that shows up most often. There can be none, or several.</div>
+        </div>
+        <div style="background:rgba(255,255,255,.7);border:1.5px solid rgba(190,18,60,.25);border-radius:11px;padding:11px 13px">
+          <div style="font-family:Fredoka,sans-serif;font-size:17px;color:#15803D;margin-bottom:5px">Range</div>
+          <div style="font-size:12.5px;line-height:1.45">Biggest take smallest. It measures spread, not the middle.</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:11px;margin:14px 0 9px">
+      <div style="width:26px;height:26px;border-radius:8px;background:#0EA5E9;color:#04283A;display:grid;place-items:center;font-size:12px">◆</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:21px;color:#0369A1">Core</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(23,19,11,.45)">The set: 4, 7, 7, 9, 13</div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+      <div style="border:1.5px solid rgba(3,105,161,.28);border-radius:13px;padding:11px 16px;background:rgba(14,165,233,.06);display:flex;align-items:center;gap:14px"><span style="font-size:13px;flex:1">1. Their total</span><span style="width:80px;border-bottom:2px dotted rgba(23,19,11,.3);height:20px"></span></div>
+      <div style="border:1.5px solid rgba(3,105,161,.28);border-radius:13px;padding:11px 16px;background:rgba(14,165,233,.06);display:flex;align-items:center;gap:14px"><span style="font-size:13px;flex:1">2. The mean</span><span style="width:80px;border-bottom:2px dotted rgba(23,19,11,.3);height:20px"></span></div>
+      <div style="border:1.5px solid rgba(3,105,161,.28);border-radius:13px;padding:11px 16px;background:rgba(14,165,233,.06);display:flex;align-items:center;gap:14px"><span style="font-size:13px;flex:1">3. The median</span><span style="width:80px;border-bottom:2px dotted rgba(23,19,11,.3);height:20px"></span></div>
+      <div style="border:1.5px solid rgba(3,105,161,.28);border-radius:13px;padding:11px 16px;background:rgba(14,165,233,.06);display:flex;align-items:center;gap:14px"><span style="font-size:13px;flex:1">4. The mode and the range</span><span style="width:80px;border-bottom:2px dotted rgba(23,19,11,.3);height:20px"></span></div>
+    </div>
+    <div style="border:1.5px solid rgba(3,105,161,.28);border-radius:13px;padding:11px 16px;background:rgba(14,165,233,.06);margin-top:10px">
+      <div style="font-size:13.5px">5. &nbsp;Five numbers have a mean of 10. Four of them are 6, 8, 12 and 14. Find the fifth.</div>
+      <div style="border-bottom:2px dotted rgba(23,19,11,.3);height:22px;margin-top:8px"></div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:11px;margin:14px 0 9px">
+      <div style="width:26px;height:26px;border-radius:8px;background:#F59E0B;color:#3A2405;display:grid;place-items:center;font-size:13px">★</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:21px;color:#B45309">Challenge</div>
+    </div>
+    <div style="background:rgba(245,158,11,.1);border:1.5px solid rgba(180,83,9,.32);border-radius:14px;padding:12px 18px;flex:1;display:flex;flex-direction:column;gap:8px">
+      <div style="font-size:14px;line-height:1.5"><strong>C1.</strong> Invent five whole numbers whose mean is 8 and whose median is 6. Prove both.</div>
+      <div style="border-bottom:2px dotted rgba(23,19,11,.28);height:20px"></div>
+      <div style="font-size:14px;line-height:1.5"><strong>C2.</strong> Can a set have a mean that is not one of its own numbers? Give an example, then say whether the same is true of the median.</div>
+      <div style="border-bottom:2px dotted rgba(23,19,11,.28);height:20px"></div>
+    </div>
+
+    <div style="border-top:2px solid rgba(23,19,11,.12);margin-top:12px;padding:11px 0 24px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(23,19,11,.45)">
+      <span>Error journal: one sentence per mistake</span><span>Lesson 1.3 · page 6</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ P7 · DAY 1.4 ============ -->
+<section class="page" data-screen-label="07 Lesson 1.4" style="background:#FFFBF2;padding:0;display:flex;flex-direction:column">
+  <div style="height:10px;background:linear-gradient(90deg,#FB7185,#FBBF24)"></div>
+  <div style="padding:30px 52px 0;flex:1;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:24px;border-bottom:2px solid rgba(23,19,11,.14);padding-bottom:14px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:#BE123C">Mission 07 · Week 1 · Thursday · Lesson 1.4</div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:34px;margin:6px 0 3px;line-height:1">When the Average Lies</h1>
+        <div style="font-size:13px;color:rgba(23,19,11,.6)">One extreme value moves the mean and leaves the median alone.</div>
+      </div>
+      <div style="flex:none;text-align:right;font-family:'JetBrains Mono',monospace;font-size:10.5px;color:rgba(23,19,11,.55);line-height:2">
+        <div>NAME ___________</div><div>DATE ___________</div>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:11px;margin:16px 0 9px">
+      <div style="width:26px;height:26px;border-radius:8px;background:#22C55E;color:#052E12;display:grid;place-items:center;font-size:13px">✦</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:21px;color:#15803D">Warm-Up</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(23,19,11,.45)">Two sets, four questions</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:10px">
+      <div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:11px 6px;text-align:center"><div style="font-size:12.5px;line-height:1.3">mean of 5, 5, 5, 5</div><div style="border-bottom:2px solid rgba(23,19,11,.25);height:22px;margin-top:8px"></div></div>
+      <div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:11px 6px;text-align:center"><div style="font-size:12.5px;line-height:1.3">median of 5, 5, 5, 5</div><div style="border-bottom:2px solid rgba(23,19,11,.25);height:22px;margin-top:8px"></div></div>
+      <div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:11px 6px;text-align:center"><div style="font-size:12.5px;line-height:1.3">mean of 5, 5, 5, 25</div><div style="border-bottom:2px solid rgba(23,19,11,.25);height:22px;margin-top:8px"></div></div>
+      <div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:11px 6px;text-align:center"><div style="font-size:12.5px;line-height:1.3">median of 5, 5, 5, 25</div><div style="border-bottom:2px solid rgba(23,19,11,.25);height:22px;margin-top:8px"></div></div>
+      <div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:11px 6px;text-align:center"><div style="font-size:12.5px;line-height:1.3">range of 5, 5, 5, 25</div><div style="border-bottom:2px solid rgba(23,19,11,.25);height:22px;margin-top:8px"></div></div>
+      <div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:11px 6px;text-align:center"><div style="font-size:12.5px;line-height:1.3">mode of 5, 5, 5, 25</div><div style="border-bottom:2px solid rgba(23,19,11,.25);height:22px;margin-top:8px"></div></div>
+    </div>
+
+    <div style="background:rgba(251,113,133,.13);border:1.5px solid rgba(190,18,60,.28);border-radius:14px;padding:14px 18px;margin-top:16px">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:#BE123C;margin-bottom:12px">Five people in a room · pocket money per week</div>
+      <div style="display:flex;gap:24px;align-items:flex-end;flex-wrap:wrap">
+        <div style="display:flex;align-items:flex-end;gap:14px;height:104px">
+          <div style="text-align:center"><div style="width:38px;height:16px;background:rgba(251,113,133,.4);border:1.5px solid rgba(190,18,60,.5);border-radius:3px 3px 0 0"></div><div style="font-family:'JetBrains Mono',monospace;font-size:10.5px;margin-top:5px">10</div></div>
+          <div style="text-align:center"><div style="width:38px;height:16px;background:rgba(251,113,133,.4);border:1.5px solid rgba(190,18,60,.5);border-radius:3px 3px 0 0"></div><div style="font-family:'JetBrains Mono',monospace;font-size:10.5px;margin-top:5px">10</div></div>
+          <div style="text-align:center"><div style="width:38px;height:16px;background:rgba(251,113,133,.4);border:1.5px solid rgba(190,18,60,.5);border-radius:3px 3px 0 0"></div><div style="font-family:'JetBrains Mono',monospace;font-size:10.5px;margin-top:5px">10</div></div>
+          <div style="text-align:center"><div style="width:38px;height:16px;background:rgba(251,113,133,.4);border:1.5px solid rgba(190,18,60,.5);border-radius:3px 3px 0 0"></div><div style="font-family:'JetBrains Mono',monospace;font-size:10.5px;margin-top:5px">10</div></div>
+          <div style="text-align:center"><div style="width:38px;height:96px;background:rgba(251,113,133,.6);border:1.5px solid rgba(190,18,60,.65);border-radius:3px 3px 0 0"></div><div style="font-family:'JetBrains Mono',monospace;font-size:10.5px;margin-top:5px">60</div></div>
+        </div>
+        <div style="flex:1;min-width:210px;font-size:12.5px;line-height:1.55;color:rgba(23,19,11,.75)">Four people get 10 a week. One gets 60. The mean of this room is 20 — a figure that describes not one single person standing in it. The median is 10, and four out of five people are on exactly that.</div>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:11px;margin:14px 0 9px">
+      <div style="width:26px;height:26px;border-radius:8px;background:#0EA5E9;color:#04283A;display:grid;place-items:center;font-size:12px">◆</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:21px;color:#0369A1">Core</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(23,19,11,.45)">Use the room above</div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+      <div style="border:1.5px solid rgba(3,105,161,.28);border-radius:13px;padding:11px 16px;background:rgba(14,165,233,.06);display:flex;align-items:center;gap:14px"><span style="font-size:13px;flex:1">1. Mean of the five</span><span style="width:80px;border-bottom:2px dotted rgba(23,19,11,.3);height:20px"></span></div>
+      <div style="border:1.5px solid rgba(3,105,161,.28);border-radius:13px;padding:11px 16px;background:rgba(14,165,233,.06);display:flex;align-items:center;gap:14px"><span style="font-size:13px;flex:1">2. Median of the five</span><span style="width:80px;border-bottom:2px dotted rgba(23,19,11,.3);height:20px"></span></div>
+      <div style="border:1.5px solid rgba(3,105,161,.28);border-radius:13px;padding:11px 16px;background:rgba(14,165,233,.06);display:flex;align-items:center;gap:14px"><span style="font-size:13px;flex:1">3. Range of the five</span><span style="width:80px;border-bottom:2px dotted rgba(23,19,11,.3);height:20px"></span></div>
+      <div style="border:1.5px solid rgba(3,105,161,.28);border-radius:13px;padding:11px 16px;background:rgba(14,165,233,.06);display:flex;align-items:center;gap:14px"><span style="font-size:13px;flex:1">4. Mean once the 60 walks out</span><span style="width:80px;border-bottom:2px dotted rgba(23,19,11,.3);height:20px"></span></div>
+    </div>
+    <div style="border:1.5px solid rgba(3,105,161,.28);border-radius:13px;padding:11px 16px;background:rgba(14,165,233,.06);margin-top:10px">
+      <div style="font-size:13.5px">5. &nbsp;A headline says “average pocket money in this room: 20 a week.” It is true. Write one sentence explaining why it is also misleading.</div>
+      <div style="border-bottom:2px dotted rgba(23,19,11,.3);height:22px;margin-top:8px"></div>
+      <div style="border-bottom:2px dotted rgba(23,19,11,.3);height:22px;margin-top:6px"></div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:11px;margin:14px 0 9px">
+      <div style="width:26px;height:26px;border-radius:8px;background:#F59E0B;color:#3A2405;display:grid;place-items:center;font-size:13px">★</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:21px;color:#B45309">Challenge</div>
+    </div>
+    <div style="background:rgba(245,158,11,.1);border:1.5px solid rgba(180,83,9,.32);border-radius:14px;padding:12px 18px;flex:1;display:flex;flex-direction:column;gap:8px">
+      <div style="font-size:14px;line-height:1.5"><strong>C1.</strong> Six houses on a street cost 200 each and one costs 900. Find the mean and the median. Which one would an estate agent print, and which one would a buyer want?</div>
+      <div style="border-bottom:2px dotted rgba(23,19,11,.28);height:20px"></div>
+      <div style="font-size:14px;line-height:1.5"><strong>C2.</strong> Build a set of seven numbers where the mean is more than double the median. Then say in one line what you had to do to get it.</div>
+      <div style="border-bottom:2px dotted rgba(23,19,11,.28);height:20px"></div>
+    </div>
+
+    <div style="border-top:2px solid rgba(23,19,11,.12);margin-top:12px;padding:11px 0 24px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(23,19,11,.45)">
+      <span>Error journal: one sentence per mistake</span><span>Lesson 1.4 · page 7</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ P8 · FRIDAY ============ -->
+<section class="page" data-screen-label="08 Friday enrichment" style="background:#FFFBF2;padding:0;display:flex;flex-direction:column">
+  <div style="height:10px;background:#F59E0B"></div>
+  <div style="padding:30px 52px 0;flex:1;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:24px;border-bottom:2px solid rgba(23,19,11,.14);padding-bottom:14px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:#B45309">Mission 07 · Week 1 · Friday · Enrichment</div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:34px;margin:6px 0 3px;line-height:1">Predict the Roll</h1>
+        <div style="font-size:13px;color:rgba(23,19,11,.6)">Write the prediction first. A prediction you can change afterwards is not one.</div>
+      </div>
+      <div style="flex:none;text-align:right;font-family:'JetBrains Mono',monospace;font-size:10.5px;color:rgba(23,19,11,.55);line-height:2">
+        <div>NAME ___________</div><div>DATE ___________</div>
+      </div>
+    </div>
+
+    <div style="background:rgba(245,158,11,.12);border:1.5px solid rgba(180,83,9,.3);border-radius:14px;padding:14px 18px;margin-top:16px;font-size:13.5px;line-height:1.55">
+      <strong>You need:</strong> one die and a pencil. Fifty rolls takes about six minutes. Nobody wins this game — the point is the gap between what should happen and what did.
+    </div>
+
+    <div style="display:flex;align-items:center;gap:11px;margin:16px 0 9px">
+      <div style="width:26px;height:26px;border-radius:8px;background:#22C55E;color:#052E12;display:grid;place-items:center;font-size:13px">✦</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:21px;color:#15803D">Step 1 · Predict, in ink</div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+      <div style="border:1.5px solid rgba(21,128,61,.28);border-radius:13px;padding:12px 16px;background:rgba(34,197,94,.08)"><div style="font-size:13.5px;margin-bottom:8px">Fifty rolls, six faces. How many times should each face appear?</div><div style="border-bottom:2px dotted rgba(23,19,11,.3);height:20px"></div></div>
+      <div style="border:1.5px solid rgba(21,128,61,.28);border-radius:13px;padding:12px 16px;background:rgba(34,197,94,.08)"><div style="font-size:13.5px;margin-bottom:8px">Fifty does not divide by six. How many rolls are left over?</div><div style="border-bottom:2px dotted rgba(23,19,11,.3);height:20px"></div></div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:11px;margin:16px 0 9px">
+      <div style="width:26px;height:26px;border-radius:8px;background:#0EA5E9;color:#04283A;display:grid;place-items:center;font-size:12px">◆</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:21px;color:#0369A1">Step 2 · Roll fifty times and tally</div>
+    </div>
+    <table style="width:100%;border-collapse:collapse;font-size:13.5px">
+      <thead>
+        <tr style="background:rgba(23,19,11,.05)">
+          <th style="text-align:left;padding:9px 12px;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(23,19,11,.55);border-bottom:2px solid rgba(23,19,11,.15)">Face</th>
+          <th style="text-align:left;padding:9px 12px;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(23,19,11,.55);border-bottom:2px solid rgba(23,19,11,.15)">Tally</th>
+          <th style="text-align:center;padding:9px 12px;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(23,19,11,.55);border-bottom:2px solid rgba(23,19,11,.15)">Count</th>
+          <th style="text-align:center;padding:9px 12px;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(23,19,11,.55);border-bottom:2px solid rgba(23,19,11,.15)">Predicted</th>
+          <th style="text-align:center;padding:9px 12px;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(23,19,11,.55);border-bottom:2px solid rgba(23,19,11,.15)">Difference</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td style="padding:12px;border-bottom:1px solid rgba(23,19,11,.1);font-family:Fredoka,sans-serif;font-size:17px">1</td><td style="border-bottom:1px solid rgba(23,19,11,.1)"></td><td style="border-bottom:1px solid rgba(23,19,11,.1)"></td><td style="border-bottom:1px solid rgba(23,19,11,.1)"></td><td style="border-bottom:1px solid rgba(23,19,11,.1)"></td></tr>
+        <tr><td style="padding:12px;border-bottom:1px solid rgba(23,19,11,.1);font-family:Fredoka,sans-serif;font-size:17px">2</td><td style="border-bottom:1px solid rgba(23,19,11,.1)"></td><td style="border-bottom:1px solid rgba(23,19,11,.1)"></td><td style="border-bottom:1px solid rgba(23,19,11,.1)"></td><td style="border-bottom:1px solid rgba(23,19,11,.1)"></td></tr>
+        <tr><td style="padding:12px;border-bottom:1px solid rgba(23,19,11,.1);font-family:Fredoka,sans-serif;font-size:17px">3</td><td style="border-bottom:1px solid rgba(23,19,11,.1)"></td><td style="border-bottom:1px solid rgba(23,19,11,.1)"></td><td style="border-bottom:1px solid rgba(23,19,11,.1)"></td><td style="border-bottom:1px solid rgba(23,19,11,.1)"></td></tr>
+        <tr><td style="padding:12px;border-bottom:1px solid rgba(23,19,11,.1);font-family:Fredoka,sans-serif;font-size:17px">4</td><td style="border-bottom:1px solid rgba(23,19,11,.1)"></td><td style="border-bottom:1px solid rgba(23,19,11,.1)"></td><td style="border-bottom:1px solid rgba(23,19,11,.1)"></td><td style="border-bottom:1px solid rgba(23,19,11,.1)"></td></tr>
+        <tr><td style="padding:12px;border-bottom:1px solid rgba(23,19,11,.1);font-family:Fredoka,sans-serif;font-size:17px">5</td><td style="border-bottom:1px solid rgba(23,19,11,.1)"></td><td style="border-bottom:1px solid rgba(23,19,11,.1)"></td><td style="border-bottom:1px solid rgba(23,19,11,.1)"></td><td style="border-bottom:1px solid rgba(23,19,11,.1)"></td></tr>
+        <tr><td style="padding:12px;border-bottom:1px solid rgba(23,19,11,.1);font-family:Fredoka,sans-serif;font-size:17px">6</td><td style="border-bottom:1px solid rgba(23,19,11,.1)"></td><td style="border-bottom:1px solid rgba(23,19,11,.1)"></td><td style="border-bottom:1px solid rgba(23,19,11,.1)"></td><td style="border-bottom:1px solid rgba(23,19,11,.1)"></td></tr>
+      </tbody>
+    </table>
+
+    <div style="display:flex;align-items:center;gap:11px;margin:16px 0 9px">
+      <div style="width:26px;height:26px;border-radius:8px;background:#F59E0B;color:#3A2405;display:grid;place-items:center;font-size:13px">★</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:21px;color:#B45309">Step 3 · Explain the gap</div>
+    </div>
+    <div style="background:rgba(245,158,11,.1);border:1.5px solid rgba(180,83,9,.32);border-radius:14px;padding:12px 18px;flex:1;display:flex;flex-direction:column;gap:8px">
+      <div style="font-size:14px;line-height:1.5"><strong>C1.</strong> Which face missed its prediction by the most? Is the die broken?</div>
+      <div style="border-bottom:2px dotted rgba(23,19,11,.28);height:20px"></div>
+      <div style="font-size:14px;line-height:1.5"><strong>C2.</strong> If you rolled 600 times instead of 50, would the counts get closer to the prediction or further away? Say why.</div>
+      <div style="border-bottom:2px dotted rgba(23,19,11,.28);height:20px"></div>
+      <div style="font-size:14px;line-height:1.5"><strong>C3.</strong> Two dice, added. Which total should come up most often, and how many ways can it happen?</div>
+      <div style="border-bottom:2px dotted rgba(23,19,11,.28);height:20px"></div>
+    </div>
+
+    <div style="border-top:2px solid rgba(23,19,11,.12);margin-top:12px;padding:11px 0 24px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(23,19,11,.45)">
+      <span>Enrichment · not graded</span><span>Friday · page 8</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ P9 · WEEKS 2–3 PLAN ============ -->
+<section class="page" data-screen-label="09 Weeks 2-3 plan" style="background:#FFFBF2;padding:0;display:flex;flex-direction:column">
+  <div style="height:10px;background:linear-gradient(90deg,#38BDF8,#818CF8)"></div>
+  <div style="padding:34px 52px 0;flex:1;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:24px;border-bottom:2px solid rgba(23,19,11,.14);padding-bottom:16px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:#0369A1">Teacher page · the rest of the mission</div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:36px;margin:6px 0 4px;line-height:1">Weeks 2–3</h1>
+        <div style="font-size:13.5px;color:rgba(23,19,11,.6)">Outlined, not written out. Week 1's five worksheets are the model — build these from the app's practice sets.</div>
+      </div>
+      <div style="flex:none;background:rgba(56,189,248,.14);border:1.5px solid rgba(3,105,161,.3);border-radius:12px;padding:12px 16px;font-family:'JetBrains Mono',monospace;font-size:10.5px;line-height:1.9;color:#0369A1">
+        <div>QUIZ · end of week 2</div>
+        <div>TEST · end of week 3</div>
+      </div>
+    </div>
+
+    <div style="margin-top:22px;background:rgba(56,189,248,.09);border:1.5px solid rgba(3,105,161,.25);border-radius:16px;padding:18px 22px">
+      <div style="display:flex;align-items:baseline;gap:12px;margin-bottom:6px">
+        <div style="font-family:Fredoka,sans-serif;font-size:24px">Week 2 · Survey &amp; Probability</div>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:#B45309">Quiz Friday</span>
+      </div>
+      <div style="font-size:13.5px;line-height:1.55;color:rgba(23,19,11,.75);margin-bottom:14px">He writes his own question, collects twenty real answers, and meets the difference between likely and actual.</div>
+      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px">
+        <div style="background:rgba(255,255,255,.8);border:1px solid rgba(23,19,11,.14);border-radius:11px;padding:11px 12px"><div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#0369A1">Mon 2.1</div><div style="font-family:Fredoka,sans-serif;font-size:14.5px;margin:6px 0 5px;line-height:1.15">Write the question</div><div style="font-size:12px;line-height:1.4;color:rgba(23,19,11,.65)">Rewrite three loaded questions until they stop pushing an answer.</div></div>
+        <div style="background:rgba(255,255,255,.8);border:1px solid rgba(23,19,11,.14);border-radius:11px;padding:11px 12px"><div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#0369A1">Tue 2.2</div><div style="font-family:Fredoka,sans-serif;font-size:14.5px;margin:6px 0 5px;line-height:1.15">Ask 20 people</div><div style="font-size:12px;line-height:1.4;color:rgba(23,19,11,.65)">Tallied on paper as they answer. No tidying up afterwards.</div></div>
+        <div style="background:rgba(255,255,255,.8);border:1px solid rgba(23,19,11,.14);border-radius:11px;padding:11px 12px"><div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#0369A1">Wed 2.3</div><div style="font-family:Fredoka,sans-serif;font-size:14.5px;margin:6px 0 5px;line-height:1.15">Graph it</div><div style="font-size:12px;line-height:1.4;color:rgba(23,19,11,.65)">Bar graph of his own data, plus all four measures.</div></div>
+        <div style="background:rgba(255,255,255,.8);border:1px solid rgba(23,19,11,.14);border-radius:11px;padding:11px 12px"><div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#0369A1">Thu 2.4</div><div style="font-family:Fredoka,sans-serif;font-size:14.5px;margin:6px 0 5px;line-height:1.15">Chance as a number</div><div style="font-size:12px;line-height:1.4;color:rgba(23,19,11,.65)">Impossible to certain, written as a count out of the total.</div></div>
+        <div style="background:rgba(245,158,11,.14);border:1px solid rgba(180,83,9,.3);border-radius:11px;padding:11px 12px"><div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#B45309">Fri</div><div style="font-family:Fredoka,sans-serif;font-size:14.5px;margin:6px 0 5px;line-height:1.15">Mid-unit quiz</div><div style="font-size:12px;line-height:1.4;color:rgba(23,19,11,.65)">Page 10. Eight items, 85% to keep flying.</div></div>
+      </div>
+    </div>
+
+    <div style="margin-top:18px;background:rgba(251,113,133,.1);border:1.5px solid rgba(190,18,60,.25);border-radius:16px;padding:18px 22px">
+      <div style="display:flex;align-items:baseline;gap:12px;margin-bottom:6px">
+        <div style="font-family:Fredoka,sans-serif;font-size:24px">Week 3 · Proof &amp; Project</div>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:#BE123C">Unit test</span>
+      </div>
+      <div style="font-size:13.5px;line-height:1.55;color:rgba(23,19,11,.75);margin-bottom:14px">Ask 20 People gets published — a headline, a graph, and one sentence about what twenty people cannot prove.</div>
+      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px">
+        <div style="background:rgba(255,255,255,.8);border:1px solid rgba(23,19,11,.14);border-radius:11px;padding:11px 12px"><div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#BE123C">Mon 3.1</div><div style="font-family:Fredoka,sans-serif;font-size:14.5px;margin:6px 0 5px;line-height:1.15">Publish it</div><div style="font-size:12px;line-height:1.4;color:rgba(23,19,11,.65)">One headline, one graph, one honest limitation.</div></div>
+        <div style="background:rgba(255,255,255,.8);border:1px solid rgba(23,19,11,.14);border-radius:11px;padding:11px 12px"><div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#BE123C">Tue 3.2</div><div style="font-family:Fredoka,sans-serif;font-size:14.5px;margin:6px 0 5px;line-height:1.15">The misleading graph</div><div style="font-size:12px;line-height:1.4;color:rgba(23,19,11,.65)">Start the axis at 90 and watch a tiny gap look enormous.</div></div>
+        <div style="background:rgba(255,255,255,.8);border:1px solid rgba(23,19,11,.14);border-radius:11px;padding:11px 12px"><div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#BE123C">Wed 3.3</div><div style="font-family:Fredoka,sans-serif;font-size:14.5px;margin:6px 0 5px;line-height:1.15">50 trials</div><div style="font-size:12px;line-height:1.4;color:rgba(23,19,11,.65)">Predict, roll, tally, and explain the gap in writing.</div></div>
+        <div style="background:rgba(255,255,255,.8);border:1px solid rgba(23,19,11,.14);border-radius:11px;padding:11px 12px"><div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#15803D">Thu</div><div style="font-family:Fredoka,sans-serif;font-size:14.5px;margin:6px 0 5px;line-height:1.15">Error journal sweep</div><div style="font-size:12px;line-height:1.4;color:rgba(23,19,11,.65)">Re-read every entry. Fix only what repeats.</div></div>
+        <div style="background:rgba(251,113,133,.18);border:1px solid rgba(190,18,60,.32);border-radius:11px;padding:11px 12px"><div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#BE123C">Fri</div><div style="font-family:Fredoka,sans-serif;font-size:14.5px;margin:6px 0 5px;line-height:1.15">Mission 07 test</div><div style="font-size:12px;line-height:1.4;color:rgba(23,19,11,.65)">Pages 11–12. Twelve items plus one explanation.</div></div>
+      </div>
+    </div>
+
+    <div style="margin-top:18px;display:grid;grid-template-columns:1fr 1fr;gap:16px">
+      <div style="border:1.5px solid rgba(23,19,11,.16);border-radius:14px;padding:16px 18px">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:#0369A1;margin-bottom:9px">If the survey goes wrong</div>
+        <div style="font-size:13px;line-height:1.55">Fewer than twenty answers is fine — twelve is enough to compute everything. What is not fine is inventing the missing eight. If he wants to, that is the lesson: made-up data has no error to find.</div>
+      </div>
+      <div style="border:1.5px solid rgba(23,19,11,.16);border-radius:14px;padding:16px 18px">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:#BE123C;margin-bottom:9px">Watch for</div>
+        <div style="font-size:13px;line-height:1.55">Computing the median without sorting first. It gives the right answer often enough to feel safe, which is exactly why it is worth catching this week rather than next year.</div>
+      </div>
+    </div>
+
+    <div style="border-top:2px solid rgba(23,19,11,.12);margin-top:auto;padding:12px 0 26px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(23,19,11,.45)">
+      <span>Teacher page</span><span>Weeks 2–3 · page 9</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ P10 · MID-UNIT QUIZ ============ -->
+<section class="page" data-screen-label="10 Mid-unit quiz" style="background:#FFFBF2;padding:0;display:flex;flex-direction:column">
+  <div style="height:10px;background:#F59E0B"></div>
+  <div style="padding:34px 52px 0;flex:1;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:24px;border-bottom:2px solid rgba(23,19,11,.14);padding-bottom:16px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:#B45309">Mission 07 · End of week 2</div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:36px;margin:6px 0 4px;line-height:1">Mid-Unit Quiz</h1>
+        <div style="font-size:13.5px;color:rgba(23,19,11,.6)">Eight items from Weeks 1 and 2. 85% to keep flying — that's 7 out of 8.</div>
+      </div>
+      <div style="flex:none;text-align:right;font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(23,19,11,.55);line-height:2.1">
+        <div>NAME ______________</div>
+        <div>SCORE ______ / 8</div>
+      </div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:12px;margin-top:20px;flex:1">
+      <div style="border:1.5px solid rgba(23,19,11,.16);border-radius:13px;padding:13px 18px;display:grid;grid-template-columns:1fr 150px;gap:16px;align-items:center"><span style="font-size:14px"><strong>1.</strong> &nbsp;Each ★ = 5 books. A row has 7 ★. How many books?</span><span style="border-bottom:2px dotted rgba(23,19,11,.3);height:22px"></span></div>
+      <div style="border:1.5px solid rgba(23,19,11,.16);border-radius:13px;padding:13px 18px;display:grid;grid-template-columns:1fr 150px;gap:16px;align-items:center"><span style="font-size:14px"><strong>2.</strong> &nbsp;Find the mean of 6, 8, 10 and 12.</span><span style="border-bottom:2px dotted rgba(23,19,11,.3);height:22px"></span></div>
+      <div style="border:1.5px solid rgba(23,19,11,.16);border-radius:13px;padding:13px 18px;display:grid;grid-template-columns:1fr 150px;gap:16px;align-items:center"><span style="font-size:14px"><strong>3.</strong> &nbsp;Find the median of 11, 4, 7, 20, 9.</span><span style="border-bottom:2px dotted rgba(23,19,11,.3);height:22px"></span></div>
+      <div style="border:1.5px solid rgba(23,19,11,.16);border-radius:13px;padding:13px 18px;display:grid;grid-template-columns:1fr 150px;gap:16px;align-items:center"><span style="font-size:14px"><strong>4.</strong> &nbsp;Find the mode and the range of 3, 8, 8, 8, 15.</span><span style="border-bottom:2px dotted rgba(23,19,11,.3);height:22px"></span></div>
+      <div style="border:1.5px solid rgba(23,19,11,.16);border-radius:13px;padding:13px 18px;display:grid;grid-template-columns:1fr 150px;gap:16px;align-items:center"><span style="font-size:14px"><strong>5.</strong> &nbsp;Six numbers have a mean of 9. What do they total?</span><span style="border-bottom:2px dotted rgba(23,19,11,.3);height:22px"></span></div>
+      <div style="border:1.5px solid rgba(23,19,11,.16);border-radius:13px;padding:13px 18px;display:grid;grid-template-columns:1fr 150px;gap:16px;align-items:center"><span style="font-size:14px"><strong>6.</strong> &nbsp;A bag holds 4 red and 6 blue. How many draws out of 10 should be red?</span><span style="border-bottom:2px dotted rgba(23,19,11,.3);height:22px"></span></div>
+      <div style="border:1.5px solid rgba(23,19,11,.16);border-radius:13px;padding:13px 18px;display:grid;grid-template-columns:1fr 150px;gap:16px;align-items:center"><span style="font-size:14px"><strong>7.</strong> &nbsp;In 60 rolls of one die, how many 5s would you expect?</span><span style="border-bottom:2px dotted rgba(23,19,11,.3);height:22px"></span></div>
+      <div style="border:1.5px solid rgba(245,158,11,.5);background:rgba(245,158,11,.09);border-radius:13px;padding:13px 18px">
+        <div style="font-size:14px;margin-bottom:9px"><strong>8.</strong> &nbsp;A set is 2, 2, 2, 2 and 22. Give the mean and the median, then say in one sentence which one describes a typical member of the set.</div>
+        <div style="border-bottom:2px dotted rgba(23,19,11,.3);height:22px"></div>
+        <div style="border-bottom:2px dotted rgba(23,19,11,.3);height:22px;margin-top:8px"></div>
+      </div>
+    </div>
+
+    <div style="background:rgba(23,19,11,.05);border-radius:12px;padding:13px 18px;margin-top:16px;font-size:13px;line-height:1.5;color:rgba(23,19,11,.7)">
+      <strong>Marking note:</strong> item 8 is worth the same as any other. A right mean with no sentence is half marks — the sentence is the skill this mission exists for.
+    </div>
+
+    <div style="border-top:2px solid rgba(23,19,11,.12);margin-top:14px;padding:12px 0 26px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(23,19,11,.45)">
+      <span>Answers on page 15</span><span>Mid-unit quiz · page 10</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ P11 · UNIT TEST A ============ -->
+<section class="page" data-screen-label="11 Unit test A" style="background:#FFFBF2;padding:0;display:flex;flex-direction:column">
+  <div style="height:10px;background:linear-gradient(90deg,#9F1239,#FB7185)"></div>
+  <div style="padding:34px 52px 0;flex:1;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:24px;border-bottom:2px solid rgba(23,19,11,.14);padding-bottom:16px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:#BE123C">Mission 07 · End of week 3</div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:36px;margin:6px 0 4px;line-height:1">Unit Test · Part 1</h1>
+        <div style="font-size:13.5px;color:rgba(23,19,11,.6)">Items 1–8. Take as long as you need; there is no time limit on this test.</div>
+      </div>
+      <div style="flex:none;text-align:right;font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(23,19,11,.55);line-height:2.1">
+        <div>NAME ______________</div>
+        <div>DATE ______________</div>
+      </div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:12px;margin-top:20px;flex:1">
+      <div style="border:1.5px solid rgba(23,19,11,.16);border-radius:13px;padding:13px 18px;display:grid;grid-template-columns:1fr 150px;gap:16px;align-items:center"><span style="font-size:14px"><strong>1.</strong> &nbsp;A bar chart marked every 4 has a bar at the third mark. Its value?</span><span style="border-bottom:2px dotted rgba(23,19,11,.3);height:22px"></span></div>
+      <div style="border:1.5px solid rgba(23,19,11,.16);border-radius:13px;padding:13px 18px;display:grid;grid-template-columns:1fr 150px;gap:16px;align-items:center"><span style="font-size:14px"><strong>2.</strong> &nbsp;Each ▮ = 2 goals. A team's bar is 9 ▮ long. Goals?</span><span style="border-bottom:2px dotted rgba(23,19,11,.3);height:22px"></span></div>
+      <div style="border:1.5px solid rgba(23,19,11,.16);border-radius:13px;padding:13px 18px;display:grid;grid-template-columns:1fr 150px;gap:16px;align-items:center"><span style="font-size:14px"><strong>3.</strong> &nbsp;Mean of 14, 16, 18 and 20.</span><span style="border-bottom:2px dotted rgba(23,19,11,.3);height:22px"></span></div>
+      <div style="border:1.5px solid rgba(23,19,11,.16);border-radius:13px;padding:13px 18px;display:grid;grid-template-columns:1fr 150px;gap:16px;align-items:center"><span style="font-size:14px"><strong>4.</strong> &nbsp;Median of 5, 12, 3, 8, 21, 9.</span><span style="border-bottom:2px dotted rgba(23,19,11,.3);height:22px"></span></div>
+      <div style="border:1.5px solid rgba(23,19,11,.16);border-radius:13px;padding:13px 18px;display:grid;grid-template-columns:1fr 150px;gap:16px;align-items:center"><span style="font-size:14px"><strong>5.</strong> &nbsp;Range of 7, 7, 19, 4, 11.</span><span style="border-bottom:2px dotted rgba(23,19,11,.3);height:22px"></span></div>
+      <div style="border:1.5px solid rgba(23,19,11,.16);border-radius:13px;padding:13px 18px;display:grid;grid-template-columns:1fr 150px;gap:16px;align-items:center"><span style="font-size:14px"><strong>6.</strong> &nbsp;Five scores total 45. A sixth score of 9 is added. New mean?</span><span style="border-bottom:2px dotted rgba(23,19,11,.3);height:22px"></span></div>
+      <div style="border:1.5px solid rgba(23,19,11,.16);border-radius:13px;padding:13px 18px;display:grid;grid-template-columns:1fr 150px;gap:16px;align-items:center"><span style="font-size:14px"><strong>7.</strong> &nbsp;A spinner has 8 equal parts, 2 of them gold. In 40 spins, expected golds?</span><span style="border-bottom:2px dotted rgba(23,19,11,.3);height:22px"></span></div>
+      <div style="border:1.5px solid rgba(23,19,11,.16);border-radius:13px;padding:13px 18px;display:grid;grid-template-columns:1fr 150px;gap:16px;align-items:center"><span style="font-size:14px"><strong>8.</strong> &nbsp;Two dice are rolled and added. How many ways can the total be 7?</span><span style="border-bottom:2px dotted rgba(23,19,11,.3);height:22px"></span></div>
+    </div>
+
+    <div style="border-top:2px solid rgba(23,19,11,.12);margin-top:14px;padding:12px 0 26px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(23,19,11,.45)">
+      <span>Continues on page 12</span><span>Unit test · page 11</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ P12 · UNIT TEST B ============ -->
+<section class="page" data-screen-label="12 Unit test B" style="background:#FFFBF2;padding:0;display:flex;flex-direction:column">
+  <div style="height:10px;background:linear-gradient(90deg,#9F1239,#FB7185)"></div>
+  <div style="padding:34px 52px 0;flex:1;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:24px;border-bottom:2px solid rgba(23,19,11,.14);padding-bottom:16px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:#BE123C">Mission 07 · End of week 3</div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:36px;margin:6px 0 4px;line-height:1">Unit Test · Part 2</h1>
+        <div style="font-size:13.5px;color:rgba(23,19,11,.6)">Items 9–12 and the Big Question.</div>
+      </div>
+      <div style="flex:none;text-align:right;font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(23,19,11,.55);line-height:2.1">
+        <div>SCORE ______ / 12</div>
+        <div>BAND ______________</div>
+      </div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:12px;margin-top:20px">
+      <div style="border:1.5px solid rgba(23,19,11,.16);border-radius:13px;padding:13px 18px">
+        <div style="font-size:14px;margin-bottom:10px"><strong>9.</strong> &nbsp;Twenty people were asked their favourite drink: water 8, juice 6, milk 4, tea 2. Draw the bar graph, labelled, with your scale stated.</div>
+        <div style="height:132px;border-radius:8px;background-image:linear-gradient(rgba(23,19,11,.12) 1px,transparent 1px),linear-gradient(90deg,rgba(23,19,11,.12) 1px,transparent 1px);background-size:18px 18px;border:1px dashed rgba(23,19,11,.3)"></div>
+      </div>
+      <div style="border:1.5px solid rgba(23,19,11,.16);border-radius:13px;padding:13px 18px;display:grid;grid-template-columns:1fr 150px;gap:16px;align-items:center"><span style="font-size:14px"><strong>10.</strong> &nbsp;From that survey: how many out of 100 people would you expect to pick water?</span><span style="border-bottom:2px dotted rgba(23,19,11,.3);height:22px"></span></div>
+      <div style="border:1.5px solid rgba(23,19,11,.16);border-radius:13px;padding:13px 18px;display:grid;grid-template-columns:1fr 150px;gap:16px;align-items:center"><span style="font-size:14px"><strong>11.</strong> &nbsp;The mode of that survey.</span><span style="border-bottom:2px dotted rgba(23,19,11,.3);height:22px"></span></div>
+      <div style="border:1.5px solid rgba(23,19,11,.16);border-radius:13px;padding:13px 18px;display:grid;grid-template-columns:1fr 150px;gap:16px;align-items:center"><span style="font-size:14px"><strong>12.</strong> &nbsp;Mean number of votes per drink.</span><span style="border-bottom:2px dotted rgba(23,19,11,.3);height:22px"></span></div>
+    </div>
+
+    <div style="margin-top:16px;background:rgba(251,113,133,.13);border:1.5px solid rgba(190,18,60,.3);border-radius:16px;padding:18px 22px;flex:1;display:flex;flex-direction:column">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:#BE123C;margin-bottom:8px">Explain your thinking · the Big Question</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:22px;line-height:1.25;margin-bottom:6px">Can a true average tell a false story?</div>
+      <div style="font-size:13.5px;line-height:1.5;color:rgba(23,19,11,.72);margin-bottom:12px">Use one set of numbers you invent. Give its mean and its median, then say which one you would print and who it would mislead. Scored on reasoning, not neatness.</div>
+      <div style="flex:1;display:flex;flex-direction:column;gap:16px;padding-top:4px">
+        <div style="border-bottom:2px dotted rgba(23,19,11,.3)"></div>
+        <div style="border-bottom:2px dotted rgba(23,19,11,.3)"></div>
+        <div style="border-bottom:2px dotted rgba(23,19,11,.3)"></div>
+        <div style="border-bottom:2px dotted rgba(23,19,11,.3)"></div>
+        <div style="border-bottom:2px dotted rgba(23,19,11,.3)"></div>
+        <div style="border-bottom:2px dotted rgba(23,19,11,.3)"></div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px">
+      <div style="background:rgba(74,222,128,.12);border:1.5px solid rgba(21,128,61,.3);border-radius:12px;padding:12px 14px"><div style="font-family:Fredoka,sans-serif;font-size:22px;color:#15803D">11–12</div><div style="font-size:12.5px;line-height:1.4;margin-top:4px">Gold band. Badge earned.</div></div>
+      <div style="background:rgba(56,189,248,.12);border:1.5px solid rgba(3,105,161,.3);border-radius:12px;padding:12px 14px"><div style="font-family:Fredoka,sans-serif;font-size:22px;color:#0369A1">9–10</div><div style="font-size:12.5px;line-height:1.4;margin-top:4px">Silver band. One reteach day, then the badge.</div></div>
+      <div style="background:rgba(245,158,11,.12);border:1.5px solid rgba(180,83,9,.3);border-radius:12px;padding:12px 14px"><div style="font-family:Fredoka,sans-serif;font-size:22px;color:#B45309">≤ 8</div><div style="font-size:12.5px;line-height:1.4;margin-top:4px">Bronze. Reteach the weak strand and retest that part only.</div></div>
+    </div>
+
+    <div style="border-top:2px solid rgba(23,19,11,.12);margin-top:14px;padding:12px 0 26px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(23,19,11,.45)">
+      <span>The Evidence Badge</span><span>Unit test · page 12</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ P13 · ANSWER KEY A ============ -->
+<section class="page" data-screen-label="13 Answer key A" style="background:#FFFBF2;padding:0;display:flex;flex-direction:column">
+  <div style="height:10px;background:#15803D"></div>
+  <div style="padding:34px 52px 0;flex:1;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:24px;border-bottom:2px solid rgba(23,19,11,.14);padding-bottom:16px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:#15803D">Teacher page · answer key</div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:36px;margin:6px 0 4px;line-height:1">Key A</h1>
+        <div style="font-size:13.5px;color:rgba(23,19,11,.6)">Pre-assessment, Lesson 1.1 and Lesson 1.2.</div>
+      </div>
+      <div style="flex:none;background:rgba(74,222,128,.14);border:1.5px solid rgba(21,128,61,.3);border-radius:12px;padding:12px 16px;font-size:12.5px;line-height:1.6;max-width:210px;color:#15803D">Mark the reasoning, not the handwriting. Any correct method counts.</div>
+    </div>
+
+    <div style="margin-top:20px;display:flex;flex-direction:column;gap:16px;flex:1">
+      <div style="border:1.5px solid rgba(21,128,61,.25);border-radius:14px;padding:16px 20px;background:rgba(74,222,128,.06)">
+        <div style="font-family:Fredoka,sans-serif;font-size:20px;margin-bottom:10px">Pre-assessment</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:13px;line-height:2.1">
+          A1 · 30 &nbsp;&nbsp;|&nbsp;&nbsp; A2 · 25 &nbsp;&nbsp;|&nbsp;&nbsp; B1 · in 5s or 10s (either, if justified) &nbsp;&nbsp;|&nbsp;&nbsp; B2 · labelled axes and a stated scale<br>
+          C1 · 6 &nbsp;&nbsp;|&nbsp;&nbsp; C2 · 5 &nbsp;&nbsp;|&nbsp;&nbsp; D1 · 7 &nbsp;&nbsp;|&nbsp;&nbsp; D2 · 9 &nbsp;&nbsp;|&nbsp;&nbsp; E1 · 10 &nbsp;&nbsp;|&nbsp;&nbsp; E2 · 5; the 25 pulls the mean but not the middle<br>
+          F1 · 3 &nbsp;&nbsp;|&nbsp;&nbsp; F2 · unlikely — 3 out of 8 is less than half
+        </div>
+      </div>
+
+      <div style="border:1.5px solid rgba(21,128,61,.25);border-radius:14px;padding:16px 20px;background:rgba(74,222,128,.06)">
+        <div style="font-family:Fredoka,sans-serif;font-size:20px;margin-bottom:10px">Lesson 1.1 · Reading a Graph</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:13px;line-height:2.1">
+          Warm-Up · 15 &nbsp;|&nbsp; 30 &nbsp;|&nbsp; 8 &nbsp;|&nbsp; 2½ &nbsp;|&nbsp; 12½ &nbsp;|&nbsp; 18<br>
+          Core · 1 · 54 &nbsp;|&nbsp; 2 · 9 &nbsp;|&nbsp; 3 · 10.8 &nbsp;|&nbsp; 4 · 13.5 &nbsp;|&nbsp; 5 · the one counting Thursday, because Thursday happened<br>
+          C1 · 18 stars &nbsp;|&nbsp; C2 · Mon 2 ★, Tue 1½ ★, Wed 2½ ★, Thu none, Fri 3 ★ — a part-star is drawn as a fraction of the symbol
+        </div>
+        <div style="font-size:12.5px;line-height:1.5;margin-top:10px;color:rgba(23,19,11,.7)">Warm-Up items 4 and 5 are the only fractional answers in this mission; accept 2.5 and 12.5 written either way.</div>
+      </div>
+
+      <div style="border:1.5px solid rgba(21,128,61,.25);border-radius:14px;padding:16px 20px;background:rgba(74,222,128,.06)">
+        <div style="font-family:Fredoka,sans-serif;font-size:20px;margin-bottom:10px">Lesson 1.2 · Building a Graph</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:13px;line-height:2.1">
+          Warm-Up · 4 &nbsp;|&nbsp; 10 &nbsp;|&nbsp; 17 &nbsp;|&nbsp; 23 &nbsp;|&nbsp; 4 fives &nbsp;|&nbsp; 3 fives + 2<br>
+          Core · 1 · 30 &nbsp;|&nbsp; 2 · apple &nbsp;|&nbsp; 3 · 8 &nbsp;|&nbsp; 4 · 7.5 &nbsp;|&nbsp; 5 · 40 (12 out of 30 is 4 out of 10)
+        </div>
+        <div style="font-size:12.5px;line-height:1.5;margin-top:10px;color:rgba(23,19,11,.7)">C1 · the pear bar disappears and the apple bar looks eight times the size of nothing — the graph is dishonest even though every number on it is right. C2 · it cannot prove what everyone likes, only what these thirty said.</div>
+      </div>
+    </div>
+
+    <div style="border-top:2px solid rgba(23,19,11,.12);margin-top:14px;padding:12px 0 26px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(23,19,11,.45)">
+      <span>Teacher page</span><span>Answer key A · page 13</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ P14 · ANSWER KEY B ============ -->
+<section class="page" data-screen-label="14 Answer key B" style="background:#FFFBF2;padding:0;display:flex;flex-direction:column">
+  <div style="height:10px;background:#15803D"></div>
+  <div style="padding:34px 52px 0;flex:1;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:24px;border-bottom:2px solid rgba(23,19,11,.14);padding-bottom:16px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:#15803D">Teacher page · answer key</div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:36px;margin:6px 0 4px;line-height:1">Key B</h1>
+        <div style="font-size:13.5px;color:rgba(23,19,11,.6)">Lesson 1.3, Lesson 1.4 and Friday's enrichment.</div>
+      </div>
+      <div style="flex:none;background:rgba(74,222,128,.14);border:1.5px solid rgba(21,128,61,.3);border-radius:12px;padding:12px 16px;font-size:12.5px;line-height:1.6;max-width:210px;color:#15803D">Where a question asks for a sentence, no sentence means no mark — even with the number right.</div>
+    </div>
+
+    <div style="margin-top:20px;display:flex;flex-direction:column;gap:16px;flex:1">
+      <div style="border:1.5px solid rgba(21,128,61,.25);border-radius:14px;padding:16px 20px;background:rgba(74,222,128,.06)">
+        <div style="font-family:Fredoka,sans-serif;font-size:20px;margin-bottom:10px">Lesson 1.3 · The Four Measures</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:13px;line-height:2.1">
+          Warm-Up · 6 &nbsp;|&nbsp; 5 &nbsp;|&nbsp; 7 &nbsp;|&nbsp; 9 &nbsp;|&nbsp; 15 &nbsp;|&nbsp; 30<br>
+          Core · 1 · 40 &nbsp;|&nbsp; 2 · 8 &nbsp;|&nbsp; 3 · 7 &nbsp;|&nbsp; 4 · mode 7, range 9 &nbsp;|&nbsp; 5 · 10 (the five must total 50)
+        </div>
+        <div style="font-size:12.5px;line-height:1.5;margin-top:10px;color:rgba(23,19,11,.7)">C1 · many answers; 2, 4, 6, 8, 20 works — mean 8, median 6. C2 · yes, the mean of 4 and 6 is 5, which is in neither; the median of an odd-sized set is always one of its own numbers, but the median of an even-sized set need not be.</div>
+      </div>
+
+      <div style="border:1.5px solid rgba(21,128,61,.25);border-radius:14px;padding:16px 20px;background:rgba(74,222,128,.06)">
+        <div style="font-family:Fredoka,sans-serif;font-size:20px;margin-bottom:10px">Lesson 1.4 · When the Average Lies</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:13px;line-height:2.1">
+          Warm-Up · 5 &nbsp;|&nbsp; 5 &nbsp;|&nbsp; 10 &nbsp;|&nbsp; 5 &nbsp;|&nbsp; 20 &nbsp;|&nbsp; 5<br>
+          Core · 1 · 20 &nbsp;|&nbsp; 2 · 10 &nbsp;|&nbsp; 3 · 50 &nbsp;|&nbsp; 4 · 10 &nbsp;|&nbsp; 5 · sentence
+        </div>
+        <div style="font-size:12.5px;line-height:1.5;margin-top:10px;color:rgba(23,19,11,.7)">Item 5 · full marks for any sentence saying the 60 drags the mean upward so that four of the five people are below it. C1 · mean 300, median 200; the agent prints the mean, the buyer wants the median. C2 · any set with one very large value, e.g. 1, 1, 1, 2, 2, 2, 70.</div>
+      </div>
+
+      <div style="border:1.5px solid rgba(21,128,61,.25);border-radius:14px;padding:16px 20px;background:rgba(74,222,128,.06)">
+        <div style="font-family:Fredoka,sans-serif;font-size:20px;margin-bottom:10px">Friday · Predict the Roll</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:13px;line-height:2.1">
+          Step 1 · about 8 each &nbsp;|&nbsp; 2 rolls left over &nbsp;&nbsp;&nbsp; Step 2 · his own tally; the counts must total 50<br>
+          C3 · 7 is the most likely total, and it can happen 6 ways
+        </div>
+        <div style="font-size:12.5px;line-height:1.5;margin-top:10px;color:rgba(23,19,11,.7)">C1 · no — a spread of a few either way is normal in fifty rolls. C2 · closer, because more trials give the underlying chance more room to show. If he says “further away” because the raw difference grows, that is worth discussing rather than marking wrong.</div>
+      </div>
+    </div>
+
+    <div style="border-top:2px solid rgba(23,19,11,.12);margin-top:14px;padding:12px 0 26px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(23,19,11,.45)">
+      <span>Teacher page</span><span>Answer key B · page 14</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ P15 · ANSWER KEY C + JOURNAL ============ -->
+<section class="page" data-screen-label="15 Answer key C" style="background:#FFFBF2;padding:0;display:flex;flex-direction:column">
+  <div style="height:10px;background:#15803D"></div>
+  <div style="padding:34px 52px 0;flex:1;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:24px;border-bottom:2px solid rgba(23,19,11,.14);padding-bottom:16px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:#15803D">Teacher page · answer key</div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:36px;margin:6px 0 4px;line-height:1">Key C</h1>
+        <div style="font-size:13.5px;color:rgba(23,19,11,.6)">Mid-unit quiz, unit test, and the error journal sheet.</div>
+      </div>
+      <div style="flex:none;background:rgba(74,222,128,.14);border:1.5px solid rgba(21,128,61,.3);border-radius:12px;padding:12px 16px;font-size:12.5px;line-height:1.6;max-width:210px;color:#15803D">Quiz is out of 8, test out of 12. 85% is 7/8 and 11/12.</div>
+    </div>
+
+    <div style="margin-top:20px;display:grid;grid-template-columns:1fr 1fr;gap:16px">
+      <div style="border:1.5px solid rgba(21,128,61,.25);border-radius:14px;padding:16px 20px;background:rgba(74,222,128,.06)">
+        <div style="font-family:Fredoka,sans-serif;font-size:20px;margin-bottom:10px">Mid-unit quiz</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:13px;line-height:2.1">
+          1 · 35<br>2 · 9<br>3 · 9<br>4 · mode 8, range 12<br>5 · 54<br>6 · 4<br>7 · 10<br>8 · mean 6, median 2 — the median
+        </div>
+      </div>
+      <div style="border:1.5px solid rgba(21,128,61,.25);border-radius:14px;padding:16px 20px;background:rgba(74,222,128,.06)">
+        <div style="font-family:Fredoka,sans-serif;font-size:20px;margin-bottom:10px">Unit test</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:13px;line-height:2.1">
+          1 · 12<br>2 · 18<br>3 · 17<br>4 · 8.5<br>5 · 15<br>6 · 9<br>7 · 10<br>8 · 6 ways<br>10 · 40<br>11 · water<br>12 · 5
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:16px;border:1.5px solid rgba(21,128,61,.25);border-radius:14px;padding:16px 20px;background:rgba(74,222,128,.06)">
+      <div style="font-family:Fredoka,sans-serif;font-size:20px;margin-bottom:8px">Item 9 and the Big Question</div>
+      <div style="font-size:13px;line-height:1.6">Item 9 earns its mark for a stated scale and two labelled axes, not for straight bars. The Big Question is full marks for any invented set where the mean and median differ, both computed correctly, plus a named audience who would be misled. A perfect answer does not need the word “outlier” — it needs the idea.</div>
+    </div>
+
+    <div style="margin-top:16px;border:1.5px solid rgba(23,19,11,.18);border-radius:14px;padding:16px 20px;flex:1;display:flex;flex-direction:column">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px">
+        <div style="font-family:Fredoka,sans-serif;font-size:20px">Error journal · Mission 07</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(23,19,11,.45)">One line per mistake · student page</div>
+      </div>
+      <div style="font-size:12.5px;line-height:1.5;color:rgba(23,19,11,.65);margin:6px 0 12px">Write what went wrong, not what the right answer was. On Thursday of Week 3, read the whole list and fix only what appears twice.</div>
+      <div style="flex:1;display:flex;flex-direction:column;gap:0">
+        <div style="display:grid;grid-template-columns:74px 1fr;gap:14px;border-bottom:1.5px solid rgba(23,19,11,.14);padding:11px 0"><span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:rgba(23,19,11,.4)">DAY</span><span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:rgba(23,19,11,.4)">WHAT I GOT WRONG, AND WHY</span></div>
+        <div style="border-bottom:1.5px solid rgba(23,19,11,.14);height:34px"></div>
+        <div style="border-bottom:1.5px solid rgba(23,19,11,.14);height:34px"></div>
+        <div style="border-bottom:1.5px solid rgba(23,19,11,.14);height:34px"></div>
+        <div style="border-bottom:1.5px solid rgba(23,19,11,.14);height:34px"></div>
+        <div style="border-bottom:1.5px solid rgba(23,19,11,.14);height:34px"></div>
+        <div style="border-bottom:1.5px solid rgba(23,19,11,.14);height:34px"></div>
+      </div>
+    </div>
+
+    <div style="border-top:2px solid rgba(23,19,11,.12);margin-top:14px;padding:12px 0 26px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(23,19,11,.45)">
+      <span>Adventures in Big Math · Mission 07 · Data Detective</span><span>Answer key C · page 15</span>
+    </div>
+  </div>
+</section>
+
+</doc-page>
+</x-dc>
+</body>
+</html>

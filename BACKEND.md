@@ -1,5 +1,64 @@
 # Adventures in Big Math — backend handoff
 
+> **STATUS (2026-08-12): implemented.** Cloud saves now ship in `index.html`
+> behind one constant. The sections below this box are the original design
+> notes, kept for background.
+
+## Turning cloud saves ON (one-time, ~5 minutes, free)
+
+The app talks straight to Firestore from the browser — GitHub Pages stays a
+plain static host, no server anywhere.
+
+1. Go to https://console.firebase.google.com → **Add project** (call it
+   anything, e.g. `big-math`). Skip Analytics.
+2. In the project: **Build → Firestore Database → Create database** →
+   Start in *production mode*, any region.
+3. **Rules** tab → replace everything with the rules below → Publish:
+
+   ```
+   rules_version = '2';
+   service cloud.firestore {
+     match /databases/{database}/documents {
+       // A student doc id bakes the pilot's secret code into an
+       // unguessable hash — knowing the id IS the login. Nobody can
+       // list the collection to discover ids.
+       match /students/{id} {
+         allow get, create, update: if true;
+         allow list, delete: if false;
+       }
+       // Name registry so the gate can say "wrong code" instead of
+       // silently creating a duplicate pilot. Contains no secrets.
+       match /names/{id} {
+         allow get, create, update: if true;
+         allow list, delete: if false;
+       }
+     }
+   }
+   ```
+4. **Project settings** (gear icon) → copy the **Project ID**.
+5. In `index.html`, search for `REMOTE_PROJECT_ID` and paste it:
+   `const REMOTE_PROJECT_ID = "big-math";`
+6. Push to GitHub Pages. Done.
+
+## How the login works
+
+- The picker gains a **secret code** (4-digit PIN) per pilot. New pilot =
+  name + code on any device. The same name + code from ANY device resolves
+  to the same account and pulls their progress down.
+- Tapping an existing pilot card asks for their code first.
+- Progress is written locally on every answer (offline-safe) and pushed to
+  Firestore after 1.5s of quiet (plus a flush when the tab hides). On
+  sign-in, whichever side has the newer `updated` wins.
+- Security model: the Firestore doc id is `name + sha256(name:code)`. It's
+  deliberately kid-grade — fine for two pilots, not for the internet at
+  large. No plaintext code, no email, nothing about the child beyond a
+  first name.
+- With `REMOTE_PROJECT_ID = ""` the app behaves exactly as before
+  (device-local, no codes).
+
+---
+
+
 The app currently stores every kid's progress in `localStorage` on the device.
 All of it goes through one object, `Storage`, near the top of the logic class in
 `index.html`. Replacing that object with API calls is the

@@ -1975,7 +1975,7 @@
           </div>
         </div>
       </sc-for>
-      <div style="font-size:12.5px;line-height:1.55;color:rgba(238,242,255,.45);padding:0 4px">Saved in this browser only. The code has a marked seam (search <span style="font-family:'JetBrains Mono',monospace;color:#FBBF24">BACKEND</span>) where a database swaps in so progress survives a lost iPad.</div>
+      <div style="font-size:12.5px;line-height:1.55;color:rgba(238,242,255,.45);padding:0 4px">{{ pfSaveNote }}</div>
     </div>
 
     <!-- weekly rhythm -->
@@ -2242,16 +2242,41 @@
 
       <div style="background:rgba(255,255,255,.03);border:1px dashed rgba(255,255,255,.2);border-radius:22px;padding:26px 22px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;min-width:200px">
         <div style="width:76px;height:76px;border-radius:50%;border:2px dashed rgba(255,255,255,.25);display:grid;place-items:center;font-family:Fredoka,sans-serif;font-size:30px;color:rgba(238,242,255,.4)">+</div>
-        <input value="{{ pfNewName }}" onChange="{{ pfSetName }}" onKeyDown="{{ pfKeyAdd }}" placeholder="New pilot's name" style="width:150px;padding:9px 12px;text-align:center;font-family:Fredoka,sans-serif;font-size:15px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);border-radius:11px;color:#EEF2FF;outline:none">
-        <button onClick="{{ pfAdd }}" style="font-family:Fredoka,sans-serif;font-size:14px;padding:9px 18px;border-radius:11px;border:0;cursor:pointer;background:#FBBF24;color:#1A1206" style-hover="filter:brightness(1.1)">Add</button>
+        <input value="{{ pfNewName }}" onChange="{{ pfSetName }}" onKeyDown="{{ pfKeyAdd }}" placeholder="Pilot's name" style="width:150px;padding:9px 12px;text-align:center;font-family:Fredoka,sans-serif;font-size:15px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);border-radius:11px;color:#EEF2FF;outline:none">
+        <sc-if value="{{ pfRemote }}" hint-placeholder-val="{{ false }}">
+          <input value="{{ pfNewPin }}" onChange="{{ pfSetPin }}" onKeyDown="{{ pfKeyAdd }}" placeholder="Secret code (4 digits)" inputmode="numeric" maxlength="4" style="width:150px;padding:9px 12px;text-align:center;font-family:Fredoka,sans-serif;font-size:15px;letter-spacing:.3em;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);border-radius:11px;color:#EEF2FF;outline:none">
+        </sc-if>
+        <button onClick="{{ pfAdd }}" style="font-family:Fredoka,sans-serif;font-size:14px;padding:9px 18px;border-radius:11px;border:0;cursor:pointer;background:#FBBF24;color:#1A1206" style-hover="filter:brightness(1.1)">{{ pfAddLabel }}</button>
       </div>
     </div>
+
+    <sc-if value="{{ pfHasErr }}" hint-placeholder-val="{{ false }}">
+      <div style="margin-top:20px;font-family:Fredoka,sans-serif;font-size:16px;color:#FB7185">{{ pfErr }}</div>
+    </sc-if>
 
     <sc-if value="{{ pfCanClose }}" hint-placeholder-val="{{ false }}">
       <button onClick="{{ pfClose }}" style="margin-top:30px;font-family:Fredoka,sans-serif;font-size:14.5px;padding:10px 22px;border-radius:12px;cursor:pointer;background:transparent;border:1px solid rgba(255,255,255,.18);color:rgba(238,242,255,.6)" style-hover="filter:brightness(1.4)">Back</button>
     </sc-if>
 
-    <div style="margin-top:26px;font-size:12.5px;color:rgba(238,242,255,.35);max-width:520px;text-align:center;line-height:1.5">Progress is saved on this device. Wire in a database later and it follows each pilot everywhere.</div>
+    <div style="margin-top:26px;font-size:12.5px;color:rgba(238,242,255,.35);max-width:520px;text-align:center;line-height:1.5">{{ pfSaveNote }}</div>
+
+    <!-- Secret-code prompt: covers the picker while a pilot signs in -->
+    <sc-if value="{{ pfPinFor }}" hint-placeholder-val="{{ false }}">
+      <div style="position:fixed;inset:0;z-index:70;background:rgba(4,7,20,.82);display:flex;align-items:center;justify-content:center" onClick="{{ pfPinCancel }}">
+        <div style="background:#0D1330;border:1px solid rgba(255,255,255,.14);border-radius:24px;padding:34px 38px;display:flex;flex-direction:column;align-items:center;gap:16px;min-width:280px" onClick="{{ pfStop }}">
+          <div style="font-family:Fredoka,sans-serif;font-size:24px">Hi {{ pfPinName }}!</div>
+          <div style="font-size:13.5px;color:rgba(238,242,255,.6)">Type your secret code</div>
+          <input value="{{ pfPinEntry }}" onChange="{{ pfSetPinEntry }}" onKeyDown="{{ pfPinKey }}" inputmode="numeric" maxlength="4" autofocus placeholder="••••" style="width:150px;padding:12px;text-align:center;font-family:Fredoka,sans-serif;font-size:24px;letter-spacing:.45em;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.2);border-radius:13px;color:#EEF2FF;outline:none">
+          <div style="display:flex;gap:10px">
+            <button onClick="{{ pfPinGo }}" style="font-family:Fredoka,sans-serif;font-size:15px;padding:10px 26px;border-radius:12px;border:0;cursor:pointer;background:#FBBF24;color:#1A1206" style-hover="filter:brightness(1.1)">{{ pfPinGoLabel }}</button>
+            <button onClick="{{ pfPinCancel }}" style="font-family:Fredoka,sans-serif;font-size:15px;padding:10px 18px;border-radius:12px;cursor:pointer;background:transparent;border:1px solid rgba(255,255,255,.18);color:rgba(238,242,255,.6)" style-hover="filter:brightness(1.4)">Back</button>
+          </div>
+          <sc-if value="{{ pfHasErr }}" hint-placeholder-val="{{ false }}">
+            <div style="font-family:Fredoka,sans-serif;font-size:14.5px;color:#FB7185">{{ pfErr }}</div>
+          </sc-if>
+        </div>
+      </div>
+    </sc-if>
   </div>
   </sc-if>
 
@@ -3623,29 +3648,73 @@ const AVATAR_COLORS = ["#FF9F1C","#2DD4BF","#A78BFA","#F472B6","#A3E635","#60A5F
  * then push to the server, and reconcile on next load. That keeps the app
  * usable when the wifi drops mid-lesson, which will happen.
  * ==========================================================================*/
+/* BACKEND CONFIG — paste a Firebase project id here to turn on cloud saves
+ * (name + secret code, progress follows the pilot to any device). With ""
+ * the app is local-only, exactly as before. Setup steps: BACKEND.md. */
+const REMOTE_PROJECT_ID = "";
+
+const SESSION_KEY = "abm.session.v1";
+const Remote = {
+  enabled: !!REMOTE_PROJECT_ID,
+  _doc(col,id){ return "https://firestore.googleapis.com/v1/projects/"+REMOTE_PROJECT_ID+"/databases/(default)/documents/"+col+"/"+id; },
+  _norm(name){ return (name||"").trim().toLowerCase(); },
+  // The account key bakes the code into an unguessable doc id — that IS the
+  // security model (two kids, low stakes). No plaintext code is ever stored.
+  async keyFor(name,pin){
+    const enc=new TextEncoder().encode(this._norm(name)+":"+String(pin||"").trim());
+    const dig=await crypto.subtle.digest("SHA-256",enc);
+    const hex=Array.from(new Uint8Array(dig)).map(b=>b.toString(16).padStart(2,"0")).join("");
+    return this._norm(name).replace(/[^a-z0-9]/g,"").slice(0,12)+"-"+hex.slice(0,24);
+  },
+  // names/{name} lets the gate tell "wrong code" apart from "new pilot".
+  async nameTaken(name){
+    try{ const r=await fetch(this._doc("names",encodeURIComponent(this._norm(name)))); return r.ok; }
+    catch(e){ return false; }
+  },
+  async fetchStudent(key){
+    try{
+      const r=await fetch(this._doc("students",key));
+      if(!r.ok) return null;
+      const f=(await r.json()).fields||{};
+      return { name:f.name?f.name.stringValue:"", color:f.color?f.color.stringValue:"",
+               slice:f.blob?JSON.parse(f.blob.stringValue):null };
+    }catch(e){ return null; }
+  },
+  async pushStudent(key,profile,slice){
+    const body=JSON.stringify({fields:{
+      name:{stringValue:profile.name}, color:{stringValue:profile.color},
+      blob:{stringValue:JSON.stringify(slice||{})},
+      updated:{integerValue:String((slice&&slice.updated)||Date.now())}}});
+    try{
+      await fetch(this._doc("students",key),{method:"PATCH",headers:{"Content-Type":"application/json"},body});
+      await fetch(this._doc("names",encodeURIComponent(this._norm(profile.name))),
+        {method:"PATCH",headers:{"Content-Type":"application/json"},body:JSON.stringify({fields:{taken:{booleanValue:true}}})});
+    }catch(e){ /* offline — localStorage still has it; the next save retries */ }
+  },
+  session(){ try{ return JSON.parse(localStorage.getItem(SESSION_KEY)||"null"); }catch(e){ return null; } },
+  setSession(s){ try{ s?localStorage.setItem(SESSION_KEY,JSON.stringify(s)):localStorage.removeItem(SESSION_KEY); }catch(e){} }
+};
+
+// Debounced remote push — persist() fires on every graded answer, so batch
+// 1.5s of quiet and flush when the tab hides (BACKEND.md: "Debounce saves").
+let _pushTimer=null,_pushFn=null;
+function queueRemotePush(fn){ _pushFn=fn; clearTimeout(_pushTimer); _pushTimer=setTimeout(flushRemotePush,1500); }
+function flushRemotePush(){ clearTimeout(_pushTimer); const f=_pushFn; _pushFn=null; if(f) f(); }
+window.addEventListener("pagehide",flushRemotePush);
+document.addEventListener("visibilitychange",()=>{ if(document.visibilityState==="hidden") flushRemotePush(); });
+
 const Storage = {
-  // Returns the blob, or null if this device has never been used.
+  // localStorage stays the offline cache; the remote copy is reconciled by
+  // `updated` in loadStore/_signInRemote (newer wins).
   async load(){
     try{ const raw=localStorage.getItem(STORE_KEY); return raw?JSON.parse(raw):null; }
     catch(e){ return null; }
-    // BACKEND: const r = await fetch(`/api/households/${id}`, {headers:{Authorization:`Bearer ${token}`}});
-    //          return r.ok ? r.json() : null;
   },
-  // Fire-and-forget. Called after every answer, so debounce it against a real API.
   async save(blob){
     try{ localStorage.setItem(STORE_KEY,JSON.stringify(blob)); }catch(e){}
-    // BACKEND: await fetch(`/api/households/${id}`, {method:"PUT", headers:{...}, body:JSON.stringify(blob)});
   },
-  // No auth on device — the profile picker IS the login. Returns a session or null.
-  async signIn(){
-    return null;
-    // BACKEND: POST /auth/login, stash the token, return { token, householdId }.
-  },
-  async signOut(){
-    return true;
-    // BACKEND: drop the token and clear the in-memory cache (leave localStorage
-    // alone unless the parent explicitly asks to wipe the device).
-  }
+  async signIn(){ return Remote.session(); },
+  async signOut(){ Remote.setSession(null); return true; }
 };
 
 class Component extends DCLogic {
@@ -3654,7 +3723,8 @@ class Component extends DCLogic {
            recW:8, recH:3, ptX:3, ptY:5,
            dat:"4,7,7,9,13", bagR:3, bagB:5, fnM:3, fnB:2, eqOp:"+", eqA:7, eqB:19,
            ans:{}, pset:"p1", pAns:{}, pChecked:{}, pRuns:{}, pTier:null, pPaper:{}, lstep:{}, playing:false,
-           profiles:[], activeId:null, gate:true, newName:"", loaded:false};
+           profiles:[], activeId:null, gate:true, newName:"", loaded:false,
+           newPin:"", pinFor:null, pinEntry:"", gateErr:"", syncing:false};
 
   // The built missions. Everything unit-specific resolves through these.
   sets(){ return this.setsFor(this.state.uview); }
@@ -3665,9 +3735,19 @@ class Component extends DCLogic {
   store = {profiles:[], activeId:null, data:{}};
 
   async loadStore(){
-    // BACKEND: await Storage.signIn() first, then load that household's blob.
     const p = await Storage.load();
     if(p) this.store={profiles:p.profiles||[],activeId:p.activeId||null,data:p.data||{}};
+    // Cloud: resume the signed-in pilot and reconcile (newer `updated` wins).
+    const sess = Remote.enabled ? await Storage.signIn() : null;
+    if(sess){
+      const prof=(this.store.profiles||[]).find(x=>x.rkey===sess.key);
+      if(prof){
+        const remote=await Remote.fetchStudent(prof.rkey);
+        const local=this.store.data[prof.id]||{};
+        if(remote&&remote.slice&&(remote.slice.updated||0)>(local.updated||0)) this.store.data[prof.id]=remote.slice;
+        this.store.activeId=prof.id;
+      }
+    }
     const {profiles,activeId}=this.store;
     const active=profiles.find(x=>x.id===activeId);
     if(active){ this.setState({profiles,activeId,gate:false,loaded:true,...this.blank(),...(this.store.data[activeId]||{})}); }
@@ -3680,22 +3760,74 @@ class Component extends DCLogic {
     const {profiles,activeId,pAns,pChecked,pRuns,lstep}=this.state;
     this.store.profiles=profiles; this.store.activeId=activeId;
     if(activeId) this.store.data[activeId]={pAns,pChecked,pRuns,lstep,pPaper:this.state.pPaper,updated:Date.now()};
-    // BACKEND: debounce this — it fires on every keystroke-committed answer.
-    Storage.save(this.store);
+    Storage.save(this.store); // local first — survives dropped wifi
+    if(Remote.enabled && activeId){
+      const prof=profiles.find(x=>x.id===activeId);
+      if(prof && prof.rkey){
+        const slice=this.store.data[activeId];
+        queueRemotePush(()=>Remote.pushStudent(prof.rkey,prof,slice));
+      }
+    }
   }
   pickProfile=id=>{
-    const d=this.store.data[id]||{};
-    this.setState({activeId:id,gate:false,view:"map",...this.blank(),...d},()=>this.persist());
+    const prof=this.state.profiles.find(x=>x.id===id);
+    if(Remote.enabled && prof && prof.rkey){ this.setState({pinFor:id,pinEntry:"",gateErr:""}); return; }
+    this._enterProfile(id);
   };
-  // BACKEND: create the kid server-side and use the returned id instead of the
-  // local timestamp id, so the same profile resolves across devices.
-  addProfile=()=>{
+  _enterProfile(id){
+    const d=this.store.data[id]||{};
+    this.setState({activeId:id,gate:false,pinFor:null,pinEntry:"",gateErr:"",view:"map",...this.blank(),...d},()=>this.persist());
+  }
+  // Pull the pilot's cloud copy, keep whichever side is newer, then enter.
+  _signInRemote=async prof=>{
+    this.setState({syncing:true});
+    const remote=await Remote.fetchStudent(prof.rkey);
+    const local=this.store.data[prof.id]||{};
+    if(remote&&remote.slice&&(remote.slice.updated||0)>(local.updated||0)) this.store.data[prof.id]=remote.slice;
+    Remote.setSession({key:prof.rkey,pid:prof.id});
+    this.setState({syncing:false});
+    this._enterProfile(prof.id);
+  };
+  confirmPin=async()=>{
+    const prof=this.state.profiles.find(x=>x.id===this.state.pinFor);
+    if(!prof) return;
+    if((this.state.pinEntry||"").length<4){ this.setState({gateErr:"Type your 4-digit secret code."}); return; }
+    const key=await Remote.keyFor(prof.name,this.state.pinEntry);
+    if(key!==prof.rkey){ this.setState({gateErr:"That's not the right code. Try again!",pinEntry:""}); return; }
+    this.setState({gateErr:""});
+    await this._signInRemote(prof);
+  };
+  // With the cloud on, "Add" doubles as cross-device sign-in: the same
+  // name + code resolves to the same account from any device.
+  addProfile=async()=>{
     const name=(this.state.newName||"").trim();
     if(!name) return;
+    if(!Remote.enabled){
+      const id="k"+Date.now().toString(36);
+      const color=AVATAR_COLORS[this.state.profiles.length%AVATAR_COLORS.length];
+      const profiles=[...this.state.profiles,{id,name,color}];
+      this.setState({profiles,newName:""},()=>this.pickProfile(id));
+      return;
+    }
+    const pin=(this.state.newPin||"").trim();
+    if(pin.length<4){ this.setState({gateErr:"Pick a 4-digit secret code first."}); return; }
+    this.setState({gateErr:"",syncing:true});
+    const key=await Remote.keyFor(name,pin);
+    const existing=this.state.profiles.find(x=>x.rkey===key);
+    if(existing){ this.setState({syncing:false,newName:"",newPin:""}); await this._signInRemote(existing); return; }
+    const remote=await Remote.fetchStudent(key);
+    if(!remote && await Remote.nameTaken(name)){
+      this.setState({syncing:false,gateErr:"That pilot already exists, but the code doesn't match."});
+      return;
+    }
     const id="k"+Date.now().toString(36);
-    const color=AVATAR_COLORS[this.state.profiles.length%AVATAR_COLORS.length];
-    const profiles=[...this.state.profiles,{id,name,color}];
-    this.setState({profiles,newName:""},()=>this.pickProfile(id));
+    const color=(remote&&remote.color)||AVATAR_COLORS[this.state.profiles.length%AVATAR_COLORS.length];
+    const prof={id,name:(remote&&remote.name)||name,color,rkey:key};
+    if(remote&&remote.slice) this.store.data[id]=remote.slice;
+    const profiles=[...this.state.profiles,prof];
+    Remote.setSession({key,pid:id});
+    this.setState({profiles,newName:"",newPin:"",syncing:false},()=>this._enterProfile(id));
+    if(!remote) Remote.pushStudent(key,prof,this.store.data[id]||{updated:Date.now()});
   };
   removeProfile=id=>{
     const profiles=this.state.profiles.filter(p=>p.id!==id);
@@ -3817,6 +3949,24 @@ class Component extends DCLogic {
       pfKeyAdd:e=>{ if(e.key==="Enter") this.addProfile(); },
       pfClose:()=>{ if(this.state.activeId) this.setState({gate:false}); },
       pfCanClose:!!st.activeId,
+      pfRemote:Remote.enabled,
+      pfNewPin:st.newPin,
+      pfSetPin:e=>this.setState({newPin:e.target.value.replace(/[^0-9]/g,"").slice(0,4)}),
+      pfHasErr:!!st.gateErr, pfErr:st.gateErr,
+      pfSyncing:st.syncing,
+      pfAddLabel:st.syncing?"...":"Go!",
+      pfPinGoLabel:st.syncing?"...":"Blast off!",
+      pfStop:e=>e.stopPropagation(),
+      pfPinFor:!!st.pinFor,
+      pfPinName:(st.profiles.find(x=>x.id===st.pinFor)||{}).name||"",
+      pfPinEntry:st.pinEntry,
+      pfSetPinEntry:e=>this.setState({pinEntry:e.target.value.replace(/[^0-9]/g,"").slice(0,4)}),
+      pfPinGo:this.confirmPin,
+      pfPinKey:e=>{ if(e.key==="Enter") this.confirmPin(); },
+      pfPinCancel:()=>this.setState({pinFor:null,pinEntry:"",gateErr:""}),
+      pfSaveNote:Remote.enabled
+        ? "Cloud saves are ON — progress follows each pilot to any device."
+        : "Progress is saved on this device. Wire in a database later and it follows each pilot everywhere.",
       pfRoster:st.profiles.map(p=>{
         const pr=progressFor(p.id);
         const counts={}; pr.missed.forEach(q=>{counts[q]=(counts[q]||0)+1;});

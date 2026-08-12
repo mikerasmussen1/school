@@ -8,6 +8,12 @@ service cloud.firestore {
       allow get, create, update: if true;
       allow list, delete: if false;
     }
+    // Photo-homework diagnostics (event metadata only, never images) so
+    // grown-ups can watch tests from the Firebase console.
+    match /paperlog/{id} {
+      allow get, create, update: if true;
+      allow list, delete: if false;
+    }
     // Name registry so the gate can say "wrong code" instead of silently
     // creating a duplicate pilot. Contains no secrets.
     match /names/{id} {

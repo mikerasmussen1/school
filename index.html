@@ -3774,6 +3774,27 @@ const GEMINI_API_KEY = "AIzaSyAdQaZOJXTY5fg7F-GdjjNWphY19Q4951Y";
 
 const PaperReader = {
   enabled: !!GEMINI_API_KEY,
+  // Diagnostics: last 25 events, kept locally AND mirrored to Firestore
+  // (paperlog/<pilot-or-device>) so grown-ups can watch tests from the
+  // Firebase console without touching the kid's iPad. Never includes the
+  // photo itself — just what happened.
+  log(ev){
+    try{
+      ev.t=new Date().toISOString();
+      console.log("[PaperReader]",ev);
+      const K="abm.paperlog.v1";
+      const arr=JSON.parse(localStorage.getItem(K)||"[]");
+      arr.push(ev); while(arr.length>25) arr.shift();
+      localStorage.setItem(K,JSON.stringify(arr));
+      if(Remote.enabled){
+        const sess=Remote.session();
+        const id=(sess&&sess.key)||"device";
+        fetch(Remote._doc("paperlog",id),{method:"PATCH",headers:{"Content-Type":"application/json"},
+          body:JSON.stringify({fields:{events:{stringValue:JSON.stringify(arr)},updated:{integerValue:String(Date.now())}}})
+        }).catch(()=>{});
+      }
+    }catch(e){}
+  },
   // Downscale on-device so a 12MP photo doesn't ship 4MB to the API.
   shrink(file){
     return new Promise((resolve,reject)=>{
@@ -3794,7 +3815,11 @@ const PaperReader = {
     });
   },
   async read(items,file){
-    const img=await this.shrink(file);
+    const t0=Date.now();
+    this.log({ev:"read-start",items:items.length,fileKB:Math.round(file.size/1024)});
+    let img;
+    try{ img=await this.shrink(file); }
+    catch(e){ this.log({ev:"shrink-error",err:String(e&&e.message||e)}); throw e; }
     const prompt=
       "You are reading a photo of a child's handwritten math homework.\n"+
       "These are the problems in the exercise (JSON, each with an index i and the question q):\n"+
@@ -3809,10 +3834,19 @@ const PaperReader = {
     const r=await fetch(
       "https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent?key="+GEMINI_API_KEY,
       {method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)});
-    if(!r.ok) throw new Error("Gemini "+r.status);
+    if(!r.ok){
+      let detail=""; try{ detail=((await r.json()).error||{}).message||""; }catch(e){}
+      this.log({ev:"api-error",status:r.status,msg:detail.slice(0,160),ms:Date.now()-t0});
+      throw new Error("Gemini "+r.status);
+    }
     const j=await r.json();
     const text=(((j.candidates||[])[0]||{}).content||{}).parts;
-    return JSON.parse((text&&text[0]&&text[0].text)||"{}");
+    let parsed;
+    try{ parsed=JSON.parse((text&&text[0]&&text[0].text)||"{}"); }
+    catch(e){ this.log({ev:"parse-error",raw:String((text&&text[0]&&text[0].text)||"").slice(0,160),ms:Date.now()-t0}); throw e; }
+    this.log({ev:"read-done",matches:parsed.matches===true,
+              answers:parsed.answers?Object.keys(parsed.answers).length:0,ms:Date.now()-t0});
+    return parsed;
   }
 };
 

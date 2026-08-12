@@ -3825,7 +3825,7 @@ const PaperReader = {
       "These are the problems in the exercise (JSON, each with an index i and the question q):\n"+
       JSON.stringify(items)+"\n"+
       "1. Decide whether the paper in the photo shows work for THIS exercise (the same problems). Set \"matches\" accordingly.\n"+
-      "2. If it matches: for every problem whose final answer you can read on the paper, record the child's answer EXACTLY as written, digits only — even if the answer is wrong. Skip problems you cannot find or cannot read confidently.\n"+
+      "2. If it matches: for every problem whose FINAL answer you can read on the paper, record the child's answer EXACTLY as written, digits only — even if the answer is wrong. The work often uses area models, multiplication grids, number lines, or tally charts; the final answer is usually circled, boxed, written after an equals sign, or written below the model. Read only what the child actually WROTE as the final answer — never compute it yourself from the working (if a grid shows partial products but no written total, skip that problem). Skip anything you cannot find or cannot read confidently.\n"+
       "Respond with only JSON: {\"matches\": true|false, \"answers\": {\"<i>\": \"<digits>\"}}";
     const body={
       contents:[{parts:[{text:prompt},{inline_data:{mime_type:img.mime,data:img.b64}}]}],

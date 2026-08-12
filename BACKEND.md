@@ -40,6 +40,23 @@ plain static host, no server anywhere.
    `const REMOTE_PROJECT_ID = "big-math";`
 6. Push to GitHub Pages. Done.
 
+## Photo homework ("I did this on paper")
+
+Set up and LIVE (2026-08-12). Tapping "I did this on paper" now asks the
+pilot if they want to snap a picture of the page. The photo is downscaled
+on-device and sent to Gemini (`gemini-flash-latest`), which checks it's the
+right exercise and reads the child's WRITTEN answers (wrong ones included)
+into the boxes — then the normal Check flow grades them. "Just mark it
+done" keeps the old behavior.
+
+- Key: `GEMINI_API_KEY` in `index.html` — a browser key restricted to this
+  site's referrer AND to the Generative Language API only, so committing it
+  to the public repo is the intended model (that's what referrer-restricted
+  keys are for). Manage it under Google Cloud → Credentials in the
+  `big-math-adventures` project.
+- Cost: free tier; two kids won't dent it.
+- With the key empty, the button silently reverts to old behavior.
+
 ## How the login works
 
 - The picker gains a **secret code** (4-digit PIN) per pilot. New pilot =

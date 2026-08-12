@@ -2406,6 +2406,50 @@
         <button onClick="{{ pReset }}" style="font-family:Fredoka,sans-serif;font-size:15px;padding:12px 22px;border-radius:13px;cursor:pointer;background:transparent;border:1px solid rgba(255,255,255,.18);color:rgba(238,242,255,.65)" style-hover="filter:brightness(1.3)">Clear the page</button>
       </div>
 
+      <input ref="{{ paperFileRef }}" onChange="{{ paperPickedCb }}" type="file" accept="image/*" style="display:none">
+
+      <sc-if value="{{ paperHasMsg }}" hint-placeholder-val="{{ false }}">
+        <div style="margin-top:18px;background:linear-gradient(150deg,rgba(74,222,128,.16),rgba(56,189,248,.1));border:1.5px solid rgba(74,222,128,.5);border-radius:16px;padding:16px 20px;display:flex;align-items:center;gap:14px">
+          <div style="font-size:26px">📸</div>
+          <div style="font-size:15px;line-height:1.5;color:rgba(238,242,255,.9);flex:1">{{ paperMsgText }}</div>
+          <span onClick="{{ paperMsgClose }}" style="font-size:17px;color:rgba(238,242,255,.4);cursor:pointer;padding:4px 8px">×</span>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ paperAny }}" hint-placeholder-val="{{ false }}">
+        <div style="position:fixed;inset:0;z-index:70;background:rgba(4,7,20,.82);display:flex;align-items:center;justify-content:center;padding:30px" onClick="{{ paperCancel }}">
+          <div style="background:#0D1330;border:1px solid rgba(255,255,255,.14);border-radius:24px;padding:34px 38px;display:flex;flex-direction:column;align-items:center;gap:16px;max-width:420px;text-align:center" onClick="{{ paperStop }}">
+            <sc-if value="{{ paperAsk }}" hint-placeholder-val="{{ false }}">
+              <div style="font-size:40px">📸</div>
+              <div style="font-family:Fredoka,sans-serif;font-size:23px">Show me your paper work?</div>
+              <div style="font-size:13.5px;line-height:1.5;color:rgba(238,242,255,.6)">Take a picture of the page and I'll read your answers into the boxes — then press Check like normal.</div>
+              <sc-if value="{{ paperHasErr }}" hint-placeholder-val="{{ false }}">
+                <div style="font-family:Fredoka,sans-serif;font-size:14px;color:#FB7185">{{ paperErrText }}</div>
+              </sc-if>
+              <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
+                <button onClick="{{ paperYes }}" style="font-family:Fredoka,sans-serif;font-size:15px;padding:11px 22px;border-radius:12px;border:0;cursor:pointer;background:#FBBF24;color:#1A1206" style-hover="filter:brightness(1.1)">Take a picture</button>
+                <button onClick="{{ paperNo }}" style="font-family:Fredoka,sans-serif;font-size:15px;padding:11px 18px;border-radius:12px;cursor:pointer;background:rgba(167,139,250,.16);border:1px solid rgba(167,139,250,.5);color:#C4B5FD" style-hover="filter:brightness(1.15)">Just mark it done</button>
+                <button onClick="{{ paperCancel }}" style="font-family:Fredoka,sans-serif;font-size:15px;padding:11px 16px;border-radius:12px;cursor:pointer;background:transparent;border:1px solid rgba(255,255,255,.18);color:rgba(238,242,255,.6)" style-hover="filter:brightness(1.4)">Back</button>
+              </div>
+            </sc-if>
+            <sc-if value="{{ paperReading }}" hint-placeholder-val="{{ false }}">
+              <div style="font-size:40px;animation:float 2s ease-in-out infinite">🔎</div>
+              <div style="font-family:Fredoka,sans-serif;font-size:23px">Reading your work…</div>
+              <div style="font-size:13.5px;color:rgba(238,242,255,.6)">Checking the photo against this exercise.</div>
+            </sc-if>
+            <sc-if value="{{ paperMismatch }}" hint-placeholder-val="{{ false }}">
+              <div style="font-size:40px">🤔</div>
+              <div style="font-family:Fredoka,sans-serif;font-size:23px">That doesn't look like this exercise</div>
+              <div style="font-size:13.5px;line-height:1.5;color:rgba(238,242,255,.6)">The photo doesn't match the problems on this page. Snap the right page, or go back.</div>
+              <div style="display:flex;gap:10px">
+                <button onClick="{{ paperRetake }}" style="font-family:Fredoka,sans-serif;font-size:15px;padding:11px 22px;border-radius:12px;border:0;cursor:pointer;background:#FBBF24;color:#1A1206" style-hover="filter:brightness(1.1)">Try another picture</button>
+                <button onClick="{{ paperCancel }}" style="font-family:Fredoka,sans-serif;font-size:15px;padding:11px 16px;border-radius:12px;cursor:pointer;background:transparent;border:1px solid rgba(255,255,255,.18);color:rgba(238,242,255,.6)" style-hover="filter:brightness(1.4)">Back</button>
+              </div>
+            </sc-if>
+          </div>
+        </div>
+      </sc-if>
+
       <sc-if value="{{ pAllRight }}" hint-placeholder-val="{{ false }}">
         <div style="margin-top:22px;background:linear-gradient(150deg,rgba(74,222,128,.18),rgba(251,191,36,.12));border:1.5px solid rgba(74,222,128,.5);border-radius:18px;padding:20px 24px;display:flex;align-items:center;gap:18px;flex-wrap:wrap">
           <div style="font-family:Fredoka,sans-serif;font-size:44px;color:#4ADE80;line-height:1">100%</div>
@@ -3722,6 +3766,56 @@ const Storage = {
   async signOut(){ Remote.setSession(null); return true; }
 };
 
+/* PHOTO HOMEWORK CONFIG — paste a Gemini API key (referrer-restricted to
+ * this site; setup steps in BACKEND.md) to let pilots photograph paper
+ * work and have the answers read in. With "" the "I did this on paper"
+ * button keeps its old mark-it-done behavior. */
+const GEMINI_API_KEY = "AIzaSyAdQaZOJXTY5fg7F-GdjjNWphY19Q4951Y";
+
+const PaperReader = {
+  enabled: !!GEMINI_API_KEY,
+  // Downscale on-device so a 12MP photo doesn't ship 4MB to the API.
+  shrink(file){
+    return new Promise((resolve,reject)=>{
+      const url=URL.createObjectURL(file);
+      const img=new Image();
+      img.onload=()=>{
+        const MAX=1280;
+        let w=img.width,h=img.height;
+        const k=Math.min(1,MAX/Math.max(w,h));
+        w=Math.round(w*k); h=Math.round(h*k);
+        const c=document.createElement("canvas"); c.width=w; c.height=h;
+        c.getContext("2d").drawImage(img,0,0,w,h);
+        URL.revokeObjectURL(url);
+        resolve({mime:"image/jpeg",b64:c.toDataURL("image/jpeg",0.85).split(",")[1]});
+      };
+      img.onerror=e=>{ URL.revokeObjectURL(url); reject(e); };
+      img.src=url;
+    });
+  },
+  async read(items,file){
+    const img=await this.shrink(file);
+    const prompt=
+      "You are reading a photo of a child's handwritten math homework.\n"+
+      "These are the problems in the exercise (JSON, each with an index i and the question q):\n"+
+      JSON.stringify(items)+"\n"+
+      "1. Decide whether the paper in the photo shows work for THIS exercise (the same problems). Set \"matches\" accordingly.\n"+
+      "2. If it matches: for every problem whose final answer you can read on the paper, record the child's answer EXACTLY as written, digits only — even if the answer is wrong. Skip problems you cannot find or cannot read confidently.\n"+
+      "Respond with only JSON: {\"matches\": true|false, \"answers\": {\"<i>\": \"<digits>\"}}";
+    const body={
+      contents:[{parts:[{text:prompt},{inline_data:{mime_type:img.mime,data:img.b64}}]}],
+      generationConfig:{response_mime_type:"application/json"}
+    };
+    const r=await fetch(
+      "https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent?key="+GEMINI_API_KEY,
+      {method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)});
+    if(!r.ok) throw new Error("Gemini "+r.status);
+    const j=await r.json();
+    const text=(((j.candidates||[])[0]||{}).content||{}).parts;
+    return JSON.parse((text&&text[0]&&text[0].text)||"{}");
+  }
+};
+
 class Component extends DCLogic {
   state = {view:"map", unit:1, uview:1, week:1, a:23, b:14, dvA:94, dvB:4, dvN:234, pvN:"3472861", exprI:0,
            fN:3, fD:4, aN:2, aD:3, bN:3, bD:5, decV:"0.35", payV:"20.00", costV:"13.75",
@@ -3729,7 +3823,8 @@ class Component extends DCLogic {
            dat:"4,7,7,9,13", bagR:3, bagB:5, fnM:3, fnB:2, eqOp:"+", eqA:7, eqB:19,
            ans:{}, pset:"p1", pAns:{}, pChecked:{}, pRuns:{}, pTier:null, pPaper:{}, lstep:{}, playing:false,
            profiles:[], activeId:null, gate:true, newName:"", loaded:false,
-           newPin:"", pinFor:null, pinEntry:"", gateErr:"", syncing:false};
+           newPin:"", pinFor:null, pinEntry:"", gateErr:"", syncing:false,
+           paperFlow:null, paperErr:"", paperMsg:""};
 
   // The built missions. Everything unit-specific resolves through these.
   sets(){ return this.setsFor(this.state.uview); }
@@ -3838,6 +3933,39 @@ class Component extends DCLogic {
     const profiles=this.state.profiles.filter(p=>p.id!==id);
     delete this.store.data[id];
     this.setState(s=>({profiles, activeId:s.activeId===id?null:s.activeId, gate:s.activeId===id?true:s.gate}),()=>this.persist());
+  };
+
+  // ── Photo homework: "I did this on paper" -> optional picture -> AI fill ──
+  _paperCtx=null; _paperFallback=null; _paperInput=null;
+  paperStart(ctx,fallback){
+    this._paperCtx=ctx; this._paperFallback=fallback;
+    if(!PaperReader.enabled){ fallback(); return; }
+    this.setState({paperFlow:"ask",paperErr:"",paperMsg:""});
+  }
+  paperPicked=async e=>{
+    const file=e.target.files&&e.target.files[0];
+    e.target.value=""; // same-file re-pick must fire change again
+    if(!file||!this._paperCtx) return;
+    this.setState({paperFlow:"reading",paperErr:""});
+    try{
+      const res=await PaperReader.read(this._paperCtx.items,file);
+      if(!res||res.matches!==true){ this.setState({paperFlow:"mismatch"}); return; }
+      const ansMap=res.answers||{};
+      const setId=this._paperCtx.setId;
+      const okIdx=new Set(this._paperCtx.items.map(x=>String(x.i)));
+      this.saveState(st=>{
+        const filled={...(st.pAns[setId]||{})};
+        Object.keys(ansMap).forEach(k=>{
+          if(!okIdx.has(String(k))) return;
+          const v=String(ansMap[k]==null?"":ansMap[k]).replace(/[^0-9]/g,"");
+          if(v) filled[k]=v;
+        });
+        return {pAns:{...st.pAns,[setId]:filled},paperFlow:null,
+                paperMsg:"Image analyzed — your answers are filled in! Press Check when you're ready."};
+      });
+    }catch(err){
+      this.setState({paperFlow:"ask",paperErr:"Couldn't read the photo — try again with more light and the whole page in the shot."});
+    }
   };
 
   setStage=el=>{
@@ -4122,15 +4250,32 @@ class Component extends DCLogic {
         this.saveState(s=>({pAns:{...s.pAns,[set.id]:kept},pChecked:{...s.pChecked,[key]:false}}));
       },
       pOnPaper:()=>{
-        const filled={...ans};
-        visible.forEach(x=>{ filled[x.i]=x.it.a; });
-        this.saveState(s=>({
-          pAns:{...s.pAns,[set.id]:filled},
-          pChecked:{...s.pChecked,[key]:true},
-          pRuns:{...s.pRuns,[key]:(s.pRuns[key]||0)+1},
-          pPaper:{...s.pPaper,[key]:true}
-        }));
+        const markDone=()=>{
+          const filled={...ans};
+          visible.forEach(x=>{ filled[x.i]=x.it.a; });
+          this.saveState(s=>({
+            pAns:{...s.pAns,[set.id]:filled},
+            pChecked:{...s.pChecked,[key]:true},
+            pRuns:{...s.pRuns,[key]:(s.pRuns[key]||0)+1},
+            pPaper:{...s.pPaper,[key]:true}
+          }));
+        };
+        this.paperStart({setId:set.id,key,items:visible.map(x=>({i:x.i,q:x.it.q}))},markDone);
       },
+      paperAsk:st.paperFlow==="ask",
+      paperReading:st.paperFlow==="reading",
+      paperMismatch:st.paperFlow==="mismatch",
+      paperAny:!!st.paperFlow,
+      paperHasErr:!!st.paperErr, paperErrText:st.paperErr,
+      paperHasMsg:!!st.paperMsg, paperMsgText:st.paperMsg,
+      paperYes:()=>{ if(this._paperInput) this._paperInput.click(); },
+      paperNo:()=>{ const f=this._paperFallback; this.setState({paperFlow:null},()=>{ if(f) f(); }); },
+      paperCancel:()=>this.setState({paperFlow:null,paperErr:""}),
+      paperRetake:()=>{ if(this._paperInput) this._paperInput.click(); },
+      paperFileRef:el=>{ this._paperInput=el; },
+      paperPickedCb:this.paperPicked,
+      paperMsgClose:()=>this.setState({paperMsg:""}),
+      paperStop:e=>e.stopPropagation(),
       pOnPaperDone:!!st.pPaper[key],
       pReset:()=>this.saveState(s=>{
         const keep={...s.pAns[set.id]};

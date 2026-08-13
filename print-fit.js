@@ -36,13 +36,13 @@
       var h = clone.getBoundingClientRect().height;
       if (h <= pageHpx + 1) { lab.removeChild(clone); return; } // fits already
 
-      // Pathology guard: a page measuring more than 2 sheets tall is a
-      // measurement artifact (runaway element), not authored content — and
-      // the refinement pass below would re-lay the clone out at an enormous
-      // width, grinding the print for minutes. Skip it rather than "fix" it.
-      if (!(h > 0) || h > pageHpx * 2) {
+      // Pathology guard — genuinely runaway measurements only. NOTE: real
+      // overflowing pages measure well past 2 sheets in the unconstrained
+      // clone (an earlier 2x threshold silently skipped exactly the pages
+      // that need fitting — 2026-08-13 regression), so only truly absurd
+      // heights bail out.
+      if (!(h > 0) || h > pageHpx * 8) {
         lab.removeChild(clone);
-        try { console.warn("[print-fit] skipping page with pathological height", h, page.getAttribute("data-screen-label")); } catch (e) {}
         return;
       }
 
@@ -53,7 +53,7 @@
       clone.style.width = (PAGE_W_IN / k) + "in";
       var h2 = clone.getBoundingClientRect().height || h;
       if (k * h2 > pageHpx) k = pageHpx / h2;
-      k = Math.max(k, 0.5); // never shrink past 2x — content would be unreadable anyway
+      k = Math.max(k, 0.25); // floor far below any real page's need
       k *= SAFETY;
       lab.removeChild(clone);
 
@@ -81,7 +81,7 @@
       page.style.padding = "0";
       page.appendChild(wrap);
       page.setAttribute("data-pf-fitted", k.toFixed(4));
-      } catch (e) { try { console.warn("[print-fit]", e); } catch (e2) {} }
+      } catch (e) {}
     });
     document.body.removeChild(lab);
   }

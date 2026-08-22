@@ -20,5 +20,13 @@ service cloud.firestore {
       allow get, create, update: if true;
       allow list, delete: if false;
     }
+    // Teacher rosters. The doc id is a hash of a teacher code that is typed in
+    // Teacher HQ and never stored in the app, so the roster is only reachable
+    // by someone who knows that code. Listing stays denied, so rosters cannot
+    // be discovered any more than student records can.
+    match /rosters/{id} {
+      allow get, create, update: if true;
+      allow list, delete: if false;
+    }
   }
 }

@@ -2080,7 +2080,8 @@
               </div>
             </sc-if>
 
-            <div style="margin-top:20px">
+            <div style="margin-top:20px;display:flex;gap:12px;flex-wrap:wrap">
+              <button onClick="{{ tOpenHQ }}" style="{{ tPrimaryStyle }}" style-hover="filter:brightness(1.18)">Open full Teacher HQ →</button>
               <button onClick="{{ tDrop }}" style="{{ tGhostStyle }}" style-hover="filter:brightness(1.25)">Remove from roster</button>
             </div>
           </div>
@@ -2093,11 +2094,22 @@
   <!-- ============ TEACHER HQ ============ -->
   <sc-if value="{{ isHQ }}" hint-placeholder-val="{{ false }}">
   <main style="position:relative;padding:34px 44px 72px;max-width:1280px">
+    <sc-if value="{{ hqViewing }}" hint-placeholder-val="{{ false }}">
+      <div style="display:grid;grid-template-columns:1fr auto;gap:20px;align-items:center;background:linear-gradient(150deg,rgba(56,189,248,.16),rgba(167,139,250,.1));border:1px solid rgba(56,189,248,.45);border-radius:18px;padding:18px 24px;margin-bottom:26px">
+        <div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:#7DD3FC;margin-bottom:6px">Viewing a pilot's record</div>
+          <div style="font-family:Fredoka,sans-serif;font-size:26px;line-height:1.1;margin-bottom:6px">{{ hqViewName }}</div>
+          <div style="font-size:13px;line-height:1.5;color:rgba(238,242,255,.72);max-width:660px">{{ hqViewNote }}</div>
+        </div>
+        <button onClick="{{ hqExit }}" style="{{ tGhostStyle }}" style-hover="filter:brightness(1.3)">Back to roster</button>
+      </div>
+    </sc-if>
     <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#4ADE80;margin-bottom:12px">Teacher HQ · For Mom</div>
     <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:52px;line-height:1.02;margin:0 0 16px;letter-spacing:-.5px">Mission control</h1>
     <p style="max-width:740px;margin:0 0 38px;font-size:16.5px;line-height:1.55;color:rgba(238,242,255,.72);text-wrap:pretty">Forty-five minutes a day, five days a week. Everything below is the whole operating system: the weekly rhythm, what to grade and when, and the failure modes specific to a gifted eight-year-old.</p>
 
     <!-- roster -->
+    <sc-if value="{{ hqNotViewing }}" hint-placeholder-val="{{ true }}">
     <h2 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.45);margin:0 0 20px">Pilots on this device</h2>
     <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:44px">
       <sc-for list="{{ pfRoster }}" as="r" hint-placeholder-count="1">
@@ -2119,6 +2131,7 @@
       </sc-for>
       <div style="font-size:12.5px;line-height:1.55;color:rgba(238,242,255,.45);padding:0 4px">{{ pfSaveNote }}</div>
     </div>
+    </sc-if>
 
     <!-- weekly rhythm -->
     <h2 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.45);margin:0 0 20px">The weekly rhythm · 45 minutes</h2>
@@ -2219,6 +2232,7 @@
     </div>
 
     <!-- pilot records -->
+    <sc-if value="{{ hqNotViewing }}" hint-placeholder-val="{{ true }}">
     <sc-if value="{{ tEnabled }}" hint-placeholder-val="{{ true }}">
     <h2 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.45);margin:0 0 20px">Pilot records</h2>
     <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:22px;padding:26px 30px;margin-bottom:44px">
@@ -2313,6 +2327,7 @@
         </div>
       </sc-if>
     </div>
+    </sc-if>
     </sc-if>
 
     <!-- recommendations -->
@@ -4248,7 +4263,7 @@ class Component extends DCLogic {
            ans:{}, pset:"p1", pAns:{}, pChecked:{}, pRuns:{}, pTier:null, pPaper:{}, lstep:{}, playing:false,
            pHist:{}, skills:{}, snooze:{}, pFull:{},
            tCode:"", tRoster:null, tKey:null, tSel:"", tData:null, tBusy:false, tErr:"",
-           tAddName:"", tAddPin:"", tCurric:"y1", tFront:false,
+           tAddName:"", tAddPin:"", tCurric:"y1", tFront:false, tView:null, tFromGate:false,
            profiles:[], activeId:null, gate:true, newName:"", loaded:false,
            newPin:"", pinFor:null, pinEntry:"", gateErr:"", syncing:false,
            paperFlow:null, paperErr:"", paperMsg:""};
@@ -4777,17 +4792,55 @@ class Component extends DCLogic {
       tCloseFront:()=>this.setState({tFront:false,tSel:"",tData:null,tErr:""}),
       tCards:cards, tCardsAny:!!cards.length,
       tRecs:trecs, tRecsAny:!!trecs.length, tRecsEmpty:chosen&&!trecs.length,
-      tBackToRoster:()=>this.setState({tSel:"",tData:null})
+      tBackToRoster:()=>this.setState({tSel:"",tData:null}),
+      tOpenHQ:()=>{
+        if(!chosen) return;
+        // The gate is a fixed overlay: closing the teacher screen without
+        // dropping it would land the teacher back on the pilot sign-in.
+        this.setState({tView:{key:chosen.key,name:chosen.name,slice:st.tData||{}},
+          tFront:false, tFromGate:st.gate, gate:false, view:"hq", uview:1});
+      }
     };
+  }
+
+  /* When a teacher opens a pilot's record, every HQ panel reads from that
+   * pilot's remote slice instead of this device's own state. Returns null in
+   * normal use, so the child's own HQ is untouched. */
+  lens(){
+    const v=this.state.tView;
+    return v ? (v.slice||{}) : null;
   }
 
   /* Suggestions for Teacher HQ. Read-only: approving is what changes anything. */
   recVals(){
-    const st=this.state, hist=st.pHist||{}, skills=st.skills||{}, snooze=st.snooze||{};
+    const st=this.state, L=this.lens();
+    const hist=(L?L.pHist:st.pHist)||{}, skills=(L?L.skills:st.skills)||{}, snooze=(L?L.snooze:st.snooze)||{};
     const now=Date.now(), today=dayNo();
-    const setDay=(id,state)=>this.saveState(s=>({skills:{...(s.skills||{}),[id]:{state,d:today}}}));
-    const clear=id=>this.saveState(s=>{const k={...(s.skills||{})}; delete k[id]; return {skills:k};});
-    const snoozeIt=id=>this.saveState(s=>({snooze:{...(s.snooze||{}),[id]:now+MASTERY.snoozeDays*86400000}}));
+
+    // Viewing a pilot: read their record fresh, layer the one decision on top,
+    // push it back. Never writes this device's state onto the child.
+    const remoteWrite=async(patch,snoozePatch)=>{
+      const v=st.tView; if(!v) return;
+      this.setState({tBusy:true});
+      const fresh=await Remote.fetchStudent(v.key);
+      const base=(fresh&&fresh.slice)||v.slice||{};
+      const next={...base,
+        skills:patch(base.skills||{}),
+        snooze:(snoozePatch||(x=>x))(base.snooze||{}),
+        updated:Date.now()};
+      await Remote.pushStudent(v.key,{name:(fresh&&fresh.name)||v.name,color:(fresh&&fresh.color)||"#38BDF8"},next);
+      this.setState({tBusy:false,tView:{...v,slice:next},tData:next});
+    };
+
+    const setDay=(id,state)=> L
+      ? remoteWrite(sk=>({...sk,[id]:{state,d:today}}))
+      : this.saveState(s=>({skills:{...(s.skills||{}),[id]:{state,d:today}}}));
+    const clear=id=> L
+      ? remoteWrite(sk=>{const k={...sk}; delete k[id]; return k;})
+      : this.saveState(s=>{const k={...(s.skills||{})}; delete k[id]; return {skills:k};});
+    const snoozeIt=id=> L
+      ? remoteWrite(sk=>sk, sn=>({...sn,[id]:now+MASTERY.snoozeDays*86400000}))
+      : this.saveState(s=>({snooze:{...(s.snooze||{}),[id]:now+MASTERY.snoozeDays*86400000}}));
 
     const btn=(bg,bd,fg)=>"font-family:Fredoka,sans-serif;font-size:14px;padding:9px 17px;border-radius:11px;cursor:pointer;background:"+bg+";border:1px solid "+bd+";color:"+fg;
     const ghost=btn("rgba(255,255,255,.05)","rgba(255,255,255,.16)","rgba(238,242,255,.72)");
@@ -4871,7 +4924,12 @@ class Component extends DCLogic {
     return {
       recs, recsEmpty:!recs.length, recsAny:!!recs.length,
       recCount:recs.length,
-      adjustments:active, adjustmentsAny:!!active.length
+      adjustments:active, adjustmentsAny:!!active.length,
+
+      hqViewing:!!st.tView, hqNotViewing:!st.tView,
+      hqViewName:st.tView?st.tView.name:"",
+      hqViewNote:st.tView?"The suggestions and standards below are "+st.tView.name+"'s record, read live from the database. Approving a change writes to their record, not this device.":"",
+      hqExit:()=>this.setState(s=>({tView:null,tFront:true,view:"hq",gate:s.tFromGate?true:s.gate}))
     };
   }
 

@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700;6..12,800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  body{margin:0;font-family:"Nunito Sans",system-ui,sans-serif;color:#11161F}
+  a{color:#0369A1;text-decoration:none}
+  a:hover{color:#0284C7}
+  *{box-sizing:border-box}
+  .page{print-color-adjust:exact;-webkit-print-color-adjust:exact}
+</style>
+<script src="./doc-page.js"></script>
+<script src="./print-fit.js"></script>
+</helmet>
+
+<doc-page size="letter">
+
+<!-- ============ P1 · COVER ============ -->
+<section class="page" data-screen-label="01 Cover" style="background:#0A1122;color:#EEF2FF;padding:0;display:flex;flex-direction:column;position:relative;overflow:hidden">
+  <div style="position:absolute;inset:0;background:radial-gradient(680px 420px at 78% 8%, rgba(129,140,248,.3), transparent 62%),radial-gradient(560px 380px at 10% 88%, rgba(56,189,248,.16), transparent 62%)"></div>
+  <div style="position:absolute;inset:0;background-image:radial-gradient(1.6px 1.6px at 16% 23%,#fff,transparent),radial-gradient(1.4px 1.4px at 34% 67%,#fff,transparent),radial-gradient(1.8px 1.8px at 54% 13%,#fff,transparent),radial-gradient(1.3px 1.3px at 70% 77%,#fff,transparent),radial-gradient(1.7px 1.7px at 88% 35%,#fff,transparent),radial-gradient(1.4px 1.4px at 24% 91%,#fff,transparent),radial-gradient(1.5px 1.5px at 90% 65%,#fff,transparent);opacity:.7"></div>
+
+  <div style="position:relative;padding:62px 62px 0;flex:1;display:flex;flex-direction:column">
+    <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:#A5B4FC">Adventures in Big Math · 5th Grade Math</div>
+    <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:rgba(238,242,255,.5);margin-top:8px">Mission 07 of 08 · Weeks 1–4</div>
+
+    <div style="margin-top:54px;display:flex;align-items:center;gap:30px">
+      <div style="flex:none;width:128px;height:128px;border-radius:50%;background:radial-gradient(circle at 32% 28%,#818CF8,#3730A3 70%);box-shadow:0 0 0 10px rgba(129,140,248,.16),0 22px 60px rgba(55,48,163,.5);display:grid;place-items:center;position:relative">
+        <div style="position:absolute;inset:-14% -32%;border:3px solid rgba(129,140,248,.45);border-radius:50%;transform:rotate(-16deg) scaleY(.28)"></div>
+        <div style="position:relative;width:52px;height:52px;border:3px solid #1B1345;border-radius:4px;transform:rotate(-8deg)">
+          <div style="position:absolute;top:-11px;left:9px;width:52px;height:52px;border:3px solid rgba(27,19,69,.45);border-radius:4px"></div>
+        </div>
+      </div>
+      <div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:60px;line-height:.98;margin:0;letter-spacing:-1px;color:#818CF8">Volume &amp;<br>Measure</h1>
+        <div style="font-size:18px;margin-top:14px;color:rgba(238,242,255,.78)">Three dimensions, and units that convert without guessing.</div>
+      </div>
+    </div>
+
+    <div style="margin-top:46px;background:rgba(255,255,255,.06);border:1px solid rgba(129,140,248,.4);border-radius:20px;padding:26px 30px">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#A5B4FC;margin-bottom:10px">The Big Question</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:29px;line-height:1.2">If you double every edge of a box, why does the volume go up eight times instead of two?</div>
+    </div>
+
+    <div style="margin-top:34px;display:grid;grid-template-columns:1fr 1fr;gap:18px">
+      <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);border-radius:16px;padding:20px 22px">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.5);margin-bottom:8px">Hands-on project</div>
+        <div style="font-family:Fredoka,sans-serif;font-size:19px;line-height:1.2;margin-bottom:7px">Box the Shipment</div>
+        <div style="font-size:13.5px;line-height:1.5;color:rgba(238,242,255,.72)">Design a box for twelve real objects using the least cardboard. Build it and see if they fit.</div>
+      </div>
+      <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);border-radius:16px;padding:20px 22px">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.5);margin-bottom:8px">Fluency game</div>
+        <div style="font-family:Fredoka,sans-serif;font-size:19px;line-height:1.2;margin-bottom:7px">Unit Sprint</div>
+        <div style="font-size:13.5px;line-height:1.5;color:rgba(238,242,255,.72)">Convert on sight — millimetres to metres, grams to kilograms, one card at a time.</div>
+      </div>
+    </div>
+
+    <div style="margin-top:auto;display:flex;align-items:flex-end;gap:18px;padding-bottom:46px">
+      <div style="flex:none;width:66px;height:66px;border-radius:20px;background:linear-gradient(160deg,#C7D2FE,#818CF8);position:relative;box-shadow:0 12px 30px rgba(129,140,248,.4)">
+        <div style="position:absolute;top:-13px;left:50%;width:2px;height:13px;background:#818CF8"></div>
+        <div style="position:absolute;top:-20px;left:50%;transform:translateX(-50%);width:10px;height:10px;border-radius:50%;background:#FBBF24"></div>
+        <div style="position:absolute;top:22px;left:13px;width:14px;height:14px;border-radius:50%;background:#111938"></div>
+        <div style="position:absolute;top:22px;right:13px;width:14px;height:14px;border-radius:50%;background:#111938"></div>
+        <div style="position:absolute;bottom:12px;left:50%;transform:translateX(-50%);width:26px;height:4px;border-radius:3px;background:rgba(17,25,56,.45)"></div>
+      </div>
+      <div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:18px;border-bottom-left-radius:4px;padding:18px 22px">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:#A5B4FC;margin-bottom:7px">AXIOM · Mission Commander, nine tours</div>
+        <div style="font-family:Fredoka,sans-serif;font-size:18px;line-height:1.35">“Volume is how much fits inside. Surface area is how much wrapping paper you need. Different questions, different answers, and the units tell you which one you found.”</div>
+      </div>
+    </div>
+  </div>
+  <div style="position:relative;height:12px;background:linear-gradient(90deg,#818CF8,#38BDF8,#4ADE80)"></div>
+</section>
+
+<!-- ============ P2 · PRE-ASSESSMENT ============ -->
+<section class="page" data-screen-label="02 Pre-assessment" style="background:#FCFCFF;padding:0;display:flex;flex-direction:column">
+  <div style="height:10px;background:linear-gradient(90deg,#818CF8,#38BDF8)"></div>
+  <div style="padding:34px 52px 0;flex:1;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:24px;border-bottom:2px solid rgba(17,22,31,.14);padding-bottom:16px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:#4338CA">Mission 07 · Before we launch</div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:36px;margin:6px 0 4px;line-height:1">Pre-Assessment</h1>
+        <div style="font-size:13.5px;color:rgba(17,22,31,.6)">Twelve items, six strands. Anything you already own, we skip.</div>
+      </div>
+      <div style="flex:none;text-align:right;font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(17,22,31,.55);line-height:2.1">
+        <div>NAME ______________</div>
+        <div>DATE ______________</div>
+      </div>
+    </div>
+
+    <div style="background:rgba(129,140,248,.14);border:1.5px solid rgba(67,56,202,.26);border-radius:14px;padding:14px 18px;margin:18px 0 20px;font-size:13.5px;line-height:1.5">
+      <strong>This is not a test.</strong> Nothing here counts for a grade. Give plain numbers — the units are already stated in each question.
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:14px;flex:1">
+      <div style="display:grid;grid-template-columns:118px 1fr;gap:18px;align-items:start">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#15803D;padding-top:6px">Strand A<br><span style="color:rgba(17,22,31,.45)">Area recap</span></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+          <div style="border:1.5px solid rgba(17,22,31,.16);border-radius:12px;padding:12px 16px"><div style="font-size:13px;margin-bottom:9px"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(17,22,31,.4)">A1</span> &nbsp;Area of a 4 by 3 rectangle</div><div style="border-bottom:2px dotted rgba(17,22,31,.3);height:22px"></div></div>
+          <div style="border:1.5px solid rgba(17,22,31,.16);border-radius:12px;padding:12px 16px"><div style="font-size:13px;margin-bottom:9px"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(17,22,31,.4)">A2</span> &nbsp;Area of a 12 by 8 rectangle</div><div style="border-bottom:2px dotted rgba(17,22,31,.3);height:22px"></div></div>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:118px 1fr;gap:18px;align-items:start">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#4338CA;padding-top:6px">Strand B<br><span style="color:rgba(17,22,31,.45)">Volume</span></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+          <div style="border:1.5px solid rgba(17,22,31,.16);border-radius:12px;padding:12px 16px"><div style="font-size:13px;margin-bottom:9px"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(17,22,31,.4)">B1</span> &nbsp;Volume of a 2 by 3 by 4 box</div><div style="border-bottom:2px dotted rgba(17,22,31,.3);height:22px"></div></div>
+          <div style="border:1.5px solid rgba(17,22,31,.16);border-radius:12px;padding:12px 16px"><div style="font-size:13px;margin-bottom:9px"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(17,22,31,.4)">B2</span> &nbsp;Volume of a 5 by 5 by 5 cube</div><div style="border-bottom:2px dotted rgba(17,22,31,.3);height:22px"></div></div>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:118px 1fr;gap:18px;align-items:start">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#4338CA;padding-top:6px">Strand C<br><span style="color:rgba(17,22,31,.45)">Surface area</span></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+          <div style="border:1.5px solid rgba(17,22,31,.16);border-radius:12px;padding:12px 16px"><div style="font-size:13px;margin-bottom:9px"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(17,22,31,.4)">C1</span> &nbsp;Faces on a box</div><div style="border-bottom:2px dotted rgba(17,22,31,.3);height:22px"></div></div>
+          <div style="border:1.5px solid rgba(17,22,31,.16);border-radius:12px;padding:12px 16px"><div style="font-size:13px;margin-bottom:9px"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(17,22,31,.4)">C2</span> &nbsp;Surface area of a 2 by 2 by 2 cube</div><div style="border-bottom:2px dotted rgba(17,22,31,.3);height:22px"></div></div>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:118px 1fr;gap:18px;align-items:start">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#4338CA;padding-top:6px">Strand D<br><span style="color:rgba(17,22,31,.45)">Metric units</span></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+          <div style="border:1.5px solid rgba(17,22,31,.16);border-radius:12px;padding:12px 16px"><div style="font-size:13px;margin-bottom:9px"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(17,22,31,.4)">D1</span> &nbsp;Centimetres in 2.5 metres</div><div style="border-bottom:2px dotted rgba(17,22,31,.3);height:22px"></div></div>
+          <div style="border:1.5px solid rgba(17,22,31,.16);border-radius:12px;padding:12px 16px"><div style="font-size:13px;margin-bottom:9px"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(17,22,31,.4)">D2</span> &nbsp;Grams in 1.5 kilograms</div><div style="border-bottom:2px dotted rgba(17,22,31,.3);height:22px"></div></div>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:118px 1fr;gap:18px;align-items:start">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#B45309;padding-top:6px">Strand E<br><span style="color:rgba(17,22,31,.45)">Customary units</span></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+          <div style="border:1.5px solid rgba(17,22,31,.16);border-radius:12px;padding:12px 16px"><div style="font-size:13px;margin-bottom:9px"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(17,22,31,.4)">E1</span> &nbsp;Inches in 3 feet</div><div style="border-bottom:2px dotted rgba(17,22,31,.3);height:22px"></div></div>
+          <div style="border:1.5px solid rgba(17,22,31,.16);border-radius:12px;padding:12px 16px"><div style="font-size:13px;margin-bottom:9px"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(17,22,31,.4)">E2</span> &nbsp;Cups in 2 quarts</div><div style="border-bottom:2px dotted rgba(17,22,31,.3);height:22px"></div></div>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:118px 1fr;gap:18px;align-items:start">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#B45309;padding-top:6px">Strand F<br><span style="color:rgba(17,22,31,.45)">Scaling up</span></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+          <div style="border:1.5px solid rgba(17,22,31,.16);border-radius:12px;padding:12px 16px"><div style="font-size:13px;margin-bottom:9px"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(17,22,31,.4)">F1</span> &nbsp;Double both sides of a 4 by 5 rectangle — the new area</div><div style="border-bottom:2px dotted rgba(17,22,31,.3);height:22px"></div></div>
+          <div style="border:1.5px solid rgba(17,22,31,.16);border-radius:12px;padding:12px 16px"><div style="font-size:13px;margin-bottom:9px"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(17,22,31,.4)">F2</span> &nbsp;Double every edge of a cube — how many times the volume?</div><div style="border-bottom:2px dotted rgba(17,22,31,.3);height:22px"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="border-top:2px solid rgba(17,22,31,.12);margin-top:14px;padding:12px 0 26px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(17,22,31,.45)">
+      <span>Adventures in Big Math · 5th Grade · Mission 07</span><span>Pre-assessment · page 2</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ P3 · SKIP CHART ============ -->
+<section class="page" data-screen-label="03 Skip chart" style="background:#FCFCFF;padding:0;display:flex;flex-direction:column">
+  <div style="height:10px;background:linear-gradient(90deg,#4ADE80,#818CF8)"></div>
+  <div style="padding:34px 52px 0;flex:1;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:24px;border-bottom:2px solid rgba(17,22,31,.14);padding-bottom:16px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:#15803D">Teacher page · do not hand to student</div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:36px;margin:6px 0 4px;line-height:1">Skip Chart</h1>
+        <div style="font-size:13.5px;color:rgba(17,22,31,.6)">Score the pre-assessment, then cross days off the four-week calendar.</div>
+      </div>
+      <div style="flex:none;background:rgba(74,222,128,.14);border:1.5px solid rgba(21,128,61,.3);border-radius:12px;padding:12px 16px;font-family:'JetBrains Mono',monospace;font-size:10.5px;line-height:1.9;color:#15803D">
+        <div>2 / 2 → SKIP</div>
+        <div>1 / 2 → COMPRESS</div>
+        <div>0 / 2 → TEACH</div>
+      </div>
+    </div>
+
+    <table style="width:100%;border-collapse:collapse;margin-top:22px;font-size:13.5px">
+      <thead>
+        <tr style="background:rgba(17,22,31,.06)">
+          <th style="text-align:left;padding:11px 12px;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.55);border-bottom:2px solid rgba(17,22,31,.15)">Strand</th>
+          <th style="text-align:left;padding:11px 12px;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.55);border-bottom:2px solid rgba(17,22,31,.15)">Items</th>
+          <th style="text-align:left;padding:11px 12px;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.55);border-bottom:2px solid rgba(17,22,31,.15)">Covers</th>
+          <th style="text-align:center;padding:11px 12px;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.55);border-bottom:2px solid rgba(17,22,31,.15)">Score</th>
+          <th style="text-align:left;padding:11px 12px;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.55);border-bottom:2px solid rgba(17,22,31,.15)">If 2/2, remove</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(17,22,31,.1)"><strong>A · Area recap</strong></td>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(17,22,31,.1);font-family:'JetBrains Mono',monospace;font-size:12px">A1 A2</td>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(17,22,31,.1)">Every Warm-Up tier</td>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(17,22,31,.1);text-align:center;font-family:'JetBrains Mono',monospace">___ / 2</td>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(17,22,31,.1)">Warm-Up drops to 3 items all mission. Area is Year One work.</td>
+        </tr>
+        <tr>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(17,22,31,.1)"><strong>B · Volume</strong></td>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(17,22,31,.1);font-family:'JetBrains Mono',monospace;font-size:12px">B1 B2</td>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(17,22,31,.1)">Week 1 · lessons 1.1 and 1.2</td>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(17,22,31,.1);text-align:center;font-family:'JetBrains Mono',monospace">___ / 2</td>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(17,22,31,.1)">Day 1.1. Keep 1.2 — counting unit cubes is what makes the formula mean something.</td>
+        </tr>
+        <tr>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(17,22,31,.1)"><strong>C · Surface area</strong></td>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(17,22,31,.1);font-family:'JetBrains Mono',monospace;font-size:12px">C1 C2</td>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(17,22,31,.1)">Week 2 · lessons 2.1 and 2.2</td>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(17,22,31,.1);text-align:center;font-family:'JetBrains Mono',monospace">___ / 2</td>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(17,22,31,.1)">Compress Week 2 to three days. Keep 2.4 — telling the two apart is the point.</td>
+        </tr>
+        <tr>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(17,22,31,.1)"><strong>D · Metric units</strong></td>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(17,22,31,.1);font-family:'JetBrains Mono',monospace;font-size:12px">D1 D2</td>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(17,22,31,.1)">Week 3 · lessons 3.1 and 3.2</td>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(17,22,31,.1);text-align:center;font-family:'JetBrains Mono',monospace">___ / 2</td>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(17,22,31,.1)">Both days. This is Mission 01's powers of ten wearing different names.</td>
+        </tr>
+        <tr>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(17,22,31,.1)"><strong>E · Customary units</strong></td>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(17,22,31,.1);font-family:'JetBrains Mono',monospace;font-size:12px">E1 E2</td>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(17,22,31,.1)">Week 3 · lessons 3.3 and 3.4</td>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(17,22,31,.1);text-align:center;font-family:'JetBrains Mono',monospace">___ / 2</td>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(17,22,31,.1)">Day 3.3 only. Keep 3.4 — the awkward conversions need practising, not skipping.</td>
+        </tr>
+        <tr>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(17,22,31,.1)"><strong>F · Scaling up</strong></td>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(17,22,31,.1);font-family:'JetBrains Mono',monospace;font-size:12px">F1 F2</td>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(17,22,31,.1)">Week 2 · lesson 2.3</td>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(17,22,31,.1);text-align:center;font-family:'JetBrains Mono',monospace">___ / 2</td>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(17,22,31,.1)">Nothing. This is the Big Question — teach it even at 2/2.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div style="background:rgba(129,140,248,.12);border:1.5px solid rgba(67,56,202,.26);border-radius:14px;padding:16px 20px;margin-top:24px">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:#4338CA;margin-bottom:9px">One note before you start</div>
+      <div style="font-size:13.5px;line-height:1.55">F2 is the interesting one. Almost every fifth grader answers “two,” because doubling one measurement doubles the result and the pattern seems obvious. The answer is eight, and the reason — three dimensions each doubling — is the only thing this mission really has to teach. Everything else is arithmetic he can already do.</div>
+    </div>
+
+    <div style="border-top:2px solid rgba(17,22,31,.12);margin-top:auto;padding:12px 0 26px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(17,22,31,.45)">
+      <span>Teacher page</span><span>Skip chart · page 3</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ P4 · DAY 1.1 ============ -->
+<section class="page" data-screen-label="04 Lesson 1.1" style="background:#FCFCFF;padding:0;display:flex;flex-direction:column">
+  <div style="height:10px;background:linear-gradient(90deg,#818CF8,#38BDF8)"></div>
+  <div style="padding:30px 52px 0;flex:1;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:24px;border-bottom:2px solid rgba(17,22,31,.14);padding-bottom:14px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:#4338CA">Mission 07 · Week 1 · Monday · Lesson 1.1</div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:34px;margin:6px 0 3px;line-height:1">How Much Fits Inside</h1>
+        <div style="font-size:13px;color:rgba(17,22,31,.6)">Length times width times height. Three numbers, one answer, cubic units.</div>
+      </div>
+      <div style="flex:none;text-align:right;font-family:'JetBrains Mono',monospace;font-size:10.5px;color:rgba(17,22,31,.55);line-height:2">
+        <div>NAME ___________</div><div>DATE ___________</div>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:11px;margin:16px 0 9px">
+      <div style="width:26px;height:26px;border-radius:8px;background:#22C55E;color:#052E12;display:grid;place-items:center;font-size:13px">✦</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:21px;color:#15803D">Warm-Up</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">Areas you already know</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:10px">
+      <div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:11px 6px;text-align:center"><div style="font-family:'JetBrains Mono',monospace;font-size:12.5px">4 × 3</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:22px;margin-top:8px"></div></div>
+      <div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:11px 6px;text-align:center"><div style="font-family:'JetBrains Mono',monospace;font-size:12.5px">5 × 5</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:22px;margin-top:8px"></div></div>
+      <div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:11px 6px;text-align:center"><div style="font-family:'JetBrains Mono',monospace;font-size:12.5px">2 × 3</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:22px;margin-top:8px"></div></div>
+      <div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:11px 6px;text-align:center"><div style="font-family:'JetBrains Mono',monospace;font-size:12.5px">6 × 4</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:22px;margin-top:8px"></div></div>
+      <div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:11px 6px;text-align:center"><div style="font-family:'JetBrains Mono',monospace;font-size:12.5px">10 × 10</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:22px;margin-top:8px"></div></div>
+      <div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:11px 6px;text-align:center"><div style="font-family:'JetBrains Mono',monospace;font-size:12.5px">7 × 8</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:22px;margin-top:8px"></div></div>
+    </div>
+
+    <div style="background:rgba(129,140,248,.12);border:1.5px solid rgba(67,56,202,.24);border-radius:14px;padding:14px 18px;margin-top:16px">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:#4338CA;margin-bottom:11px">A 2 by 3 by 4 box · layers of area</div>
+      <div style="display:flex;gap:22px;flex-wrap:wrap;align-items:center">
+        <div style="display:flex;gap:9px;align-items:flex-end">
+          <div style="text-align:center">
+            <div style="display:grid;grid-template-columns:repeat(3,20px);grid-template-rows:repeat(2,20px);border:2px solid rgba(67,56,202,.5);border-radius:3px;overflow:hidden">
+              <div style="background:rgba(129,140,248,.5);border-right:1px solid rgba(67,56,202,.3);border-bottom:1px solid rgba(67,56,202,.3)"></div>
+              <div style="background:rgba(129,140,248,.5);border-right:1px solid rgba(67,56,202,.3);border-bottom:1px solid rgba(67,56,202,.3)"></div>
+              <div style="background:rgba(129,140,248,.5);border-bottom:1px solid rgba(67,56,202,.3)"></div>
+              <div style="background:rgba(129,140,248,.5);border-right:1px solid rgba(67,56,202,.3)"></div>
+              <div style="background:rgba(129,140,248,.5);border-right:1px solid rgba(67,56,202,.3)"></div>
+              <div style="background:rgba(129,140,248,.5)"></div>
+            </div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:9px;margin-top:5px;color:rgba(17,22,31,.55)">layer 1</div>
+          </div>
+          <div style="text-align:center">
+            <div style="display:grid;grid-template-columns:repeat(3,20px);grid-template-rows:repeat(2,20px);border:2px solid rgba(67,56,202,.5);border-radius:3px;overflow:hidden;opacity:.8">
+              <div style="background:rgba(56,189,248,.5);border-right:1px solid rgba(67,56,202,.3);border-bottom:1px solid rgba(67,56,202,.3)"></div>
+              <div style="background:rgba(56,189,248,.5);border-right:1px solid rgba(67,56,202,.3);border-bottom:1px solid rgba(67,56,202,.3)"></div>
+              <div style="background:rgba(56,189,248,.5);border-bottom:1px solid rgba(67,56,202,.3)"></div>
+              <div style="background:rgba(56,189,248,.5);border-right:1px solid rgba(67,56,202,.3)"></div>
+              <div style="background:rgba(56,189,248,.5);border-right:1px solid rgba(67,56,202,.3)"></div>
+              <div style="background:rgba(56,189,248,.5)"></div>
+            </div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:9px;margin-top:5px;color:rgba(17,22,31,.55)">layer 2</div>
+          </div>
+          <div style="text-align:center">
+            <div style="display:grid;grid-template-columns:repeat(3,20px);grid-template-rows:repeat(2,20px);border:2px solid rgba(67,56,202,.5);border-radius:3px;overflow:hidden;opacity:.62">
+              <div style="background:rgba(129,140,248,.5);border-right:1px solid rgba(67,56,202,.3);border-bottom:1px solid rgba(67,56,202,.3)"></div>
+              <div style="background:rgba(129,140,248,.5);border-right:1px solid rgba(67,56,202,.3);border-bottom:1px solid rgba(67,56,202,.3)"></div>
+              <div style="background:rgba(129,140,248,.5);border-bottom:1px solid rgba(67,56,202,.3)"></div>
+              <div style="background:rgba(129,140,248,.5);border-right:1px solid rgba(67,56,202,.3)"></div>
+              <div style="background:rgba(129,140,248,.5);border-right:1px solid rgba(67,56,202,.3)"></div>
+              <div style="background:rgba(129,140,248,.5)"></div>
+            </div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:9px;margin-top:5px;color:rgba(17,22,31,.55)">layer 3</div>
+          </div>
+          <div style="text-align:center">
+            <div style="display:grid;grid-template-columns:repeat(3,20px);grid-template-rows:repeat(2,20px);border:2px solid rgba(67,56,202,.5);border-radius:3px;overflow:hidden;opacity:.44">
+              <div style="background:rgba(56,189,248,.5);border-right:1px solid rgba(67,56,202,.3);border-bottom:1px solid rgba(67,56,202,.3)"></div>
+              <div style="background:rgba(56,189,248,.5);border-right:1px solid rgba(67,56,202,.3);border-bottom:1px solid rgba(67,56,202,.3)"></div>
+              <div style="background:rgba(56,189,248,.5);border-bottom:1px solid rgba(67,56,202,.3)"></div>
+              <div style="background:rgba(56,189,248,.5);border-right:1px solid rgba(67,56,202,.3)"></div>
+              <div style="background:rgba(56,189,248,.5);border-right:1px solid rgba(67,56,202,.3)"></div>
+              <div style="background:rgba(56,189,248,.5)"></div>
+            </div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:9px;margin-top:5px;color:rgba(17,22,31,.55)">layer 4</div>
+          </div>
+        </div>
+        <div style="flex:1;min-width:195px;font-size:12.5px;line-height:1.65;color:rgba(17,22,31,.78)">Each layer is 2 by 3, so each holds 6 unit cubes. Four layers stacked up gives 6 × 4 = <strong>24 cubic units</strong>.<br><br>That is all the formula says: find the area of one layer, then multiply by how many layers deep it goes. The order does not matter — 2 × 3 × 4 gives 24 whichever way you group it.</div>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:11px;margin:14px 0 9px">
+      <div style="width:26px;height:26px;border-radius:8px;background:#6366F1;color:#EEF2FF;display:grid;place-items:center;font-size:12px">◆</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:21px;color:#4338CA">Core</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">Cubic units, every answer</div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+      <div style="border:1.5px solid rgba(67,56,202,.24);border-radius:13px;padding:13px 16px;background:rgba(99,102,241,.05)"><div style="font-family:'JetBrains Mono',monospace;font-size:14.5px;margin-bottom:9px">1. &nbsp;2 by 3 by 4</div><div style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></div></div>
+      <div style="border:1.5px solid rgba(67,56,202,.24);border-radius:13px;padding:13px 16px;background:rgba(99,102,241,.05)"><div style="font-family:'JetBrains Mono',monospace;font-size:14.5px;margin-bottom:9px">2. &nbsp;5 by 5 by 5</div><div style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></div></div>
+      <div style="border:1.5px solid rgba(67,56,202,.24);border-radius:13px;padding:13px 16px;background:rgba(99,102,241,.05)"><div style="font-family:'JetBrains Mono',monospace;font-size:14.5px;margin-bottom:9px">3. &nbsp;10 by 4 by 3</div><div style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></div></div>
+      <div style="border:1.5px solid rgba(67,56,202,.24);border-radius:13px;padding:13px 16px;background:rgba(99,102,241,.05)"><div style="font-family:'JetBrains Mono',monospace;font-size:14.5px;margin-bottom:9px">4. &nbsp;12 by 8 by 2</div><div style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></div></div>
+    </div>
+    <div style="border:1.5px solid rgba(67,56,202,.24);border-radius:13px;padding:12px 16px;background:rgba(99,102,241,.05);margin-top:10px">
+      <div style="font-size:13.5px">5. &nbsp;A box holds 60 cubic units and is 5 by 4 at the base. How tall is it?</div>
+      <div style="border-bottom:2px dotted rgba(17,22,31,.3);height:22px;margin-top:8px"></div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:11px;margin:14px 0 9px">
+      <div style="width:26px;height:26px;border-radius:8px;background:#F59E0B;color:#3A2405;display:grid;place-items:center;font-size:13px">★</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:21px;color:#B45309">Challenge</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">Not graded</div>
+    </div>
+    <div style="background:rgba(245,158,11,.1);border:1.5px solid rgba(180,83,9,.32);border-radius:14px;padding:12px 18px;flex:1;display:flex;flex-direction:column;gap:8px">
+      <div style="font-size:14px;line-height:1.5"><strong>C1.</strong> A cube has volume 27. What is the length of one edge?</div>
+      <div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div>
+      <div style="font-size:14px;line-height:1.5"><strong>C2.</strong> Find three different boxes with whole-number edges that all hold exactly 24 cubic units.</div>
+      <div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:14px;background:rgba(129,140,248,.12);border:1.5px solid rgba(99,102,241,.28);border-radius:14px;padding:11px 16px;margin-top:12px">
+      <div style="flex:none;width:32px;height:32px;border-radius:10px;background:linear-gradient(160deg,#C7D2FE,#818CF8);position:relative">
+        <div style="position:absolute;top:10px;left:7px;width:7px;height:7px;border-radius:50%;background:#111938"></div>
+        <div style="position:absolute;top:10px;right:7px;width:7px;height:7px;border-radius:50%;background:#111938"></div>
+      </div>
+      <div style="font-size:13.5px;line-height:1.45"><strong>AXIOM:</strong> Write the units. Area is squared, volume is cubed — and if you cannot say which you found, you have not finished the problem.</div>
+    </div>
+
+    <div style="border-top:2px solid rgba(17,22,31,.12);margin-top:12px;padding:11px 0 24px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(17,22,31,.45)">
+      <span>Error journal: one sentence per mistake</span><span>Lesson 1.1 · page 4</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ P5 · DAY 1.2 ============ -->
+<section class="page" data-screen-label="05 Lesson 1.2" style="background:#FCFCFF;padding:0;display:flex;flex-direction:column">
+  <div style="height:10px;background:linear-gradient(90deg,#818CF8,#38BDF8)"></div>
+  <div style="padding:30px 52px 0;flex:1;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:24px;border-bottom:2px solid rgba(17,22,31,.14);padding-bottom:14px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:#4338CA">Mission 07 · Week 1 · Tuesday · Lesson 1.2</div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:34px;margin:6px 0 3px;line-height:1">Counting Cubes</h1>
+        <div style="font-size:13px;color:rgba(17,22,31,.6)">Build it, count it, then check the formula agrees.</div>
+      </div>
+      <div style="flex:none;text-align:right;font-family:'JetBrains Mono',monospace;font-size:10.5px;color:rgba(17,22,31,.55);line-height:2">
+        <div>NAME ___________</div><div>DATE ___________</div>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:11px;margin:16px 0 9px">
+      <div style="width:26px;height:26px;border-radius:8px;background:#22C55E;color:#052E12;display:grid;place-items:center;font-size:13px">✦</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:21px;color:#15803D">Warm-Up</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">Cubes in one layer</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:10px">
+      <div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:11px 6px;text-align:center"><div style="font-size:12px;line-height:1.3">2 by 2</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:22px;margin-top:8px"></div></div>
+      <div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:11px 6px;text-align:center"><div style="font-size:12px;line-height:1.3">3 by 3</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:22px;margin-top:8px"></div></div>
+      <div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:11px 6px;text-align:center"><div style="font-size:12px;line-height:1.3">4 by 5</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:22px;margin-top:8px"></div></div>
+      <div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:11px 6px;text-align:center"><div style="font-size:12px;line-height:1.3">6 by 2</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:22px;margin-top:8px"></div></div>
+      <div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:11px 6px;text-align:center"><div style="font-size:12px;line-height:1.3">8 by 3</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:22px;margin-top:8px"></div></div>
+      <div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:11px 6px;text-align:center"><div style="font-size:12px;line-height:1.3">10 by 10</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:22px;margin-top:8px"></div></div>
+    </div>
+
+    <div style="background:rgba(129,140,248,.12);border:1.5px solid rgba(67,56,202,.24);border-radius:14px;padding:14px 18px;margin-top:16px">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:#4338CA;margin-bottom:10px">Same volume, different shapes</div>
+      <table style="width:100%;border-collapse:collapse;font-size:13px;background:rgba(255,255,255,.7)">
+        <tr>
+          <td style="border:1.5px solid rgba(67,56,202,.3);padding:9px 14px;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:rgba(17,22,31,.5)">Box</td>
+          <td style="border:1.5px solid rgba(67,56,202,.3);padding:9px 14px;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:rgba(17,22,31,.5)">Volume</td>
+          <td style="border:1.5px solid rgba(67,56,202,.3);padding:9px 14px;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:rgba(17,22,31,.5)">Surface area</td>
+        </tr>
+        <tr>
+          <td style="border:1.5px solid rgba(67,56,202,.3);padding:10px 14px;font-family:'JetBrains Mono',monospace">1 by 1 by 24</td>
+          <td style="border:1.5px solid rgba(67,56,202,.3);padding:10px 14px;font-family:'JetBrains Mono',monospace">24</td>
+          <td style="border:1.5px solid rgba(67,56,202,.3);padding:10px 14px;font-family:'JetBrains Mono',monospace">98</td>
+        </tr>
+        <tr>
+          <td style="border:1.5px solid rgba(67,56,202,.3);padding:10px 14px;font-family:'JetBrains Mono',monospace">2 by 3 by 4</td>
+          <td style="border:1.5px solid rgba(67,56,202,.3);padding:10px 14px;font-family:'JetBrains Mono',monospace">24</td>
+          <td style="border:1.5px solid rgba(67,56,202,.3);padding:10px 14px;font-family:'JetBrains Mono',monospace;background:rgba(74,222,128,.2)">52</td>
+        </tr>
+        <tr>
+          <td style="border:1.5px solid rgba(67,56,202,.3);padding:10px 14px;font-family:'JetBrains Mono',monospace">2 by 2 by 6</td>
+          <td style="border:1.5px solid rgba(67,56,202,.3);padding:10px 14px;font-family:'JetBrains Mono',monospace">24</td>
+          <td style="border:1.5px solid rgba(67,56,202,.3);padding:10px 14px;font-family:'JetBrains Mono',monospace">56</td>
+        </tr>
+      </table>
+      <div style="font-size:12.5px;line-height:1.55;margin-top:10px;color:rgba(17,22,31,.78)">All three hold exactly the same amount. The cardboard needed varies from 52 to 98 — the closer a box is to a cube, the less material it takes. That is the whole idea behind the shipping project.</div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:11px;margin:14px 0 9px">
+      <div style="width:26px;height:26px;border-radius:8px;background:#6366F1;color:#EEF2FF;display:grid;place-items:center;font-size:12px">◆</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:21px;color:#4338CA">Core</div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+      <div style="border:1.5px solid rgba(67,56,202,.24);border-radius:13px;padding:13px 16px;background:rgba(99,102,241,.05)"><div style="font-size:13px;margin-bottom:9px">1. &nbsp;Cubes in a 3 by 3 by 3 stack</div><div style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></div></div>
+      <div style="border:1.5px solid rgba(67,56,202,.24);border-radius:13px;padding:13px 16px;background:rgba(99,102,241,.05)"><div style="font-size:13px;margin-bottom:9px">2. &nbsp;Cubes in a 4 by 2 by 5 stack</div><div style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></div></div>
+      <div style="border:1.5px solid rgba(67,56,202,.24);border-radius:13px;padding:13px 16px;background:rgba(99,102,241,.05)"><div style="font-size:13px;margin-bottom:9px">3. &nbsp;A 6 by 6 base, 3 layers deep</div><div style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></div></div>
+      <div style="border:1.5px solid rgba(67,56,202,.24);border-radius:13px;padding:13px 16px;background:rgba(99,102,241,.05)"><div style="font-size:13px;margin-bottom:9px">4. &nbsp;An 8 by 5 base, 4 layers deep</div><div style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></div></div>
+    </div>
+    <div style="border:1.5px solid rgba(67,56,202,.24);border-radius:13px;padding:12px 16px;background:rgba(99,102,241,.05);margin-top:10px">
+      <div style="font-size:13.5px">5. &nbsp;List every box with whole-number edges holding exactly 12 cubic units. How many are there?</div>
+      <div style="border-bottom:2px dotted rgba(17,22,31,.3);height:22px;margin-top:8px"></div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:11px;margin:14px 0 9px">
+      <div style="width:26px;height:26px;border-radius:8px;background:#F59E0B;color:#3A2405;display:grid;place-items:center;font-size:13px">★</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:21px;color:#B45309">Challenge</div>
+    </div>
+    <div style="background:rgba(245,158,11,.1);border:1.5px solid rgba(180,83,9,.32);border-radius:14px;padding:12px 18px;flex:1;display:flex;flex-direction:column;gap:8px">
+      <div style="font-size:14px;line-height:1.5"><strong>C1.</strong> Of your boxes from item 5, which needs the least cardboard? Which needs the most?</div>
+      <div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div>
+      <div style="font-size:14px;line-height:1.5"><strong>C2.</strong> A 3 by 4 by 5 box has one cube removed from a corner. What is the new volume, and what happens to the surface area?</div>
+      <div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div>
+    </div>
+
+    <div style="border-top:2px solid rgba(17,22,31,.12);margin-top:12px;padding:11px 0 24px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(17,22,31,.45)">
+      <span>Error journal: one sentence per mistake</span><span>Lesson 1.2 · page 5</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ P6 · DAY 1.3 ============ -->
+<section class="page" data-screen-label="06 Lesson 1.3" style="background:#FCFCFF;padding:0;display:flex;flex-direction:column">
+  <div style="height:10px;background:linear-gradient(90deg,#818CF8,#38BDF8)"></div>
+  <div style="padding:30px 52px 0;flex:1;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:24px;border-bottom:2px solid rgba(17,22,31,.14);padding-bottom:14px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:#4338CA">Mission 07 · Week 1 · Wednesday · Lesson 1.3</div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:34px;margin:6px 0 3px;line-height:1">Working Backwards</h1>
+        <div style="font-size:13px;color:rgba(17,22,31,.6)">Given the volume and two edges, find the third.</div>
+      </div>
+      <div style="flex:none;text-align:right;font-family:'JetBrains Mono',monospace;font-size:10.5px;color:rgba(17,22,31,.55);line-height:2">
+        <div>NAME ___________</div><div>DATE ___________</div>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:11px;margin:16px 0 9px">
+      <div style="width:26px;height:26px;border-radius:8px;background:#22C55E;color:#052E12;display:grid;place-items:center;font-size:13px">✦</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:21px;color:#15803D">Warm-Up</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">Missing factors</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:10px">
+      <div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:11px 6px;text-align:center"><div style="font-family:'JetBrains Mono',monospace;font-size:12.5px">6 × ? = 24</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:22px;margin-top:8px"></div></div>
+      <div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:11px 6px;text-align:center"><div style="font-family:'JetBrains Mono',monospace;font-size:12.5px">20 × ? = 60</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:22px;margin-top:8px"></div></div>
+      <div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:11px 6px;text-align:center"><div style="font-family:'JetBrains Mono',monospace;font-size:12.5px">12 × ? = 96</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:22px;margin-top:8px"></div></div>
+      <div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:11px 6px;text-align:center"><div style="font-family:'JetBrains Mono',monospace;font-size:12.5px">25 × ? = 100</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:22px;margin-top:8px"></div></div>
+      <div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:11px 6px;text-align:center"><div style="font-family:'JetBrains Mono',monospace;font-size:12.5px">9 × ? = 45</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:22px;margin-top:8px"></div></div>
+      <div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:11px 6px;text-align:center"><div style="font-family:'JetBrains Mono',monospace;font-size:12.5px">16 × ? = 64</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:22px;margin-top:8px"></div></div>
+    </div>
+
+    <div style="background:rgba(129,140,248,.12);border:1.5px solid rgba(67,56,202,.24);border-radius:14px;padding:14px 18px;margin-top:16px">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:#4338CA;margin-bottom:11px">Volume 120, base 5 by 6 · how deep?</div>
+      <div style="display:flex;gap:22px;flex-wrap:wrap;align-items:center">
+        <div style="background:rgba(255,255,255,.85);border:1.5px solid rgba(67,56,202,.3);border-radius:11px;padding:14px 22px;font-family:'JetBrains Mono',monospace;font-size:14.5px;line-height:2">
+          <div>5 × 6 × h = 120</div>
+          <div style="color:rgba(17,22,31,.5)">─────────────</div>
+          <div>30 × h = 120</div>
+          <div>h = 120 ÷ 30</div>
+          <div>h = <strong>4</strong></div>
+        </div>
+        <div style="flex:1;min-width:220px;font-size:12.5px;line-height:1.65;color:rgba(17,22,31,.78)">Find the base area first, then divide the volume by it. One layer holds 30 cubes, and 120 cubes make four such layers.<br><br>Check by multiplying back: 5 × 6 × 4 = 120. Every one of these problems hands you that check for free.</div>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:11px;margin:14px 0 9px">
+      <div style="width:26px;height:26px;border-radius:8px;background:#6366F1;color:#EEF2FF;display:grid;place-items:center;font-size:12px">◆</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:21px;color:#4338CA">Core</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">Check each one by multiplying back</div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+      <div style="border:1.5px solid rgba(67,56,202,.24);border-radius:13px;padding:13px 16px;background:rgba(99,102,241,.05)"><div style="font-size:13px;margin-bottom:9px">1. &nbsp;Volume 120, base 5 by 6 — the height</div><div style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></div></div>
+      <div style="border:1.5px solid rgba(67,56,202,.24);border-radius:13px;padding:13px 16px;background:rgba(99,102,241,.05)"><div style="font-size:13px;margin-bottom:9px">2. &nbsp;Volume 96, base 4 by 6 — the height</div><div style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></div></div>
+      <div style="border:1.5px solid rgba(67,56,202,.24);border-radius:13px;padding:13px 16px;background:rgba(99,102,241,.05)"><div style="font-size:13px;margin-bottom:9px">3. &nbsp;Volume 200, height 5, width 8 — the length</div><div style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></div></div>
+      <div style="border:1.5px solid rgba(67,56,202,.24);border-radius:13px;padding:13px 16px;background:rgba(99,102,241,.05)"><div style="font-size:13px;margin-bottom:9px">4. &nbsp;A cube of volume 64 — one edge</div><div style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></div></div>
+    </div>
+    <div style="border:1.5px solid rgba(67,56,202,.24);border-radius:13px;padding:12px 16px;background:rgba(99,102,241,.05);margin-top:10px">
+      <div style="font-size:13.5px">5. &nbsp;A fish tank holds 240 litres and its base is 8 by 5. If 1 litre fills one unit cube, how deep is the water when full?</div>
+      <div style="border-bottom:2px dotted rgba(17,22,31,.3);height:22px;margin-top:8px"></div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:11px;margin:14px 0 9px">
+      <div style="width:26px;height:26px;border-radius:8px;background:#F59E0B;color:#3A2405;display:grid;place-items:center;font-size:13px">★</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:21px;color:#B45309">Challenge</div>
+    </div>
+    <div style="background:rgba(245,158,11,.1);border:1.5px solid rgba(180,83,9,.32);border-radius:14px;padding:12px 18px;flex:1;display:flex;flex-direction:column;gap:8px">
+      <div style="font-size:14px;line-height:1.5"><strong>C1.</strong> A cube has volume 125. What is its surface area?</div>
+      <div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div>
+      <div style="font-size:14px;line-height:1.5"><strong>C2.</strong> A box of volume 100 has whole-number edges and none of them is 1. Find two possibilities.</div>
+      <div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div>
+    </div>
+
+    <div style="border-top:2px solid rgba(17,22,31,.12);margin-top:12px;padding:11px 0 24px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(17,22,31,.45)">
+      <span>Error journal: one sentence per mistake</span><span>Lesson 1.3 · page 6</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ P7 · DAY 1.4 ============ -->
+<section class="page" data-screen-label="07 Lesson 1.4" style="background:#FCFCFF;padding:0;display:flex;flex-direction:column">
+  <div style="height:10px;background:linear-gradient(90deg,#818CF8,#38BDF8)"></div>
+  <div style="padding:30px 52px 0;flex:1;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:24px;border-bottom:2px solid rgba(17,22,31,.14);padding-bottom:14px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:#4338CA">Mission 07 · Week 1 · Thursday · Lesson 1.4</div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:34px;margin:6px 0 3px;line-height:1">Two Boxes Joined</h1>
+        <div style="font-size:13px;color:rgba(17,22,31,.6)">Split the shape into boxes, do each one, add them up.</div>
+      </div>
+      <div style="flex:none;text-align:right;font-family:'JetBrains Mono',monospace;font-size:10.5px;color:rgba(17,22,31,.55);line-height:2">
+        <div>NAME ___________</div><div>DATE ___________</div>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:11px;margin:16px 0 9px">
+      <div style="width:26px;height:26px;border-radius:8px;background:#22C55E;color:#052E12;display:grid;place-items:center;font-size:13px">✦</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:21px;color:#15803D">Warm-Up</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">Single boxes</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:10px">
+      <div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:11px 6px;text-align:center"><div style="font-size:12px;line-height:1.3">2×2×2</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:22px;margin-top:8px"></div></div>
+      <div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:11px 6px;text-align:center"><div style="font-size:12px;line-height:1.3">3×3×2</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:22px;margin-top:8px"></div></div>
+      <div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:11px 6px;text-align:center"><div style="font-size:12px;line-height:1.3">4×4×1</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:22px;margin-top:8px"></div></div>
+      <div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:11px 6px;text-align:center"><div style="font-size:12px;line-height:1.3">5×2×2</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:22px;margin-top:8px"></div></div>
+      <div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:11px 6px;text-align:center"><div style="font-size:12px;line-height:1.3">6×1×3</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:22px;margin-top:8px"></div></div>
+      <div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:11px 6px;text-align:center"><div style="font-size:12px;line-height:1.3">10×2×1</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:22px;margin-top:8px"></div></div>
+    </div>
+
+    <div style="background:rgba(129,140,248,.12);border:1.5px solid rgba(67,56,202,.24);border-radius:14px;padding:14px 18px;margin-top:16px">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:#4338CA;margin-bottom:11px">An L-shaped solid · two ways to split it</div>
+      <div style="display:flex;gap:20px;flex-wrap:wrap;align-items:center">
+        <div style="display:flex;gap:16px">
+          <div style="text-align:center">
+            <div style="display:flex;flex-direction:column;align-items:flex-start">
+              <div style="display:flex">
+                <div style="width:46px;height:30px;background:rgba(129,140,248,.5);border:1.5px solid rgba(67,56,202,.5)"></div>
+                <div style="width:46px;height:30px;background:rgba(56,189,248,.42);border:1.5px solid rgba(67,56,202,.5);border-left:none"></div>
+              </div>
+              <div style="width:46px;height:30px;background:rgba(129,140,248,.5);border:1.5px solid rgba(67,56,202,.5);border-top:none"></div>
+            </div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;margin-top:6px;color:rgba(17,22,31,.55)">split vertically</div>
+          </div>
+          <div style="text-align:center">
+            <div style="display:flex;flex-direction:column;align-items:flex-start">
+              <div style="display:flex">
+                <div style="width:46px;height:30px;background:rgba(74,222,128,.4);border:1.5px solid rgba(67,56,202,.5)"></div>
+                <div style="width:46px;height:30px;background:rgba(74,222,128,.4);border:1.5px solid rgba(67,56,202,.5);border-left:none"></div>
+              </div>
+              <div style="width:46px;height:30px;background:rgba(251,191,36,.42);border:1.5px solid rgba(67,56,202,.5);border-top:none"></div>
+            </div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;margin-top:6px;color:rgba(17,22,31,.55)">split horizontally</div>
+          </div>
+        </div>
+        <div style="flex:1;min-width:200px;font-size:12.5px;line-height:1.65;color:rgba(17,22,31,.78)">Both splits give the same total, because the solid has not changed — only the way you described it.<br><br>Pick whichever split makes the two boxes easiest to compute, and say which one you chose. A third option is to work out the big box that would enclose the whole thing and subtract the missing corner.</div>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:11px;margin:14px 0 9px">
+      <div style="width:26px;height:26px;border-radius:8px;background:#6366F1;color:#EEF2FF;display:grid;place-items:center;font-size:12px">◆</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:21px;color:#4338CA">Core</div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+      <div style="border:1.5px solid rgba(67,56,202,.24);border-radius:13px;padding:12px 16px;background:rgba(99,102,241,.05)"><div style="font-size:13px;margin-bottom:9px">1. &nbsp;A 3×3×2 box joined to a 3×3×2 box</div><div style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></div></div>
+      <div style="border:1.5px solid rgba(67,56,202,.24);border-radius:13px;padding:12px 16px;background:rgba(99,102,241,.05)"><div style="font-size:13px;margin-bottom:9px">2. &nbsp;A 4×4×2 joined to a 2×2×2</div><div style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></div></div>
+      <div style="border:1.5px solid rgba(67,56,202,.24);border-radius:13px;padding:12px 16px;background:rgba(99,102,241,.05)"><div style="font-size:13px;margin-bottom:9px">3. &nbsp;A 5×4×3 with a 2×2×3 corner removed</div><div style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></div></div>
+      <div style="border:1.5px solid rgba(67,56,202,.24);border-radius:13px;padding:12px 16px;background:rgba(99,102,241,.05)"><div style="font-size:13px;margin-bottom:9px">4. &nbsp;A 6×6×2 with a 3×3×2 corner removed</div><div style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></div></div>
+    </div>
+    <div style="border:1.5px solid rgba(67,56,202,.24);border-radius:13px;padding:12px 16px;background:rgba(99,102,241,.05);margin-top:10px">
+      <div style="font-size:13.5px">5. &nbsp;For item 3, did you add two boxes or subtract from one? Say which and why you chose it.</div>
+      <div style="border-bottom:2px dotted rgba(17,22,31,.3);height:22px;margin-top:8px"></div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:11px;margin:14px 0 9px">
+      <div style="width:26px;height:26px;border-radius:8px;background:#F59E0B;color:#3A2405;display:grid;place-items:center;font-size:13px">★</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:21px;color:#B45309">Challenge</div>
+    </div>
+    <div style="background:rgba(245,158,11,.1);border:1.5px solid rgba(180,83,9,.32);border-radius:14px;padding:12px 18px;flex:1;display:flex;flex-direction:column;gap:8px">
+      <div style="font-size:14px;line-height:1.5"><strong>C1.</strong> A 10×10×10 cube has a 5×5×5 corner cut out. What is the remaining volume?</div>
+      <div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div>
+      <div style="font-size:14px;line-height:1.5"><strong>C2.</strong> Removing a corner cube leaves the surface area unchanged. Explain why, thinking about the faces exposed and hidden.</div>
+      <div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div>
+    </div>
+
+    <div style="border-top:2px solid rgba(17,22,31,.12);margin-top:12px;padding:11px 0 24px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(17,22,31,.45)">
+      <span>Error journal: one sentence per mistake</span><span>Lesson 1.4 · page 7</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ P8 · FRIDAY ============ -->
+<section class="page" data-screen-label="08 Friday enrichment" style="background:#FCFCFF;padding:0;display:flex;flex-direction:column">
+  <div style="height:10px;background:#F59E0B"></div>
+  <div style="padding:30px 52px 0;flex:1;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:24px;border-bottom:2px solid rgba(17,22,31,.14);padding-bottom:14px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:#B45309">Mission 07 · Week 1 · Friday · Enrichment</div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:34px;margin:6px 0 3px;line-height:1">Unit Sprint</h1>
+        <div style="font-size:13px;color:rgba(17,22,31,.6)">Convert on sight. Metric first, then the awkward ones.</div>
+      </div>
+      <div style="flex:none;text-align:right;font-family:'JetBrains Mono',monospace;font-size:10.5px;color:rgba(17,22,31,.55);line-height:2">
+        <div>NAME ___________</div><div>DATE ___________</div>
+      </div>
+    </div>
+
+    <div style="background:rgba(245,158,11,.12);border:1.5px solid rgba(180,83,9,.3);border-radius:14px;padding:14px 18px;margin-top:16px;font-size:13.5px;line-height:1.55">
+      <strong>How to play:</strong> write twenty conversions on cards — ten metric, ten customary. Shuffle. One player reads, the other answers out loud. Time the full deck, then swap and try to beat it. Metric should get fast quickly; customary will not, and that is the lesson.
+    </div>
+
+    <div style="background:rgba(129,140,248,.12);border:1.5px solid rgba(67,56,202,.24);border-radius:14px;padding:14px 18px;margin-top:14px">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:#4338CA;margin-bottom:11px">Why one system is faster than the other</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <div style="background:rgba(255,255,255,.85);border:1.5px solid rgba(67,56,202,.28);border-radius:12px;padding:13px 16px">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#4338CA;margin-bottom:7px">Metric · everything is ten</div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:12.5px;line-height:1.9;color:rgba(17,22,31,.78)">10 mm = 1 cm<br>100 cm = 1 m<br>1000 m = 1 km<br>1000 g = 1 kg</div>
+        </div>
+        <div style="background:rgba(255,255,255,.85);border:1.5px solid rgba(180,83,9,.28);border-radius:12px;padding:13px 16px">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#B45309;margin-bottom:7px">Customary · all different</div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:12.5px;line-height:1.9;color:rgba(17,22,31,.78)">12 in = 1 ft<br>3 ft = 1 yd<br>16 oz = 1 lb<br>2 cups = 1 pint</div>
+        </div>
+      </div>
+      <div style="font-size:12.5px;line-height:1.5;margin-top:11px;color:rgba(17,22,31,.75)">Metric conversions are Mission 01's powers of ten with new labels — the digits move, the point stays. Customary ones have to be learnt individually, which is why they are slower and why the sprint is worth timing.</div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:11px;margin:16px 0 9px">
+      <div style="width:26px;height:26px;border-radius:8px;background:#22C55E;color:#052E12;display:grid;place-items:center;font-size:13px">✦</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:21px;color:#15803D">Warm-Up</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:11px">
+      <div style="border:1.5px solid rgba(21,128,61,.28);border-radius:13px;padding:11px 14px;background:rgba(34,197,94,.08);text-align:center"><div style="font-size:12.5px;margin-bottom:8px">cm in 2.5 m</div><div style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></div></div>
+      <div style="border:1.5px solid rgba(21,128,61,.28);border-radius:13px;padding:11px 14px;background:rgba(34,197,94,.08);text-align:center"><div style="font-size:12.5px;margin-bottom:8px">g in 1.5 kg</div><div style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></div></div>
+      <div style="border:1.5px solid rgba(21,128,61,.28);border-radius:13px;padding:11px 14px;background:rgba(34,197,94,.08);text-align:center"><div style="font-size:12.5px;margin-bottom:8px">in in 3 ft</div><div style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></div></div>
+      <div style="border:1.5px solid rgba(21,128,61,.28);border-radius:13px;padding:11px 14px;background:rgba(34,197,94,.08);text-align:center"><div style="font-size:12.5px;margin-bottom:8px">cups in 2 quarts</div><div style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></div></div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:11px;margin:16px 0 9px">
+      <div style="width:26px;height:26px;border-radius:8px;background:#6366F1;color:#EEF2FF;display:grid;place-items:center;font-size:12px">◆</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:21px;color:#4338CA">Time four runs</div>
+    </div>
+    <table style="width:100%;border-collapse:collapse;font-size:13.5px">
+      <thead>
+        <tr style="background:rgba(17,22,31,.05)">
+          <th style="text-align:left;padding:9px 12px;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.55);border-bottom:2px solid rgba(17,22,31,.15)">Run</th>
+          <th style="text-align:left;padding:9px 12px;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.55);border-bottom:2px solid rgba(17,22,31,.15)">Metric time</th>
+          <th style="text-align:left;padding:9px 12px;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.55);border-bottom:2px solid rgba(17,22,31,.15)">Customary time</th>
+          <th style="text-align:left;padding:9px 12px;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.55);border-bottom:2px solid rgba(17,22,31,.15)">Errors</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td style="padding:13px 12px;border-bottom:1px solid rgba(17,22,31,.1);font-family:Fredoka,sans-serif;font-size:17px">1</td><td style="border-bottom:1px solid rgba(17,22,31,.1)"></td><td style="border-bottom:1px solid rgba(17,22,31,.1)"></td><td style="border-bottom:1px solid rgba(17,22,31,.1)"></td></tr>
+        <tr><td style="padding:13px 12px;border-bottom:1px solid rgba(17,22,31,.1);font-family:Fredoka,sans-serif;font-size:17px">2</td><td style="border-bottom:1px solid rgba(17,22,31,.1)"></td><td style="border-bottom:1px solid rgba(17,22,31,.1)"></td><td style="border-bottom:1px solid rgba(17,22,31,.1)"></td></tr>
+        <tr><td style="padding:13px 12px;border-bottom:1px solid rgba(17,22,31,.1);font-family:Fredoka,sans-serif;font-size:17px">3</td><td style="border-bottom:1px solid rgba(17,22,31,.1)"></td><td style="border-bottom:1px solid rgba(17,22,31,.1)"></td><td style="border-bottom:1px solid rgba(17,22,31,.1)"></td></tr>
+        <tr><td style="padding:13px 12px;border-bottom:1px solid rgba(17,22,31,.1);font-family:Fredoka,sans-serif;font-size:17px">4</td><td style="border-bottom:1px solid rgba(17,22,31,.1)"></td><td style="border-bottom:1px solid rgba(17,22,31,.1)"></td><td style="border-bottom:1px solid rgba(17,22,31,.1)"></td></tr>
+      </tbody>
+    </table>
+
+    <div style="display:flex;align-items:center;gap:11px;margin:16px 0 9px">
+      <div style="width:26px;height:26px;border-radius:8px;background:#F59E0B;color:#3A2405;display:grid;place-items:center;font-size:13px">★</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:21px;color:#B45309">Challenge</div>
+    </div>
+    <div style="background:rgba(245,158,11,.1);border:1.5px solid rgba(180,83,9,.32);border-radius:14px;padding:12px 18px;flex:1;display:flex;flex-direction:column;gap:8px">
+      <div style="font-size:14px;line-height:1.5"><strong>C1.</strong> Which deck was faster, and by how much? Say why in one sentence.</div>
+      <div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div>
+      <div style="font-size:14px;line-height:1.5"><strong>C2.</strong> Millimetres in 2.5 metres. Which two conversions did you have to chain together?</div>
+      <div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div>
+    </div>
+
+    <div style="border-top:2px solid rgba(17,22,31,.12);margin-top:12px;padding:11px 0 24px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(17,22,31,.45)">
+      <span>Enrichment · not graded</span><span>Friday · page 8</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ P9 · WEEKS 2–4 PLAN ============ -->
+<section class="page" data-screen-label="09 Weeks 2-4 plan" style="background:#FCFCFF;padding:0;display:flex;flex-direction:column">
+  <div style="height:10px;background:linear-gradient(90deg,#818CF8,#38BDF8)"></div>
+  <div style="padding:34px 52px 0;flex:1;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:24px;border-bottom:2px solid rgba(17,22,31,.14);padding-bottom:16px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:#4338CA">Teacher page · the rest of the mission</div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:36px;margin:6px 0 4px;line-height:1">Weeks 2–4</h1>
+        <div style="font-size:13.5px;color:rgba(17,22,31,.6)">Every day below has five graded sets waiting in Practice Bay.</div>
+      </div>
+      <div style="flex:none;background:rgba(129,140,248,.18);border:1.5px solid rgba(67,56,202,.3);border-radius:12px;padding:12px 16px;font-family:'JetBrains Mono',monospace;font-size:10.5px;line-height:1.9;color:#4338CA">
+        <div>QUIZ · end of week 2</div>
+        <div>TEST · end of week 4</div>
+      </div>
+    </div>
+
+    <div style="margin-top:22px;background:rgba(129,140,248,.09);border:1.5px solid rgba(67,56,202,.22);border-radius:16px;padding:18px 22px">
+      <div style="display:flex;align-items:baseline;gap:12px;margin-bottom:6px">
+        <div style="font-family:Fredoka,sans-serif;font-size:24px">Week 2 · Surface Area</div>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:#B45309">Quiz Friday</span>
+      </div>
+      <div style="font-size:13.5px;line-height:1.55;color:rgba(17,22,31,.75);margin-bottom:14px">Six faces, three pairs. The week ends by asking which of the two measures a question actually wants.</div>
+      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px">
+        <div style="background:rgba(255,255,255,.85);border:1px solid rgba(17,22,31,.14);border-radius:11px;padding:11px 12px"><div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#4338CA">Mon 2.1</div><div style="font-family:Fredoka,sans-serif;font-size:14.5px;margin:6px 0 5px;line-height:1.15">Six faces</div><div style="font-size:12px;line-height:1.4;color:rgba(17,22,31,.65)">Three pairs, each pair identical.</div></div>
+        <div style="background:rgba(255,255,255,.85);border:1px solid rgba(17,22,31,.14);border-radius:11px;padding:11px 12px"><div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#4338CA">Tue 2.2</div><div style="font-family:Fredoka,sans-serif;font-size:14.5px;margin:6px 0 5px;line-height:1.15">Unfold the net</div><div style="font-size:12px;line-height:1.4;color:rgba(17,22,31,.65)">Flatten the box and the six faces become obvious.</div></div>
+        <div style="background:rgba(255,255,255,.85);border:1px solid rgba(17,22,31,.14);border-radius:11px;padding:11px 12px"><div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#4338CA">Wed 2.3</div><div style="font-family:Fredoka,sans-serif;font-size:14.5px;margin:6px 0 5px;line-height:1.15">Double every edge</div><div style="font-size:12px;line-height:1.4;color:rgba(17,22,31,.65)">Volume × 8, surface area × 4. The Big Question.</div></div>
+        <div style="background:rgba(255,255,255,.85);border:1px solid rgba(17,22,31,.14);border-radius:11px;padding:11px 12px"><div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#4338CA">Thu 2.4</div><div style="font-family:Fredoka,sans-serif;font-size:14.5px;margin:6px 0 5px;line-height:1.15">Which one do I want</div><div style="font-size:12px;line-height:1.4;color:rgba(17,22,31,.65)">Paint the walls or fill the pool? Read the words.</div></div>
+        <div style="background:rgba(245,158,11,.14);border:1px solid rgba(180,83,9,.3);border-radius:11px;padding:11px 12px"><div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#B45309">Fri</div><div style="font-family:Fredoka,sans-serif;font-size:14.5px;margin:6px 0 5px;line-height:1.15">Mid-unit quiz</div><div style="font-size:12px;line-height:1.4;color:rgba(17,22,31,.65)">Page 10. Eight items, 85% to keep flying.</div></div>
+      </div>
+    </div>
+
+    <div style="margin-top:18px;background:rgba(129,140,248,.09);border:1.5px solid rgba(67,56,202,.22);border-radius:16px;padding:18px 22px">
+      <div style="font-family:Fredoka,sans-serif;font-size:24px;margin-bottom:6px">Week 3 · Units That Convert</div>
+      <div style="font-size:13.5px;line-height:1.55;color:rgba(17,22,31,.75);margin-bottom:14px">Metric is Mission 01 again. Customary has to be memorised, and the week is honest about that.</div>
+      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px">
+        <div style="background:rgba(255,255,255,.85);border:1px solid rgba(17,22,31,.14);border-radius:11px;padding:11px 12px"><div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#4338CA">Mon 3.1</div><div style="font-family:Fredoka,sans-serif;font-size:14.5px;margin:6px 0 5px;line-height:1.15">Metric length</div><div style="font-size:12px;line-height:1.4;color:rgba(17,22,31,.65)">mm, cm, m, km — all powers of ten.</div></div>
+        <div style="background:rgba(255,255,255,.85);border:1px solid rgba(17,22,31,.14);border-radius:11px;padding:11px 12px"><div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#4338CA">Tue 3.2</div><div style="font-family:Fredoka,sans-serif;font-size:14.5px;margin:6px 0 5px;line-height:1.15">Metric mass and volume</div><div style="font-size:12px;line-height:1.4;color:rgba(17,22,31,.65)">Grams, kilograms, millilitres, litres.</div></div>
+        <div style="background:rgba(255,255,255,.85);border:1px solid rgba(17,22,31,.14);border-radius:11px;padding:11px 12px"><div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#4338CA">Wed 3.3</div><div style="font-family:Fredoka,sans-serif;font-size:14.5px;margin:6px 0 5px;line-height:1.15">Customary units</div><div style="font-size:12px;line-height:1.4;color:rgba(17,22,31,.65)">Inches, feet, yards, ounces, pounds.</div></div>
+        <div style="background:rgba(255,255,255,.85);border:1px solid rgba(17,22,31,.14);border-radius:11px;padding:11px 12px"><div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#4338CA">Thu 3.4</div><div style="font-family:Fredoka,sans-serif;font-size:14.5px;margin:6px 0 5px;line-height:1.15">Chained conversions</div><div style="font-size:12px;line-height:1.4;color:rgba(17,22,31,.65)">Yards to inches, in two steps.</div></div>
+        <div style="background:rgba(255,255,255,.85);border:1px solid rgba(17,22,31,.14);border-radius:11px;padding:11px 12px"><div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#15803D">Fri</div><div style="font-family:Fredoka,sans-serif;font-size:14.5px;margin:6px 0 5px;line-height:1.15">Shipment begins</div><div style="font-size:12px;line-height:1.4;color:rgba(17,22,31,.65)">Measure twelve real objects. No box design yet.</div></div>
+      </div>
+    </div>
+
+    <div style="margin-top:18px;background:rgba(129,140,248,.14);border:1.5px solid rgba(99,102,241,.28);border-radius:16px;padding:18px 22px">
+      <div style="display:flex;align-items:baseline;gap:12px;margin-bottom:6px">
+        <div style="font-family:Fredoka,sans-serif;font-size:24px">Week 4 · Proof</div>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:#4338CA">Unit test</span>
+      </div>
+      <div style="font-size:13.5px;line-height:1.55;color:rgba(17,22,31,.75);margin-bottom:14px">The box gets designed, built, and tested against reality — the twelve objects either fit or they do not.</div>
+      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px">
+        <div style="background:rgba(255,255,255,.85);border:1px solid rgba(17,22,31,.14);border-radius:11px;padding:11px 12px"><div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#4338CA">Mon 4.1</div><div style="font-family:Fredoka,sans-serif;font-size:14.5px;margin:6px 0 5px;line-height:1.15">Three candidate boxes</div><div style="font-size:12px;line-height:1.4;color:rgba(17,22,31,.65)">Same volume, three shapes.</div></div>
+        <div style="background:rgba(255,255,255,.85);border:1px solid rgba(17,22,31,.14);border-radius:11px;padding:11px 12px"><div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#4338CA">Tue 4.2</div><div style="font-family:Fredoka,sans-serif;font-size:14.5px;margin:6px 0 5px;line-height:1.15">Least cardboard wins</div><div style="font-size:12px;line-height:1.4;color:rgba(17,22,31,.65)">Compute all three surface areas and pick one.</div></div>
+        <div style="background:rgba(255,255,255,.85);border:1px solid rgba(17,22,31,.14);border-radius:11px;padding:11px 12px"><div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#4338CA">Wed 4.3</div><div style="font-family:Fredoka,sans-serif;font-size:14.5px;margin:6px 0 5px;line-height:1.15">Build it</div><div style="font-size:12px;line-height:1.4;color:rgba(17,22,31,.65)">Cut the net, tape it, load the objects.</div></div>
+        <div style="background:rgba(255,255,255,.85);border:1px solid rgba(17,22,31,.14);border-radius:11px;padding:11px 12px"><div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#15803D">Thu</div><div style="font-family:Fredoka,sans-serif;font-size:14.5px;margin:6px 0 5px;line-height:1.15">Error journal sweep</div><div style="font-size:12px;line-height:1.4;color:rgba(17,22,31,.65)">Fix only what repeats.</div></div>
+        <div style="background:rgba(129,140,248,.22);border:1px solid rgba(99,102,241,.34);border-radius:11px;padding:11px 12px"><div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#4338CA">Fri</div><div style="font-family:Fredoka,sans-serif;font-size:14.5px;margin:6px 0 5px;line-height:1.15">Mission 07 test</div><div style="font-size:12px;line-height:1.4;color:rgba(17,22,31,.65)">Pages 11–12. Twelve items plus one explanation.</div></div>
+      </div>
+    </div>
+
+    <div style="border-top:2px solid rgba(17,22,31,.12);margin-top:auto;padding:12px 0 26px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(17,22,31,.45)">
+      <span>Teacher page</span><span>Weeks 2–4 · page 9</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ P10 · MID-UNIT QUIZ ============ -->
+<section class="page" data-screen-label="10 Mid-unit quiz" style="background:#FCFCFF;padding:0;display:flex;flex-direction:column">
+  <div style="height:10px;background:#F59E0B"></div>
+  <div style="padding:34px 52px 0;flex:1;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:24px;border-bottom:2px solid rgba(17,22,31,.14);padding-bottom:16px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:#B45309">Mission 07 · End of week 2</div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:36px;margin:6px 0 4px;line-height:1">Mid-Unit Quiz</h1>
+        <div style="font-size:13.5px;color:rgba(17,22,31,.6)">Eight items from Weeks 1 and 2. 85% to keep flying — that's 7 out of 8.</div>
+      </div>
+      <div style="flex:none;text-align:right;font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(17,22,31,.55);line-height:2.1">
+        <div>NAME ______________</div>
+        <div>SCORE ______ / 8</div>
+      </div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:12px;margin-top:20px;flex:1">
+      <div style="border:1.5px solid rgba(17,22,31,.16);border-radius:13px;padding:13px 18px;display:grid;grid-template-columns:1fr 150px;gap:16px;align-items:center"><span style="font-size:14px"><strong>1.</strong> &nbsp;Volume of a 2 by 3 by 4 box</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:22px"></span></div>
+      <div style="border:1.5px solid rgba(17,22,31,.16);border-radius:13px;padding:13px 18px;display:grid;grid-template-columns:1fr 150px;gap:16px;align-items:center"><span style="font-size:14px"><strong>2.</strong> &nbsp;Volume of a 5 by 5 by 5 cube</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:22px"></span></div>
+      <div style="border:1.5px solid rgba(17,22,31,.16);border-radius:13px;padding:13px 18px;display:grid;grid-template-columns:1fr 150px;gap:16px;align-items:center"><span style="font-size:14px"><strong>3.</strong> &nbsp;Volume 96, base 4 by 6 — the height</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:22px"></span></div>
+      <div style="border:1.5px solid rgba(17,22,31,.16);border-radius:13px;padding:13px 18px;display:grid;grid-template-columns:1fr 150px;gap:16px;align-items:center"><span style="font-size:14px"><strong>4.</strong> &nbsp;Surface area of a 2 by 2 by 2 cube</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:22px"></span></div>
+      <div style="border:1.5px solid rgba(17,22,31,.16);border-radius:13px;padding:13px 18px;display:grid;grid-template-columns:1fr 150px;gap:16px;align-items:center"><span style="font-size:14px"><strong>5.</strong> &nbsp;Surface area of a 2 by 3 by 4 box</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:22px"></span></div>
+      <div style="border:1.5px solid rgba(17,22,31,.16);border-radius:13px;padding:13px 18px;display:grid;grid-template-columns:1fr 150px;gap:16px;align-items:center"><span style="font-size:14px"><strong>6.</strong> &nbsp;A 5×4×3 box with a 2×2×3 corner removed — the volume</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:22px"></span></div>
+      <div style="border:1.5px solid rgba(17,22,31,.16);border-radius:13px;padding:13px 18px;display:grid;grid-template-columns:1fr 150px;gap:16px;align-items:center"><span style="font-size:14px"><strong>7.</strong> &nbsp;Double every edge of a 2 by 2 by 2 cube — the new volume</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:22px"></span></div>
+      <div style="border:1.5px solid rgba(245,158,11,.5);background:rgba(245,158,11,.09);border-radius:13px;padding:13px 18px">
+        <div style="font-size:14px;margin-bottom:9px"><strong>8.</strong> &nbsp;“How much water fills the tank” and “how much glass makes the tank” are different questions. Which is volume and which is surface area? How do the units tell you?</div>
+        <div style="border-bottom:2px dotted rgba(17,22,31,.3);height:22px"></div>
+        <div style="border-bottom:2px dotted rgba(17,22,31,.3);height:22px;margin-top:8px"></div>
+      </div>
+    </div>
+
+    <div style="background:rgba(17,22,31,.05);border-radius:12px;padding:13px 18px;margin-top:16px;font-size:13px;line-height:1.5;color:rgba(17,22,31,.7)">
+      <strong>Marking note:</strong> item 8 wants both halves — water is volume in cubic units, glass is surface area in square units. Half marks for getting the pairing right without mentioning the units.
+    </div>
+
+    <div style="border-top:2px solid rgba(17,22,31,.12);margin-top:14px;padding:12px 0 26px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(17,22,31,.45)">
+      <span>Answers on page 15</span><span>Mid-unit quiz · page 10</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ P11 · UNIT TEST A ============ -->
+<section class="page" data-screen-label="11 Unit test A" style="background:#FCFCFF;padding:0;display:flex;flex-direction:column">
+  <div style="height:10px;background:linear-gradient(90deg,#3730A3,#818CF8)"></div>
+  <div style="padding:34px 52px 0;flex:1;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:24px;border-bottom:2px solid rgba(17,22,31,.14);padding-bottom:16px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:#4338CA">Mission 07 · End of week 4</div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:36px;margin:6px 0 4px;line-height:1">Unit Test · Part 1</h1>
+        <div style="font-size:13.5px;color:rgba(17,22,31,.6)">Items 1–8. No time limit. Write the units on every answer.</div>
+      </div>
+      <div style="flex:none;text-align:right;font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(17,22,31,.55);line-height:2.1">
+        <div>NAME ______________</div>
+        <div>DATE ______________</div>
+      </div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:12px;margin-top:20px;flex:1">
+      <div style="border:1.5px solid rgba(17,22,31,.16);border-radius:13px;padding:13px 18px;display:grid;grid-template-columns:1fr 150px;gap:16px;align-items:center"><span style="font-size:14px"><strong>1.</strong> &nbsp;Volume of a 10 by 4 by 3 box</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:22px"></span></div>
+      <div style="border:1.5px solid rgba(17,22,31,.16);border-radius:13px;padding:13px 18px;display:grid;grid-template-columns:1fr 150px;gap:16px;align-items:center"><span style="font-size:14px"><strong>2.</strong> &nbsp;A cube of volume 64 — one edge</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:22px"></span></div>
+      <div style="border:1.5px solid rgba(17,22,31,.16);border-radius:13px;padding:13px 18px;display:grid;grid-template-columns:1fr 150px;gap:16px;align-items:center"><span style="font-size:14px"><strong>3.</strong> &nbsp;Volume 200, height 5, width 8 — the length</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:22px"></span></div>
+      <div style="border:1.5px solid rgba(17,22,31,.16);border-radius:13px;padding:13px 18px;display:grid;grid-template-columns:1fr 150px;gap:16px;align-items:center"><span style="font-size:14px"><strong>4.</strong> &nbsp;Surface area of a 3 by 3 by 3 cube</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:22px"></span></div>
+      <div style="border:1.5px solid rgba(17,22,31,.16);border-radius:13px;padding:13px 18px;display:grid;grid-template-columns:1fr 150px;gap:16px;align-items:center"><span style="font-size:14px"><strong>5.</strong> &nbsp;Surface area of a 2 by 2 by 6 box</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:22px"></span></div>
+      <div style="border:1.5px solid rgba(17,22,31,.16);border-radius:13px;padding:13px 18px;display:grid;grid-template-columns:1fr 150px;gap:16px;align-items:center"><span style="font-size:14px"><strong>6.</strong> &nbsp;Centimetres in 2.5 metres</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:22px"></span></div>
+      <div style="border:1.5px solid rgba(17,22,31,.16);border-radius:13px;padding:13px 18px;display:grid;grid-template-columns:1fr 150px;gap:16px;align-items:center"><span style="font-size:14px"><strong>7.</strong> &nbsp;Millimetres in 2.5 metres</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:22px"></span></div>
+      <div style="border:1.5px solid rgba(17,22,31,.16);border-radius:13px;padding:13px 18px;display:grid;grid-template-columns:1fr 150px;gap:16px;align-items:center"><span style="font-size:14px"><strong>8.</strong> &nbsp;Inches in 2 yards</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:22px"></span></div>
+    </div>
+
+    <div style="border-top:2px solid rgba(17,22,31,.12);margin-top:14px;padding:12px 0 26px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(17,22,31,.45)">
+      <span>Continues on page 12</span><span>Unit test · page 11</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ P12 · UNIT TEST B ============ -->
+<section class="page" data-screen-label="12 Unit test B" style="background:#FCFCFF;padding:0;display:flex;flex-direction:column">
+  <div style="height:10px;background:linear-gradient(90deg,#3730A3,#818CF8)"></div>
+  <div style="padding:34px 52px 0;flex:1;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:24px;border-bottom:2px solid rgba(17,22,31,.14);padding-bottom:16px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:#4338CA">Mission 07 · End of week 4</div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:36px;margin:6px 0 4px;line-height:1">Unit Test · Part 2</h1>
+        <div style="font-size:13.5px;color:rgba(17,22,31,.6)">Items 9–12 and the Big Question.</div>
+      </div>
+      <div style="flex:none;text-align:right;font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(17,22,31,.55);line-height:2.1">
+        <div>SCORE ______ / 12</div>
+        <div>BAND ______________</div>
+      </div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:11px;margin-top:18px">
+      <div style="border:1.5px solid rgba(17,22,31,.16);border-radius:13px;padding:13px 18px;display:grid;grid-template-columns:1fr 150px;gap:16px;align-items:center"><span style="font-size:14px"><strong>9.</strong> &nbsp;A 6×6×2 box with a 3×3×2 corner removed — the volume</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:22px"></span></div>
+      <div style="border:1.5px solid rgba(17,22,31,.16);border-radius:13px;padding:13px 18px;display:grid;grid-template-columns:1fr 150px;gap:16px;align-items:center"><span style="font-size:14px"><strong>10.</strong> &nbsp;Double every edge of a 3 by 3 by 3 cube — the new volume</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:22px"></span></div>
+      <div style="border:1.5px solid rgba(17,22,31,.16);border-radius:13px;padding:13px 18px">
+        <div style="font-size:14px;margin-bottom:9px"><strong>11.</strong> &nbsp;Two boxes each hold 24 cubic units: one is 1 by 1 by 24, the other 2 by 3 by 4. Which needs less cardboard, and by how much?</div>
+        <div style="border-bottom:2px dotted rgba(17,22,31,.3);height:22px"></div>
+      </div>
+      <div style="border:1.5px solid rgba(17,22,31,.16);border-radius:13px;padding:13px 18px">
+        <div style="font-size:14px;margin-bottom:9px"><strong>12.</strong> &nbsp;A tank is 8 by 5 at the base and 6 deep. How much water fills it, and how much glass makes the four walls and the base?</div>
+        <div style="border-bottom:2px dotted rgba(17,22,31,.3);height:22px"></div>
+      </div>
+    </div>
+
+    <div style="margin-top:14px;background:rgba(129,140,248,.14);border:1.5px solid rgba(67,56,202,.28);border-radius:16px;padding:16px 20px;flex:1;display:flex;flex-direction:column">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:#4338CA;margin-bottom:8px">Explain your thinking · the Big Question</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:22px;line-height:1.25;margin-bottom:6px">If you double every edge of a box, why does the volume go up eight times instead of two?</div>
+      <div style="font-size:13.5px;line-height:1.5;color:rgba(17,22,31,.72);margin-bottom:10px">Use a real cube as your example, and say what happens to the surface area too. Scored on reasoning, not neatness.</div>
+      <div style="flex:1;display:flex;flex-direction:column;gap:15px;padding-top:2px">
+        <div style="border-bottom:2px dotted rgba(17,22,31,.3)"></div>
+        <div style="border-bottom:2px dotted rgba(17,22,31,.3)"></div>
+        <div style="border-bottom:2px dotted rgba(17,22,31,.3)"></div>
+        <div style="border-bottom:2px dotted rgba(17,22,31,.3)"></div>
+        <div style="border-bottom:2px dotted rgba(17,22,31,.3)"></div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px">
+      <div style="background:rgba(74,222,128,.12);border:1.5px solid rgba(21,128,61,.3);border-radius:12px;padding:12px 14px"><div style="font-family:Fredoka,sans-serif;font-size:22px;color:#15803D">11–12</div><div style="font-size:12.5px;line-height:1.4;margin-top:4px">Gold band. The Dimension Badge is earned.</div></div>
+      <div style="background:rgba(129,140,248,.16);border:1.5px solid rgba(67,56,202,.3);border-radius:12px;padding:12px 14px"><div style="font-family:Fredoka,sans-serif;font-size:22px;color:#4338CA">9–10</div><div style="font-size:12.5px;line-height:1.4;margin-top:4px">Silver band. One reteach day, then the badge.</div></div>
+      <div style="background:rgba(245,158,11,.12);border:1.5px solid rgba(180,83,9,.3);border-radius:12px;padding:12px 14px"><div style="font-family:Fredoka,sans-serif;font-size:22px;color:#B45309">≤ 8</div><div style="font-size:12.5px;line-height:1.4;margin-top:4px">Bronze. Reteach the weak strand and retest that part only.</div></div>
+    </div>
+
+    <div style="border-top:2px solid rgba(17,22,31,.12);margin-top:12px;padding:12px 0 26px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(17,22,31,.45)">
+      <span>The Dimension Badge</span><span>Unit test · page 12</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ P13 · ANSWER KEY A ============ -->
+<section class="page" data-screen-label="13 Answer key A" style="background:#FCFCFF;padding:0;display:flex;flex-direction:column">
+  <div style="height:10px;background:#15803D"></div>
+  <div style="padding:34px 52px 0;flex:1;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:24px;border-bottom:2px solid rgba(17,22,31,.14);padding-bottom:16px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:#15803D">Teacher page · answer key</div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:36px;margin:6px 0 4px;line-height:1">Key A</h1>
+        <div style="font-size:13.5px;color:rgba(17,22,31,.6)">Pre-assessment, Lesson 1.1 and Lesson 1.2.</div>
+      </div>
+      <div style="flex:none;background:rgba(74,222,128,.14);border:1.5px solid rgba(21,128,61,.3);border-radius:12px;padding:12px 16px;font-size:12.5px;line-height:1.6;max-width:210px;color:#15803D">Mark the reasoning, not the handwriting. Any correct method counts.</div>
+    </div>
+
+    <div style="margin-top:20px;display:flex;flex-direction:column;gap:16px;flex:1">
+      <div style="border:1.5px solid rgba(21,128,61,.25);border-radius:14px;padding:16px 20px;background:rgba(74,222,128,.06)">
+        <div style="font-family:Fredoka,sans-serif;font-size:20px;margin-bottom:10px">Pre-assessment</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:13px;line-height:2.1">
+          A1 · 12 &nbsp;|&nbsp; A2 · 96 &nbsp;|&nbsp; B1 · 24 &nbsp;|&nbsp; B2 · 125<br>
+          C1 · 6 &nbsp;|&nbsp; C2 · 24 &nbsp;|&nbsp; D1 · 250 &nbsp;|&nbsp; D2 · 1500<br>
+          E1 · 36 &nbsp;|&nbsp; E2 · 8 &nbsp;|&nbsp; F1 · 80 &nbsp;|&nbsp; F2 · 8 times
+        </div>
+        <div style="font-size:12.5px;line-height:1.5;margin-top:10px;color:rgba(17,22,31,.7)">F2 is the one to read carefully — see the skip chart note. An answer of 2 or 4 is the expected miss, not a sign of weakness.</div>
+      </div>
+
+      <div style="border:1.5px solid rgba(21,128,61,.25);border-radius:14px;padding:16px 20px;background:rgba(74,222,128,.06)">
+        <div style="font-family:Fredoka,sans-serif;font-size:20px;margin-bottom:10px">Lesson 1.1 · How Much Fits Inside</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:13px;line-height:2.1">
+          Warm-Up · 12 &nbsp;|&nbsp; 25 &nbsp;|&nbsp; 6 &nbsp;|&nbsp; 24 &nbsp;|&nbsp; 100 &nbsp;|&nbsp; 56<br>
+          Core · 1 · 24 &nbsp;|&nbsp; 2 · 125 &nbsp;|&nbsp; 3 · 120 &nbsp;|&nbsp; 4 · 192 &nbsp;|&nbsp; 5 · 3
+        </div>
+        <div style="font-size:12.5px;line-height:1.5;margin-top:10px;color:rgba(17,22,31,.7)">C1 · 3, since 3 × 3 × 3 = 27. C2 · e.g. 1×1×24, 2×3×4, 2×2×6, 1×2×12, 1×3×8, 1×4×6 — six with distinct shapes; accept any three.</div>
+      </div>
+
+      <div style="border:1.5px solid rgba(21,128,61,.25);border-radius:14px;padding:16px 20px;background:rgba(74,222,128,.06)">
+        <div style="font-family:Fredoka,sans-serif;font-size:20px;margin-bottom:10px">Lesson 1.2 · Counting Cubes</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:13px;line-height:2.1">
+          Warm-Up · 4 &nbsp;|&nbsp; 9 &nbsp;|&nbsp; 20 &nbsp;|&nbsp; 12 &nbsp;|&nbsp; 24 &nbsp;|&nbsp; 100<br>
+          Core · 1 · 27 &nbsp;|&nbsp; 2 · 40 &nbsp;|&nbsp; 3 · 108 &nbsp;|&nbsp; 4 · 160
+        </div>
+        <div style="font-size:12.5px;line-height:1.5;margin-top:10px;color:rgba(17,22,31,.7)">Item 5 · 1×1×12, 1×2×6, 1×3×4, 2×2×3 — four distinct shapes. C1 · 2×2×3 needs the least at 32, and 1×1×12 the most at 50. C2 · volume drops to 59; surface area is unchanged, which surprises everybody and is worth dwelling on.</div>
+      </div>
+    </div>
+
+    <div style="border-top:2px solid rgba(17,22,31,.12);margin-top:14px;padding:12px 0 26px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(17,22,31,.45)">
+      <span>Teacher page</span><span>Answer key A · page 13</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ P14 · ANSWER KEY B ============ -->
+<section class="page" data-screen-label="14 Answer key B" style="background:#FCFCFF;padding:0;display:flex;flex-direction:column">
+  <div style="height:10px;background:#15803D"></div>
+  <div style="padding:34px 52px 0;flex:1;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:24px;border-bottom:2px solid rgba(17,22,31,.14);padding-bottom:16px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:#15803D">Teacher page · answer key</div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:36px;margin:6px 0 4px;line-height:1">Key B</h1>
+        <div style="font-size:13.5px;color:rgba(17,22,31,.6)">Lesson 1.3, Lesson 1.4 and Friday's sprint.</div>
+      </div>
+      <div style="flex:none;background:rgba(74,222,128,.14);border:1.5px solid rgba(21,128,61,.3);border-radius:12px;padding:12px 16px;font-size:12.5px;line-height:1.6;max-width:210px;color:#15803D">Where a question asks for a sentence, no sentence means no mark — even with the number right.</div>
+    </div>
+
+    <div style="margin-top:20px;display:flex;flex-direction:column;gap:16px;flex:1">
+      <div style="border:1.5px solid rgba(21,128,61,.25);border-radius:14px;padding:16px 20px;background:rgba(74,222,128,.06)">
+        <div style="font-family:Fredoka,sans-serif;font-size:20px;margin-bottom:10px">Lesson 1.3 · Working Backwards</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:13px;line-height:2.1">
+          Warm-Up · 4 &nbsp;|&nbsp; 3 &nbsp;|&nbsp; 8 &nbsp;|&nbsp; 4 &nbsp;|&nbsp; 5 &nbsp;|&nbsp; 4<br>
+          Core · 1 · 4 &nbsp;|&nbsp; 2 · 4 &nbsp;|&nbsp; 3 · 5 &nbsp;|&nbsp; 4 · 4 &nbsp;|&nbsp; 5 · 6
+        </div>
+        <div style="font-size:12.5px;line-height:1.5;margin-top:10px;color:rgba(17,22,31,.7)">C1 · edge 5, so surface area 150. C2 · 2×5×10 and 4×5×5 both work; 2×2×25 also qualifies.</div>
+      </div>
+
+      <div style="border:1.5px solid rgba(21,128,61,.25);border-radius:14px;padding:16px 20px;background:rgba(74,222,128,.06)">
+        <div style="font-family:Fredoka,sans-serif;font-size:20px;margin-bottom:10px">Lesson 1.4 · Two Boxes Joined</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:13px;line-height:2.1">
+          Warm-Up · 8 &nbsp;|&nbsp; 18 &nbsp;|&nbsp; 16 &nbsp;|&nbsp; 20 &nbsp;|&nbsp; 18 &nbsp;|&nbsp; 20<br>
+          Core · 1 · 36 &nbsp;|&nbsp; 2 · 40 &nbsp;|&nbsp; 3 · 48 &nbsp;|&nbsp; 4 · 54
+        </div>
+        <div style="font-size:12.5px;line-height:1.5;margin-top:10px;color:rgba(17,22,31,.7)">Item 5 · either is right; subtracting is usually quicker here since 5×4×3 = 60 is easy and the corner is only 12. C1 · 875. C2 · the three faces you expose are exactly the three you hide, so the total is unchanged.</div>
+      </div>
+
+      <div style="border:1.5px solid rgba(21,128,61,.25);border-radius:14px;padding:16px 20px;background:rgba(74,222,128,.06)">
+        <div style="font-family:Fredoka,sans-serif;font-size:20px;margin-bottom:10px">Friday · Unit Sprint</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:13px;line-height:2.1">
+          Warm-Up · 250 cm &nbsp;|&nbsp; 1500 g &nbsp;|&nbsp; 36 in &nbsp;|&nbsp; 8 cups
+        </div>
+        <div style="font-size:12.5px;line-height:1.5;margin-top:10px;color:rgba(17,22,31,.7)">C1 · metric, because every step is a power of ten and the digits just shift. C2 · 2500 mm, chaining metres to centimetres to millimetres — or metres straight to millimetres by multiplying by 1000.</div>
+      </div>
+    </div>
+
+    <div style="border-top:2px solid rgba(17,22,31,.12);margin-top:14px;padding:12px 0 26px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(17,22,31,.45)">
+      <span>Teacher page</span><span>Answer key B · page 14</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ P15 · ANSWER KEY C + JOURNAL ============ -->
+<section class="page" data-screen-label="15 Answer key C" style="background:#FCFCFF;padding:0;display:flex;flex-direction:column">
+  <div style="height:10px;background:#15803D"></div>
+  <div style="padding:34px 52px 0;flex:1;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:24px;border-bottom:2px solid rgba(17,22,31,.14);padding-bottom:16px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:#15803D">Teacher page · answer key</div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:36px;margin:6px 0 4px;line-height:1">Key C</h1>
+        <div style="font-size:13.5px;color:rgba(17,22,31,.6)">Mid-unit quiz, unit test, and the error journal sheet.</div>
+      </div>
+      <div style="flex:none;background:rgba(74,222,128,.14);border:1.5px solid rgba(21,128,61,.3);border-radius:12px;padding:12px 16px;font-size:12.5px;line-height:1.6;max-width:210px;color:#15803D">Quiz is out of 8, test out of 12. 85% is 7/8 and 11/12.</div>
+    </div>
+
+    <div style="margin-top:18px;display:grid;grid-template-columns:1fr 1fr;gap:16px">
+      <div style="border:1.5px solid rgba(21,128,61,.25);border-radius:14px;padding:15px 20px;background:rgba(74,222,128,.06)">
+        <div style="font-family:Fredoka,sans-serif;font-size:20px;margin-bottom:8px">Mid-unit quiz</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:13px;line-height:2">
+          1 · 24<br>2 · 125<br>3 · 4<br>4 · 24<br>5 · 52<br>6 · 48<br>7 · 64<br>8 · see below
+        </div>
+      </div>
+      <div style="border:1.5px solid rgba(21,128,61,.25);border-radius:14px;padding:15px 20px;background:rgba(74,222,128,.06)">
+        <div style="font-family:Fredoka,sans-serif;font-size:20px;margin-bottom:8px">Unit test</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:13px;line-height:2">
+          1 · 120<br>2 · 4<br>3 · 5<br>4 · 54<br>5 · 56<br>6 · 250<br>7 · 2500<br>8 · 72<br>9 · 54<br>10 · 216
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:14px;border:1.5px solid rgba(21,128,61,.25);border-radius:14px;padding:15px 20px;background:rgba(74,222,128,.06)">
+      <div style="font-family:Fredoka,sans-serif;font-size:20px;margin-bottom:8px">Items 8, 11, 12 and the Big Question</div>
+      <div style="font-size:13px;line-height:1.6"><strong>Quiz 8 ·</strong> water is volume, measured in cubic units; glass is surface area, measured in square units. <strong>11 ·</strong> the 2×3×4 needs 52 against 98, so it saves 46 square units — nearly half. <strong>12 ·</strong> 240 cubic units of water; the glass is 40 for the base plus 96 and 60 for the walls, giving 196 square units. <strong>Big Question ·</strong> full marks for an answer naming all three dimensions doubling — 2 × 2 × 2 = 8 — ideally with a worked example such as 3×3×3 = 27 becoming 6×6×6 = 216. Credit noticing that surface area only quadruples, since a face has two dimensions rather than three. An answer that just states “eight times” with no reason scores half.</div>
+    </div>
+
+    <div style="margin-top:14px;border:1.5px solid rgba(17,22,31,.18);border-radius:14px;padding:15px 20px;flex:1;display:flex;flex-direction:column">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px">
+        <div style="font-family:Fredoka,sans-serif;font-size:20px">Error journal · Mission 07</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(17,22,31,.45)">One line per mistake · student page</div>
+      </div>
+      <div style="font-size:12.5px;line-height:1.5;color:rgba(17,22,31,.65);margin:6px 0 10px">Write what went wrong, not what the right answer was. On Thursday of Week 4, read the whole list and fix only what appears twice.</div>
+      <div style="flex:1;display:flex;flex-direction:column;gap:0">
+        <div style="display:grid;grid-template-columns:74px 1fr;gap:14px;border-bottom:1.5px solid rgba(17,22,31,.14);padding:10px 0"><span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:rgba(17,22,31,.4)">DAY</span><span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:rgba(17,22,31,.4)">WHAT I GOT WRONG, AND WHY</span></div>
+        <div style="border-bottom:1.5px solid rgba(17,22,31,.14);height:32px"></div>
+        <div style="border-bottom:1.5px solid rgba(17,22,31,.14);height:32px"></div>
+        <div style="border-bottom:1.5px solid rgba(17,22,31,.14);height:32px"></div>
+        <div style="border-bottom:1.5px solid rgba(17,22,31,.14);height:32px"></div>
+        <div style="border-bottom:1.5px solid rgba(17,22,31,.14);height:32px"></div>
+      </div>
+    </div>
+
+    <div style="border-top:2px solid rgba(17,22,31,.12);margin-top:12px;padding:12px 0 26px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(17,22,31,.45)">
+      <span>Adventures in Big Math · 5th Grade · Mission 07 · Volume &amp; Measure</span><span>Answer key C · page 15</span>
+    </div>
+  </div>
+</section>
+
+</doc-page>
+</x-dc>
+</body>
+</html>

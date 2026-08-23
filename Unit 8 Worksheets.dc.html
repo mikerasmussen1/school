@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700;6..12,800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  body{margin:0;font-family:"Nunito Sans",system-ui,sans-serif;color:#11161F}
+  a{color:#0369A1;text-decoration:none}
+  a:hover{color:#0284C7}
+  *{box-sizing:border-box}
+  .page{print-color-adjust:exact;-webkit-print-color-adjust:exact}
+</style>
+<script src="./doc-page.js"></script>
+<script src="./print-fit.js"></script>
+</helmet>
+
+<doc-page size="letter">
+
+<section class="page" data-screen-label="Cover" style="background:#07101C;color:#F4F8FF;padding:0;display:flex;flex-direction:column;position:relative;overflow:hidden">
+  <div style="position:absolute;inset:0;background:radial-gradient(640px 400px at 78% 10%, #FCD34D44, transparent 62%)"></div>
+  <div style="position:relative;padding:60px 58px 0;flex:1;display:flex;flex-direction:column">
+    <div style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;color:#FCD34D">Adventures in Big Math · 3rd Grade Math</div>
+    <div style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;color:rgba(244,248,255,.5);margin-top:8px">Mission 08 of 08 · Worksheet pack</div>
+    <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:54px;line-height:1;margin:44px 0 0;letter-spacing:-1px;color:#FCD34D">Algebra Sparks</h1>
+    <div style="font-size:19px;margin-top:16px;color:rgba(244,248,255,.8);max-width:600px">Every graded set, every week — 4 weeks, 20 worksheets, with an answer key after each week.</div>
+    <div style="margin-top:40px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px">
+      <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);border-radius:14px;padding:16px 18px"><div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:rgba(244,248,255,.5)">Week 1</div><div style="font-family:Fredoka,sans-serif;font-size:17px;margin-top:5px">5 sets</div></div><div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);border-radius:14px;padding:16px 18px"><div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:rgba(244,248,255,.5)">Week 2</div><div style="font-family:Fredoka,sans-serif;font-size:17px;margin-top:5px">5 sets</div></div><div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);border-radius:14px;padding:16px 18px"><div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:rgba(244,248,255,.5)">Week 3</div><div style="font-family:Fredoka,sans-serif;font-size:17px;margin-top:5px">5 sets</div></div><div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);border-radius:14px;padding:16px 18px"><div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:rgba(244,248,255,.5)">Week 4</div><div style="font-family:Fredoka,sans-serif;font-size:17px;margin-top:5px">5 sets</div></div>
+    </div>
+    <div style="margin-top:auto;margin-bottom:44px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);border-radius:16px;padding:18px 22px">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:#FCD34D;margin-bottom:7px">How to use it</div>
+      <div style="font-size:13.5px;line-height:1.55;color:rgba(244,248,255,.78)">One page per day. Warm-Up is recall, Core is the graded tier, Challenge is never graded — the score box counts the graded items only. The same items appear in the app's Practice Bay, so a day can be done on paper or on screen, not both.</div>
+    </div>
+  </div>
+  <div style="position:relative;height:11px;background:#FCD34D"></div>
+</section>
+<!-- u8p1 -->
+<section class="page" data-screen-label="1.1 Find the Rule" style="background:#FCFDFF;padding:0;display:flex;flex-direction:column">
+  <div style="height:9px;background:#FCD34D"></div>
+  <div style="padding:28px 50px 0;flex:1;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:22px;border-bottom:2px solid rgba(17,22,31,.14);padding-bottom:13px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#FCD34D">3rd Grade · Mission 08 · Week 1 · Set 1.1</div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:31px;margin:6px 0 3px;line-height:1.03">Find the Rule</h1>
+        <div style="font-size:12.5px;color:rgba(17,22,31,.62);max-width:520px">Say the rule out loud in one sentence before you write the next number.</div>
+      </div>
+      <div style="flex:none;text-align:right;font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(17,22,31,.55);line-height:1.95">
+        <div>NAME __________</div><div>DATE __________</div><div>SCORE ____ / 11</div>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#22C55E;color:#052E12;display:grid;place-items:center;font-size:12px">✦</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#15803D">Warm-Up</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">6 items</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:9px"><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">3, 6, 9, 12 — next</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">5, 10, 15, 20 — next</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">2, 4, 8, 16 — next</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">20, 17, 14, 11 — next</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">1, 4, 7, 10 — next</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">100, 90, 80 — next</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div></div>
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#FCD34D;color:#0B1220;display:grid;place-items:center;font-size:12px">◆</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#FCD34D">Core</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">graded · show your working</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:8px"><div style="border:1.5px solid #FCD34D44;border-radius:13px;padding:11px 16px;background:#FCD34D0d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">1. &nbsp;Rule × 3, starting at 2 — the fourth number <span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:rgba(17,22,31,.45)">(2, 6, 18, 54)</span></span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #FCD34D44;border-radius:13px;padding:11px 16px;background:#FCD34D0d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">2. &nbsp;1, 3, 7, 15 — next <span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:rgba(17,22,31,.45)">(Double it and add one)</span></span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #FCD34D44;border-radius:13px;padding:11px 16px;background:#FCD34D0d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">3. &nbsp;Rule × 2 + 1. Put in 5</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #FCD34D44;border-radius:13px;padding:11px 16px;background:#FCD34D0d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">4. &nbsp;4, 9, 14, 19 — the tenth number <span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:rgba(17,22,31,.45)">(Start at 4 and add 5 nine times)</span></span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #FCD34D44;border-radius:13px;padding:11px 16px;background:#FCD34D0d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">5. &nbsp;2, 5, 10, 17 — next <span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:rgba(17,22,31,.45)">(The gaps go 3, 5, 7, 9)</span></span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div></div>
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#F59E0B;color:#3A2405;display:grid;place-items:center;font-size:12px">★</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#B45309">Challenge</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">not graded</div>
+    </div>
+    <div style="background:rgba(245,158,11,.1);border:1.5px solid rgba(180,83,9,.32);border-radius:14px;padding:11px 17px;flex:1;display:flex;flex-direction:column;gap:7px"><div style="font-size:13.5px;line-height:1.5">C1. &nbsp;Rule × 4 − 3. Put in 7</div><div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div><div style="font-size:13.5px;line-height:1.5">C2. &nbsp;6, 11, 16, 21 — the twentieth number <span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:rgba(180,83,9,.7)">(6 + 5 × 19)</span></div><div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div></div>
+    <div style="border-top:2px solid rgba(17,22,31,.12);margin-top:11px;padding:10px 0 22px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(17,22,31,.45)">
+      <span>Error journal: one sentence per mistake</span><span>Week 1 · page 2</span>
+    </div>
+  </div>
+</section>
+<!-- u8p2 -->
+<section class="page" data-screen-label="1.2 Function Machines" style="background:#FCFDFF;padding:0;display:flex;flex-direction:column">
+  <div style="height:9px;background:#FCD34D"></div>
+  <div style="padding:28px 50px 0;flex:1;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:22px;border-bottom:2px solid rgba(17,22,31,.14);padding-bottom:13px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#FCD34D">3rd Grade · Mission 08 · Week 1 · Set 1.2</div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:31px;margin:6px 0 3px;line-height:1.03">Function Machines</h1>
+        <div style="font-size:12.5px;color:rgba(17,22,31,.62);max-width:520px">In goes a number, out comes a number. The machine never changes its mind halfway.</div>
+      </div>
+      <div style="flex:none;text-align:right;font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(17,22,31,.55);line-height:1.95">
+        <div>NAME __________</div><div>DATE __________</div><div>SCORE ____ / 11</div>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#22C55E;color:#052E12;display:grid;place-items:center;font-size:12px">✦</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#15803D">Warm-Up</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">6 items</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:9px"><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">Machine + 8. In 5</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">Machine × 6. In 4</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">Machine − 7. In 20</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">Machine × 10. In 9</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">Machine ÷ 2. In 18</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">Machine + 15. In 15</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div></div>
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#FCD34D;color:#0B1220;display:grid;place-items:center;font-size:12px">◆</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#FCD34D">Core</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">graded · show your working</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:8px"><div style="border:1.5px solid #FCD34D44;border-radius:13px;padding:11px 16px;background:#FCD34D0d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">1. &nbsp;Machine × 3 + 4. In 6 <span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:rgba(17,22,31,.45)">(Multiply first)</span></span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #FCD34D44;border-radius:13px;padding:11px 16px;background:#FCD34D0d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">2. &nbsp;Machine × 5 − 2. In 7</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #FCD34D44;border-radius:13px;padding:11px 16px;background:#FCD34D0d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">3. &nbsp;Machine × 2 + 9. In 12</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #FCD34D44;border-radius:13px;padding:11px 16px;background:#FCD34D0d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">4. &nbsp;Machine × 3 + 4. Out 25 — what went in <span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:rgba(17,22,31,.45)">(Undo the + 4 first)</span></span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #FCD34D44;border-radius:13px;padding:11px 16px;background:#FCD34D0d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">5. &nbsp;Machine × 4 − 1. Out 27 — what went in</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div></div>
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#F59E0B;color:#3A2405;display:grid;place-items:center;font-size:12px">★</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#B45309">Challenge</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">not graded</div>
+    </div>
+    <div style="background:rgba(245,158,11,.1);border:1.5px solid rgba(180,83,9,.32);border-radius:14px;padding:11px 17px;flex:1;display:flex;flex-direction:column;gap:7px"><div style="font-size:13.5px;line-height:1.5">C1. &nbsp;In 2 gives 7, in 3 gives 10, in 4 gives 13. In 10 gives <span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:rgba(180,83,9,.7)">(The rule is × 3 + 1)</span></div><div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div><div style="font-size:13.5px;line-height:1.5">C2. &nbsp;In 1 gives 5, in 2 gives 9, in 3 gives 13. In 12 gives <span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:rgba(180,83,9,.7)">(The rule is × 4 + 1)</span></div><div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div></div>
+    <div style="border-top:2px solid rgba(17,22,31,.12);margin-top:11px;padding:10px 0 22px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(17,22,31,.45)">
+      <span>Error journal: one sentence per mistake</span><span>Week 1 · page 3</span>
+    </div>
+  </div>
+</section>
+<!-- u8p3 -->
+<section class="page" data-screen-label="1.3 Letters Standing for Numbers" style="background:#FCFDFF;padding:0;display:flex;flex-direction:column">
+  <div style="height:9px;background:#FCD34D"></div>
+  <div style="padding:28px 50px 0;flex:1;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:22px;border-bottom:2px solid rgba(17,22,31,.14);padding-bottom:13px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#FCD34D">3rd Grade · Mission 08 · Week 1 · Set 1.3</div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:31px;margin:6px 0 3px;line-height:1.03">Letters Standing for Numbers</h1>
+        <div style="font-size:12.5px;color:rgba(17,22,31,.62);max-width:520px">A letter is a number nobody has named yet. Put the number in, then work it out.</div>
+      </div>
+      <div style="flex:none;text-align:right;font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(17,22,31,.55);line-height:1.95">
+        <div>NAME __________</div><div>DATE __________</div><div>SCORE ____ / 11</div>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#22C55E;color:#052E12;display:grid;place-items:center;font-size:12px">✦</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#15803D">Warm-Up</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">6 items</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:9px"><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">n = 4. Value of n + 6</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">n = 4. Value of 3n</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">n = 7. Value of n − 3</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">n = 5. Value of 2n</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">n = 9. Value of n + n</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">n = 6. Value of 10 − n</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div></div>
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#FCD34D;color:#0B1220;display:grid;place-items:center;font-size:12px">◆</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#FCD34D">Core</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">graded · show your working</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:8px"><div style="border:1.5px solid #FCD34D44;border-radius:13px;padding:11px 16px;background:#FCD34D0d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">1. &nbsp;n = 5. Value of 3n + 2</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #FCD34D44;border-radius:13px;padding:11px 16px;background:#FCD34D0d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">2. &nbsp;n = 8. Value of 2n − 5</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #FCD34D44;border-radius:13px;padding:11px 16px;background:#FCD34D0d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">3. &nbsp;a = 3, b = 7. Value of 4a + b <span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:rgba(17,22,31,.45)">(12 and 7)</span></span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #FCD34D44;border-radius:13px;padding:11px 16px;background:#FCD34D0d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">4. &nbsp;n = 6. Value of n × n</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #FCD34D44;border-radius:13px;padding:11px 16px;background:#FCD34D0d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">5. &nbsp;n = 12. Value of n ÷ 4 + 5</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div></div>
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#F59E0B;color:#3A2405;display:grid;place-items:center;font-size:12px">★</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#B45309">Challenge</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">not graded</div>
+    </div>
+    <div style="background:rgba(245,158,11,.1);border:1.5px solid rgba(180,83,9,.32);border-radius:14px;padding:11px 17px;flex:1;display:flex;flex-direction:column;gap:7px"><div style="font-size:13.5px;line-height:1.5">C1. &nbsp;n = 4. Value of 2n + 3n <span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:rgba(180,83,9,.7)">(That's 5n)</span></div><div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div><div style="font-size:13.5px;line-height:1.5">C2. &nbsp;p = 9. Value of 100 − 8p</div><div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div></div>
+    <div style="border-top:2px solid rgba(17,22,31,.12);margin-top:11px;padding:10px 0 22px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(17,22,31,.45)">
+      <span>Error journal: one sentence per mistake</span><span>Week 1 · page 4</span>
+    </div>
+  </div>
+</section>
+<!-- u8p4 -->
+<section class="page" data-screen-label="1.4 One-Step Equations" style="background:#FCFDFF;padding:0;display:flex;flex-direction:column">
+  <div style="height:9px;background:#FCD34D"></div>
+  <div style="padding:28px 50px 0;flex:1;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:22px;border-bottom:2px solid rgba(17,22,31,.14);padding-bottom:13px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#FCD34D">3rd Grade · Mission 08 · Week 1 · Set 1.4</div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:31px;margin:6px 0 3px;line-height:1.03">One-Step Equations</h1>
+        <div style="font-size:12.5px;color:rgba(17,22,31,.62);max-width:520px">Do the same thing to both sides. Type the value of the letter.</div>
+      </div>
+      <div style="flex:none;text-align:right;font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(17,22,31,.55);line-height:1.95">
+        <div>NAME __________</div><div>DATE __________</div><div>SCORE ____ / 11</div>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#22C55E;color:#052E12;display:grid;place-items:center;font-size:12px">✦</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#15803D">Warm-Up</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">6 items</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:9px"><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">x + 4 = 11</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">x − 5 = 9</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">3x = 21</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">x + 12 = 20</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">6x = 30</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">x ÷ 2 = 8</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div></div>
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#FCD34D;color:#0B1220;display:grid;place-items:center;font-size:12px">◆</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#FCD34D">Core</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">graded · show your working</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:8px"><div style="border:1.5px solid #FCD34D44;border-radius:13px;padding:11px 16px;background:#FCD34D0d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">1. &nbsp;x + 17 = 42</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #FCD34D44;border-radius:13px;padding:11px 16px;background:#FCD34D0d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">2. &nbsp;8x = 96 <span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:rgba(17,22,31,.45)">(96 ÷ 8)</span></span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #FCD34D44;border-radius:13px;padding:11px 16px;background:#FCD34D0d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">3. &nbsp;x − 23 = 19</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #FCD34D44;border-radius:13px;padding:11px 16px;background:#FCD34D0d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">4. &nbsp;x ÷ 5 = 13</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #FCD34D44;border-radius:13px;padding:11px 16px;background:#FCD34D0d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">5. &nbsp;4x = 100</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div></div>
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#F59E0B;color:#3A2405;display:grid;place-items:center;font-size:12px">★</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#B45309">Challenge</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">not graded</div>
+    </div>
+    <div style="background:rgba(245,158,11,.1);border:1.5px solid rgba(180,83,9,.32);border-radius:14px;padding:11px 17px;flex:1;display:flex;flex-direction:column;gap:7px"><div style="font-size:13.5px;line-height:1.5">C1. &nbsp;2x + 5 = 19 <span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:rgba(180,83,9,.7)">(Take 5 from both sides, then halve)</span></div><div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div><div style="font-size:13.5px;line-height:1.5">C2. &nbsp;3x − 7 = 26</div><div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div></div>
+    <div style="border-top:2px solid rgba(17,22,31,.12);margin-top:11px;padding:10px 0 22px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(17,22,31,.45)">
+      <span>Error journal: one sentence per mistake</span><span>Week 1 · page 5</span>
+    </div>
+  </div>
+</section>
+<!-- u8p5 -->
+<section class="page" data-screen-label="Fri Guess My Rule &amp; the Math Trail" style="background:#FCFDFF;padding:0;display:flex;flex-direction:column">
+  <div style="height:9px;background:#FCD34D"></div>
+  <div style="padding:28px 50px 0;flex:1;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:22px;border-bottom:2px solid rgba(17,22,31,.14);padding-bottom:13px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#FCD34D">3rd Grade · Mission 08 · Week 1 · Set Fri</div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:31px;margin:6px 0 3px;line-height:1.03">Guess My Rule &amp; the Math Trail</h1>
+        <div style="font-size:12.5px;color:rgba(17,22,31,.62);max-width:520px">Capstone day. Every stop on the trail is a problem you wrote yourself.</div>
+      </div>
+      <div style="flex:none;text-align:right;font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(17,22,31,.55);line-height:1.95">
+        <div>NAME __________</div><div>DATE __________</div><div>SCORE ____ / 4</div>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#22C55E;color:#052E12;display:grid;place-items:center;font-size:12px">✦</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#15803D">Warm-Up</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">2 items</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:9px"><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">Stops on a ten-stop trail</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">x + 9 = 9</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div></div>
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#FCD34D;color:#0B1220;display:grid;place-items:center;font-size:12px">◆</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#FCD34D">Core</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">graded · show your working</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:8px"><div style="border:1.5px solid #FCD34D44;border-radius:13px;padding:11px 16px;background:#FCD34D0d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">1. &nbsp;Trail rule × 2 + 3. Stop number 6 gives</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #FCD34D44;border-radius:13px;padding:11px 16px;background:#FCD34D0d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">2. &nbsp;Ten stops, 3 minutes each — total minutes</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div></div>
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#F59E0B;color:#3A2405;display:grid;place-items:center;font-size:12px">★</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#B45309">Challenge</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">not graded</div>
+    </div>
+    <div style="background:rgba(245,158,11,.1);border:1.5px solid rgba(180,83,9,.32);border-radius:14px;padding:11px 17px;flex:1;display:flex;flex-direction:column;gap:7px"><div style="font-size:13.5px;line-height:1.5">C1. &nbsp;In 5 gives 23, in 8 gives 35. In 10 gives <span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:rgba(180,83,9,.7)">(The rule is × 4 + 3)</span></div><div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div><div style="font-size:13.5px;line-height:1.5">C2. &nbsp;2x + 2x = 40 <span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:rgba(180,83,9,.7)">(That's 4x)</span></div><div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div><div style="font-size:13.5px;line-height:1.5">C3. &nbsp;A rule turns 4 into 4 and 6 into 8. Put in 10 <span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:rgba(180,83,9,.7)">(× 2 − 4)</span></div><div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div></div>
+    <div style="border-top:2px solid rgba(17,22,31,.12);margin-top:11px;padding:10px 0 22px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(17,22,31,.45)">
+      <span>Error journal: one sentence per mistake</span><span>Week 1 · page 6</span>
+    </div>
+  </div>
+</section>
+<section class="page" data-screen-label="Week 1 key" style="background:#FCFDFF;padding:0;display:flex;flex-direction:column">
+  <div style="height:9px;background:#15803D"></div>
+  <div style="padding:30px 50px 0;flex:1;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:22px;border-bottom:2px solid rgba(17,22,31,.14);padding-bottom:14px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#15803D">Teacher page · answer key</div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:32px;margin:6px 0 3px;line-height:1">Week 1 Answers</h1>
+        <div style="font-size:12.5px;color:rgba(17,22,31,.62)">Mission 08 · all 5 sets. Answers run in page order. Score out of the graded tiers only — Challenge never counts.</div>
+      </div>
+      <div style="flex:none;background:rgba(74,222,128,.14);border:1.5px solid rgba(21,128,61,.3);border-radius:11px;padding:10px 14px;font-size:12px;line-height:1.55;max-width:190px;color:#15803D">Mark the reasoning, not the handwriting. Any correct method counts.</div>
+    </div>
+    <div style="margin-top:16px;display:flex;flex-direction:column;gap:11px;flex:1"><div style="border:1.5px solid rgba(21,128,61,.25);border-radius:13px;padding:12px 17px;background:rgba(74,222,128,.06)">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:6px"><div style="font-family:Fredoka,sans-serif;font-size:17px">1.1 · Find the Rule</div><div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(17,22,31,.42)">out of 11</div></div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Warm-Up · </span>15 &nbsp;|&nbsp; 25 &nbsp;|&nbsp; 32 &nbsp;|&nbsp; 8 &nbsp;|&nbsp; 13 &nbsp;|&nbsp; 70</div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Core · </span>54 &nbsp;|&nbsp; 31 &nbsp;|&nbsp; 11 &nbsp;|&nbsp; 49 &nbsp;|&nbsp; 26</div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Challenge · </span>25 &nbsp;|&nbsp; 101</div></div><div style="border:1.5px solid rgba(21,128,61,.25);border-radius:13px;padding:12px 17px;background:rgba(74,222,128,.06)">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:6px"><div style="font-family:Fredoka,sans-serif;font-size:17px">1.2 · Function Machines</div><div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(17,22,31,.42)">out of 11</div></div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Warm-Up · </span>13 &nbsp;|&nbsp; 24 &nbsp;|&nbsp; 13 &nbsp;|&nbsp; 90 &nbsp;|&nbsp; 9 &nbsp;|&nbsp; 30</div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Core · </span>22 &nbsp;|&nbsp; 33 &nbsp;|&nbsp; 33 &nbsp;|&nbsp; 7 &nbsp;|&nbsp; 7</div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Challenge · </span>31 &nbsp;|&nbsp; 49</div></div><div style="border:1.5px solid rgba(21,128,61,.25);border-radius:13px;padding:12px 17px;background:rgba(74,222,128,.06)">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:6px"><div style="font-family:Fredoka,sans-serif;font-size:17px">1.3 · Letters Standing for Numbers</div><div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(17,22,31,.42)">out of 11</div></div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Warm-Up · </span>10 &nbsp;|&nbsp; 12 &nbsp;|&nbsp; 4 &nbsp;|&nbsp; 10 &nbsp;|&nbsp; 18 &nbsp;|&nbsp; 4</div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Core · </span>17 &nbsp;|&nbsp; 11 &nbsp;|&nbsp; 19 &nbsp;|&nbsp; 36 &nbsp;|&nbsp; 8</div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Challenge · </span>20 &nbsp;|&nbsp; 28</div></div><div style="border:1.5px solid rgba(21,128,61,.25);border-radius:13px;padding:12px 17px;background:rgba(74,222,128,.06)">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:6px"><div style="font-family:Fredoka,sans-serif;font-size:17px">1.4 · One-Step Equations</div><div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(17,22,31,.42)">out of 11</div></div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Warm-Up · </span>7 &nbsp;|&nbsp; 14 &nbsp;|&nbsp; 7 &nbsp;|&nbsp; 8 &nbsp;|&nbsp; 5 &nbsp;|&nbsp; 16</div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Core · </span>25 &nbsp;|&nbsp; 12 &nbsp;|&nbsp; 42 &nbsp;|&nbsp; 65 &nbsp;|&nbsp; 25</div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Challenge · </span>7 &nbsp;|&nbsp; 11</div></div><div style="border:1.5px solid rgba(21,128,61,.25);border-radius:13px;padding:12px 17px;background:rgba(74,222,128,.06)">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:6px"><div style="font-family:Fredoka,sans-serif;font-size:17px">Fri · Guess My Rule &amp; the Math Trail</div><div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(17,22,31,.42)">out of 4</div></div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Warm-Up · </span>10 &nbsp;|&nbsp; 0</div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Core · </span>15 &nbsp;|&nbsp; 30</div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Challenge · </span>43 &nbsp;|&nbsp; 10 &nbsp;|&nbsp; 16</div></div></div>
+    <div style="border-top:2px solid rgba(17,22,31,.12);margin-top:11px;padding:10px 0 22px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(17,22,31,.45)">
+      <span>Algebra Sparks · Week 1</span><span>Answer key · page 7</span>
+    </div>
+  </div>
+</section>
+<!-- u8w2p1 -->
+<section class="page" data-screen-label="2.1 What a Letter Is" style="background:#FCFDFF;padding:0;display:flex;flex-direction:column">
+  <div style="height:9px;background:#FCD34D"></div>
+  <div style="padding:28px 50px 0;flex:1;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:22px;border-bottom:2px solid rgba(17,22,31,.14);padding-bottom:13px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#FCD34D">3rd Grade · Mission 08 · Week 2 · Set 2.1</div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:31px;margin:6px 0 3px;line-height:1.03">What a Letter Is</h1>
+        <div style="font-size:12.5px;color:rgba(17,22,31,.62);max-width:520px">n is a seat a number sits in. 3n is three of them.</div>
+      </div>
+      <div style="flex:none;text-align:right;font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(17,22,31,.55);line-height:1.95">
+        <div>NAME __________</div><div>DATE __________</div><div>SCORE ____ / 11</div>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#22C55E;color:#052E12;display:grid;place-items:center;font-size:12px">✦</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#15803D">Warm-Up</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">6 items</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:9px"><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">n = 4. Value of n + 6</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">n = 4. Value of 3n</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">n = 7. Value of n − 3</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">n = 5. Value of 2n</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">n = 9. Value of n + n</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">n = 6. Value of 10 − n</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div></div>
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#FCD34D;color:#0B1220;display:grid;place-items:center;font-size:12px">◆</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#FCD34D">Core</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">graded · show your working</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:8px"><div style="border:1.5px solid #FCD34D44;border-radius:13px;padding:11px 16px;background:#FCD34D0d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">1. &nbsp;n = 5. Value of 3n + 2</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #FCD34D44;border-radius:13px;padding:11px 16px;background:#FCD34D0d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">2. &nbsp;n = 8. Value of 2n − 5</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #FCD34D44;border-radius:13px;padding:11px 16px;background:#FCD34D0d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">3. &nbsp;n = 6. Value of n × n</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #FCD34D44;border-radius:13px;padding:11px 16px;background:#FCD34D0d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">4. &nbsp;n = 12. Value of n ÷ 4 + 5</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #FCD34D44;border-radius:13px;padding:11px 16px;background:#FCD34D0d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">5. &nbsp;n = 10. Value of 4n − 10</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div></div>
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#F59E0B;color:#3A2405;display:grid;place-items:center;font-size:12px">★</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#B45309">Challenge</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">not graded</div>
+    </div>
+    <div style="background:rgba(245,158,11,.1);border:1.5px solid rgba(180,83,9,.32);border-radius:14px;padding:11px 17px;flex:1;display:flex;flex-direction:column;gap:7px"><div style="font-size:13.5px;line-height:1.5">C1. &nbsp;n = 4. Value of 2n + 3n</div><div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div><div style="font-size:13.5px;line-height:1.5">C2. &nbsp;p = 9. Value of 100 − 8p</div><div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div></div>
+    <div style="border-top:2px solid rgba(17,22,31,.12);margin-top:11px;padding:10px 0 22px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(17,22,31,.45)">
+      <span>Error journal: one sentence per mistake</span><span>Week 2 · page 8</span>
+    </div>
+  </div>
+</section>
+<!-- u8w2p2 -->
+<section class="page" data-screen-label="2.2 Evaluate It" style="background:#FCFDFF;padding:0;display:flex;flex-direction:column">
+  <div style="height:9px;background:#FCD34D"></div>
+  <div style="padding:28px 50px 0;flex:1;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:22px;border-bottom:2px solid rgba(17,22,31,.14);padding-bottom:13px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#FCD34D">3rd Grade · Mission 08 · Week 2 · Set 2.2</div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:31px;margin:6px 0 3px;line-height:1.03">Evaluate It</h1>
+        <div style="font-size:12.5px;color:rgba(17,22,31,.62);max-width:520px">Substitute the number, then work it out. One step at a time.</div>
+      </div>
+      <div style="flex:none;text-align:right;font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(17,22,31,.55);line-height:1.95">
+        <div>NAME __________</div><div>DATE __________</div><div>SCORE ____ / 11</div>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#22C55E;color:#052E12;display:grid;place-items:center;font-size:12px">✦</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#15803D">Warm-Up</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">6 items</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:9px"><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">n = 2. Value of 5n</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">n = 3. Value of n + 7</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">n = 10. Value of n ÷ 2</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">n = 1. Value of 9n</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">n = 0. Value of 6n</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">n = 8. Value of n − 8</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div></div>
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#FCD34D;color:#0B1220;display:grid;place-items:center;font-size:12px">◆</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#FCD34D">Core</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">graded · show your working</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:8px"><div style="border:1.5px solid #FCD34D44;border-radius:13px;padding:11px 16px;background:#FCD34D0d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">1. &nbsp;n = 7. Value of 4n + 1</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #FCD34D44;border-radius:13px;padding:11px 16px;background:#FCD34D0d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">2. &nbsp;n = 6. Value of 5n − 12</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #FCD34D44;border-radius:13px;padding:11px 16px;background:#FCD34D0d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">3. &nbsp;n = 9. Value of 2n + 2</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #FCD34D44;border-radius:13px;padding:11px 16px;background:#FCD34D0d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">4. &nbsp;n = 11. Value of 3n − 3</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #FCD34D44;border-radius:13px;padding:11px 16px;background:#FCD34D0d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">5. &nbsp;n = 4. Value of 25 − 3n</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div></div>
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#F59E0B;color:#3A2405;display:grid;place-items:center;font-size:12px">★</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#B45309">Challenge</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">not graded</div>
+    </div>
+    <div style="background:rgba(245,158,11,.1);border:1.5px solid rgba(180,83,9,.32);border-radius:14px;padding:11px 17px;flex:1;display:flex;flex-direction:column;gap:7px"><div style="font-size:13.5px;line-height:1.5">C1. &nbsp;n = 12. Value of 2n ÷ 3</div><div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div><div style="font-size:13.5px;line-height:1.5">C2. &nbsp;n = 5. Value of n² + n</div><div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div></div>
+    <div style="border-top:2px solid rgba(17,22,31,.12);margin-top:11px;padding:10px 0 22px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(17,22,31,.45)">
+      <span>Error journal: one sentence per mistake</span><span>Week 2 · page 9</span>
+    </div>
+  </div>
+</section>
+<!-- u8w2p3 -->
+<section class="page" data-screen-label="2.3 Write the Expression" style="background:#FCFDFF;padding:0;display:flex;flex-direction:column">
+  <div style="height:9px;background:#FCD34D"></div>
+  <div style="padding:28px 50px 0;flex:1;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:22px;border-bottom:2px solid rgba(17,22,31,.14);padding-bottom:13px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#FCD34D">3rd Grade · Mission 08 · Week 2 · Set 2.3</div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:31px;margin:6px 0 3px;line-height:1.03">Write the Expression</h1>
+        <div style="font-size:12.5px;color:rgba(17,22,31,.62);max-width:520px">Turn the sentence into symbols. Then check it on a number.</div>
+      </div>
+      <div style="flex:none;text-align:right;font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(17,22,31,.55);line-height:1.95">
+        <div>NAME __________</div><div>DATE __________</div><div>SCORE ____ / 11</div>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#22C55E;color:#052E12;display:grid;place-items:center;font-size:12px">✦</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#15803D">Warm-Up</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">6 items</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:9px"><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">Three lots of n, when n = 4</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">n more than 5, when n = 3</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">Double n, when n = 7</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">n less than 10, when n = 4</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">Half of n, when n = 8</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">n plus n, when n = 5</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div></div>
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#FCD34D;color:#0B1220;display:grid;place-items:center;font-size:12px">◆</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#FCD34D">Core</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">graded · show your working</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:8px"><div style="border:1.5px solid #FCD34D44;border-radius:13px;padding:11px 16px;background:#FCD34D0d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">1. &nbsp;Five more than double n, when n = 6</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #FCD34D44;border-radius:13px;padding:11px 16px;background:#FCD34D0d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">2. &nbsp;Three less than four lots of n, when n = 5</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #FCD34D44;border-radius:13px;padding:11px 16px;background:#FCD34D0d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">3. &nbsp;Ten more than half of n, when n = 20</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #FCD34D44;border-radius:13px;padding:11px 16px;background:#FCD34D0d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">4. &nbsp;Triple n, plus 4, when n = 8</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #FCD34D44;border-radius:13px;padding:11px 16px;background:#FCD34D0d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">5. &nbsp;n multiplied by itself, when n = 7</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div></div>
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#F59E0B;color:#3A2405;display:grid;place-items:center;font-size:12px">★</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#B45309">Challenge</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">not graded</div>
+    </div>
+    <div style="background:rgba(245,158,11,.1);border:1.5px solid rgba(180,83,9,.32);border-radius:14px;padding:11px 17px;flex:1;display:flex;flex-direction:column;gap:7px"><div style="font-size:13.5px;line-height:1.5">C1. &nbsp;Twice the sum of n and 3, when n = 5</div><div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div><div style="font-size:13.5px;line-height:1.5">C2. &nbsp;The perimeter of a square of side s, when s = 7</div><div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div></div>
+    <div style="border-top:2px solid rgba(17,22,31,.12);margin-top:11px;padding:10px 0 22px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(17,22,31,.45)">
+      <span>Error journal: one sentence per mistake</span><span>Week 2 · page 10</span>
+    </div>
+  </div>
+</section>
+<!-- u8w2p4 -->
+<section class="page" data-screen-label="2.4 Two Letters" style="background:#FCFDFF;padding:0;display:flex;flex-direction:column">
+  <div style="height:9px;background:#FCD34D"></div>
+  <div style="padding:28px 50px 0;flex:1;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:22px;border-bottom:2px solid rgba(17,22,31,.14);padding-bottom:13px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#FCD34D">3rd Grade · Mission 08 · Week 2 · Set 2.4</div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:31px;margin:6px 0 3px;line-height:1.03">Two Letters</h1>
+        <div style="font-size:12.5px;color:rgba(17,22,31,.62);max-width:520px">Substitute both before you simplify anything.</div>
+      </div>
+      <div style="flex:none;text-align:right;font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(17,22,31,.55);line-height:1.95">
+        <div>NAME __________</div><div>DATE __________</div><div>SCORE ____ / 11</div>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#22C55E;color:#052E12;display:grid;place-items:center;font-size:12px">✦</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#15803D">Warm-Up</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">6 items</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:9px"><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">a = 2, b = 3. Value of a + b</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">a = 2, b = 3. Value of ab</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">a = 5, b = 1. Value of a − b</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">a = 4, b = 4. Value of a + b</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">a = 3, b = 6. Value of b ÷ a</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">a = 1, b = 9. Value of ab</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div></div>
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#FCD34D;color:#0B1220;display:grid;place-items:center;font-size:12px">◆</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#FCD34D">Core</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">graded · show your working</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:8px"><div style="border:1.5px solid #FCD34D44;border-radius:13px;padding:11px 16px;background:#FCD34D0d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">1. &nbsp;a = 3, b = 7. Value of 4a + b</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #FCD34D44;border-radius:13px;padding:11px 16px;background:#FCD34D0d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">2. &nbsp;a = 4, b = 6. Value of 3a + 2b</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #FCD34D44;border-radius:13px;padding:11px 16px;background:#FCD34D0d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">3. &nbsp;a = 5, b = 2. Value of a × b + 3</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #FCD34D44;border-radius:13px;padding:11px 16px;background:#FCD34D0d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">4. &nbsp;a = 6, b = 3. Value of 2a − b</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #FCD34D44;border-radius:13px;padding:11px 16px;background:#FCD34D0d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">5. &nbsp;a = 8, b = 2. Value of a ÷ b + 5</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div></div>
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#F59E0B;color:#3A2405;display:grid;place-items:center;font-size:12px">★</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#B45309">Challenge</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">not graded</div>
+    </div>
+    <div style="background:rgba(245,158,11,.1);border:1.5px solid rgba(180,83,9,.32);border-radius:14px;padding:11px 17px;flex:1;display:flex;flex-direction:column;gap:7px"><div style="font-size:13.5px;line-height:1.5">C1. &nbsp;a = 4, b = 5. Value of 2a + 3b − 10</div><div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div><div style="font-size:13.5px;line-height:1.5">C2. &nbsp;l = 7, w = 3. Value of 2l + 2w</div><div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div></div>
+    <div style="border-top:2px solid rgba(17,22,31,.12);margin-top:11px;padding:10px 0 22px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(17,22,31,.45)">
+      <span>Error journal: one sentence per mistake</span><span>Week 2 · page 11</span>
+    </div>
+  </div>
+</section>
+<!-- u8w2p5 -->
+<section class="page" data-screen-label="Fri Perimeter as a Rule" style="background:#FCFDFF;padding:0;display:flex;flex-direction:column">
+  <div style="height:9px;background:#FCD34D"></div>
+  <div style="padding:28px 50px 0;flex:1;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:22px;border-bottom:2px solid rgba(17,22,31,.14);padding-bottom:13px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#FCD34D">3rd Grade · Mission 08 · Week 2 · Set Fri</div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:31px;margin:6px 0 3px;line-height:1.03">Perimeter as a Rule</h1>
+        <div style="font-size:12.5px;color:rgba(17,22,31,.62);max-width:520px">Write it as 4s once, then test it on three squares.</div>
+      </div>
+      <div style="flex:none;text-align:right;font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(17,22,31,.55);line-height:1.95">
+        <div>NAME __________</div><div>DATE __________</div><div>SCORE ____ / 4</div>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#22C55E;color:#052E12;display:grid;place-items:center;font-size:12px">✦</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#15803D">Warm-Up</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">2 items</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:9px"><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">Perimeter of a square of side 3</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">Of side 5</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div></div>
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#FCD34D;color:#0B1220;display:grid;place-items:center;font-size:12px">◆</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#FCD34D">Core</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">graded · show your working</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:8px"><div style="border:1.5px solid #FCD34D44;border-radius:13px;padding:11px 16px;background:#FCD34D0d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">1. &nbsp;Using 4s with s = 9 — the perimeter</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #FCD34D44;border-radius:13px;padding:11px 16px;background:#FCD34D0d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">2. &nbsp;A square of perimeter 28 — its side</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div></div>
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#F59E0B;color:#3A2405;display:grid;place-items:center;font-size:12px">★</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#B45309">Challenge</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">not graded</div>
+    </div>
+    <div style="background:rgba(245,158,11,.1);border:1.5px solid rgba(180,83,9,.32);border-radius:14px;padding:11px 17px;flex:1;display:flex;flex-direction:column;gap:7px"><div style="font-size:13.5px;line-height:1.5">C1. &nbsp;Using 2l + 2w with l = 8, w = 5</div><div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div><div style="font-size:13.5px;line-height:1.5">C2. &nbsp;A rectangle of perimeter 30 and length 10 — its width</div><div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div><div style="font-size:13.5px;line-height:1.5">C3. &nbsp;Using 4s, the side when the perimeter is 100</div><div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div></div>
+    <div style="border-top:2px solid rgba(17,22,31,.12);margin-top:11px;padding:10px 0 22px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(17,22,31,.45)">
+      <span>Error journal: one sentence per mistake</span><span>Week 2 · page 12</span>
+    </div>
+  </div>
+</section>
+<section class="page" data-screen-label="Week 2 key" style="background:#FCFDFF;padding:0;display:flex;flex-direction:column">
+  <div style="height:9px;background:#15803D"></div>
+  <div style="padding:30px 50px 0;flex:1;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:22px;border-bottom:2px solid rgba(17,22,31,.14);padding-bottom:14px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#15803D">Teacher page · answer key</div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:32px;margin:6px 0 3px;line-height:1">Week 2 Answers</h1>
+        <div style="font-size:12.5px;color:rgba(17,22,31,.62)">Mission 08 · all 5 sets. Answers run in page order. Score out of the graded tiers only — Challenge never counts.</div>
+      </div>
+      <div style="flex:none;background:rgba(74,222,128,.14);border:1.5px solid rgba(21,128,61,.3);border-radius:11px;padding:10px 14px;font-size:12px;line-height:1.55;max-width:190px;color:#15803D">Mark the reasoning, not the handwriting. Any correct method counts.</div>
+    </div>
+    <div style="margin-top:16px;display:flex;flex-direction:column;gap:11px;flex:1"><div style="border:1.5px solid rgba(21,128,61,.25);border-radius:13px;padding:12px 17px;background:rgba(74,222,128,.06)">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:6px"><div style="font-family:Fredoka,sans-serif;font-size:17px">2.1 · What a Letter Is</div><div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(17,22,31,.42)">out of 11</div></div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Warm-Up · </span>10 &nbsp;|&nbsp; 12 &nbsp;|&nbsp; 4 &nbsp;|&nbsp; 10 &nbsp;|&nbsp; 18 &nbsp;|&nbsp; 4</div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Core · </span>17 &nbsp;|&nbsp; 11 &nbsp;|&nbsp; 36 &nbsp;|&nbsp; 8 &nbsp;|&nbsp; 30</div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Challenge · </span>20 &nbsp;|&nbsp; 28</div></div><div style="border:1.5px solid rgba(21,128,61,.25);border-radius:13px;padding:12px 17px;background:rgba(74,222,128,.06)">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:6px"><div style="font-family:Fredoka,sans-serif;font-size:17px">2.2 · Evaluate It</div><div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(17,22,31,.42)">out of 11</div></div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Warm-Up · </span>10 &nbsp;|&nbsp; 10 &nbsp;|&nbsp; 5 &nbsp;|&nbsp; 9 &nbsp;|&nbsp; 0 &nbsp;|&nbsp; 0</div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Core · </span>29 &nbsp;|&nbsp; 18 &nbsp;|&nbsp; 20 &nbsp;|&nbsp; 30 &nbsp;|&nbsp; 13</div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Challenge · </span>8 &nbsp;|&nbsp; 30</div></div><div style="border:1.5px solid rgba(21,128,61,.25);border-radius:13px;padding:12px 17px;background:rgba(74,222,128,.06)">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:6px"><div style="font-family:Fredoka,sans-serif;font-size:17px">2.3 · Write the Expression</div><div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(17,22,31,.42)">out of 11</div></div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Warm-Up · </span>12 &nbsp;|&nbsp; 8 &nbsp;|&nbsp; 14 &nbsp;|&nbsp; 6 &nbsp;|&nbsp; 4 &nbsp;|&nbsp; 10</div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Core · </span>17 &nbsp;|&nbsp; 17 &nbsp;|&nbsp; 20 &nbsp;|&nbsp; 28 &nbsp;|&nbsp; 49</div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Challenge · </span>16 &nbsp;|&nbsp; 28</div></div><div style="border:1.5px solid rgba(21,128,61,.25);border-radius:13px;padding:12px 17px;background:rgba(74,222,128,.06)">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:6px"><div style="font-family:Fredoka,sans-serif;font-size:17px">2.4 · Two Letters</div><div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(17,22,31,.42)">out of 11</div></div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Warm-Up · </span>5 &nbsp;|&nbsp; 6 &nbsp;|&nbsp; 4 &nbsp;|&nbsp; 8 &nbsp;|&nbsp; 2 &nbsp;|&nbsp; 9</div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Core · </span>19 &nbsp;|&nbsp; 24 &nbsp;|&nbsp; 13 &nbsp;|&nbsp; 9 &nbsp;|&nbsp; 9</div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Challenge · </span>13 &nbsp;|&nbsp; 20</div></div><div style="border:1.5px solid rgba(21,128,61,.25);border-radius:13px;padding:12px 17px;background:rgba(74,222,128,.06)">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:6px"><div style="font-family:Fredoka,sans-serif;font-size:17px">Fri · Perimeter as a Rule</div><div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(17,22,31,.42)">out of 4</div></div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Warm-Up · </span>12 &nbsp;|&nbsp; 20</div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Core · </span>36 &nbsp;|&nbsp; 7</div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Challenge · </span>26 &nbsp;|&nbsp; 5 &nbsp;|&nbsp; 25</div></div></div>
+    <div style="border-top:2px solid rgba(17,22,31,.12);margin-top:11px;padding:10px 0 22px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(17,22,31,.45)">
+      <span>Algebra Sparks · Week 2</span><span>Answer key · page 13</span>
+    </div>
+  </div>
+</section>
+<!-- u8w3p1 -->
+<section class="page" data-screen-label="3.1 Keep It Level" style="background:#FCFDFF;padding:0;display:flex;flex-direction:column">
+  <div style="height:9px;background:#FCD34D"></div>
+  <div style="padding:28px 50px 0;flex:1;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:22px;border-bottom:2px solid rgba(17,22,31,.14);padding-bottom:13px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#FCD34D">3rd Grade · Mission 08 · Week 3 · Set 3.1</div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:31px;margin:6px 0 3px;line-height:1.03">Keep It Level</h1>
+        <div style="font-size:12.5px;color:rgba(17,22,31,.62);max-width:520px">Take the same amount from both sides and the balance holds.</div>
+      </div>
+      <div style="flex:none;text-align:right;font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(17,22,31,.55);line-height:1.95">
+        <div>NAME __________</div><div>DATE __________</div><div>SCORE ____ / 11</div>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#22C55E;color:#052E12;display:grid;place-items:center;font-size:12px">✦</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#15803D">Warm-Up</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">6 items</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:9px"><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">x + 4 = 11</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">x + 5 = 12</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">x + 10 = 15</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">x + 2 = 9</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">x + 7 = 7</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">x + 12 = 20</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div></div>
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#FCD34D;color:#0B1220;display:grid;place-items:center;font-size:12px">◆</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#FCD34D">Core</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">graded · show your working</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:8px"><div style="border:1.5px solid #FCD34D44;border-radius:13px;padding:11px 16px;background:#FCD34D0d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">1. &nbsp;x + 17 = 42</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #FCD34D44;border-radius:13px;padding:11px 16px;background:#FCD34D0d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">2. &nbsp;x − 5 = 9</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #FCD34D44;border-radius:13px;padding:11px 16px;background:#FCD34D0d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">3. &nbsp;x − 23 = 19</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #FCD34D44;border-radius:13px;padding:11px 16px;background:#FCD34D0d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">4. &nbsp;x + 38 = 100</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #FCD34D44;border-radius:13px;padding:11px 16px;background:#FCD34D0d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">5. &nbsp;x − 14 = 27</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div></div>
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#F59E0B;color:#3A2405;display:grid;place-items:center;font-size:12px">★</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#B45309">Challenge</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">not graded</div>
+    </div>
+    <div style="background:rgba(245,158,11,.1);border:1.5px solid rgba(180,83,9,.32);border-radius:14px;padding:11px 17px;flex:1;display:flex;flex-direction:column;gap:7px"><div style="font-size:13.5px;line-height:1.5">C1. &nbsp;x + 156 = 400</div><div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div><div style="font-size:13.5px;line-height:1.5">C2. &nbsp;x − 99 = 101</div><div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div></div>
+    <div style="border-top:2px solid rgba(17,22,31,.12);margin-top:11px;padding:10px 0 22px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(17,22,31,.45)">
+      <span>Error journal: one sentence per mistake</span><span>Week 3 · page 14</span>
+    </div>
+  </div>
+</section>
+<!-- u8w3p2 -->
+<section class="page" data-screen-label="3.2 Multiply and Divide" style="background:#FCFDFF;padding:0;display:flex;flex-direction:column">
+  <div style="height:9px;background:#FCD34D"></div>
+  <div style="padding:28px 50px 0;flex:1;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:22px;border-bottom:2px solid rgba(17,22,31,.14);padding-bottom:13px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#FCD34D">3rd Grade · Mission 08 · Week 3 · Set 3.2</div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:31px;margin:6px 0 3px;line-height:1.03">Multiply and Divide</h1>
+        <div style="font-size:12.5px;color:rgba(17,22,31,.62);max-width:520px">Divide both sides by the same number and the balance still holds.</div>
+      </div>
+      <div style="flex:none;text-align:right;font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(17,22,31,.55);line-height:1.95">
+        <div>NAME __________</div><div>DATE __________</div><div>SCORE ____ / 11</div>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#22C55E;color:#052E12;display:grid;place-items:center;font-size:12px">✦</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#15803D">Warm-Up</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">6 items</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:9px"><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">3x = 21</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">6x = 30</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">2x = 14</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">5x = 25</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">x ÷ 2 = 8</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">4x = 20</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div></div>
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#FCD34D;color:#0B1220;display:grid;place-items:center;font-size:12px">◆</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#FCD34D">Core</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">graded · show your working</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:8px"><div style="border:1.5px solid #FCD34D44;border-radius:13px;padding:11px 16px;background:#FCD34D0d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">1. &nbsp;8x = 96</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #FCD34D44;border-radius:13px;padding:11px 16px;background:#FCD34D0d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">2. &nbsp;7x = 84</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #FCD34D44;border-radius:13px;padding:11px 16px;background:#FCD34D0d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">3. &nbsp;x ÷ 5 = 13</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #FCD34D44;border-radius:13px;padding:11px 16px;background:#FCD34D0d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">4. &nbsp;4x = 100</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #FCD34D44;border-radius:13px;padding:11px 16px;background:#FCD34D0d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">5. &nbsp;9x = 108</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div></div>
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#F59E0B;color:#3A2405;display:grid;place-items:center;font-size:12px">★</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#B45309">Challenge</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">not graded</div>
+    </div>
+    <div style="background:rgba(245,158,11,.1);border:1.5px solid rgba(180,83,9,.32);border-radius:14px;padding:11px 17px;flex:1;display:flex;flex-direction:column;gap:7px"><div style="font-size:13.5px;line-height:1.5">C1. &nbsp;12x = 288</div><div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div><div style="font-size:13.5px;line-height:1.5">C2. &nbsp;x ÷ 7 = 21</div><div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div></div>
+    <div style="border-top:2px solid rgba(17,22,31,.12);margin-top:11px;padding:10px 0 22px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(17,22,31,.45)">
+      <span>Error journal: one sentence per mistake</span><span>Week 3 · page 15</span>
+    </div>
+  </div>
+</section>
+<!-- u8w3p3 -->
+<section class="page" data-screen-label="3.3 Check Your Answer" style="background:#FCFDFF;padding:0;display:flex;flex-direction:column">
+  <div style="height:9px;background:#FCD34D"></div>
+  <div style="padding:28px 50px 0;flex:1;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:22px;border-bottom:2px solid rgba(17,22,31,.14);padding-bottom:13px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#FCD34D">3rd Grade · Mission 08 · Week 3 · Set 3.3</div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:31px;margin:6px 0 3px;line-height:1.03">Check Your Answer</h1>
+        <div style="font-size:12.5px;color:rgba(17,22,31,.62);max-width:520px">Put it back in. If both sides match, you are done — no marking needed.</div>
+      </div>
+      <div style="flex:none;text-align:right;font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(17,22,31,.55);line-height:1.95">
+        <div>NAME __________</div><div>DATE __________</div><div>SCORE ____ / 11</div>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#22C55E;color:#052E12;display:grid;place-items:center;font-size:12px">✦</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#15803D">Warm-Up</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">6 items</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:9px"><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">x = 7 in x + 4 — the value</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">x = 5 in 3x — the value</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">x = 9 in x − 2</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">x = 4 in 2x + 1</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">x = 6 in x ÷ 2</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">x = 10 in x + 10</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div></div>
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#FCD34D;color:#0B1220;display:grid;place-items:center;font-size:12px">◆</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#FCD34D">Core</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">graded · show your working</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:8px"><div style="border:1.5px solid #FCD34D44;border-radius:13px;padding:11px 16px;background:#FCD34D0d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">1. &nbsp;Solve then check: 3x = 27</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #FCD34D44;border-radius:13px;padding:11px 16px;background:#FCD34D0d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">2. &nbsp;Check x = 9 in 3x — the value</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #FCD34D44;border-radius:13px;padding:11px 16px;background:#FCD34D0d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">3. &nbsp;Solve then check: x + 19 = 31</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #FCD34D44;border-radius:13px;padding:11px 16px;background:#FCD34D0d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">4. &nbsp;Check x = 12 in x + 19</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #FCD34D44;border-radius:13px;padding:11px 16px;background:#FCD34D0d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">5. &nbsp;Solve: 6x = 72</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div></div>
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#F59E0B;color:#3A2405;display:grid;place-items:center;font-size:12px">★</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#B45309">Challenge</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">not graded</div>
+    </div>
+    <div style="background:rgba(245,158,11,.1);border:1.5px solid rgba(180,83,9,.32);border-radius:14px;padding:11px 17px;flex:1;display:flex;flex-direction:column;gap:7px"><div style="font-size:13.5px;line-height:1.5">C1. &nbsp;2x + 5 = 19</div><div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div><div style="font-size:13.5px;line-height:1.5">C2. &nbsp;Check x = 7 in 2x + 5</div><div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div></div>
+    <div style="border-top:2px solid rgba(17,22,31,.12);margin-top:11px;padding:10px 0 22px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(17,22,31,.45)">
+      <span>Error journal: one sentence per mistake</span><span>Week 3 · page 16</span>
+    </div>
+  </div>
+</section>
+<!-- u8w3p4 -->
+<section class="page" data-screen-label="3.4 Word to Equation" style="background:#FCFDFF;padding:0;display:flex;flex-direction:column">
+  <div style="height:9px;background:#FCD34D"></div>
+  <div style="padding:28px 50px 0;flex:1;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:22px;border-bottom:2px solid rgba(17,22,31,.14);padding-bottom:13px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#FCD34D">3rd Grade · Mission 08 · Week 3 · Set 3.4</div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:31px;margin:6px 0 3px;line-height:1.03">Word to Equation</h1>
+        <div style="font-size:12.5px;color:rgba(17,22,31,.62);max-width:520px">Turn the situation into an equation, then solve it.</div>
+      </div>
+      <div style="flex:none;text-align:right;font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(17,22,31,.55);line-height:1.95">
+        <div>NAME __________</div><div>DATE __________</div><div>SCORE ____ / 11</div>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#22C55E;color:#052E12;display:grid;place-items:center;font-size:12px">✦</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#15803D">Warm-Up</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">6 items</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:9px"><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">A number plus 5 is 12. The number</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">Double a number is 14. The number</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">A number less 3 is 8. The number</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">Three lots of a number is 18. The number</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">Half a number is 9. The number</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">A number plus itself is 16. The number</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div></div>
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#FCD34D;color:#0B1220;display:grid;place-items:center;font-size:12px">◆</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#FCD34D">Core</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">graded · show your working</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:8px"><div style="border:1.5px solid #FCD34D44;border-radius:13px;padding:11px 16px;background:#FCD34D0d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">1. &nbsp;Four friends share equally and get 13 each. The total</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #FCD34D44;border-radius:13px;padding:11px 16px;background:#FCD34D0d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">2. &nbsp;After spending $18 you have $27. You started with</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #FCD34D44;border-radius:13px;padding:11px 16px;background:#FCD34D0d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">3. &nbsp;Five boxes hold 60 altogether. Each box</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #FCD34D44;border-radius:13px;padding:11px 16px;background:#FCD34D0d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">4. &nbsp;A number times 7 is 91. The number</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #FCD34D44;border-radius:13px;padding:11px 16px;background:#FCD34D0d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">5. &nbsp;Twice a number plus 3 is 21. The number</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div></div>
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#F59E0B;color:#3A2405;display:grid;place-items:center;font-size:12px">★</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#B45309">Challenge</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">not graded</div>
+    </div>
+    <div style="background:rgba(245,158,11,.1);border:1.5px solid rgba(180,83,9,.32);border-radius:14px;padding:11px 17px;flex:1;display:flex;flex-direction:column;gap:7px"><div style="font-size:13.5px;line-height:1.5">C1. &nbsp;Three times a number, less 7, is 26. The number</div><div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div><div style="font-size:13.5px;line-height:1.5">C2. &nbsp;A rectangle of perimeter 34 and width 5 — its length</div><div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div></div>
+    <div style="border-top:2px solid rgba(17,22,31,.12);margin-top:11px;padding:10px 0 22px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(17,22,31,.45)">
+      <span>Error journal: one sentence per mistake</span><span>Week 3 · page 17</span>
+    </div>
+  </div>
+</section>
+<!-- u8w3p5 -->
+<section class="page" data-screen-label="Fri Mid-Unit Quiz" style="background:#FCFDFF;padding:0;display:flex;flex-direction:column">
+  <div style="height:9px;background:#FCD34D"></div>
+  <div style="padding:28px 50px 0;flex:1;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:22px;border-bottom:2px solid rgba(17,22,31,.14);padding-bottom:13px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#FCD34D">3rd Grade · Mission 08 · Week 3 · Set Fri</div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:31px;margin:6px 0 3px;line-height:1.03">Mid-Unit Quiz</h1>
+        <div style="font-size:12.5px;color:rgba(17,22,31,.62);max-width:520px">Eight items across Weeks 1–3. 85% to keep flying.</div>
+      </div>
+      <div style="flex:none;text-align:right;font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(17,22,31,.55);line-height:1.95">
+        <div>NAME __________</div><div>DATE __________</div><div>SCORE ____ / 7</div>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#22C55E;color:#052E12;display:grid;place-items:center;font-size:12px">✦</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#15803D">Warm-Up</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">2 items</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:9px"><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">6, 11, 16, 21 — next</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">n = 4. Value of 3n</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div></div>
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#FCD34D;color:#0B1220;display:grid;place-items:center;font-size:12px">◆</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#FCD34D">Core</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">graded · show your working</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:8px"><div style="border:1.5px solid #FCD34D44;border-radius:13px;padding:11px 16px;background:#FCD34D0d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">1. &nbsp;Machine × 4 + 2. In 9</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #FCD34D44;border-radius:13px;padding:11px 16px;background:#FCD34D0d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">2. &nbsp;That machine gives 30 — what went in</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #FCD34D44;border-radius:13px;padding:11px 16px;background:#FCD34D0d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">3. &nbsp;n = 7. Value of 3n − 4</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #FCD34D44;border-radius:13px;padding:11px 16px;background:#FCD34D0d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">4. &nbsp;x + 18 = 45</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #FCD34D44;border-radius:13px;padding:11px 16px;background:#FCD34D0d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">5. &nbsp;7x = 63</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div></div>
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#F59E0B;color:#3A2405;display:grid;place-items:center;font-size:12px">★</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#B45309">Challenge</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">not graded</div>
+    </div>
+    <div style="background:rgba(245,158,11,.1);border:1.5px solid rgba(180,83,9,.32);border-radius:14px;padding:11px 17px;flex:1;display:flex;flex-direction:column;gap:7px"><div style="font-size:13.5px;line-height:1.5">C1. &nbsp;A pattern starts at 3 and adds 4 — its tenth number</div><div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div></div>
+    <div style="border-top:2px solid rgba(17,22,31,.12);margin-top:11px;padding:10px 0 22px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(17,22,31,.45)">
+      <span>Error journal: one sentence per mistake</span><span>Week 3 · page 18</span>
+    </div>
+  </div>
+</section>
+<section class="page" data-screen-label="Week 3 key" style="background:#FCFDFF;padding:0;display:flex;flex-direction:column">
+  <div style="height:9px;background:#15803D"></div>
+  <div style="padding:30px 50px 0;flex:1;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:22px;border-bottom:2px solid rgba(17,22,31,.14);padding-bottom:14px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#15803D">Teacher page · answer key</div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:32px;margin:6px 0 3px;line-height:1">Week 3 Answers</h1>
+        <div style="font-size:12.5px;color:rgba(17,22,31,.62)">Mission 08 · all 5 sets. Answers run in page order. Score out of the graded tiers only — Challenge never counts.</div>
+      </div>
+      <div style="flex:none;background:rgba(74,222,128,.14);border:1.5px solid rgba(21,128,61,.3);border-radius:11px;padding:10px 14px;font-size:12px;line-height:1.55;max-width:190px;color:#15803D">Mark the reasoning, not the handwriting. Any correct method counts.</div>
+    </div>
+    <div style="margin-top:16px;display:flex;flex-direction:column;gap:11px;flex:1"><div style="border:1.5px solid rgba(21,128,61,.25);border-radius:13px;padding:12px 17px;background:rgba(74,222,128,.06)">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:6px"><div style="font-family:Fredoka,sans-serif;font-size:17px">3.1 · Keep It Level</div><div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(17,22,31,.42)">out of 11</div></div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Warm-Up · </span>7 &nbsp;|&nbsp; 7 &nbsp;|&nbsp; 5 &nbsp;|&nbsp; 7 &nbsp;|&nbsp; 0 &nbsp;|&nbsp; 8</div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Core · </span>25 &nbsp;|&nbsp; 14 &nbsp;|&nbsp; 42 &nbsp;|&nbsp; 62 &nbsp;|&nbsp; 41</div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Challenge · </span>244 &nbsp;|&nbsp; 200</div></div><div style="border:1.5px solid rgba(21,128,61,.25);border-radius:13px;padding:12px 17px;background:rgba(74,222,128,.06)">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:6px"><div style="font-family:Fredoka,sans-serif;font-size:17px">3.2 · Multiply and Divide</div><div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(17,22,31,.42)">out of 11</div></div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Warm-Up · </span>7 &nbsp;|&nbsp; 5 &nbsp;|&nbsp; 7 &nbsp;|&nbsp; 5 &nbsp;|&nbsp; 16 &nbsp;|&nbsp; 5</div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Core · </span>12 &nbsp;|&nbsp; 12 &nbsp;|&nbsp; 65 &nbsp;|&nbsp; 25 &nbsp;|&nbsp; 12</div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Challenge · </span>24 &nbsp;|&nbsp; 147</div></div><div style="border:1.5px solid rgba(21,128,61,.25);border-radius:13px;padding:12px 17px;background:rgba(74,222,128,.06)">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:6px"><div style="font-family:Fredoka,sans-serif;font-size:17px">3.3 · Check Your Answer</div><div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(17,22,31,.42)">out of 11</div></div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Warm-Up · </span>11 &nbsp;|&nbsp; 15 &nbsp;|&nbsp; 7 &nbsp;|&nbsp; 9 &nbsp;|&nbsp; 3 &nbsp;|&nbsp; 20</div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Core · </span>9 &nbsp;|&nbsp; 27 &nbsp;|&nbsp; 12 &nbsp;|&nbsp; 31 &nbsp;|&nbsp; 12</div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Challenge · </span>7 &nbsp;|&nbsp; 19</div></div><div style="border:1.5px solid rgba(21,128,61,.25);border-radius:13px;padding:12px 17px;background:rgba(74,222,128,.06)">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:6px"><div style="font-family:Fredoka,sans-serif;font-size:17px">3.4 · Word to Equation</div><div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(17,22,31,.42)">out of 11</div></div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Warm-Up · </span>7 &nbsp;|&nbsp; 7 &nbsp;|&nbsp; 11 &nbsp;|&nbsp; 6 &nbsp;|&nbsp; 18 &nbsp;|&nbsp; 8</div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Core · </span>52 &nbsp;|&nbsp; 45 &nbsp;|&nbsp; 12 &nbsp;|&nbsp; 13 &nbsp;|&nbsp; 9</div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Challenge · </span>11 &nbsp;|&nbsp; 12</div></div><div style="border:1.5px solid rgba(21,128,61,.25);border-radius:13px;padding:12px 17px;background:rgba(74,222,128,.06)">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:6px"><div style="font-family:Fredoka,sans-serif;font-size:17px">Fri · Mid-Unit Quiz</div><div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(17,22,31,.42)">out of 7</div></div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Warm-Up · </span>26 &nbsp;|&nbsp; 12</div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Core · </span>38 &nbsp;|&nbsp; 7 &nbsp;|&nbsp; 17 &nbsp;|&nbsp; 27 &nbsp;|&nbsp; 9</div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Challenge · </span>39</div></div></div>
+    <div style="border-top:2px solid rgba(17,22,31,.12);margin-top:11px;padding:10px 0 22px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(17,22,31,.45)">
+      <span>Algebra Sparks · Week 3</span><span>Answer key · page 19</span>
+    </div>
+  </div>
+</section>
+<!-- u8w4p1 -->
+<section class="page" data-screen-label="4.1 Design the Trail" style="background:#FCFDFF;padding:0;display:flex;flex-direction:column">
+  <div style="height:9px;background:#FCD34D"></div>
+  <div style="padding:28px 50px 0;flex:1;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:22px;border-bottom:2px solid rgba(17,22,31,.14);padding-bottom:13px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#FCD34D">3rd Grade · Mission 08 · Week 4 · Set 4.1</div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:31px;margin:6px 0 3px;line-height:1.03">Design the Trail</h1>
+        <div style="font-size:12.5px;color:rgba(17,22,31,.62);max-width:520px">Ten stops, one per mission plus two of your own. Map it first.</div>
+      </div>
+      <div style="flex:none;text-align:right;font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(17,22,31,.55);line-height:1.95">
+        <div>NAME __________</div><div>DATE __________</div><div>SCORE ____ / 11</div>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#22C55E;color:#052E12;display:grid;place-items:center;font-size:12px">✦</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#15803D">Warm-Up</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">6 items</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:9px"><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">Stops on the trail</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">Missions in the year</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">Stops of your own choosing</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">3 minutes per stop, 10 stops — minutes</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">Half of 10 stops</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">Two stops per room — rooms needed</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div></div>
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#FCD34D;color:#0B1220;display:grid;place-items:center;font-size:12px">◆</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#FCD34D">Core</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">graded · show your working</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:8px"><div style="border:1.5px solid #FCD34D44;border-radius:13px;padding:11px 16px;background:#FCD34D0d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">1. &nbsp;Trail rule × 2 + 3 — stop 6 gives</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #FCD34D44;border-radius:13px;padding:11px 16px;background:#FCD34D0d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">2. &nbsp;That rule — stop 10 gives</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #FCD34D44;border-radius:13px;padding:11px 16px;background:#FCD34D0d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">3. &nbsp;10 stops at 4 minutes each — minutes</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #FCD34D44;border-radius:13px;padding:11px 16px;background:#FCD34D0d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">4. &nbsp;If 3 stops are outdoors, the percent indoors</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #FCD34D44;border-radius:13px;padding:11px 16px;background:#FCD34D0d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">5. &nbsp;Stops numbered 1 to 10 — their total</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div></div>
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#F59E0B;color:#3A2405;display:grid;place-items:center;font-size:12px">★</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#B45309">Challenge</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">not graded</div>
+    </div>
+    <div style="background:rgba(245,158,11,.1);border:1.5px solid rgba(180,83,9,.32);border-radius:14px;padding:11px 17px;flex:1;display:flex;flex-direction:column;gap:7px"><div style="font-size:13.5px;line-height:1.5">C1. &nbsp;A trail rule × 3 + 1 — stop 12 gives</div><div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div><div style="font-size:13.5px;line-height:1.5">C2. &nbsp;Ten stops, each worth 12 points — the total</div><div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div></div>
+    <div style="border-top:2px solid rgba(17,22,31,.12);margin-top:11px;padding:10px 0 22px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(17,22,31,.45)">
+      <span>Error journal: one sentence per mistake</span><span>Week 4 · page 20</span>
+    </div>
+  </div>
+</section>
+<!-- u8w4p2 -->
+<section class="page" data-screen-label="4.2 Write the Problems" style="background:#FCFDFF;padding:0;display:flex;flex-direction:column">
+  <div style="height:9px;background:#FCD34D"></div>
+  <div style="padding:28px 50px 0;flex:1;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:22px;border-bottom:2px solid rgba(17,22,31,.14);padding-bottom:13px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#FCD34D">3rd Grade · Mission 08 · Week 4 · Set 4.2</div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:31px;margin:6px 0 3px;line-height:1.03">Write the Problems</h1>
+        <div style="font-size:12.5px;color:rgba(17,22,31,.62);max-width:520px">Every stop gets a problem and a hidden answer key in your handwriting.</div>
+      </div>
+      <div style="flex:none;text-align:right;font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(17,22,31,.55);line-height:1.95">
+        <div>NAME __________</div><div>DATE __________</div><div>SCORE ____ / 11</div>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#22C55E;color:#052E12;display:grid;place-items:center;font-size:12px">✦</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#15803D">Warm-Up</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">6 items</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:9px"><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">23 × 14</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">372 ÷ 3</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">2 + 3 × 4</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">1/2 + 1/4 — type as a/b</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">$20 − $13.68</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">Perimeter of a 4 by 3 rectangle</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div></div>
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#FCD34D;color:#0B1220;display:grid;place-items:center;font-size:12px">◆</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#FCD34D">Core</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">graded · show your working</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:8px"><div style="border:1.5px solid #FCD34D44;border-radius:13px;padding:11px 16px;background:#FCD34D0d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">1. &nbsp;Mean of 4, 7, 7, 9, 13</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #FCD34D44;border-radius:13px;padding:11px 16px;background:#FCD34D0d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">2. &nbsp;x + 17 = 42</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #FCD34D44;border-radius:13px;padding:11px 16px;background:#FCD34D0d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">3. &nbsp;Area 48, one side 6 — the other</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #FCD34D44;border-radius:13px;padding:11px 16px;background:#FCD34D0d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">4. &nbsp;GCF of 24 and 36</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #FCD34D44;border-radius:13px;padding:11px 16px;background:#FCD34D0d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">5. &nbsp;Round 4,829 to the nearest thousand</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div></div>
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#F59E0B;color:#3A2405;display:grid;place-items:center;font-size:12px">★</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#B45309">Challenge</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">not graded</div>
+    </div>
+    <div style="background:rgba(245,158,11,.1);border:1.5px solid rgba(180,83,9,.32);border-radius:14px;padding:11px 17px;flex:1;display:flex;flex-direction:column;gap:7px"><div style="font-size:13.5px;line-height:1.5">C1. &nbsp;2/3 + 3/4 — type as a/b</div><div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div><div style="font-size:13.5px;line-height:1.5">C2. &nbsp;A machine × 4 + 3 — in 10 gives</div><div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div></div>
+    <div style="border-top:2px solid rgba(17,22,31,.12);margin-top:11px;padding:10px 0 22px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(17,22,31,.45)">
+      <span>Error journal: one sentence per mistake</span><span>Week 4 · page 21</span>
+    </div>
+  </div>
+</section>
+<!-- u8w4p3 -->
+<section class="page" data-screen-label="4.3 Mom Walks It" style="background:#FCFDFF;padding:0;display:flex;flex-direction:column">
+  <div style="height:9px;background:#FCD34D"></div>
+  <div style="padding:28px 50px 0;flex:1;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:22px;border-bottom:2px solid rgba(17,22,31,.14);padding-bottom:13px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#FCD34D">3rd Grade · Mission 08 · Week 4 · Set 4.3</div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:31px;margin:6px 0 3px;line-height:1.03">Mom Walks It</h1>
+        <div style="font-size:12.5px;color:rgba(17,22,31,.62);max-width:520px">You mark her work. Any ambiguous question gets rewritten on the spot.</div>
+      </div>
+      <div style="flex:none;text-align:right;font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(17,22,31,.55);line-height:1.95">
+        <div>NAME __________</div><div>DATE __________</div><div>SCORE ____ / 11</div>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#22C55E;color:#052E12;display:grid;place-items:center;font-size:12px">✦</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#15803D">Warm-Up</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">6 items</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:9px"><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">10 stops, 8 correct — the percent</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">10 stops, 9 correct — the percent</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">10 stops, 10 correct — the percent</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">10 minus 7</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">Half of 10 stops</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">10 stops, 5 correct — the percent</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div></div>
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#FCD34D;color:#0B1220;display:grid;place-items:center;font-size:12px">◆</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#FCD34D">Core</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">graded · show your working</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:8px"><div style="border:1.5px solid #FCD34D44;border-radius:13px;padding:11px 16px;background:#FCD34D0d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">1. &nbsp;She takes 4 minutes a stop — total minutes</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #FCD34D44;border-radius:13px;padding:11px 16px;background:#FCD34D0d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">2. &nbsp;Two stops rewritten out of 10 — the percent</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #FCD34D44;border-radius:13px;padding:11px 16px;background:#FCD34D0d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">3. &nbsp;85% of 10 stops — how many</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #FCD34D44;border-radius:13px;padding:11px 16px;background:#FCD34D0d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">4. &nbsp;If 9 of 10 are solvable, the percent that are not</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #FCD34D44;border-radius:13px;padding:11px 16px;background:#FCD34D0d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">5. &nbsp;A 40-minute walk over 10 stops — mean minutes per stop</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div></div>
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#F59E0B;color:#3A2405;display:grid;place-items:center;font-size:12px">★</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#B45309">Challenge</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">not graded</div>
+    </div>
+    <div style="background:rgba(245,158,11,.1);border:1.5px solid rgba(180,83,9,.32);border-radius:14px;padding:11px 17px;flex:1;display:flex;flex-direction:column;gap:7px"><div style="font-size:13.5px;line-height:1.5">C1. &nbsp;12 points per stop, 10 stops, she scores 96 — the percent</div><div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div><div style="font-size:13.5px;line-height:1.5">C2. &nbsp;To score 85% of 120 points, she needs</div><div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div></div>
+    <div style="border-top:2px solid rgba(17,22,31,.12);margin-top:11px;padding:10px 0 22px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(17,22,31,.45)">
+      <span>Error journal: one sentence per mistake</span><span>Week 4 · page 22</span>
+    </div>
+  </div>
+</section>
+<!-- u8w4p4 -->
+<section class="page" data-screen-label="Thu Year-End Sweep" style="background:#FCFDFF;padding:0;display:flex;flex-direction:column">
+  <div style="height:9px;background:#FCD34D"></div>
+  <div style="padding:28px 50px 0;flex:1;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:22px;border-bottom:2px solid rgba(17,22,31,.14);padding-bottom:13px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#FCD34D">3rd Grade · Mission 08 · Week 4 · Set Thu</div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:31px;margin:6px 0 3px;line-height:1.03">Year-End Sweep</h1>
+        <div style="font-size:12.5px;color:rgba(17,22,31,.62);max-width:520px">All eight error journals. Name the one habit that fixed itself.</div>
+      </div>
+      <div style="flex:none;text-align:right;font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(17,22,31,.55);line-height:1.95">
+        <div>NAME __________</div><div>DATE __________</div><div>SCORE ____ / 11</div>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#22C55E;color:#052E12;display:grid;place-items:center;font-size:12px">✦</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#15803D">Warm-Up</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">6 items</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:9px"><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">7 × 8</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">84 ÷ 12</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">2 + 3 × 4</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">1/2 of 20</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">0.25 + 0.25</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">Degrees in a right angle</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div></div>
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#FCD34D;color:#0B1220;display:grid;place-items:center;font-size:12px">◆</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#FCD34D">Core</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">graded · show your working</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:8px"><div style="border:1.5px solid #FCD34D44;border-radius:13px;padding:11px 16px;background:#FCD34D0d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">1. &nbsp;38 × 24</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #FCD34D44;border-radius:13px;padding:11px 16px;background:#FCD34D0d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">2. &nbsp;618 ÷ 6</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #FCD34D44;border-radius:13px;padding:11px 16px;background:#FCD34D0d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">3. &nbsp;2/3 + 1/4 — type as a/b</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #FCD34D44;border-radius:13px;padding:11px 16px;background:#FCD34D0d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">4. &nbsp;Mean of 6, 8, 10, 12</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #FCD34D44;border-radius:13px;padding:11px 16px;background:#FCD34D0d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">5. &nbsp;3x = 21</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div></div>
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#F59E0B;color:#3A2405;display:grid;place-items:center;font-size:12px">★</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#B45309">Challenge</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">not graded</div>
+    </div>
+    <div style="background:rgba(245,158,11,.1);border:1.5px solid rgba(180,83,9,.32);border-radius:14px;padding:11px 17px;flex:1;display:flex;flex-direction:column;gap:7px"><div style="font-size:13.5px;line-height:1.5">C1. &nbsp;Primes below 100 — how many</div><div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div><div style="font-size:13.5px;line-height:1.5">C2. &nbsp;2x + 5 = 19</div><div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div></div>
+    <div style="border-top:2px solid rgba(17,22,31,.12);margin-top:11px;padding:10px 0 22px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(17,22,31,.45)">
+      <span>Error journal: one sentence per mistake</span><span>Week 4 · page 23</span>
+    </div>
+  </div>
+</section>
+<!-- u8w4p5 -->
+<section class="page" data-screen-label="Fri Mission 08 Test" style="background:#FCFDFF;padding:0;display:flex;flex-direction:column">
+  <div style="height:9px;background:#FCD34D"></div>
+  <div style="padding:28px 50px 0;flex:1;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:22px;border-bottom:2px solid rgba(17,22,31,.14);padding-bottom:13px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#FCD34D">3rd Grade · Mission 08 · Week 4 · Set Fri</div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:31px;margin:6px 0 3px;line-height:1.03">Mission 08 Test</h1>
+        <div style="font-size:12.5px;color:rgba(17,22,31,.62);max-width:520px">Twelve items plus the completed trail. Final trophy band awarded.</div>
+      </div>
+      <div style="flex:none;text-align:right;font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(17,22,31,.55);line-height:1.95">
+        <div>NAME __________</div><div>DATE __________</div><div>SCORE ____ / 10</div>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#22C55E;color:#052E12;display:grid;place-items:center;font-size:12px">✦</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#15803D">Warm-Up</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">2 items</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:9px"><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">3, 6, 9, 12 — next</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">n = 5. Value of 2n</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div></div>
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#FCD34D;color:#0B1220;display:grid;place-items:center;font-size:12px">◆</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#FCD34D">Core</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">graded · show your working</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:8px"><div style="border:1.5px solid #FCD34D44;border-radius:13px;padding:11px 16px;background:#FCD34D0d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">1. &nbsp;2, 6, 18, 54 — next</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #FCD34D44;border-radius:13px;padding:11px 16px;background:#FCD34D0d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">2. &nbsp;A pattern from 5 adding 6 — its twelfth number</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #FCD34D44;border-radius:13px;padding:11px 16px;background:#FCD34D0d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">3. &nbsp;Machine × 5 + 3. In 8</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #FCD34D44;border-radius:13px;padding:11px 16px;background:#FCD34D0d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">4. &nbsp;Machine × 6 − 4 gives 32 — what went in</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #FCD34D44;border-radius:13px;padding:11px 16px;background:#FCD34D0d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">5. &nbsp;n = 9. Value of 4n + 7</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #FCD34D44;border-radius:13px;padding:11px 16px;background:#FCD34D0d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">6. &nbsp;a = 4, b = 6. Value of 3a + 2b</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #FCD34D44;border-radius:13px;padding:11px 16px;background:#FCD34D0d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">7. &nbsp;x − 26 = 19</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #FCD34D44;border-radius:13px;padding:11px 16px;background:#FCD34D0d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">8. &nbsp;9x = 108</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div></div>
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#F59E0B;color:#3A2405;display:grid;place-items:center;font-size:12px">★</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#B45309">Challenge</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">not graded</div>
+    </div>
+    <div style="background:rgba(245,158,11,.1);border:1.5px solid rgba(180,83,9,.32);border-radius:14px;padding:11px 17px;flex:1;display:flex;flex-direction:column;gap:7px"><div style="font-size:13.5px;line-height:1.5">C1. &nbsp;2x + 5 = 19</div><div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div><div style="font-size:13.5px;line-height:1.5">C2. &nbsp;A machine turns 5 into 23 and 8 into 35 — in 10 gives</div><div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div></div>
+    <div style="border-top:2px solid rgba(17,22,31,.12);margin-top:11px;padding:10px 0 22px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(17,22,31,.45)">
+      <span>Error journal: one sentence per mistake</span><span>Week 4 · page 24</span>
+    </div>
+  </div>
+</section>
+<section class="page" data-screen-label="Week 4 key" style="background:#FCFDFF;padding:0;display:flex;flex-direction:column">
+  <div style="height:9px;background:#15803D"></div>
+  <div style="padding:30px 50px 0;flex:1;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:22px;border-bottom:2px solid rgba(17,22,31,.14);padding-bottom:14px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#15803D">Teacher page · answer key</div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:32px;margin:6px 0 3px;line-height:1">Week 4 Answers</h1>
+        <div style="font-size:12.5px;color:rgba(17,22,31,.62)">Mission 08 · all 5 sets. Answers run in page order. Score out of the graded tiers only — Challenge never counts.</div>
+      </div>
+      <div style="flex:none;background:rgba(74,222,128,.14);border:1.5px solid rgba(21,128,61,.3);border-radius:11px;padding:10px 14px;font-size:12px;line-height:1.55;max-width:190px;color:#15803D">Mark the reasoning, not the handwriting. Any correct method counts.</div>
+    </div>
+    <div style="margin-top:16px;display:flex;flex-direction:column;gap:11px;flex:1"><div style="border:1.5px solid rgba(21,128,61,.25);border-radius:13px;padding:12px 17px;background:rgba(74,222,128,.06)">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:6px"><div style="font-family:Fredoka,sans-serif;font-size:17px">4.1 · Design the Trail</div><div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(17,22,31,.42)">out of 11</div></div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Warm-Up · </span>10 &nbsp;|&nbsp; 8 &nbsp;|&nbsp; 2 &nbsp;|&nbsp; 30 &nbsp;|&nbsp; 5 &nbsp;|&nbsp; 5</div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Core · </span>15 &nbsp;|&nbsp; 23 &nbsp;|&nbsp; 40 &nbsp;|&nbsp; 70 &nbsp;|&nbsp; 55</div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Challenge · </span>37 &nbsp;|&nbsp; 120</div></div><div style="border:1.5px solid rgba(21,128,61,.25);border-radius:13px;padding:12px 17px;background:rgba(74,222,128,.06)">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:6px"><div style="font-family:Fredoka,sans-serif;font-size:17px">4.2 · Write the Problems</div><div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(17,22,31,.42)">out of 11</div></div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Warm-Up · </span>322 &nbsp;|&nbsp; 124 &nbsp;|&nbsp; 14 &nbsp;|&nbsp; 3/4 &nbsp;|&nbsp; 6.32 &nbsp;|&nbsp; 14</div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Core · </span>8 &nbsp;|&nbsp; 25 &nbsp;|&nbsp; 8 &nbsp;|&nbsp; 12 &nbsp;|&nbsp; 5000</div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Challenge · </span>17/12 &nbsp;|&nbsp; 43</div></div><div style="border:1.5px solid rgba(21,128,61,.25);border-radius:13px;padding:12px 17px;background:rgba(74,222,128,.06)">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:6px"><div style="font-family:Fredoka,sans-serif;font-size:17px">4.3 · Mom Walks It</div><div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(17,22,31,.42)">out of 11</div></div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Warm-Up · </span>80 &nbsp;|&nbsp; 90 &nbsp;|&nbsp; 100 &nbsp;|&nbsp; 3 &nbsp;|&nbsp; 5 &nbsp;|&nbsp; 50</div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Core · </span>40 &nbsp;|&nbsp; 20 &nbsp;|&nbsp; 8.5 &nbsp;|&nbsp; 10 &nbsp;|&nbsp; 4</div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Challenge · </span>80 &nbsp;|&nbsp; 102</div></div><div style="border:1.5px solid rgba(21,128,61,.25);border-radius:13px;padding:12px 17px;background:rgba(74,222,128,.06)">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:6px"><div style="font-family:Fredoka,sans-serif;font-size:17px">Thu · Year-End Sweep</div><div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(17,22,31,.42)">out of 11</div></div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Warm-Up · </span>56 &nbsp;|&nbsp; 7 &nbsp;|&nbsp; 14 &nbsp;|&nbsp; 10 &nbsp;|&nbsp; 0.5 &nbsp;|&nbsp; 90</div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Core · </span>912 &nbsp;|&nbsp; 103 &nbsp;|&nbsp; 11/12 &nbsp;|&nbsp; 9 &nbsp;|&nbsp; 7</div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Challenge · </span>25 &nbsp;|&nbsp; 7</div></div><div style="border:1.5px solid rgba(21,128,61,.25);border-radius:13px;padding:12px 17px;background:rgba(74,222,128,.06)">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:6px"><div style="font-family:Fredoka,sans-serif;font-size:17px">Fri · Mission 08 Test</div><div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(17,22,31,.42)">out of 10</div></div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Warm-Up · </span>15 &nbsp;|&nbsp; 10</div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Core · </span>162 &nbsp;|&nbsp; 71 &nbsp;|&nbsp; 43 &nbsp;|&nbsp; 6 &nbsp;|&nbsp; 43 &nbsp;|&nbsp; 24 &nbsp;|&nbsp; 45 &nbsp;|&nbsp; 12</div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Challenge · </span>7 &nbsp;|&nbsp; 43</div></div></div>
+    <div style="border-top:2px solid rgba(17,22,31,.12);margin-top:11px;padding:10px 0 22px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(17,22,31,.45)">
+      <span>Algebra Sparks · Week 4</span><span>Answer key · page 25</span>
+    </div>
+  </div>
+</section>
+</doc-page>
+</x-dc>
+</body>
+</html>

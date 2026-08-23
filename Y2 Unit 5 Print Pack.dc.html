@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700;6..12,800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  body{margin:0;font-family:"Nunito Sans",system-ui,sans-serif;color:#11161F}
+  a{color:#0369A1;text-decoration:none}
+  a:hover{color:#0284C7}
+  *{box-sizing:border-box}
+  .page{print-color-adjust:exact;-webkit-print-color-adjust:exact}
+</style>
+<script src="./doc-page.js"></script>
+<script src="./print-fit.js"></script>
+</helmet>
+
+<doc-page size="letter">
+
+<!-- ============ P1 · COVER ============ -->
+<section class="page" data-screen-label="01 Cover" style="background:#0B1A08;color:#F0FDF4;padding:0;display:flex;flex-direction:column;position:relative;overflow:hidden">
+  <div style="position:absolute;inset:0;background:radial-gradient(680px 420px at 78% 8%, rgba(74,222,128,.3), transparent 62%),radial-gradient(560px 380px at 10% 88%, rgba(45,212,191,.16), transparent 62%)"></div>
+  <div style="position:absolute;inset:0;background-image:radial-gradient(1.6px 1.6px at 15% 24%,#fff,transparent),radial-gradient(1.4px 1.4px at 33% 68%,#fff,transparent),radial-gradient(1.8px 1.8px at 53% 12%,#fff,transparent),radial-gradient(1.3px 1.3px at 69% 76%,#fff,transparent),radial-gradient(1.7px 1.7px at 87% 34%,#fff,transparent),radial-gradient(1.4px 1.4px at 23% 92%,#fff,transparent),radial-gradient(1.5px 1.5px at 91% 64%,#fff,transparent);opacity:.7"></div>
+
+  <div style="position:relative;padding:62px 62px 0;flex:1;display:flex;flex-direction:column">
+    <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:#86EFAC">Adventures in Big Math · 5th Grade Math</div>
+    <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:rgba(240,253,244,.5);margin-top:8px">Mission 05 of 08 · Weeks 1–5</div>
+
+    <div style="margin-top:54px;display:flex;align-items:center;gap:30px">
+      <div style="flex:none;width:128px;height:128px;border-radius:50%;background:radial-gradient(circle at 32% 28%,#4ADE80,#166534 70%);box-shadow:0 0 0 10px rgba(74,222,128,.16),0 22px 60px rgba(22,101,52,.5);display:grid;place-items:center;position:relative">
+        <div style="position:absolute;inset:-14% -32%;border:3px solid rgba(74,222,128,.45);border-radius:50%;transform:rotate(-20deg) scaleY(.28)"></div>
+        <div style="position:relative;font-family:Fredoka,sans-serif;font-size:30px;color:#052E12;line-height:.85;text-align:center">
+          <div>1</div>
+          <div style="border-top:2.5px solid #052E12;padding-top:1px">3</div>
+        </div>
+      </div>
+      <div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:60px;line-height:.98;margin:0;letter-spacing:-1px;color:#4ADE80">Fraction<br>Sums</h1>
+        <div style="font-size:18px;margin-top:14px;color:rgba(240,253,244,.78)">Unlike denominators, and a common one you find rather than guess.</div>
+      </div>
+    </div>
+
+    <div style="margin-top:46px;background:rgba(255,255,255,.06);border:1px solid rgba(74,222,128,.4);border-radius:20px;padding:26px 30px">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#86EFAC;margin-bottom:10px">The Big Question</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:29px;line-height:1.2">Why can't you add 1/2 and 1/3 by adding the tops and adding the bottoms?</div>
+    </div>
+
+    <div style="margin-top:34px;display:grid;grid-template-columns:1fr 1fr;gap:18px">
+      <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);border-radius:16px;padding:20px 22px">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:rgba(240,253,244,.5);margin-bottom:8px">Hands-on project</div>
+        <div style="font-family:Fredoka,sans-serif;font-size:19px;line-height:1.2;margin-bottom:7px">Double the Recipe</div>
+        <div style="font-size:13.5px;line-height:1.5;color:rgba(240,253,244,.72)">Take a real recipe, scale it up, and cook it. The measuring cups do not lie.</div>
+      </div>
+      <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);border-radius:16px;padding:20px 22px">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:rgba(240,253,244,.5);margin-bottom:8px">Fluency game</div>
+        <div style="font-family:Fredoka,sans-serif;font-size:19px;line-height:1.2;margin-bottom:7px">Denominator Hunt</div>
+        <div style="font-size:13.5px;line-height:1.5;color:rgba(240,253,244,.72)">Two fractions drawn at random. First to name the smallest common denominator wins.</div>
+      </div>
+    </div>
+
+    <div style="margin-top:auto;display:flex;align-items:flex-end;gap:18px;padding-bottom:46px">
+      <div style="flex:none;width:66px;height:66px;border-radius:20px;background:linear-gradient(160deg,#C7D2FE,#818CF8);position:relative;box-shadow:0 12px 30px rgba(129,140,248,.4)">
+        <div style="position:absolute;top:-13px;left:50%;width:2px;height:13px;background:#818CF8"></div>
+        <div style="position:absolute;top:-20px;left:50%;transform:translateX(-50%);width:10px;height:10px;border-radius:50%;background:#FBBF24"></div>
+        <div style="position:absolute;top:22px;left:13px;width:14px;height:14px;border-radius:50%;background:#111938"></div>
+        <div style="position:absolute;top:22px;right:13px;width:14px;height:14px;border-radius:50%;background:#111938"></div>
+        <div style="position:absolute;bottom:12px;left:50%;transform:translateX(-50%);width:26px;height:4px;border-radius:3px;background:rgba(17,25,56,.45)"></div>
+      </div>
+      <div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:18px;border-bottom-left-radius:4px;padding:18px 22px">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:#A5B4FC;margin-bottom:7px">AXIOM · Mission Commander, nine tours</div>
+        <div style="font-family:Fredoka,sans-serif;font-size:18px;line-height:1.35">“You cannot add halves to thirds any more than you can add metres to gallons. Change the units first, then add.”</div>
+      </div>
+    </div>
+  </div>
+  <div style="position:relative;height:12px;background:linear-gradient(90deg,#4ADE80,#2DD4BF,#38BDF8)"></div>
+</section>
+
+<!-- ============ P2 · PRE-ASSESSMENT ============ -->
+<section class="page" data-screen-label="02 Pre-assessment" style="background:#FBFEFB;padding:0;display:flex;flex-direction:column">
+  <div style="height:10px;background:linear-gradient(90deg,#4ADE80,#2DD4BF)"></div>
+  <div style="padding:34px 52px 0;flex:1;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:24px;border-bottom:2px solid rgba(17,22,31,.14);padding-bottom:16px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:#166534">Mission 05 · Before we launch</div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:36px;margin:6px 0 4px;line-height:1">Pre-Assessment</h1>
+        <div style="font-size:13.5px;color:rgba(17,22,31,.6)">Twelve items, six strands. Anything you already own, we skip.</div>
+      </div>
+      <div style="flex:none;text-align:right;font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(17,22,31,.55);line-height:2.1">
+        <div>NAME ______________</div>
+        <div>DATE ______________</div>
+      </div>
+    </div>
+
+    <div style="background:rgba(74,222,128,.14);border:1.5px solid rgba(22,101,52,.28);border-radius:14px;padding:14px 18px;margin:18px 0 20px;font-size:13.5px;line-height:1.5">
+      <strong>This is not a test.</strong> Nothing here counts for a grade. Write fractions as a/b — for example, three quarters is 3/4.
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:14px;flex:1">
+      <div style="display:grid;grid-template-columns:118px 1fr;gap:18px;align-items:start">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#15803D;padding-top:6px">Strand A<br><span style="color:rgba(17,22,31,.45)">Equivalents</span></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+          <div style="border:1.5px solid rgba(17,22,31,.16);border-radius:12px;padding:12px 16px"><div style="font-size:13px;margin-bottom:9px"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(17,22,31,.4)">A1</span> &nbsp;1/2 = ?/6</div><div style="border-bottom:2px dotted rgba(17,22,31,.3);height:22px"></div></div>
+          <div style="border:1.5px solid rgba(17,22,31,.16);border-radius:12px;padding:12px 16px"><div style="font-size:13px;margin-bottom:9px"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(17,22,31,.4)">A2</span> &nbsp;2/3 = ?/12</div><div style="border-bottom:2px dotted rgba(17,22,31,.3);height:22px"></div></div>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:118px 1fr;gap:18px;align-items:start">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#15803D;padding-top:6px">Strand B<br><span style="color:rgba(17,22,31,.45)">Same denominator</span></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+          <div style="border:1.5px solid rgba(17,22,31,.16);border-radius:12px;padding:12px 16px"><div style="font-size:13px;margin-bottom:9px"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(17,22,31,.4)">B1</span> &nbsp;3/8 + 2/8</div><div style="border-bottom:2px dotted rgba(17,22,31,.3);height:22px"></div></div>
+          <div style="border:1.5px solid rgba(17,22,31,.16);border-radius:12px;padding:12px 16px"><div style="font-size:13px;margin-bottom:9px"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(17,22,31,.4)">B2</span> &nbsp;5/6 − 1/6</div><div style="border-bottom:2px dotted rgba(17,22,31,.3);height:22px"></div></div>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:118px 1fr;gap:18px;align-items:start">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#166534;padding-top:6px">Strand C<br><span style="color:rgba(17,22,31,.45)">Common denominator</span></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+          <div style="border:1.5px solid rgba(17,22,31,.16);border-radius:12px;padding:12px 16px"><div style="font-size:13px;margin-bottom:9px"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(17,22,31,.4)">C1</span> &nbsp;Smallest common denominator of 4 and 6</div><div style="border-bottom:2px dotted rgba(17,22,31,.3);height:22px"></div></div>
+          <div style="border:1.5px solid rgba(17,22,31,.16);border-radius:12px;padding:12px 16px"><div style="font-size:13px;margin-bottom:9px"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(17,22,31,.4)">C2</span> &nbsp;Of 3 and 5</div><div style="border-bottom:2px dotted rgba(17,22,31,.3);height:22px"></div></div>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:118px 1fr;gap:18px;align-items:start">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#166534;padding-top:6px">Strand D<br><span style="color:rgba(17,22,31,.45)">Unlike denominators</span></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+          <div style="border:1.5px solid rgba(17,22,31,.16);border-radius:12px;padding:12px 16px"><div style="font-size:13px;margin-bottom:9px"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(17,22,31,.4)">D1</span> &nbsp;1/2 + 1/3</div><div style="border-bottom:2px dotted rgba(17,22,31,.3);height:22px"></div></div>
+          <div style="border:1.5px solid rgba(17,22,31,.16);border-radius:12px;padding:12px 16px"><div style="font-size:13px;margin-bottom:9px"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(17,22,31,.4)">D2</span> &nbsp;3/4 − 1/6</div><div style="border-bottom:2px dotted rgba(17,22,31,.3);height:22px"></div></div>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:118px 1fr;gap:18px;align-items:start">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#B45309;padding-top:6px">Strand E<br><span style="color:rgba(17,22,31,.45)">Mixed numbers</span></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+          <div style="border:1.5px solid rgba(17,22,31,.16);border-radius:12px;padding:12px 16px"><div style="font-size:13px;margin-bottom:9px"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(17,22,31,.4)">E1</span> &nbsp;Write 7/4 as a mixed number</div><div style="border-bottom:2px dotted rgba(17,22,31,.3);height:22px"></div></div>
+          <div style="border:1.5px solid rgba(17,22,31,.16);border-radius:12px;padding:12px 16px"><div style="font-size:13px;margin-bottom:9px"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(17,22,31,.4)">E2</span> &nbsp;1 1/2 + 2 1/4</div><div style="border-bottom:2px dotted rgba(17,22,31,.3);height:22px"></div></div>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:118px 1fr;gap:18px;align-items:start">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#B45309;padding-top:6px">Strand F<br><span style="color:rgba(17,22,31,.45)">Estimating</span></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+          <div style="border:1.5px solid rgba(17,22,31,.16);border-radius:12px;padding:12px 16px"><div style="font-size:13px;margin-bottom:9px"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(17,22,31,.4)">F1</span> &nbsp;Is 5/8 + 1/3 more or less than 1?</div><div style="border-bottom:2px dotted rgba(17,22,31,.3);height:22px"></div></div>
+          <div style="border:1.5px solid rgba(17,22,31,.16);border-radius:12px;padding:12px 16px"><div style="font-size:13px;margin-bottom:9px"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(17,22,31,.4)">F2</span> &nbsp;Someone says 1/2 + 1/3 = 2/5. Why is that wrong?</div><div style="border-bottom:2px dotted rgba(17,22,31,.3);height:22px"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="border-top:2px solid rgba(17,22,31,.12);margin-top:14px;padding:12px 0 26px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(17,22,31,.45)">
+      <span>Adventures in Big Math · 5th Grade · Mission 05</span><span>Pre-assessment · page 2</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ P3 · SKIP CHART ============ -->
+<section class="page" data-screen-label="03 Skip chart" style="background:#FBFEFB;padding:0;display:flex;flex-direction:column">
+  <div style="height:10px;background:linear-gradient(90deg,#2DD4BF,#4ADE80)"></div>
+  <div style="padding:34px 52px 0;flex:1;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:24px;border-bottom:2px solid rgba(17,22,31,.14);padding-bottom:16px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:#15803D">Teacher page · do not hand to student</div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:36px;margin:6px 0 4px;line-height:1">Skip Chart</h1>
+        <div style="font-size:13.5px;color:rgba(17,22,31,.6)">Score the pre-assessment, then cross days off the five-week calendar.</div>
+      </div>
+      <div style="flex:none;background:rgba(74,222,128,.14);border:1.5px solid rgba(21,128,61,.3);border-radius:12px;padding:12px 16px;font-family:'JetBrains Mono',monospace;font-size:10.5px;line-height:1.9;color:#15803D">
+        <div>2 / 2 → SKIP</div>
+        <div>1 / 2 → COMPRESS</div>
+        <div>0 / 2 → TEACH</div>
+      </div>
+    </div>
+
+    <table style="width:100%;border-collapse:collapse;margin-top:22px;font-size:13.5px">
+      <thead>
+        <tr style="background:rgba(17,22,31,.06)">
+          <th style="text-align:left;padding:11px 12px;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.55);border-bottom:2px solid rgba(17,22,31,.15)">Strand</th>
+          <th style="text-align:left;padding:11px 12px;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.55);border-bottom:2px solid rgba(17,22,31,.15)">Items</th>
+          <th style="text-align:left;padding:11px 12px;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.55);border-bottom:2px solid rgba(17,22,31,.15)">Covers</th>
+          <th style="text-align:center;padding:11px 12px;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.55);border-bottom:2px solid rgba(17,22,31,.15)">Score</th>
+          <th style="text-align:left;padding:11px 12px;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.55);border-bottom:2px solid rgba(17,22,31,.15)">If 2/2, remove</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(17,22,31,.1)"><strong>A · Equivalents</strong></td>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(17,22,31,.1);font-family:'JetBrains Mono',monospace;font-size:12px">A1 A2</td>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(17,22,31,.1)">Week 1 · lesson 1.1</td>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(17,22,31,.1);text-align:center;font-family:'JetBrains Mono',monospace">___ / 2</td>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(17,22,31,.1)">Day 1.1. Equivalent fractions are the engine of the whole mission, so check this is solid rather than lucky.</td>
+        </tr>
+        <tr>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(17,22,31,.1)"><strong>B · Same denominator</strong></td>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(17,22,31,.1);font-family:'JetBrains Mono',monospace;font-size:12px">B1 B2</td>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(17,22,31,.1)">Week 1 · lesson 1.2</td>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(17,22,31,.1);text-align:center;font-family:'JetBrains Mono',monospace">___ / 2</td>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(17,22,31,.1)">Day 1.2. This is Year One material.</td>
+        </tr>
+        <tr>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(17,22,31,.1)"><strong>C · Common denominator</strong></td>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(17,22,31,.1);font-family:'JetBrains Mono',monospace;font-size:12px">C1 C2</td>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(17,22,31,.1)">Week 2 · lessons 2.1 and 2.2</td>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(17,22,31,.1);text-align:center;font-family:'JetBrains Mono',monospace">___ / 2</td>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(17,22,31,.1)">Compress Week 2 to three days. Keep 2.3 — the multiples ladder is worth the time.</td>
+        </tr>
+        <tr>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(17,22,31,.1)"><strong>D · Unlike denominators</strong></td>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(17,22,31,.1);font-family:'JetBrains Mono',monospace;font-size:12px">D1 D2</td>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(17,22,31,.1)">Week 3 · all four lessons</td>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(17,22,31,.1);text-align:center;font-family:'JetBrains Mono',monospace">___ / 2</td>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(17,22,31,.1)">Compress Week 3 to three days. Do not remove it entirely — this is the mission.</td>
+        </tr>
+        <tr>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(17,22,31,.1)"><strong>E · Mixed numbers</strong></td>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(17,22,31,.1);font-family:'JetBrains Mono',monospace;font-size:12px">E1 E2</td>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(17,22,31,.1)">Week 4 · lessons 4.1 to 4.3</td>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(17,22,31,.1);text-align:center;font-family:'JetBrains Mono',monospace">___ / 2</td>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(17,22,31,.1)">Days 4.1 and 4.2. Keep 4.3 — borrowing across a whole number is its own skill.</td>
+        </tr>
+        <tr>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(17,22,31,.1)"><strong>F · Estimating</strong></td>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(17,22,31,.1);font-family:'JetBrains Mono',monospace;font-size:12px">F1 F2</td>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(17,22,31,.1)">Week 2 · lesson 2.4</td>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(17,22,31,.1);text-align:center;font-family:'JetBrains Mono',monospace">___ / 2</td>
+          <td style="padding:14px 12px;border-bottom:1px solid rgba(17,22,31,.1)">Nothing. F2 is the Big Question in miniature — teach it even at 2/2.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div style="background:rgba(74,222,128,.12);border:1.5px solid rgba(22,101,52,.26);border-radius:14px;padding:16px 20px;margin-top:24px">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:#166534;margin-bottom:9px">One note before you start</div>
+      <div style="font-size:13.5px;line-height:1.55">The answer 2/5 to item D1 is the most informative wrong answer in the whole year. It means the student is treating a fraction as two separate numbers rather than one quantity. If you see it, spend Week 1 on the area diagrams rather than the procedure — no amount of practice at finding common denominators fixes that misconception.</div>
+    </div>
+
+    <div style="border-top:2px solid rgba(17,22,31,.12);margin-top:auto;padding:12px 0 26px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(17,22,31,.45)">
+      <span>Teacher page</span><span>Skip chart · page 3</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ P4 · DAY 1.1 ============ -->
+<section class="page" data-screen-label="04 Lesson 1.1" style="background:#FBFEFB;padding:0;display:flex;flex-direction:column">
+  <div style="height:10px;background:linear-gradient(90deg,#4ADE80,#2DD4BF)"></div>
+  <div style="padding:30px 52px 0;flex:1;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:24px;border-bottom:2px solid rgba(17,22,31,.14);padding-bottom:14px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:#166534">Mission 05 · Week 1 · Monday · Lesson 1.1</div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:34px;margin:6px 0 3px;line-height:1">Same Amount, New Name</h1>
+        <div style="font-size:13px;color:rgba(17,22,31,.6)">Multiply top and bottom by the same number and nothing changes.</div>
+      </div>
+      <div style="flex:none;text-align:right;font-family:'JetBrains Mono',monospace;font-size:10.5px;color:rgba(17,22,31,.55);line-height:2">
+        <div>NAME ___________</div><div>DATE ___________</div>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:11px;margin:16px 0 9px">
+      <div style="width:26px;height:26px;border-radius:8px;background:#22C55E;color:#052E12;display:grid;place-items:center;font-size:13px">✦</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:21px;color:#15803D">Warm-Up</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">Fill in the missing top</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:10px">
+      <div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:11px 6px;text-align:center"><div style="font-family:'JetBrains Mono',monospace;font-size:13.5px">1/2 = ?/4</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:22px;margin-top:8px"></div></div>
+      <div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:11px 6px;text-align:center"><div style="font-family:'JetBrains Mono',monospace;font-size:13.5px">1/2 = ?/6</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:22px;margin-top:8px"></div></div>
+      <div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:11px 6px;text-align:center"><div style="font-family:'JetBrains Mono',monospace;font-size:13.5px">1/3 = ?/6</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:22px;margin-top:8px"></div></div>
+      <div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:11px 6px;text-align:center"><div style="font-family:'JetBrains Mono',monospace;font-size:13.5px">1/4 = ?/8</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:22px;margin-top:8px"></div></div>
+      <div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:11px 6px;text-align:center"><div style="font-family:'JetBrains Mono',monospace;font-size:13.5px">2/3 = ?/9</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:22px;margin-top:8px"></div></div>
+      <div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:11px 6px;text-align:center"><div style="font-family:'JetBrains Mono',monospace;font-size:13.5px">3/4 = ?/12</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:22px;margin-top:8px"></div></div>
+    </div>
+
+    <div style="background:rgba(74,222,128,.13);border:1.5px solid rgba(22,101,52,.24);border-radius:14px;padding:14px 18px;margin-top:16px">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:#166534;margin-bottom:11px">1/2 and 3/6 are the same amount</div>
+      <div style="display:flex;gap:22px;flex-wrap:wrap;align-items:center">
+        <div style="display:flex;flex-direction:column;gap:9px">
+          <div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(17,22,31,.55);margin-bottom:4px">1/2</div>
+            <div style="display:flex;width:230px;height:34px;border:2px solid rgba(22,101,52,.5);border-radius:5px;overflow:hidden">
+              <div style="flex:1;background:rgba(74,222,128,.55);border-right:2px solid rgba(22,101,52,.5)"></div>
+              <div style="flex:1;background:rgba(255,255,255,.6)"></div>
+            </div>
+          </div>
+          <div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(17,22,31,.55);margin-bottom:4px">3/6</div>
+            <div style="display:flex;width:230px;height:34px;border:2px solid rgba(22,101,52,.5);border-radius:5px;overflow:hidden">
+              <div style="flex:1;background:rgba(74,222,128,.55);border-right:1px solid rgba(22,101,52,.4)"></div>
+              <div style="flex:1;background:rgba(74,222,128,.55);border-right:1px solid rgba(22,101,52,.4)"></div>
+              <div style="flex:1;background:rgba(74,222,128,.55);border-right:2px solid rgba(22,101,52,.5)"></div>
+              <div style="flex:1;background:rgba(255,255,255,.6);border-right:1px solid rgba(22,101,52,.4)"></div>
+              <div style="flex:1;background:rgba(255,255,255,.6);border-right:1px solid rgba(22,101,52,.4)"></div>
+              <div style="flex:1;background:rgba(255,255,255,.6)"></div>
+            </div>
+          </div>
+        </div>
+        <div style="flex:1;min-width:200px;font-size:12.5px;line-height:1.65;color:rgba(17,22,31,.78)">The shaded amount is identical. All that changed is how many pieces the bar was cut into — and cutting each piece into three makes three times as many pieces, three times as many of them shaded.<br><br>That is why multiplying top and bottom by 3 is allowed: <strong>1/2 = 3/6</strong>. You are renaming the amount, not changing it.</div>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:11px;margin:14px 0 9px">
+      <div style="width:26px;height:26px;border-radius:8px;background:#22C55E;color:#052E12;display:grid;place-items:center;font-size:12px">◆</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:21px;color:#166534">Core</div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+      <div style="border:1.5px solid rgba(22,101,52,.24);border-radius:13px;padding:13px 16px;background:rgba(34,197,94,.05)"><div style="font-family:'JetBrains Mono',monospace;font-size:15px;margin-bottom:9px">1. &nbsp;2/3 = ?/12</div><div style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></div></div>
+      <div style="border:1.5px solid rgba(22,101,52,.24);border-radius:13px;padding:13px 16px;background:rgba(34,197,94,.05)"><div style="font-family:'JetBrains Mono',monospace;font-size:15px;margin-bottom:9px">2. &nbsp;3/5 = ?/20</div><div style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></div></div>
+      <div style="border:1.5px solid rgba(22,101,52,.24);border-radius:13px;padding:13px 16px;background:rgba(34,197,94,.05)"><div style="font-family:'JetBrains Mono',monospace;font-size:15px;margin-bottom:9px">3. &nbsp;Simplify 8/12</div><div style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></div></div>
+      <div style="border:1.5px solid rgba(22,101,52,.24);border-radius:13px;padding:13px 16px;background:rgba(34,197,94,.05)"><div style="font-family:'JetBrains Mono',monospace;font-size:15px;margin-bottom:9px">4. &nbsp;Simplify 15/20</div><div style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></div></div>
+    </div>
+    <div style="border:1.5px solid rgba(22,101,52,.24);border-radius:13px;padding:12px 16px;background:rgba(34,197,94,.05);margin-top:10px">
+      <div style="font-size:13.5px">5. &nbsp;Write three different fractions that all equal 1/2. Say what you did to get each one.</div>
+      <div style="border-bottom:2px dotted rgba(17,22,31,.3);height:22px;margin-top:8px"></div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:11px;margin:14px 0 9px">
+      <div style="width:26px;height:26px;border-radius:8px;background:#F59E0B;color:#3A2405;display:grid;place-items:center;font-size:13px">★</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:21px;color:#B45309">Challenge</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">Not graded</div>
+    </div>
+    <div style="background:rgba(245,158,11,.1);border:1.5px solid rgba(180,83,9,.32);border-radius:14px;padding:12px 18px;flex:1;display:flex;flex-direction:column;gap:8px">
+      <div style="font-size:14px;line-height:1.5"><strong>C1.</strong> Simplify 36/48 all the way down. How do you know you have finished?</div>
+      <div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div>
+      <div style="font-size:14px;line-height:1.5"><strong>C2.</strong> Why does adding 1 to the top and 1 to the bottom of 1/2 not give an equivalent fraction? Draw it if that helps.</div>
+      <div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:14px;background:rgba(129,140,248,.12);border:1.5px solid rgba(99,102,241,.28);border-radius:14px;padding:11px 16px;margin-top:12px">
+      <div style="flex:none;width:32px;height:32px;border-radius:10px;background:linear-gradient(160deg,#C7D2FE,#818CF8);position:relative">
+        <div style="position:absolute;top:10px;left:7px;width:7px;height:7px;border-radius:50%;background:#111938"></div>
+        <div style="position:absolute;top:10px;right:7px;width:7px;height:7px;border-radius:50%;background:#111938"></div>
+      </div>
+      <div style="font-size:13.5px;line-height:1.45"><strong>AXIOM:</strong> Multiplying is allowed. Adding is not. Top and bottom must be scaled by the same factor, or you have a different fraction.</div>
+    </div>
+
+    <div style="border-top:2px solid rgba(17,22,31,.12);margin-top:12px;padding:11px 0 24px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(17,22,31,.45)">
+      <span>Error journal: one sentence per mistake</span><span>Lesson 1.1 · page 4</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ P5 · DAY 1.2 ============ -->
+<section class="page" data-screen-label="05 Lesson 1.2" style="background:#FBFEFB;padding:0;display:flex;flex-direction:column">
+  <div style="height:10px;background:linear-gradient(90deg,#4ADE80,#2DD4BF)"></div>
+  <div style="padding:30px 52px 0;flex:1;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:24px;border-bottom:2px solid rgba(17,22,31,.14);padding-bottom:14px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:#166534">Mission 05 · Week 1 · Tuesday · Lesson 1.2</div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:34px;margin:6px 0 3px;line-height:1">When the Bottoms Match</h1>
+        <div style="font-size:13px;color:rgba(17,22,31,.6)">Add the tops. The bottom is the unit, and it stays put.</div>
+      </div>
+      <div style="flex:none;text-align:right;font-family:'JetBrains Mono',monospace;font-size:10.5px;color:rgba(17,22,31,.55);line-height:2">
+        <div>NAME ___________</div><div>DATE ___________</div>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:11px;margin:16px 0 9px">
+      <div style="width:26px;height:26px;border-radius:8px;background:#22C55E;color:#052E12;display:grid;place-items:center;font-size:13px">✦</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:21px;color:#15803D">Warm-Up</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:10px">
+      <div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:11px 6px;text-align:center"><div style="font-family:'JetBrains Mono',monospace;font-size:13px">1/8 + 3/8</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:22px;margin-top:8px"></div></div>
+      <div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:11px 6px;text-align:center"><div style="font-family:'JetBrains Mono',monospace;font-size:13px">3/8 + 2/8</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:22px;margin-top:8px"></div></div>
+      <div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:11px 6px;text-align:center"><div style="font-family:'JetBrains Mono',monospace;font-size:13px">5/6 − 1/6</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:22px;margin-top:8px"></div></div>
+      <div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:11px 6px;text-align:center"><div style="font-family:'JetBrains Mono',monospace;font-size:13px">2/5 + 2/5</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:22px;margin-top:8px"></div></div>
+      <div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:11px 6px;text-align:center"><div style="font-family:'JetBrains Mono',monospace;font-size:13px">7/10 − 3/10</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:22px;margin-top:8px"></div></div>
+      <div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:11px 6px;text-align:center"><div style="font-family:'JetBrains Mono',monospace;font-size:13px">3/4 + 1/4</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:22px;margin-top:8px"></div></div>
+    </div>
+
+    <div style="background:rgba(74,222,128,.13);border:1.5px solid rgba(22,101,52,.24);border-radius:14px;padding:14px 18px;margin-top:16px">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:#166534;margin-bottom:11px">The denominator names the unit</div>
+      <div style="display:flex;gap:22px;flex-wrap:wrap;align-items:center">
+        <div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(17,22,31,.55);margin-bottom:4px">3/8 + 2/8 = 5/8</div>
+          <div style="display:flex;width:250px;height:36px;border:2px solid rgba(22,101,52,.5);border-radius:5px;overflow:hidden">
+            <div style="flex:1;background:rgba(74,222,128,.6);border-right:1px solid rgba(22,101,52,.4)"></div>
+            <div style="flex:1;background:rgba(74,222,128,.6);border-right:1px solid rgba(22,101,52,.4)"></div>
+            <div style="flex:1;background:rgba(74,222,128,.6);border-right:1px solid rgba(22,101,52,.4)"></div>
+            <div style="flex:1;background:rgba(45,212,191,.6);border-right:1px solid rgba(22,101,52,.4)"></div>
+            <div style="flex:1;background:rgba(45,212,191,.6);border-right:1px solid rgba(22,101,52,.4)"></div>
+            <div style="flex:1;background:rgba(255,255,255,.6);border-right:1px solid rgba(22,101,52,.4)"></div>
+            <div style="flex:1;background:rgba(255,255,255,.6);border-right:1px solid rgba(22,101,52,.4)"></div>
+            <div style="flex:1;background:rgba(255,255,255,.6)"></div>
+          </div>
+        </div>
+        <div style="flex:1;min-width:210px;font-size:12.5px;line-height:1.65;color:rgba(17,22,31,.78)">Three eighths plus two eighths is five eighths, the same way three apples plus two apples is five apples. The word “eighths” is the unit, and it does not change just because you added some more of them.<br><br>This is exactly why you cannot add 1/2 to 1/3 directly. Halves and thirds are different units, and there is no single word for the answer until you make them the same.</div>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:11px;margin:14px 0 9px">
+      <div style="width:26px;height:26px;border-radius:8px;background:#22C55E;color:#052E12;display:grid;place-items:center;font-size:12px">◆</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:21px;color:#166534">Core</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">Simplify every answer</div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+      <div style="border:1.5px solid rgba(22,101,52,.24);border-radius:13px;padding:13px 16px;background:rgba(34,197,94,.05)"><div style="font-family:'JetBrains Mono',monospace;font-size:15px;margin-bottom:9px">1. &nbsp;3/8 + 2/8</div><div style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></div></div>
+      <div style="border:1.5px solid rgba(22,101,52,.24);border-radius:13px;padding:13px 16px;background:rgba(34,197,94,.05)"><div style="font-family:'JetBrains Mono',monospace;font-size:15px;margin-bottom:9px">2. &nbsp;2/6 + 2/6</div><div style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></div></div>
+      <div style="border:1.5px solid rgba(22,101,52,.24);border-radius:13px;padding:13px 16px;background:rgba(34,197,94,.05)"><div style="font-family:'JetBrains Mono',monospace;font-size:15px;margin-bottom:9px">3. &nbsp;9/10 − 4/10</div><div style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></div></div>
+      <div style="border:1.5px solid rgba(22,101,52,.24);border-radius:13px;padding:13px 16px;background:rgba(34,197,94,.05)"><div style="font-family:'JetBrains Mono',monospace;font-size:15px;margin-bottom:9px">4. &nbsp;5/12 + 7/12</div><div style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></div></div>
+    </div>
+    <div style="border:1.5px solid rgba(22,101,52,.24);border-radius:13px;padding:12px 16px;background:rgba(34,197,94,.05);margin-top:10px">
+      <div style="font-size:13.5px">5. &nbsp;In item 4 the answer is a whole number. Explain what happened to the twelfths.</div>
+      <div style="border-bottom:2px dotted rgba(17,22,31,.3);height:22px;margin-top:8px"></div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:11px;margin:14px 0 9px">
+      <div style="width:26px;height:26px;border-radius:8px;background:#F59E0B;color:#3A2405;display:grid;place-items:center;font-size:13px">★</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:21px;color:#B45309">Challenge</div>
+    </div>
+    <div style="background:rgba(245,158,11,.1);border:1.5px solid rgba(180,83,9,.32);border-radius:14px;padding:12px 18px;flex:1;display:flex;flex-direction:column;gap:8px">
+      <div style="font-size:14px;line-height:1.5"><strong>C1.</strong> 7/8 + 5/8. The answer is more than one whole — write it as a mixed number.</div>
+      <div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div>
+      <div style="font-size:14px;line-height:1.5"><strong>C2.</strong> Somebody works out 3/8 + 2/8 and gets 5/16. Which part did they add that they should have left alone?</div>
+      <div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div>
+    </div>
+
+    <div style="border-top:2px solid rgba(17,22,31,.12);margin-top:12px;padding:11px 0 24px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(17,22,31,.45)">
+      <span>Error journal: one sentence per mistake</span><span>Lesson 1.2 · page 5</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ P6 · DAY 1.3 ============ -->
+<section class="page" data-screen-label="06 Lesson 1.3" style="background:#FBFEFB;padding:0;display:flex;flex-direction:column">
+  <div style="height:10px;background:linear-gradient(90deg,#4ADE80,#2DD4BF)"></div>
+  <div style="padding:30px 52px 0;flex:1;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:24px;border-bottom:2px solid rgba(17,22,31,.14);padding-bottom:14px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:#166534">Mission 05 · Week 1 · Wednesday · Lesson 1.3</div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:34px;margin:6px 0 3px;line-height:1">Compare Without Adding</h1>
+        <div style="font-size:13px;color:rgba(17,22,31,.6)">Benchmark against one half. Faster than a common denominator.</div>
+      </div>
+      <div style="flex:none;text-align:right;font-family:'JetBrains Mono',monospace;font-size:10.5px;color:rgba(17,22,31,.55);line-height:2">
+        <div>NAME ___________</div><div>DATE ___________</div>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:11px;margin:16px 0 9px">
+      <div style="width:26px;height:26px;border-radius:8px;background:#22C55E;color:#052E12;display:grid;place-items:center;font-size:13px">✦</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:21px;color:#15803D">Warm-Up</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">More or less than a half?</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:10px">
+      <div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:11px 6px;text-align:center"><div style="font-family:'JetBrains Mono',monospace;font-size:14px">3/8</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:22px;margin-top:8px"></div></div>
+      <div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:11px 6px;text-align:center"><div style="font-family:'JetBrains Mono',monospace;font-size:14px">5/8</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:22px;margin-top:8px"></div></div>
+      <div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:11px 6px;text-align:center"><div style="font-family:'JetBrains Mono',monospace;font-size:14px">2/5</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:22px;margin-top:8px"></div></div>
+      <div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:11px 6px;text-align:center"><div style="font-family:'JetBrains Mono',monospace;font-size:14px">7/12</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:22px;margin-top:8px"></div></div>
+      <div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:11px 6px;text-align:center"><div style="font-family:'JetBrains Mono',monospace;font-size:14px">4/9</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:22px;margin-top:8px"></div></div>
+      <div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:11px 6px;text-align:center"><div style="font-family:'JetBrains Mono',monospace;font-size:14px">11/20</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:22px;margin-top:8px"></div></div>
+    </div>
+
+    <div style="background:rgba(74,222,128,.13);border:1.5px solid rgba(22,101,52,.24);border-radius:14px;padding:14px 18px;margin-top:16px">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:#166534;margin-bottom:11px">Three ways to compare, fastest first</div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px">
+        <div style="background:rgba(255,255,255,.85);border:1.5px solid rgba(22,101,52,.28);border-radius:12px;padding:13px 16px">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#166534;margin-bottom:6px">Against a half</div>
+          <div style="font-size:12.5px;line-height:1.5;color:rgba(17,22,31,.75)">3/8 is under a half, 5/9 is over. Done — no arithmetic needed.</div>
+        </div>
+        <div style="background:rgba(255,255,255,.85);border:1.5px solid rgba(22,101,52,.28);border-radius:12px;padding:13px 16px">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#166534;margin-bottom:6px">Same top</div>
+          <div style="font-size:12.5px;line-height:1.5;color:rgba(17,22,31,.75)">3/5 beats 3/8, because fifths are bigger pieces than eighths.</div>
+        </div>
+        <div style="background:rgba(255,255,255,.85);border:1.5px solid rgba(22,101,52,.28);border-radius:12px;padding:13px 16px">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#166534;margin-bottom:6px">Common denominator</div>
+          <div style="font-size:12.5px;line-height:1.5;color:rgba(17,22,31,.75)">Always works, slowest. Save it for when the first two do not settle it.</div>
+        </div>
+      </div>
+      <div style="font-size:12.5px;line-height:1.5;margin-top:11px;color:rgba(17,22,31,.75)">A half is the useful landmark because you can see it at a glance: double the top and compare it to the bottom.</div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:11px;margin:14px 0 9px">
+      <div style="width:26px;height:26px;border-radius:8px;background:#22C55E;color:#052E12;display:grid;place-items:center;font-size:12px">◆</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:21px;color:#166534">Core</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">Say which method you used</div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+      <div style="border:1.5px solid rgba(22,101,52,.24);border-radius:13px;padding:13px 16px;background:rgba(34,197,94,.05)"><div style="font-family:'JetBrains Mono',monospace;font-size:14.5px;margin-bottom:9px">1. &nbsp;Larger: 3/8 or 5/9</div><div style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></div></div>
+      <div style="border:1.5px solid rgba(22,101,52,.24);border-radius:13px;padding:13px 16px;background:rgba(34,197,94,.05)"><div style="font-family:'JetBrains Mono',monospace;font-size:14.5px;margin-bottom:9px">2. &nbsp;Larger: 3/5 or 3/8</div><div style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></div></div>
+      <div style="border:1.5px solid rgba(22,101,52,.24);border-radius:13px;padding:13px 16px;background:rgba(34,197,94,.05)"><div style="font-family:'JetBrains Mono',monospace;font-size:14.5px;margin-bottom:9px">3. &nbsp;Larger: 2/3 or 5/8</div><div style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></div></div>
+      <div style="border:1.5px solid rgba(22,101,52,.24);border-radius:13px;padding:13px 16px;background:rgba(34,197,94,.05)"><div style="font-family:'JetBrains Mono',monospace;font-size:14.5px;margin-bottom:9px">4. &nbsp;Larger: 7/12 or 5/8</div><div style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></div></div>
+    </div>
+    <div style="border:1.5px solid rgba(22,101,52,.24);border-radius:13px;padding:12px 16px;background:rgba(34,197,94,.05);margin-top:10px">
+      <div style="font-size:13.5px">5. &nbsp;Put in order, smallest first: 2/5 &nbsp; 1/2 &nbsp; 5/8 &nbsp; 3/10</div>
+      <div style="border-bottom:2px dotted rgba(17,22,31,.3);height:22px;margin-top:8px"></div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:11px;margin:14px 0 9px">
+      <div style="width:26px;height:26px;border-radius:8px;background:#F59E0B;color:#3A2405;display:grid;place-items:center;font-size:13px">★</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:21px;color:#B45309">Challenge</div>
+    </div>
+    <div style="background:rgba(245,158,11,.1);border:1.5px solid rgba(180,83,9,.32);border-radius:14px;padding:12px 18px;flex:1;display:flex;flex-direction:column;gap:8px">
+      <div style="font-size:14px;line-height:1.5"><strong>C1.</strong> Which is larger, 7/8 or 8/9? Both are just under one whole, so the half trick will not help.</div>
+      <div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div>
+      <div style="font-size:14px;line-height:1.5"><strong>C2.</strong> Write a fraction between 1/2 and 5/8. How did you find it?</div>
+      <div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div>
+    </div>
+
+    <div style="border-top:2px solid rgba(17,22,31,.12);margin-top:12px;padding:11px 0 24px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(17,22,31,.45)">
+      <span>Error journal: one sentence per mistake</span><span>Lesson 1.3 · page 6</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ P7 · DAY 1.4 ============ -->
+<section class="page" data-screen-label="07 Lesson 1.4" style="background:#FBFEFB;padding:0;display:flex;flex-direction:column">
+  <div style="height:10px;background:linear-gradient(90deg,#4ADE80,#2DD4BF)"></div>
+  <div style="padding:30px 52px 0;flex:1;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:24px;border-bottom:2px solid rgba(17,22,31,.14);padding-bottom:14px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:#166534">Mission 05 · Week 1 · Thursday · Lesson 1.4</div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:34px;margin:6px 0 3px;line-height:1">Why 2/5 Is Wrong</h1>
+        <div style="font-size:13px;color:rgba(17,22,31,.6)">The most common fraction error in the world, taken apart with a diagram.</div>
+      </div>
+      <div style="flex:none;text-align:right;font-family:'JetBrains Mono',monospace;font-size:10.5px;color:rgba(17,22,31,.55);line-height:2">
+        <div>NAME ___________</div><div>DATE ___________</div>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:11px;margin:16px 0 9px">
+      <div style="width:26px;height:26px;border-radius:8px;background:#22C55E;color:#052E12;display:grid;place-items:center;font-size:13px">✦</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:21px;color:#15803D">Warm-Up</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">Estimate: more or less than 1?</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:10px">
+      <div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:11px 6px;text-align:center"><div style="font-family:'JetBrains Mono',monospace;font-size:12.5px">1/2 + 1/3</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:22px;margin-top:8px"></div></div>
+      <div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:11px 6px;text-align:center"><div style="font-family:'JetBrains Mono',monospace;font-size:12.5px">3/4 + 1/2</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:22px;margin-top:8px"></div></div>
+      <div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:11px 6px;text-align:center"><div style="font-family:'JetBrains Mono',monospace;font-size:12.5px">1/4 + 1/3</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:22px;margin-top:8px"></div></div>
+      <div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:11px 6px;text-align:center"><div style="font-family:'JetBrains Mono',monospace;font-size:12.5px">5/8 + 1/2</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:22px;margin-top:8px"></div></div>
+      <div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:11px 6px;text-align:center"><div style="font-family:'JetBrains Mono',monospace;font-size:12.5px">1/5 + 1/4</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:22px;margin-top:8px"></div></div>
+      <div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:11px 6px;text-align:center"><div style="font-family:'JetBrains Mono',monospace;font-size:12.5px">2/3 + 2/3</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:22px;margin-top:8px"></div></div>
+    </div>
+
+    <div style="background:rgba(74,222,128,.13);border:1.5px solid rgba(22,101,52,.24);border-radius:14px;padding:14px 18px;margin-top:16px">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:#166534;margin-bottom:11px">1/2 + 1/3 · the answer must be bigger than a half</div>
+      <div style="display:flex;gap:20px;flex-wrap:wrap;align-items:center">
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(17,22,31,.55);margin-bottom:3px">1/2</div>
+            <div style="display:flex;width:210px;height:26px;border:2px solid rgba(22,101,52,.5);border-radius:4px;overflow:hidden">
+              <div style="flex:1;background:rgba(74,222,128,.6);border-right:2px solid rgba(22,101,52,.5)"></div>
+              <div style="flex:1;background:rgba(255,255,255,.6)"></div>
+            </div>
+          </div>
+          <div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(17,22,31,.55);margin-bottom:3px">2/5 — the wrong answer, shown</div>
+            <div style="display:flex;width:210px;height:26px;border:2px solid rgba(190,24,93,.5);border-radius:4px;overflow:hidden">
+              <div style="flex:1;background:rgba(244,114,182,.5);border-right:1px solid rgba(190,24,93,.4)"></div>
+              <div style="flex:1;background:rgba(244,114,182,.5);border-right:2px solid rgba(190,24,93,.5)"></div>
+              <div style="flex:1;background:rgba(255,255,255,.6);border-right:1px solid rgba(190,24,93,.35)"></div>
+              <div style="flex:1;background:rgba(255,255,255,.6);border-right:1px solid rgba(190,24,93,.35)"></div>
+              <div style="flex:1;background:rgba(255,255,255,.6)"></div>
+            </div>
+          </div>
+          <div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(17,22,31,.55);margin-bottom:3px">5/6 — the right answer</div>
+            <div style="display:flex;width:210px;height:26px;border:2px solid rgba(22,101,52,.5);border-radius:4px;overflow:hidden">
+              <div style="flex:1;background:rgba(74,222,128,.6);border-right:1px solid rgba(22,101,52,.4)"></div>
+              <div style="flex:1;background:rgba(74,222,128,.6);border-right:1px solid rgba(22,101,52,.4)"></div>
+              <div style="flex:1;background:rgba(74,222,128,.6);border-right:1px solid rgba(22,101,52,.4)"></div>
+              <div style="flex:1;background:rgba(45,212,191,.6);border-right:1px solid rgba(22,101,52,.4)"></div>
+              <div style="flex:1;background:rgba(45,212,191,.6);border-right:2px solid rgba(22,101,52,.5)"></div>
+              <div style="flex:1;background:rgba(255,255,255,.6)"></div>
+            </div>
+          </div>
+        </div>
+        <div style="flex:1;min-width:195px;font-size:12.5px;line-height:1.6;color:rgba(17,22,31,.78)">You started with a half and added something to it. The answer <strong>has</strong> to be more than a half.<br><br>But 2/5 is <em>less</em> than a half. So it is wrong before you check any arithmetic — and that check takes one second.<br><br>Adding the bottoms makes the pieces smaller, which is the opposite of what adding should do.</div>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:11px;margin:14px 0 9px">
+      <div style="width:26px;height:26px;border-radius:8px;background:#22C55E;color:#052E12;display:grid;place-items:center;font-size:12px">◆</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:21px;color:#166534">Core</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">Estimate before you compute</div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+      <div style="border:1.5px solid rgba(22,101,52,.24);border-radius:13px;padding:12px 16px;background:rgba(34,197,94,.05)"><div style="font-size:13px;margin-bottom:9px">1. &nbsp;Is 1/2 + 1/3 more or less than 1?</div><div style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></div></div>
+      <div style="border:1.5px solid rgba(22,101,52,.24);border-radius:13px;padding:12px 16px;background:rgba(34,197,94,.05)"><div style="font-size:13px;margin-bottom:9px">2. &nbsp;Is 5/8 + 1/3 more or less than 1?</div><div style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></div></div>
+      <div style="border:1.5px solid rgba(22,101,52,.24);border-radius:13px;padding:12px 16px;background:rgba(34,197,94,.05)"><div style="font-size:13px;margin-bottom:9px">3. &nbsp;Is 3/4 + 1/2 more or less than 1?</div><div style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></div></div>
+      <div style="border:1.5px solid rgba(22,101,52,.24);border-radius:13px;padding:12px 16px;background:rgba(34,197,94,.05)"><div style="font-size:13px;margin-bottom:9px">4. &nbsp;Is 1/5 + 1/4 more or less than 1/2?</div><div style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></div></div>
+    </div>
+    <div style="border:1.5px solid rgba(22,101,52,.24);border-radius:13px;padding:12px 16px;background:rgba(34,197,94,.05);margin-top:10px">
+      <div style="font-size:13.5px">5. &nbsp;Somebody says 1/4 + 1/4 = 2/8. Use the “more than what you started with” test to show it is wrong.</div>
+      <div style="border-bottom:2px dotted rgba(17,22,31,.3);height:22px;margin-top:8px"></div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:11px;margin:14px 0 9px">
+      <div style="width:26px;height:26px;border-radius:8px;background:#F59E0B;color:#3A2405;display:grid;place-items:center;font-size:13px">★</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:21px;color:#B45309">Challenge</div>
+    </div>
+    <div style="background:rgba(245,158,11,.1);border:1.5px solid rgba(180,83,9,.32);border-radius:14px;padding:12px 18px;flex:1;display:flex;flex-direction:column;gap:8px">
+      <div style="font-size:14px;line-height:1.5"><strong>C1.</strong> Adding the tops and bottoms of 1/2 and 1/2 gives 2/4, which equals 1/2. Why does this look like it worked, and what went wrong anyway?</div>
+      <div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div>
+      <div style="font-size:14px;line-height:1.5"><strong>C2.</strong> Can adding two fractions ever give an answer smaller than both of them? Say why or why not.</div>
+      <div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div>
+    </div>
+
+    <div style="border-top:2px solid rgba(17,22,31,.12);margin-top:12px;padding:11px 0 24px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(17,22,31,.45)">
+      <span>Error journal: one sentence per mistake</span><span>Lesson 1.4 · page 7</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ P8 · FRIDAY ============ -->
+<section class="page" data-screen-label="08 Friday enrichment" style="background:#FBFEFB;padding:0;display:flex;flex-direction:column">
+  <div style="height:10px;background:#F59E0B"></div>
+  <div style="padding:30px 52px 0;flex:1;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:24px;border-bottom:2px solid rgba(17,22,31,.14);padding-bottom:14px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:#B45309">Mission 05 · Week 1 · Friday · Enrichment</div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:34px;margin:6px 0 3px;line-height:1">Denominator Hunt</h1>
+        <div style="font-size:13px;color:rgba(17,22,31,.6)">First to name the smallest common denominator takes the round.</div>
+      </div>
+      <div style="flex:none;text-align:right;font-family:'JetBrains Mono',monospace;font-size:10.5px;color:rgba(17,22,31,.55);line-height:2">
+        <div>NAME ___________</div><div>DATE ___________</div>
+      </div>
+    </div>
+
+    <div style="background:rgba(245,158,11,.12);border:1.5px solid rgba(180,83,9,.3);border-radius:14px;padding:14px 18px;margin-top:16px;font-size:13.5px;line-height:1.55">
+      <strong>How to play:</strong> write the numbers 2 to 12 on slips of paper. Draw two. Both players race to name the smallest number both will divide into. Say it out loud; first correct answer wins. If the two numbers share a factor, the answer is <em>not</em> their product — that is where the round is won.
+    </div>
+
+    <div style="display:flex;align-items:center;gap:11px;margin:16px 0 9px">
+      <div style="width:26px;height:26px;border-radius:8px;background:#22C55E;color:#052E12;display:grid;place-items:center;font-size:13px">✦</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:21px;color:#15803D">Warm-Up · list the multiples</div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+      <div style="border:1.5px solid rgba(21,128,61,.28);border-radius:13px;padding:12px 16px;background:rgba(34,197,94,.08)"><div style="font-size:13.5px;margin-bottom:8px">First six multiples of 4</div><div style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></div></div>
+      <div style="border:1.5px solid rgba(21,128,61,.28);border-radius:13px;padding:12px 16px;background:rgba(34,197,94,.08)"><div style="font-size:13.5px;margin-bottom:8px">First six multiples of 6</div><div style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></div></div>
+    </div>
+    <div style="font-size:12.5px;color:rgba(17,22,31,.6);margin-top:8px;padding-left:2px">Circle the first number that appears in both lists. That is the smallest common denominator for quarters and sixths — and it is 12, not 24.</div>
+
+    <div style="display:flex;align-items:center;gap:11px;margin:16px 0 9px">
+      <div style="width:26px;height:26px;border-radius:8px;background:#22C55E;color:#052E12;display:grid;place-items:center;font-size:12px">◆</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:21px;color:#166534">Play eight rounds</div>
+    </div>
+    <table style="width:100%;border-collapse:collapse;font-size:13.5px">
+      <thead>
+        <tr style="background:rgba(17,22,31,.05)">
+          <th style="text-align:left;padding:9px 12px;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.55);border-bottom:2px solid rgba(17,22,31,.15)">Round</th>
+          <th style="text-align:left;padding:9px 12px;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.55);border-bottom:2px solid rgba(17,22,31,.15)">Numbers drawn</th>
+          <th style="text-align:left;padding:9px 12px;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.55);border-bottom:2px solid rgba(17,22,31,.15)">Smallest common</th>
+          <th style="text-align:left;padding:9px 12px;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.55);border-bottom:2px solid rgba(17,22,31,.15)">Their product</th>
+          <th style="text-align:center;padding:9px 12px;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.55);border-bottom:2px solid rgba(17,22,31,.15)">Same?</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td style="padding:11px 12px;border-bottom:1px solid rgba(17,22,31,.1);font-family:Fredoka,sans-serif;font-size:16px">1</td><td style="border-bottom:1px solid rgba(17,22,31,.1)"></td><td style="border-bottom:1px solid rgba(17,22,31,.1)"></td><td style="border-bottom:1px solid rgba(17,22,31,.1)"></td><td style="border-bottom:1px solid rgba(17,22,31,.1)"></td></tr>
+        <tr><td style="padding:11px 12px;border-bottom:1px solid rgba(17,22,31,.1);font-family:Fredoka,sans-serif;font-size:16px">2</td><td style="border-bottom:1px solid rgba(17,22,31,.1)"></td><td style="border-bottom:1px solid rgba(17,22,31,.1)"></td><td style="border-bottom:1px solid rgba(17,22,31,.1)"></td><td style="border-bottom:1px solid rgba(17,22,31,.1)"></td></tr>
+        <tr><td style="padding:11px 12px;border-bottom:1px solid rgba(17,22,31,.1);font-family:Fredoka,sans-serif;font-size:16px">3</td><td style="border-bottom:1px solid rgba(17,22,31,.1)"></td><td style="border-bottom:1px solid rgba(17,22,31,.1)"></td><td style="border-bottom:1px solid rgba(17,22,31,.1)"></td><td style="border-bottom:1px solid rgba(17,22,31,.1)"></td></tr>
+        <tr><td style="padding:11px 12px;border-bottom:1px solid rgba(17,22,31,.1);font-family:Fredoka,sans-serif;font-size:16px">4</td><td style="border-bottom:1px solid rgba(17,22,31,.1)"></td><td style="border-bottom:1px solid rgba(17,22,31,.1)"></td><td style="border-bottom:1px solid rgba(17,22,31,.1)"></td><td style="border-bottom:1px solid rgba(17,22,31,.1)"></td></tr>
+        <tr><td style="padding:11px 12px;border-bottom:1px solid rgba(17,22,31,.1);font-family:Fredoka,sans-serif;font-size:16px">5</td><td style="border-bottom:1px solid rgba(17,22,31,.1)"></td><td style="border-bottom:1px solid rgba(17,22,31,.1)"></td><td style="border-bottom:1px solid rgba(17,22,31,.1)"></td><td style="border-bottom:1px solid rgba(17,22,31,.1)"></td></tr>
+        <tr><td style="padding:11px 12px;border-bottom:1px solid rgba(17,22,31,.1);font-family:Fredoka,sans-serif;font-size:16px">6</td><td style="border-bottom:1px solid rgba(17,22,31,.1)"></td><td style="border-bottom:1px solid rgba(17,22,31,.1)"></td><td style="border-bottom:1px solid rgba(17,22,31,.1)"></td><td style="border-bottom:1px solid rgba(17,22,31,.1)"></td></tr>
+        <tr><td style="padding:11px 12px;border-bottom:1px solid rgba(17,22,31,.1);font-family:Fredoka,sans-serif;font-size:16px">7</td><td style="border-bottom:1px solid rgba(17,22,31,.1)"></td><td style="border-bottom:1px solid rgba(17,22,31,.1)"></td><td style="border-bottom:1px solid rgba(17,22,31,.1)"></td><td style="border-bottom:1px solid rgba(17,22,31,.1)"></td></tr>
+        <tr><td style="padding:11px 12px;border-bottom:1px solid rgba(17,22,31,.1);font-family:Fredoka,sans-serif;font-size:16px">8</td><td style="border-bottom:1px solid rgba(17,22,31,.1)"></td><td style="border-bottom:1px solid rgba(17,22,31,.1)"></td><td style="border-bottom:1px solid rgba(17,22,31,.1)"></td><td style="border-bottom:1px solid rgba(17,22,31,.1)"></td></tr>
+      </tbody>
+    </table>
+
+    <div style="display:flex;align-items:center;gap:11px;margin:16px 0 9px">
+      <div style="width:26px;height:26px;border-radius:8px;background:#F59E0B;color:#3A2405;display:grid;place-items:center;font-size:13px">★</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:21px;color:#B45309">Challenge</div>
+    </div>
+    <div style="background:rgba(245,158,11,.1);border:1.5px solid rgba(180,83,9,.32);border-radius:14px;padding:12px 18px;flex:1;display:flex;flex-direction:column;gap:8px">
+      <div style="font-size:14px;line-height:1.5"><strong>C1.</strong> Look down your table. When is the smallest common denominator the same as the product? What do those pairs have in common?</div>
+      <div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div>
+      <div style="font-size:14px;line-height:1.5"><strong>C2.</strong> Which pair from 2 to 12 has the largest smallest-common-denominator? Find it and say why.</div>
+      <div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div>
+    </div>
+
+    <div style="border-top:2px solid rgba(17,22,31,.12);margin-top:12px;padding:11px 0 24px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(17,22,31,.45)">
+      <span>Enrichment · not graded</span><span>Friday · page 8</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ P9 · WEEKS 2–5 PLAN ============ -->
+<section class="page" data-screen-label="09 Weeks 2-5 plan" style="background:#FBFEFB;padding:0;display:flex;flex-direction:column">
+  <div style="height:10px;background:linear-gradient(90deg,#4ADE80,#2DD4BF)"></div>
+  <div style="padding:32px 52px 0;flex:1;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:24px;border-bottom:2px solid rgba(17,22,31,.14);padding-bottom:14px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:#166534">Teacher page · the rest of the mission</div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:34px;margin:6px 0 4px;line-height:1">Weeks 2–5</h1>
+        <div style="font-size:13px;color:rgba(17,22,31,.6)">Every day below has five graded sets waiting in Practice Bay.</div>
+      </div>
+      <div style="flex:none;background:rgba(74,222,128,.16);border:1.5px solid rgba(22,101,52,.3);border-radius:12px;padding:11px 15px;font-family:'JetBrains Mono',monospace;font-size:10px;line-height:1.85;color:#166534">
+        <div>QUIZ · end of week 3</div>
+        <div>TEST · end of week 5</div>
+      </div>
+    </div>
+
+    <div style="margin-top:16px;background:rgba(74,222,128,.09);border:1.5px solid rgba(22,101,52,.22);border-radius:15px;padding:15px 20px">
+      <div style="font-family:Fredoka,sans-serif;font-size:22px;margin-bottom:5px">Week 2 · Finding the Common Denominator</div>
+      <div style="font-size:12.5px;line-height:1.5;color:rgba(17,22,31,.75);margin-bottom:11px">Multiples, not guesses. The smallest common denominator is rarely the product.</div>
+      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:9px">
+        <div style="background:rgba(255,255,255,.85);border:1px solid rgba(17,22,31,.14);border-radius:10px;padding:10px 11px"><div style="font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;color:#166534">Mon 2.1</div><div style="font-family:Fredoka,sans-serif;font-size:13.5px;margin:5px 0 4px;line-height:1.15">List the multiples</div><div style="font-size:11px;line-height:1.35;color:rgba(17,22,31,.65)">First shared one wins.</div></div>
+        <div style="background:rgba(255,255,255,.85);border:1px solid rgba(17,22,31,.14);border-radius:10px;padding:10px 11px"><div style="font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;color:#166534">Tue 2.2</div><div style="font-family:Fredoka,sans-serif;font-size:13.5px;margin:5px 0 4px;line-height:1.15">Rename both fractions</div><div style="font-size:11px;line-height:1.35;color:rgba(17,22,31,.65)">Scale each one to the new bottom.</div></div>
+        <div style="background:rgba(255,255,255,.85);border:1px solid rgba(17,22,31,.14);border-radius:10px;padding:10px 11px"><div style="font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;color:#166534">Wed 2.3</div><div style="font-family:Fredoka,sans-serif;font-size:13.5px;margin:5px 0 4px;line-height:1.15">The multiples ladder</div><div style="font-size:11px;line-height:1.35;color:rgba(17,22,31,.65)">Why 4 and 6 give 12, not 24.</div></div>
+        <div style="background:rgba(255,255,255,.85);border:1px solid rgba(17,22,31,.14);border-radius:10px;padding:10px 11px"><div style="font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;color:#166534">Thu 2.4</div><div style="font-family:Fredoka,sans-serif;font-size:13.5px;margin:5px 0 4px;line-height:1.15">Estimate the answer</div><div style="font-size:11px;line-height:1.35;color:rgba(17,22,31,.65)">More or less than one, before any arithmetic.</div></div>
+        <div style="background:rgba(255,255,255,.85);border:1px solid rgba(17,22,31,.14);border-radius:10px;padding:10px 11px"><div style="font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;color:#15803D">Fri</div><div style="font-family:Fredoka,sans-serif;font-size:13.5px;margin:5px 0 4px;line-height:1.15">Denominator Hunt</div><div style="font-size:11px;line-height:1.35;color:rgba(17,22,31,.65)">Page 8's game, played for speed.</div></div>
+      </div>
+    </div>
+
+    <div style="margin-top:12px;background:rgba(74,222,128,.09);border:1.5px solid rgba(22,101,52,.22);border-radius:15px;padding:15px 20px">
+      <div style="display:flex;align-items:baseline;gap:12px;margin-bottom:5px">
+        <div style="font-family:Fredoka,sans-serif;font-size:22px">Week 3 · Adding Unlike Fractions</div>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:#B45309">Quiz Friday</span>
+      </div>
+      <div style="font-size:12.5px;line-height:1.5;color:rgba(17,22,31,.75);margin-bottom:11px">The mission's core week. Rename, add, simplify — and estimate first, every time.</div>
+      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:9px">
+        <div style="background:rgba(255,255,255,.85);border:1px solid rgba(17,22,31,.14);border-radius:10px;padding:10px 11px"><div style="font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;color:#166534">Mon 3.1</div><div style="font-family:Fredoka,sans-serif;font-size:13.5px;margin:5px 0 4px;line-height:1.15">Halves and thirds</div><div style="font-size:11px;line-height:1.35;color:rgba(17,22,31,.65)">The classic pair, done properly.</div></div>
+        <div style="background:rgba(255,255,255,.85);border:1px solid rgba(17,22,31,.14);border-radius:10px;padding:10px 11px"><div style="font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;color:#166534">Tue 3.2</div><div style="font-family:Fredoka,sans-serif;font-size:13.5px;margin:5px 0 4px;line-height:1.15">Quarters and sixths</div><div style="font-size:11px;line-height:1.35;color:rgba(17,22,31,.65)">Where the shared factor saves work.</div></div>
+        <div style="background:rgba(255,255,255,.85);border:1px solid rgba(17,22,31,.14);border-radius:10px;padding:10px 11px"><div style="font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;color:#166534">Wed 3.3</div><div style="font-family:Fredoka,sans-serif;font-size:13.5px;margin:5px 0 4px;line-height:1.15">Subtracting unlike</div><div style="font-size:11px;line-height:1.35;color:rgba(17,22,31,.65)">Same method, minus sign.</div></div>
+        <div style="background:rgba(255,255,255,.85);border:1px solid rgba(17,22,31,.14);border-radius:10px;padding:10px 11px"><div style="font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;color:#166534">Thu 3.4</div><div style="font-family:Fredoka,sans-serif;font-size:13.5px;margin:5px 0 4px;line-height:1.15">Simplify the answer</div><div style="font-size:11px;line-height:1.35;color:rgba(17,22,31,.65)">Not finished until it is in lowest terms.</div></div>
+        <div style="background:rgba(245,158,11,.14);border:1px solid rgba(180,83,9,.3);border-radius:10px;padding:10px 11px"><div style="font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;color:#B45309">Fri</div><div style="font-family:Fredoka,sans-serif;font-size:13.5px;margin:5px 0 4px;line-height:1.15">Mid-unit quiz</div><div style="font-size:11px;line-height:1.35;color:rgba(17,22,31,.65)">Page 10. Eight items, 85%.</div></div>
+      </div>
+    </div>
+
+    <div style="margin-top:12px;background:rgba(74,222,128,.09);border:1.5px solid rgba(22,101,52,.22);border-radius:15px;padding:15px 20px">
+      <div style="font-family:Fredoka,sans-serif;font-size:22px;margin-bottom:5px">Week 4 · Mixed Numbers</div>
+      <div style="font-size:12.5px;line-height:1.5;color:rgba(17,22,31,.75);margin-bottom:11px">Wholes and parts together, including borrowing from the whole number.</div>
+      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:9px">
+        <div style="background:rgba(255,255,255,.85);border:1px solid rgba(17,22,31,.14);border-radius:10px;padding:10px 11px"><div style="font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;color:#166534">Mon 4.1</div><div style="font-family:Fredoka,sans-serif;font-size:13.5px;margin:5px 0 4px;line-height:1.15">Improper and mixed</div><div style="font-size:11px;line-height:1.35;color:rgba(17,22,31,.65)">Convert both ways.</div></div>
+        <div style="background:rgba(255,255,255,.85);border:1px solid rgba(17,22,31,.14);border-radius:10px;padding:10px 11px"><div style="font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;color:#166534">Tue 4.2</div><div style="font-family:Fredoka,sans-serif;font-size:13.5px;margin:5px 0 4px;line-height:1.15">Adding mixed numbers</div><div style="font-size:11px;line-height:1.35;color:rgba(17,22,31,.65)">Wholes first, then the parts.</div></div>
+        <div style="background:rgba(255,255,255,.85);border:1px solid rgba(17,22,31,.14);border-radius:10px;padding:10px 11px"><div style="font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;color:#166534">Wed 4.3</div><div style="font-family:Fredoka,sans-serif;font-size:13.5px;margin:5px 0 4px;line-height:1.15">Borrowing from a whole</div><div style="font-size:11px;line-height:1.35;color:rgba(17,22,31,.65)">3 becomes 2 and 4/4.</div></div>
+        <div style="background:rgba(255,255,255,.85);border:1px solid rgba(17,22,31,.14);border-radius:10px;padding:10px 11px"><div style="font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;color:#166534">Thu 4.4</div><div style="font-family:Fredoka,sans-serif;font-size:13.5px;margin:5px 0 4px;line-height:1.15">Recipe arithmetic</div><div style="font-size:11px;line-height:1.35;color:rgba(17,22,31,.65)">Real measurements, doubled and halved.</div></div>
+        <div style="background:rgba(255,255,255,.85);border:1px solid rgba(17,22,31,.14);border-radius:10px;padding:10px 11px"><div style="font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;color:#15803D">Fri</div><div style="font-family:Fredoka,sans-serif;font-size:13.5px;margin:5px 0 4px;line-height:1.15">Recipe chosen</div><div style="font-size:11px;line-height:1.35;color:rgba(17,22,31,.65)">Pick it, write out the doubled amounts.</div></div>
+      </div>
+    </div>
+
+    <div style="margin-top:12px;background:rgba(129,140,248,.1);border:1.5px solid rgba(99,102,241,.24);border-radius:15px;padding:15px 20px">
+      <div style="display:flex;align-items:baseline;gap:12px;margin-bottom:5px">
+        <div style="font-family:Fredoka,sans-serif;font-size:22px">Week 5 · Proof</div>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:#6366F1">Unit test</span>
+      </div>
+      <div style="font-size:12.5px;line-height:1.5;color:rgba(17,22,31,.75);margin-bottom:11px">The recipe gets cooked. Measuring cups are unforgiving, which is the point.</div>
+      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:9px">
+        <div style="background:rgba(255,255,255,.85);border:1px solid rgba(17,22,31,.14);border-radius:10px;padding:10px 11px"><div style="font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;color:#6366F1">Mon 5.1</div><div style="font-family:Fredoka,sans-serif;font-size:13.5px;margin:5px 0 4px;line-height:1.15">Scale every line</div><div style="font-size:11px;line-height:1.35;color:rgba(17,22,31,.65)">Doubled, then halved.</div></div>
+        <div style="background:rgba(255,255,255,.85);border:1px solid rgba(17,22,31,.14);border-radius:10px;padding:10px 11px"><div style="font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;color:#6366F1">Tue 5.2</div><div style="font-family:Fredoka,sans-serif;font-size:13.5px;margin:5px 0 4px;line-height:1.15">Cook it</div><div style="font-size:11px;line-height:1.35;color:rgba(17,22,31,.65)">Wrong arithmetic tastes wrong.</div></div>
+        <div style="background:rgba(255,255,255,.85);border:1px solid rgba(17,22,31,.14);border-radius:10px;padding:10px 11px"><div style="font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;color:#6366F1">Wed 5.3</div><div style="font-family:Fredoka,sans-serif;font-size:13.5px;margin:5px 0 4px;line-height:1.15">Mixed review</div><div style="font-size:11px;line-height:1.35;color:rgba(17,22,31,.65)">All five weeks together.</div></div>
+        <div style="background:rgba(255,255,255,.85);border:1px solid rgba(17,22,31,.14);border-radius:10px;padding:10px 11px"><div style="font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;color:#15803D">Thu</div><div style="font-family:Fredoka,sans-serif;font-size:13.5px;margin:5px 0 4px;line-height:1.15">Error journal sweep</div><div style="font-size:11px;line-height:1.35;color:rgba(17,22,31,.65)">Fix only what repeats.</div></div>
+        <div style="background:rgba(129,140,248,.2);border:1px solid rgba(99,102,241,.32);border-radius:10px;padding:10px 11px"><div style="font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;color:#6366F1">Fri</div><div style="font-family:Fredoka,sans-serif;font-size:13.5px;margin:5px 0 4px;line-height:1.15">Mission 05 test</div><div style="font-size:11px;line-height:1.35;color:rgba(17,22,31,.65)">Pages 11–12.</div></div>
+      </div>
+    </div>
+
+    <div style="border-top:2px solid rgba(17,22,31,.12);margin-top:auto;padding:11px 0 24px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(17,22,31,.45)">
+      <span>Teacher page</span><span>Weeks 2–5 · page 9</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ P10 · MID-UNIT QUIZ ============ -->
+<section class="page" data-screen-label="10 Mid-unit quiz" style="background:#FBFEFB;padding:0;display:flex;flex-direction:column">
+  <div style="height:10px;background:#F59E0B"></div>
+  <div style="padding:34px 52px 0;flex:1;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:24px;border-bottom:2px solid rgba(17,22,31,.14);padding-bottom:16px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:#B45309">Mission 05 · End of week 3</div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:36px;margin:6px 0 4px;line-height:1">Mid-Unit Quiz</h1>
+        <div style="font-size:13.5px;color:rgba(17,22,31,.6)">Eight items from Weeks 1 to 3. 85% to keep flying — that's 7 out of 8.</div>
+      </div>
+      <div style="flex:none;text-align:right;font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(17,22,31,.55);line-height:2.1">
+        <div>NAME ______________</div>
+        <div>SCORE ______ / 8</div>
+      </div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:12px;margin-top:20px;flex:1">
+      <div style="border:1.5px solid rgba(17,22,31,.16);border-radius:13px;padding:13px 18px;display:grid;grid-template-columns:1fr 150px;gap:16px;align-items:center"><span style="font-size:14px"><strong>1.</strong> &nbsp;1/2 = ?/6</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:22px"></span></div>
+      <div style="border:1.5px solid rgba(17,22,31,.16);border-radius:13px;padding:13px 18px;display:grid;grid-template-columns:1fr 150px;gap:16px;align-items:center"><span style="font-size:14px"><strong>2.</strong> &nbsp;3/8 + 2/8</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:22px"></span></div>
+      <div style="border:1.5px solid rgba(17,22,31,.16);border-radius:13px;padding:13px 18px;display:grid;grid-template-columns:1fr 150px;gap:16px;align-items:center"><span style="font-size:14px"><strong>3.</strong> &nbsp;Smallest common denominator of 4 and 6</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:22px"></span></div>
+      <div style="border:1.5px solid rgba(17,22,31,.16);border-radius:13px;padding:13px 18px;display:grid;grid-template-columns:1fr 150px;gap:16px;align-items:center"><span style="font-size:14px"><strong>4.</strong> &nbsp;1/2 + 1/3</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:22px"></span></div>
+      <div style="border:1.5px solid rgba(17,22,31,.16);border-radius:13px;padding:13px 18px;display:grid;grid-template-columns:1fr 150px;gap:16px;align-items:center"><span style="font-size:14px"><strong>5.</strong> &nbsp;3/4 + 1/6</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:22px"></span></div>
+      <div style="border:1.5px solid rgba(17,22,31,.16);border-radius:13px;padding:13px 18px;display:grid;grid-template-columns:1fr 150px;gap:16px;align-items:center"><span style="font-size:14px"><strong>6.</strong> &nbsp;5/6 − 1/4</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:22px"></span></div>
+      <div style="border:1.5px solid rgba(17,22,31,.16);border-radius:13px;padding:13px 18px;display:grid;grid-template-columns:1fr 150px;gap:16px;align-items:center"><span style="font-size:14px"><strong>7.</strong> &nbsp;Simplify 8/12</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:22px"></span></div>
+      <div style="border:1.5px solid rgba(245,158,11,.5);background:rgba(245,158,11,.09);border-radius:13px;padding:13px 18px">
+        <div style="font-size:14px;margin-bottom:9px"><strong>8.</strong> &nbsp;Somebody says 1/2 + 1/3 = 2/5. Explain why that answer cannot be right, without working out the real one.</div>
+        <div style="border-bottom:2px dotted rgba(17,22,31,.3);height:22px"></div>
+        <div style="border-bottom:2px dotted rgba(17,22,31,.3);height:22px;margin-top:8px"></div>
+      </div>
+    </div>
+
+    <div style="background:rgba(17,22,31,.05);border-radius:12px;padding:13px 18px;margin-top:16px;font-size:13px;line-height:1.5;color:rgba(17,22,31,.7)">
+      <strong>Marking note:</strong> item 8 wants the size argument. Full marks for “you added something to a half, so the answer must be bigger than a half, and 2/5 is smaller.”
+    </div>
+
+    <div style="border-top:2px solid rgba(17,22,31,.12);margin-top:14px;padding:12px 0 26px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(17,22,31,.45)">
+      <span>Answers on page 15</span><span>Mid-unit quiz · page 10</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ P11 · UNIT TEST A ============ -->
+<section class="page" data-screen-label="11 Unit test A" style="background:#FBFEFB;padding:0;display:flex;flex-direction:column">
+  <div style="height:10px;background:linear-gradient(90deg,#166534,#4ADE80)"></div>
+  <div style="padding:34px 52px 0;flex:1;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:24px;border-bottom:2px solid rgba(17,22,31,.14);padding-bottom:16px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:#166534">Mission 05 · End of week 5</div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:36px;margin:6px 0 4px;line-height:1">Unit Test · Part 1</h1>
+        <div style="font-size:13.5px;color:rgba(17,22,31,.6)">Items 1–8. No time limit. Simplify every answer, and estimate first.</div>
+      </div>
+      <div style="flex:none;text-align:right;font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(17,22,31,.55);line-height:2.1">
+        <div>NAME ______________</div>
+        <div>DATE ______________</div>
+      </div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:12px;margin-top:20px;flex:1">
+      <div style="border:1.5px solid rgba(17,22,31,.16);border-radius:13px;padding:13px 18px;display:grid;grid-template-columns:1fr 150px;gap:16px;align-items:center"><span style="font-size:14px"><strong>1.</strong> &nbsp;2/3 = ?/12</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:22px"></span></div>
+      <div style="border:1.5px solid rgba(17,22,31,.16);border-radius:13px;padding:13px 18px;display:grid;grid-template-columns:1fr 150px;gap:16px;align-items:center"><span style="font-size:14px"><strong>2.</strong> &nbsp;5/12 + 7/12</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:22px"></span></div>
+      <div style="border:1.5px solid rgba(17,22,31,.16);border-radius:13px;padding:13px 18px;display:grid;grid-template-columns:1fr 150px;gap:16px;align-items:center"><span style="font-size:14px"><strong>3.</strong> &nbsp;1/2 + 1/3</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:22px"></span></div>
+      <div style="border:1.5px solid rgba(17,22,31,.16);border-radius:13px;padding:13px 18px;display:grid;grid-template-columns:1fr 150px;gap:16px;align-items:center"><span style="font-size:14px"><strong>4.</strong> &nbsp;2/3 + 3/4</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:22px"></span></div>
+      <div style="border:1.5px solid rgba(17,22,31,.16);border-radius:13px;padding:13px 18px;display:grid;grid-template-columns:1fr 150px;gap:16px;align-items:center"><span style="font-size:14px"><strong>5.</strong> &nbsp;3/4 − 1/6</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:22px"></span></div>
+      <div style="border:1.5px solid rgba(17,22,31,.16);border-radius:13px;padding:13px 18px;display:grid;grid-template-columns:1fr 150px;gap:16px;align-items:center"><span style="font-size:14px"><strong>6.</strong> &nbsp;Write 7/4 as a mixed number</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:22px"></span></div>
+      <div style="border:1.5px solid rgba(17,22,31,.16);border-radius:13px;padding:13px 18px;display:grid;grid-template-columns:1fr 150px;gap:16px;align-items:center"><span style="font-size:14px"><strong>7.</strong> &nbsp;1 1/2 + 2 1/4</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:22px"></span></div>
+      <div style="border:1.5px solid rgba(17,22,31,.16);border-radius:13px;padding:13px 18px;display:grid;grid-template-columns:1fr 150px;gap:16px;align-items:center"><span style="font-size:14px"><strong>8.</strong> &nbsp;Larger: 7/12 or 5/8</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:22px"></span></div>
+    </div>
+
+    <div style="border-top:2px solid rgba(17,22,31,.12);margin-top:14px;padding:12px 0 26px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(17,22,31,.45)">
+      <span>Continues on page 12</span><span>Unit test · page 11</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ P12 · UNIT TEST B ============ -->
+<section class="page" data-screen-label="12 Unit test B" style="background:#FBFEFB;padding:0;display:flex;flex-direction:column">
+  <div style="height:10px;background:linear-gradient(90deg,#166534,#4ADE80)"></div>
+  <div style="padding:34px 52px 0;flex:1;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:24px;border-bottom:2px solid rgba(17,22,31,.14);padding-bottom:16px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:#166534">Mission 05 · End of week 5</div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:36px;margin:6px 0 4px;line-height:1">Unit Test · Part 2</h1>
+        <div style="font-size:13.5px;color:rgba(17,22,31,.6)">Items 9–12 and the Big Question.</div>
+      </div>
+      <div style="flex:none;text-align:right;font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(17,22,31,.55);line-height:2.1">
+        <div>SCORE ______ / 12</div>
+        <div>BAND ______________</div>
+      </div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:11px;margin-top:18px">
+      <div style="border:1.5px solid rgba(17,22,31,.16);border-radius:13px;padding:13px 18px;display:grid;grid-template-columns:1fr 150px;gap:16px;align-items:center"><span style="font-size:14px"><strong>9.</strong> &nbsp;3 − 1 3/4</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:22px"></span></div>
+      <div style="border:1.5px solid rgba(17,22,31,.16);border-radius:13px;padding:13px 18px;display:grid;grid-template-columns:1fr 150px;gap:16px;align-items:center"><span style="font-size:14px"><strong>10.</strong> &nbsp;2/3 + 1/4 + 1/2</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:22px"></span></div>
+      <div style="border:1.5px solid rgba(17,22,31,.16);border-radius:13px;padding:13px 18px">
+        <div style="font-size:14px;margin-bottom:9px"><strong>11.</strong> &nbsp;A recipe needs 3/4 cup of flour and 2/3 cup of sugar. How much dry ingredient altogether? Is that more or less than 1 1/2 cups?</div>
+        <div style="border-bottom:2px dotted rgba(17,22,31,.3);height:22px"></div>
+      </div>
+      <div style="border:1.5px solid rgba(17,22,31,.16);border-radius:13px;padding:13px 18px">
+        <div style="font-size:14px;margin-bottom:9px"><strong>12.</strong> &nbsp;You double a recipe that called for 1 1/3 cups of milk. How much do you need now? Write it as a mixed number.</div>
+        <div style="border-bottom:2px dotted rgba(17,22,31,.3);height:22px"></div>
+      </div>
+    </div>
+
+    <div style="margin-top:14px;background:rgba(74,222,128,.14);border:1.5px solid rgba(22,101,52,.28);border-radius:16px;padding:16px 20px;flex:1;display:flex;flex-direction:column">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:#166534;margin-bottom:8px">Explain your thinking · the Big Question</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:22px;line-height:1.25;margin-bottom:6px">Why can't you add 1/2 and 1/3 by adding the tops and adding the bottoms?</div>
+      <div style="font-size:13.5px;line-height:1.5;color:rgba(17,22,31,.72);margin-bottom:10px">Draw a diagram or use the “bigger than a half” argument. Scored on reasoning, not neatness.</div>
+      <div style="flex:1;display:flex;flex-direction:column;gap:15px;padding-top:2px">
+        <div style="border-bottom:2px dotted rgba(17,22,31,.3)"></div>
+        <div style="border-bottom:2px dotted rgba(17,22,31,.3)"></div>
+        <div style="border-bottom:2px dotted rgba(17,22,31,.3)"></div>
+        <div style="border-bottom:2px dotted rgba(17,22,31,.3)"></div>
+        <div style="border-bottom:2px dotted rgba(17,22,31,.3)"></div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px">
+      <div style="background:rgba(74,222,128,.12);border:1.5px solid rgba(21,128,61,.3);border-radius:12px;padding:12px 14px"><div style="font-family:Fredoka,sans-serif;font-size:22px;color:#15803D">11–12</div><div style="font-size:12.5px;line-height:1.4;margin-top:4px">Gold band. The Common Ground Badge is earned.</div></div>
+      <div style="background:rgba(45,212,191,.14);border:1.5px solid rgba(15,118,110,.3);border-radius:12px;padding:12px 14px"><div style="font-family:Fredoka,sans-serif;font-size:22px;color:#0F766E">9–10</div><div style="font-size:12.5px;line-height:1.4;margin-top:4px">Silver band. One reteach day, then the badge.</div></div>
+      <div style="background:rgba(245,158,11,.12);border:1.5px solid rgba(180,83,9,.3);border-radius:12px;padding:12px 14px"><div style="font-family:Fredoka,sans-serif;font-size:22px;color:#B45309">≤ 8</div><div style="font-size:12.5px;line-height:1.4;margin-top:4px">Bronze. Reteach the weak strand and retest that part only.</div></div>
+    </div>
+
+    <div style="border-top:2px solid rgba(17,22,31,.12);margin-top:12px;padding:12px 0 26px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(17,22,31,.45)">
+      <span>The Common Ground Badge</span><span>Unit test · page 12</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ P13 · ANSWER KEY A ============ -->
+<section class="page" data-screen-label="13 Answer key A" style="background:#FBFEFB;padding:0;display:flex;flex-direction:column">
+  <div style="height:10px;background:#15803D"></div>
+  <div style="padding:34px 52px 0;flex:1;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:24px;border-bottom:2px solid rgba(17,22,31,.14);padding-bottom:16px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:#15803D">Teacher page · answer key</div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:36px;margin:6px 0 4px;line-height:1">Key A</h1>
+        <div style="font-size:13.5px;color:rgba(17,22,31,.6)">Pre-assessment, Lesson 1.1 and Lesson 1.2.</div>
+      </div>
+      <div style="flex:none;background:rgba(74,222,128,.14);border:1.5px solid rgba(21,128,61,.3);border-radius:12px;padding:12px 16px;font-size:12.5px;line-height:1.6;max-width:210px;color:#15803D">Mark the reasoning, not the handwriting. Any correct method counts.</div>
+    </div>
+
+    <div style="margin-top:20px;display:flex;flex-direction:column;gap:16px;flex:1">
+      <div style="border:1.5px solid rgba(21,128,61,.25);border-radius:14px;padding:16px 20px;background:rgba(74,222,128,.06)">
+        <div style="font-family:Fredoka,sans-serif;font-size:20px;margin-bottom:10px">Pre-assessment</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:13px;line-height:2.1">
+          A1 · 3/6 &nbsp;|&nbsp; A2 · 8/12 &nbsp;|&nbsp; B1 · 5/8 &nbsp;|&nbsp; B2 · 4/6 or 2/3<br>
+          C1 · 12 &nbsp;|&nbsp; C2 · 15 &nbsp;|&nbsp; D1 · 5/6 &nbsp;|&nbsp; D2 · 7/12<br>
+          E1 · 1 3/4 &nbsp;|&nbsp; E2 · 3 3/4 &nbsp;|&nbsp; F1 · less than 1 &nbsp;|&nbsp; F2 · see below
+        </div>
+        <div style="font-size:12.5px;line-height:1.5;margin-top:10px;color:rgba(17,22,31,.7)">F2 · adding the bottoms makes the pieces smaller, so the answer comes out less than the half you started with. An answer of 2/5 on D1 is the diagnostic — see the note on the skip chart.</div>
+      </div>
+
+      <div style="border:1.5px solid rgba(21,128,61,.25);border-radius:14px;padding:16px 20px;background:rgba(74,222,128,.06)">
+        <div style="font-family:Fredoka,sans-serif;font-size:20px;margin-bottom:10px">Lesson 1.1 · Same Amount, New Name</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:13px;line-height:2.1">
+          Warm-Up · 2/4 &nbsp;|&nbsp; 3/6 &nbsp;|&nbsp; 2/6 &nbsp;|&nbsp; 2/8 &nbsp;|&nbsp; 6/9 &nbsp;|&nbsp; 9/12<br>
+          Core · 1 · 8/12 &nbsp;|&nbsp; 2 · 12/20 &nbsp;|&nbsp; 3 · 2/3 &nbsp;|&nbsp; 4 · 3/4
+        </div>
+        <div style="font-size:12.5px;line-height:1.5;margin-top:10px;color:rgba(17,22,31,.7)">Item 5 · any three, e.g. 2/4, 3/6, 50/100 — the reason matters more than the choice. C1 · 3/4; you are finished when top and bottom share no factor but 1. C2 · because 2/3 is not 1/2 — adding changes the ratio, while multiplying preserves it.</div>
+      </div>
+
+      <div style="border:1.5px solid rgba(21,128,61,.25);border-radius:14px;padding:16px 20px;background:rgba(74,222,128,.06)">
+        <div style="font-family:Fredoka,sans-serif;font-size:20px;margin-bottom:10px">Lesson 1.2 · When the Bottoms Match</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:13px;line-height:2.1">
+          Warm-Up · 4/8 or 1/2 &nbsp;|&nbsp; 5/8 &nbsp;|&nbsp; 4/6 or 2/3 &nbsp;|&nbsp; 4/5 &nbsp;|&nbsp; 4/10 or 2/5 &nbsp;|&nbsp; 1<br>
+          Core · 1 · 5/8 &nbsp;|&nbsp; 2 · 4/6 = 2/3 &nbsp;|&nbsp; 3 · 5/10 = 1/2 &nbsp;|&nbsp; 4 · 12/12 = 1
+        </div>
+        <div style="font-size:12.5px;line-height:1.5;margin-top:10px;color:rgba(17,22,31,.7)">Item 5 · twelve twelfths make one whole, so the fraction disappears. C1 · 12/8 = 1 1/2. C2 · they added the denominators; eighths plus eighths are still eighths.</div>
+      </div>
+    </div>
+
+    <div style="border-top:2px solid rgba(17,22,31,.12);margin-top:14px;padding:12px 0 26px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(17,22,31,.45)">
+      <span>Teacher page</span><span>Answer key A · page 13</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ P14 · ANSWER KEY B ============ -->
+<section class="page" data-screen-label="14 Answer key B" style="background:#FBFEFB;padding:0;display:flex;flex-direction:column">
+  <div style="height:10px;background:#15803D"></div>
+  <div style="padding:34px 52px 0;flex:1;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:24px;border-bottom:2px solid rgba(17,22,31,.14);padding-bottom:16px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:#15803D">Teacher page · answer key</div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:36px;margin:6px 0 4px;line-height:1">Key B</h1>
+        <div style="font-size:13.5px;color:rgba(17,22,31,.6)">Lesson 1.3, Lesson 1.4 and Friday's game.</div>
+      </div>
+      <div style="flex:none;background:rgba(74,222,128,.14);border:1.5px solid rgba(21,128,61,.3);border-radius:12px;padding:12px 16px;font-size:12.5px;line-height:1.6;max-width:210px;color:#15803D">Where a question asks for a sentence, no sentence means no mark — even with the number right.</div>
+    </div>
+
+    <div style="margin-top:20px;display:flex;flex-direction:column;gap:16px;flex:1">
+      <div style="border:1.5px solid rgba(21,128,61,.25);border-radius:14px;padding:16px 20px;background:rgba(74,222,128,.06)">
+        <div style="font-family:Fredoka,sans-serif;font-size:20px;margin-bottom:10px">Lesson 1.3 · Compare Without Adding</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:13px;line-height:2.1">
+          Warm-Up · less &nbsp;|&nbsp; more &nbsp;|&nbsp; less &nbsp;|&nbsp; more &nbsp;|&nbsp; less &nbsp;|&nbsp; more<br>
+          Core · 1 · 5/9 &nbsp;|&nbsp; 2 · 3/5 &nbsp;|&nbsp; 3 · 2/3 &nbsp;|&nbsp; 4 · 5/8 &nbsp;|&nbsp; 5 · 3/10, 2/5, 1/2, 5/8
+        </div>
+        <div style="font-size:12.5px;line-height:1.5;margin-top:10px;color:rgba(17,22,31,.7)">C1 · 8/9, because 1/9 missing is less than 1/8 missing — comparing what is left over is the trick. C2 · e.g. 9/16, found by using the common denominator 16.</div>
+      </div>
+
+      <div style="border:1.5px solid rgba(21,128,61,.25);border-radius:14px;padding:16px 20px;background:rgba(74,222,128,.06)">
+        <div style="font-family:Fredoka,sans-serif;font-size:20px;margin-bottom:10px">Lesson 1.4 · Why 2/5 Is Wrong</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:13px;line-height:2.1">
+          Warm-Up · less &nbsp;|&nbsp; more &nbsp;|&nbsp; less &nbsp;|&nbsp; more &nbsp;|&nbsp; less &nbsp;|&nbsp; more<br>
+          Core · 1 · less &nbsp;|&nbsp; 2 · less &nbsp;|&nbsp; 3 · more &nbsp;|&nbsp; 4 · less
+        </div>
+        <div style="font-size:12.5px;line-height:1.5;margin-top:10px;color:rgba(17,22,31,.7)">Item 5 · you added a quarter to a quarter, so the answer must be bigger than a quarter; 2/8 <em>is</em> a quarter, so nothing was added. C1 · it worked by coincidence — 2/4 does equal 1/2, but only because both fractions were identical halves; try 1/2 + 1/3 and the method collapses. C2 · no, never, as long as both fractions are positive: adding a positive amount always increases the total.</div>
+      </div>
+
+      <div style="border:1.5px solid rgba(21,128,61,.25);border-radius:14px;padding:16px 20px;background:rgba(74,222,128,.06)">
+        <div style="font-family:Fredoka,sans-serif;font-size:20px;margin-bottom:10px">Friday · Denominator Hunt</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:13px;line-height:2.1">
+          Warm-Up · 4, 8, 12, 16, 20, 24 &nbsp;|&nbsp; 6, 12, 18, 24, 30, 36 &nbsp;→&nbsp; first shared is 12
+        </div>
+        <div style="font-size:12.5px;line-height:1.5;margin-top:10px;color:rgba(17,22,31,.7)">C1 · the product only works when the two numbers share no factor — 3 and 5 give 15, but 4 and 6 give 12 rather than 24. C2 · 11 and 12, giving 132, since 11 is prime and shares nothing with 12.</div>
+      </div>
+    </div>
+
+    <div style="border-top:2px solid rgba(17,22,31,.12);margin-top:14px;padding:12px 0 26px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(17,22,31,.45)">
+      <span>Teacher page</span><span>Answer key B · page 14</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ P15 · ANSWER KEY C + JOURNAL ============ -->
+<section class="page" data-screen-label="15 Answer key C" style="background:#FBFEFB;padding:0;display:flex;flex-direction:column">
+  <div style="height:10px;background:#15803D"></div>
+  <div style="padding:34px 52px 0;flex:1;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:24px;border-bottom:2px solid rgba(17,22,31,.14);padding-bottom:16px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:#15803D">Teacher page · answer key</div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:36px;margin:6px 0 4px;line-height:1">Key C</h1>
+        <div style="font-size:13.5px;color:rgba(17,22,31,.6)">Mid-unit quiz, unit test, and the error journal sheet.</div>
+      </div>
+      <div style="flex:none;background:rgba(74,222,128,.14);border:1.5px solid rgba(21,128,61,.3);border-radius:12px;padding:12px 16px;font-size:12.5px;line-height:1.6;max-width:210px;color:#15803D">Quiz is out of 8, test out of 12. 85% is 7/8 and 11/12.</div>
+    </div>
+
+    <div style="margin-top:18px;display:grid;grid-template-columns:1fr 1fr;gap:16px">
+      <div style="border:1.5px solid rgba(21,128,61,.25);border-radius:14px;padding:15px 20px;background:rgba(74,222,128,.06)">
+        <div style="font-family:Fredoka,sans-serif;font-size:20px;margin-bottom:8px">Mid-unit quiz</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:13px;line-height:2">
+          1 · 3/6<br>2 · 5/8<br>3 · 12<br>4 · 5/6<br>5 · 11/12<br>6 · 7/12<br>7 · 2/3<br>8 · size argument
+        </div>
+      </div>
+      <div style="border:1.5px solid rgba(21,128,61,.25);border-radius:14px;padding:15px 20px;background:rgba(74,222,128,.06)">
+        <div style="font-family:Fredoka,sans-serif;font-size:20px;margin-bottom:8px">Unit test</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:13px;line-height:2">
+          1 · 8/12<br>2 · 1<br>3 · 5/6<br>4 · 17/12 = 1 5/12<br>5 · 7/12<br>6 · 1 3/4<br>7 · 3 3/4<br>8 · 5/8<br>9 · 1 1/4<br>10 · 17/12 = 1 5/12
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:14px;border:1.5px solid rgba(21,128,61,.25);border-radius:14px;padding:15px 20px;background:rgba(74,222,128,.06)">
+      <div style="font-family:Fredoka,sans-serif;font-size:20px;margin-bottom:8px">Items 11, 12 and the Big Question</div>
+      <div style="font-size:13px;line-height:1.6"><strong>11 ·</strong> 17/12 cups, or 1 5/12 — less than 1 1/2, since 5/12 is under a half. <strong>12 ·</strong> 2 2/3 cups. <strong>Big Question ·</strong> full marks for either route: a diagram showing that halves and thirds are different-sized pieces so the counts cannot be combined until they match, or the size argument that 2/5 is less than the 1/2 you started with. An answer that only recites “find a common denominator” without saying why scores half — the procedure is not the reason.</div>
+    </div>
+
+    <div style="margin-top:14px;border:1.5px solid rgba(17,22,31,.18);border-radius:14px;padding:15px 20px;flex:1;display:flex;flex-direction:column">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px">
+        <div style="font-family:Fredoka,sans-serif;font-size:20px">Error journal · Mission 05</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(17,22,31,.45)">One line per mistake · student page</div>
+      </div>
+      <div style="font-size:12.5px;line-height:1.5;color:rgba(17,22,31,.65);margin:6px 0 10px">Write what went wrong, not what the right answer was. On Thursday of Week 5, read the whole list and fix only what appears twice.</div>
+      <div style="flex:1;display:flex;flex-direction:column;gap:0">
+        <div style="display:grid;grid-template-columns:74px 1fr;gap:14px;border-bottom:1.5px solid rgba(17,22,31,.14);padding:10px 0"><span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:rgba(17,22,31,.4)">DAY</span><span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:rgba(17,22,31,.4)">WHAT I GOT WRONG, AND WHY</span></div>
+        <div style="border-bottom:1.5px solid rgba(17,22,31,.14);height:32px"></div>
+        <div style="border-bottom:1.5px solid rgba(17,22,31,.14);height:32px"></div>
+        <div style="border-bottom:1.5px solid rgba(17,22,31,.14);height:32px"></div>
+        <div style="border-bottom:1.5px solid rgba(17,22,31,.14);height:32px"></div>
+        <div style="border-bottom:1.5px solid rgba(17,22,31,.14);height:32px"></div>
+      </div>
+    </div>
+
+    <div style="border-top:2px solid rgba(17,22,31,.12);margin-top:12px;padding:12px 0 26px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(17,22,31,.45)">
+      <span>Adventures in Big Math · 5th Grade · Mission 05 · Fraction Sums</span><span>Answer key C · page 15</span>
+    </div>
+  </div>
+</section>
+
+</doc-page>
+</x-dc>
+</body>
+</html>

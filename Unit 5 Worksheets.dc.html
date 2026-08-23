@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700;6..12,800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  body{margin:0;font-family:"Nunito Sans",system-ui,sans-serif;color:#11161F}
+  a{color:#0369A1;text-decoration:none}
+  a:hover{color:#0284C7}
+  *{box-sizing:border-box}
+  .page{print-color-adjust:exact;-webkit-print-color-adjust:exact}
+</style>
+<script src="./doc-page.js"></script>
+<script src="./print-fit.js"></script>
+</helmet>
+
+<doc-page size="letter">
+
+<section class="page" data-screen-label="Cover" style="background:#07101C;color:#F4F8FF;padding:0;display:flex;flex-direction:column;position:relative;overflow:hidden">
+  <div style="position:absolute;inset:0;background:radial-gradient(640px 400px at 78% 10%, #A3E63544, transparent 62%)"></div>
+  <div style="position:relative;padding:60px 58px 0;flex:1;display:flex;flex-direction:column">
+    <div style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;color:#A3E635">Adventures in Big Math · 3rd Grade Math</div>
+    <div style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;color:rgba(244,248,255,.5);margin-top:8px">Mission 05 of 08 · Worksheet pack</div>
+    <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:54px;line-height:1;margin:44px 0 0;letter-spacing:-1px;color:#A3E635">Decimals &amp; Money</h1>
+    <div style="font-size:19px;margin-top:16px;color:rgba(244,248,255,.8);max-width:600px">Every graded set, every week — 4 weeks, 20 worksheets, with an answer key after each week.</div>
+    <div style="margin-top:40px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px">
+      <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);border-radius:14px;padding:16px 18px"><div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:rgba(244,248,255,.5)">Week 1</div><div style="font-family:Fredoka,sans-serif;font-size:17px;margin-top:5px">5 sets</div></div><div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);border-radius:14px;padding:16px 18px"><div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:rgba(244,248,255,.5)">Week 2</div><div style="font-family:Fredoka,sans-serif;font-size:17px;margin-top:5px">5 sets</div></div><div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);border-radius:14px;padding:16px 18px"><div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:rgba(244,248,255,.5)">Week 3</div><div style="font-family:Fredoka,sans-serif;font-size:17px;margin-top:5px">5 sets</div></div><div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);border-radius:14px;padding:16px 18px"><div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:rgba(244,248,255,.5)">Week 4</div><div style="font-family:Fredoka,sans-serif;font-size:17px;margin-top:5px">5 sets</div></div>
+    </div>
+    <div style="margin-top:auto;margin-bottom:44px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);border-radius:16px;padding:18px 22px">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:#A3E635;margin-bottom:7px">How to use it</div>
+      <div style="font-size:13.5px;line-height:1.55;color:rgba(244,248,255,.78)">One page per day. Warm-Up is recall, Core is the graded tier, Challenge is never graded — the score box counts the graded items only. The same items appear in the app's Practice Bay, so a day can be done on paper or on screen, not both.</div>
+    </div>
+  </div>
+  <div style="position:relative;height:11px;background:#A3E635"></div>
+</section>
+<!-- u5p1 -->
+<section class="page" data-screen-label="1.1 Tenths and Hundredths" style="background:#FCFDFF;padding:0;display:flex;flex-direction:column">
+  <div style="height:9px;background:#A3E635"></div>
+  <div style="padding:28px 50px 0;flex:1;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:22px;border-bottom:2px solid rgba(17,22,31,.14);padding-bottom:13px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#A3E635">3rd Grade · Mission 05 · Week 1 · Set 1.1</div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:31px;margin:6px 0 3px;line-height:1.03">Tenths and Hundredths</h1>
+        <div style="font-size:12.5px;color:rgba(17,22,31,.62);max-width:520px">Answers are whole numbers. When a question says “in hundredths” or “in cents”, type just that count.</div>
+      </div>
+      <div style="flex:none;text-align:right;font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(17,22,31,.55);line-height:1.95">
+        <div>NAME __________</div><div>DATE __________</div><div>SCORE ____ / 11</div>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#22C55E;color:#052E12;display:grid;place-items:center;font-size:12px">✦</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#15803D">Warm-Up</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">6 items</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:9px"><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">0.3 = ?/10 → numerator</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">0.7 = ?/10 → numerator</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">0.09 = ?/100 → numerator</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">0.5 in hundredths</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">1/2 in hundredths</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">1/4 in hundredths</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div></div>
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#A3E635;color:#0B1220;display:grid;place-items:center;font-size:12px">◆</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#A3E635">Core</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">graded · show your working</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:8px"><div style="border:1.5px solid #A3E63544;border-radius:13px;padding:11px 16px;background:#A3E6350d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">1. &nbsp;0.6 in hundredths <span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:rgba(17,22,31,.45)">(6/10 is the same as 60/100)</span></span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #A3E63544;border-radius:13px;padding:11px 16px;background:#A3E6350d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">2. &nbsp;$2.35 in cents <span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:rgba(17,22,31,.45)">(Two dollars is 200 cents)</span></span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #A3E63544;border-radius:13px;padding:11px 16px;background:#A3E6350d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">3. &nbsp;$0.08 in cents <span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:rgba(17,22,31,.45)">(Eight hundredths of a dollar)</span></span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #A3E63544;border-radius:13px;padding:11px 16px;background:#A3E6350d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">4. &nbsp;3/10 + 4/10 = ?/10 → numerator <span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:rgba(17,22,31,.45)">(Count the tenths)</span></span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #A3E63544;border-radius:13px;padding:11px 16px;background:#A3E6350d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">5. &nbsp;0.25 + 0.25 in hundredths <span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:rgba(17,22,31,.45)">(25 + 25)</span></span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div></div>
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#F59E0B;color:#3A2405;display:grid;place-items:center;font-size:12px">★</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#B45309">Challenge</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">not graded</div>
+    </div>
+    <div style="background:rgba(245,158,11,.1);border:1.5px solid rgba(180,83,9,.32);border-radius:14px;padding:11px 17px;flex:1;display:flex;flex-direction:column;gap:7px"><div style="font-size:13.5px;line-height:1.5">C1. &nbsp;Bigger: 0.7 or 0.65 → in hundredths <span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:rgba(180,83,9,.7)">(Write 0.7 as 0.70 first)</span></div><div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div><div style="font-size:13.5px;line-height:1.5">C2. &nbsp;Hundredths in one whole <span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:rgba(180,83,9,.7)">(Ten tenths, each cut into ten)</span></div><div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div></div>
+    <div style="border-top:2px solid rgba(17,22,31,.12);margin-top:11px;padding:10px 0 22px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(17,22,31,.45)">
+      <span>Error journal: one sentence per mistake</span><span>Week 1 · page 2</span>
+    </div>
+  </div>
+</section>
+<!-- u5p2 -->
+<section class="page" data-screen-label="1.2 Decimals on the Line" style="background:#FCFDFF;padding:0;display:flex;flex-direction:column">
+  <div style="height:9px;background:#A3E635"></div>
+  <div style="padding:28px 50px 0;flex:1;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:22px;border-bottom:2px solid rgba(17,22,31,.14);padding-bottom:13px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#A3E635">3rd Grade · Mission 05 · Week 1 · Set 1.2</div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:31px;margin:6px 0 3px;line-height:1.03">Decimals on the Line</h1>
+        <div style="font-size:12.5px;color:rgba(17,22,31,.62);max-width:520px">Every decimal has a place between 0 and 1. More digits does not mean bigger.</div>
+      </div>
+      <div style="flex:none;text-align:right;font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(17,22,31,.55);line-height:1.95">
+        <div>NAME __________</div><div>DATE __________</div><div>SCORE ____ / 11</div>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#22C55E;color:#052E12;display:grid;place-items:center;font-size:12px">✦</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#15803D">Warm-Up</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">6 items</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:9px"><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">0.4 in hundredths</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">0.9 in hundredths</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">0.05 in hundredths</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">0.75 in hundredths</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">0.1 in hundredths</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">1.0 in hundredths</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div></div>
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#A3E635;color:#0B1220;display:grid;place-items:center;font-size:12px">◆</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#A3E635">Core</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">graded · show your working</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:8px"><div style="border:1.5px solid #A3E63544;border-radius:13px;padding:11px 16px;background:#A3E6350d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">1. &nbsp;0.65 sits below which tenth? In hundredths <span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:rgba(17,22,31,.45)">(Between 0.60 and 0.70)</span></span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #A3E63544;border-radius:13px;padding:11px 16px;background:#A3E6350d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">2. &nbsp;Halfway between 0.2 and 0.3, in hundredths <span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:rgba(17,22,31,.45)">(20 and 30 hundredths)</span></span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #A3E63544;border-radius:13px;padding:11px 16px;background:#A3E6350d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">3. &nbsp;0.8 in tenths <span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:rgba(17,22,31,.45)">(Eight tenths)</span></span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #A3E63544;border-radius:13px;padding:11px 16px;background:#A3E6350d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">4. &nbsp;Bigger: 0.4 or 0.35 → in hundredths <span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:rgba(17,22,31,.45)">(0.40 against 0.35)</span></span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #A3E63544;border-radius:13px;padding:11px 16px;background:#A3E6350d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">5. &nbsp;0.3 + 0.45 in hundredths <span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:rgba(17,22,31,.45)">(30 + 45)</span></span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div></div>
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#F59E0B;color:#3A2405;display:grid;place-items:center;font-size:12px">★</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#B45309">Challenge</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">not graded</div>
+    </div>
+    <div style="background:rgba(245,158,11,.1);border:1.5px solid rgba(180,83,9,.32);border-radius:14px;padding:11px 17px;flex:1;display:flex;flex-direction:column;gap:7px"><div style="font-size:13.5px;line-height:1.5">C1. &nbsp;Largest of 0.5, 0.45, 0.055 → in thousandths <span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:rgba(180,83,9,.7)">(500, 450 and 55 thousandths)</span></div><div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div><div style="font-size:13.5px;line-height:1.5">C2. &nbsp;0.9 − 0.35 in hundredths <span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:rgba(180,83,9,.7)">(90 − 35)</span></div><div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div></div>
+    <div style="border-top:2px solid rgba(17,22,31,.12);margin-top:11px;padding:10px 0 22px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(17,22,31,.45)">
+      <span>Error journal: one sentence per mistake</span><span>Week 1 · page 3</span>
+    </div>
+  </div>
+</section>
+<!-- u5p3 -->
+<section class="page" data-screen-label="1.3 Money Math" style="background:#FCFDFF;padding:0;display:flex;flex-direction:column">
+  <div style="height:9px;background:#A3E635"></div>
+  <div style="padding:28px 50px 0;flex:1;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:22px;border-bottom:2px solid rgba(17,22,31,.14);padding-bottom:13px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#A3E635">3rd Grade · Mission 05 · Week 1 · Set 1.3</div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:31px;margin:6px 0 3px;line-height:1.03">Money Math</h1>
+        <div style="font-size:12.5px;color:rgba(17,22,31,.62);max-width:520px">Money is just hundredths with a dollar sign. Answer everything in cents.</div>
+      </div>
+      <div style="flex:none;text-align:right;font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(17,22,31,.55);line-height:1.95">
+        <div>NAME __________</div><div>DATE __________</div><div>SCORE ____ / 11</div>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#22C55E;color:#052E12;display:grid;place-items:center;font-size:12px">✦</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#15803D">Warm-Up</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">6 items</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:9px"><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">$1.50 in cents</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">$0.75 in cents</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">$3.05 in cents</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">$10.00 in cents</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">$0.99 in cents</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">$2.20 in cents</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div></div>
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#A3E635;color:#0B1220;display:grid;place-items:center;font-size:12px">◆</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#A3E635">Core</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">graded · show your working</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:8px"><div style="border:1.5px solid #A3E63544;border-radius:13px;padding:11px 16px;background:#A3E6350d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">1. &nbsp;$3.45 + $2.30 in cents <span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:rgba(17,22,31,.45)">(345 + 230)</span></span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #A3E63544;border-radius:13px;padding:11px 16px;background:#A3E6350d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">2. &nbsp;$20.00 − $13.75 in cents <span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:rgba(17,22,31,.45)">(Count up: 25 cents to $14, then $6)</span></span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #A3E63544;border-radius:13px;padding:11px 16px;background:#A3E6350d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">3. &nbsp;$4.99 + $3.99 in cents <span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:rgba(17,22,31,.45)">($5 + $4 is 900, then take 2 off)</span></span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #A3E63544;border-radius:13px;padding:11px 16px;background:#A3E6350d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">4. &nbsp;Three items at $2.50 — total in cents <span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:rgba(17,22,31,.45)">(250 × 3)</span></span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #A3E63544;border-radius:13px;padding:11px 16px;background:#A3E6350d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">5. &nbsp;$10 − ($2.50 + $3.75) in cents <span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:rgba(17,22,31,.45)">(1000 − 625)</span></span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div></div>
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#F59E0B;color:#3A2405;display:grid;place-items:center;font-size:12px">★</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#B45309">Challenge</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">not graded</div>
+    </div>
+    <div style="background:rgba(245,158,11,.1);border:1.5px solid rgba(180,83,9,.32);border-radius:14px;padding:11px 17px;flex:1;display:flex;flex-direction:column;gap:7px"><div style="font-size:13.5px;line-height:1.5">C1. &nbsp;Cheaper per item: 4 for $6.00 or $1.60 each? In cents <span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:rgba(180,83,9,.7)">(600 ÷ 4 against 160)</span></div><div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div><div style="font-size:13.5px;line-height:1.5">C2. &nbsp;$20 shared 8 ways, in cents <span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:rgba(180,83,9,.7)">(2000 ÷ 8)</span></div><div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div></div>
+    <div style="border-top:2px solid rgba(17,22,31,.12);margin-top:11px;padding:10px 0 22px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(17,22,31,.45)">
+      <span>Error journal: one sentence per mistake</span><span>Week 1 · page 4</span>
+    </div>
+  </div>
+</section>
+<!-- u5p4 -->
+<section class="page" data-screen-label="1.4 Rounding &amp; Estimating" style="background:#FCFDFF;padding:0;display:flex;flex-direction:column">
+  <div style="height:9px;background:#A3E635"></div>
+  <div style="padding:28px 50px 0;flex:1;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:22px;border-bottom:2px solid rgba(17,22,31,.14);padding-bottom:13px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#A3E635">3rd Grade · Mission 05 · Week 1 · Set 1.4</div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:31px;margin:6px 0 3px;line-height:1.03">Rounding &amp; Estimating</h1>
+        <div style="font-size:12.5px;color:rgba(17,22,31,.62);max-width:520px">Round before you compute, then check the exact answer against the estimate.</div>
+      </div>
+      <div style="flex:none;text-align:right;font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(17,22,31,.55);line-height:1.95">
+        <div>NAME __________</div><div>DATE __________</div><div>SCORE ____ / 11</div>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#22C55E;color:#052E12;display:grid;place-items:center;font-size:12px">✦</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#15803D">Warm-Up</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">6 items</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:9px"><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">$3.45 to the nearest dollar, in dollars</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">$7.80 to the nearest dollar</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">$12.50 to the nearest dollar</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">$0.60 to the nearest dollar</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">$9.49 to the nearest dollar</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">$5.55 to the nearest dollar</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div></div>
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#A3E635;color:#0B1220;display:grid;place-items:center;font-size:12px">◆</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#A3E635">Core</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">graded · show your working</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:8px"><div style="border:1.5px solid #A3E63544;border-radius:13px;padding:11px 16px;background:#A3E6350d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">1. &nbsp;Round $4.678 to the nearest cent, in cents <span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:rgba(17,22,31,.45)">(The thousandths digit decides)</span></span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #A3E63544;border-radius:13px;padding:11px 16px;background:#A3E6350d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">2. &nbsp;Round $23.49 to the nearest dollar, in dollars <span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:rgba(17,22,31,.45)">(49 cents is under half)</span></span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #A3E63544;border-radius:13px;padding:11px 16px;background:#A3E6350d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">3. &nbsp;Estimate $3.95 + $6.10 to the nearest dollar, in dollars <span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:rgba(17,22,31,.45)">($4 + $6)</span></span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #A3E63544;border-radius:13px;padding:11px 16px;background:#A3E6350d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">4. &nbsp;Exact $3.95 + $6.10 in cents <span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:rgba(17,22,31,.45)">(395 + 610)</span></span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #A3E63544;border-radius:13px;padding:11px 16px;background:#A3E6350d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">5. &nbsp;Round 0.482 to the nearest hundredth, in hundredths <span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:rgba(17,22,31,.45)">(The 2 rounds down)</span></span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div></div>
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#F59E0B;color:#3A2405;display:grid;place-items:center;font-size:12px">★</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#B45309">Challenge</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">not graded</div>
+    </div>
+    <div style="background:rgba(245,158,11,.1);border:1.5px solid rgba(180,83,9,.32);border-radius:14px;padding:11px 17px;flex:1;display:flex;flex-direction:column;gap:7px"><div style="font-size:13.5px;line-height:1.5">C1. &nbsp;$19.99 × 3 in cents <span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:rgba(180,83,9,.7)">($20 × 3 is 6000, then take 3 off)</span></div><div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div><div style="font-size:13.5px;line-height:1.5">C2. &nbsp;Change from $50 after $19.99 × 2, in cents <span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:rgba(180,83,9,.7)">(5000 − 3998)</span></div><div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div></div>
+    <div style="border-top:2px solid rgba(17,22,31,.12);margin-top:11px;padding:10px 0 22px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(17,22,31,.45)">
+      <span>Error journal: one sentence per mistake</span><span>Week 1 · page 5</span>
+    </div>
+  </div>
+</section>
+<!-- u5p5 -->
+<section class="page" data-screen-label="Fri The $40 Mission &amp; Change Sprint" style="background:#FCFDFF;padding:0;display:flex;flex-direction:column">
+  <div style="height:9px;background:#A3E635"></div>
+  <div style="padding:28px 50px 0;flex:1;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:22px;border-bottom:2px solid rgba(17,22,31,.14);padding-bottom:13px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#A3E635">3rd Grade · Mission 05 · Week 1 · Set Fri</div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:31px;margin:6px 0 3px;line-height:1.03">The $40 Mission &amp; Change Sprint</h1>
+        <div style="font-size:12.5px;color:rgba(17,22,31,.62);max-width:520px">Enrichment day. Real prices, real change, everything in cents.</div>
+      </div>
+      <div style="flex:none;text-align:right;font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(17,22,31,.55);line-height:1.95">
+        <div>NAME __________</div><div>DATE __________</div><div style="color:rgba(180,83,9,.8)">ENRICHMENT</div>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#F59E0B;color:#3A2405;display:grid;place-items:center;font-size:12px">★</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#B45309">Challenge</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">not graded</div>
+    </div>
+    <div style="background:rgba(245,158,11,.1);border:1.5px solid rgba(180,83,9,.32);border-radius:14px;padding:11px 17px;flex:1;display:flex;flex-direction:column;gap:7px"><div style="font-size:13.5px;line-height:1.5">C1. &nbsp;Budget $40, spent $27.85. Left, in cents <span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:rgba(180,83,9,.7)">(4000 − 2785)</span></div><div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div><div style="font-size:13.5px;line-height:1.5">C2. &nbsp;Fewest coins to make 67¢ <span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:rgba(180,83,9,.7)">(25, 25, 10, 5, 1, 1)</span></div><div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div><div style="font-size:13.5px;line-height:1.5">C3. &nbsp;Fewest coins to make 41¢ <span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:rgba(180,83,9,.7)">(25, 10, 5, 1)</span></div><div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div><div style="font-size:13.5px;line-height:1.5">C4. &nbsp;$5.00 shared 4 ways, in cents <span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:rgba(180,83,9,.7)">(500 ÷ 4)</span></div><div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div><div style="font-size:13.5px;line-height:1.5">C5. &nbsp;$12.40 + $9.85 + $15.30 in cents <span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:rgba(180,83,9,.7)">(1240 + 985 + 1530)</span></div><div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div><div style="font-size:13.5px;line-height:1.5">C6. &nbsp;That total against a $40 budget — left over, in cents <span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:rgba(180,83,9,.7)">(4000 − 3755)</span></div><div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div><div style="font-size:13.5px;line-height:1.5">C7. &nbsp;$1.29 × 4 in cents <span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:rgba(180,83,9,.7)">(129 × 4)</span></div><div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div><div style="font-size:13.5px;line-height:1.5">C8. &nbsp;Cheaper per ounce: 12 oz for $3.60 or 16 oz for $4.00? In cents <span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:rgba(180,83,9,.7)">(30¢ an ounce against 25¢)</span></div><div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div></div>
+    <div style="border-top:2px solid rgba(17,22,31,.12);margin-top:11px;padding:10px 0 22px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(17,22,31,.45)">
+      <span>Not graded — talk it through instead</span><span>Week 1 · page 6</span>
+    </div>
+  </div>
+</section>
+<section class="page" data-screen-label="Week 1 key" style="background:#FCFDFF;padding:0;display:flex;flex-direction:column">
+  <div style="height:9px;background:#15803D"></div>
+  <div style="padding:30px 50px 0;flex:1;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:22px;border-bottom:2px solid rgba(17,22,31,.14);padding-bottom:14px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#15803D">Teacher page · answer key</div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:32px;margin:6px 0 3px;line-height:1">Week 1 Answers</h1>
+        <div style="font-size:12.5px;color:rgba(17,22,31,.62)">Mission 05 · all 5 sets. Answers run in page order. Score out of the graded tiers only — Challenge never counts.</div>
+      </div>
+      <div style="flex:none;background:rgba(74,222,128,.14);border:1.5px solid rgba(21,128,61,.3);border-radius:11px;padding:10px 14px;font-size:12px;line-height:1.55;max-width:190px;color:#15803D">Mark the reasoning, not the handwriting. Any correct method counts.</div>
+    </div>
+    <div style="margin-top:16px;display:flex;flex-direction:column;gap:11px;flex:1"><div style="border:1.5px solid rgba(21,128,61,.25);border-radius:13px;padding:12px 17px;background:rgba(74,222,128,.06)">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:6px"><div style="font-family:Fredoka,sans-serif;font-size:17px">1.1 · Tenths and Hundredths</div><div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(17,22,31,.42)">out of 11</div></div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Warm-Up · </span>3 &nbsp;|&nbsp; 7 &nbsp;|&nbsp; 9 &nbsp;|&nbsp; 50 &nbsp;|&nbsp; 50 &nbsp;|&nbsp; 25</div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Core · </span>60 &nbsp;|&nbsp; 235 &nbsp;|&nbsp; 8 &nbsp;|&nbsp; 7 &nbsp;|&nbsp; 50</div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Challenge · </span>70 &nbsp;|&nbsp; 100</div></div><div style="border:1.5px solid rgba(21,128,61,.25);border-radius:13px;padding:12px 17px;background:rgba(74,222,128,.06)">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:6px"><div style="font-family:Fredoka,sans-serif;font-size:17px">1.2 · Decimals on the Line</div><div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(17,22,31,.42)">out of 11</div></div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Warm-Up · </span>40 &nbsp;|&nbsp; 90 &nbsp;|&nbsp; 5 &nbsp;|&nbsp; 75 &nbsp;|&nbsp; 10 &nbsp;|&nbsp; 100</div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Core · </span>70 &nbsp;|&nbsp; 25 &nbsp;|&nbsp; 8 &nbsp;|&nbsp; 40 &nbsp;|&nbsp; 75</div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Challenge · </span>500 &nbsp;|&nbsp; 55</div></div><div style="border:1.5px solid rgba(21,128,61,.25);border-radius:13px;padding:12px 17px;background:rgba(74,222,128,.06)">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:6px"><div style="font-family:Fredoka,sans-serif;font-size:17px">1.3 · Money Math</div><div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(17,22,31,.42)">out of 11</div></div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Warm-Up · </span>150 &nbsp;|&nbsp; 75 &nbsp;|&nbsp; 305 &nbsp;|&nbsp; 1000 &nbsp;|&nbsp; 99 &nbsp;|&nbsp; 220</div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Core · </span>575 &nbsp;|&nbsp; 625 &nbsp;|&nbsp; 898 &nbsp;|&nbsp; 750 &nbsp;|&nbsp; 375</div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Challenge · </span>150 &nbsp;|&nbsp; 250</div></div><div style="border:1.5px solid rgba(21,128,61,.25);border-radius:13px;padding:12px 17px;background:rgba(74,222,128,.06)">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:6px"><div style="font-family:Fredoka,sans-serif;font-size:17px">1.4 · Rounding &amp; Estimating</div><div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(17,22,31,.42)">out of 11</div></div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Warm-Up · </span>3 &nbsp;|&nbsp; 8 &nbsp;|&nbsp; 13 &nbsp;|&nbsp; 1 &nbsp;|&nbsp; 9 &nbsp;|&nbsp; 6</div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Core · </span>468 &nbsp;|&nbsp; 23 &nbsp;|&nbsp; 10 &nbsp;|&nbsp; 1005 &nbsp;|&nbsp; 48</div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Challenge · </span>5997 &nbsp;|&nbsp; 1002</div></div><div style="border:1.5px solid rgba(21,128,61,.25);border-radius:13px;padding:12px 17px;background:rgba(74,222,128,.06)">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:6px"><div style="font-family:Fredoka,sans-serif;font-size:17px">Fri · The $40 Mission &amp; Change Sprint</div><div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(17,22,31,.42)">enrichment</div></div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Challenge · </span>1215 &nbsp;|&nbsp; 6 &nbsp;|&nbsp; 4 &nbsp;|&nbsp; 125 &nbsp;|&nbsp; 3755 &nbsp;|&nbsp; 245 &nbsp;|&nbsp; 516 &nbsp;|&nbsp; 25</div></div></div>
+    <div style="border-top:2px solid rgba(17,22,31,.12);margin-top:11px;padding:10px 0 22px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(17,22,31,.45)">
+      <span>Decimals &amp; Money · Week 1</span><span>Answer key · page 7</span>
+    </div>
+  </div>
+</section>
+<!-- u5w2p1 -->
+<section class="page" data-screen-label="2.1 Line Up the Point" style="background:#FCFDFF;padding:0;display:flex;flex-direction:column">
+  <div style="height:9px;background:#A3E635"></div>
+  <div style="padding:28px 50px 0;flex:1;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:22px;border-bottom:2px solid rgba(17,22,31,.14);padding-bottom:13px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#A3E635">3rd Grade · Mission 05 · Week 2 · Set 2.1</div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:31px;margin:6px 0 3px;line-height:1.03">Line Up the Point</h1>
+        <div style="font-size:12.5px;color:rgba(17,22,31,.62);max-width:520px">Not the last digit — the point. Fill the gaps with zeros.</div>
+      </div>
+      <div style="flex:none;text-align:right;font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(17,22,31,.55);line-height:1.95">
+        <div>NAME __________</div><div>DATE __________</div><div>SCORE ____ / 11</div>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#22C55E;color:#052E12;display:grid;place-items:center;font-size:12px">✦</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#15803D">Warm-Up</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">6 items</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:9px"><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">0.3 + 0.4</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">1.2 + 2.5</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">0.25 + 0.25</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">2.5 + 1.5</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">0.6 + 0.9</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">3.4 + 1.2</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div></div>
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#A3E635;color:#0B1220;display:grid;place-items:center;font-size:12px">◆</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#A3E635">Core</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">graded · show your working</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:8px"><div style="border:1.5px solid #A3E63544;border-radius:13px;padding:11px 16px;background:#A3E6350d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">1. &nbsp;3.5 + 0.47</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #A3E63544;border-radius:13px;padding:11px 16px;background:#A3E6350d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">2. &nbsp;12.6 + 4.85</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #A3E63544;border-radius:13px;padding:11px 16px;background:#A3E6350d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">3. &nbsp;9.4 + 0.68</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #A3E63544;border-radius:13px;padding:11px 16px;background:#A3E6350d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">4. &nbsp;0.125 + 0.875</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #A3E63544;border-radius:13px;padding:11px 16px;background:#A3E6350d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">5. &nbsp;7.05 + 2.9</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div></div>
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#F59E0B;color:#3A2405;display:grid;place-items:center;font-size:12px">★</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#B45309">Challenge</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">not graded</div>
+    </div>
+    <div style="background:rgba(245,158,11,.1);border:1.5px solid rgba(180,83,9,.32);border-radius:14px;padding:11px 17px;flex:1;display:flex;flex-direction:column;gap:7px"><div style="font-size:13.5px;line-height:1.5">C1. &nbsp;2.5 + 3.75 + 0.125</div><div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div><div style="font-size:13.5px;line-height:1.5">C2. &nbsp;What adds to 4.6 to make 10</div><div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div></div>
+    <div style="border-top:2px solid rgba(17,22,31,.12);margin-top:11px;padding:10px 0 22px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(17,22,31,.45)">
+      <span>Error journal: one sentence per mistake</span><span>Week 2 · page 8</span>
+    </div>
+  </div>
+</section>
+<!-- u5w2p2 -->
+<section class="page" data-screen-label="2.2 Subtracting Decimals" style="background:#FCFDFF;padding:0;display:flex;flex-direction:column">
+  <div style="height:9px;background:#A3E635"></div>
+  <div style="padding:28px 50px 0;flex:1;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:22px;border-bottom:2px solid rgba(17,22,31,.14);padding-bottom:13px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#A3E635">3rd Grade · Mission 05 · Week 2 · Set 2.2</div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:31px;margin:6px 0 3px;line-height:1.03">Subtracting Decimals</h1>
+        <div style="font-size:12.5px;color:rgba(17,22,31,.62);max-width:520px">Same alignment. Borrow across the point when you must.</div>
+      </div>
+      <div style="flex:none;text-align:right;font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(17,22,31,.55);line-height:1.95">
+        <div>NAME __________</div><div>DATE __________</div><div>SCORE ____ / 11</div>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#22C55E;color:#052E12;display:grid;place-items:center;font-size:12px">✦</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#15803D">Warm-Up</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">6 items</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:9px"><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">0.9 − 0.4</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">3.7 − 1.2</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">1 − 0.5</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">2.5 − 0.5</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">0.75 − 0.25</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">5.8 − 2.3</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div></div>
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#A3E635;color:#0B1220;display:grid;place-items:center;font-size:12px">◆</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#A3E635">Core</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">graded · show your working</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:8px"><div style="border:1.5px solid #A3E63544;border-radius:13px;padding:11px 16px;background:#A3E6350d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">1. &nbsp;4 − 1.35</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #A3E63544;border-radius:13px;padding:11px 16px;background:#A3E6350d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">2. &nbsp;10 − 0.07</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #A3E63544;border-radius:13px;padding:11px 16px;background:#A3E6350d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">3. &nbsp;8.2 − 3.45</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #A3E63544;border-radius:13px;padding:11px 16px;background:#A3E6350d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">4. &nbsp;6.05 − 2.5</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #A3E63544;border-radius:13px;padding:11px 16px;background:#A3E6350d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">5. &nbsp;12.3 − 4.75</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div></div>
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#F59E0B;color:#3A2405;display:grid;place-items:center;font-size:12px">★</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#B45309">Challenge</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">not graded</div>
+    </div>
+    <div style="background:rgba(245,158,11,.1);border:1.5px solid rgba(180,83,9,.32);border-radius:14px;padding:11px 17px;flex:1;display:flex;flex-direction:column;gap:7px"><div style="font-size:13.5px;line-height:1.5">C1. &nbsp;12.4 − 7.856</div><div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div><div style="font-size:13.5px;line-height:1.5">C2. &nbsp;A 2.5 m board with 0.85 m cut off — metres left</div><div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div></div>
+    <div style="border-top:2px solid rgba(17,22,31,.12);margin-top:11px;padding:10px 0 22px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(17,22,31,.45)">
+      <span>Error journal: one sentence per mistake</span><span>Week 2 · page 9</span>
+    </div>
+  </div>
+</section>
+<!-- u5w2p3 -->
+<section class="page" data-screen-label="2.3 Change from a Twenty" style="background:#FCFDFF;padding:0;display:flex;flex-direction:column">
+  <div style="height:9px;background:#A3E635"></div>
+  <div style="padding:28px 50px 0;flex:1;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:22px;border-bottom:2px solid rgba(17,22,31,.14);padding-bottom:13px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#A3E635">3rd Grade · Mission 05 · Week 2 · Set 2.3</div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:31px;margin:6px 0 3px;line-height:1.03">Change from a Twenty</h1>
+        <div style="font-size:12.5px;color:rgba(17,22,31,.62);max-width:520px">Money is decimals wearing a dollar sign. Type numbers only.</div>
+      </div>
+      <div style="flex:none;text-align:right;font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(17,22,31,.55);line-height:1.95">
+        <div>NAME __________</div><div>DATE __________</div><div>SCORE ____ / 11</div>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#22C55E;color:#052E12;display:grid;place-items:center;font-size:12px">✦</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#15803D">Warm-Up</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">6 items</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:9px"><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">$20 − $5</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">$20 − $10.50</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">$10 − $2.50</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">$5 − $1.25</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">$20 − $15</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">$1 − $0.35</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div></div>
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#A3E635;color:#0B1220;display:grid;place-items:center;font-size:12px">◆</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#A3E635">Core</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">graded · show your working</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:8px"><div style="border:1.5px solid #A3E63544;border-radius:13px;padding:11px 16px;background:#A3E6350d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">1. &nbsp;$20 − $13.68</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #A3E63544;border-radius:13px;padding:11px 16px;background:#A3E6350d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">2. &nbsp;$50 − $27.45</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #A3E63544;border-radius:13px;padding:11px 16px;background:#A3E6350d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">3. &nbsp;$20 − $4.99</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #A3E63544;border-radius:13px;padding:11px 16px;background:#A3E6350d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">4. &nbsp;$100 − $63.20</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #A3E63544;border-radius:13px;padding:11px 16px;background:#A3E6350d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">5. &nbsp;$20 − ($6.50 + $4.25)</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div></div>
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#F59E0B;color:#3A2405;display:grid;place-items:center;font-size:12px">★</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#B45309">Challenge</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">not graded</div>
+    </div>
+    <div style="background:rgba(245,158,11,.1);border:1.5px solid rgba(180,83,9,.32);border-radius:14px;padding:11px 17px;flex:1;display:flex;flex-direction:column;gap:7px"><div style="font-size:13.5px;line-height:1.5">C1. &nbsp;Three items at $4.95 — change from $20</div><div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div><div style="font-size:13.5px;line-height:1.5">C2. &nbsp;$20 buys items at $2.40 — how many whole ones</div><div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div></div>
+    <div style="border-top:2px solid rgba(17,22,31,.12);margin-top:11px;padding:10px 0 22px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(17,22,31,.45)">
+      <span>Error journal: one sentence per mistake</span><span>Week 2 · page 10</span>
+    </div>
+  </div>
+</section>
+<!-- u5w2p4 -->
+<section class="page" data-screen-label="2.4 Adding Money Columns" style="background:#FCFDFF;padding:0;display:flex;flex-direction:column">
+  <div style="height:9px;background:#A3E635"></div>
+  <div style="padding:28px 50px 0;flex:1;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:22px;border-bottom:2px solid rgba(17,22,31,.14);padding-bottom:13px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#A3E635">3rd Grade · Mission 05 · Week 2 · Set 2.4</div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:31px;margin:6px 0 3px;line-height:1.03">Adding Money Columns</h1>
+        <div style="font-size:12.5px;color:rgba(17,22,31,.62);max-width:520px">A receipt is just a column of decimals.</div>
+      </div>
+      <div style="flex:none;text-align:right;font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(17,22,31,.55);line-height:1.95">
+        <div>NAME __________</div><div>DATE __________</div><div>SCORE ____ / 11</div>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#22C55E;color:#052E12;display:grid;place-items:center;font-size:12px">✦</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#15803D">Warm-Up</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">6 items</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:9px"><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">$2.50 + $1.50</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">$3.25 + $1.75</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">$0.99 + $0.01</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">$4.20 + $3.80</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">$1.10 + $2.40</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">$6.75 + $0.25</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div></div>
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#A3E635;color:#0B1220;display:grid;place-items:center;font-size:12px">◆</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#A3E635">Core</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">graded · show your working</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:8px"><div style="border:1.5px solid #A3E63544;border-radius:13px;padding:11px 16px;background:#A3E6350d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">1. &nbsp;$4.99 + $3.49</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #A3E63544;border-radius:13px;padding:11px 16px;background:#A3E6350d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">2. &nbsp;$12.75 + $8.60</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #A3E63544;border-radius:13px;padding:11px 16px;background:#A3E6350d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">3. &nbsp;$1.99 + $2.99 + $3.99</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #A3E63544;border-radius:13px;padding:11px 16px;background:#A3E6350d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">4. &nbsp;$15.40 + $9.85</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #A3E63544;border-radius:13px;padding:11px 16px;background:#A3E6350d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">5. &nbsp;$7.30 + $0.95 + $1.25</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div></div>
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#F59E0B;color:#3A2405;display:grid;place-items:center;font-size:12px">★</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#B45309">Challenge</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">not graded</div>
+    </div>
+    <div style="background:rgba(245,158,11,.1);border:1.5px solid rgba(180,83,9,.32);border-radius:14px;padding:11px 17px;flex:1;display:flex;flex-direction:column;gap:7px"><div style="font-size:13.5px;line-height:1.5">C1. &nbsp;Four items at $6.25 — the total</div><div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div><div style="font-size:13.5px;line-height:1.5">C2. &nbsp;$18.99 + $11.01 + $5.50</div><div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div></div>
+    <div style="border-top:2px solid rgba(17,22,31,.12);margin-top:11px;padding:10px 0 22px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(17,22,31,.45)">
+      <span>Error journal: one sentence per mistake</span><span>Week 2 · page 11</span>
+    </div>
+  </div>
+</section>
+<!-- u5w2p5 -->
+<section class="page" data-screen-label="Fri Change Sprint" style="background:#FCFDFF;padding:0;display:flex;flex-direction:column">
+  <div style="height:9px;background:#A3E635"></div>
+  <div style="padding:28px 50px 0;flex:1;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:22px;border-bottom:2px solid rgba(17,22,31,.14);padding-bottom:13px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#A3E635">3rd Grade · Mission 05 · Week 2 · Set Fri</div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:31px;margin:6px 0 3px;line-height:1.03">Change Sprint</h1>
+        <div style="font-size:12.5px;color:rgba(17,22,31,.62);max-width:520px">Make the amount with the fewest coins. Beat your own record.</div>
+      </div>
+      <div style="flex:none;text-align:right;font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(17,22,31,.55);line-height:1.95">
+        <div>NAME __________</div><div>DATE __________</div><div>SCORE ____ / 4</div>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#22C55E;color:#052E12;display:grid;place-items:center;font-size:12px">✦</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#15803D">Warm-Up</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">2 items</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:9px"><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">Cents in a quarter</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">Cents in a dime</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div></div>
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#A3E635;color:#0B1220;display:grid;place-items:center;font-size:12px">◆</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#A3E635">Core</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">graded · show your working</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:8px"><div style="border:1.5px solid #A3E63544;border-radius:13px;padding:11px 16px;background:#A3E6350d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">1. &nbsp;Fewest coins for 30 cents</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #A3E63544;border-radius:13px;padding:11px 16px;background:#A3E6350d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">2. &nbsp;Fewest coins for 41 cents</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div></div>
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#F59E0B;color:#3A2405;display:grid;place-items:center;font-size:12px">★</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#B45309">Challenge</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">not graded</div>
+    </div>
+    <div style="background:rgba(245,158,11,.1);border:1.5px solid rgba(180,83,9,.32);border-radius:14px;padding:11px 17px;flex:1;display:flex;flex-direction:column;gap:7px"><div style="font-size:13.5px;line-height:1.5">C1. &nbsp;Fewest coins for 99 cents</div><div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div><div style="font-size:13.5px;line-height:1.5">C2. &nbsp;Fewest coins for 63 cents</div><div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div><div style="font-size:13.5px;line-height:1.5">C3. &nbsp;Quarters in $3.75</div><div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div></div>
+    <div style="border-top:2px solid rgba(17,22,31,.12);margin-top:11px;padding:10px 0 22px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(17,22,31,.45)">
+      <span>Error journal: one sentence per mistake</span><span>Week 2 · page 12</span>
+    </div>
+  </div>
+</section>
+<section class="page" data-screen-label="Week 2 key" style="background:#FCFDFF;padding:0;display:flex;flex-direction:column">
+  <div style="height:9px;background:#15803D"></div>
+  <div style="padding:30px 50px 0;flex:1;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:22px;border-bottom:2px solid rgba(17,22,31,.14);padding-bottom:14px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#15803D">Teacher page · answer key</div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:32px;margin:6px 0 3px;line-height:1">Week 2 Answers</h1>
+        <div style="font-size:12.5px;color:rgba(17,22,31,.62)">Mission 05 · all 5 sets. Answers run in page order. Score out of the graded tiers only — Challenge never counts.</div>
+      </div>
+      <div style="flex:none;background:rgba(74,222,128,.14);border:1.5px solid rgba(21,128,61,.3);border-radius:11px;padding:10px 14px;font-size:12px;line-height:1.55;max-width:190px;color:#15803D">Mark the reasoning, not the handwriting. Any correct method counts.</div>
+    </div>
+    <div style="margin-top:16px;display:flex;flex-direction:column;gap:11px;flex:1"><div style="border:1.5px solid rgba(21,128,61,.25);border-radius:13px;padding:12px 17px;background:rgba(74,222,128,.06)">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:6px"><div style="font-family:Fredoka,sans-serif;font-size:17px">2.1 · Line Up the Point</div><div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(17,22,31,.42)">out of 11</div></div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Warm-Up · </span>0.7 &nbsp;|&nbsp; 3.7 &nbsp;|&nbsp; 0.5 &nbsp;|&nbsp; 4 &nbsp;|&nbsp; 1.5 &nbsp;|&nbsp; 4.6</div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Core · </span>3.97 &nbsp;|&nbsp; 17.45 &nbsp;|&nbsp; 10.08 &nbsp;|&nbsp; 1 &nbsp;|&nbsp; 9.95</div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Challenge · </span>6.375 &nbsp;|&nbsp; 5.4</div></div><div style="border:1.5px solid rgba(21,128,61,.25);border-radius:13px;padding:12px 17px;background:rgba(74,222,128,.06)">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:6px"><div style="font-family:Fredoka,sans-serif;font-size:17px">2.2 · Subtracting Decimals</div><div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(17,22,31,.42)">out of 11</div></div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Warm-Up · </span>0.5 &nbsp;|&nbsp; 2.5 &nbsp;|&nbsp; 0.5 &nbsp;|&nbsp; 2 &nbsp;|&nbsp; 0.5 &nbsp;|&nbsp; 3.5</div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Core · </span>2.65 &nbsp;|&nbsp; 9.93 &nbsp;|&nbsp; 4.75 &nbsp;|&nbsp; 3.55 &nbsp;|&nbsp; 7.55</div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Challenge · </span>4.544 &nbsp;|&nbsp; 1.65</div></div><div style="border:1.5px solid rgba(21,128,61,.25);border-radius:13px;padding:12px 17px;background:rgba(74,222,128,.06)">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:6px"><div style="font-family:Fredoka,sans-serif;font-size:17px">2.3 · Change from a Twenty</div><div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(17,22,31,.42)">out of 11</div></div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Warm-Up · </span>15 &nbsp;|&nbsp; 9.5 &nbsp;|&nbsp; 7.5 &nbsp;|&nbsp; 3.75 &nbsp;|&nbsp; 5 &nbsp;|&nbsp; 0.65</div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Core · </span>6.32 &nbsp;|&nbsp; 22.55 &nbsp;|&nbsp; 15.01 &nbsp;|&nbsp; 36.8 &nbsp;|&nbsp; 9.25</div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Challenge · </span>5.15 &nbsp;|&nbsp; 8</div></div><div style="border:1.5px solid rgba(21,128,61,.25);border-radius:13px;padding:12px 17px;background:rgba(74,222,128,.06)">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:6px"><div style="font-family:Fredoka,sans-serif;font-size:17px">2.4 · Adding Money Columns</div><div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(17,22,31,.42)">out of 11</div></div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Warm-Up · </span>4 &nbsp;|&nbsp; 5 &nbsp;|&nbsp; 1 &nbsp;|&nbsp; 8 &nbsp;|&nbsp; 3.5 &nbsp;|&nbsp; 7</div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Core · </span>8.48 &nbsp;|&nbsp; 21.35 &nbsp;|&nbsp; 8.97 &nbsp;|&nbsp; 25.25 &nbsp;|&nbsp; 9.5</div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Challenge · </span>25 &nbsp;|&nbsp; 35.5</div></div><div style="border:1.5px solid rgba(21,128,61,.25);border-radius:13px;padding:12px 17px;background:rgba(74,222,128,.06)">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:6px"><div style="font-family:Fredoka,sans-serif;font-size:17px">Fri · Change Sprint</div><div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(17,22,31,.42)">out of 4</div></div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Warm-Up · </span>25 &nbsp;|&nbsp; 10</div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Core · </span>2 &nbsp;|&nbsp; 4</div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Challenge · </span>9 &nbsp;|&nbsp; 6 &nbsp;|&nbsp; 15</div></div></div>
+    <div style="border-top:2px solid rgba(17,22,31,.12);margin-top:11px;padding:10px 0 22px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(17,22,31,.45)">
+      <span>Decimals &amp; Money · Week 2</span><span>Answer key · page 13</span>
+    </div>
+  </div>
+</section>
+<!-- u5w3p1 -->
+<section class="page" data-screen-label="3.1 Rounding Money" style="background:#FCFDFF;padding:0;display:flex;flex-direction:column">
+  <div style="height:9px;background:#A3E635"></div>
+  <div style="padding:28px 50px 0;flex:1;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:22px;border-bottom:2px solid rgba(17,22,31,.14);padding-bottom:13px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#A3E635">3rd Grade · Mission 05 · Week 3 · Set 3.1</div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:31px;margin:6px 0 3px;line-height:1.03">Rounding Money</h1>
+        <div style="font-size:12.5px;color:rgba(17,22,31,.62);max-width:520px">To the nearest dollar, dime or cent — say which before you round.</div>
+      </div>
+      <div style="flex:none;text-align:right;font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(17,22,31,.55);line-height:1.95">
+        <div>NAME __________</div><div>DATE __________</div><div>SCORE ____ / 11</div>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#22C55E;color:#052E12;display:grid;place-items:center;font-size:12px">✦</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#15803D">Warm-Up</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">6 items</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:9px"><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">Round $4.60 to the nearest dollar</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">Round $4.30 to the nearest dollar</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">Round $0.48 to the nearest dime</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">Round $9.99 to the nearest dollar</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">Round $12.50 to the nearest dollar</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">Round $0.94 to the nearest dime</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div></div>
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#A3E635;color:#0B1220;display:grid;place-items:center;font-size:12px">◆</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#A3E635">Core</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">graded · show your working</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:8px"><div style="border:1.5px solid #A3E63544;border-radius:13px;padding:11px 16px;background:#A3E6350d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">1. &nbsp;Round $27.45 to the nearest dollar</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #A3E63544;border-radius:13px;padding:11px 16px;background:#A3E6350d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">2. &nbsp;Round $3.456 to the nearest cent</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #A3E63544;border-radius:13px;padding:11px 16px;background:#A3E6350d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">3. &nbsp;Round $149.50 to the nearest ten dollars</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #A3E63544;border-radius:13px;padding:11px 16px;background:#A3E6350d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">4. &nbsp;Round $0.075 to the nearest cent</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #A3E63544;border-radius:13px;padding:11px 16px;background:#A3E6350d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">5. &nbsp;Round $64.49 to the nearest dollar</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div></div>
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#F59E0B;color:#3A2405;display:grid;place-items:center;font-size:12px">★</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#B45309">Challenge</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">not graded</div>
+    </div>
+    <div style="background:rgba(245,158,11,.1);border:1.5px solid rgba(180,83,9,.32);border-radius:14px;padding:11px 17px;flex:1;display:flex;flex-direction:column;gap:7px"><div style="font-size:13.5px;line-height:1.5">C1. &nbsp;An item is $7.99. Estimate the cost of 6 to the nearest dollar</div><div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div><div style="font-size:13.5px;line-height:1.5">C2. &nbsp;True cost of 6 at $7.99</div><div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div></div>
+    <div style="border-top:2px solid rgba(17,22,31,.12);margin-top:11px;padding:10px 0 22px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(17,22,31,.45)">
+      <span>Error journal: one sentence per mistake</span><span>Week 3 · page 14</span>
+    </div>
+  </div>
+</section>
+<!-- u5w3p2 -->
+<section class="page" data-screen-label="3.2 Unit Price" style="background:#FCFDFF;padding:0;display:flex;flex-direction:column">
+  <div style="height:9px;background:#A3E635"></div>
+  <div style="padding:28px 50px 0;flex:1;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:22px;border-bottom:2px solid rgba(17,22,31,.14);padding-bottom:13px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#A3E635">3rd Grade · Mission 05 · Week 3 · Set 3.2</div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:31px;margin:6px 0 3px;line-height:1.03">Unit Price</h1>
+        <div style="font-size:12.5px;color:rgba(17,22,31,.62);max-width:520px">Price per one is the only fair comparison.</div>
+      </div>
+      <div style="flex:none;text-align:right;font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(17,22,31,.55);line-height:1.95">
+        <div>NAME __________</div><div>DATE __________</div><div>SCORE ____ / 11</div>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#22C55E;color:#052E12;display:grid;place-items:center;font-size:12px">✦</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#15803D">Warm-Up</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">6 items</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:9px"><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">$6 for 2 — price each</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">$10 for 5 — price each</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">$12 for 4 — price each</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">$8 for 8 — price each</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">$20 for 10 — price each</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">$9 for 3 — price each</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div></div>
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#A3E635;color:#0B1220;display:grid;place-items:center;font-size:12px">◆</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#A3E635">Core</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">graded · show your working</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:8px"><div style="border:1.5px solid #A3E63544;border-radius:13px;padding:11px 16px;background:#A3E6350d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">1. &nbsp;$4.50 for 3 — price each</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #A3E63544;border-radius:13px;padding:11px 16px;background:#A3E6350d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">2. &nbsp;$7.20 for 8 — price each</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #A3E63544;border-radius:13px;padding:11px 16px;background:#A3E6350d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">3. &nbsp;$11.25 for 5 — price each</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #A3E63544;border-radius:13px;padding:11px 16px;background:#A3E6350d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">4. &nbsp;$2.40 for 6 — price each</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #A3E63544;border-radius:13px;padding:11px 16px;background:#A3E6350d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">5. &nbsp;$15 for 12 — price each</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div></div>
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#F59E0B;color:#3A2405;display:grid;place-items:center;font-size:12px">★</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#B45309">Challenge</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">not graded</div>
+    </div>
+    <div style="background:rgba(245,158,11,.1);border:1.5px solid rgba(180,83,9,.32);border-radius:14px;padding:11px 17px;flex:1;display:flex;flex-direction:column;gap:7px"><div style="font-size:13.5px;line-height:1.5">C1. &nbsp;Pack A: $5 for 4. Pack B: $9 for 8. Price each for B</div><div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div><div style="font-size:13.5px;line-height:1.5">C2. &nbsp;Same packs — price each for A</div><div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div></div>
+    <div style="border-top:2px solid rgba(17,22,31,.12);margin-top:11px;padding:10px 0 22px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(17,22,31,.45)">
+      <span>Error journal: one sentence per mistake</span><span>Week 3 · page 15</span>
+    </div>
+  </div>
+</section>
+<!-- u5w3p3 -->
+<section class="page" data-screen-label="3.3 Is It Actually a Deal" style="background:#FCFDFF;padding:0;display:flex;flex-direction:column">
+  <div style="height:9px;background:#A3E635"></div>
+  <div style="padding:28px 50px 0;flex:1;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:22px;border-bottom:2px solid rgba(17,22,31,.14);padding-bottom:13px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#A3E635">3rd Grade · Mission 05 · Week 3 · Set 3.3</div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:31px;margin:6px 0 3px;line-height:1.03">Is It Actually a Deal</h1>
+        <div style="font-size:12.5px;color:rgba(17,22,31,.62);max-width:520px">Bigger box, better price? Only sometimes. Prove it.</div>
+      </div>
+      <div style="flex:none;text-align:right;font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(17,22,31,.55);line-height:1.95">
+        <div>NAME __________</div><div>DATE __________</div><div>SCORE ____ / 11</div>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#22C55E;color:#052E12;display:grid;place-items:center;font-size:12px">✦</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#15803D">Warm-Up</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">6 items</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:9px"><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">$1 each or $5 for 5 — cheaper per item, type the price each for the pack</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">$2 each or $9 for 5 — price each for the pack</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">Which is cheaper each — type 1.8 or 2</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">$3 each, buy 4 — total</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">$10 for 4 — price each</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">Save per item vs $3 each</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div></div>
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#A3E635;color:#0B1220;display:grid;place-items:center;font-size:12px">◆</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#A3E635">Core</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">graded · show your working</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:8px"><div style="border:1.5px solid #A3E63544;border-radius:13px;padding:11px 16px;background:#A3E6350d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">1. &nbsp;400 g for $5 — price per 100 g</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #A3E63544;border-radius:13px;padding:11px 16px;background:#A3E6350d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">2. &nbsp;800 g for $9 — price per 100 g</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #A3E63544;border-radius:13px;padding:11px 16px;background:#A3E6350d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">3. &nbsp;Better value — type 400 or 800</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #A3E63544;border-radius:13px;padding:11px 16px;background:#A3E6350d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">4. &nbsp;A $12 item at 25% off — the price paid</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #A3E63544;border-radius:13px;padding:11px 16px;background:#A3E6350d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">5. &nbsp;Buy 2 get 1 free at $6 each — price each across 3</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div></div>
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#F59E0B;color:#3A2405;display:grid;place-items:center;font-size:12px">★</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#B45309">Challenge</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">not graded</div>
+    </div>
+    <div style="background:rgba(245,158,11,.1);border:1.5px solid rgba(180,83,9,.32);border-radius:14px;padding:11px 17px;flex:1;display:flex;flex-direction:column;gap:7px"><div style="font-size:13.5px;line-height:1.5">C1. &nbsp;1 kg for $8 or 750 g for $5.40 — price per kg of the small one</div><div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div><div style="font-size:13.5px;line-height:1.5">C2. &nbsp;So which is better value — type 1kg or 750g</div><div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div></div>
+    <div style="border-top:2px solid rgba(17,22,31,.12);margin-top:11px;padding:10px 0 22px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(17,22,31,.45)">
+      <span>Error journal: one sentence per mistake</span><span>Week 3 · page 16</span>
+    </div>
+  </div>
+</section>
+<!-- u5w3p4 -->
+<section class="page" data-screen-label="3.4 Multi-Step Money" style="background:#FCFDFF;padding:0;display:flex;flex-direction:column">
+  <div style="height:9px;background:#A3E635"></div>
+  <div style="padding:28px 50px 0;flex:1;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:22px;border-bottom:2px solid rgba(17,22,31,.14);padding-bottom:13px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#A3E635">3rd Grade · Mission 05 · Week 3 · Set 3.4</div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:31px;margin:6px 0 3px;line-height:1.03">Multi-Step Money</h1>
+        <div style="font-size:12.5px;color:rgba(17,22,31,.62);max-width:520px">Two operations, in the right order, with an estimate first.</div>
+      </div>
+      <div style="flex:none;text-align:right;font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(17,22,31,.55);line-height:1.95">
+        <div>NAME __________</div><div>DATE __________</div><div>SCORE ____ / 11</div>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#22C55E;color:#052E12;display:grid;place-items:center;font-size:12px">✦</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#15803D">Warm-Up</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">6 items</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:9px"><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">3 items at $2 — total</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">Change from $10</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">4 items at $1.50 — total</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">Change from $20</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">2 items at $3.25 — total</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">Change from $10</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div></div>
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#A3E635;color:#0B1220;display:grid;place-items:center;font-size:12px">◆</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#A3E635">Core</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">graded · show your working</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:8px"><div style="border:1.5px solid #A3E63544;border-radius:13px;padding:11px 16px;background:#A3E6350d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">1. &nbsp;3 at $4.99 — total</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #A3E63544;border-radius:13px;padding:11px 16px;background:#A3E6350d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">2. &nbsp;Change from $20</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #A3E63544;border-radius:13px;padding:11px 16px;background:#A3E6350d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">3. &nbsp;5 at $2.40 plus one at $3.10 — total</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #A3E63544;border-radius:13px;padding:11px 16px;background:#A3E6350d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">4. &nbsp;$50 split between 4 people — each</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #A3E63544;border-radius:13px;padding:11px 16px;background:#A3E6350d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">5. &nbsp;6 at $1.75 — total</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div></div>
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#F59E0B;color:#3A2405;display:grid;place-items:center;font-size:12px">★</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#B45309">Challenge</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">not graded</div>
+    </div>
+    <div style="background:rgba(245,158,11,.1);border:1.5px solid rgba(180,83,9,.32);border-radius:14px;padding:11px 17px;flex:1;display:flex;flex-direction:column;gap:7px"><div style="font-size:13.5px;line-height:1.5">C1. &nbsp;$40 budget, 3 dinners at $11.25 — dollars left</div><div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div><div style="font-size:13.5px;line-height:1.5">C2. &nbsp;$100 for items at $12.50 — how many whole ones</div><div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div></div>
+    <div style="border-top:2px solid rgba(17,22,31,.12);margin-top:11px;padding:10px 0 22px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(17,22,31,.45)">
+      <span>Error journal: one sentence per mistake</span><span>Week 3 · page 17</span>
+    </div>
+  </div>
+</section>
+<!-- u5w3p5 -->
+<section class="page" data-screen-label="Fri Mid-Unit Quiz" style="background:#FCFDFF;padding:0;display:flex;flex-direction:column">
+  <div style="height:9px;background:#A3E635"></div>
+  <div style="padding:28px 50px 0;flex:1;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:22px;border-bottom:2px solid rgba(17,22,31,.14);padding-bottom:13px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#A3E635">3rd Grade · Mission 05 · Week 3 · Set Fri</div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:31px;margin:6px 0 3px;line-height:1.03">Mid-Unit Quiz</h1>
+        <div style="font-size:12.5px;color:rgba(17,22,31,.62);max-width:520px">Eight items across Weeks 1–3. 85% to keep flying.</div>
+      </div>
+      <div style="flex:none;text-align:right;font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(17,22,31,.55);line-height:1.95">
+        <div>NAME __________</div><div>DATE __________</div><div>SCORE ____ / 7</div>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#22C55E;color:#052E12;display:grid;place-items:center;font-size:12px">✦</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#15803D">Warm-Up</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">2 items</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:9px"><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">0.3 + 0.4</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">Round $4.60 to the nearest dollar</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div></div>
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#A3E635;color:#0B1220;display:grid;place-items:center;font-size:12px">◆</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#A3E635">Core</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">graded · show your working</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:8px"><div style="border:1.5px solid #A3E63544;border-radius:13px;padding:11px 16px;background:#A3E6350d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">1. &nbsp;3.5 + 0.47</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #A3E63544;border-radius:13px;padding:11px 16px;background:#A3E6350d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">2. &nbsp;$20 − $13.68</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #A3E63544;border-radius:13px;padding:11px 16px;background:#A3E6350d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">3. &nbsp;$4.50 for 3 — price each</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #A3E63544;border-radius:13px;padding:11px 16px;background:#A3E6350d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">4. &nbsp;8.2 − 3.45</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #A3E63544;border-radius:13px;padding:11px 16px;background:#A3E6350d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">5. &nbsp;3 at $4.99 — total</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div></div>
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#F59E0B;color:#3A2405;display:grid;place-items:center;font-size:12px">★</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#B45309">Challenge</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">not graded</div>
+    </div>
+    <div style="background:rgba(245,158,11,.1);border:1.5px solid rgba(180,83,9,.32);border-radius:14px;padding:11px 17px;flex:1;display:flex;flex-direction:column;gap:7px"><div style="font-size:13.5px;line-height:1.5">C1. &nbsp;$40 budget, 3 dinners at $11.25 — dollars left</div><div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div></div>
+    <div style="border-top:2px solid rgba(17,22,31,.12);margin-top:11px;padding:10px 0 22px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(17,22,31,.45)">
+      <span>Error journal: one sentence per mistake</span><span>Week 3 · page 18</span>
+    </div>
+  </div>
+</section>
+<section class="page" data-screen-label="Week 3 key" style="background:#FCFDFF;padding:0;display:flex;flex-direction:column">
+  <div style="height:9px;background:#15803D"></div>
+  <div style="padding:30px 50px 0;flex:1;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:22px;border-bottom:2px solid rgba(17,22,31,.14);padding-bottom:14px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#15803D">Teacher page · answer key</div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:32px;margin:6px 0 3px;line-height:1">Week 3 Answers</h1>
+        <div style="font-size:12.5px;color:rgba(17,22,31,.62)">Mission 05 · all 5 sets. Answers run in page order. Score out of the graded tiers only — Challenge never counts.</div>
+      </div>
+      <div style="flex:none;background:rgba(74,222,128,.14);border:1.5px solid rgba(21,128,61,.3);border-radius:11px;padding:10px 14px;font-size:12px;line-height:1.55;max-width:190px;color:#15803D">Mark the reasoning, not the handwriting. Any correct method counts.</div>
+    </div>
+    <div style="margin-top:16px;display:flex;flex-direction:column;gap:11px;flex:1"><div style="border:1.5px solid rgba(21,128,61,.25);border-radius:13px;padding:12px 17px;background:rgba(74,222,128,.06)">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:6px"><div style="font-family:Fredoka,sans-serif;font-size:17px">3.1 · Rounding Money</div><div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(17,22,31,.42)">out of 11</div></div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Warm-Up · </span>5 &nbsp;|&nbsp; 4 &nbsp;|&nbsp; 0.5 &nbsp;|&nbsp; 10 &nbsp;|&nbsp; 13 &nbsp;|&nbsp; 0.9</div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Core · </span>27 &nbsp;|&nbsp; 3.46 &nbsp;|&nbsp; 150 &nbsp;|&nbsp; 0.08 &nbsp;|&nbsp; 64</div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Challenge · </span>48 &nbsp;|&nbsp; 47.94</div></div><div style="border:1.5px solid rgba(21,128,61,.25);border-radius:13px;padding:12px 17px;background:rgba(74,222,128,.06)">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:6px"><div style="font-family:Fredoka,sans-serif;font-size:17px">3.2 · Unit Price</div><div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(17,22,31,.42)">out of 11</div></div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Warm-Up · </span>3 &nbsp;|&nbsp; 2 &nbsp;|&nbsp; 3 &nbsp;|&nbsp; 1 &nbsp;|&nbsp; 2 &nbsp;|&nbsp; 3</div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Core · </span>1.5 &nbsp;|&nbsp; 0.9 &nbsp;|&nbsp; 2.25 &nbsp;|&nbsp; 0.4 &nbsp;|&nbsp; 1.25</div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Challenge · </span>1.125 &nbsp;|&nbsp; 1.25</div></div><div style="border:1.5px solid rgba(21,128,61,.25);border-radius:13px;padding:12px 17px;background:rgba(74,222,128,.06)">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:6px"><div style="font-family:Fredoka,sans-serif;font-size:17px">3.3 · Is It Actually a Deal</div><div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(17,22,31,.42)">out of 11</div></div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Warm-Up · </span>1 &nbsp;|&nbsp; 1.8 &nbsp;|&nbsp; 1.8 &nbsp;|&nbsp; 12 &nbsp;|&nbsp; 2.5 &nbsp;|&nbsp; 0.5</div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Core · </span>1.25 &nbsp;|&nbsp; 1.125 &nbsp;|&nbsp; 800 &nbsp;|&nbsp; 9 &nbsp;|&nbsp; 4</div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Challenge · </span>7.2 &nbsp;|&nbsp; 750g</div></div><div style="border:1.5px solid rgba(21,128,61,.25);border-radius:13px;padding:12px 17px;background:rgba(74,222,128,.06)">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:6px"><div style="font-family:Fredoka,sans-serif;font-size:17px">3.4 · Multi-Step Money</div><div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(17,22,31,.42)">out of 11</div></div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Warm-Up · </span>6 &nbsp;|&nbsp; 4 &nbsp;|&nbsp; 6 &nbsp;|&nbsp; 14 &nbsp;|&nbsp; 6.5 &nbsp;|&nbsp; 3.5</div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Core · </span>14.97 &nbsp;|&nbsp; 5.03 &nbsp;|&nbsp; 15.1 &nbsp;|&nbsp; 12.5 &nbsp;|&nbsp; 10.5</div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Challenge · </span>6.25 &nbsp;|&nbsp; 8</div></div><div style="border:1.5px solid rgba(21,128,61,.25);border-radius:13px;padding:12px 17px;background:rgba(74,222,128,.06)">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:6px"><div style="font-family:Fredoka,sans-serif;font-size:17px">Fri · Mid-Unit Quiz</div><div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(17,22,31,.42)">out of 7</div></div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Warm-Up · </span>0.7 &nbsp;|&nbsp; 5</div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Core · </span>3.97 &nbsp;|&nbsp; 6.32 &nbsp;|&nbsp; 1.5 &nbsp;|&nbsp; 4.75 &nbsp;|&nbsp; 14.97</div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Challenge · </span>6.25</div></div></div>
+    <div style="border-top:2px solid rgba(17,22,31,.12);margin-top:11px;padding:10px 0 22px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(17,22,31,.45)">
+      <span>Decimals &amp; Money · Week 3</span><span>Answer key · page 19</span>
+    </div>
+  </div>
+</section>
+<!-- u5w4p1 -->
+<section class="page" data-screen-label="4.1 Build the Budget" style="background:#FCFDFF;padding:0;display:flex;flex-direction:column">
+  <div style="height:9px;background:#A3E635"></div>
+  <div style="padding:28px 50px 0;flex:1;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:22px;border-bottom:2px solid rgba(17,22,31,.14);padding-bottom:13px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#A3E635">3rd Grade · Mission 05 · Week 4 · Set 4.1</div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:31px;margin:6px 0 3px;line-height:1.03">Build the Budget</h1>
+        <div style="font-size:12.5px;color:rgba(17,22,31,.62);max-width:520px">Three dinners, $40, and no going over.</div>
+      </div>
+      <div style="flex:none;text-align:right;font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(17,22,31,.55);line-height:1.95">
+        <div>NAME __________</div><div>DATE __________</div><div>SCORE ____ / 11</div>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#22C55E;color:#052E12;display:grid;place-items:center;font-size:12px">✦</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#15803D">Warm-Up</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">6 items</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:9px"><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">$40 split 4 ways</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">$40 split 5 ways</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">$12 + $15</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">$40 − $27</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">$40 split 8 ways</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">3 items at $5</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div></div>
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#A3E635;color:#0B1220;display:grid;place-items:center;font-size:12px">◆</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#A3E635">Core</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">graded · show your working</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:8px"><div style="border:1.5px solid #A3E63544;border-radius:13px;padding:11px 16px;background:#A3E6350d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">1. &nbsp;Three dinners at $11.25 — total</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #A3E63544;border-radius:13px;padding:11px 16px;background:#A3E6350d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">2. &nbsp;Left from $40</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #A3E63544;border-radius:13px;padding:11px 16px;background:#A3E6350d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">3. &nbsp;$40 ÷ 3, rounded down to the cent</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #A3E63544;border-radius:13px;padding:11px 16px;background:#A3E6350d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">4. &nbsp;Two dinners at $14.50 — total</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #A3E63544;border-radius:13px;padding:11px 16px;background:#A3E6350d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">5. &nbsp;Left from $40</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div></div>
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#F59E0B;color:#3A2405;display:grid;place-items:center;font-size:12px">★</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#B45309">Challenge</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">not graded</div>
+    </div>
+    <div style="background:rgba(245,158,11,.1);border:1.5px solid rgba(180,83,9,.32);border-radius:14px;padding:11px 17px;flex:1;display:flex;flex-direction:column;gap:7px"><div style="font-size:13.5px;line-height:1.5">C1. &nbsp;Feeding 4 people three dinners on $40 — dollars per person per dinner <span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:rgba(180,83,9,.7)">($40 ÷ 12, to the cent)</span></div><div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div><div style="font-size:13.5px;line-height:1.5">C2. &nbsp;$40 with 15% left as buffer — dollars to spend</div><div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div></div>
+    <div style="border-top:2px solid rgba(17,22,31,.12);margin-top:11px;padding:10px 0 22px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(17,22,31,.45)">
+      <span>Error journal: one sentence per mistake</span><span>Week 4 · page 20</span>
+    </div>
+  </div>
+</section>
+<!-- u5w4p2 -->
+<section class="page" data-screen-label="4.2 Shop It" style="background:#FCFDFF;padding:0;display:flex;flex-direction:column">
+  <div style="height:9px;background:#A3E635"></div>
+  <div style="padding:28px 50px 0;flex:1;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:22px;border-bottom:2px solid rgba(17,22,31,.14);padding-bottom:13px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#A3E635">3rd Grade · Mission 05 · Week 4 · Set 4.2</div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:31px;margin:6px 0 3px;line-height:1.03">Shop It</h1>
+        <div style="font-size:12.5px;color:rgba(17,22,31,.62);max-width:520px">Real prices, real quantities, running total in your head.</div>
+      </div>
+      <div style="flex:none;text-align:right;font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(17,22,31,.55);line-height:1.95">
+        <div>NAME __________</div><div>DATE __________</div><div>SCORE ____ / 11</div>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#22C55E;color:#052E12;display:grid;place-items:center;font-size:12px">✦</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#15803D">Warm-Up</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">6 items</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:9px"><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">$3.50 + $2.50</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">$6 + $4.25</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">2 at $1.99</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">3 at $2</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">$5.75 + $4.25</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">$8.40 + $1.60</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div></div>
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#A3E635;color:#0B1220;display:grid;place-items:center;font-size:12px">◆</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#A3E635">Core</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">graded · show your working</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:8px"><div style="border:1.5px solid #A3E63544;border-radius:13px;padding:11px 16px;background:#A3E6350d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">1. &nbsp;2 at $3.49 plus 1 at $5.99 — total</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #A3E63544;border-radius:13px;padding:11px 16px;background:#A3E6350d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">2. &nbsp;$12.97 rounded to the nearest dollar</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #A3E63544;border-radius:13px;padding:11px 16px;background:#A3E6350d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">3. &nbsp;4 at $2.25 plus 2 at $1.10 — total</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #A3E63544;border-radius:13px;padding:11px 16px;background:#A3E6350d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">4. &nbsp;Left from $40 after spending $28.65</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #A3E63544;border-radius:13px;padding:11px 16px;background:#A3E6350d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">5. &nbsp;3 at $6.99 — total</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div></div>
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#F59E0B;color:#3A2405;display:grid;place-items:center;font-size:12px">★</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#B45309">Challenge</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">not graded</div>
+    </div>
+    <div style="background:rgba(245,158,11,.1);border:1.5px solid rgba(180,83,9,.32);border-radius:14px;padding:11px 17px;flex:1;display:flex;flex-direction:column;gap:7px"><div style="font-size:13.5px;line-height:1.5">C1. &nbsp;A cart of $33.75 with $2.70 tax — total</div><div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div><div style="font-size:13.5px;line-height:1.5">C2. &nbsp;Change from $40 on that cart</div><div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div></div>
+    <div style="border-top:2px solid rgba(17,22,31,.12);margin-top:11px;padding:10px 0 22px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(17,22,31,.45)">
+      <span>Error journal: one sentence per mistake</span><span>Week 4 · page 21</span>
+    </div>
+  </div>
+</section>
+<!-- u5w4p3 -->
+<section class="page" data-screen-label="4.3 Reconcile the Receipt" style="background:#FCFDFF;padding:0;display:flex;flex-direction:column">
+  <div style="height:9px;background:#A3E635"></div>
+  <div style="padding:28px 50px 0;flex:1;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:22px;border-bottom:2px solid rgba(17,22,31,.14);padding-bottom:13px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#A3E635">3rd Grade · Mission 05 · Week 4 · Set 4.3</div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:31px;margin:6px 0 3px;line-height:1.03">Reconcile the Receipt</h1>
+        <div style="font-size:12.5px;color:rgba(17,22,31,.62);max-width:520px">Your total against theirs. Find the gap and name it.</div>
+      </div>
+      <div style="flex:none;text-align:right;font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(17,22,31,.55);line-height:1.95">
+        <div>NAME __________</div><div>DATE __________</div><div>SCORE ____ / 11</div>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#22C55E;color:#052E12;display:grid;place-items:center;font-size:12px">✦</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#15803D">Warm-Up</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">6 items</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:9px"><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">Estimated $30, actual $32 — the difference</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">Estimated $25, actual $22 — the difference</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">$40 − $36.45</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">$20 − $18.50</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">$15 + $15</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">$50 − $30</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div></div>
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#A3E635;color:#0B1220;display:grid;place-items:center;font-size:12px">◆</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#A3E635">Core</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">graded · show your working</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:8px"><div style="border:1.5px solid #A3E63544;border-radius:13px;padding:11px 16px;background:#A3E6350d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">1. &nbsp;Planned $33.75, paid $36.45 — over by</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #A3E63544;border-radius:13px;padding:11px 16px;background:#A3E6350d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">2. &nbsp;Planned $40, paid $37.20 — under by</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #A3E63544;border-radius:13px;padding:11px 16px;background:#A3E6350d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">3. &nbsp;A $2.70 gap on $33.75 — roughly what percent, to the nearest whole</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #A3E63544;border-radius:13px;padding:11px 16px;background:#A3E6350d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">4. &nbsp;Receipt says $24.99, you counted $24.89 — the gap</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #A3E63544;border-radius:13px;padding:11px 16px;background:#A3E6350d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">5. &nbsp;Three receipts of $12.50 — total</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div></div>
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#F59E0B;color:#3A2405;display:grid;place-items:center;font-size:12px">★</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#B45309">Challenge</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">not graded</div>
+    </div>
+    <div style="background:rgba(245,158,11,.1);border:1.5px solid rgba(180,83,9,.32);border-radius:14px;padding:11px 17px;flex:1;display:flex;flex-direction:column;gap:7px"><div style="font-size:13.5px;line-height:1.5">C1. &nbsp;You budgeted $13.33 a dinner and spent $12.15 — saved across 3 dinners</div><div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div><div style="font-size:13.5px;line-height:1.5">C2. &nbsp;$40 budget, spent $36.45, three dinners — average per dinner</div><div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div></div>
+    <div style="border-top:2px solid rgba(17,22,31,.12);margin-top:11px;padding:10px 0 22px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(17,22,31,.45)">
+      <span>Error journal: one sentence per mistake</span><span>Week 4 · page 22</span>
+    </div>
+  </div>
+</section>
+<!-- u5w4p4 -->
+<section class="page" data-screen-label="Thu Error Journal Sweep" style="background:#FCFDFF;padding:0;display:flex;flex-direction:column">
+  <div style="height:9px;background:#A3E635"></div>
+  <div style="padding:28px 50px 0;flex:1;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:22px;border-bottom:2px solid rgba(17,22,31,.14);padding-bottom:13px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#A3E635">3rd Grade · Mission 05 · Week 4 · Set Thu</div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:31px;margin:6px 0 3px;line-height:1.03">Error Journal Sweep</h1>
+        <div style="font-size:12.5px;color:rgba(17,22,31,.62);max-width:520px">Mixed review of the whole mission. Fix only what repeats.</div>
+      </div>
+      <div style="flex:none;text-align:right;font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(17,22,31,.55);line-height:1.95">
+        <div>NAME __________</div><div>DATE __________</div><div>SCORE ____ / 11</div>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#22C55E;color:#052E12;display:grid;place-items:center;font-size:12px">✦</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#15803D">Warm-Up</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">6 items</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:9px"><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">0.25 + 0.25</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">1 − 0.5</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">Round $9.99 to the nearest dollar</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">$10 for 5 — price each</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">$20 − $15</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">$3.25 + $1.75</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div></div>
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#A3E635;color:#0B1220;display:grid;place-items:center;font-size:12px">◆</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#A3E635">Core</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">graded · show your working</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:8px"><div style="border:1.5px solid #A3E63544;border-radius:13px;padding:11px 16px;background:#A3E6350d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">1. &nbsp;12.6 + 4.85</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #A3E63544;border-radius:13px;padding:11px 16px;background:#A3E6350d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">2. &nbsp;10 − 0.07</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #A3E63544;border-radius:13px;padding:11px 16px;background:#A3E6350d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">3. &nbsp;$7.20 for 8 — price each</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #A3E63544;border-radius:13px;padding:11px 16px;background:#A3E6350d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">4. &nbsp;3 at $4.99 — total</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #A3E63544;border-radius:13px;padding:11px 16px;background:#A3E6350d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">5. &nbsp;Round $3.456 to the nearest cent</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div></div>
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#F59E0B;color:#3A2405;display:grid;place-items:center;font-size:12px">★</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#B45309">Challenge</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">not graded</div>
+    </div>
+    <div style="background:rgba(245,158,11,.1);border:1.5px solid rgba(180,83,9,.32);border-radius:14px;padding:11px 17px;flex:1;display:flex;flex-direction:column;gap:7px"><div style="font-size:13.5px;line-height:1.5">C1. &nbsp;12.4 − 7.856</div><div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div><div style="font-size:13.5px;line-height:1.5">C2. &nbsp;$40 budget, 3 dinners at $11.25 — dollars left</div><div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div></div>
+    <div style="border-top:2px solid rgba(17,22,31,.12);margin-top:11px;padding:10px 0 22px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(17,22,31,.45)">
+      <span>Error journal: one sentence per mistake</span><span>Week 4 · page 23</span>
+    </div>
+  </div>
+</section>
+<!-- u5w4p5 -->
+<section class="page" data-screen-label="Fri Mission 05 Test" style="background:#FCFDFF;padding:0;display:flex;flex-direction:column">
+  <div style="height:9px;background:#A3E635"></div>
+  <div style="padding:28px 50px 0;flex:1;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:22px;border-bottom:2px solid rgba(17,22,31,.14);padding-bottom:13px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#A3E635">3rd Grade · Mission 05 · Week 4 · Set Fri</div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:31px;margin:6px 0 3px;line-height:1.03">Mission 05 Test</h1>
+        <div style="font-size:12.5px;color:rgba(17,22,31,.62);max-width:520px">Twelve items plus the Big Question, answered out loud.</div>
+      </div>
+      <div style="flex:none;text-align:right;font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(17,22,31,.55);line-height:1.95">
+        <div>NAME __________</div><div>DATE __________</div><div>SCORE ____ / 10</div>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#22C55E;color:#052E12;display:grid;place-items:center;font-size:12px">✦</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#15803D">Warm-Up</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">2 items</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:9px"><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">0.6 + 0.9</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div><div style="background:rgba(34,197,94,.1);border:1.5px solid rgba(21,128,61,.28);border-radius:12px;padding:10px 8px"><div style="font-size:12px;line-height:1.35">$20 − $10.50</div><div style="border-bottom:2px solid rgba(17,22,31,.25);height:20px;margin-top:7px"></div></div></div>
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#A3E635;color:#0B1220;display:grid;place-items:center;font-size:12px">◆</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#A3E635">Core</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">graded · show your working</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:8px"><div style="border:1.5px solid #A3E63544;border-radius:13px;padding:11px 16px;background:#A3E6350d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">1. &nbsp;3.5 + 0.47</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #A3E63544;border-radius:13px;padding:11px 16px;background:#A3E6350d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">2. &nbsp;8.2 − 3.45</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #A3E63544;border-radius:13px;padding:11px 16px;background:#A3E6350d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">3. &nbsp;$50 − $27.45</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #A3E63544;border-radius:13px;padding:11px 16px;background:#A3E6350d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">4. &nbsp;$11.25 for 5 — price each</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #A3E63544;border-radius:13px;padding:11px 16px;background:#A3E6350d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">5. &nbsp;Round $27.45 to the nearest dollar</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #A3E63544;border-radius:13px;padding:11px 16px;background:#A3E6350d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">6. &nbsp;3 at $4.99 — change from $20</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #A3E63544;border-radius:13px;padding:11px 16px;background:#A3E6350d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">7. &nbsp;$15 for 12 — price each</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div><div style="border:1.5px solid #A3E63544;border-radius:13px;padding:11px 16px;background:#A3E6350d;display:grid;grid-template-columns:1fr 130px;gap:14px;align-items:center"><span style="font-size:13px">8. &nbsp;$12.75 + $8.60</span><span style="border-bottom:2px dotted rgba(17,22,31,.3);height:20px"></span></div></div>
+    <div style="display:flex;align-items:center;gap:10px;margin:15px 0 8px">
+      <div style="width:24px;height:24px;border-radius:7px;background:#F59E0B;color:#3A2405;display:grid;place-items:center;font-size:12px">★</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#B45309">Challenge</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,22,31,.45)">not graded</div>
+    </div>
+    <div style="background:rgba(245,158,11,.1);border:1.5px solid rgba(180,83,9,.32);border-radius:14px;padding:11px 17px;flex:1;display:flex;flex-direction:column;gap:7px"><div style="font-size:13.5px;line-height:1.5">C1. &nbsp;12.4 − 7.856</div><div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div><div style="font-size:13.5px;line-height:1.5">C2. &nbsp;$40 budget, spent $36.45, three dinners — average per dinner</div><div style="border-bottom:2px dotted rgba(17,22,31,.28);height:20px"></div></div>
+    <div style="border-top:2px solid rgba(17,22,31,.12);margin-top:11px;padding:10px 0 22px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(17,22,31,.45)">
+      <span>Error journal: one sentence per mistake</span><span>Week 4 · page 24</span>
+    </div>
+  </div>
+</section>
+<section class="page" data-screen-label="Week 4 key" style="background:#FCFDFF;padding:0;display:flex;flex-direction:column">
+  <div style="height:9px;background:#15803D"></div>
+  <div style="padding:30px 50px 0;flex:1;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:22px;border-bottom:2px solid rgba(17,22,31,.14);padding-bottom:14px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#15803D">Teacher page · answer key</div>
+        <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:32px;margin:6px 0 3px;line-height:1">Week 4 Answers</h1>
+        <div style="font-size:12.5px;color:rgba(17,22,31,.62)">Mission 05 · all 5 sets. Answers run in page order. Score out of the graded tiers only — Challenge never counts.</div>
+      </div>
+      <div style="flex:none;background:rgba(74,222,128,.14);border:1.5px solid rgba(21,128,61,.3);border-radius:11px;padding:10px 14px;font-size:12px;line-height:1.55;max-width:190px;color:#15803D">Mark the reasoning, not the handwriting. Any correct method counts.</div>
+    </div>
+    <div style="margin-top:16px;display:flex;flex-direction:column;gap:11px;flex:1"><div style="border:1.5px solid rgba(21,128,61,.25);border-radius:13px;padding:12px 17px;background:rgba(74,222,128,.06)">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:6px"><div style="font-family:Fredoka,sans-serif;font-size:17px">4.1 · Build the Budget</div><div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(17,22,31,.42)">out of 11</div></div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Warm-Up · </span>10 &nbsp;|&nbsp; 8 &nbsp;|&nbsp; 27 &nbsp;|&nbsp; 13 &nbsp;|&nbsp; 5 &nbsp;|&nbsp; 15</div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Core · </span>33.75 &nbsp;|&nbsp; 6.25 &nbsp;|&nbsp; 13.33 &nbsp;|&nbsp; 29 &nbsp;|&nbsp; 11</div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Challenge · </span>3.33 &nbsp;|&nbsp; 34</div></div><div style="border:1.5px solid rgba(21,128,61,.25);border-radius:13px;padding:12px 17px;background:rgba(74,222,128,.06)">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:6px"><div style="font-family:Fredoka,sans-serif;font-size:17px">4.2 · Shop It</div><div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(17,22,31,.42)">out of 11</div></div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Warm-Up · </span>6 &nbsp;|&nbsp; 10.25 &nbsp;|&nbsp; 3.98 &nbsp;|&nbsp; 6 &nbsp;|&nbsp; 10 &nbsp;|&nbsp; 10</div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Core · </span>12.97 &nbsp;|&nbsp; 13 &nbsp;|&nbsp; 11.2 &nbsp;|&nbsp; 11.35 &nbsp;|&nbsp; 20.97</div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Challenge · </span>36.45 &nbsp;|&nbsp; 3.55</div></div><div style="border:1.5px solid rgba(21,128,61,.25);border-radius:13px;padding:12px 17px;background:rgba(74,222,128,.06)">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:6px"><div style="font-family:Fredoka,sans-serif;font-size:17px">4.3 · Reconcile the Receipt</div><div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(17,22,31,.42)">out of 11</div></div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Warm-Up · </span>2 &nbsp;|&nbsp; 3 &nbsp;|&nbsp; 3.55 &nbsp;|&nbsp; 1.5 &nbsp;|&nbsp; 30 &nbsp;|&nbsp; 20</div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Core · </span>2.7 &nbsp;|&nbsp; 2.8 &nbsp;|&nbsp; 8 &nbsp;|&nbsp; 0.1 &nbsp;|&nbsp; 37.5</div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Challenge · </span>3.54 &nbsp;|&nbsp; 12.15</div></div><div style="border:1.5px solid rgba(21,128,61,.25);border-radius:13px;padding:12px 17px;background:rgba(74,222,128,.06)">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:6px"><div style="font-family:Fredoka,sans-serif;font-size:17px">Thu · Error Journal Sweep</div><div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(17,22,31,.42)">out of 11</div></div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Warm-Up · </span>0.5 &nbsp;|&nbsp; 0.5 &nbsp;|&nbsp; 10 &nbsp;|&nbsp; 2 &nbsp;|&nbsp; 5 &nbsp;|&nbsp; 5</div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Core · </span>17.45 &nbsp;|&nbsp; 9.93 &nbsp;|&nbsp; 0.9 &nbsp;|&nbsp; 14.97 &nbsp;|&nbsp; 3.46</div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Challenge · </span>4.544 &nbsp;|&nbsp; 6.25</div></div><div style="border:1.5px solid rgba(21,128,61,.25);border-radius:13px;padding:12px 17px;background:rgba(74,222,128,.06)">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:6px"><div style="font-family:Fredoka,sans-serif;font-size:17px">Fri · Mission 05 Test</div><div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(17,22,31,.42)">out of 10</div></div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Warm-Up · </span>1.5 &nbsp;|&nbsp; 9.5</div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Core · </span>3.97 &nbsp;|&nbsp; 4.75 &nbsp;|&nbsp; 22.55 &nbsp;|&nbsp; 2.25 &nbsp;|&nbsp; 27 &nbsp;|&nbsp; 5.03 &nbsp;|&nbsp; 1.25 &nbsp;|&nbsp; 21.35</div><div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.85"><span style="color:rgba(17,22,31,.45)">Challenge · </span>4.544 &nbsp;|&nbsp; 12.15</div></div></div>
+    <div style="border-top:2px solid rgba(17,22,31,.12);margin-top:11px;padding:10px 0 22px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(17,22,31,.45)">
+      <span>Decimals &amp; Money · Week 4</span><span>Answer key · page 25</span>
+    </div>
+  </div>
+</section>
+</doc-page>
+</x-dc>
+</body>
+</html>

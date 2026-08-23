@@ -131,3 +131,7 @@ number.** Put reasoning prompts on the printed worksheet instead.
 Progress is keyed by practice-set id and item **index**. Reordering items in an
 existing set silently corrupts saved answers. Append rather than reorder, or
 give items stable ids first and migrate.
+
+## Last sync
+
+- 2026-08-23 — commit `144fe78fde0630f1b68bd0cc85c54e7d886c8823` ("Y2 curriculum print packs + worksheets; all 32 PDFs regenerated"): merged claude design's to-upload 3 drop (Y2 weeks, worksheets, lessons, checker normalization), fixed Y2 Unit 8 grid strokes to the verified print spec (#17130B @ .5), regenerated and page-count-asserted all 32 PDFs.

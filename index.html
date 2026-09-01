@@ -4395,7 +4395,7 @@ class Component extends DCLogic {
       pStreamOn:true, pGridOn:false, smStart:start,
       smLive:!s.done, smDone:s.done,
       smDots:[0,1,2,3,4].map(i=>({style:"width:14px;height:14px;border-radius:50%;transition:.2s;background:"+(i<streakNow?"#4ADE80":"rgba(255,255,255,.12)")+(i<streakNow?";box-shadow:0 0 8px rgba(74,222,128,.6)":"")})),
-      smProgress:"Problem "+Math.min(s.pos+1,items.length)+" · "+s.right+" right of "+s.att+(s.att<10?" · at least 10 to finish":""),
+      smProgress:(s.pos<items.length?"Problem "+(s.pos+1):"Second look")+" · "+s.right+" right of "+s.att+(s.att<MIN_ATT?" · at least "+MIN_ATT+" to finish":""),
       smQ:it.q, smVal:s.val, smTierIcon:tier.icon, smTierName:tier.name,
       smTierChipStyle:`width:22px;height:22px;border-radius:7px;background:${tier.color}26;color:${tier.color};display:grid;place-items:center;font-size:11px;flex:none`,
       smCardStyle:"background:"+(s.rev?(s.lastRight?"rgba(74,222,128,.1)":"rgba(251,113,133,.1)"):"rgba(0,0,0,.24)")+";border:1.5px solid "+(s.rev?(s.lastRight?"rgba(74,222,128,.5)":"rgba(251,113,133,.5)"):"rgba(255,255,255,.12)")+";border-radius:20px;padding:26px 30px;transition:.25s",
@@ -4406,14 +4406,14 @@ class Component extends DCLogic {
       smCheck:check, smNext:next,
       smMark:s.lastRight?"✓":"✗", smMarkColor:s.lastRight?"#4ADE80":"#FB7185",
       smFeedbackColor:s.lastRight?"#4ADE80":"#FB7185",
-      smNextLabel:(s.att+1>=MIN_ATT&&(s.lastRight?s.streak+1:0)>=STREAK_GOAL)||(s.pos+1>=items.length&&!(s.recycle||[]).length)?"Finish →":"Next →",
+      smNextLabel:(()=>{const i=idxFor(s),q=s.lastRight?(s.recycle||[]).filter(x=>x!==i):[...(s.recycle||[]),i],a=s.att+1,k=s.lastRight?s.streak+1:0;return (a>=MIN_ATT&&k>=STREAK_GOAL)||(s.pos+1>=items.length&&!q.length)||a>=MAX_ATT;})()?"Finish →":"Next →",
       smNextBg:s.lastRight?"#4ADE80":"#FBBF24",
       smFeedback:s.rev?(s.lastRight?"CORRECT":("INCORRECT — the answer is "+it.a+"."+(it.hint?" "+it.hint:"")+" Your streak resets, and this one comes back later.")):"",
       smDoneIcon:s.streak>=STREAK_GOAL?"🎯":"💪",
       smDoneTitle:s.streak>=STREAK_GOAL?"Five in a row — set closed!":"Bank finished",
       smDoneNote:s.right+" right out of "+s.att+" ("+Math.round(s.right/Math.max(1,s.att)*100)+"%). "+(s.streak>=STREAK_GOAL?"That's mastery-level closing. Logged for today.":"You worked the whole bank without a closing streak — it's logged, and this set will come back tomorrow."),
       smAgain:start,
-      smExit:()=>this.setState({stream:null})
+      smExit:()=>{ clearTimeout(this._smTimer); this.setState({stream:null}); }
     };
   }
 

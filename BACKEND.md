@@ -44,10 +44,18 @@ done" keeps the old behavior.
   console on the site:
   `localStorage.setItem("GEMINI_API_KEY", "PASTE_KEY_HERE")`, then reload.
   Remove with `localStorage.removeItem("GEMINI_API_KEY")`.
-- Manage keys under Google Cloud → Credentials in the `big-math-adventures`
-  project. DELETE the leaked key rather than leaving it disabled, and create a
-  fresh one; keep the referrer and API restrictions, which are still worth
-  having as a second layer.
+- The current key ("BaskinSchool", created 2026-09-01) lives on Google Cloud
+  project **270254517675**, which is NOT `big-math-adventures`
+  (632810102950 — the Firestore project). That is fine functionally: the Gemini
+  key has nothing to do with Firestore. But it means two things.
+  First, manage this key in AI Studio or under Credentials on **270254517675**,
+  not on the Firebase project. Second, and more important: the old "worst case
+  is free-tier quota burn, never a bill" assurance was about
+  `big-math-adventures` having no billing account. It says nothing about
+  270254517675. **Verify that project has no billing account attached**, or the
+  failure mode changes from "requests stop" to "requests get charged".
+- The leaked `AIzaSy…` key should be DELETED on `big-math-adventures` rather
+  than left disabled.
 - Cost: free tier; two kids won't dent it. The tutor sends roughly 1k tokens in
   and a lesson back, capped at 2 attempts per round and 3 rounds per set.
 - With no key set, photo homework reverts to "mark it done" and dynamic lessons

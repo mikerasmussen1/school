@@ -2348,10 +2348,28 @@
         </div>
       </sc-if>
 
+      <sc-if value="{{ hqDMissionsOn }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.4)">{{ hqDWho }} · pick a mission</div>
+          <sc-for list="{{ hqDMissions }}" as="m" hint-placeholder-count="4">
+            <button onClick="{{ m.go }}" style="{{ m.style }}" style-hover="filter:brightness(1.2)">
+              <div style="display:grid;grid-template-columns:1fr auto;gap:16px;align-items:baseline">
+                <div>
+                  <div style="font-family:Fredoka,sans-serif;font-size:16px">{{ m.label }}</div>
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(238,242,255,.42);margin-top:5px">{{ m.sub }}</div>
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(238,242,255,.35);margin-top:4px">{{ m.meta }}</div>
+                </div>
+                <div style="font-family:Fredoka,sans-serif;font-size:18px;color:{{ m.pctColor }}">{{ m.pct }}</div>
+              </div>
+            </button>
+          </sc-for>
+        </div>
+      </sc-if>
+
       <sc-if value="{{ hqDWeeksOn }}" hint-placeholder-val="{{ false }}">
         <div style="display:flex;flex-direction:column;gap:8px">
-          <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.4)">{{ hqDWho }} · pick a week</div>
-          <sc-for list="{{ hqDWeeks }}" as="w" hint-placeholder-count="3">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.4)">{{ hqDMissionLabel }} · pick a week</div>
+          <sc-for list="{{ hqDWeeks }}" as="w" hint-placeholder-count="4">
             <button onClick="{{ w.go }}" style="{{ w.style }}" style-hover="filter:brightness(1.2)">
               <div style="display:grid;grid-template-columns:1fr auto;gap:16px;align-items:baseline">
                 <div>
@@ -2366,34 +2384,10 @@
         </div>
       </sc-if>
 
-      <sc-if value="{{ hqDDaysOn }}" hint-placeholder-val="{{ false }}">
-        <div style="display:flex;flex-direction:column;gap:8px">
-          <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.4)">{{ hqDWeekLabel }} · pick a day</div>
-          <sc-for list="{{ hqDDays }}" as="d" hint-placeholder-count="3">
-            <button onClick="{{ d.go }}" style="{{ d.style }}" style-hover="filter:brightness(1.2)">
-              <div style="display:grid;grid-template-columns:1fr auto;gap:16px;align-items:baseline">
-                <div>
-                  <div style="font-family:Fredoka,sans-serif;font-size:16px">{{ d.label }}</div>
-                  <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(238,242,255,.42);margin-top:5px">{{ d.meta }}</div>
-                </div>
-                <div style="font-family:Fredoka,sans-serif;font-size:18px;color:{{ d.pctColor }}">{{ d.pct }}</div>
-              </div>
-            </button>
-          </sc-for>
-        </div>
-      </sc-if>
-      <sc-if value="{{ hqDWeeksEmpty }}" hint-placeholder-val="{{ false }}">
-        <div style="font-size:13px;line-height:1.55;color:rgba(238,242,255,.5)">Nothing graded yet for {{ hqDWho }}. Every checked worksheet and every Streak Run answer lands here.</div>
-      </sc-if>
-
       <sc-if value="{{ hqDSetsOn }}" hint-placeholder-val="{{ false }}">
         <div style="display:flex;flex-direction:column;gap:8px">
-          <div style="display:flex;align-items:baseline;justify-content:space-between;gap:14px;flex-wrap:wrap">
-            <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.4)">{{ hqDDayLabel }}</div>
-            <button onClick="{{ hqDAllDayGo }}" style="font-family:Fredoka,sans-serif;font-size:13px;padding:7px 14px;border-radius:10px;cursor:pointer;background:rgba(56,189,248,.12);border:1px solid rgba(56,189,248,.4);color:#7DD3FC">{{ hqDAllDayLabel }}</button>
-          </div>
-          <sc-for list="{{ hqDSets }}" as="x" hint-placeholder-count="2">
-            <div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.4)">{{ hqDWeekLabel }} · pick an exercise</div>
+          <sc-for list="{{ hqDSets }}" as="x" hint-placeholder-count="3">
             <button onClick="{{ x.go }}" style="{{ x.style }}" style-hover="filter:brightness(1.2)">
               <div style="display:grid;grid-template-columns:1fr auto;gap:16px;align-items:baseline">
                 <div>
@@ -2404,30 +2398,43 @@
                 <div style="font-family:Fredoka,sans-serif;font-size:18px;color:{{ x.pctColor }}">{{ x.pct }}</div>
               </div>
             </button>
-            <div style="display:flex;gap:7px;flex-wrap:wrap;margin:7px 0 2px 18px">
-              <sc-for list="{{ x.tiers }}" as="t" hint-placeholder-count="3">
-                <button onClick="{{ t.go }}" style="{{ t.style }}" style-hover="filter:brightness(1.3)">{{ t.name }} · {{ t.line }}</button>
-              </sc-for>
-            </div>
-            </div>
+          </sc-for>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ hqDTiersOn }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.4)">{{ hqDSetLabel }} · pick a tier</div>
+          <sc-for list="{{ hqDTiers }}" as="t" hint-placeholder-count="3">
+            <button onClick="{{ t.go }}" style="{{ t.style }}" style-hover="filter:brightness(1.2)">
+              <div style="display:grid;grid-template-columns:1fr auto;gap:16px;align-items:baseline">
+                <div>
+                  <div style="font-family:Fredoka,sans-serif;font-size:16px">{{ t.label }}</div>
+                  
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(238,242,255,.35);margin-top:4px">{{ t.meta }}</div>
+                </div>
+                <div style="font-family:Fredoka,sans-serif;font-size:18px;color:{{ t.pctColor }}">{{ t.pct }}</div>
+              </div>
+            </button>
           </sc-for>
         </div>
       </sc-if>
 
       <sc-if value="{{ hqDAnswersOn }}" hint-placeholder-val="{{ false }}">
         <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.11);border-radius:18px;padding:20px 22px">
-          <div style="font-family:Fredoka,sans-serif;font-size:17px;margin-bottom:14px">{{ hqDAnswersTitle }}</div>
+          <div style="font-family:Fredoka,sans-serif;font-size:17px;margin-bottom:4px">{{ hqDAnswersTitle }}</div>
+          <div style="font-size:12px;line-height:1.5;color:rgba(238,242,255,.45);margin-bottom:14px">{{ hqDAnswersNote }}</div>
           <div style="display:flex;flex-direction:column;gap:7px">
             <sc-for list="{{ hqDAnswers }}" as="a" hint-placeholder-count="6">
-              <div style="display:grid;grid-template-columns:30px 1fr auto;gap:14px;align-items:center;background:rgba(0,0,0,.2);border:1px solid rgba(255,255,255,.07);border-radius:11px;padding:10px 13px">
+              <div style="display:grid;grid-template-columns:30px 1fr auto;gap:14px;align-items:center;background:rgba(0,0,0,.2);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:11px 14px">
                 <div style="{{ a.markStyle }}">{{ a.mark }}</div>
                 <div>
-                  <div style="font-size:14.5px;line-height:1.4;color:rgba(238,242,255,.9)">{{ a.q }}</div>
-                  <div style="font-family:'JetBrains Mono',monospace;font-size:10.5px;margin-top:5px;color:rgba(238,242,255,.5)">answered <span style="color:{{ a.givenColor }}">{{ a.given }}</span> <sc-if value="{{ a.wrong }}" hint-placeholder-val="{{ false }}"><span> · correct answer <span style="color:#4ADE80">{{ a.exp }}</span></span></sc-if></div>
+                  <div style="font-size:14.5px;line-height:1.4;color:rgba(238,242,255,.9)">{{ a.n }}. {{ a.q }}</div>
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:10.5px;margin-top:5px;color:rgba(238,242,255,.5)">answered <span style="color:{{ a.givenColor }}">{{ a.given }}</span> · correct answer {{ a.exp }}</div>
                 </div>
                 <div style="text-align:right">
-                  <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(238,242,255,.38)">{{ a.tier }} {{ a.from }}</div>
-                  <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(238,242,255,.5);margin-top:4px">{{ a.secs }} · {{ a.when }}</div>
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(238,242,255,.4)">{{ a.tier }}</div>
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(238,242,255,.5);margin-top:4px">{{ a.when }}</div>
                 </div>
               </div>
             </sc-for>
@@ -2478,9 +2485,6 @@
               </div>
             </sc-if>
             <div style="font-size:12.5px;line-height:1.5;color:rgba(238,242,255,.6)">{{ hqDStrugglesNote }}</div>
-            <sc-if value="{{ hqDStruggleAllOn }}" hint-placeholder-val="{{ false }}">
-              <button onClick="{{ hqDStruggleAllGo }}" style="margin-top:12px;font-family:Fredoka,sans-serif;font-size:13px;padding:9px 15px;border-radius:11px;cursor:pointer;background:rgba(251,113,133,.14);border:1px solid rgba(251,113,133,.45);color:#FDA4AF" style-hover="filter:brightness(1.15)">{{ hqDStruggleAllLabel }}</button>
-            </sc-if>
           </div>
         </div>
       </sc-if>
@@ -3862,7 +3866,7 @@ class Component extends DCLogic {
            ans:{}, pset:"p1", pAns:{}, pChecked:{}, pRuns:{}, pTier:null, pPaper:{}, lstep:{}, playing:false,
            pLog:{}, qbank:"idle", qbankLine:"",
            dyn:{}, coach:null, dynBusy:false, dynErr:"",
-           hqWho:null, hqWeek:null, hqDay:null, hqSet:null, hqAll:false, hqTier:null,
+           hqWho:null, hqUnit:null, hqWeek:null, hqSet:null, hqTier:null,
            hqSlices:{}, hqLoadingRoster:false,
            pHist:{}, skills:{}, snooze:{}, pFull:{}, pweek:1, pStreak:{}, sprintHist:{}, stream:null, sprint:null,
            tCode:"", tRoster:null, tKey:null, tSel:"", tData:null, tBusy:false, tErr:"",
@@ -4361,9 +4365,10 @@ class Component extends DCLogic {
       // day → set → every answer, with an estimate of time spent.
       ...this.drillVals("hqD",
         this.reviewStudents(),
-        {who:st.hqWho, week:st.hqWeek, day:st.hqDay, set:st.hqSet, all:st.hqAll, tier:st.hqTier},
-        sel=>this.setState({hqWho:sel.who, hqWeek:sel.week==null?null:sel.week, hqDay:sel.day,
-          hqSet:sel.set, hqAll:sel.all, hqTier:sel.tier==null?null:sel.tier})),
+        {who:st.hqWho, unit:st.hqUnit, week:st.hqWeek, set:st.hqSet, tier:st.hqTier},
+        sel=>this.setState({hqWho:sel.who, hqUnit:sel.unit==null?null:sel.unit,
+          hqWeek:sel.week==null?null:sel.week, hqSet:sel.set,
+          hqTier:sel.tier==null?null:sel.tier})),
       hqDLoading:!!st.hqLoadingRoster,
       ...(()=>{
         const rows=this.dynRows(this.reviewStudents());
@@ -4794,20 +4799,48 @@ class Component extends DCLogic {
   }
   pctColor(pct){ return pct==null?"rgba(238,242,255,.6)":pct>=85?"#4ADE80":pct>=70?"#FBBF24":"#F87171"; }
 
-  /* One review UI, two callers: the on-device Teacher HQ (every pilot saved
-   * here) and the cloud-roster view (the one fetched pilot). `sel` is the
-   * drill position, `go` writes it back. Keys are prefixed so both can live
-   * in the same render. */
+  /* The review drill-down, shaped like the CURRICULUM rather than like the
+   * record: Mission, then Week, then the set (1.1), then the tier, then every
+   * question in it. A grown-up navigates it exactly the way the child does.
+   *
+   * That ordering is the whole point. The previous version was shaped like the
+   * log — calendar weeks of days that already had attempts against them — so
+   * work a child had never started simply did not appear, and "week" meant a
+   * week of the year rather than Week 1 of a Mission. Here every set is
+   * reachable whether or not it has been opened, and an untouched one says so.
+   *
+   * Questions come from the set, not from the log, so a set shows all of its
+   * items with the child's answer laid over the top. pLog keeps only the last
+   * 60 entries per set, so an old answer can age out; that reads as "no answer
+   * recorded" rather than as a blank the child left, and the note says so. */
   drillVals(pfx, students, sel, go){
     const K={}, put=(k,v)=>{K[pfx+k]=v;};
-    const meta=this.setMeta();
     const rowStyle=(on)=>"width:100%;text-align:left;cursor:pointer;background:"+(on?"rgba(56,189,248,.12)":"rgba(255,255,255,.04)")+
       ";border:1px solid "+(on?"rgba(56,189,248,.45)":"rgba(255,255,255,.1)")+";border-radius:14px;padding:14px 18px;color:inherit;transition:.15s;display:block";
+    const crumbStyle="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;background:none;border:0;cursor:pointer;color:#38BDF8;padding:0";
 
     const who=(students.find(s=>s.id===sel.who)||(students.length===1?students[0]:null));
     const all=who?this.attemptsOf(who.slice):[];
+    const bySet={};
+    all.forEach(e=>{ (bySet[e.setId]=bySet[e.setId]||[]).push(e); });
 
-    // ---- level 1: students -------------------------------------------------
+    // Score a group of sets from whatever the log holds for them.
+    const statOf=sets=>{
+      let started=0, marked=0, right=0, items=0;
+      sets.forEach(s=>{
+        items+=(s.items||[]).length;
+        const es=bySet[s.id]||[];
+        if(es.length) started++;
+        es.forEach(e=>{ if(e.ok!==null){ marked++; if(e.ok) right++; } });
+      });
+      return {n:sets.length, started, marked, right, items,
+        pct:marked?Math.round(right/marked*100):null};
+    };
+    const summarise=st=>st.started
+      ? st.started+" of "+st.n+" started · "+st.marked+" answered"
+      : "not started yet";
+
+    // ---- level 1: pilots ---------------------------------------------------
     put("Students", students.map(s=>{
       const a=this.attemptsOf(s.slice), marked=a.filter(e=>e.ok!==null);
       const right=marked.filter(e=>e.ok).length;
@@ -4815,173 +4848,154 @@ class Component extends DCLogic {
       const days=new Set(a.map(e=>e.d)).size;
       const last=a.length?Math.max.apply(null,a.map(e=>e.ts)):null;
       return {id:s.id, name:s.name,
-        meta:a.length?(days+" day"+(days===1?"":"s")+" · "+marked.length+" questions · "+this.fmtDur(this.timeOf(a))):"nothing logged yet",
+        meta:a.length?(days+" day"+(days===1?"":"s")+" · "+marked.length+" question"+(marked.length===1?"":"s")+" · "+this.fmtDur(this.timeOf(a))):"nothing logged yet",
         pct:pct==null?"—":pct+"%", pctColor:this.pctColor(pct),
         when:last?new Date(last).toLocaleDateString(undefined,{month:"short",day:"numeric"}):"—",
-        go:()=>go({who:s.id, week:null, day:null, set:null, all:false}),
+        go:()=>go({who:s.id, unit:null, week:null, set:null, tier:null}),
         style:rowStyle(who&&who.id===s.id)};
     }));
     put("StudentsOn", students.length>1);
     put("Who", who?who.name:"");
     put("HasWho", !!who);
 
-    // ---- level 2: weeks ----------------------------------------------------
-    /* A pilot who has been flying a whole term has a long flat list of days,
-     * and a grown-up thinks in weeks — "the week of the 4th". Epoch day 0 is a
-     * Thursday, so the Monday starting day d's week is d - ((d+3) mod 7); the
-     * extra +7 keeps it non-negative, which JS's % otherwise would not. */
-    const weekOf = d => d - (((d+3)%7+7)%7);
-    const fmtDay = (d,o)=>new Date(d*86400000).toLocaleDateString(undefined,{...o,timeZone:"UTC"});
-    const byWeek={};
-    all.forEach(e=>{ const w=weekOf(e.d); (byWeek[w]=byWeek[w]||[]).push(e); });
-    const weekKeys=Object.keys(byWeek).map(Number).sort((a,b)=>b-a);
+    const whoId=who?who.id:null;
+
+    // ---- level 2: missions -------------------------------------------------
+    const unitSets={}; for(let u=1;u<=8;u++) unitSets[u]=this.setsFor(u)||[];
+    put("Missions", [1,2,3,4,5,6,7,8].map(u=>{
+      const st=statOf(unitSets[u]), wks=this.weeksWithSets(u).length;
+      return {u:u, label:"Mission 0"+u,
+        sub:st.n+" set"+(st.n===1?"":"s")+" · "+wks+" week"+(wks===1?"":"s"),
+        meta:summarise(st),
+        pct:st.pct==null?"—":st.pct+"%", pctColor:this.pctColor(st.pct),
+        go:()=>go({who:whoId, unit:u, week:null, set:null, tier:null}),
+        style:rowStyle(sel.unit===u)};
+    }));
+    put("MissionsOn", !!who);
+
+    // ---- level 3: weeks inside the mission ---------------------------------
+    const weekKeys=sel.unit!=null?this.weeksWithSets(sel.unit):[];
     put("Weeks", weekKeys.map(w=>{
-      const es=byWeek[w], marked=es.filter(e=>e.ok!==null);
-      const right=marked.filter(e=>e.ok).length;
-      const pct=marked.length?Math.round(right/marked.length*100):null;
-      const days=new Set(es.map(e=>e.d)).size;
-      return {w:w,
-        label:"Week of "+fmtDay(w,{month:"short",day:"numeric"}),
-        sub:fmtDay(w,{month:"short",day:"numeric"})+" – "+fmtDay(w+6,{month:"short",day:"numeric"}),
-        meta:days+" day"+(days===1?"":"s")+" · "+marked.length+" question"+(marked.length===1?"":"s")+" · "+this.fmtDur(this.timeOf(es)),
-        pct:pct==null?"—":pct+"%", pctColor:this.pctColor(pct),
-        go:()=>go({who:who?who.id:null, week:w, day:null, set:null, all:false}),
+      const sets=this.setsForWeek(sel.unit,w), st=statOf(sets);
+      return {w:w, label:"Week "+w,
+        sub:sets.map(s=>s.label||s.id).join(" · "),
+        meta:summarise(st),
+        pct:st.pct==null?"—":st.pct+"%", pctColor:this.pctColor(st.pct),
+        go:()=>go({who:whoId, unit:sel.unit, week:w, set:null, tier:null}),
         style:rowStyle(sel.week===w)};
     }));
-    put("WeeksOn", !!who && weekKeys.length>0);
-    put("WeeksEmpty", !!who && weekKeys.length===0);
+    put("WeeksOn", sel.unit!=null && weekKeys.length>0);
+    put("MissionLabel", sel.unit!=null?("Mission 0"+sel.unit):"");
 
-    // ---- level 3: days within the chosen week ------------------------------
-    const weekPool = sel.week!=null ? (byWeek[sel.week]||[]) : [];
-    const byDay={};
-    weekPool.forEach(e=>{ (byDay[e.d]=byDay[e.d]||[]).push(e); });
-    const dayKeys=Object.keys(byDay).map(Number).sort((a,b)=>b-a);
-    put("Days", dayKeys.map(d=>{
-      const es=byDay[d], marked=es.filter(e=>e.ok!==null);
+    // ---- level 4: the sets in that week ------------------------------------
+    const weekSets=(sel.unit!=null&&sel.week!=null)?this.setsForWeek(sel.unit,sel.week):[];
+    put("Sets", weekSets.map(s=>{
+      const st=statOf([s]), es=bySet[s.id]||[];
+      const last=es.length?Math.max.apply(null,es.map(e=>e.ts)):null;
+      return {id:s.id, label:s.label||s.id, title:s.title||"",
+        meta:(s.items||[]).length+" question"+((s.items||[]).length===1?"":"s")+
+          (st.marked?(" · "+st.marked+" answered"):" · not started")+
+          (last?(" · last "+new Date(last).toLocaleDateString(undefined,{month:"short",day:"numeric"})):""),
+        pct:st.pct==null?"—":st.pct+"%", pctColor:this.pctColor(st.pct),
+        go:()=>go({who:whoId, unit:sel.unit, week:sel.week, set:s.id, tier:null}),
+        style:rowStyle(sel.set===s.id)};
+    }));
+    put("SetsOn", weekSets.length>0);
+    put("WeekLabel", sel.week!=null?("Mission 0"+sel.unit+" · Week "+sel.week):"");
+
+    // ---- level 5: the tiers in that set ------------------------------------
+    const curSet=sel.set?weekSets.find(s=>s.id===sel.set)||null:null;
+    const curItems=curSet?(curSet.items||[]).map((it,i)=>({it,i})):[];
+    // Latest attempt per item, so a set run twice shows the most recent answer.
+    const latest={};
+    (curSet?(bySet[curSet.id]||[]):[]).forEach(e=>{
+      const k=e.qid||("i"+e.i); const p=latest[k];
+      if(!p||e.ts>p.ts) latest[k]=e;
+    });
+    const keyOf=(it,i)=>it.id||((curSet?curSet.id:"")+"-i"+(i+1));
+    const tiersPresent=curSet?[0,1,2].filter(t=>curItems.some(x=>x.it.t===t)):[];
+    put("Tiers", tiersPresent.map(t=>{
+      const xs=curItems.filter(x=>x.it.t===t);
+      const seen=xs.map(x=>latest[keyOf(x.it,x.i)]).filter(Boolean);
+      const marked=seen.filter(e=>e.ok!==null);
       const right=marked.filter(e=>e.ok).length;
       const pct=marked.length?Math.round(right/marked.length*100):null;
-      const sets=new Set(es.map(e=>e.setId)).size;
-      return {d:d,
-        label:new Date(d*86400000).toLocaleDateString(undefined,{weekday:"long",month:"short",day:"numeric",timeZone:"UTC"}),
-        meta:sets+" set"+(sets===1?"":"s")+" · "+marked.length+" questions · "+this.fmtDur(this.timeOf(es)),
+      return {t:t, name:TIER_NAME[t], color:TIERS[t].color,
+        meta:xs.length+" question"+(xs.length===1?"":"s")+
+          (marked.length?(" · "+right+" of "+marked.length+" right"):" · no answers recorded"),
         pct:pct==null?"—":pct+"%", pctColor:this.pctColor(pct),
-        go:()=>go({who:who?who.id:null, week:sel.week, day:d, set:null, all:false}),
-        style:rowStyle(sel.day===d)};
+        go:()=>go({who:whoId, unit:sel.unit, week:sel.week, set:sel.set, tier:t}),
+        style:rowStyle(sel.tier===t)};
     }));
-    put("DaysOn", !!who && sel.week!=null && dayKeys.length>0);
-    put("WeekLabel", sel.week!=null?("Week of "+fmtDay(sel.week,{month:"long",day:"numeric"})):"");
+    put("TiersOn", !!curSet && tiersPresent.length>0);
+    put("SetLabel", curSet?((curSet.label||curSet.id)+(curSet.title?" · "+curSet.title:"")):"");
 
-    // ---- level 4: exercises within the chosen day --------------------------
-    const dayEntries=sel.day!=null?(byDay[sel.day]||[]):[];
-    const bySet={};
-    dayEntries.forEach(e=>{ (bySet[e.setId]=bySet[e.setId]||[]).push(e); });
-    const setKeys=Object.keys(bySet);
-    put("Sets", setKeys.map(id=>{
-      const es=bySet[id], marked=es.filter(e=>e.ok!==null);
-      const right=marked.filter(e=>e.ok).length;
-      const pct=marked.length?Math.round(right/marked.length*100):null;
-      const m=meta[id];
-      const tiers=[0,1,2].map(t=>es.filter(e=>e.t===t).length);
-      return {id:id,
-        label:m?m.s.title:id,
-        sub:(m?("Mission 0"+m.u+" · "+m.s.label):id)+" · "+(es.some(e=>e.m==="streak")?"Streak Run":"Worksheet"),
-        meta:marked.length+" answered · "+this.fmtDur(this.timeOf(es))+
-          " · warm-up "+tiers[0]+" / core "+tiers[1]+" / challenge "+tiers[2],
-        pct:pct==null?"—":pct+"%", pctColor:this.pctColor(pct),
-        go:()=>go({who:who?who.id:null, week:sel.week, day:sel.day, set:id, all:false, tier:null}),
-        style:rowStyle(sel.set===id && sel.tier==null),
-        /* Warm-Up / Core / Challenge each get their own row, so a grown-up can
-         * open one tier of one worksheet directly instead of opening the set
-         * and then reaching for the tier filter over in the summary panel. */
-        tiers:[0,1,2].map(t=>{
-          const ts=es.filter(e=>e.t===t), tm=ts.filter(e=>e.ok!==null);
-          const tr=tm.filter(e=>e.ok).length;
-          const tp=tm.length?Math.round(tr/tm.length*100):null;
-          const on=sel.set===id&&sel.tier===t;
-          return {any:ts.length>0, name:TIER_NAME[t],
-            line:tm.length?(tr+" / "+tm.length+" · "+tp+"%"):(ts.length+" logged"),
-            go:()=>go({who:who?who.id:null, week:sel.week, day:sel.day, set:id, all:false, tier:t}),
-            style:"cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;padding:5px 11px;border-radius:9px;color:"+
-              TIERS[t].color+";background:"+(on?"rgba(56,189,248,.18)":"rgba(255,255,255,.05)")+
-              ";border:1px solid "+(on?"rgba(56,189,248,.5)":"rgba(255,255,255,.12)")};
-        }).filter(x=>x.any)};
-    }));
-    put("SetsOn", sel.day!=null && setKeys.length>0);
-    put("DayLabel", sel.day!=null?new Date(sel.day*86400000).toLocaleDateString(undefined,{weekday:"long",month:"long",day:"numeric",timeZone:"UTC"}):"");
-
-    // ---- level 4: the answers ---------------------------------------------
-    // Either one set, or the whole day when "all answers" is on. A tier
-    // picked off the summary narrows both this and the struggle list.
-    const tierOK = e => sel.tier==null || e.t===sel.tier;
-    /* "Show all answers" must cover the SAME scope the struggle list was built
-     * from, which is the whole record when no day is picked and just that day
-     * when one is. It previously used dayEntries unconditionally — and
-     * dayEntries is [] with no day selected, so the button promised every
-     * answer and delivered an empty list. */
-    const inScope = sel.day!=null ? dayEntries : (sel.week!=null ? weekPool : all);
-    const shown = (sel.all ? inScope : (sel.set?(bySet[sel.set]||[]):[])).filter(tierOK);
-    const secs=this.itemSecs(dayEntries);
-    put("Answers", shown.slice().sort((a,b)=>a.ts-b.ts).map((e,i)=>{
-      const m=meta[e.setId];
-      return {n:i+1, q:e.q||"", given:e.given===""?"(blank)":e.given, exp:e.exp||"",
-        mark:e.ok===null?"·":e.ok?"✓":"✗",
+    // ---- level 6: every question, with the answer laid over it -------------
+    const shownItems=curSet?curItems.filter(x=>sel.tier==null||x.it.t===sel.tier):[];
+    let missing=0;
+    put("Answers", shownItems.map(({it,i},n)=>{
+      const e=latest[keyOf(it,i)];
+      if(!e) missing++;
+      const ok=e?e.ok:null;
+      return {n:n+1, q:it.q||"", exp:e?(e.exp||""):String(QTypes.answerText(it)||""),
+        given:e?(e.given===""?"(blank)":e.given):"no answer recorded",
+        answered:!!e, unanswered:!e,
+        mark:!e?"–":ok===null?"·":ok?"✓":"✗",
         markStyle:"width:30px;height:30px;flex:none;border-radius:9px;display:grid;place-items:center;font-size:14px;font-family:'JetBrains Mono',monospace;"+
-          (e.ok===null?"background:rgba(251,191,36,.16);color:#FBBF24;border:1px solid rgba(251,191,36,.4)"
-           :e.ok?"background:rgba(74,222,128,.16);color:#4ADE80;border:1px solid rgba(74,222,128,.4)"
-                :"background:rgba(248,113,113,.18);color:#FCA5A5;border:1px solid rgba(248,113,113,.45)"),
-        givenColor:e.ok===false?"#FCA5A5":"rgba(238,242,255,.8)",
-        wrong:e.ok===false,
-        tier:e.t==null?"":(TIER_NAME[e.t]||""),
-        from:sel.all&&m?m.s.title:"",
-        secs:this.fmtDur(secs[e.ts+"|"+(e.qid||e.i)]||0),
-        when:new Date(e.ts).toLocaleTimeString(undefined,{hour:"numeric",minute:"2-digit"})};
+          (!e?"background:rgba(255,255,255,.05);color:rgba(238,242,255,.35);border:1px solid rgba(255,255,255,.12)"
+           :ok===null?"background:rgba(251,191,36,.16);color:#FBBF24;border:1px solid rgba(251,191,36,.4)"
+           :ok?"background:rgba(74,222,128,.16);color:#4ADE80;border:1px solid rgba(74,222,128,.4)"
+               :"background:rgba(248,113,113,.18);color:#FCA5A5;border:1px solid rgba(248,113,113,.45)"),
+        givenColor:!e?"rgba(238,242,255,.35)":ok===false?"#FCA5A5":"rgba(238,242,255,.8)",
+        wrong:ok===false,
+        tier:it.t==null?"":(TIER_NAME[it.t]||""),
+        when:e?new Date(e.ts).toLocaleDateString(undefined,{month:"short",day:"numeric"}):""};
     }));
-    put("AnswersOn", shown.length>0);
-    /* Log only the FAILURE case — "show all answers" asked for and got nothing.
-     * drillVals runs on every render, so logging unconditionally would flood
-     * the ring buffer and bury everything else. */
-    if(sel.all && shown.length===0){
-      try{ Diag.write({src:"review", step:"all-answers-empty", pfx:pfx,
-        who:sel.who||null, day:sel.day, tier:sel.tier,
-        students:students.length, dayEntries:dayEntries.length,
-        allEntries:all.length, hasWho:!!who}); }catch(e){}
-    }
-    put("AnswersTitle", (sel.all?(sel.day!=null?"Every answer this day":(sel.week!=null?"Every answer this week":"Every answer"))
-                                :(sel.set&&meta[sel.set]?meta[sel.set].s.title:"Answers"))+(sel.tier!=null?" · "+TIER_NAME[sel.tier]:""));
-    put("AllDayGo", ()=>go({who:who?who.id:null, week:sel.week, day:sel.day, set:null, all:!sel.all, tier:sel.tier}));
-    put("AllDayLabel", sel.all?"Back to one set at a time":"See every answer this day");
-    put("AllDayOn", sel.day!=null);
+    put("AnswersOn", shownItems.length>0);
+    put("AnswersTitle", (curSet?((curSet.label||curSet.id)+(sel.tier!=null?" · "+TIER_NAME[sel.tier]:"")):"Answers"));
+    put("AnswersNote", !shownItems.length ? ""
+      : missing===shownItems.length
+        ? "Nothing recorded for these yet. Every question in the set is listed so you can see what is coming."
+        : missing
+          ? missing+" of these have no answer on record — either not attempted, or old enough to have dropped out of the last 60 entries kept per set."
+          : "Every question here has an answer on record.");
 
-    // ---- summary + what they struggled with -------------------------------
-    const scopeAll = sel.day!=null?dayEntries:(sel.week!=null?weekPool:all);
-    const scope = scopeAll.filter(tierOK);
+    // ---- summary + what they struggled with --------------------------------
+    // Scope follows the deepest thing picked, so the numbers always describe
+    // exactly what is on screen.
+    const scopeIds = sel.set ? [sel.set]
+      : (sel.unit!=null&&sel.week!=null) ? this.setsForWeek(sel.unit,sel.week).map(s=>s.id)
+      : sel.unit!=null ? unitSets[sel.unit].map(s=>s.id)
+      : null;
+    const inScopeAll = all.filter(e=>!scopeIds||scopeIds.indexOf(e.setId)>=0);
+    const scope = inScopeAll.filter(e=>sel.tier==null||e.t===sel.tier);
     const marked=scope.filter(e=>e.ok!==null);
     const right=marked.filter(e=>e.ok).length;
     const pct=marked.length?Math.round(right/marked.length*100):null;
-    put("SumScope", (sel.day!=null?"Selected day":(sel.week!=null?"Selected week":(who?"All time":"")))+(sel.tier!=null?" · "+TIER_NAME[sel.tier]:""));
+    put("SumScope", (sel.set?("Set "+(curSet?(curSet.label||curSet.id):sel.set))
+      : sel.week!=null?("Mission 0"+sel.unit+" · Week "+sel.week)
+      : sel.unit!=null?("Mission 0"+sel.unit)
+      : (who?"All time":""))+(sel.tier!=null?" · "+TIER_NAME[sel.tier]:""));
     put("SumTime", this.fmtDur(this.timeOf(scope)));
     put("SumQuestions", marked.length?String(marked.length):"—");
     put("SumScore", marked.length?right+" / "+marked.length:"—");
     put("SumPct", pct==null?"—":pct+"%");
     put("SumPctColor", this.pctColor(pct));
-    // Each tier is a button: it filters the summary, the struggle list and the
-    // answers to that tier for whatever day is open.
     put("SumTiers", [0,1,2].map(t=>{
-      const es=scopeAll.filter(e=>e.ok!==null&&e.t===t), r=es.filter(e=>e.ok).length;
+      const es=inScopeAll.filter(e=>e.ok!==null&&e.t===t), r=es.filter(e=>e.ok).length;
       const p=es.length?Math.round(r/es.length*100):null;
       const on=sel.tier===t;
       return {name:TIER_NAME[t], color:TIERS[t].color,
         line:es.length?(r+" / "+es.length+" · "+p+"%"):"not attempted",
         lineColor:es.length?this.pctColor(p):"rgba(238,242,255,.35)",
-        go:()=>go({who:who?who.id:null, week:sel.week, day:sel.day, set:sel.set, all:sel.all, tier:on?null:t}),
-        style:"width:100%;text-align:left;cursor:pointer;display:grid;grid-template-columns:88px 1fr auto;gap:10px;align-items:baseline;padding:7px 9px;border-radius:9px;color:inherit;transition:.15s;background:"+
+        go:()=>go({who:whoId, unit:sel.unit, week:sel.week, set:sel.set, tier:on?null:t}),
+        style:"width:100%;text-align:left;cursor:pointer;display:grid;grid-template-columns:88px 1fr auto;gap:10px;align-items:baseline;padding:7px 9px;border-radius:9px;background:"+
           (on?"rgba(56,189,248,.14)":"transparent")+";border:1px solid "+(on?"rgba(56,189,248,.4)":"transparent"),
         chev:on?"clear":"open"};
     }));
     put("TierNote", sel.tier!=null
       ? TIER_NAME[sel.tier]+" only. Tap it again to see every tier."
-      : (sel.day!=null?"Tap a tier to narrow the day to it.":"Tap a tier to narrow to it."));
-    // Ranked by how often it was missed, then by how recently.
+      : "Tap a tier to narrow to it.");
     const missBy={};
     scope.filter(e=>e.ok===false).forEach(e=>{
       const k=e.qid||e.q;
@@ -4989,35 +5003,32 @@ class Component extends DCLogic {
       o.n++; o.last=Math.max(o.last,e.ts);
       if(o.given.length<3 && e.given) o.given.push(e.given);
     });
+    const meta=this.setMeta();
     const struggles=Object.keys(missBy).map(k=>missBy[k]).sort((a,b)=>b.n-a.n||b.last-a.last).slice(0,8);
     put("Struggles", struggles.map(o=>{
       const m=meta[o.setId];
       return {q:o.q, exp:o.exp,
         times:o.n===1?"missed once":"missed "+o.n+" times",
         gave:o.given.length?("typed "+o.given.join(", ")):"left blank",
-        where:(m?m.s.title:o.setId)+(o.t==null?"":" · "+(TIER_NAME[o.t]||""))};
+        where:(m?((m.s.label||m.s.id)+" · "+m.s.title):o.setId)+(o.t==null?"":" · "+(TIER_NAME[o.t]||""))};
     }));
     put("StrugglesOn", struggles.length>0);
     put("StrugglesNote", struggles.length
       ? "Ranked by how often it was missed. These are the reteach list."
       : (marked.length?"Nothing missed in this scope.":""));
-    // Straight from the struggle list to every answer behind it.
-    put("StruggleAllGo", ()=>go({who:who?who.id:null, week:sel.week, day:sel.day, set:null, all:true, tier:sel.tier}));
-    put("StruggleAllLabel", (sel.tier!=null?"Show all "+TIER_NAME[sel.tier]+" answers":"Show all answers")+(sel.day!=null?" this day":(sel.week!=null?" this week":"")));
-    put("StruggleAllOn", scope.length>0);
 
     // ---- breadcrumbs -------------------------------------------------------
     const crumbs=[];
-    if(students.length>1) crumbs.push({label:"All pilots", go:()=>go({who:null,week:null,day:null,set:null,all:false}),
-      style:"font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;background:none;border:0;cursor:pointer;color:#38BDF8;padding:0"});
-    if(who&&sel.week!=null) crumbs.push({label:who.name, go:()=>go({who:who.id,week:null,day:null,set:null,all:false}),
-      style:"font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;background:none;border:0;cursor:pointer;color:#38BDF8;padding:0"});
-    if(sel.week!=null&&sel.day!=null) crumbs.push({label:"Week of "+fmtDay(sel.week,{month:"short",day:"numeric"}),
-      go:()=>go({who:who?who.id:null,week:sel.week,day:null,set:null,all:false}),
-      style:"font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;background:none;border:0;cursor:pointer;color:#38BDF8;padding:0"});
-    if(sel.day!=null&&(sel.set||sel.all)) crumbs.push({label:fmtDay(sel.day,{month:"short",day:"numeric"}),
-      go:()=>go({who:who?who.id:null,week:sel.week,day:sel.day,set:null,all:false}),
-      style:"font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;background:none;border:0;cursor:pointer;color:#38BDF8;padding:0"});
+    if(students.length>1) crumbs.push({label:"All pilots",
+      go:()=>go({who:null,unit:null,week:null,set:null,tier:null}), style:crumbStyle});
+    if(who&&sel.unit!=null) crumbs.push({label:who.name,
+      go:()=>go({who:whoId,unit:null,week:null,set:null,tier:null}), style:crumbStyle});
+    if(sel.unit!=null&&sel.week!=null) crumbs.push({label:"Mission 0"+sel.unit,
+      go:()=>go({who:whoId,unit:sel.unit,week:null,set:null,tier:null}), style:crumbStyle});
+    if(sel.week!=null&&sel.set) crumbs.push({label:"Week "+sel.week,
+      go:()=>go({who:whoId,unit:sel.unit,week:sel.week,set:null,tier:null}), style:crumbStyle});
+    if(sel.set&&sel.tier!=null&&curSet) crumbs.push({label:curSet.label||curSet.id,
+      go:()=>go({who:whoId,unit:sel.unit,week:sel.week,set:sel.set,tier:null}), style:crumbStyle});
     put("Crumbs", crumbs);
     put("CrumbsOn", crumbs.length>0);
     return K;

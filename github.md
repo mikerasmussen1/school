@@ -3,6 +3,33 @@ branch: main
 
 ## Last sync
 
+date: 2026-09-01T17:49:05Z
+
+### Updated in this project
+
+- Merged main at tree c076f134. Took upstream `curriculum/qbank.js`, `firestore.rules`, `BACKEND.md` and the new `.gitignore`; upstream `index.html` was unchanged since the last pull, so the local copy (dynamic difficulty, drill-down review) is ahead.
+- **Adopted upstream's security decision and extended it to lessons.** Client writes to `questionbanks` are denied outright — bank ids are public, so the unguessable-id protection the rest of the ruleset relies on does not apply. The same now goes for `lessons`: read public, client writes denied.
+- Consequence, handled: a generated lesson no longer tries to publish itself. It is stored inline in the child's own record and teaches them there; promoting one into the shared reuse pool is an admin step, and Teacher HQ grew a "Copy lesson JSON" button per generated round to hand the object over for the Firebase console.
+- `LessonBank.publish`/`score` kept and re-documented as admin-only — the validation is the part worth having.
+
+## Sync history
+
+date: 2026-09-01T17:05:00Z
+
+- **Dynamic difficulty.** A set closing under 70% now goes to `curriculum/tutor.js`: proficiency read (went well / did not / one line for the child), the concept behind the misses, and a 6–8 slide lesson with 5–10 new questions. The child taps through it immediately, answers, and the round closes at 70%. Three rounds max, each told to change representation rather than difficulty; after three, generation stops and Teacher HQ flags it red.
+- **Lessons are data** — `curriculum/lessons.js` loads `lessons/{bankId}` like question banks, keyed by `concept` so a lesson that already taught an idea gets reused. (Write-back superseded by the 17:49 merge: admin-only.)
+- **Teacher HQ Review is a drill-down**: pilot → day → set → every answer, with typed answers, per-item time, tier filters, a ranked "struggled with" list, and a jump straight to every answer behind it. It also pulls every pilot on the open teacher roster, not just this device.
+- New **Dynamic difficulty** section in Teacher HQ: every round, whether the lesson was generated or reused, the post-lesson score, and a red "needs you" card after three rounds.
+- `firestore.rules` gained a `lessons` block. (Superseded by the 17:49 merge: read public, client writes denied.) Still not deployed.
+- Fixed: browser autofill was pre-filling the Streak Run answer box and grading junk.
+
+date: 2026-09-01T16:42:00Z
+
+- Pulled main at tree 0c30ab6c. The question-platform work is on main, with edits on top of what was handed over: `index.html` (444,388 bytes), `curriculum/qbank.js`, `curriculum/question-types.js`, `Worksheet Builder.dc.html`, `CONTRIBUTING.md`, `DB-TASK.md`, `scripts/qa-verify.js`.
+- `japan.dc.html` and `image-slot.js` are now committed, and `index.html` loads `curriculum/japan-unit.js` — the Japan card is live rather than held back.
+- `firestore.rules` on main carries the `questionbanks` public-read block. Nothing in the repo says it has been deployed.
+- No `scripts/seed-questionbanks.js` on main yet, so no bank has been published: the app is still running on the file questions.
+
 date: 2026-09-01T15:40:00Z
 
 ### Updated in this project
@@ -13,13 +40,7 @@ date: 2026-09-01T15:40:00Z
 - **Teacher HQ shows every completed exercise.** New card: one row per set per day with a per-item grid, the score, and each miss spelled out — what the child typed and the right answer. Backed by a new per-item `pLog` in the synced record (capped at 60 entries per set).
 - **`Worksheet Builder.dc.html`** prints any level/mission from the loaded bank, with a spinner while it fetches and an answer key. The 32 static `Unit N` packs stay as frozen snapshots.
 
-## Sync history
-
-date: 2026-09-01T15:09:05Z
-
-- Pulled main at tree 575cbbef. Everything except `index.html` was already byte-identical locally (the subject registry, Word Voyagers, and Japan unit are on main); pulled the newer upstream `index.html` (430,945 bytes, ~413 bytes ahead of the local copy).
-
-## Sync history
+date: 2026-09-01T15:09:05Z — pulled main at tree 575cbbef. Everything except `index.html` was already byte-identical locally; pulled the newer upstream `index.html`.
 
 date: 2026-09-01T12:52:00Z
 
@@ -59,6 +80,9 @@ Live, and deliberately client-side. Do not "fix" these without reading `BACKEND.
 | Screen / file | Built from |
 | --- | --- |
 | Question types + grading | `curriculum/question-types.js` |
+| Lessons as data + reuse pool | `curriculum/lessons.js`, `firestore.rules` (`lessons`) |
+| Dynamic difficulty (model call, rounds) | `curriculum/tutor.js`; `index.html` — `maybeDynamic`, `coachVals`, `dynRows` |
+| Teacher HQ review drill-down | `index.html` — `drillVals`, `reviewStudents`, `loadRosterSlices` |
 | Question sets loaded from the DB | `curriculum/qbank.js`, `firestore.rules` (`questionbanks`) |
 | Completed-exercise log (Teacher HQ) | `index.html` — `logAttempt`, `logAttempts`, `pLog`, `tExRows` |
 | Streak Run difficulty mix | `index.html` — `streamVals`; `QTypes.mixOrder` |

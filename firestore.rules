@@ -62,5 +62,23 @@ service cloud.firestore {
       allow get: if true;
       allow list, create, update, delete: if false;
     }
+    // Lessons — the slide walkthroughs, including the ones the tutor generates.
+    //
+    // Same shape of problem as questionbanks, so the same answer: read is
+    // public because every device has to fetch them, and client writes are
+    // denied because lesson bank ids are not secret either. A lesson is
+    // teaching material a child reads; letting anyone overwrite it is worse
+    // than letting them overwrite a question.
+    //
+    // This means a generated lesson cannot publish itself into the shared
+    // bank. It does not have to: the round keeps its lesson inline in the
+    // child's own record, so the child gets taught either way. Promoting a
+    // lesson that worked into the shared pool — where other children reuse it
+    // — is an admin step: Teacher HQ shows the lesson JSON, and the Firebase
+    // console or a service-account script writes it.
+    match /lessons/{id} {
+      allow get: if true;
+      allow list, create, update, delete: if false;
+    }
   }
 }

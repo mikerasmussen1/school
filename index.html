@@ -12,6 +12,8 @@
 <script src="./curriculum/subjects.js"></script>
 <script src="./curriculum/question-types.js"></script>
 <script src="./curriculum/qbank.js"></script>
+<script src="./curriculum/lessons.js"></script>
+<script src="./curriculum/tutor.js"></script>
 <script src="./curriculum/shared.js"></script>
 <script src="./curriculum/math-y1.js"></script>
 <script src="./curriculum/math-y2.js"></script>
@@ -2192,40 +2194,143 @@
                   </sc-if>
                   <div style="font-size:12.5px;line-height:1.5;color:rgba(238,242,255,.6)">{{ tStreakNote }}</div>
                 </div>
-                <div style="background:rgba(74,222,128,.05);border:1px solid rgba(74,222,128,.24);border-radius:16px;padding:18px 20px;grid-column:1/-1">
-                  <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:12px">
-                    <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:#4ADE80">Completed exercises</div>
-                    <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(238,242,255,.4)">{{ tExCount }} logged</div>
-                  </div>
-                  <sc-if value="{{ tExAny }}" hint-placeholder-val="{{ true }}">
-                    <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:12px">
-                      <sc-for list="{{ tExRows }}" as="x" hint-placeholder-count="3">
-                        <div style="background:rgba(0,0,0,.24);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:12px 14px">
-                          <div style="display:grid;grid-template-columns:1fr auto auto;gap:14px;align-items:baseline">
-                            <div>
-                              <div style="font-family:Fredoka,sans-serif;font-size:14.5px">{{ x.title }}</div>
-                              <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:rgba(238,242,255,.4);margin-top:4px">{{ x.unit }} · {{ x.mode }} · {{ x.when }}</div>
-                            </div>
-                            <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(238,242,255,.55)">{{ x.score }}</div>
-                            <div style="font-family:Fredoka,sans-serif;font-size:17px;color:{{ x.pctColor }}">{{ x.pct }}</div>
-                          </div>
-                          <div style="display:flex;flex-wrap:wrap;gap:5px;margin-top:10px">
-                            <sc-for list="{{ x.cells }}" as="c" hint-placeholder-count="6">
-                              <div title="{{ c.tip }}" style="{{ c.style }}">{{ c.mark }}</div>
-                            </sc-for>
-                          </div>
-                          <sc-if value="{{ x.hasMisses }}" hint-placeholder-val="{{ false }}">
-                            <div style="display:flex;flex-direction:column;gap:5px;margin-top:10px;padding-top:9px;border-top:1px dashed rgba(255,255,255,.12)">
-                              <sc-for list="{{ x.misses }}" as="w" hint-placeholder-count="2">
-                                <div style="font-size:12px;line-height:1.5;color:rgba(238,242,255,.6)"><span style="color:rgba(238,242,255,.85)">{{ w.q }}</span> — typed <span style="color:#FCA5A5">{{ w.given }}</span>, answer <span style="color:#4ADE80">{{ w.exp }}</span></div>
-                              </sc-for>
-                            </div>
-                          </sc-if>
-                        </div>
+                <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:44px">
+                  <sc-if value="{{ tDCrumbsOn }}" hint-placeholder-val="{{ false }}">
+                    <div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap">
+                      <sc-for list="{{ tDCrumbs }}" as="cb" hint-placeholder-count="1">
+                        <button onClick="{{ cb.go }}" style="{{ cb.style }}">← {{ cb.label }}</button>
                       </sc-for>
                     </div>
                   </sc-if>
-                  <div style="font-size:12.5px;line-height:1.5;color:rgba(238,242,255,.6)">{{ tExNote }}</div>
+
+                  <sc-if value="{{ tDStudentsOn }}" hint-placeholder-val="{{ true }}">
+                    <div style="display:flex;flex-direction:column;gap:8px">
+                      <sc-for list="{{ tDStudents }}" as="s" hint-placeholder-count="2">
+                        <button onClick="{{ s.go }}" style="{{ s.style }}" style-hover="filter:brightness(1.2)">
+                          <div style="display:grid;grid-template-columns:1fr auto auto;gap:16px;align-items:baseline">
+                            <div>
+                              <div style="font-family:Fredoka,sans-serif;font-size:18px;line-height:1.1">{{ s.name }}</div>
+                              <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(238,242,255,.42);margin-top:5px">{{ s.meta }}</div>
+                            </div>
+                            <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(238,242,255,.4)">{{ s.when }}</div>
+                            <div style="font-family:Fredoka,sans-serif;font-size:19px;color:{{ s.pctColor }}">{{ s.pct }}</div>
+                          </div>
+                        </button>
+                      </sc-for>
+                    </div>
+                  </sc-if>
+
+                  <sc-if value="{{ tDDaysOn }}" hint-placeholder-val="{{ false }}">
+                    <div style="display:flex;flex-direction:column;gap:8px">
+                      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.4)">{{ tDWho }} · pick a day</div>
+                      <sc-for list="{{ tDDays }}" as="d" hint-placeholder-count="3">
+                        <button onClick="{{ d.go }}" style="{{ d.style }}" style-hover="filter:brightness(1.2)">
+                          <div style="display:grid;grid-template-columns:1fr auto;gap:16px;align-items:baseline">
+                            <div>
+                              <div style="font-family:Fredoka,sans-serif;font-size:16px">{{ d.label }}</div>
+                              <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(238,242,255,.42);margin-top:5px">{{ d.meta }}</div>
+                            </div>
+                            <div style="font-family:Fredoka,sans-serif;font-size:18px;color:{{ d.pctColor }}">{{ d.pct }}</div>
+                          </div>
+                        </button>
+                      </sc-for>
+                    </div>
+                  </sc-if>
+                  <sc-if value="{{ tDDaysEmpty }}" hint-placeholder-val="{{ false }}">
+                    <div style="font-size:13px;line-height:1.55;color:rgba(238,242,255,.5)">Nothing graded yet for {{ tDWho }}. Every checked worksheet and every Streak Run answer lands here.</div>
+                  </sc-if>
+
+                  <sc-if value="{{ tDSetsOn }}" hint-placeholder-val="{{ false }}">
+                    <div style="display:flex;flex-direction:column;gap:8px">
+                      <div style="display:flex;align-items:baseline;justify-content:space-between;gap:14px;flex-wrap:wrap">
+                        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.4)">{{ tDDayLabel }}</div>
+                        <button onClick="{{ tDAllDayGo }}" style="font-family:Fredoka,sans-serif;font-size:13px;padding:7px 14px;border-radius:10px;cursor:pointer;background:rgba(56,189,248,.12);border:1px solid rgba(56,189,248,.4);color:#7DD3FC">{{ tDAllDayLabel }}</button>
+                      </div>
+                      <sc-for list="{{ tDSets }}" as="x" hint-placeholder-count="2">
+                        <button onClick="{{ x.go }}" style="{{ x.style }}" style-hover="filter:brightness(1.2)">
+                          <div style="display:grid;grid-template-columns:1fr auto;gap:16px;align-items:baseline">
+                            <div>
+                              <div style="font-family:Fredoka,sans-serif;font-size:16px">{{ x.label }}</div>
+                              <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(238,242,255,.42);margin-top:5px">{{ x.sub }}</div>
+                              <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(238,242,255,.35);margin-top:4px">{{ x.meta }}</div>
+                            </div>
+                            <div style="font-family:Fredoka,sans-serif;font-size:18px;color:{{ x.pctColor }}">{{ x.pct }}</div>
+                          </div>
+                        </button>
+                      </sc-for>
+                    </div>
+                  </sc-if>
+
+                  <sc-if value="{{ tDAnswersOn }}" hint-placeholder-val="{{ false }}">
+                    <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.11);border-radius:18px;padding:20px 22px">
+                      <div style="font-family:Fredoka,sans-serif;font-size:17px;margin-bottom:14px">{{ tDAnswersTitle }}</div>
+                      <div style="display:flex;flex-direction:column;gap:7px">
+                        <sc-for list="{{ tDAnswers }}" as="a" hint-placeholder-count="6">
+                          <div style="display:grid;grid-template-columns:30px 1fr auto;gap:14px;align-items:center;background:rgba(0,0,0,.2);border:1px solid rgba(255,255,255,.07);border-radius:11px;padding:10px 13px">
+                            <div style="{{ a.markStyle }}">{{ a.mark }}</div>
+                            <div>
+                              <div style="font-size:14.5px;line-height:1.4;color:rgba(238,242,255,.9)">{{ a.q }}</div>
+                              <div style="font-family:'JetBrains Mono',monospace;font-size:10.5px;margin-top:5px;color:rgba(238,242,255,.5)">answered <span style="color:{{ a.givenColor }}">{{ a.given }}</span> <sc-if value="{{ a.wrong }}" hint-placeholder-val="{{ false }}"><span> · correct answer <span style="color:#4ADE80">{{ a.exp }}</span></span></sc-if></div>
+                            </div>
+                            <div style="text-align:right">
+                              <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(238,242,255,.38)">{{ a.tier }} {{ a.from }}</div>
+                              <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(238,242,255,.5);margin-top:4px">{{ a.secs }} · {{ a.when }}</div>
+                            </div>
+                          </div>
+                        </sc-for>
+                      </div>
+                    </div>
+                  </sc-if>
+
+                  <sc-if value="{{ tDHasWho }}" hint-placeholder-val="{{ false }}">
+                    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px">
+                      <div style="background:rgba(56,189,248,.05);border:1px solid rgba(56,189,248,.24);border-radius:16px;padding:18px 20px">
+                        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:#38BDF8;margin-bottom:14px">Summary · {{ tDSumScope }}</div>
+                        <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:14px">
+                          <div>
+                            <div style="font-family:Fredoka,sans-serif;font-size:22px;color:{{ tDSumPctColor }};line-height:1">{{ tDSumPct }}</div>
+                            <div style="font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:.13em;text-transform:uppercase;color:rgba(238,242,255,.45);margin-top:6px">{{ tDSumScore }}</div>
+                          </div>
+                          <div>
+                            <div style="font-family:Fredoka,sans-serif;font-size:22px;color:#EEF2FF;line-height:1">{{ tDSumTime }}</div>
+                            <div style="font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:.13em;text-transform:uppercase;color:rgba(238,242,255,.45);margin-top:6px">Time, estimated</div>
+                          </div>
+                          <div>
+                            <div style="font-family:Fredoka,sans-serif;font-size:22px;color:#EEF2FF;line-height:1">{{ tDSumQuestions }}</div>
+                            <div style="font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:.13em;text-transform:uppercase;color:rgba(238,242,255,.45);margin-top:6px">Questions</div>
+                          </div>
+                        </div>
+                        <div style="display:flex;flex-direction:column;gap:6px">
+                          <sc-for list="{{ tDSumTiers }}" as="t" hint-placeholder-count="3">
+                            <button onClick="{{ t.go }}" style="{{ t.style }}" style-hover="filter:brightness(1.35)">
+                              <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:{{ t.color }}">{{ t.name }}</div>
+                              <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:{{ t.lineColor }}">{{ t.line }}</div>
+                              <div style="font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(238,242,255,.35)">{{ t.chev }}</div>
+                            </button>
+                          </sc-for>
+                          <div style="font-size:11.5px;line-height:1.5;color:rgba(238,242,255,.42);margin-top:4px">{{ tDTierNote }}</div>
+                        </div>
+                      </div>
+                      <div style="background:rgba(251,113,133,.05);border:1px solid rgba(251,113,133,.24);border-radius:16px;padding:18px 20px">
+                        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:#FB7185;margin-bottom:14px">Struggled with</div>
+                        <sc-if value="{{ tDStrugglesOn }}" hint-placeholder-val="{{ false }}">
+                          <div style="display:flex;flex-direction:column;gap:9px;margin-bottom:12px">
+                            <sc-for list="{{ tDStruggles }}" as="w" hint-placeholder-count="3">
+                              <div style="background:rgba(0,0,0,.2);border:1px solid rgba(255,255,255,.07);border-radius:11px;padding:10px 13px">
+                                <div style="font-size:14px;line-height:1.4;color:rgba(238,242,255,.9)">{{ w.q }}</div>
+                                <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(238,242,255,.5);margin-top:5px">{{ w.times }} · {{ w.gave }} · answer <span style="color:#4ADE80">{{ w.exp }}</span></div>
+                                <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:rgba(238,242,255,.35);margin-top:5px">{{ w.where }}</div>
+                              </div>
+                            </sc-for>
+                          </div>
+                        </sc-if>
+                        <div style="font-size:12.5px;line-height:1.5;color:rgba(238,242,255,.6)">{{ tDStrugglesNote }}</div>
+                        <sc-if value="{{ tDStruggleAllOn }}" hint-placeholder-val="{{ false }}">
+                          <button onClick="{{ tDStruggleAllGo }}" style="margin-top:12px;font-family:Fredoka,sans-serif;font-size:13px;padding:9px 15px;border-radius:11px;cursor:pointer;background:rgba(251,113,133,.14);border:1px solid rgba(251,113,133,.45);color:#FDA4AF" style-hover="filter:brightness(1.15)">{{ tDStruggleAllLabel }}</button>
+                        </sc-if>
+                      </div>
+                    </div>
+                  </sc-if>
                 </div>
                 <div style="background:rgba(129,140,248,.05);border:1px solid rgba(129,140,248,.26);border-radius:16px;padding:18px 20px">
                   <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:#818CF8;margin-bottom:14px">Subjects</div>
@@ -2505,6 +2610,205 @@
       </sc-for>
       <div style="font-size:12.5px;line-height:1.55;color:rgba(238,242,255,.45);padding:0 4px">{{ pfSaveNote }}</div>
     </div>
+
+    <h2 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.45);margin:0 0 6px">Review</h2>
+    <div style="font-size:12.5px;line-height:1.55;color:rgba(238,242,255,.5);margin-bottom:6px;max-width:720px">Pick a pilot, then a day, then a set — the answers open underneath, green for right and red with what they typed. Tap a tier to narrow to it. Time is estimated from the answer stamps.</div>
+    <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.13em;text-transform:uppercase;color:rgba(238,242,255,.38);margin-bottom:18px">{{ hqDScopeNote }}</div>
+    <sc-if value="{{ hqDLoading }}" hint-placeholder-val="{{ false }}">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:#38BDF8;margin-bottom:14px">Loading students from the roster…</div>
+    </sc-if>
+    <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:44px">
+      <sc-if value="{{ hqDCrumbsOn }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap">
+          <sc-for list="{{ hqDCrumbs }}" as="cb" hint-placeholder-count="1">
+            <button onClick="{{ cb.go }}" style="{{ cb.style }}">← {{ cb.label }}</button>
+          </sc-for>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ hqDStudentsOn }}" hint-placeholder-val="{{ true }}">
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <sc-for list="{{ hqDStudents }}" as="s" hint-placeholder-count="2">
+            <button onClick="{{ s.go }}" style="{{ s.style }}" style-hover="filter:brightness(1.2)">
+              <div style="display:grid;grid-template-columns:1fr auto auto;gap:16px;align-items:baseline">
+                <div>
+                  <div style="font-family:Fredoka,sans-serif;font-size:18px;line-height:1.1">{{ s.name }}</div>
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(238,242,255,.42);margin-top:5px">{{ s.meta }}</div>
+                </div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(238,242,255,.4)">{{ s.when }}</div>
+                <div style="font-family:Fredoka,sans-serif;font-size:19px;color:{{ s.pctColor }}">{{ s.pct }}</div>
+              </div>
+            </button>
+          </sc-for>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ hqDDaysOn }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.4)">{{ hqDWho }} · pick a day</div>
+          <sc-for list="{{ hqDDays }}" as="d" hint-placeholder-count="3">
+            <button onClick="{{ d.go }}" style="{{ d.style }}" style-hover="filter:brightness(1.2)">
+              <div style="display:grid;grid-template-columns:1fr auto;gap:16px;align-items:baseline">
+                <div>
+                  <div style="font-family:Fredoka,sans-serif;font-size:16px">{{ d.label }}</div>
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(238,242,255,.42);margin-top:5px">{{ d.meta }}</div>
+                </div>
+                <div style="font-family:Fredoka,sans-serif;font-size:18px;color:{{ d.pctColor }}">{{ d.pct }}</div>
+              </div>
+            </button>
+          </sc-for>
+        </div>
+      </sc-if>
+      <sc-if value="{{ hqDDaysEmpty }}" hint-placeholder-val="{{ false }}">
+        <div style="font-size:13px;line-height:1.55;color:rgba(238,242,255,.5)">Nothing graded yet for {{ hqDWho }}. Every checked worksheet and every Streak Run answer lands here.</div>
+      </sc-if>
+
+      <sc-if value="{{ hqDSetsOn }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div style="display:flex;align-items:baseline;justify-content:space-between;gap:14px;flex-wrap:wrap">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.4)">{{ hqDDayLabel }}</div>
+            <button onClick="{{ hqDAllDayGo }}" style="font-family:Fredoka,sans-serif;font-size:13px;padding:7px 14px;border-radius:10px;cursor:pointer;background:rgba(56,189,248,.12);border:1px solid rgba(56,189,248,.4);color:#7DD3FC">{{ hqDAllDayLabel }}</button>
+          </div>
+          <sc-for list="{{ hqDSets }}" as="x" hint-placeholder-count="2">
+            <button onClick="{{ x.go }}" style="{{ x.style }}" style-hover="filter:brightness(1.2)">
+              <div style="display:grid;grid-template-columns:1fr auto;gap:16px;align-items:baseline">
+                <div>
+                  <div style="font-family:Fredoka,sans-serif;font-size:16px">{{ x.label }}</div>
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(238,242,255,.42);margin-top:5px">{{ x.sub }}</div>
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(238,242,255,.35);margin-top:4px">{{ x.meta }}</div>
+                </div>
+                <div style="font-family:Fredoka,sans-serif;font-size:18px;color:{{ x.pctColor }}">{{ x.pct }}</div>
+              </div>
+            </button>
+          </sc-for>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ hqDAnswersOn }}" hint-placeholder-val="{{ false }}">
+        <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.11);border-radius:18px;padding:20px 22px">
+          <div style="font-family:Fredoka,sans-serif;font-size:17px;margin-bottom:14px">{{ hqDAnswersTitle }}</div>
+          <div style="display:flex;flex-direction:column;gap:7px">
+            <sc-for list="{{ hqDAnswers }}" as="a" hint-placeholder-count="6">
+              <div style="display:grid;grid-template-columns:30px 1fr auto;gap:14px;align-items:center;background:rgba(0,0,0,.2);border:1px solid rgba(255,255,255,.07);border-radius:11px;padding:10px 13px">
+                <div style="{{ a.markStyle }}">{{ a.mark }}</div>
+                <div>
+                  <div style="font-size:14.5px;line-height:1.4;color:rgba(238,242,255,.9)">{{ a.q }}</div>
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:10.5px;margin-top:5px;color:rgba(238,242,255,.5)">answered <span style="color:{{ a.givenColor }}">{{ a.given }}</span> <sc-if value="{{ a.wrong }}" hint-placeholder-val="{{ false }}"><span> · correct answer <span style="color:#4ADE80">{{ a.exp }}</span></span></sc-if></div>
+                </div>
+                <div style="text-align:right">
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(238,242,255,.38)">{{ a.tier }} {{ a.from }}</div>
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(238,242,255,.5);margin-top:4px">{{ a.secs }} · {{ a.when }}</div>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ hqDHasWho }}" hint-placeholder-val="{{ false }}">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px">
+          <div style="background:rgba(56,189,248,.05);border:1px solid rgba(56,189,248,.24);border-radius:16px;padding:18px 20px">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:#38BDF8;margin-bottom:14px">Summary · {{ hqDSumScope }}</div>
+            <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:14px">
+              <div>
+                <div style="font-family:Fredoka,sans-serif;font-size:22px;color:{{ hqDSumPctColor }};line-height:1">{{ hqDSumPct }}</div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:.13em;text-transform:uppercase;color:rgba(238,242,255,.45);margin-top:6px">{{ hqDSumScore }}</div>
+              </div>
+              <div>
+                <div style="font-family:Fredoka,sans-serif;font-size:22px;color:#EEF2FF;line-height:1">{{ hqDSumTime }}</div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:.13em;text-transform:uppercase;color:rgba(238,242,255,.45);margin-top:6px">Time, estimated</div>
+              </div>
+              <div>
+                <div style="font-family:Fredoka,sans-serif;font-size:22px;color:#EEF2FF;line-height:1">{{ hqDSumQuestions }}</div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:.13em;text-transform:uppercase;color:rgba(238,242,255,.45);margin-top:6px">Questions</div>
+              </div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <sc-for list="{{ hqDSumTiers }}" as="t" hint-placeholder-count="3">
+                <button onClick="{{ t.go }}" style="{{ t.style }}" style-hover="filter:brightness(1.35)">
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:{{ t.color }}">{{ t.name }}</div>
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:{{ t.lineColor }}">{{ t.line }}</div>
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(238,242,255,.35)">{{ t.chev }}</div>
+                </button>
+              </sc-for>
+              <div style="font-size:11.5px;line-height:1.5;color:rgba(238,242,255,.42);margin-top:4px">{{ hqDTierNote }}</div>
+            </div>
+          </div>
+          <div style="background:rgba(251,113,133,.05);border:1px solid rgba(251,113,133,.24);border-radius:16px;padding:18px 20px">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:#FB7185;margin-bottom:14px">Struggled with</div>
+            <sc-if value="{{ hqDStrugglesOn }}" hint-placeholder-val="{{ false }}">
+              <div style="display:flex;flex-direction:column;gap:9px;margin-bottom:12px">
+                <sc-for list="{{ hqDStruggles }}" as="w" hint-placeholder-count="3">
+                  <div style="background:rgba(0,0,0,.2);border:1px solid rgba(255,255,255,.07);border-radius:11px;padding:10px 13px">
+                    <div style="font-size:14px;line-height:1.4;color:rgba(238,242,255,.9)">{{ w.q }}</div>
+                    <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(238,242,255,.5);margin-top:5px">{{ w.times }} · {{ w.gave }} · answer <span style="color:#4ADE80">{{ w.exp }}</span></div>
+                    <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:rgba(238,242,255,.35);margin-top:5px">{{ w.where }}</div>
+                  </div>
+                </sc-for>
+              </div>
+            </sc-if>
+            <div style="font-size:12.5px;line-height:1.5;color:rgba(238,242,255,.6)">{{ hqDStrugglesNote }}</div>
+            <sc-if value="{{ hqDStruggleAllOn }}" hint-placeholder-val="{{ false }}">
+              <button onClick="{{ hqDStruggleAllGo }}" style="margin-top:12px;font-family:Fredoka,sans-serif;font-size:13px;padding:9px 15px;border-radius:11px;cursor:pointer;background:rgba(251,113,133,.14);border:1px solid rgba(251,113,133,.45);color:#FDA4AF" style-hover="filter:brightness(1.15)">{{ hqDStruggleAllLabel }}</button>
+            </sc-if>
+          </div>
+        </div>
+      </sc-if>
+    </div>
+    </sc-if>
+
+    <h2 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.45);margin:0 0 6px">Dynamic difficulty</h2>
+    <div style="font-size:12.5px;line-height:1.55;color:rgba(238,242,255,.5);margin-bottom:18px;max-width:720px">{{ hqDynNote }}</div>
+    <sc-if value="{{ hqDynAny }}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:44px">
+        <sc-for list="{{ hqDynRows }}" as="r" hint-placeholder-count="2">
+          <div style="{{ r.cardStyle }}">
+            <div style="display:grid;grid-template-columns:1fr auto;gap:16px;align-items:baseline">
+              <div>
+                <div style="font-family:Fredoka,sans-serif;font-size:17px">{{ r.who }} · {{ r.title }}</div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(238,242,255,.42);margin-top:5px">{{ r.unit }} · {{ r.concept }}</div>
+              </div>
+              <div style="{{ r.stateStyle }}">{{ r.state }}</div>
+            </div>
+            <sc-if value="{{ r.hasRead }}" hint-placeholder-val="{{ false }}">
+              <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin-top:14px">
+                <div style="background:rgba(74,222,128,.07);border:1px solid rgba(74,222,128,.24);border-radius:12px;padding:12px 14px">
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;color:#4ADE80;margin-bottom:7px">Went well</div>
+                  <div style="font-size:13px;line-height:1.5;color:rgba(238,242,255,.8)">{{ r.wentWell }}</div>
+                </div>
+                <div style="background:rgba(251,191,36,.07);border:1px solid rgba(251,191,36,.24);border-radius:12px;padding:12px 14px">
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;color:#FBBF24;margin-bottom:7px">Did not</div>
+                  <div style="font-size:13px;line-height:1.5;color:rgba(238,242,255,.8)">{{ r.notWell }}</div>
+                </div>
+              </div>
+            </sc-if>
+            <div style="display:flex;flex-direction:column;gap:7px;margin-top:14px">
+              <sc-for list="{{ r.rounds }}" as="rd" hint-placeholder-count="2">
+                <div style="display:grid;grid-template-columns:26px 1fr auto;gap:13px;align-items:center;background:rgba(0,0,0,.2);border:1px solid rgba(255,255,255,.07);border-radius:11px;padding:11px 14px">
+                  <div style="{{ rd.markStyle }}">{{ rd.mark }}</div>
+                  <div>
+                    <div style="font-size:14px;line-height:1.4;color:rgba(238,242,255,.9)">{{ rd.n }} · {{ rd.title }}</div>
+                    <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(238,242,255,.4);margin-top:5px">{{ rd.source }} · {{ rd.qCount }} · {{ rd.when }}</div>
+                    <div style="font-size:12px;line-height:1.45;color:rgba(238,242,255,.55);margin-top:5px">{{ rd.approach }}</div>
+                  </div>
+                  <div style="text-align:right">
+                    <div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;color:{{ rd.scoreColor }}">{{ rd.score }}</div>
+                    <sc-if value="{{ rd.dropped }}" hint-placeholder-val="{{ false }}">
+                      <div style="font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:.08em;text-transform:uppercase;color:rgba(238,242,255,.32);margin-top:7px;max-width:120px;line-height:1.4">{{ rd.droppedNote }}</div>
+                    </sc-if>
+                    <sc-if value="{{ rd.canPromote }}" hint-placeholder-val="{{ false }}">
+                      <button onClick="{{ rd.promote }}" style="margin-top:7px;font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;padding:6px 10px;border-radius:8px;cursor:pointer;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.16);color:rgba(238,242,255,.6)" style-hover="filter:brightness(1.3)">{{ rd.promoteLabel }}</button>
+                    </sc-if>
+                  </div>
+                </div>
+              </sc-for>
+            </div>
+            <sc-if value="{{ r.stuck }}" hint-placeholder-val="{{ false }}">
+              <div style="margin-top:14px;font-size:13px;line-height:1.55;color:#FCA5A5;background:rgba(248,113,113,.1);border:1px solid rgba(248,113,113,.3);border-radius:12px;padding:12px 15px">{{ r.stuckNote }}</div>
+            </sc-if>
+          </div>
+        </sc-for>
+      </div>
     </sc-if>
 
     <sc-if value="{{ isStdY5 }}" hint-placeholder-val="{{ false }}">
@@ -2747,40 +3051,138 @@
                 </sc-if>
                 <div style="font-size:12.5px;line-height:1.5;color:rgba(238,242,255,.6)">{{ tStreakNote }}</div>
               </div>
-              <div style="background:rgba(74,222,128,.05);border:1px solid rgba(74,222,128,.24);border-radius:16px;padding:18px 20px;grid-column:1/-1">
-                <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:12px">
-                  <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:#4ADE80">Completed exercises</div>
-                  <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(238,242,255,.4)">{{ tExCount }} logged</div>
-                </div>
-                <sc-if value="{{ tExAny }}" hint-placeholder-val="{{ true }}">
-                  <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:12px">
-                    <sc-for list="{{ tExRows }}" as="x" hint-placeholder-count="3">
-                      <div style="background:rgba(0,0,0,.24);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:12px 14px">
-                        <div style="display:grid;grid-template-columns:1fr auto auto;gap:14px;align-items:baseline">
-                          <div>
-                            <div style="font-family:Fredoka,sans-serif;font-size:14.5px">{{ x.title }}</div>
-                            <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:rgba(238,242,255,.4);margin-top:4px">{{ x.unit }} · {{ x.mode }} · {{ x.when }}</div>
-                          </div>
-                          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(238,242,255,.55)">{{ x.score }}</div>
-                          <div style="font-family:Fredoka,sans-serif;font-size:17px;color:{{ x.pctColor }}">{{ x.pct }}</div>
-                        </div>
-                        <div style="display:flex;flex-wrap:wrap;gap:5px;margin-top:10px">
-                          <sc-for list="{{ x.cells }}" as="c" hint-placeholder-count="6">
-                            <div title="{{ c.tip }}" style="{{ c.style }}">{{ c.mark }}</div>
-                          </sc-for>
-                        </div>
-                        <sc-if value="{{ x.hasMisses }}" hint-placeholder-val="{{ false }}">
-                          <div style="display:flex;flex-direction:column;gap:5px;margin-top:10px;padding-top:9px;border-top:1px dashed rgba(255,255,255,.12)">
-                            <sc-for list="{{ x.misses }}" as="w" hint-placeholder-count="2">
-                              <div style="font-size:12px;line-height:1.5;color:rgba(238,242,255,.6)"><span style="color:rgba(238,242,255,.85)">{{ w.q }}</span> — typed <span style="color:#FCA5A5">{{ w.given }}</span>, answer <span style="color:#4ADE80">{{ w.exp }}</span></div>
-                            </sc-for>
-                          </div>
-                        </sc-if>
-                      </div>
+              <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:44px">
+                <sc-if value="{{ tDCrumbsOn }}" hint-placeholder-val="{{ false }}">
+                  <div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap">
+                    <sc-for list="{{ tDCrumbs }}" as="cb" hint-placeholder-count="1">
+                      <button onClick="{{ cb.go }}" style="{{ cb.style }}">← {{ cb.label }}</button>
                     </sc-for>
                   </div>
                 </sc-if>
-                <div style="font-size:12.5px;line-height:1.5;color:rgba(238,242,255,.6)">{{ tExNote }}</div>
+
+                <sc-if value="{{ tDStudentsOn }}" hint-placeholder-val="{{ true }}">
+                  <div style="display:flex;flex-direction:column;gap:8px">
+                    <sc-for list="{{ tDStudents }}" as="s" hint-placeholder-count="2">
+                      <button onClick="{{ s.go }}" style="{{ s.style }}" style-hover="filter:brightness(1.2)">
+                        <div style="display:grid;grid-template-columns:1fr auto auto;gap:16px;align-items:baseline">
+                          <div>
+                            <div style="font-family:Fredoka,sans-serif;font-size:18px;line-height:1.1">{{ s.name }}</div>
+                            <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(238,242,255,.42);margin-top:5px">{{ s.meta }}</div>
+                          </div>
+                          <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(238,242,255,.4)">{{ s.when }}</div>
+                          <div style="font-family:Fredoka,sans-serif;font-size:19px;color:{{ s.pctColor }}">{{ s.pct }}</div>
+                        </div>
+                      </button>
+                    </sc-for>
+                  </div>
+                </sc-if>
+
+                <sc-if value="{{ tDDaysOn }}" hint-placeholder-val="{{ false }}">
+                  <div style="display:flex;flex-direction:column;gap:8px">
+                    <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.4)">{{ tDWho }} · pick a day</div>
+                    <sc-for list="{{ tDDays }}" as="d" hint-placeholder-count="3">
+                      <button onClick="{{ d.go }}" style="{{ d.style }}" style-hover="filter:brightness(1.2)">
+                        <div style="display:grid;grid-template-columns:1fr auto;gap:16px;align-items:baseline">
+                          <div>
+                            <div style="font-family:Fredoka,sans-serif;font-size:16px">{{ d.label }}</div>
+                            <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(238,242,255,.42);margin-top:5px">{{ d.meta }}</div>
+                          </div>
+                          <div style="font-family:Fredoka,sans-serif;font-size:18px;color:{{ d.pctColor }}">{{ d.pct }}</div>
+                        </div>
+                      </button>
+                    </sc-for>
+                  </div>
+                </sc-if>
+                <sc-if value="{{ tDDaysEmpty }}" hint-placeholder-val="{{ false }}">
+                  <div style="font-size:13px;line-height:1.55;color:rgba(238,242,255,.5)">Nothing graded yet for {{ tDWho }}. Every checked worksheet and every Streak Run answer lands here.</div>
+                </sc-if>
+
+                <sc-if value="{{ tDSetsOn }}" hint-placeholder-val="{{ false }}">
+                  <div style="display:flex;flex-direction:column;gap:8px">
+                    <div style="display:flex;align-items:baseline;justify-content:space-between;gap:14px;flex-wrap:wrap">
+                      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.4)">{{ tDDayLabel }}</div>
+                      <button onClick="{{ tDAllDayGo }}" style="font-family:Fredoka,sans-serif;font-size:13px;padding:7px 14px;border-radius:10px;cursor:pointer;background:rgba(56,189,248,.12);border:1px solid rgba(56,189,248,.4);color:#7DD3FC">{{ tDAllDayLabel }}</button>
+                    </div>
+                    <sc-for list="{{ tDSets }}" as="x" hint-placeholder-count="2">
+                      <button onClick="{{ x.go }}" style="{{ x.style }}" style-hover="filter:brightness(1.2)">
+                        <div style="display:grid;grid-template-columns:1fr auto;gap:16px;align-items:baseline">
+                          <div>
+                            <div style="font-family:Fredoka,sans-serif;font-size:16px">{{ x.label }}</div>
+                            <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(238,242,255,.42);margin-top:5px">{{ x.sub }}</div>
+                            <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(238,242,255,.35);margin-top:4px">{{ x.meta }}</div>
+                          </div>
+                          <div style="font-family:Fredoka,sans-serif;font-size:18px;color:{{ x.pctColor }}">{{ x.pct }}</div>
+                        </div>
+                      </button>
+                    </sc-for>
+                  </div>
+                </sc-if>
+
+                <sc-if value="{{ tDAnswersOn }}" hint-placeholder-val="{{ false }}">
+                  <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.11);border-radius:18px;padding:20px 22px">
+                    <div style="font-family:Fredoka,sans-serif;font-size:17px;margin-bottom:14px">{{ tDAnswersTitle }}</div>
+                    <div style="display:flex;flex-direction:column;gap:7px">
+                      <sc-for list="{{ tDAnswers }}" as="a" hint-placeholder-count="6">
+                        <div style="display:grid;grid-template-columns:30px 1fr auto;gap:14px;align-items:center;background:rgba(0,0,0,.2);border:1px solid rgba(255,255,255,.07);border-radius:11px;padding:10px 13px">
+                          <div style="{{ a.markStyle }}">{{ a.mark }}</div>
+                          <div>
+                            <div style="font-size:14.5px;line-height:1.4;color:rgba(238,242,255,.9)">{{ a.q }}</div>
+                            <div style="font-family:'JetBrains Mono',monospace;font-size:10.5px;margin-top:5px;color:rgba(238,242,255,.5)">answered <span style="color:{{ a.givenColor }}">{{ a.given }}</span> <sc-if value="{{ a.wrong }}" hint-placeholder-val="{{ false }}"><span> · correct answer <span style="color:#4ADE80">{{ a.exp }}</span></span></sc-if></div>
+                          </div>
+                          <div style="text-align:right">
+                            <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(238,242,255,.38)">{{ a.tier }} {{ a.from }}</div>
+                            <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(238,242,255,.5);margin-top:4px">{{ a.secs }} · {{ a.when }}</div>
+                          </div>
+                        </div>
+                      </sc-for>
+                    </div>
+                  </div>
+                </sc-if>
+
+                <sc-if value="{{ tDHasWho }}" hint-placeholder-val="{{ false }}">
+                  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px">
+                    <div style="background:rgba(56,189,248,.05);border:1px solid rgba(56,189,248,.24);border-radius:16px;padding:18px 20px">
+                      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:#38BDF8;margin-bottom:14px">Summary · {{ tDSumScope }}</div>
+                      <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:14px">
+                        <div>
+                          <div style="font-family:Fredoka,sans-serif;font-size:22px;color:{{ tDSumPctColor }};line-height:1">{{ tDSumPct }}</div>
+                          <div style="font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:.13em;text-transform:uppercase;color:rgba(238,242,255,.45);margin-top:6px">{{ tDSumScore }}</div>
+                        </div>
+                        <div>
+                          <div style="font-family:Fredoka,sans-serif;font-size:22px;color:#EEF2FF;line-height:1">{{ tDSumTime }}</div>
+                          <div style="font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:.13em;text-transform:uppercase;color:rgba(238,242,255,.45);margin-top:6px">Time, estimated</div>
+                        </div>
+                        <div>
+                          <div style="font-family:Fredoka,sans-serif;font-size:22px;color:#EEF2FF;line-height:1">{{ tDSumQuestions }}</div>
+                          <div style="font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:.13em;text-transform:uppercase;color:rgba(238,242,255,.45);margin-top:6px">Questions</div>
+                        </div>
+                      </div>
+                      <div style="display:flex;flex-direction:column;gap:6px">
+                        <sc-for list="{{ tDSumTiers }}" as="t" hint-placeholder-count="3">
+                          <div style="display:grid;grid-template-columns:88px 1fr;gap:10px;align-items:baseline">
+                            <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:{{ t.color }}">{{ t.name }}</div>
+                            <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:{{ t.lineColor }}">{{ t.line }}</div>
+                          </div>
+                        </sc-for>
+                      </div>
+                    </div>
+                    <div style="background:rgba(251,113,133,.05);border:1px solid rgba(251,113,133,.24);border-radius:16px;padding:18px 20px">
+                      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:#FB7185;margin-bottom:14px">Struggled with</div>
+                      <sc-if value="{{ tDStrugglesOn }}" hint-placeholder-val="{{ false }}">
+                        <div style="display:flex;flex-direction:column;gap:9px;margin-bottom:12px">
+                          <sc-for list="{{ tDStruggles }}" as="w" hint-placeholder-count="3">
+                            <div style="background:rgba(0,0,0,.2);border:1px solid rgba(255,255,255,.07);border-radius:11px;padding:10px 13px">
+                              <div style="font-size:14px;line-height:1.4;color:rgba(238,242,255,.9)">{{ w.q }}</div>
+                              <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(238,242,255,.5);margin-top:5px">{{ w.times }} · {{ w.gave }} · answer <span style="color:#4ADE80">{{ w.exp }}</span></div>
+                              <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:rgba(238,242,255,.35);margin-top:5px">{{ w.where }}</div>
+                            </div>
+                          </sc-for>
+                        </div>
+                      </sc-if>
+                      <div style="font-size:12.5px;line-height:1.5;color:rgba(238,242,255,.6)">{{ tDStrugglesNote }}</div>
+                    </div>
+                  </div>
+                </sc-if>
               </div>
               <div style="background:rgba(129,140,248,.05);border:1px solid rgba(129,140,248,.26);border-radius:16px;padding:18px 20px">
                 <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:#818CF8;margin-bottom:14px">Subjects</div>
@@ -3099,11 +3501,99 @@
   </div>
   </sc-if>
 
+  <!-- ============ COACH · dynamic difficulty ============ -->
+  <sc-if value="{{ isCoach }}" hint-placeholder-val="{{ false }}">
+  <main style="position:relative;padding:34px 44px 80px;max-width:920px">
+    <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:14px">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#FBBF24">A closer look</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(238,242,255,.4)">{{ coachRound }} · {{ coachConcept }}</div>
+    </div>
+    <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:40px;line-height:1.05;margin:0 0 12px;letter-spacing:-.4px">{{ coachTitle }}</h1>
+    <p style="max-width:640px;margin:0 0 26px;font-size:16px;line-height:1.55;color:rgba(238,242,255,.72);text-wrap:pretty">{{ coachForChild }}</p>
+
+    <sc-if value="{{ coachSlideOn }}" hint-placeholder-val="{{ true }}">
+      <div style="background:linear-gradient(155deg,rgba(251,191,36,.1),rgba(255,255,255,.03));border:1px solid rgba(251,191,36,.3);border-radius:22px;padding:30px 34px;margin-bottom:18px">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:#FBBF24;margin-bottom:12px">{{ coachKind }}</div>
+        <div style="font-family:Fredoka,sans-serif;font-size:27px;line-height:1.15;margin-bottom:14px">{{ coachHead }}</div>
+        <div style="font-size:17px;line-height:1.6;color:rgba(238,242,255,.86);max-width:640px;text-wrap:pretty">{{ coachBody }}</div>
+        <sc-if value="{{ coachHasWork }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;flex-direction:column;gap:8px;margin-top:20px;background:rgba(0,0,0,.28);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:18px 22px">
+            <sc-for list="{{ coachWork }}" as="w" hint-placeholder-count="3">
+              <div style="font-family:'JetBrains Mono',monospace;font-size:15px;color:#FDE68A">{{ w.line }}</div>
+            </sc-for>
+          </div>
+        </sc-if>
+        <sc-if value="{{ coachHasNote }}" hint-placeholder-val="{{ false }}">
+          <div style="margin-top:18px;font-size:14px;line-height:1.5;color:rgba(238,242,255,.6);border-left:2px solid rgba(251,191,36,.5);padding-left:14px">{{ coachNote }}</div>
+        </sc-if>
+      </div>
+      <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:40px">
+        <div style="display:flex;gap:7px;align-items:center">
+          <sc-for list="{{ coachDots }}" as="d" hint-placeholder-count="6">
+            <div style="{{ d.style }}"></div>
+          </sc-for>
+        </div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(238,242,255,.4);flex:1">{{ coachStep }}</div>
+        <sc-if value="{{ coachCanBack }}" hint-placeholder-val="{{ false }}">
+          <button onClick="{{ coachBack }}" style="font-family:Fredoka,sans-serif;font-size:14px;padding:11px 20px;border-radius:12px;cursor:pointer;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.18);color:rgba(238,242,255,.8)">← Back</button>
+        </sc-if>
+        <button onClick="{{ coachNext }}" style="font-family:Fredoka,sans-serif;font-size:15.5px;padding:12px 26px;border-radius:13px;border:0;cursor:pointer;background:linear-gradient(150deg,#FBBF24,#F472B6);color:#1A1206" style-hover="filter:brightness(1.1)">{{ coachNextLabel }}</button>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ coachQuestionsOn }}" hint-placeholder-val="{{ false }}">
+      <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.11);border-radius:22px;padding:28px 30px;margin-bottom:22px">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:#38BDF8;margin-bottom:16px">Your turn · {{ coachConcept }}</div>
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <sc-for list="{{ coachItems }}" as="it" hint-placeholder-count="6">
+            <div style="display:grid;grid-template-columns:28px 1fr auto auto;gap:14px;align-items:center;background:rgba(0,0,0,.22);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:14px 18px">
+              <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(238,242,255,.4)">{{ it.n }}.</div>
+              <div>
+                <div style="font-family:Fredoka,sans-serif;font-size:19px;line-height:1.3">{{ it.q }}</div>
+                <sc-if value="{{ it.hasHint }}" hint-placeholder-val="{{ false }}">
+                  <div style="font-size:13px;line-height:1.5;color:#FDE68A;margin-top:7px">{{ it.hint }}</div>
+                </sc-if>
+                <sc-if value="{{ it.hasNote }}" hint-placeholder-val="{{ false }}">
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:rgba(238,242,255,.4);margin-top:6px">{{ it.note }}</div>
+                </sc-if>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(238,242,255,.45);margin-top:6px">{{ it.exp }}</div>
+              </div>
+              <input value="{{ it.value }}" onChange="{{ it.set }}" placeholder="{{ it.ph }}" autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck="false" style="{{ it.inputStyle }}">
+              <div style="font-size:20px;width:24px;text-align:center;color:{{ it.markColor }}">{{ it.mark }}</div>
+            </div>
+          </sc-for>
+        </div>
+        <sc-if value="{{ coachUnchecked }}" hint-placeholder-val="{{ true }}">
+          <button onClick="{{ coachCheck }}" style="margin-top:22px;font-family:Fredoka,sans-serif;font-size:16px;padding:13px 30px;border-radius:14px;border:0;cursor:pointer;background:linear-gradient(150deg,#38BDF8,#818CF8);color:#08121F" style-hover="filter:brightness(1.1)">Check my answers</button>
+        </sc-if>
+      </div>
+      <sc-if value="{{ coachChecked }}" hint-placeholder-val="{{ false }}">
+        <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.14);border-radius:20px;padding:26px 30px;margin-bottom:24px">
+          <div style="font-family:Fredoka,sans-serif;font-size:24px;margin-bottom:8px">{{ coachResultTitle }}</div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:rgba(238,242,255,.5);margin-bottom:12px">{{ coachScore }}</div>
+          <div style="font-size:15.5px;line-height:1.6;color:rgba(238,242,255,.78);max-width:620px;text-wrap:pretty">{{ coachResultNote }}</div>
+        </div>
+      </sc-if>
+    </sc-if>
+
+    <button onClick="{{ coachExit }}" style="font-family:Fredoka,sans-serif;font-size:14px;padding:11px 22px;border-radius:12px;cursor:pointer;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.18);color:rgba(238,242,255,.75)">{{ coachExitLabel }}</button>
+  </main>
+  </sc-if>
+
   <!-- ============ PRACTICE BAY ============ -->
   <sc-if value="{{ isPractice }}" hint-placeholder-val="{{ false }}">
   <main style="position:relative;padding:34px 44px 72px;max-width:1180px">
     <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#38BDF8;margin-bottom:12px">{{ pUnitLabel }}</div>
     <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.13em;text-transform:uppercase;color:rgba(238,242,255,.38);margin-bottom:12px">{{ pBankLine }} · <a href="Worksheet Builder.dc.html">print these questions</a></div>
+    <sc-if value="{{ dynBusy }}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex;align-items:center;gap:12px;background:rgba(251,191,36,.1);border:1px solid rgba(251,191,36,.32);border-radius:14px;padding:12px 16px;margin-bottom:16px">
+        <div style="width:16px;height:16px;border-radius:50%;border:2px solid rgba(251,191,36,.3);border-top-color:#FBBF24;animation:spin .9s linear infinite"></div>
+        <div style="font-size:13.5px;color:#FDE68A">Reading how that went, and building a lesson if you need one…</div>
+      </div>
+    </sc-if>
+    <sc-if value="{{ dynHasErr }}" hint-placeholder-val="{{ false }}">
+      <div style="font-size:13px;color:#FCA5A5;margin-bottom:16px">{{ dynErr }}</div>
+    </sc-if>
     <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:50px;line-height:1.02;margin:0 0 14px;letter-spacing:-.5px">Check your own work.</h1>
     <p style="max-width:700px;margin:0 0 30px;font-size:16.5px;line-height:1.55;color:rgba(238,242,255,.72);text-wrap:pretty">Type your answers, press Check, and find out immediately. Wrong ones get a hint and you keep going until the bar hits 100%. Unlimited tries — nobody is counting how many you needed.</p>
 
@@ -3212,7 +3702,7 @@
             <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(238,242,255,.45);margin-bottom:10px">{{ sprFrom }}</div>
             <div style="font-family:Fredoka,sans-serif;font-size:27px;line-height:1.25;margin-bottom:18px;min-height:66px">{{ sprQ }}</div>
             <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap">
-              <input value="{{ sprVal }}" onChange="{{ sprSet }}" onKeyDown="{{ sprKeyd }}" inputMode="numeric" placeholder="?" autoFocus style="width:120px;height:52px;text-align:center;font-family:Fredoka,sans-serif;font-size:24px;border-radius:12px;outline:none;background:rgba(255,255,255,.07);color:#EEF2FF;border:2px solid rgba(251,191,36,.5)">
+              <input value="{{ sprVal }}" onChange="{{ sprSet }}" onKeyDown="{{ sprKeyd }}" inputMode="numeric" placeholder="?" autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck="false" name="sprint-answer" autoFocus style="width:120px;height:52px;text-align:center;font-family:Fredoka,sans-serif;font-size:24px;border-radius:12px;outline:none;background:rgba(255,255,255,.07);color:#EEF2FF;border:2px solid rgba(251,191,36,.5)">
               <button onClick="{{ sprGo }}" style="font-family:Fredoka,sans-serif;font-size:16px;padding:13px 28px;border-radius:14px;border:0;cursor:pointer;background:#FBBF24;color:#1A1206" style-hover="filter:brightness(1.1)">{{ sprGoLabel }}</button>
               <span style="font-size:26px;color:{{ sprMarkColor }}">{{ sprMark }}</span>
             </div>
@@ -3277,7 +3767,7 @@
               </div>
               <div style="font-family:Fredoka,sans-serif;font-size:29px;line-height:1.25;margin-bottom:20px;min-height:72px">{{ smQ }}</div>
               <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap">
-                <input id="smInput" value="{{ smVal }}" onChange="{{ smSet }}" onKeyDown="{{ smKey }}" inputMode="numeric" placeholder="?" autoFocus style="{{ smInputStyle }}">
+                <input id="smInput" value="{{ smVal }}" onChange="{{ smSet }}" onKeyDown="{{ smKey }}" inputMode="numeric" placeholder="?" autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck="false" name="streak-answer" autoFocus style="{{ smInputStyle }}">
                 <sc-if value="{{ smUnrevealed }}" hint-placeholder-val="{{ true }}">
                   <button onClick="{{ smCheck }}" style="font-family:Fredoka,sans-serif;font-size:16px;padding:13px 30px;border-radius:14px;border:0;cursor:pointer;background:linear-gradient(150deg,#38BDF8,#818CF8);color:#04283A" style-hover="filter:brightness(1.1)">Check</button>
                 </sc-if>
@@ -3320,7 +3810,7 @@
             </div>
             <div style="font-family:Fredoka,sans-serif;font-size:18px;line-height:1.25;min-height:44px">{{ it.q }}</div>
             <div style="display:flex;align-items:center;gap:12px">
-              <input value="{{ it.value }}" onChange="{{ it.set }}" inputMode="numeric" placeholder="?" style="{{ it.inputStyle }}">
+              <input value="{{ it.value }}" onChange="{{ it.set }}" inputMode="numeric" placeholder="?" autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck="false" style="{{ it.inputStyle }}">
               <span style="font-size:21px;color:{{ it.markColor }}">{{ it.mark }}</span>
             </div>
             <div style="font-size:12px;line-height:1.4;color:#FBBF24;min-height:0">{{ it.hint }}</div>
@@ -3442,6 +3932,10 @@ const MASTERY = {
   snoozeDays: 14  // a dismissed suggestion stays quiet this long
 };
 const dayNo = t => Math.floor((t||Date.now())/86400000);
+
+// Teacher review time estimate: answers stamped within GAP_MS of each other
+// count as one sitting; a lone answer counts as LONE_MS.
+const GAP_MS = 5*60*1000, LONE_MS = 20*1000;
 
 // First graded pass of the day only. Existing entries are never rewritten.
 function logRun(hist, setId, right, total, tier){
@@ -3706,6 +4200,10 @@ class Component extends DCLogic {
            dat:"4,7,7,9,13", bagR:3, bagB:5, fnM:3, fnB:2, eqOp:"+", eqA:7, eqB:19,
            ans:{}, pset:"p1", pAns:{}, pChecked:{}, pRuns:{}, pTier:null, pPaper:{}, lstep:{}, playing:false,
            pLog:{}, qbank:"idle", qbankLine:"",
+           dyn:{}, coach:null, dynBusy:false, dynErr:"",
+           hqWho:null, hqDay:null, hqSet:null, hqAll:false, hqTier:null,
+           hqSlices:{}, hqLoadingRoster:false,
+           tDay:null, tSet:null, tAll:false, tTier:null,
            pHist:{}, skills:{}, snooze:{}, pFull:{}, pweek:1, pStreak:{}, sprintHist:{}, stream:null, sprint:null,
            tCode:"", tRoster:null, tKey:null, tSel:"", tData:null, tBusy:false, tErr:"",
            tAddName:"", tAddPin:"", tCurric:"y3", tFront:false, tView:null, tFromGate:false,
@@ -3787,6 +4285,10 @@ class Component extends DCLogic {
       .load(id, this.allFileSets())
       .then(()=>this.setState({qbank:QBank.sourceOf(id), qbankLine:QBank.statusLine(id)}))
       .catch(()=>this.setState({qbank:"files"}));
+    // Lessons are data too, and the tutor writes generated ones back into the
+    // same bank so the next child who misses this concept reuses them.
+    Tutor.configure(GEMINI_API_KEY);
+    LessonBank.configure(REMOTE_PROJECT_ID).load(id, []).then(()=>this.forceUpdate()).catch(()=>{});
   }
   // Sets authored before weeks existed carry no `w` and belong to Week 1.
   setsForWeek(u,w){ const all=this.setsFor(u); const got=all.filter(s=>(s.w||1)===w); return got.length?got:all.filter(s=>(s.w||1)===1); }
@@ -3843,7 +4345,7 @@ class Component extends DCLogic {
     if(active){ this.setState({profiles,activeId,gate:false,loaded:true,...this.blank(),...(this.store.data[activeId]||{})}); }
     else{ this.setState({profiles,gate:true,loaded:true}); }
   }
-  blank(){ return {pAns:{},pChecked:{},pRuns:{},pPaper:{},lstep:{},pHist:{},pLog:{},skills:{},snooze:{},pStreak:{},sprintHist:{},subjects:{},lastSubject:null,stream:null,sprint:null,pTier:null,pset:"p1"}; }
+  blank(){ return {pAns:{},pChecked:{},pRuns:{},pPaper:{},lstep:{},pHist:{},pLog:{},dyn:{},coach:null,skills:{},snooze:{},pStreak:{},sprintHist:{},subjects:{},lastSubject:null,stream:null,sprint:null,pTier:null,pset:"p1"}; }
   // setState + write-through. Used by every handler that touches saved progress.
   saveState(updater){ this.setState(updater); setTimeout(()=>this.persist(),0); }
   persist(){
@@ -3851,7 +4353,7 @@ class Component extends DCLogic {
     this.store.profiles=profiles; this.store.activeId=activeId;
     const keepCurric=(this.store.data[activeId]||{}).curriculum
       || ((profiles.find(p=>p.id===activeId)||{}).curriculum);
-    if(activeId) this.store.data[activeId]={pAns,pChecked,pRuns,lstep,pHist,skills,snooze,pLog:this.state.pLog,pPaper:this.state.pPaper,pStreak:this.state.pStreak,sprintHist:this.state.sprintHist,subjects:this.state.subjects,lastSubject:this.state.lastSubject,curriculum:keepCurric,updated:Date.now()};
+    if(activeId) this.store.data[activeId]={pAns,pChecked,pRuns,lstep,pHist,skills,snooze,pLog:this.state.pLog,dyn:this.trimDyn(this.state.dyn),pPaper:this.state.pPaper,pStreak:this.state.pStreak,sprintHist:this.state.sprintHist,subjects:this.state.subjects,lastSubject:this.state.lastSubject,curriculum:keepCurric,updated:Date.now()};
     Storage.save(this.store); // local first — survives dropped wifi
     if(Remote.enabled && activeId){
       const prof=profiles.find(x=>x.id===activeId);
@@ -4025,6 +4527,7 @@ class Component extends DCLogic {
   componentDidMount(){
     this.loadStore();
     this.loadBank();
+    this.maybeCoachDemo();
     window.addEventListener("resize",this.measure);
     setTimeout(this.measure,60);
     this._t=setInterval(()=>{
@@ -4037,7 +4540,43 @@ class Component extends DCLogic {
   }
   // The level a child picks decides which bank to pull, and the level is picked
   // after mount, so the load has to be able to happen again.
-  componentDidUpdate(){ this.loadBank(); }
+  componentDidUpdate(){ this.loadBank(); this.loadRosterSlices(); }
+
+  // ── Every student, not just this device ──────────────────────────────────
+  // Student doc ids are unguessable hashes and `list` is denied in the rules,
+  // so nothing can enumerate pilots — the teacher roster IS the index. Once a
+  // roster is open, pull each pilot's record so Review covers all of them.
+  loadRosterSlices(){
+    const roster=this.state.tRoster;
+    if(!Remote.enabled || !roster || !roster.length) return;
+    const want=roster.filter(r=>r&&r.key&&!(this.state.hqSlices||{})[r.key]);
+    if(!want.length || this._rosterFetching) return;
+    this._rosterFetching=true;
+    this.setState({hqLoadingRoster:true});
+    Promise.all(want.map(r=>Remote.fetchStudent(r.key).then(rec=>({key:r.key,
+      name:(rec&&rec.name)||r.name||"Pilot", slice:(rec&&rec.slice)||{}}))))
+      .then(got=>{
+        const map={...(this.state.hqSlices||{})};
+        got.forEach(g=>{ map[g.key]=g; });
+        this._rosterFetching=false;
+        this.setState({hqSlices:map, hqLoadingRoster:false});
+      })
+      .catch(()=>{ this._rosterFetching=false; this.setState({hqLoadingRoster:false}); });
+  }
+  // Device pilots first, then every pilot on the open roster that is not
+  // already one of them (matched on name).
+  reviewStudents(){
+    const st=this.state;
+    const out=(st.profiles||[]).map(p=>({id:p.id, name:p.name, where:"this device",
+      slice: p.id===st.activeId ? {pLog:st.pLog, dyn:st.dyn} : (this.store.data[p.id]||{})}));
+    const seen={}; out.forEach(o=>{ seen[(o.name||"").trim().toLowerCase()]=1; });
+    Object.keys(st.hqSlices||{}).forEach(k=>{
+      const g=st.hqSlices[k];
+      if(seen[(g.name||"").trim().toLowerCase()]) return;
+      out.push({id:"r:"+k, name:g.name, where:"roster", slice:g.slice||{}});
+    });
+    return out;
+  }
   componentWillUnmount(){ clearInterval(this._t); window.removeEventListener("resize",this.measure); }
 
   tabStyle(active){
@@ -4145,6 +4684,28 @@ class Component extends DCLogic {
       pfSaveNote:Remote.enabled
         ? "Cloud saves are ON — progress follows each pilot to any device."
         : "Progress is saved on this device. Wire in a database later and it follows each pilot everywhere.",
+      // Completed exercises for every pilot saved on this device: student →
+      // day → set → every answer, with an estimate of time spent.
+      ...this.drillVals("hqD",
+        this.reviewStudents(),
+        {who:st.hqWho, day:st.hqDay, set:st.hqSet, all:st.hqAll, tier:st.hqTier},
+        sel=>this.setState({hqWho:sel.who, hqDay:sel.day, hqSet:sel.set, hqAll:sel.all, hqTier:sel.tier==null?null:sel.tier})),
+      hqDLoading:!!st.hqLoadingRoster,
+      ...(()=>{
+        const rows=this.dynRows(this.reviewStudents());
+        return {hqDynRows:rows, hqDynAny:!!rows.length,
+          hqDynStuck:rows.filter(r=>r.stuck).length,
+          hqDynNote:rows.length
+            ? "Every lesson the tutor built, the questions that followed it, and how they did after the lesson. Red means three rounds went by without it landing. Copy a lesson that worked to add it to the shared bank."
+            : (Tutor.enabled
+              ? "Nothing here yet. When a set closes under 70%, the tutor reads the run, writes a lesson on the one concept behind the misses, and the child taps through it before trying 5–10 new questions."
+              : "Dynamic difficulty is off — no model key is configured.")};
+      })(),
+      hqDScopeNote:Remote.enabled
+        ? (st.tRoster
+            ? "Every pilot on the open roster, plus anyone signed in on this device."
+            : "Pilots on this device. Open the teacher roster below to pull in every other student.")
+        : "Pilots on this device.",
       pfRoster:st.profiles.map(p=>{
         const pr=progressFor(p.id,p.curriculum||"y3");
         const counts={}; pr.missed.forEach(q=>{counts[q]=(counts[q]||0)+1;});
@@ -4349,51 +4910,7 @@ class Component extends DCLogic {
 
     const setById={}; for(let u=1;u<=8;u++) this.setsFor(u).forEach(s=>{setById[s.id]={s:s,u:u};});
 
-    // ---- every completed exercise, with the answers ------------------------
-    // One row per set per day, newest first, each with a per-item grid. Green
-    // is right, red is wrong and carries what the child typed, amber is a
-    // written response waiting to be marked by hand.
-    const exLog=(slice&&slice.pLog)||{};
-    const exRows=[];
-    Object.keys(exLog).forEach(id=>{
-      const byDay={};
-      (exLog[id]||[]).forEach(e=>{ (byDay[e.d]=byDay[e.d]||[]).push(e); });
-      Object.keys(byDay).forEach(d=>{
-        // Same item answered twice in a day: the last answer is the one that counts.
-        const seen={}; byDay[d].forEach(e=>{ seen[e.qid||e.i]=e; });
-        const items=Object.keys(seen).map(k=>seen[k]).sort((a,b)=>a.ts-b.ts);
-        const marked=items.filter(e=>e.ok!==null);
-        const right=marked.filter(e=>e.ok).length;
-        const pct=marked.length?Math.round(right/marked.length*100):null;
-        const m=setById[id];
-        exRows.push({
-          key:id+"|"+d, day:Number(d), ts:items[items.length-1].ts,
-          unit:m?("Mission 0"+m.u+" · "+m.s.label):id,
-          title:m?m.s.title:id,
-          when:new Date(items[items.length-1].ts).toLocaleDateString(undefined,{month:"short",day:"numeric"}),
-          mode:items.some(e=>e.m==="streak")?(items.every(e=>e.m==="streak")?"Streak Run":"Streak + worksheet"):"Worksheet",
-          score:marked.length?right+" / "+marked.length:"—",
-          pct:pct==null?"—":pct+"%",
-          pctColor:pct==null?"rgba(238,242,255,.6)":pct>=85?"#4ADE80":pct>=70?"#FBBF24":"#F87171",
-          cells:items.map((e,k)=>({
-            n:k+1,
-            mark:e.ok===null?"·":e.ok?"✓":"✗",
-            tip:(e.q||"")+"  →  "+(e.ok===null?"written response, mark by hand":
-                 e.ok?("correct: "+(e.given||"")):("typed "+(e.given||"(blank)")+", answer "+(e.exp||""))),
-            style:"width:26px;height:26px;border-radius:8px;display:grid;place-items:center;font-size:12px;font-family:'JetBrains Mono',monospace;"+
-              (e.ok===null?"background:rgba(251,191,36,.16);color:#FBBF24;border:1px solid rgba(251,191,36,.4)"
-               :e.ok?"background:rgba(74,222,128,.16);color:#4ADE80;border:1px solid rgba(74,222,128,.4)"
-                    :"background:rgba(248,113,113,.18);color:#FCA5A5;border:1px solid rgba(248,113,113,.45)")
-          })),
-          misses:items.filter(e=>e.ok===false).map(e=>({
-            q:e.q, given:e.given||"(blank)", exp:e.exp||"",
-            tier:e.t==null?"":(TIER_NAME[e.t]||"")
-          })),
-          hasMisses:items.some(e=>e.ok===false)
-        });
-      });
-    });
-    exRows.sort((a,b)=>b.ts-a.ts);
+    const exRows=this.exerciseRows(slice, setById);
     const exShown=exRows.slice(0,40);
 
     const sIds=Object.keys(streaks).filter(id=>setById[id]);
@@ -4498,6 +5015,10 @@ class Component extends DCLogic {
       tStreakRows:streakRows, tStreakRowsAny:!!streakRows.length,
       tExRows:exShown, tExAny:!!exShown.length,
       tExCount:exRows.length,
+      ...this.drillVals("tD",
+        [{id:st.tSel||"pilot", name:(chosen&&chosen.name)||"This pilot", slice:slice||{}}],
+        {who:st.tSel||"pilot", day:st.tDay, set:st.tSet, all:st.tAll, tier:st.tTier},
+        sel=>this.setState({tDay:sel.day, tSet:sel.set, tAll:sel.all, tTier:sel.tier==null?null:sel.tier})),
       tExNote:exRows.length
         ? "Newest first. Green is right, red shows what they typed, amber is a written response for you to mark."
         : "Nothing graded yet on this pilot's record. Every checked worksheet and every Streak Run answer lands here.",
@@ -4670,6 +5191,594 @@ class Component extends DCLogic {
     };
   }
 
+  // Shared by both Teacher HQ views: the cloud-roster one reads the fetched
+  // slice, the on-device one reads each pilot's saved slice.
+  // One row per set per day, newest first, each with a per-item grid. Green is
+  // right, red is wrong and carries what the child typed, amber is a written
+  // response waiting to be marked by hand.
+  exerciseRows(slice, setById){
+      const exLog=(slice&&slice.pLog)||{};
+      const exRows=[];
+      Object.keys(exLog).forEach(id=>{
+        const byDay={};
+        (exLog[id]||[]).forEach(e=>{ (byDay[e.d]=byDay[e.d]||[]).push(e); });
+        Object.keys(byDay).forEach(d=>{
+          // Same item answered twice in a day: the last answer is the one that counts.
+          const seen={}; byDay[d].forEach(e=>{ seen[e.qid||e.i]=e; });
+          const items=Object.keys(seen).map(k=>seen[k]).sort((a,b)=>a.ts-b.ts);
+          const marked=items.filter(e=>e.ok!==null);
+          const right=marked.filter(e=>e.ok).length;
+          const pct=marked.length?Math.round(right/marked.length*100):null;
+          const m=setById[id];
+          exRows.push({
+            key:id+"|"+d, day:Number(d), ts:items[items.length-1].ts,
+            unit:m?("Mission 0"+m.u+" · "+m.s.label):id,
+            title:m?m.s.title:id,
+            when:new Date(items[items.length-1].ts).toLocaleDateString(undefined,{month:"short",day:"numeric"}),
+            mode:items.some(e=>e.m==="streak")?(items.every(e=>e.m==="streak")?"Streak Run":"Streak + worksheet"):"Worksheet",
+            score:marked.length?right+" / "+marked.length:"—",
+            pct:pct==null?"—":pct+"%",
+            pctColor:pct==null?"rgba(238,242,255,.6)":pct>=85?"#4ADE80":pct>=70?"#FBBF24":"#F87171",
+            cells:items.map((e,k)=>({
+              n:k+1,
+              mark:e.ok===null?"·":e.ok?"✓":"✗",
+              tip:(e.q||"")+"  →  "+(e.ok===null?"written response, mark by hand":
+                   e.ok?("correct: "+(e.given||"")):("typed "+(e.given||"(blank)")+", answer "+(e.exp||""))),
+              style:"width:26px;height:26px;border-radius:8px;display:grid;place-items:center;font-size:12px;font-family:'JetBrains Mono',monospace;"+
+                (e.ok===null?"background:rgba(251,191,36,.16);color:#FBBF24;border:1px solid rgba(251,191,36,.4)"
+                 :e.ok?"background:rgba(74,222,128,.16);color:#4ADE80;border:1px solid rgba(74,222,128,.4)"
+                      :"background:rgba(248,113,113,.18);color:#FCA5A5;border:1px solid rgba(248,113,113,.45)")
+            })),
+            misses:items.filter(e=>e.ok===false).map(e=>({
+              q:e.q, given:e.given||"(blank)", exp:e.exp||"",
+              tier:e.t==null?"":(TIER_NAME[e.t]||"")
+            })),
+            hasMisses:items.some(e=>e.ok===false)
+          });
+        });
+      });
+      exRows.sort((a,b)=>b.ts-a.ts);
+      return exRows;
+  }
+
+  // ── Teacher review: student → day → set → every answer ───────────────────
+  // All of it is derived from the per-item attempt log (pLog). Time is an
+  // ESTIMATE: attempts are stamped, so consecutive stamps inside a five-minute
+  // window count as work, and a lone answer counts as twenty seconds. It is
+  // honest about sitting-down time, not a stopwatch.
+  timeOf(entries){
+    const ts=entries.map(e=>e.ts).filter(Boolean).sort((a,b)=>a-b);
+    if(!ts.length) return 0;
+    if(ts.length===1) return LONE_MS;
+    let ms=0, sessions=1;
+    for(let i=1;i<ts.length;i++){
+      const d=ts[i]-ts[i-1];
+      if(d<=GAP_MS) ms+=d; else sessions++;
+    }
+    return ms + sessions*LONE_MS;
+  }
+  fmtDur(ms){
+    if(!ms) return "—";
+    const s=Math.round(ms/1000);
+    if(s<60) return s+"s";
+    const m=Math.floor(s/60), r=s%60;
+    if(m<60) return m+"m"+(r?" "+String(r).padStart(2,"0")+"s":"");
+    return Math.floor(m/60)+"h "+String(m%60).padStart(2,"0")+"m";
+  }
+  // Per-item seconds, from the gap to the previous answer in the same sitting.
+  // Capped at two minutes: a longer gap is a pause, not time on that question.
+  itemSecs(entries){
+    const CAP=120*1000;
+    const sorted=entries.slice().sort((a,b)=>a.ts-b.ts);
+    const out={};
+    sorted.forEach((e,i)=>{
+      const prev=sorted[i-1];
+      const d=prev?e.ts-prev.ts:LONE_MS;
+      out[e.ts+"|"+(e.qid||e.i)] = (d>0&&d<=CAP)?d:LONE_MS;
+    });
+    return out;
+  }
+  // Flat list of attempts out of a saved slice, newest work first.
+  attemptsOf(slice){
+    const log=(slice&&slice.pLog)||{};
+    const out=[];
+    Object.keys(log).forEach(setId=>{ (log[setId]||[]).forEach(e=>out.push({...e, setId})); });
+    return out;
+  }
+  setMeta(){
+    if(this._setMetaCache && this._setMetaCache.k===this.bankId()) return this._setMetaCache.v;
+    const m={}; for(let u=1;u<=8;u++) this.setsFor(u).forEach(s=>{ m[s.id]={s:s,u:u}; });
+    this._setMetaCache={k:this.bankId(), v:m};
+    return m;
+  }
+  pctColor(pct){ return pct==null?"rgba(238,242,255,.6)":pct>=85?"#4ADE80":pct>=70?"#FBBF24":"#F87171"; }
+
+  /* One review UI, two callers: the on-device Teacher HQ (every pilot saved
+   * here) and the cloud-roster view (the one fetched pilot). `sel` is the
+   * drill position, `go` writes it back. Keys are prefixed so both can live
+   * in the same render. */
+  drillVals(pfx, students, sel, go){
+    const K={}, put=(k,v)=>{K[pfx+k]=v;};
+    const meta=this.setMeta();
+    const rowStyle=(on)=>"width:100%;text-align:left;cursor:pointer;background:"+(on?"rgba(56,189,248,.12)":"rgba(255,255,255,.04)")+
+      ";border:1px solid "+(on?"rgba(56,189,248,.45)":"rgba(255,255,255,.1)")+";border-radius:14px;padding:14px 18px;color:inherit;transition:.15s;display:block";
+
+    const who=(students.find(s=>s.id===sel.who)||(students.length===1?students[0]:null));
+    const all=who?this.attemptsOf(who.slice):[];
+
+    // ---- level 1: students -------------------------------------------------
+    put("Students", students.map(s=>{
+      const a=this.attemptsOf(s.slice), marked=a.filter(e=>e.ok!==null);
+      const right=marked.filter(e=>e.ok).length;
+      const pct=marked.length?Math.round(right/marked.length*100):null;
+      const days=new Set(a.map(e=>e.d)).size;
+      const last=a.length?Math.max.apply(null,a.map(e=>e.ts)):null;
+      return {id:s.id, name:s.name,
+        meta:a.length?(days+" day"+(days===1?"":"s")+" · "+marked.length+" questions · "+this.fmtDur(this.timeOf(a))):"nothing logged yet",
+        pct:pct==null?"—":pct+"%", pctColor:this.pctColor(pct),
+        when:last?new Date(last).toLocaleDateString(undefined,{month:"short",day:"numeric"}):"—",
+        go:()=>go({who:s.id, day:null, set:null, all:false}),
+        style:rowStyle(who&&who.id===s.id)};
+    }));
+    put("StudentsOn", students.length>1);
+    put("Who", who?who.name:"");
+    put("HasWho", !!who);
+
+    // ---- level 2: days -----------------------------------------------------
+    const byDay={};
+    all.forEach(e=>{ (byDay[e.d]=byDay[e.d]||[]).push(e); });
+    const dayKeys=Object.keys(byDay).map(Number).sort((a,b)=>b-a);
+    put("Days", dayKeys.map(d=>{
+      const es=byDay[d], marked=es.filter(e=>e.ok!==null);
+      const right=marked.filter(e=>e.ok).length;
+      const pct=marked.length?Math.round(right/marked.length*100):null;
+      const sets=new Set(es.map(e=>e.setId)).size;
+      return {d:d,
+        label:new Date(d*86400000).toLocaleDateString(undefined,{weekday:"long",month:"short",day:"numeric",timeZone:"UTC"}),
+        meta:sets+" set"+(sets===1?"":"s")+" · "+marked.length+" questions · "+this.fmtDur(this.timeOf(es)),
+        pct:pct==null?"—":pct+"%", pctColor:this.pctColor(pct),
+        go:()=>go({who:who?who.id:null, day:d, set:null, all:false}),
+        style:rowStyle(sel.day===d)};
+    }));
+    put("DaysOn", !!who && dayKeys.length>0);
+    put("DaysEmpty", !!who && dayKeys.length===0);
+
+    // ---- level 3: sets within the chosen day -------------------------------
+    const dayEntries=sel.day!=null?(byDay[sel.day]||[]):[];
+    const bySet={};
+    dayEntries.forEach(e=>{ (bySet[e.setId]=bySet[e.setId]||[]).push(e); });
+    const setKeys=Object.keys(bySet);
+    put("Sets", setKeys.map(id=>{
+      const es=bySet[id], marked=es.filter(e=>e.ok!==null);
+      const right=marked.filter(e=>e.ok).length;
+      const pct=marked.length?Math.round(right/marked.length*100):null;
+      const m=meta[id];
+      const tiers=[0,1,2].map(t=>es.filter(e=>e.t===t).length);
+      return {id:id,
+        label:m?m.s.title:id,
+        sub:(m?("Mission 0"+m.u+" · "+m.s.label):id)+" · "+(es.some(e=>e.m==="streak")?"Streak Run":"Worksheet"),
+        meta:marked.length+" answered · "+this.fmtDur(this.timeOf(es))+
+          " · warm-up "+tiers[0]+" / core "+tiers[1]+" / challenge "+tiers[2],
+        pct:pct==null?"—":pct+"%", pctColor:this.pctColor(pct),
+        go:()=>go({who:who?who.id:null, day:sel.day, set:id, all:false}),
+        style:rowStyle(sel.set===id)};
+    }));
+    put("SetsOn", sel.day!=null && setKeys.length>0);
+    put("DayLabel", sel.day!=null?new Date(sel.day*86400000).toLocaleDateString(undefined,{weekday:"long",month:"long",day:"numeric",timeZone:"UTC"}):"");
+
+    // ---- level 4: the answers ---------------------------------------------
+    // Either one set, or the whole day when "all answers" is on. A tier
+    // picked off the summary narrows both this and the struggle list.
+    const tierOK = e => sel.tier==null || e.t===sel.tier;
+    const shown = (sel.all ? dayEntries : (sel.set?(bySet[sel.set]||[]):[])).filter(tierOK);
+    const secs=this.itemSecs(dayEntries);
+    put("Answers", shown.slice().sort((a,b)=>a.ts-b.ts).map((e,i)=>{
+      const m=meta[e.setId];
+      return {n:i+1, q:e.q||"", given:e.given===""?"(blank)":e.given, exp:e.exp||"",
+        mark:e.ok===null?"·":e.ok?"✓":"✗",
+        markStyle:"width:30px;height:30px;flex:none;border-radius:9px;display:grid;place-items:center;font-size:14px;font-family:'JetBrains Mono',monospace;"+
+          (e.ok===null?"background:rgba(251,191,36,.16);color:#FBBF24;border:1px solid rgba(251,191,36,.4)"
+           :e.ok?"background:rgba(74,222,128,.16);color:#4ADE80;border:1px solid rgba(74,222,128,.4)"
+                :"background:rgba(248,113,113,.18);color:#FCA5A5;border:1px solid rgba(248,113,113,.45)"),
+        givenColor:e.ok===false?"#FCA5A5":"rgba(238,242,255,.8)",
+        wrong:e.ok===false,
+        tier:e.t==null?"":(TIER_NAME[e.t]||""),
+        from:sel.all&&m?m.s.title:"",
+        secs:this.fmtDur(secs[e.ts+"|"+(e.qid||e.i)]||0),
+        when:new Date(e.ts).toLocaleTimeString(undefined,{hour:"numeric",minute:"2-digit"})};
+    }));
+    put("AnswersOn", shown.length>0);
+    put("AnswersTitle", (sel.all?"Every answer this day":(sel.set&&meta[sel.set]?meta[sel.set].s.title:"Answers"))+(sel.tier!=null?" · "+TIER_NAME[sel.tier]:""));
+    put("AllDayGo", ()=>go({who:who?who.id:null, day:sel.day, set:null, all:!sel.all, tier:sel.tier}));
+    put("AllDayLabel", sel.all?"Back to one set at a time":"See every answer this day");
+    put("AllDayOn", sel.day!=null);
+
+    // ---- summary + what they struggled with -------------------------------
+    const scopeAll = sel.day!=null?dayEntries:all;
+    const scope = scopeAll.filter(tierOK);
+    const marked=scope.filter(e=>e.ok!==null);
+    const right=marked.filter(e=>e.ok).length;
+    const pct=marked.length?Math.round(right/marked.length*100):null;
+    put("SumScope", (sel.day!=null?"Selected day":(who?"All time":""))+(sel.tier!=null?" · "+TIER_NAME[sel.tier]:""));
+    put("SumTime", this.fmtDur(this.timeOf(scope)));
+    put("SumQuestions", marked.length?String(marked.length):"—");
+    put("SumScore", marked.length?right+" / "+marked.length:"—");
+    put("SumPct", pct==null?"—":pct+"%");
+    put("SumPctColor", this.pctColor(pct));
+    // Each tier is a button: it filters the summary, the struggle list and the
+    // answers to that tier for whatever day is open.
+    put("SumTiers", [0,1,2].map(t=>{
+      const es=scopeAll.filter(e=>e.ok!==null&&e.t===t), r=es.filter(e=>e.ok).length;
+      const p=es.length?Math.round(r/es.length*100):null;
+      const on=sel.tier===t;
+      return {name:TIER_NAME[t], color:TIERS[t].color,
+        line:es.length?(r+" / "+es.length+" · "+p+"%"):"not attempted",
+        lineColor:es.length?this.pctColor(p):"rgba(238,242,255,.35)",
+        go:()=>go({who:who?who.id:null, day:sel.day, set:sel.set, all:sel.all, tier:on?null:t}),
+        style:"width:100%;text-align:left;cursor:pointer;display:grid;grid-template-columns:88px 1fr auto;gap:10px;align-items:baseline;padding:7px 9px;border-radius:9px;color:inherit;transition:.15s;background:"+
+          (on?"rgba(56,189,248,.14)":"transparent")+";border:1px solid "+(on?"rgba(56,189,248,.4)":"transparent"),
+        chev:on?"clear":"open"};
+    }));
+    put("TierNote", sel.tier!=null
+      ? TIER_NAME[sel.tier]+" only. Tap it again to see every tier."
+      : (sel.day!=null?"Tap a tier to narrow the day to it.":"Tap a tier to narrow to it."));
+    // Ranked by how often it was missed, then by how recently.
+    const missBy={};
+    scope.filter(e=>e.ok===false).forEach(e=>{
+      const k=e.qid||e.q;
+      const o=missBy[k]||(missBy[k]={q:e.q, exp:e.exp, n:0, last:0, given:[], setId:e.setId, t:e.t});
+      o.n++; o.last=Math.max(o.last,e.ts);
+      if(o.given.length<3 && e.given) o.given.push(e.given);
+    });
+    const struggles=Object.keys(missBy).map(k=>missBy[k]).sort((a,b)=>b.n-a.n||b.last-a.last).slice(0,8);
+    put("Struggles", struggles.map(o=>{
+      const m=meta[o.setId];
+      return {q:o.q, exp:o.exp,
+        times:o.n===1?"missed once":"missed "+o.n+" times",
+        gave:o.given.length?("typed "+o.given.join(", ")):"left blank",
+        where:(m?m.s.title:o.setId)+(o.t==null?"":" · "+(TIER_NAME[o.t]||""))};
+    }));
+    put("StrugglesOn", struggles.length>0);
+    put("StrugglesNote", struggles.length
+      ? "Ranked by how often it was missed. These are the reteach list."
+      : (marked.length?"Nothing missed in this scope.":""));
+    // Straight from the struggle list to every answer behind it.
+    put("StruggleAllGo", ()=>go({who:who?who.id:null, day:sel.day, set:null, all:true, tier:sel.tier}));
+    put("StruggleAllLabel", (sel.tier!=null?"Show all "+TIER_NAME[sel.tier]+" answers":"Show all answers")+(sel.day!=null?" this day":""));
+    put("StruggleAllOn", scope.length>0);
+
+    // ---- breadcrumbs -------------------------------------------------------
+    const crumbs=[];
+    if(students.length>1) crumbs.push({label:"All pilots", go:()=>go({who:null,day:null,set:null,all:false}),
+      style:"font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;background:none;border:0;cursor:pointer;color:#38BDF8;padding:0"});
+    if(who&&sel.day!=null) crumbs.push({label:who.name, go:()=>go({who:who.id,day:null,set:null,all:false}),
+      style:"font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;background:none;border:0;cursor:pointer;color:#38BDF8;padding:0"});
+    if(sel.day!=null&&(sel.set||sel.all)) crumbs.push({label:new Date(sel.day*86400000).toLocaleDateString(undefined,{month:"short",day:"numeric",timeZone:"UTC"}),
+      go:()=>go({who:who?who.id:null,day:sel.day,set:null,all:false}),
+      style:"font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;background:none;border:0;cursor:pointer;color:#38BDF8;padding:0"});
+    put("Crumbs", crumbs);
+    put("CrumbsOn", crumbs.length>0);
+    return K;
+  }
+
+  // ── Dynamic difficulty ────────────────────────────────────────────────────
+  // A set that closes under the bar gets read by the tutor. If the misses are
+  // a real gap rather than slips, the child gets a lesson — reused from the
+  // bank when one already teaches that concept, generated when none does —
+  // followed by fresh questions on the same idea. Three rounds at most; after
+  // that it stops generating and Teacher HQ says so.
+  static DYN_BAR = 0.70;
+  // The one place a round's lesson is resolved: inline copy first, then the
+  // shared bank. A GENERATED lesson only ever exists inline — client writes to
+  // the lesson bank are denied — so the inline copy is the only copy and
+  // trimDyn below must not throw it away.
+  roundsOf(slice, setId){
+    const rec=((slice&&slice.dyn)||{})[setId]||{rounds:[],flagged:false};
+    return {...rec, rounds:(rec.rounds||[]).map(r=>r.lesson?r:(r.lessonId
+      ? {...r, lesson:LessonBank.get(this.bankId(), r.lessonId)||null}
+      : r))};
+  }
+  dynFor(setId){ return this.roundsOf({dyn:this.state.dyn}, setId); }
+  // Keeps the record inside one Firestore document. The open round keeps its
+  // lesson inline so it still works offline; closed rounds keep the summary,
+  // the score and the lesson id, and the lesson itself lives in the bank.
+  trimDyn(dyn){
+    const out={}, ids=Object.keys(dyn||{});
+    const byRecency=ids.map(id=>{
+      const rs=(dyn[id].rounds)||[];
+      return {id, ts:rs.length?Math.max.apply(null,rs.map(r=>r.doneTs||r.ts||0)):0};
+    }).sort((a,b)=>b.ts-a.ts);
+    const keep=byRecency.slice(0,40).map(x=>x.id);
+    // Inline lessons are the bulky part, so only the most recent sets keep
+    // theirs. Oldest generated lessons are dropped first, and the round says so
+    // rather than pretending the JSON is still there.
+    const inlineFor=byRecency.slice(0,6).map(x=>x.id);
+    keep.forEach(id=>{
+      const rec=dyn[id], allowInline=inlineFor.indexOf(id)>=0;
+      out[id]={...rec, rounds:(rec.rounds||[]).filter(r=>!r.demo).slice(-3).map(r=>{
+        if(!r.closed && !r.failed) return r;                       // still being worked
+        if(!r.lesson) return r;
+        // A reused lesson lives in the shared bank, so the inline copy is
+        // redundant. A generated one does not — keep it while there is room.
+        if(r.source==="generated" && allowInline) return r;
+        const {lesson, ...rest}=r;
+        return {...rest, lessonId:r.lessonId||lesson.id,
+          lessonDropped:r.source==="generated"?true:undefined};
+      })};
+    });
+    return out;
+  }
+  // Answers logged for this set since the run started.
+  runAttempts(setId, since){
+    return ((this.state.pLog||{})[setId]||[]).filter(e=>!since||e.ts>=since);
+  }
+  async maybeDynamic(set, since, pct){
+    if(pct>=0.70) return;
+    if(!Tutor.enabled) return;
+    const rec=this.dynFor(set.id);
+    const open=rec.rounds.filter(r=>!r.closed&&!r.failed);
+    if(open.length) return;                       // a round is already waiting
+    if(rec.rounds.length>=3){
+      this.saveState(s=>({dyn:{...(s.dyn||{}),[set.id]:{...rec,flagged:true}}}));
+      return;
+    }
+    const attempts=this.runAttempts(set.id, since);
+    if(!attempts.length) return;
+    const round=rec.rounds.length+1;
+    const missedTiers=attempts.filter(a=>a.ok===false).map(a=>a.t);
+    this.setState({dynBusy:true, dynErr:""});
+    const bank=this.bankId();
+    const res=await Tutor.assess({
+      set, attempts, round, grade:bank,
+      childName:(this.state.profiles.find(p=>p.id===this.state.activeId)||{}).name||"",
+      tier:missedTiers.length?missedTiers.sort((a,b)=>b-a)[0]:1,
+      history:rec.rounds.map(r=>({n:r.n, concept:r.concept, title:r.title, score:r.score?r.score.r+"/"+r.score.n:"not taken", approach:r.approach}))
+    });
+    if(!res.ok){
+      this.setState({dynBusy:false, dynErr:(res.errors||["The tutor could not be reached."])[0]});
+      return;
+    }
+    if(!res.needsHelp){
+      // Slips, not a gap. Record the read so Teacher HQ still shows it.
+      this.saveState(s=>({dynBusy:false, dyn:{...(s.dyn||{}),[set.id]:{...rec,
+        rounds:[...rec.rounds,{n:round, ts:Date.now(), slipsOnly:true, closed:true,
+          concept:res.summary.concept, conceptLabel:res.summary.conceptLabel,
+          summary:res.summary, title:"No lesson needed", source:"none", qCount:0}]}}}));
+      return;
+    }
+    // Reuse before generating anything new: a lesson that already taught this
+    // concept to somebody is better evidence than a fresh one.
+    const served=rec.rounds.map(r=>r.lessonId).filter(Boolean);
+    const found=LessonBank.findForConcept(bank, res.summary.concept, {exclude:served});
+    let lesson=res.lesson, source="generated";
+    if(found && (found.wins>0 || found.items.length>=5)){ lesson=found; source="reused"; }
+    // No publish attempt: firestore.rules denies client writes to the lesson
+    // bank (see the rule's comment). The generated lesson is stored inline in
+    // this child's record, which is all the child needs; promoting it into the
+    // shared pool is an admin step, and Teacher HQ hands over the JSON for it.
+
+    this.saveState(s=>({dynBusy:false, dyn:{...(s.dyn||{}),[set.id]:{...rec,
+      rounds:[...rec.rounds,{n:round, ts:Date.now(), closed:false, failed:false,
+        concept:res.summary.concept, conceptLabel:res.summary.conceptLabel,
+        approach:res.summary.approach, summary:res.summary,
+        title:lesson.title, lessonId:lesson.id, source:source,
+        lesson:lesson,                     // kept inline so it works offline
+        qCount:(lesson.items||[]).length}]}}}));
+    // The lesson opens straight away — no waiting for a grown-up.
+    this.openCoach(set.id, round);
+  }
+  // ?coach=demo builds a canned round so the lesson screen can be walked
+  // through without a model call. The referrer-locked key means generation only
+  // runs on the real site, and this UI should never debut on a child's screen.
+  maybeCoachDemo(){
+    try{ if(!/[?&]coach=demo/.test(location.search)) return; }catch(e){ return; }
+    const setId="p1";
+    const L=(kind,head,body,work,note)=>({kind,head,body,work:work||[],note:note||""});
+    const lesson={
+      id:"demo-lesson", setId, concept:"area-model-2x1", source:"generated",
+      title:"Splitting a number before you multiply", tier:1,
+      slides:[
+        L("why","The tens got left behind","On 4 × 13 you found 4 × 3 and stopped. Thirteen is ten and three, so there is a second piece to find.","",""),
+        L("teach","Break the big number up","Thirteen is 10 + 3. Multiply each piece, then put the pieces back together.",["13 = 10 + 3"],"Splitting is allowed. The total never changes."),
+        L("teach","Two easy multiplications","Multiplying by ten is the easy one. Do it first, then the small piece.",["4 × 10 = 40","4 × 3 = 12"],""),
+        L("example","4 × 13, all the way through","Split thirteen, multiply both pieces, add them.",["4 × 10 = 40","4 × 3  = 12","40 + 12 = 52"],""),
+        L("example","6 × 14, same three steps","Fourteen is 10 + 4. Nothing else changes.",["6 × 10 = 60","6 × 4  = 24","60 + 24 = 84"],""),
+        L("your-turn","Try 3 × 27","Twenty-seven is 20 + 7. Two multiplications, then one addition.",["3 × 20 = ?","3 × 7  = ?"],""),
+        L("recap","Split, multiply, add","Every two-digit multiplication is two easy ones stuck together.","","")
+      ],
+      items:[
+        {id:"d1",type:"short-answer",t:0,q:"5 × 10",a:"50",hint:"Multiplying by ten adds a zero."},
+        {id:"d2",type:"short-answer",t:1,q:"5 × 12",a:"60",hint:"12 is 10 + 2. Find 5 × 10, then 5 × 2."},
+        {id:"d3",type:"short-answer",t:1,q:"4 × 16",a:"64",hint:"16 is 10 + 6."},
+        {id:"d4",type:"short-answer",t:1,q:"3 × 24",a:"72",hint:"24 is 20 + 4."},
+        {id:"d5",type:"short-answer",t:2,q:"7 × 23",a:"161",hint:"7 × 20 first, then 7 × 3."},
+        {id:"d6",type:"fill-blank",t:1,q:"18 = 10 + ___, so 6 × 18 = 60 + ___",a:["8","48"],hint:"Split, then multiply each piece."}
+      ]
+    };
+    const round={n:1, ts:Date.now(), closed:false, failed:false, demo:true,
+      concept:"area-model-2x1", conceptLabel:"Splitting before multiplying",
+      approach:"place-value split, tens first", title:lesson.title,
+      lessonId:lesson.id, source:"generated", lesson:lesson, qCount:lesson.items.length,
+      summary:{wentWell:"Facts to ten are fluent and fast.",
+        notWell:"Two-digit work stops after the ones digit — the tens are dropped.",
+        forChild:"Your times tables are solid. The bit to fix is remembering the tens when the number is bigger than ten.",
+        concept:"area-model-2x1", conceptLabel:"Splitting before multiplying", approach:"place-value split, tens first"}};
+    setTimeout(()=>{
+      // setState, NOT saveState: a fixture must not end up in the child's
+      // record or get pushed to the cloud as real work.
+      this.setState(s=>({dyn:{...(s.dyn||{}),[setId]:{rounds:[round],flagged:false}}}),
+        ()=>this.openCoach(setId,1));
+    },400);
+  }
+  openCoach=(setId, roundN)=>{
+    const rec=this.dynFor(setId);
+    const r=rec.rounds.find(x=>x.n===roundN)||rec.rounds[rec.rounds.length-1];
+    if(!r||!r.lesson) return;
+    this.setState({view:"coach", coach:{setId, round:r.n, slide:0, ans:{}, checked:false}});
+  };
+  closeCoach=()=>this.setState({view:"practice", coach:null});
+
+  coachVals(){
+    const st=this.state, c=st.coach;
+    if(!c) return {coachOn:false};
+    const rec=this.dynFor(c.setId);
+    const r=rec.rounds.find(x=>x.n===c.round);
+    if(!r||!r.lesson) return {coachOn:false};
+    const lesson=r.lesson, slides=lesson.slides||[], items=lesson.items||[];
+    const i=Math.max(0, Math.min(c.slide, slides.length));
+    const onQuestions=i>=slides.length;
+    const s=slides[i]||{};
+    const KIND={why:"What happened", teach:"The idea", example:"Worked example", "your-turn":"Your turn", recap:"To remember"};
+    // A fill-blank item wants one answer per blank, and the child has one box:
+    // commas (or spaces) separate them, in order.
+    const blanksOf=it=>(String(it.q||"").match(/_{2,}/g)||[]).length;
+    const respFor=(it,v)=>it.type==="fill-blank"
+      ? String(v==null?"":v).split(/[,\s]+/).filter(x=>x!=="")
+      : v;
+    const verdict=k=>QTypes.grade(items[k], respFor(items[k], c.ans[k]));
+    const right=items.filter((it,k)=>verdict(k)!==false).length;
+    const pct=items.length?Math.round(right/items.length*100):0;
+    const passed=pct>=70;
+
+    const check=()=>{
+      const t0=Date.now();
+      const rows=items.map((it,k)=>({i:k, it, given:c.ans[k], ok:verdict(k)}));   // raw text is what they typed
+      const won=pct>=70;
+      const done=rec.rounds.length>=3 && !won;
+      // A demo round exercises the screen without writing anything down.
+      if(r.demo){
+        this.setState(prev=>{
+          const cur=((prev.dyn||{})[c.setId])||{rounds:[],flagged:false};
+          return {coach:{...c, checked:true}, dyn:{...(prev.dyn||{}),[c.setId]:{...cur,
+            rounds:cur.rounds.map(x=>x.n===c.round
+              ? {...x, closed:won, failed:!won, score:{r:right,n:items.length}, doneTs:Date.now()}
+              : x)}}};
+        });
+        return;
+      }
+      this.logAttempts({id:c.setId}, rows, "coach");
+      this.saveState(prev=>{
+        const cur=((prev.dyn||{})[c.setId])||{rounds:[],flagged:false};
+        return {coach:{...c, checked:true}, dyn:{...(prev.dyn||{}),[c.setId]:{...cur,
+          flagged:done||cur.flagged,
+          rounds:cur.rounds.map(x=>x.n===c.round
+            ? {...x, closed:won, failed:!won, score:{r:right,n:items.length}, doneTs:Date.now()}
+            : x)}}};
+      });
+      if(r.lessonId) LessonBank.score(this.bankId(), r.lessonId, won, []);
+      // A miss here IS the evidence for the next round, so build it now rather
+      // than waiting for the child to run the original set again.
+      if(!won && rec.rounds.length<3){
+        const m=this.setMeta()[c.setId];
+        if(m) setTimeout(()=>this.maybeDynamic(m.s, t0, right/Math.max(1,items.length)), 250);
+      }
+    };
+
+    return {coachOn:true,
+      coachTitle:lesson.title,
+      coachRound:"Round "+r.n+" of 3",
+      coachConcept:r.conceptLabel||r.concept||"",
+      coachForChild:(r.summary&&r.summary.forChild)||"",
+      coachSlideOn:!onQuestions && slides.length>0,
+      coachKind:KIND[s.kind]||"The idea",
+      coachHead:s.head||"", coachBody:s.body||"", coachNote:s.note||"", coachHasNote:!!s.note,
+      coachWork:(s.work||[]).map(w=>({line:w})), coachHasWork:!!(s.work&&s.work.length),
+      coachDots:slides.map((_,k)=>({style:"width:9px;height:9px;border-radius:50%;background:"+(k===i?"#FBBF24":k<i?"rgba(251,191,36,.4)":"rgba(255,255,255,.14)")})),
+      coachStep:(Math.min(i+1,slides.length))+" of "+slides.length,
+      coachBack:()=>this.setState({coach:{...c, slide:Math.max(0,i-1)}}),
+      coachNext:()=>this.setState({coach:{...c, slide:i+1}}),
+      coachNextLabel:i>=slides.length-1?"Try the questions →":"Next →",
+      coachCanBack:i>0,
+      coachQuestionsOn:onQuestions,
+      coachChecked:!!c.checked,
+      coachUnchecked:!c.checked,
+      coachItems:items.map((it,k)=>{
+        const v=verdict(k), shown=!!c.checked;
+        return {n:k+1, q:it.q, hint:it.hint||"", hasHint:shown&&v===false&&!!it.hint,
+          value:c.ans[k]==null?"":c.ans[k],
+          set:e=>{const val=e.target.value.slice(0,32); this.setState(p=>({coach:{...p.coach, ans:{...p.coach.ans,[k]:val}}}));},
+          note:blanksOf(it)>1?("Type "+blanksOf(it)+" answers with a comma between them"):"",
+          hasNote:blanksOf(it)>1,
+          ph:blanksOf(it)>1?"?, ?":"?",
+          mark:shown?(v===false?"✗":"✓"):"", markColor:v===false?"#FB7185":"#4ADE80",
+          exp:shown&&v===false?("answer: "+QTypes.answerText(it)):"",
+          tier:TIER_NAME[it.t==null?1:it.t]||"",
+          inputStyle:"width:"+(blanksOf(it)>1?"190px":"120px")+";height:46px;text-align:center;font-family:Fredoka,sans-serif;font-size:21px;border-radius:11px;outline:none;background:rgba(255,255,255,.07);color:#EEF2FF;border:2px solid "+
+            (shown?(v===false?"#FB7185":"#4ADE80"):"rgba(251,191,36,.45)")};
+      }),
+      coachCheck:check,
+      coachScore:right+" / "+items.length+" · "+pct+"%",
+      coachPassed:!!c.checked&&passed,
+      coachFailed:!!c.checked&&!passed,
+      coachResultTitle:passed?"That landed. Back to the mission.":(rec.rounds.length>=3?"Let's get a grown-up on this one.":"Not yet — one more go at it."),
+      coachResultNote:passed
+        ? "You got it after the lesson, which is exactly how this is supposed to work. This set counts as caught up."
+        : (rec.rounds.length>=3
+          ? "Three tries is enough for today. Your teacher can see this and will work through it with you."
+          : "A new lesson is being built right now, coming at this a different way."),
+      coachExit:this.closeCoach,
+      coachExitLabel:c.checked?"Done":"Leave for now"};
+  }
+
+  // Teacher HQ · Dynamic difficulty: every remediation round, per student.
+  dynRows(students){
+    const meta=this.setMeta(), out=[];
+    (students||[]).forEach(s=>{
+      const dyn=(s.slice&&s.slice.dyn)||{};
+      Object.keys(dyn).forEach(setId=>{
+        const rec=this.roundsOf(s.slice, setId);
+        const rounds=(rec.rounds||[]).filter(r=>!r.demo).slice().sort((a,b)=>a.n-b.n);
+        if(!rounds.length) return;
+        const last=rounds[rounds.length-1];
+        const stuck=!!rec.flagged || (rounds.length>=3 && !rounds.some(r=>r.closed&&!r.slipsOnly));
+        const won=rounds.some(r=>r.closed&&!r.slipsOnly);
+        out.push({
+          key:s.id+"|"+setId, who:s.name,
+          title:meta[setId]?meta[setId].s.title:setId,
+          unit:meta[setId]?("Mission 0"+meta[setId].u+" · "+meta[setId].s.label):setId,
+          concept:last.conceptLabel||last.concept||"",
+          state:stuck?"Needs you":won?"Caught up":"In progress",
+          stateStyle:"font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;padding:5px 10px;border-radius:999px;white-space:nowrap;background:"+
+            (stuck?"rgba(248,113,113,.18);color:#FCA5A5":won?"rgba(74,222,128,.16);color:#4ADE80":"rgba(56,189,248,.16);color:#7DD3FC"),
+          stuck:stuck, ts:last.doneTs||last.ts||0,
+          cardStyle:"background:"+(stuck?"rgba(248,113,113,.07)":"rgba(255,255,255,.04)")+";border:1px solid "+
+            (stuck?"rgba(248,113,113,.4)":"rgba(255,255,255,.1)")+";border-radius:16px;padding:18px 20px",
+          wentWell:(last.summary&&last.summary.wentWell)||"",
+          notWell:(last.summary&&last.summary.notWell)||"",
+          hasRead:!!(last.summary&&(last.summary.wentWell||last.summary.notWell)),
+          stuckNote:stuck?"Three rounds without getting it. Generation has stopped — this one needs you at the table. The rounds below show what was already tried, so you don't repeat it.":"",
+          rounds:rounds.map(r=>({
+            n:"Round "+r.n,
+            canPromote:!!(r.lesson&&r.source==="generated"),
+            dropped:!!r.lessonDropped,
+            droppedNote:"Lesson JSON aged out of the saved record",
+            promoteLabel:"Copy lesson JSON",
+            promote:()=>{
+              const json=JSON.stringify(r.lesson,null,2);
+              try{ navigator.clipboard.writeText(json); }catch(e){}
+              console.log("[lesson JSON — paste into the Firebase console at lessons/"+this.bankId()+"]\n"+json);
+            },
+            title:r.slipsOnly?"No lesson — careless slips":r.title,
+            source:r.slipsOnly?"read only":(r.source==="reused"?"reused from the bank":r.source==="generated"?"generated":r.source||""),
+            approach:r.approach||"",
+            qCount:r.qCount?r.qCount+" questions":"—",
+            score:r.score?(r.score.r+" / "+r.score.n+" · "+Math.round(r.score.r/Math.max(1,r.score.n)*100)+"%"):(r.slipsOnly?"—":"not taken yet"),
+            scoreColor:r.score?this.pctColor(Math.round(r.score.r/Math.max(1,r.score.n)*100)):"rgba(238,242,255,.45)",
+            when:new Date(r.doneTs||r.ts).toLocaleDateString(undefined,{month:"short",day:"numeric"}),
+            mark:r.closed?"✓":r.failed?"✗":"·",
+            markStyle:"width:26px;height:26px;flex:none;border-radius:8px;display:grid;place-items:center;font-size:13px;font-family:'JetBrains Mono',monospace;"+
+              (r.closed?"background:rgba(74,222,128,.16);color:#4ADE80;border:1px solid rgba(74,222,128,.4)"
+               :r.failed?"background:rgba(248,113,113,.18);color:#FCA5A5;border:1px solid rgba(248,113,113,.45)"
+                        :"background:rgba(251,191,36,.16);color:#FBBF24;border:1px solid rgba(251,191,36,.4)")
+          }))
+        });
+      });
+    });
+    return out.sort((a,b)=>(b.stuck?1:0)-(a.stuck?1:0) || b.ts-a.ts);
+  }
+
+  static DYN_MAX = 3;
+
   normAns(v){ return String(v==null?"":v).replace(/[\s,]/g,"").toLowerCase().replace(/^0+(?=\d)/,""); }
 
   // ── Per-item attempt log ─────────────────────────────────────────────────
@@ -4732,7 +5841,7 @@ class Component extends DCLogic {
     // Banks are authored easy-first, so walking them in order meant five in a
     // row was five Warm-Up items. Every run now gets its own mixed order:
     // repeating windows of 1 Warm-Up, 2 Core, 2 Challenge (QTypes.mixOrder).
-    const start=()=>{ this.setState({stream:{setId:set.id,order:QTypes.mixOrder(items),pos:0,streak:0,att:0,right:0,val:"",rev:false,lastRight:false,done:false,recycle:[]}}); this.focusStreak(); };
+    const start=()=>{ this.setState({stream:{setId:set.id,t0:Date.now(),order:QTypes.mixOrder(items),pos:0,streak:0,att:0,right:0,val:"",rev:false,lastRight:false,done:false,recycle:[]}}); this.focusStreak(); };
     if(!s) return {pStreamOn:false, pGridOn:true, smStart:start, smLive:false, smDone:false, smDots:[], smProgress:"", smUnrevealed:false, smRevealed:false};
     // Past the end of the bank, re-ask whatever was missed.
     const ord=(s.order&&s.order.length)?s.order:items.map((_,i)=>i);
@@ -4748,6 +5857,8 @@ class Component extends DCLogic {
       this.saveState(prev=>({stream:done,
         pHist:logRun(prev.pHist||{},set.id,str.right,str.att,null),
         pStreak:{...(prev.pStreak||{}),[set.id]:{att:str.att,right:str.right,d:dayNo(),closed:str.streak>=STREAK_GOAL}}}));
+      // Below the bar → read the run and, if it needs it, teach it again.
+      setTimeout(()=>this.maybeDynamic(set, str.t0||0, str.right/Math.max(1,str.att)), 60);
     };
     // Advance reads LIVE state, not the closure, so the auto-advance timer and
     // the button can never double-count the same answer.
@@ -5019,8 +6130,10 @@ class Component extends DCLogic {
             `border:2px solid ${shown?(right?"#4ADE80":"#FB7185"):"rgba(255,255,255,.18)"}`
         };
       }),
-      pCheck:()=>{this.saveState(s=>({pChecked:{...s.pChecked,[key]:true},pRuns:{...s.pRuns,[key]:(s.pRuns[key]||0)+1},pHist:logRun(s.pHist||{},set.id,score,visible.length,compressed?null:tf)}));
-        this.logAttempts(set, visible.map(({it,i})=>({i,it,given:ans[i],ok:verdictOf(i,it)})), "grid");},
+      pCheck:()=>{const t0=Date.now();
+        this.saveState(s=>({pChecked:{...s.pChecked,[key]:true},pRuns:{...s.pRuns,[key]:(s.pRuns[key]||0)+1},pHist:logRun(s.pHist||{},set.id,score,visible.length,compressed?null:tf)}));
+        this.logAttempts(set, visible.map(({it,i})=>({i,it,given:ans[i],ok:verdictOf(i,it)})), "grid");
+        setTimeout(()=>this.maybeDynamic(set, t0, score/Math.max(1,visible.length)), 80);},
       pRetry:()=>{
         const kept={};
         set.items.forEach((it,i)=>{ if(isRight(i,it) || (tf!=null && it.t!==tf)) kept[i]=ans[i]; });
@@ -5382,6 +6495,9 @@ class Component extends DCLogic {
         dotStyle:`flex:none;width:9px;height:9px;border-radius:50%;background:${sel.color}`})),
       uBriefing:Y5_BRIEFINGS[sel.n]||Y5_BRIEFINGS[1],
       isHQ:st.view==="hq", isPractice:st.view==="practice",
+      ...this.coachVals(),
+      isCoach:st.view==="coach"&&!!st.coach,
+      dynBusy:!!st.dynBusy, dynHasErr:!!st.dynErr, dynErr:st.dynErr,
       isStd1:st.uview===1&&!y5, isStd2:st.uview===2&&!y5, isStd3:st.uview===3&&!y5, isStd4:st.uview===4&&!y5, isStd5:st.uview===5&&!y5,
       isStd6:st.uview===6&&!y5, isStd7:st.uview===7&&!y5, isStd8:st.uview===8&&!y5,
       isStdY5:y5, stdY5Title:"Standards alignment · "+(this.unitsList()[st.uview-1]||sel).name,

@@ -139,19 +139,78 @@ Step 3 is why nothing breaks: with nothing published, every exercise is the one
 in the repo. A published bank that says nothing about a unit leaves that unit's
 file version alone, so you can publish one mission at a time.
 
-Publishing has no UI yet. From the browser console, on the app:
+Publishing has no UI, and from a browser it cannot work: `firestore.rules`
+denies client writes to `questionbanks` outright. Bank ids are public (`y3`,
+`y5`), so the unguessable-id protection the rest of the ruleset relies on does
+not apply, and an open write would let anyone who reads our JavaScript replace
+every question a third-grader is served. Publishing is an ADMIN operation — the
+Firebase console, or a script holding service-account credentials, both of which
+bypass rules:
 
 ```js
 QBank.publish("y3", mySets)   // validates first; refuses a broken bank
 ```
 
-It bumps `version`, and both the app and the worksheet builder pick it up on
-next load. `firestore.rules` allows public read on `questionbanks` — deploy the
-rules before expecting a published bank to load.
+The validation and payload shaping are the valuable part of that function: it
+refuses to publish a bank that would not load. Deploy the rules before expecting
+a published bank to load.
 
 `Worksheet Builder.dc.html` prints from the same loader, so a question fixed in
 the database is fixed on the next printout. The 32 `Unit N` packs in this repo
 are frozen snapshots and do not follow the database.
+
+## Lessons are data too
+
+`curriculum/lessons.js` loads `lessons/{bankId}` the same way question sets load:
+database first, then this device's cached copy, then nothing. A lesson is slides
+plus the questions that follow them:
+
+```js
+{id, setId, concept, title, source:"authored"|"generated", tier,
+ slides:[{kind, head, body, work:[], note}], items:[…], uses, wins}
+```
+
+`kind` is one of `why`, `teach`, `example`, `your-turn`, `recap`. `concept` is
+the match key — it is how a lesson gets reused instead of regenerated, so keep
+slugs stable and specific (`area-model-2x1`, not `multiplication`).
+
+The authored walkthroughs in `curriculum/math-y*.js` still use the older `steps`
+shape and are NOT in this bank yet; the bank starts empty and fills up as
+lessons are published.
+
+## Dynamic difficulty
+
+When a set closes under 70%, `curriculum/tutor.js` sends the run's per-item log
+to the model and asks for three things: a proficiency read (what went well, what
+did not), the one concept behind the misses, and a lesson (6–8 slides, two
+worked examples, concrete → abstract) with 5–10 questions on that concept.
+
+- Generated questions are limited to `short-answer`, `number-units` and
+  `fill-blank`, so a round can be graded without a grown-up.
+- Everything is validated before a child sees it: slides and question count
+  through `LessonBank.validate`, questions through `QTypes.validateSet`. One
+  retry with the errors fed back, then it gives up rather than show something
+  broken.
+- **Reuse before generation.** A lesson already in the bank for that concept
+  wins over a new one, ranked by wins then fewest uses, so a lesson that works
+  spreads.
+- **Generated lessons do not publish themselves.** `firestore.rules` denies
+  client writes to `lessons` for the same reason it denies them to
+  `questionbanks`: bank ids are public, so the unguessable-id protection does
+  not apply. The generated lesson is stored inline in that child's record, which
+  is all the child needs. Promoting one that worked into the shared pool is an
+  admin step — Teacher HQ's "Copy lesson JSON" hands over the object, and the
+  Firebase console or a service-account script writes it.
+- Three rounds maximum. Each later round is told what was already tried and is
+  asked to change the representation, not the difficulty. After three, generation
+  stops and Teacher HQ flags it red as "needs you".
+- Rounds live inside each child's synced record under `dyn.<setId>.rounds`, with
+  the lesson stored inline so it still works offline.
+
+The model is Gemini, using the browser key already in `index.html` — which is
+referrer-locked to `mikerasmussen1.github.io` and localhost. Generation therefore
+only runs on the real site or a local server; anywhere else the call 403s and the
+app carries on without it.
 
 ## The math shapes (a reference, not a requirement)
 

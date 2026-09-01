@@ -4394,7 +4394,7 @@ class Component extends DCLogic {
     return {
       pStreamOn:true, pGridOn:false, smStart:start,
       smLive:!s.done, smDone:s.done,
-      smDots:[0,1,2,3,4].map(i=>({style:"width:14px;height:14px;border-radius:50%;transition:.2s;background:"+(i<streakNow?"#4ADE80":"rgba(255,255,255,.12)")+(i<streakNow?";box-shadow:0 0 8px rgba(74,222,128,.6)":"")})),
+      smDots:Array.from({length:STREAK_GOAL},(_,i)=>i).map(i=>({style:"width:14px;height:14px;border-radius:50%;transition:.2s;background:"+(i<streakNow?"#4ADE80":"rgba(255,255,255,.12)")+(i<streakNow?";box-shadow:0 0 8px rgba(74,222,128,.6)":"")})),
       smProgress:(s.pos<items.length?"Problem "+(s.pos+1):"Second look")+" · "+s.right+" right of "+s.att+(s.att<MIN_ATT?" · at least "+MIN_ATT+" to finish":""),
       smQ:it.q, smVal:s.val, smTierIcon:tier.icon, smTierName:tier.name,
       smTierChipStyle:`width:22px;height:22px;border-radius:7px;background:${tier.color}26;color:${tier.color};display:grid;place-items:center;font-size:11px;flex:none`,

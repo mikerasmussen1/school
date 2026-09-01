@@ -33,9 +33,11 @@ const ALLOWED_ORIGINS = [
   "http://127.0.0.1:8000",
 ];
 
-// Per-IP ceiling. A struggling child generates at most a handful of lessons an
-// hour; anything past this is not a child.
-const RATE_LIMIT = 20;
+// Per-IP ceiling. Note a household shares ONE IP: two children practising, plus
+// any testing from the same house, all draw on the same bucket — 20 proved too
+// tight in practice. At roughly 3k tokens a call this is still pennies an hour,
+// and the spend cap remains the real backstop.
+const RATE_LIMIT = 60;
 const RATE_WINDOW_SECONDS = 3600;
 
 // Bound the cost of a single call regardless of what the client asks for.
@@ -195,11 +197,18 @@ export default {
     });
 
     const text = await upstream.text();
-    // Pass the upstream status through so the client can tell "rate limited"
-    // from "bad request" from "overloaded", rather than seeing a flat 500.
-    return new Response(text, {
-      status: upstream.status,
-      headers: { "Content-Type": "application/json", ...corsHeaders(origin) },
-    });
+    /* Pass the upstream status through so the client can tell "rate limited"
+     * from "bad request" from "overloaded", rather than seeing a flat 500.
+     *
+     * Also forward Anthropic's org and workspace ids. They cost nothing, are
+     * not secret, and are the only way to see WHICH balance a failing request
+     * actually checked — without them a billing error is undebuggable from
+     * outside, which cost real time once already. */
+    const out = { "Content-Type": "application/json", ...corsHeaders(origin) };
+    for (const h of ["anthropic-organization-id", "anthropic-workspace-id", "request-id"]) {
+      const v = upstream.headers.get(h);
+      if (v) out[h] = v;
+    }
+    return new Response(text, { status: upstream.status, headers: out });
   },
 };

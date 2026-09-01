@@ -5,3 +5,6 @@
 # Editor / OS scratch
 *.swp
 *~
+
+# wrangler writes account state and build caches here
+worker/.wrangler/

@@ -2317,7 +2317,7 @@
     </div>
 
     <h2 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.45);margin:0 0 6px">Review</h2>
-    <div style="font-size:12.5px;line-height:1.55;color:rgba(238,242,255,.5);margin-bottom:6px;max-width:720px">Pick a pilot, then a day, then a set — the answers open underneath, green for right and red with what they typed. Tap a tier to narrow to it. Time is estimated from the answer stamps.</div>
+    <div style="font-size:12.5px;line-height:1.55;color:rgba(238,242,255,.5);margin-bottom:6px;max-width:720px">Pick a pilot, then a Mission, a week, an exercise and a tier — every question in it opens underneath, green for right and red with what they typed. Questions with nothing recorded show as unanswered. Time is estimated from the answer stamps.</div>
     <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.13em;text-transform:uppercase;color:rgba(238,242,255,.38);margin-bottom:18px">{{ hqDScopeNote }}</div>
     <sc-if value="{{ hqDLoading }}" hint-placeholder-val="{{ false }}">
       <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:#38BDF8;margin-bottom:14px">Loading students from the roster…</div>
@@ -4534,6 +4534,9 @@ class Component extends DCLogic {
       // The gate is a fixed overlay, so it has to be dropped and remembered,
       // or closing HQ lands the teacher back on the pilot sign-in.
       this.setState({tBusy:false,tData:slice,tErr:"",
+        // A different pilot may be on a different course, so their drill-down
+        // starts at the top rather than inheriting the last one's position.
+        hqUnit:null, hqWeek:null, hqSet:null, hqTier:null,
         tView:{key:k, name:rec.name||entry.name||"Pilot",
                curriculum:slice.curriculum||entry.curriculum||"y3", slice},
         tFront:false, tFromGate:this.state.gate, gate:false,
@@ -4743,7 +4746,8 @@ class Component extends DCLogic {
       hqViewing:!!st.tView, hqNotViewing:!st.tView,
       hqViewName:st.tView?st.tView.name:"",
       hqViewNote:st.tView?"The suggestions and standards below are "+st.tView.name+"'s record, read live from the database. Approving a change writes to their record, not this device.":"",
-      hqExit:()=>this.setState(s=>({tView:null,tFront:true,view:"hq",gate:s.tFromGate?true:s.gate}))
+      hqExit:()=>this.setState(s=>({tView:null,tFront:true,view:"hq",gate:s.tFromGate?true:s.gate,
+        hqUnit:null,hqWeek:null,hqSet:null,hqTier:null}))
     };
   }
 
@@ -4770,19 +4774,6 @@ class Component extends DCLogic {
     const m=Math.floor(s/60), r=s%60;
     if(m<60) return m+"m"+(r?" "+String(r).padStart(2,"0")+"s":"");
     return Math.floor(m/60)+"h "+String(m%60).padStart(2,"0")+"m";
-  }
-  // Per-item seconds, from the gap to the previous answer in the same sitting.
-  // Capped at two minutes: a longer gap is a pause, not time on that question.
-  itemSecs(entries){
-    const CAP=120*1000;
-    const sorted=entries.slice().sort((a,b)=>a.ts-b.ts);
-    const out={};
-    sorted.forEach((e,i)=>{
-      const prev=sorted[i-1];
-      const d=prev?e.ts-prev.ts:LONE_MS;
-      out[e.ts+"|"+(e.qid||e.i)] = (d>0&&d<=CAP)?d:LONE_MS;
-    });
-    return out;
   }
   // Flat list of attempts out of a saved slice, newest work first.
   attemptsOf(slice){
@@ -4892,7 +4883,7 @@ class Component extends DCLogic {
     put("Sets", weekSets.map(s=>{
       const st=statOf([s]), es=bySet[s.id]||[];
       const last=es.length?Math.max.apply(null,es.map(e=>e.ts)):null;
-      return {id:s.id, label:s.label||s.id, title:s.title||"",
+      return {id:s.id, label:s.label||s.id, sub:s.title||"",
         meta:(s.items||[]).length+" question"+((s.items||[]).length===1?"":"s")+
           (st.marked?(" · "+st.marked+" answered"):" · not started")+
           (last?(" · last "+new Date(last).toLocaleDateString(undefined,{month:"short",day:"numeric"})):""),
@@ -4920,7 +4911,7 @@ class Component extends DCLogic {
       const marked=seen.filter(e=>e.ok!==null);
       const right=marked.filter(e=>e.ok).length;
       const pct=marked.length?Math.round(right/marked.length*100):null;
-      return {t:t, name:TIER_NAME[t], color:TIERS[t].color,
+      return {t:t, label:TIER_NAME[t], color:TIERS[t].color,
         meta:xs.length+" question"+(xs.length===1?"":"s")+
           (marked.length?(" · "+right+" of "+marked.length+" right"):" · no answers recorded"),
         pct:pct==null?"—":pct+"%", pctColor:this.pctColor(pct),

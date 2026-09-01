@@ -21,29 +21,82 @@
 (function(){
 
   const MODEL="gemini-flash-latest";
+  // Sonnet 5 by default: this writes teaching material for a child, so quality
+  // matters more than the per-call saving. Override `model` in the Firestore
+  // config doc to switch — claude-haiku-4-5-20251001 is the cheaper option.
+  const CLAUDE_MODEL="claude-sonnet-5";
   const ALLOWED=["short-answer","number-units","fill-blank"];
   const Q = () => window.QTypes;
 
   const Tutor = {
     apiKey:"",
-    configure(key){ this.apiKey=key||""; return this; },
+    model:"",
+    configure(key, model){ this.apiKey=key||""; this.model=model||""; return this; },
     get enabled(){ return !!this.apiKey; },
 
+    /* Provider is inferred from the key, so switching is a one-field edit in
+     * Firestore with no deploy: an "sk-ant-" key routes to Anthropic, anything
+     * else to Gemini. `model` can be overridden from the same document. */
+    get provider(){ return /^sk-ant-/.test(this.apiKey) ? "anthropic" : "gemini"; },
+
     async _call(prompt){
+      return this.provider==="anthropic" ? this._callClaude(prompt) : this._callGemini(prompt);
+    },
+
+    async _callGemini(prompt){
       const body={contents:[{parts:[{text:prompt}]}],
         generationConfig:{response_mime_type:"application/json", temperature:0.4}};
-      const r=await fetch("https://generativelanguage.googleapis.com/v1beta/models/"+MODEL+
-        ":generateContent?key="+this.apiKey,
+      const r=await fetch("https://generativelanguage.googleapis.com/v1beta/models/"+
+        (this.model||MODEL)+":generateContent?key="+this.apiKey,
         {method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)});
       if(!r.ok){
         let detail=""; try{ detail=((await r.json()).error||{}).message||""; }catch(e){}
-        try{ window.Diag && Diag.tutor("http-error", {status:r.status, detail:detail.slice(0,160)}); }catch(e){}
+        try{ window.Diag && Diag.tutor("http-error", {provider:"gemini", status:r.status, detail:detail.slice(0,160)}); }catch(e){}
         throw new Error("Gemini "+r.status+(detail?": "+detail.slice(0,140):""));
       }
       const j=await r.json();
       const parts=(((j.candidates||[])[0]||{}).content||{}).parts;
-      const text=(parts&&parts[0]&&parts[0].text)||"{}";
-      return JSON.parse(text);
+      return this._json((parts&&parts[0]&&parts[0].text)||"{}");
+    },
+
+    async _callClaude(prompt){
+      /* anthropic-dangerous-direct-browser-access is REQUIRED: the API blocks
+       * browser origins by default, and without it every call fails CORS. The
+       * header name is a warning, not a formality — it exists because calling
+       * this API from a browser means shipping a BILLED key to the client. */
+      const r=await fetch("https://api.anthropic.com/v1/messages",{
+        method:"POST",
+        headers:{"Content-Type":"application/json",
+                 "x-api-key":this.apiKey,
+                 "anthropic-version":"2023-06-01",
+                 "anthropic-dangerous-direct-browser-access":"true"},
+        body:JSON.stringify({
+          model:this.model||CLAUDE_MODEL,
+          max_tokens:4096,
+          temperature:0.4,
+          // Prefill an opening brace so the reply starts as JSON rather than
+          // "Here is the lesson:" — Claude has no response_mime_type.
+          messages:[{role:"user",content:prompt},
+                    {role:"assistant",content:"{"}]})});
+      if(!r.ok){
+        let detail=""; try{ detail=((await r.json()).error||{}).message||""; }catch(e){}
+        try{ window.Diag && Diag.tutor("http-error", {provider:"anthropic", status:r.status, detail:detail.slice(0,160)}); }catch(e){}
+        throw new Error("Claude "+r.status+(detail?": "+detail.slice(0,140):""));
+      }
+      const j=await r.json();
+      const txt=((j.content||[]).find(c=>c.type==="text")||{}).text||"";
+      return this._json("{"+txt);   // put the prefilled brace back
+    },
+
+    /* Tolerant JSON read. Gemini honours response_mime_type; Claude does not,
+     * so a reply can arrive fenced in ```json or with a trailing sentence. */
+    _json(text){
+      let t=String(text||"").trim();
+      t=t.replace(/^```(?:json)?\s*/i,"").replace(/```\s*$/,"").trim();
+      try{ return JSON.parse(t); }catch(e){}
+      const a=t.indexOf("{"), b=t.lastIndexOf("}");
+      if(a>=0 && b>a) return JSON.parse(t.slice(a,b+1));
+      throw new Error("model did not return JSON");
     },
 
     _prompt(ctx, priorErrors){

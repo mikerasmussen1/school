@@ -40,31 +40,46 @@ done" keeps the old behavior.
   it, and environment variables do not help — this is a static site, so there is
   no server to hold one and a build-time substitution still ships the key to the
   browser.
-- **How it actually works now: every device loads the key by itself.** The key
-  sits at `config/app` — a fixed, well-known document id — and the app fetches
-  it on every load. No teacher code, no per-device setup, nothing to type.
+- **How it actually works: every device loads the key by itself.** The key sits
+  at `config/app` — a fixed, well-known document id — fetched on every load. No
+  teacher code, no per-device setup.
 
-  To set or rotate it: Firebase console → Firestore → collection `config`,
-  document id `app`, one **string** field `gemini`. Every device picks up the
-  new value on its next load. No redeploy.
+  Fields on that document:
+  - `apiKey` (string) — the key. `gemini` is still read as a fallback name.
+  - `model` (string, optional) — overrides the default for that provider.
 
-  **This key is public by deliberate choice.** Anyone reading `index.html`
-  knows the document id and can fetch it. That is accepted here because the key
-  is free-tier on a project with **no billing account**: the worst anyone can do
-  is exhaust quota, which is fixed by rotating the field.
+  **The provider is inferred from the key.** A key starting `sk-ant-` routes to
+  the Anthropic Messages API; anything else goes to Gemini. Switching providers
+  is a one-field edit with no deploy.
 
-  It is still meaningfully better than the committed literal that caused the
-  original incident. Google's secret scanner watches public GitHub repos, not
-  Firestore, so this key will not be auto-disabled the way the last one was —
-  and rotating it no longer requires a deploy.
+  Defaults: `gemini-flash-latest`, or `claude-sonnet-5` for Anthropic. Set
+  `model` to `claude-haiku-4-5-20251001` for a cheaper Claude.
 
-  **If billing is ever enabled on this project, this must be undone.** The
-  failure mode changes from "quota runs out" to "a stranger spends your money".
-  At that point the key has to move behind a proxy that keeps it server-side.
+  ### The key is public. What that costs depends entirely on the provider.
 
-  A device can opt out of the shared key: set its own `GEMINI_API_KEY` in
-  `localStorage` plus `GEMINI_KEY_PINNED=1`, and the shared loader leaves it
-  alone.
+  Anyone reading `index.html` knows the document id and can fetch the key.
+
+  With a **Gemini free-tier key on a project with no billing**, the worst case
+  is exhausted quota, fixed by rotating the field. That is why this design was
+  acceptable.
+
+  With an **Anthropic key, that is no longer true.** Anthropic keys are billed.
+  A stranger who reads the key can spend real money, and a spend cap limits the
+  size of the loss without preventing it — someone can burn the whole monthly
+  cap in minutes and lock the children out of the feature until it resets.
+
+  So if a Claude key is used here:
+  - Set a **low** monthly spend limit on a dedicated key, not the main one.
+  - Treat the key as disposable and rotate it on any surprise in usage.
+  - Understand that this is accepted exposure, not protection.
+
+  The durable fix, and the right one the moment this matters, is a proxy that
+  holds the key server-side — a Cloudflare Worker on its free tier, or a
+  Firebase Function (Functions need the Blaze plan for outbound calls). The
+  browser then never sees a credential at all.
+
+  Note also that calling Anthropic from a browser requires the
+  `anthropic-dangerous-direct-browser-access` header. The name is the warning.
 
 - Fallbacks, still supported, set `localStorage` directly:
   - **Any device, including iPads** — visit the site with `?gemkey=THEKEY` on

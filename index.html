@@ -4109,10 +4109,17 @@ const Remote = {
       const r=await fetch(this._doc("config","app"), {cache:"no-store"});
       if(!r.ok) return;                                  // 404 = none published
       const f=(await r.json()).fields||{};
-      const k=(f.gemini&&f.gemini.stringValue)||"";
-      if(!k || k===localStorage.getItem("GEMINI_API_KEY")) return;
+      // `gemini` is the historical field name and stays for compatibility; an
+      // sk-ant- value in it routes to Claude instead. `model` is optional.
+      const k=(f.apiKey&&f.apiKey.stringValue)||(f.gemini&&f.gemini.stringValue)||"";
+      const model=(f.model&&f.model.stringValue)||"";
+      if(model) localStorage.setItem("GEMINI_API_MODEL", model);
+      if(!k || k===localStorage.getItem("GEMINI_API_KEY")) {
+        if(model && window.Tutor) Tutor.configure(localStorage.getItem("GEMINI_API_KEY")||"", model);
+        return;
+      }
       localStorage.setItem("GEMINI_API_KEY", k);
-      if(window.Tutor) Tutor.configure(k);
+      if(window.Tutor) Tutor.configure(k, model);
       if(window.PaperReader) PaperReader.enabled = true;
     }catch(e){ /* offline or blocked: whatever is cached still applies */ }
   },
@@ -4432,7 +4439,9 @@ class Component extends DCLogic {
       .catch(()=>this.setState({qbank:"files"}));
     // Lessons are data too, and the tutor writes generated ones back into the
     // same bank so the next child who misses this concept reuses them.
-    Tutor.configure(GEMINI_API_KEY);
+    Tutor.configure(GEMINI_API_KEY, (function(){
+      try{ return localStorage.getItem("GEMINI_API_MODEL")||""; }catch(e){ return ""; }
+    })());
     // Every device picks the key up on its own, no teacher code, no setup.
     // Deliberately public — see Remote.loadSharedKey and BACKEND.md.
     Remote.loadSharedKey();

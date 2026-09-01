@@ -160,24 +160,18 @@
                 note:n.note, items:n.items};
       });
     },
-    /* `teacherCode` is required. firestore.rules will only accept a write whose
-     * `editor` field is the id of a roster document that exists, and roster ids
-     * are a hash of the teacher code — so publishing is gated on knowing that
-     * code rather than on knowing the (public) bank id. Validation below still
-     * runs first, but it is client-side and is no longer what protects the
-     * bank; the rule is. */
-    async publish(bankId, sets, version, teacherCode){
+    /* Publishing is an ADMIN operation. firestore.rules denies client writes to
+     * questionbanks outright: bank ids are public ("y3", "y5"...), so the
+     * unguessable-id protection the rest of the ruleset relies on does not
+     * apply, and with no auth in the app any credential a browser can present,
+     * an attacker can manufacture. Run this from a context holding
+     * service-account credentials, or edit the document in the Firebase
+     * console; both bypass rules. From a browser this will 403, by design.
+     *
+     * Kept because the validation and payload shaping below are the valuable
+     * part — it refuses to publish a bank that would not load. */
+    async publish(bankId, sets, version){
       if(!this.remote) throw new Error("no project configured");
-      if(!teacherCode) throw new Error("publish needs the teacher code — the rules reject writes without a valid editor");
-      // `Remote` is a top-level `const` in index.html's classic script, which
-      // makes it a global LEXICAL binding, not a property of window — so
-      // window.Remote is undefined here. Resolve by name, and reuse its
-      // derivation rather than reimplementing the hash, so the roster id this
-      // sends can never drift from the one Teacher HQ writes.
-      const R = (typeof Remote !== "undefined") ? Remote : null;
-      if(!R || typeof R.rosterKeyFor !== "function")
-        throw new Error("Remote.rosterKeyFor unavailable — cannot derive the editor id");
-      const editor=await R.rosterKeyFor(teacherCode);
       const payload=this.payloadFrom(sets);
       const errs=[]; payload.forEach(s=>{ const v=Q().validateSet(s); if(!v.ok) errs.push.apply(errs,v.errors); });
       if(errs.length) throw new Error("refusing to publish, "+errs.length+" problem(s):\n"+errs.slice(0,20).join("\n"));
@@ -185,8 +179,7 @@
       const body=JSON.stringify({fields:{
         sets:{stringValue:JSON.stringify(payload)},
         version:{integerValue:String(v)},
-        updated:{integerValue:String(Date.now())},
-        editor:{stringValue:editor}}});
+        updated:{integerValue:String(Date.now())}}});
       const r=await fetch(this._url(bankId),{method:"PATCH",headers:{"Content-Type":"application/json"},body});
       if(!r.ok) throw new Error("publish failed: HTTP "+r.status);
       delete this.banks[bankId];

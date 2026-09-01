@@ -30,45 +30,37 @@ service cloud.firestore {
     }
     // Question banks — the exercises themselves.
     //
-    // Read is public and has to be: every child's device fetches these.
+    // Read is public and must be: every child's device fetches these.
     //
-    // WRITE IS NOT open the way the collections above are, and the difference
-    // matters. Everything else here is protected by an UNGUESSABLE DOC ID —
-    // knowing the id is the login, and `list` is denied so ids cannot be
-    // discovered. Question-bank ids are not secret: they are "y3", "y5", "la"
-    // and "japan", named in the client source. An `if true` write rule on a
-    // guessable id would let anyone who reads our JavaScript replace every
-    // question a third-grader is served. QBank.publish validates before
-    // writing, but that is client-side and a raw REST PATCH skips it entirely.
+    // WRITES ARE DENIED TO CLIENTS ENTIRELY, and that is not laziness — it is
+    // the only honest option here. Every other collection is protected by an
+    // UNGUESSABLE DOC ID: knowing the id is the login, and `list` is denied so
+    // ids cannot be discovered. Question-bank ids are NOT secret — "y3", "y5",
+    // "la", "japan", named in the client source — so that protection does not
+    // apply, and an `if true` write would let anyone who reads our JavaScript
+    // replace every question a third-grader is served.
     //
-    // So a write must carry `editor`: the id of a roster document that ACTUALLY
-    // EXISTS. Roster ids are SHA-256 of a teacher code that lives only in the
-    // grown-up's head (Remote.rosterKeyFor), and rosters cannot be listed — so
-    // producing a valid one is exactly as hard as knowing the teacher code.
-    // That puts question banks on the same footing as the rest of this ruleset
-    // rather than merely claiming to be.
+    // A previous attempt required the write to name a roster document that
+    // exists, on the theory that roster ids are a hash of the teacher code.
+    // THAT WAS BROKEN: rosters allow `create: if true` with no id validation,
+    // so an attacker creates rosters/<anything> in one request and uses it as
+    // their own credential in the next. exists() proves a document is present,
+    // never that whoever wrote it knew a secret. With no authentication in the
+    // app, any proof a client can present, a client can manufacture.
+    //
+    // So publishing is an ADMIN operation: the Firebase console, or a script
+    // holding service-account credentials, both of which bypass these rules.
+    // That costs the browser-console publish path, which had no UI and no
+    // callers. It does not cost the feature — banks still load from the DB, and
+    // a question can still be fixed without shipping a build.
+    //
+    // If in-app publishing is ever wanted, the mechanism is a shared secret
+    // compared against a literal IN THIS FILE — rules are server-side and are
+    // never served to clients, so a hash placed here stays private in a way
+    // nothing in index.html can.
     match /questionbanks/{id} {
       allow get: if true;
-      allow list, delete: if false;
-      allow create, update: if isEditor() && wellFormedBank();
-    }
-
-    function isEditor() {
-      return request.resource.data.editor is string
-          && request.resource.data.editor.size() > 8
-          && exists(/databases/$(database)/documents/rosters/$(request.resource.data.editor));
-    }
-
-    // Shape and size are enforced here too, so even a valid editor cannot write
-    // arbitrary junk, and a runaway payload cannot approach Firestore's 1 MiB
-    // document ceiling.
-    function wellFormedBank() {
-      return request.resource.data.keys().hasOnly(['sets', 'version', 'updated', 'editor'])
-          && request.resource.data.sets is string
-          && request.resource.data.sets.size() > 2
-          && request.resource.data.sets.size() < 900000
-          && request.resource.data.version is int
-          && request.resource.data.updated is int;
+      allow list, create, update, delete: if false;
     }
   }
 }

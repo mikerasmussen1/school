@@ -59,13 +59,24 @@ done" keeps the old behavior.
   writes some other way.
 - `questionbanks` is the one collection whose ids are NOT secret — they are
   `y3`, `y5`, `la`, `japan`, named in the client source. Reads are public,
-  which is correct since every device fetches the exercises. Writes therefore
-  cannot be `if true`: that would let anyone who reads our JavaScript replace
-  every question a third-grader is served, and `QBank.publish`'s validation is
-  client-side so a raw REST PATCH skips it. Instead a write must carry an
-  `editor` field holding the id of a roster document that exists — which is a
-  hash of the teacher code, so publishing is gated on knowing that code.
-  `QBank.publish(bankId, sets, version, teacherCode)` requires it.
+  which is correct since every device fetches the exercises. **Client writes
+  are denied outright**, because the unguessable-id protection the rest of the
+  ruleset depends on simply does not apply to a public id, and
+  `QBank.publish`'s validation is client-side so a raw REST PATCH skips it.
+  Publishing is an admin operation: the Firebase console, or a script with
+  service-account credentials. Both bypass rules.
+- A rejected design worth recording, so nobody re-invents it: requiring the
+  write to name an existing roster document, on the theory that roster ids are
+  a hash of the teacher code. It does not work. Rosters allow
+  `create: if true` with no id validation, so an attacker creates
+  `rosters/<anything>` in one request and presents it as their own credential
+  in the next. `exists()` proves a document is present, never that whoever
+  wrote it knew a secret — and with no auth in the app, any proof a client can
+  present is a proof a client can manufacture.
+- If in-app publishing is ever wanted, the mechanism is a shared secret
+  compared against a literal **inside `firestore.rules`**. Rules are
+  server-side and never served to clients, so a hash placed there stays private
+  in a way nothing in `index.html` can.
 - With `REMOTE_PROJECT_ID = ""` the app behaves exactly as before
   (device-local, no codes).
 

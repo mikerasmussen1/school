@@ -102,6 +102,28 @@ end, and Teacher HQ. If a set id is wrong the set simply will not appear.
 
 Print packs and worksheet packs are separate files (`Unit N Print Pack.dc.html`,
 `Unit N Worksheets.dc.html`) and are generated to PDF by hand — ask before
-touching those; there is a strict grid regime. Worksheet pages carry 18 items
-per set (8 Warm-Up, 7 Core, 3 Challenge) drawn from the front of each bank, so
-a set with fewer than 18 unique items will print short.
+touching those; there is a strict grid regime.
+
+## How a worksheet relates to a set
+
+A worksheet is a **replacement** for doing the set in the app, not an extra. It
+prints the set's whole bank across two pages — front is Warm-Up and Core, back
+is Challenge, working space and the error journal — so a paper day and a screen
+day produce the same evidence.
+
+Two rules the generator follows, and the app mirrors in code:
+
+1. Items are deduped **in bank order** (same question text = one item), then
+   grouped Warm-Up → Core → Challenge.
+2. They are numbered **1..N straight through the sheet**, front to back. That
+   printed number is what the photo scanner reads, and `pOnPaper` in
+   `index.html` builds the same list to translate printed number back to the
+   item's index in the bank.
+
+If you change the dedupe or the grouping in one place you must change it in the
+other, or scanned answers land on the wrong problems. The Core section also
+prints a stop rule — the paper version of the Streak Run — so a fluent child
+stops after six and a struggling one keeps going.
+
+A set with a short Core (few unique tier-1 items) prints a short sheet, so put
+real, distinct problems in the extra banks rather than repeating Warm-Up facts.

@@ -138,6 +138,21 @@ for (const f of dcFiles) {
   if (!/<\/html>\s*$/.test(html.trim())) fail(`${f} does not end with </html> — truncated?`);
 }
 
+// ── 3b. Paper answers must land on the right problems ────────────────────
+// The printed sheet and index.html's pOnPaper are built by different tools but
+// must produce the same ordered list, or a photographed worksheet maps answers
+// onto the wrong questions and a child is marked wrong for correct work.
+section("3b. Paper -> app problem mapping");
+try {
+  execSync("node scripts/check-paper-mapping.js", { stdio: "pipe" });
+  pass("printed numbering matches the app's mapping on every page");
+} catch (e) {
+  const out = String((e.stdout || "") + (e.stderr || ""));
+  const lines = out.split("\n").filter(l => /FAIL|MISMATCH/.test(l)).slice(0, 6);
+  fail("paper/app mapping is broken — scanned answers would land on the wrong problems");
+  lines.forEach(l => console.log("        " + l.trim()));
+}
+
 // ── 4. Files the handoff says never to edit ──────────────────────────────
 section("4. Protected runtime files");
 const PROTECTED = ["support.js", "doc-page.js"];

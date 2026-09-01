@@ -3491,12 +3491,13 @@ const PaperReader = {
     try{ img=await this.shrink(file); }
     catch(e){ this.log({ev:"shrink-error",err:String(e&&e.message||e)}); throw e; }
     const prompt=
-      "You are reading a photo of a child's handwritten math homework.\n"+
-      "These are the problems in the exercise (JSON, each with an index i and the question q):\n"+
-      JSON.stringify(items)+"\n"+
-      "1. Decide whether the paper in the photo shows work for THIS exercise (the same problems). Set \"matches\" accordingly.\n"+
-      "2. If it matches: for every problem whose FINAL answer you can read on the paper, record the child's answer EXACTLY as written, digits only — even if the answer is wrong. The work often uses area models, multiplication grids, number lines, or tally charts; the final answer is usually circled, boxed, written after an equals sign, or written below the model. Read only what the child actually WROTE as the final answer — never compute it yourself from the working (if a grid shows partial products but no written total, skip that problem). Skip anything you cannot find or cannot read confidently.\n"+
-      "Respond with only JSON: {\"matches\": true|false, \"answers\": {\"<i>\": \"<digits>\"}}";
+      "You are reading a photo of a child's handwritten math worksheet.\n"+
+      "The printed sheet numbers every problem straight through, front to back: Warm-Up first in a grid of small boxes, then Core as full-width rows, then Challenge on the back. Each problem's printed number sits just before the question.\n"+
+      "These are the problems, in printed order (JSON, each with its printed number n and the question q):\n"+
+      JSON.stringify(items.map(x=>({n:x.n,q:x.q})))+"\n"+
+      "1. Decide whether the paper in the photo shows work for THIS worksheet (the same problems). Set \"matches\" accordingly. A photo of only one side of the sheet still matches — just report the problems you can see.\n"+
+      "2. If it matches: for every problem whose FINAL answer you can read on the paper, record the child's answer EXACTLY as written — even if the answer is wrong. Match each answer to its problem by the PRINTED NUMBER next to it; use the question text only to confirm. The work often uses area models, multiplication grids, number lines, or tally charts; the final answer is usually on the answer line, circled, boxed, or written after an equals sign. Read only what the child actually WROTE as the final answer — never compute it yourself from the working (if a grid shows partial products but no written total, skip that problem). Keep decimal points, fraction slashes and minus signs; drop currency symbols, commas and units. Skip anything you cannot find or cannot read confidently, and skip blank answer lines.\n"+
+      "Respond with only JSON: {\"matches\": true|false, \"answers\": {\"<n>\": \"<answer>\"}}";
     const body={
       contents:[{parts:[{text:prompt},{inline_data:{mime_type:img.mime,data:img.b64}}]}],
       generationConfig:{response_mime_type:"application/json"}
@@ -3706,16 +3707,22 @@ class Component extends DCLogic {
       if(!res||res.matches!==true){ this.setState({paperFlow:"mismatch"}); return; }
       const ansMap=res.answers||{};
       const setId=this._paperCtx.setId;
-      const okIdx=new Set(this._paperCtx.items.map(x=>String(x.i)));
+      // The sheet numbers problems 1..N in printed order; the app stores them by
+      // their index in the set's bank. byN is that translation.
+      const byN={}; this._paperCtx.items.forEach(x=>{ byN[String(x.n)]=x.i; });
+      let hits=0;
       this.saveState(st=>{
         const filled={...(st.pAns[setId]||{})};
         Object.keys(ansMap).forEach(k=>{
-          if(!okIdx.has(String(k))) return;
-          const v=String(ansMap[k]==null?"":ansMap[k]).replace(/[^0-9]/g,"");
-          if(v) filled[k]=v;
+          const idx=byN[String(k).replace(/[^0-9]/g,"")];
+          if(idx==null) return;
+          const v=String(ansMap[k]==null?"":ansMap[k]).replace(/[^0-9./-]/g,"").slice(0,9);
+          if(v){ filled[idx]=v; hits++; }
         });
         return {pAns:{...st.pAns,[setId]:filled},paperFlow:null,
-                paperMsg:"Image analyzed — your answers are filled in! Press Check when you're ready."};
+                paperMsg:hits
+                  ? "Read "+hits+" answer"+(hits===1?"":"s")+" off your sheet — they're filled in below. Press Check when you're ready."
+                  : "Couldn't make out any answers on that photo. Try again with more light, or type them in."};
       });
     }catch(err){
       this.setState({paperFlow:"ask",paperErr:"Couldn't read the photo — try again with more light and the whole page in the shot."});
@@ -4600,7 +4607,17 @@ class Component extends DCLogic {
             pPaper:{...s.pPaper,[key]:true}
           }));
         };
-        this.paperStart({setId:set.id,key,items:visible.map(x=>({i:x.i,q:x.it.q}))},markDone);
+        // The printed sheet always carries the WHOLE set, deduped in bank order
+        // then grouped Warm-Up → Core → Challenge and numbered straight
+        // through. Mirror that exactly so printed number → bank index is right.
+        const seenQ=new Set(); const uniq=[];
+        set.items.forEach((it,i)=>{
+          const q=String(it.q).replace(/\s+/g,"").toLowerCase();
+          if(seenQ.has(q)) return; seenQ.add(q); uniq.push({it,i});
+        });
+        const sheet=[];
+        [0,1,2].forEach(t=>uniq.forEach(x=>{ if(x.it.t===t) sheet.push({i:x.i,n:sheet.length+1,q:x.it.q}); }));
+        this.paperStart({setId:set.id,key,items:sheet},markDone);
       },
       paperAsk:st.paperFlow==="ask",
       paperReading:st.paperFlow==="reading",

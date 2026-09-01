@@ -4526,8 +4526,8 @@ class Component extends DCLogic {
       const slice=rec.slice||{};
       if(open===false){ this.setState({tBusy:false,tData:slice,tErr:""}); return; }
       const entry=(this.state.tRoster||[]).find(x=>x.key===k)||{};
-      // Mirrors tOpenHQ: the gate is a fixed overlay, so it has to be dropped
-      // and remembered, or closing HQ lands the teacher on the pilot sign-in.
+      // The gate is a fixed overlay, so it has to be dropped and remembered,
+      // or closing HQ lands the teacher back on the pilot sign-in.
       this.setState({tBusy:false,tData:slice,tErr:"",
         tView:{key:k, name:rec.name||entry.name||"Pilot",
                curriculum:slice.curriculum||entry.curriculum||"y3", slice},
@@ -4740,56 +4740,6 @@ class Component extends DCLogic {
       hqViewNote:st.tView?"The suggestions and standards below are "+st.tView.name+"'s record, read live from the database. Approving a change writes to their record, not this device.":"",
       hqExit:()=>this.setState(s=>({tView:null,tFront:true,view:"hq",gate:s.tFromGate?true:s.gate}))
     };
-  }
-
-  // Shared by both Teacher HQ views: the cloud-roster one reads the fetched
-  // slice, the on-device one reads each pilot's saved slice.
-  // One row per set per day, newest first, each with a per-item grid. Green is
-  // right, red is wrong and carries what the child typed, amber is a written
-  // response waiting to be marked by hand.
-  exerciseRows(slice, setById){
-      const exLog=(slice&&slice.pLog)||{};
-      const exRows=[];
-      Object.keys(exLog).forEach(id=>{
-        const byDay={};
-        (exLog[id]||[]).forEach(e=>{ (byDay[e.d]=byDay[e.d]||[]).push(e); });
-        Object.keys(byDay).forEach(d=>{
-          // Same item answered twice in a day: the last answer is the one that counts.
-          const seen={}; byDay[d].forEach(e=>{ seen[e.qid||e.i]=e; });
-          const items=Object.keys(seen).map(k=>seen[k]).sort((a,b)=>a.ts-b.ts);
-          const marked=items.filter(e=>e.ok!==null);
-          const right=marked.filter(e=>e.ok).length;
-          const pct=marked.length?Math.round(right/marked.length*100):null;
-          const m=setById[id];
-          exRows.push({
-            key:id+"|"+d, day:Number(d), ts:items[items.length-1].ts,
-            unit:m?("Mission 0"+m.u+" · "+m.s.label):id,
-            title:m?m.s.title:id,
-            when:new Date(items[items.length-1].ts).toLocaleDateString(undefined,{month:"short",day:"numeric"}),
-            mode:items.some(e=>e.m==="streak")?(items.every(e=>e.m==="streak")?"Streak Run":"Streak + worksheet"):"Worksheet",
-            score:marked.length?right+" / "+marked.length:"—",
-            pct:pct==null?"—":pct+"%",
-            pctColor:pct==null?"rgba(238,242,255,.6)":pct>=85?"#4ADE80":pct>=70?"#FBBF24":"#F87171",
-            cells:items.map((e,k)=>({
-              n:k+1,
-              mark:e.ok===null?"·":e.ok?"✓":"✗",
-              tip:(e.q||"")+"  →  "+(e.ok===null?"written response, mark by hand":
-                   e.ok?("correct: "+(e.given||"")):("typed "+(e.given||"(blank)")+", answer "+(e.exp||""))),
-              style:"width:26px;height:26px;border-radius:8px;display:grid;place-items:center;font-size:12px;font-family:'JetBrains Mono',monospace;"+
-                (e.ok===null?"background:rgba(251,191,36,.16);color:#FBBF24;border:1px solid rgba(251,191,36,.4)"
-                 :e.ok?"background:rgba(74,222,128,.16);color:#4ADE80;border:1px solid rgba(74,222,128,.4)"
-                      :"background:rgba(248,113,113,.18);color:#FCA5A5;border:1px solid rgba(248,113,113,.45)")
-            })),
-            misses:items.filter(e=>e.ok===false).map(e=>({
-              q:e.q, given:e.given||"(blank)", exp:e.exp||"",
-              tier:e.t==null?"":(TIER_NAME[e.t]||"")
-            })),
-            hasMisses:items.some(e=>e.ok===false)
-          });
-        });
-      });
-      exRows.sort((a,b)=>b.ts-a.ts);
-      return exRows;
   }
 
   // ── Teacher review: student → day → set → every answer ───────────────────

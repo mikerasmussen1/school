@@ -5583,7 +5583,13 @@ class Component extends DCLogic {
     // Either one set, or the whole day when "all answers" is on. A tier
     // picked off the summary narrows both this and the struggle list.
     const tierOK = e => sel.tier==null || e.t===sel.tier;
-    const shown = (sel.all ? dayEntries : (sel.set?(bySet[sel.set]||[]):[])).filter(tierOK);
+    /* "Show all answers" must cover the SAME scope the struggle list was built
+     * from, which is the whole record when no day is picked and just that day
+     * when one is. It previously used dayEntries unconditionally — and
+     * dayEntries is [] with no day selected, so the button promised every
+     * answer and delivered an empty list. */
+    const inScope = sel.day!=null ? dayEntries : all;
+    const shown = (sel.all ? inScope : (sel.set?(bySet[sel.set]||[]):[])).filter(tierOK);
     const secs=this.itemSecs(dayEntries);
     put("Answers", shown.slice().sort((a,b)=>a.ts-b.ts).map((e,i)=>{
       const m=meta[e.setId];
@@ -5601,7 +5607,8 @@ class Component extends DCLogic {
         when:new Date(e.ts).toLocaleTimeString(undefined,{hour:"numeric",minute:"2-digit"})};
     }));
     put("AnswersOn", shown.length>0);
-    put("AnswersTitle", (sel.all?"Every answer this day":(sel.set&&meta[sel.set]?meta[sel.set].s.title:"Answers"))+(sel.tier!=null?" · "+TIER_NAME[sel.tier]:""));
+    put("AnswersTitle", (sel.all?(sel.day!=null?"Every answer this day":"Every answer")
+                                :(sel.set&&meta[sel.set]?meta[sel.set].s.title:"Answers"))+(sel.tier!=null?" · "+TIER_NAME[sel.tier]:""));
     put("AllDayGo", ()=>go({who:who?who.id:null, day:sel.day, set:null, all:!sel.all, tier:sel.tier}));
     put("AllDayLabel", sel.all?"Back to one set at a time":"See every answer this day");
     put("AllDayOn", sel.day!=null);

@@ -1,0 +1,7 @@
+# macOS Finder metadata — created on any folder the user opens, never content.
+.DS_Store
+._*
+
+# Editor / OS scratch
+*.swp
+*~

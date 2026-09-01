@@ -31,8 +31,16 @@
   const Tutor = {
     apiKey:"",
     model:"",
-    configure(key, model){ this.apiKey=key||""; this.model=model||""; return this; },
-    get enabled(){ return !!this.apiKey; },
+    proxyUrl:"",
+    /* A proxyUrl means the key lives on a server and the browser never holds
+     * one — see worker/tutor-proxy.js. It takes precedence over any key, so a
+     * config document carrying both cannot accidentally keep shipping the key
+     * to clients. */
+    configure(key, model, proxyUrl){
+      this.apiKey=key||""; this.model=model||""; this.proxyUrl=proxyUrl||"";
+      return this;
+    },
+    get enabled(){ return !!(this.proxyUrl || this.apiKey); },
 
     /* Provider is inferred from the key, so switching is a one-field edit in
      * Firestore with no deploy: an "sk-ant-" key routes to Anthropic, anything
@@ -40,7 +48,28 @@
     get provider(){ return /^sk-ant-/.test(this.apiKey) ? "anthropic" : "gemini"; },
 
     async _call(prompt){
+      if(this.proxyUrl) return this._callProxy(prompt);
       return this.provider==="anthropic" ? this._callClaude(prompt) : this._callGemini(prompt);
+    },
+
+    /* Proxy mode: no credential leaves this file, because there is none here.
+     * The Worker replies with Anthropic's own body, so the parsing below is
+     * identical to _callClaude — including re-attaching the prefilled brace. */
+    async _callProxy(prompt){
+      const r=await fetch(this.proxyUrl,{
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({prompt:prompt, model:this.model||undefined})});
+      if(!r.ok){
+        let detail=""; try{ const e=await r.json(); detail=(e.error&&(e.error.message||e.error))||""; }catch(e){}
+        try{ window.Diag && Diag.tutor("http-error", {provider:"proxy", status:r.status, detail:String(detail).slice(0,160)}); }catch(e){}
+        throw new Error(r.status===429
+          ? "The tutor is busy — try again in a little while."
+          : "Tutor proxy "+r.status+(detail?": "+String(detail).slice(0,120):""));
+      }
+      const j=await r.json();
+      const txt=((j.content||[]).find(c=>c.type==="text")||{}).text||"";
+      return this._json("{"+txt);
     },
 
     async _callGemini(prompt){

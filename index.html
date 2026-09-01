@@ -4111,15 +4111,23 @@ const Remote = {
       const f=(await r.json()).fields||{};
       // `gemini` is the historical field name and stays for compatibility; an
       // sk-ant- value in it routes to Claude instead. `model` is optional.
-      const k=(f.apiKey&&f.apiKey.stringValue)||(f.gemini&&f.gemini.stringValue)||"";
+      // proxyUrl wins: with it the browser holds no credential at all.
+      const proxy=(f.proxyUrl&&f.proxyUrl.stringValue)||"";
+      const k=proxy ? "" : ((f.apiKey&&f.apiKey.stringValue)||(f.gemini&&f.gemini.stringValue)||"");
       const model=(f.model&&f.model.stringValue)||"";
-      if(model) localStorage.setItem("GEMINI_API_MODEL", model);
-      if(!k || k===localStorage.getItem("GEMINI_API_KEY")) {
-        if(model && window.Tutor) Tutor.configure(localStorage.getItem("GEMINI_API_KEY")||"", model);
-        return;
-      }
-      localStorage.setItem("GEMINI_API_KEY", k);
-      if(window.Tutor) Tutor.configure(k, model);
+      try{
+        if(model) localStorage.setItem("GEMINI_API_MODEL", model);
+        if(proxy){
+          localStorage.setItem("TUTOR_PROXY_URL", proxy);
+          // A key cached from before the switch must not linger on the device.
+          localStorage.removeItem("GEMINI_API_KEY");
+        } else {
+          localStorage.removeItem("TUTOR_PROXY_URL");
+          if(k) localStorage.setItem("GEMINI_API_KEY", k);
+        }
+      }catch(e){}
+      if(window.Tutor) Tutor.configure(k||localStorage.getItem("GEMINI_API_KEY")||"", model, proxy);
+      if(window.PaperReader && (proxy||k)) PaperReader.enabled = true;
       if(window.PaperReader) PaperReader.enabled = true;
     }catch(e){ /* offline or blocked: whatever is cached still applies */ }
   },
@@ -4439,9 +4447,9 @@ class Component extends DCLogic {
       .catch(()=>this.setState({qbank:"files"}));
     // Lessons are data too, and the tutor writes generated ones back into the
     // same bank so the next child who misses this concept reuses them.
-    Tutor.configure(GEMINI_API_KEY, (function(){
-      try{ return localStorage.getItem("GEMINI_API_MODEL")||""; }catch(e){ return ""; }
-    })());
+    Tutor.configure(GEMINI_API_KEY,
+      (function(){ try{ return localStorage.getItem("GEMINI_API_MODEL")||""; }catch(e){ return ""; } })(),
+      (function(){ try{ return localStorage.getItem("TUTOR_PROXY_URL")||""; }catch(e){ return ""; } })());
     // Every device picks the key up on its own, no teacher code, no setup.
     // Deliberately public — see Remote.loadSharedKey and BACKEND.md.
     Remote.loadSharedKey();

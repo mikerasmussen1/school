@@ -1,0 +1,7 @@
+name = "baskin-tutor"
+main = "tutor-proxy.js"
+compatibility_date = "2026-09-01"
+
+# No KV, no Durable Objects, no bindings — the rate limiter uses the edge cache
+# so this deploys with nothing but a secret. Free tier is 100,000 requests/day,
+# which two children will not approach.

@@ -55,31 +55,41 @@ done" keeps the old behavior.
   Defaults: `gemini-flash-latest`, or `claude-sonnet-5` for Anthropic. Set
   `model` to `claude-haiku-4-5-20251001` for a cheaper Claude.
 
-  ### The key is public. What that costs depends entirely on the provider.
+  ### Two ways to run this, and only one is safe with a billed key
 
-  Anyone reading `index.html` knows the document id and can fetch the key.
+  **Proxy (recommended, and required for Anthropic).** Set `proxyUrl` on
+  `config/app` to the Cloudflare Worker in `worker/` and DELETE `apiKey`. The
+  browser then holds no credential at all — `proxyUrl` takes precedence in code
+  precisely so a document carrying both cannot keep shipping a key to clients,
+  and any key cached on a device from before the switch is cleared on next load.
+  Deploy steps: `worker/README.md`.
 
-  With a **Gemini free-tier key on a project with no billing**, the worst case
-  is exhausted quota, fixed by rotating the field. That is why this design was
-  acceptable.
+  **Direct (key in the document).** The key is public: anyone reading
+  `index.html` knows the document id and can fetch it.
 
-  With an **Anthropic key, that is no longer true.** Anthropic keys are billed.
-  A stranger who reads the key can spend real money, and a spend cap limits the
-  size of the loss without preventing it — someone can burn the whole monthly
-  cap in minutes and lock the children out of the feature until it resets.
+  With a **Gemini free-tier key on a project with no billing**, worst case is
+  exhausted quota, fixed by rotating the field. That is why this was acceptable.
 
-  So if a Claude key is used here:
-  - Set a **low** monthly spend limit on a dedicated key, not the main one.
-  - Treat the key as disposable and rotate it on any surprise in usage.
-  - Understand that this is accepted exposure, not protection.
+  With an **Anthropic key it is not**, because Anthropic keys are billed. A
+  stranger can spend real money, and a spend cap bounds the size of the loss
+  without preventing it — the cap can be burned in minutes, which also locks the
+  children out until it resets. Use the proxy.
 
-  The durable fix, and the right one the moment this matters, is a proxy that
-  holds the key server-side — a Cloudflare Worker on its free tier, or a
-  Firebase Function (Functions need the Blaze plan for outbound calls). The
-  browser then never sees a credential at all.
+  ### What the proxy does and does not protect
 
-  Note also that calling Anthropic from a browser requires the
-  `anthropic-dangerous-direct-browser-access` header. The name is the warning.
+  The key is genuinely safe: it never reaches a browser. What remains is abuse
+  of the endpoint itself, bounded by three things of very unequal strength:
+
+  1. **Origin allowlist** — stops other websites. Does not stop `curl`, which
+     can send any Origin. Real, but only against casual reuse.
+  2. **Rate limit** — 20 per IP per hour in the edge cache, per-colo rather than
+     global. A speed bump, not a wall.
+  3. **The spend cap on the key** — the only hard limit, and so the one that
+     actually matters. Set it low.
+
+  The Worker also refuses a client-chosen model outside its allowlist, so nobody
+  can bill you for a model you did not pick.
+
 
 - Fallbacks, still supported, set `localStorage` directly:
   - **Any device, including iPads** — visit the site with `?gemkey=THEKEY` on

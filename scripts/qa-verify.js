@@ -36,6 +36,20 @@ for (const s of srcs) {
 if (!/<\/html>\s*$/.test(index.trim())) fail("index.html does not end with </html> — likely truncated");
 else pass("index.html closes properly");
 
+// ── 1b. index.html's own inline script must parse ────────────────────────
+// The app logic lives in a ~112k-char inline <script>. A syntax error there
+// is a blank page for every user, and nothing else here would catch it.
+section("1b. index.html inline script");
+{
+  const blocks = [...index.matchAll(/<script(?![^>]*\bsrc=)[^>]*>([\s\S]*?)<\/script>/g)].map(m => m[1]);
+  if (!blocks.length) fail("index.html has no inline <script> — the app logic is missing");
+  blocks.forEach((code, i) => {
+    if (code.trim().length < 40) return;             // skip tiny shims
+    try { new Function(code); pass(`inline script #${i + 1} parses (${code.length} chars)`); }
+    catch (e) { fail(`inline script #${i + 1} has a syntax error: ${String(e.message).slice(0, 140)}`); }
+  });
+}
+
 // ── 2. The curriculum boots (the real fragility) ─────────────────────────
 // registry.js destructures ~130 names off window.__CURR. If any bank file
 // stops exporting one, the app dies at load with a blank page — and nothing

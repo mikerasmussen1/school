@@ -3099,7 +3099,7 @@
               </div>
               <div style="font-family:Fredoka,sans-serif;font-size:29px;line-height:1.25;margin-bottom:20px;min-height:72px">{{ smQ }}</div>
               <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap">
-                <input value="{{ smVal }}" onChange="{{ smSet }}" onKeyDown="{{ smKey }}" inputMode="numeric" placeholder="?" autoFocus style="{{ smInputStyle }}">
+                <input id="smInput" value="{{ smVal }}" onChange="{{ smSet }}" onKeyDown="{{ smKey }}" inputMode="numeric" placeholder="?" autoFocus style="{{ smInputStyle }}">
                 <sc-if value="{{ smUnrevealed }}" hint-placeholder-val="{{ true }}">
                   <button onClick="{{ smCheck }}" style="font-family:Fredoka,sans-serif;font-size:16px;padding:13px 30px;border-radius:14px;border:0;cursor:pointer;background:linear-gradient(150deg,#38BDF8,#818CF8);color:#04283A" style-hover="filter:brightness(1.1)">Check</button>
                 </sc-if>
@@ -3108,7 +3108,7 @@
                   <button onClick="{{ smNext }}" style="font-family:Fredoka,sans-serif;font-size:16px;padding:13px 30px;border-radius:14px;border:0;cursor:pointer;background:{{ smNextBg }};color:#04283A" style-hover="filter:brightness(1.1)">{{ smNextLabel }}</button>
                 </sc-if>
               </div>
-              <div style="font-size:14px;line-height:1.5;color:#FBBF24;margin-top:14px;min-height:0">{{ smFeedback }}</div>
+              <div style="font-size:15px;font-weight:600;line-height:1.5;color:{{ smFeedbackColor }};margin-top:14px;min-height:0">{{ smFeedback }}</div>
             </div>
           </sc-if>
           <sc-if value="{{ smDone }}" hint-placeholder-val="{{ false }}">
@@ -4323,29 +4323,72 @@ class Component extends DCLogic {
 
   normAns(v){ return String(v==null?"":v).replace(/[\s,]/g,"").toLowerCase().replace(/^0+(?=\d)/,""); }
 
-  // ── Streak Run: one item at a time, close at 5-in-a-row (min 10 attempts) ──
+  // Put the cursor in the answer box for every new problem. autoFocus only
+  // fires on first mount, so without this the child had to click the box
+  // again after each question.
+  focusStreak(){
+    setTimeout(()=>{
+      const el=document.getElementById("smInput");
+      if(el && document.activeElement!==el){ el.focus(); el.select&&el.select(); }
+    },0);
+  }
+
+  // ── Streak Run: one item at a time, close at 5-in-a-row (min 8 attempts) ──
+  // STREAK_GOAL 5 is the mastery threshold the five dots represent. MIN_ATT is
+  // the evidence floor, so a lucky guesser can't close a set in five taps; 8
+  // lets a genuinely fluent child out early on a median 26-item bank while
+  // still asking for real work.
+  // Missed items are RECYCLED to the back of the queue instead of being lost.
+  // Before this, the run simply ended when the bank ran out, so a child who
+  // kept missing got FEWER chances to reach mastery, not more. MAX_ATT stops a
+  // struggling run going on forever.
   streamVals(set, compressed){
     const st=this.state;
     const s = st.stream && st.stream.setId===set.id ? st.stream : null;
     const items=set.items;
-    const start=()=>this.setState({stream:{setId:set.id,pos:0,streak:0,att:0,right:0,val:"",rev:false,lastRight:false,done:false}});
+    const STREAK_GOAL=5, MIN_ATT=8, MAX_ATT=Math.max(items.length+12, 30);
+    const start=()=>{ this.setState({stream:{setId:set.id,pos:0,streak:0,att:0,right:0,val:"",rev:false,lastRight:false,done:false,recycle:[]}}); this.focusStreak(); };
     if(!s) return {pStreamOn:false, pGridOn:true, smStart:start, smLive:false, smDone:false, smDots:[], smProgress:"", smUnrevealed:false, smRevealed:false};
-    const it=items[Math.min(s.pos,items.length-1)], tier=TIERS[it.t];
+    // Past the end of the bank, re-ask whatever was missed.
+    const idxFor=(x)=>{
+      if(x.pos < items.length) return x.pos;
+      const q=x.recycle||[];
+      return q.length ? q[(x.pos-items.length)%q.length] : items.length-1;
+    };
+    const it=items[idxFor(s)], tier=TIERS[it.t];
     const finish=(str)=>{
       const done={...str,done:true};
       this.saveState(prev=>({stream:done,
         pHist:logRun(prev.pHist||{},set.id,str.right,str.att,null),
-        pStreak:{...(prev.pStreak||{}),[set.id]:{att:str.att,right:str.right,d:dayNo(),closed:str.streak>=5}}}));
+        pStreak:{...(prev.pStreak||{}),[set.id]:{att:str.att,right:str.right,d:dayNo(),closed:str.streak>=STREAK_GOAL}}}));
     };
-    const check=()=>{
-      const right=this.normAns(s.val)!==""&&this.normAns(s.val)===this.normAns(it.a);
-      this.setState({stream:{...s,rev:true,lastRight:right}});
-    };
+    // Advance reads LIVE state, not the closure, so the auto-advance timer and
+    // the button can never double-count the same answer.
     const next=()=>{
-      const att=s.att+1, right=s.right+(s.lastRight?1:0), streak=s.lastRight?s.streak+1:0;
-      const closed=(att>=10&&streak>=5)||s.pos>=items.length-1;
-      const ns={...s,att,right,streak,pos:s.pos+1,val:"",rev:false,lastRight:false};
-      if(closed) finish(ns); else this.setState({stream:ns});
+      const cur=(this.state.stream && this.state.stream.setId===set.id) ? this.state.stream : null;
+      if(!cur || !cur.rev || cur.done) return;
+      clearTimeout(this._smTimer);
+      const att=cur.att+1, right=cur.right+(cur.lastRight?1:0), streak=cur.lastRight?cur.streak+1:0;
+      const curIdx=idxFor(cur);
+      const recycle=cur.lastRight
+        ? (cur.recycle||[]).filter(i=>i!==curIdx)      // got it on the retry — retire it
+        : [...(cur.recycle||[]), curIdx];              // missed — ask it again later
+      const pos=cur.pos+1;
+      const nothingLeft = pos>=items.length && recycle.length===0;
+      const closed=(att>=MIN_ATT && streak>=STREAK_GOAL) || nothingLeft || att>=MAX_ATT;
+      const ns={...cur,att,right,streak,recycle,pos,val:"",rev:false,lastRight:false};
+      if(closed) finish(ns); else { this.setState({stream:ns}); this.focusStreak(); }
+    };
+    // Mark it, show CORRECT/INCORRECT, then move on by itself. A wrong answer
+    // holds longer so the child can actually read the correct one.
+    const check=()=>{
+      const cur=(this.state.stream && this.state.stream.setId===set.id) ? this.state.stream : s;
+      if(cur.rev || cur.done) return;
+      if(this.normAns(cur.val)==="") return;   // ignore an empty submit
+      const right=this.normAns(cur.val)===this.normAns(it.a);
+      this.setState({stream:{...cur,rev:true,lastRight:right}});
+      clearTimeout(this._smTimer);
+      this._smTimer=setTimeout(next, right?900:2600);
     };
     const streakNow=s.rev?(s.lastRight?s.streak+1:0):s.streak;
     return {
@@ -4362,12 +4405,13 @@ class Component extends DCLogic {
       smUnrevealed:!s.rev, smRevealed:s.rev,
       smCheck:check, smNext:next,
       smMark:s.lastRight?"✓":"✗", smMarkColor:s.lastRight?"#4ADE80":"#FB7185",
-      smNextLabel:(s.att+1>=10&&(s.lastRight?s.streak+1:0)>=5)||s.pos>=items.length-1?"Finish →":"Next →",
+      smFeedbackColor:s.lastRight?"#4ADE80":"#FB7185",
+      smNextLabel:(s.att+1>=MIN_ATT&&(s.lastRight?s.streak+1:0)>=STREAK_GOAL)||(s.pos+1>=items.length&&!(s.recycle||[]).length)?"Finish →":"Next →",
       smNextBg:s.lastRight?"#4ADE80":"#FBBF24",
-      smFeedback:s.rev&&!s.lastRight?("The answer is "+it.a+"."+(it.hint?" "+it.hint:"")+" Your streak resets — keep going."):"",
-      smDoneIcon:s.streak>=5?"🎯":"💪",
-      smDoneTitle:s.streak>=5?"Five in a row — set closed!":"Bank finished",
-      smDoneNote:s.right+" right out of "+s.att+" ("+Math.round(s.right/Math.max(1,s.att)*100)+"%). "+(s.streak>=5?"That's mastery-level closing. Logged for today.":"You worked the whole bank without a closing streak — it's logged, and this set will come back tomorrow."),
+      smFeedback:s.rev?(s.lastRight?"CORRECT":("INCORRECT — the answer is "+it.a+"."+(it.hint?" "+it.hint:"")+" Your streak resets, and this one comes back later.")):"",
+      smDoneIcon:s.streak>=STREAK_GOAL?"🎯":"💪",
+      smDoneTitle:s.streak>=STREAK_GOAL?"Five in a row — set closed!":"Bank finished",
+      smDoneNote:s.right+" right out of "+s.att+" ("+Math.round(s.right/Math.max(1,s.att)*100)+"%). "+(s.streak>=STREAK_GOAL?"That's mastery-level closing. Logged for today.":"You worked the whole bank without a closing streak — it's logged, and this set will come back tomorrow."),
       smAgain:start,
       smExit:()=>this.setState({stream:null})
     };

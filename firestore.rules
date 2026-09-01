@@ -80,5 +80,27 @@ service cloud.firestore {
       allow get: if true;
       allow list, create, update, delete: if false;
     }
+    // Device config — currently just the Gemini API key.
+    //
+    // This is the ONE collection here holding an actual secret, so read is
+    // deliberately NOT public. It is protected the way students and rosters
+    // are: the doc id is a SHA-256 of the teacher code (Remote.configKeyFor,
+    // salted differently from rosterKeyFor so one id never reveals the other),
+    // and `list` is denied, so the id cannot be discovered. Reading the key is
+    // exactly as hard as knowing the teacher code.
+    //
+    // `get` has to be open-by-id because a child's iPad has no way to
+    // authenticate — that is the same constraint as everywhere else here, and
+    // the unguessable id is the same answer. Writes are denied: the key is put
+    // in place once from the Firebase console, not by the app.
+    //
+    // Worth being clear about the blast radius. If the teacher code leaks, the
+    // Gemini key leaks with it. On a project with no billing account attached
+    // that costs free-tier quota, not money — which is why this trade is
+    // acceptable here and would NOT be if billing were ever enabled.
+    match /config/{id} {
+      allow get: if true;
+      allow list, create, update, delete: if false;
+    }
   }
 }

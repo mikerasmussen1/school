@@ -40,7 +40,36 @@ done" keeps the old behavior.
   it, and environment variables do not help — this is a static site, so there is
   no server to hold one and a build-time substitution still ships the key to the
   browser.
-- The key lives in `localStorage`, set once per device. Two ways:
+- **Preferred: store it once in Firestore, then unlock each device with the
+  teacher code.** The key sits at `config/<id>`, where `<id>` is a SHA-256 of
+  the teacher code — unguessable, and `list` is denied, so reading it is exactly
+  as hard as knowing that code. Typing the teacher code in Teacher HQ fetches
+  the key and caches it on that device. One short code the grown-up already
+  knows, instead of a 53-character key, and nothing lands in browser history.
+
+  Set it up once. In a browser console on the site, compute the doc id without
+  the code ever leaving the machine:
+
+  ```js
+  (async c => {
+    const d = await crypto.subtle.digest("SHA-256",
+      new TextEncoder().encode("gemini:" + c.trim().toLowerCase()));
+    return "k-" + [...new Uint8Array(d)].map(b=>b.toString(16).padStart(2,"0")).join("").slice(0,28);
+  })("YOUR-TEACHER-CODE").then(console.log)
+  ```
+
+  Then in the Firebase console → Firestore → collection `config`, create a
+  document with that id and one **string** field named `gemini` holding the key.
+  Writes are denied to the app, so this is a console-only step by design.
+
+  After that, on any device: open Teacher HQ, type the teacher code, done.
+
+  The trade, stated plainly: **if the teacher code leaks, the Gemini key leaks
+  with it.** On a project with no billing attached that costs free-tier quota
+  rather than money, which is why it is acceptable here and would not be if
+  billing were ever enabled.
+
+- Fallbacks, still supported, set `localStorage` directly:
   - **Any device, including iPads** — visit the site with `?gemkey=THEKEY` on
     the end of the URL. It stores the key and strips the parameter from the
     address bar immediately. This is the only method that works on an iPad,

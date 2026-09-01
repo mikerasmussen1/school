@@ -4060,6 +4060,32 @@ const Remote = {
    * this file. Knowing the code is what grants the overview, exactly as
    * knowing a pilot's name+code grants their record.
    * ------------------------------------------------------------------- */
+  /* The Gemini key, kept in Firestore at an UNGUESSABLE id derived from the
+   * teacher code — the same protection the rest of this database relies on.
+   *
+   * A plain readable doc would be no better than committing the key: this app
+   * has no authentication, so any rule permissive enough for a child's iPad is
+   * permissive enough for anyone. What makes it safe is that the id cannot be
+   * guessed and `list` is denied, so reading the key is exactly as hard as
+   * knowing the teacher code.
+   *
+   * Deliberately a DIFFERENT salt from rosterKeyFor: a roster id must not
+   * reveal the config id, or anyone who ever saw one URL would have the other.
+   */
+  async configKeyFor(code){
+    const enc=new TextEncoder().encode("gemini:"+String(code||"").trim().toLowerCase());
+    const dig=await crypto.subtle.digest("SHA-256",enc);
+    const hex=Array.from(new Uint8Array(dig)).map(b=>b.toString(16).padStart(2,"0")).join("");
+    return "k-"+hex.slice(0,28);
+  },
+  async fetchGeminiKey(ckey){
+    try{
+      const r=await fetch(this._doc("config",ckey));
+      if(!r.ok) return null;                       // 404 = none stored yet
+      const f=(await r.json()).fields||{};
+      return (f.gemini&&f.gemini.stringValue)||null;
+    }catch(e){ return null; }
+  },
   async rosterKeyFor(code){
     const enc=new TextEncoder().encode("roster:"+String(code||"").trim().toLowerCase());
     const dig=await crypto.subtle.digest("SHA-256",enc);
@@ -4860,7 +4886,18 @@ class Component extends DCLogic {
       const key=await Remote.rosterKeyFor(code);
       const list=await Remote.fetchRoster(key);
       if(list===null){ this.setState({tBusy:false,tErr:"Couldn't reach the database. Check the connection and try again."}); return; }
-      this.setState({tBusy:false,tKey:key,tRoster:list,tCode:"",tSel:"",tData:null});
+        // Same code also unlocks the Gemini key, so a grown-up sets up a device by
+      // typing one short code they already know rather than a 53-character key.
+      try{
+        const ck=await Remote.configKeyFor(code);
+        const gk=await Remote.fetchGeminiKey(ck);
+        if(gk){
+          localStorage.setItem("GEMINI_API_KEY", gk);
+          Tutor.configure(gk);          // live this session; the const picks it up next load
+          PaperReader.enabled = true;
+        }
+      }catch(e){ /* key setup is best-effort; the roster still opened */ }
+    this.setState({tBusy:false,tKey:key,tRoster:list,tCode:"",tSel:"",tData:null});
     };
 
     const pick=async k=>{

@@ -4134,8 +4134,22 @@ const Storage = {
  * key server-side — a Cloudflare Worker or a Firebase Function — so the browser
  * never sees it at all. See BACKEND.md. */
 const GEMINI_API_KEY = (function(){
-  try { return localStorage.getItem("GEMINI_API_KEY") || ""; }
-  catch (e) { return ""; }   // private mode / storage disabled
+  try {
+    // ?gemkey=... sets the key and immediately strips itself from the URL.
+    // This exists because the children use iPads, and Safari on iPad has no
+    // JavaScript console — the console instruction above is desktop-only, so
+    // without this there is no way to set a key on the devices that matter.
+    // The key is visible in that one URL (and so in history), which is why the
+    // parameter is removed from the address bar the moment it is stored.
+    var m = /[?&]gemkey=([^&#]+)/.exec(location.search);
+    if (m) {
+      localStorage.setItem("GEMINI_API_KEY", decodeURIComponent(m[1]));
+      var clean = location.pathname + location.search.replace(/([?&])gemkey=[^&#]*&?/, "$1")
+                                                    .replace(/[?&]$/, "");
+      history.replaceState(null, "", clean + location.hash);
+    }
+    return localStorage.getItem("GEMINI_API_KEY") || "";
+  } catch (e) { return ""; }   // private mode / storage disabled
 })();
 
 const PaperReader = {

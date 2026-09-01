@@ -40,10 +40,18 @@ done" keeps the old behavior.
   it, and environment variables do not help — this is a static site, so there is
   no server to hold one and a build-time substitution still ships the key to the
   browser.
-- The key now lives in `localStorage`, set once per device. In the browser
-  console on the site:
-  `localStorage.setItem("GEMINI_API_KEY", "PASTE_KEY_HERE")`, then reload.
-  Remove with `localStorage.removeItem("GEMINI_API_KEY")`.
+- The key lives in `localStorage`, set once per device. Two ways:
+  - **Any device, including iPads** — visit the site with `?gemkey=THEKEY` on
+    the end of the URL. It stores the key and strips the parameter from the
+    address bar immediately. This is the only method that works on an iPad,
+    because Safari there has no JavaScript console.
+  - **Desktop** — browser console:
+    `localStorage.setItem("GEMINI_API_KEY", "PASTE_KEY_HERE")`, then reload.
+  - Remove with `localStorage.removeItem("GEMINI_API_KEY")`, or by clearing
+    site data.
+  Note the `?gemkey=` URL does put the key in that device's browser history for
+  one entry. On a family iPad that is an acceptable trade for it being settable
+  at all; do not paste such a URL into a chat, an email, or anything shared.
 - The current key ("BaskinSchool", created 2026-09-01) lives on Google Cloud
   project **270254517675**, which is NOT `big-math-adventures`
   (632810102950 — the Firestore project). That is fine functionally: the Gemini

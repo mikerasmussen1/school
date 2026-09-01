@@ -5607,6 +5607,15 @@ class Component extends DCLogic {
         when:new Date(e.ts).toLocaleTimeString(undefined,{hour:"numeric",minute:"2-digit"})};
     }));
     put("AnswersOn", shown.length>0);
+    /* Log only the FAILURE case — "show all answers" asked for and got nothing.
+     * drillVals runs on every render, so logging unconditionally would flood
+     * the ring buffer and bury everything else. */
+    if(sel.all && shown.length===0){
+      try{ Diag.write({src:"review", step:"all-answers-empty", pfx:pfx,
+        who:sel.who||null, day:sel.day, tier:sel.tier,
+        students:students.length, dayEntries:dayEntries.length,
+        allEntries:all.length, hasWho:!!who}); }catch(e){}
+    }
     put("AnswersTitle", (sel.all?(sel.day!=null?"Every answer this day":"Every answer")
                                 :(sel.set&&meta[sel.set]?meta[sel.set].s.title:"Answers"))+(sel.tier!=null?" · "+TIER_NAME[sel.tier]:""));
     put("AllDayGo", ()=>go({who:who?who.id:null, day:sel.day, set:null, all:!sel.all, tier:sel.tier}));

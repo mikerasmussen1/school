@@ -39,9 +39,20 @@ In Firestore → `config/app`, set:
 Then **delete the `apiKey` field**. With `proxyUrl` set the app sends no key at
 all, and having both is a needless exposure.
 
-Optional: `model` accepts `claude-sonnet-5` (default) or
-`claude-haiku-4-5-20251001`. The Worker ignores anything else, so a client
-cannot bill you for a model you did not choose.
+## Two jobs, two model defaults
+
+The proxy serves both model features, and picks a default by what it is asked
+to do:
+
+| Request | Default model | Why |
+|---|---|---|
+| Text only — the tutor's lesson | `claude-haiku-4-5-20251001` | Structure and plain explanation at grade 3–5. Haiku handles it. |
+| With an image — grading a scanned worksheet | `claude-sonnet-5` | Reading handwriting and matching each answer to its PRINTED problem number is higher stakes: a misread puts a correct answer on the wrong question and marks a child wrong for work they got right. |
+
+A client may name either model; anything outside the allowlist falls back to the
+default for its job, so nobody can bill you for a model you did not choose.
+Images are capped at 5,000,000 base64 characters and limited to JPEG, PNG, WebP
+and GIF.
 
 ## What this protects, honestly
 

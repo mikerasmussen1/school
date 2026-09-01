@@ -42,11 +42,28 @@ const RATE_WINDOW_SECONDS = 3600;
 const MAX_TOKENS = 4096;
 const MAX_PROMPT_CHARS = 24000;
 
-const DEFAULT_MODEL = "claude-sonnet-5";
+/* Two jobs, two defaults, because they are not equally hard.
+ *
+ * Reading a photo of a child's handwriting and matching each answer to its
+ * PRINTED problem number is the higher-stakes task: a misread lands a correct
+ * answer on the wrong question and marks the child wrong for work they got
+ * right. That gets Sonnet.
+ *
+ * Writing a short remediation lesson is mostly structure and plain explanation,
+ * which Haiku handles well at this grade level. A client can still name either
+ * model; anything outside the allowlist falls back to the default for its job.
+ */
+const DEFAULT_TEXT_MODEL = "claude-haiku-4-5-20251001";
+const DEFAULT_VISION_MODEL = "claude-sonnet-5";
 const ALLOWED_MODELS = [
   "claude-sonnet-5",
   "claude-haiku-4-5-20251001",
 ];
+
+// A 1280px JPEG at q0.85 base64s to a few hundred KB; this leaves generous room
+// while still refusing anything that looks like an attempt to run up a bill.
+const MAX_IMAGE_B64_CHARS = 5000000;
+const ALLOWED_IMAGE_TYPES = ["image/jpeg", "image/png", "image/webp", "image/gif"];
 
 function corsHeaders(origin) {
   return {
@@ -120,9 +137,33 @@ export default {
       return json({ error: "prompt too long" }, 413, origin);
     }
 
+    /* Optional image for scanned-homework grading. */
+    const image = body.image && typeof body.image === "object" ? body.image : null;
+    if (image) {
+      if (!ALLOWED_IMAGE_TYPES.includes(image.mime)) {
+        return json({ error: "unsupported image type" }, 415, origin);
+      }
+      if (typeof image.b64 !== "string" || !image.b64) {
+        return json({ error: "image.b64 required" }, 400, origin);
+      }
+      if (image.b64.length > MAX_IMAGE_B64_CHARS) {
+        return json({ error: "image too large" }, 413, origin);
+      }
+    }
+
     // Never pass a client-chosen model straight through — that is how someone
     // bills you for the most expensive model available.
-    const model = ALLOWED_MODELS.includes(body.model) ? body.model : DEFAULT_MODEL;
+    const model = ALLOWED_MODELS.includes(body.model)
+      ? body.model
+      : (image ? DEFAULT_VISION_MODEL : DEFAULT_TEXT_MODEL);
+
+    /* Image first, then the text: Anthropic reads a prompt that refers to "the
+     * photo" more reliably when the photo already precedes it. */
+    const userContent = image
+      ? [{ type: "image",
+           source: { type: "base64", media_type: image.mime, data: image.b64 } },
+         { type: "text", text: prompt }]
+      : prompt;
 
     /* Identity-linked keys (the "works across workspaces" kind) REQUIRE an
      * anthropic-workspace-id header and 400 without it. Workspace-scoped keys
@@ -147,7 +188,7 @@ export default {
         // Prefill an opening brace so the reply starts as JSON. The client
         // re-attaches it; keep the two in step if either changes.
         messages: [
-          { role: "user", content: prompt },
+          { role: "user", content: userContent },
           { role: "assistant", content: "{" },
         ],
       }),

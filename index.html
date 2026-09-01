@@ -4332,22 +4332,56 @@ const PaperReader = {
       "1. Decide whether the paper in the photo shows work for THIS worksheet (the same problems). Set \"matches\" accordingly. A photo of only one side of the sheet still matches — just report the problems you can see.\n"+
       "2. If it matches: for every problem whose FINAL answer you can read on the paper, record the child's answer EXACTLY as written — even if the answer is wrong. Match each answer to its problem by the PRINTED NUMBER next to it; use the question text only to confirm. The work often uses area models, multiplication grids, number lines, or tally charts; the final answer is usually on the answer line, circled, boxed, or written after an equals sign. Read only what the child actually WROTE as the final answer — never compute it yourself from the working (if a grid shows partial products but no written total, skip that problem). Keep decimal points, fraction slashes and minus signs; drop currency symbols, commas and units. Skip anything you cannot find or cannot read confidently, and skip blank answer lines.\n"+
       "Respond with only JSON: {\"matches\": true|false, \"answers\": {\"<n>\": \"<answer>\"}}";
-    const body={
-      contents:[{parts:[{text:prompt},{inline_data:{mime_type:img.mime,data:img.b64}}]}],
-      generationConfig:{response_mime_type:"application/json"}
-    };
-    const r=await fetch(
-      "https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent?key="+GEMINI_API_KEY,
-      {method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)});
+    /* Routes the same way the tutor does: through the proxy when one is
+     * configured, so the browser holds no credential; otherwise straight to
+     * whichever provider the key belongs to.
+     *
+     * Reading handwriting and matching each answer to its PRINTED problem
+     * number is the higher-stakes of the two model jobs — a misread lands a
+     * correct answer on the wrong question and marks the child wrong for work
+     * they got right — so image requests use Sonnet. The proxy defaults images
+     * to Sonnet on its own; the direct path names it explicitly. */
+    const T=window.Tutor||{};
+    const viaProxy=!!T.proxyUrl;
+    const anthropic=viaProxy || /^sk-ant-/.test(T.apiKey||GEMINI_API_KEY||"");
+    let r;
+    if(viaProxy){
+      r=await fetch(T.proxyUrl,{method:"POST",headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({prompt:prompt, image:{mime:img.mime,b64:img.b64}})});
+    } else if(anthropic){
+      const key=T.apiKey||GEMINI_API_KEY;
+      r=await fetch("https://api.anthropic.com/v1/messages",{method:"POST",
+        headers:Object.assign({"Content-Type":"application/json","x-api-key":key,
+          "anthropic-version":"2023-06-01","anthropic-dangerous-direct-browser-access":"true"},
+          T.workspaceId?{"anthropic-workspace-id":T.workspaceId}:{}),
+        body:JSON.stringify({model:"claude-sonnet-5",max_tokens:2048,
+          messages:[{role:"user",content:[
+            {type:"image",source:{type:"base64",media_type:img.mime,data:img.b64}},
+            {type:"text",text:prompt}]},
+            {role:"assistant",content:"{"}]})});
+    } else {
+      r=await fetch(
+        "https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent?key="+GEMINI_API_KEY,
+        {method:"POST",headers:{"Content-Type":"application/json"},
+         body:JSON.stringify({contents:[{parts:[{text:prompt},{inline_data:{mime_type:img.mime,data:img.b64}}]}],
+           generationConfig:{response_mime_type:"application/json"}})});
+    }
     if(!r.ok){
-      let detail=""; try{ detail=((await r.json()).error||{}).message||""; }catch(e){}
-      this.log({ev:"api-error",status:r.status,msg:detail.slice(0,160),ms:Date.now()-t0});
-      throw new Error("Gemini "+r.status);
+      let detail=""; try{ const e=await r.json(); detail=(e.error&&(e.error.message||e.error))||""; }catch(e){}
+      this.log({ev:"api-error",provider:viaProxy?"proxy":(anthropic?"anthropic":"gemini"),
+                status:r.status,msg:String(detail).slice(0,160),ms:Date.now()-t0});
+      throw new Error((viaProxy?"Tutor proxy ":(anthropic?"Claude ":"Gemini "))+r.status);
     }
     const j=await r.json();
-    const text=(((j.candidates||[])[0]||{}).content||{}).parts;
+    // Gemini answers in candidates[].content.parts; Claude in content[].text,
+    // and because the assistant turn is prefilled with "{" the reply arrives
+    // without its opening brace.
+    const raw = anthropic
+      ? "{"+((((j.content)||[]).find(c=>c.type==="text")||{}).text||"")
+      : ((((((j.candidates||[])[0]||{}).content||{}).parts)||[])[0]||{}).text||"{}";
+    const text=[{text:raw}];   // keep the shape the logging below expects
     let parsed;
-    try{ parsed=JSON.parse((text&&text[0]&&text[0].text)||"{}"); }
+    try{ parsed=JSON.parse(raw); }
     catch(e){ this.log({ev:"parse-error",raw:String((text&&text[0]&&text[0].text)||"").slice(0,160),ms:Date.now()-t0}); throw e; }
     this.log({ev:"read-done",matches:parsed.matches===true,
               answers:parsed.answers?Object.keys(parsed.answers).length:0,ms:Date.now()-t0});

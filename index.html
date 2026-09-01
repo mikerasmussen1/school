@@ -6025,6 +6025,8 @@ class Component extends DCLogic {
     };
     const it=items[idxFor(s)], tier=TIERS[it.t];
     const finish=(str)=>{
+      if(str.stoppedEarly) Diag.tutor("early-stop", {set:set.id, att:str.att, right:str.right,
+        pct:Math.round(100*str.right/Math.max(1,str.att)), why:"70% no longer reachable"});
       const done={...str,done:true};
       this.saveState(prev=>({stream:done,
         pHist:logRun(prev.pHist||{},set.id,str.right,str.att,null),
@@ -6049,8 +6051,29 @@ class Component extends DCLogic {
         : [...(cur.recycle||[]), curIdx];              // missed — ask it again later
       const pos=cur.pos+1;
       const nothingLeft = pos>=ord.length && recycle.length===0;
-      const closed=(att>=MIN_ATT && streak>=STREAK_GOAL) || nothingLeft || att>=MAX_ATT;
-      const ns={...cur,att,right,streak,recycle,pos,val:"",rev:false,lastRight:false};
+      // Stop once 70% is out of reach rather than grinding on. The BEST any run
+      // can still end at is streaking straight to STREAK_GOAL from here — every
+      // further miss only lowers that ceiling — so if even a clean finish lands
+      // under the bar, the outcome is already decided and more questions just
+      // wear the child down.
+      //
+      // Two guards, both load-bearing. MIN_ATT means there is real evidence: at
+      // 5 attempts this only trips if they got at most 1 right. And streak===0
+      // means we only ever stop straight after a MISS — never mid-recovery.
+      // Simulated without that second guard, "miss 3 then 5 straight" was cut
+      // off at question 5 on a 2-streak, killing the comeback before it landed
+      // and defeating the recovery lesson entirely. With it, that run finishes
+      // at 63% and earns its consolidation lesson.
+      const needed=Math.max(STREAK_GOAL-streak, MIN_ATT-att, 0);
+      const hopeless = att>=MIN_ATT && streak===0 && ((right+needed)/(att+needed))<0.70;
+      const closed=(att>=MIN_ATT && streak>=STREAK_GOAL) || nothingLeft || att>=MAX_ATT || hopeless;
+      const ns={...cur,att,right,streak,recycle,pos,val:"",rev:false,lastRight:false,
+                stoppedEarly:hopeless};
+      // Answers carry into the whole-set view: the child typed them, so they
+      // should still be there if they switch over for paper.
+      const typed=(cur.val==null?"":String(cur.val));
+      if(typed!=="") this.saveState(prev=>({
+        pAns:{...(prev.pAns||{}), [set.id]:{...((prev.pAns||{})[set.id]||{}), [curIdx]:typed}}}));
       if(closed) finish(ns); else { this.setState({stream:ns}); this.focusStreak(); }
     };
     // Mark it, show CORRECT/INCORRECT, then move on by itself. A wrong answer

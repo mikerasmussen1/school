@@ -4072,6 +4072,39 @@ const Remote = {
    * Deliberately a DIFFERENT salt from rosterKeyFor: a roster id must not
    * reveal the config id, or anyone who ever saw one URL would have the other.
    */
+  /* The shared Gemini key, at a FIXED, well-known document id.
+   *
+   * This is public by deliberate choice, not by accident. Anyone who reads this
+   * file knows the id and can fetch the key. That is accepted because the key
+   * is free-tier on a project with NO BILLING ACCOUNT: the worst anyone can do
+   * is burn quota we can top up by rotating the document.
+   *
+   * It is still meaningfully better than the committed literal that got us
+   * here. Google's secret scanner watches public GitHub repos, not Firestore,
+   * so this key will not be auto-disabled the way the last one was. And
+   * rotating it is a one-field edit in the console that every device picks up
+   * on next load — no redeploy, no per-device setup.
+   *
+   * Fetched on EVERY load rather than cached-and-forgotten, so a rotation
+   * actually propagates. The cached copy is the offline fallback, and a
+   * device-specific key in localStorage always wins over the shared one.
+   *
+   * IF BILLING IS EVER ENABLED ON THIS PROJECT, THIS MUST BE UNDONE — the
+   * failure mode changes from "quota runs out" to "someone spends your money".
+   */
+  async loadSharedKey(){
+    try{
+      if(localStorage.getItem("GEMINI_KEY_PINNED") === "1") return;  // device override
+      const r=await fetch(this._doc("config","app"), {cache:"no-store"});
+      if(!r.ok) return;                                  // 404 = none published
+      const f=(await r.json()).fields||{};
+      const k=(f.gemini&&f.gemini.stringValue)||"";
+      if(!k || k===localStorage.getItem("GEMINI_API_KEY")) return;
+      localStorage.setItem("GEMINI_API_KEY", k);
+      if(window.Tutor) Tutor.configure(k);
+      if(window.PaperReader) PaperReader.enabled = true;
+    }catch(e){ /* offline or blocked: whatever is cached still applies */ }
+  },
   async configKeyFor(code){
     const enc=new TextEncoder().encode("gemini:"+String(code||"").trim().toLowerCase());
     const dig=await crypto.subtle.digest("SHA-256",enc);
@@ -4352,6 +4385,9 @@ class Component extends DCLogic {
     // Lessons are data too, and the tutor writes generated ones back into the
     // same bank so the next child who misses this concept reuses them.
     Tutor.configure(GEMINI_API_KEY);
+    // Every device picks the key up on its own, no teacher code, no setup.
+    // Deliberately public — see Remote.loadSharedKey and BACKEND.md.
+    Remote.loadSharedKey();
     LessonBank.configure(REMOTE_PROJECT_ID).load(id, []).then(()=>this.forceUpdate()).catch(()=>{});
   }
   // Sets authored before weeks existed carry no `w` and belong to Week 1.

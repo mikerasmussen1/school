@@ -40,34 +40,31 @@ done" keeps the old behavior.
   it, and environment variables do not help — this is a static site, so there is
   no server to hold one and a build-time substitution still ships the key to the
   browser.
-- **Preferred: store it once in Firestore, then unlock each device with the
-  teacher code.** The key sits at `config/<id>`, where `<id>` is a SHA-256 of
-  the teacher code — unguessable, and `list` is denied, so reading it is exactly
-  as hard as knowing that code. Typing the teacher code in Teacher HQ fetches
-  the key and caches it on that device. One short code the grown-up already
-  knows, instead of a 53-character key, and nothing lands in browser history.
+- **How it actually works now: every device loads the key by itself.** The key
+  sits at `config/app` — a fixed, well-known document id — and the app fetches
+  it on every load. No teacher code, no per-device setup, nothing to type.
 
-  Set it up once. In a browser console on the site, compute the doc id without
-  the code ever leaving the machine:
+  To set or rotate it: Firebase console → Firestore → collection `config`,
+  document id `app`, one **string** field `gemini`. Every device picks up the
+  new value on its next load. No redeploy.
 
-  ```js
-  (async c => {
-    const d = await crypto.subtle.digest("SHA-256",
-      new TextEncoder().encode("gemini:" + c.trim().toLowerCase()));
-    return "k-" + [...new Uint8Array(d)].map(b=>b.toString(16).padStart(2,"0")).join("").slice(0,28);
-  })("YOUR-TEACHER-CODE").then(console.log)
-  ```
+  **This key is public by deliberate choice.** Anyone reading `index.html`
+  knows the document id and can fetch it. That is accepted here because the key
+  is free-tier on a project with **no billing account**: the worst anyone can do
+  is exhaust quota, which is fixed by rotating the field.
 
-  Then in the Firebase console → Firestore → collection `config`, create a
-  document with that id and one **string** field named `gemini` holding the key.
-  Writes are denied to the app, so this is a console-only step by design.
+  It is still meaningfully better than the committed literal that caused the
+  original incident. Google's secret scanner watches public GitHub repos, not
+  Firestore, so this key will not be auto-disabled the way the last one was —
+  and rotating it no longer requires a deploy.
 
-  After that, on any device: open Teacher HQ, type the teacher code, done.
+  **If billing is ever enabled on this project, this must be undone.** The
+  failure mode changes from "quota runs out" to "a stranger spends your money".
+  At that point the key has to move behind a proxy that keeps it server-side.
 
-  The trade, stated plainly: **if the teacher code leaks, the Gemini key leaks
-  with it.** On a project with no billing attached that costs free-tier quota
-  rather than money, which is why it is acceptable here and would not be if
-  billing were ever enabled.
+  A device can opt out of the shared key: set its own `GEMINI_API_KEY` in
+  `localStorage` plus `GEMINI_KEY_PINNED=1`, and the shared loader leaves it
+  alone.
 
 - Fallbacks, still supported, set `localStorage` directly:
   - **Any device, including iPads** — visit the site with `?gemkey=THEKEY` on

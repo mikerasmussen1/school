@@ -2315,6 +2315,12 @@
       </sc-for>
       <div style="font-size:12.5px;line-height:1.55;color:rgba(238,242,255,.45);padding:0 4px">{{ pfSaveNote }}</div>
     </div>
+    </sc-if>
+    <!-- The roster above is "every pilot on this device", so it is hidden while
+         one fetched pilot is being viewed. The review drill-down below is NOT:
+         it is the whole point of opening a pilot, and living inside that same
+         hqNotViewing gate meant it vanished on exactly the path a teacher signing
+         in from her own device takes. -->
 
     <h2 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.45);margin:0 0 6px">Review</h2>
     <div style="font-size:12.5px;line-height:1.55;color:rgba(238,242,255,.5);margin-bottom:6px;max-width:720px">Pick a pilot, then a Mission, a week, an exercise and a tier — every question in it opens underneath, green for right and red with what they typed. Questions with nothing recorded show as unanswered. Time is estimated from the answer stamps.</div>
@@ -2489,7 +2495,6 @@
         </div>
       </sc-if>
     </div>
-    </sc-if>
 
     <h2 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.45);margin:0 0 6px">Dynamic difficulty</h2>
     <div style="font-size:12.5px;line-height:1.55;color:rgba(238,242,255,.5);margin-bottom:18px;max-width:720px">{{ hqDynNote }}</div>

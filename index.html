@@ -3130,7 +3130,7 @@
 
       <sc-if value="{{ pGridOn }}" hint-placeholder-val="{{ false }}">
       <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:18px;background:rgba(56,189,248,.08);border:1px solid rgba(56,189,248,.3);border-radius:14px;padding:13px 17px">
-        <span style="font-size:13.5px;line-height:1.5;color:#7DD3FC;flex:1;min-width:220px">One-at-a-time is the main way to practice now: answer until you get 5 in a row right (at least 10 problems). This whole-set view stays for paper day.</span>
+        <span style="font-size:13.5px;line-height:1.5;color:#7DD3FC;flex:1;min-width:220px">One-at-a-time is the main way to practice now: answer until you get 5 in a row right. This whole-set view stays for paper day.</span>
         <button onClick="{{ smStart }}" style="font-family:Fredoka,sans-serif;font-size:14.5px;padding:10px 20px;border-radius:12px;border:0;cursor:pointer;background:linear-gradient(150deg,#38BDF8,#818CF8);color:#04283A" style-hover="filter:brightness(1.1)">▶ Streak Run</button>
       </div>
       <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(232px,1fr));gap:12px">
@@ -4340,11 +4340,12 @@ class Component extends DCLogic {
     },0);
   }
 
-  // ── Streak Run: one item at a time, close at 5-in-a-row (min 8 attempts) ──
-  // STREAK_GOAL 5 is the mastery threshold the five dots represent. MIN_ATT is
-  // the evidence floor, so a lucky guesser can't close a set in five taps; 8
-  // lets a genuinely fluent child out early on a median 26-item bank while
-  // still asking for real work.
+  // ── Streak Run: one item at a time, close at 5-in-a-row ──────────────────
+  // STREAK_GOAL 5 is the mastery threshold the five dots represent, and MIN_ATT
+  // matches it so filling the five dots ends the run — the dots mean exactly
+  // what they show. MIN_ATT was briefly 8 as an anti-guessing floor, but five
+  // right in a row is already the evidence, and a fluent child being held for
+  // three more problems after the dots filled read as the run being broken.
   // Missed items are RECYCLED to the back of the queue instead of being lost.
   // Before this, the run simply ended when the bank ran out, so a child who
   // kept missing got FEWER chances to reach mastery, not more. MAX_ATT stops a
@@ -4353,7 +4354,7 @@ class Component extends DCLogic {
     const st=this.state;
     const s = st.stream && st.stream.setId===set.id ? st.stream : null;
     const items=set.items;
-    const STREAK_GOAL=5, MIN_ATT=8, MAX_ATT=Math.max(items.length+12, 30);
+    const STREAK_GOAL=5, MIN_ATT=5, MAX_ATT=Math.max(items.length+12, 30);
     const start=()=>{ this.setState({stream:{setId:set.id,pos:0,streak:0,att:0,right:0,val:"",rev:false,lastRight:false,done:false,recycle:[]}}); this.focusStreak(); };
     if(!s) return {pStreamOn:false, pGridOn:true, smStart:start, smLive:false, smDone:false, smDots:[], smProgress:"", smUnrevealed:false, smRevealed:false};
     // Past the end of the bank, re-ask whatever was missed.
@@ -4426,23 +4427,62 @@ class Component extends DCLogic {
 
   // ── Daily Review Sprint: 5 timed minutes of mixed prior concepts ──
   allSetsForCurriculum(){ let out=[]; for(let u=1;u<=8;u++) out=out.concat(this.setsFor(u)); return out; }
+  // Number facts for the sprint. These sit deliberately below the grade's
+  // current work: the sprint exists to get a child answering quickly and
+  // confidently before the lesson, so it never introduces new difficulty.
+  sprintFacts(curric){
+    const out=[], push=(q,a)=>out.push({q:q,a:String(a),label:"Number facts"});
+    const top=curric==="y5"?12:10;
+    for(let a=2;a<=top;a++) for(let b=2;b<=top;b++){ push(a+" × "+b,a*b); push((a*b)+" ÷ "+a,b); }
+    if(curric==="y5"){
+      [3,7,12,25,40,60,150,800].forEach(n=>{ push(n+" × 10",n*10); push((n*10)+" ÷ 10",n); });
+      [4,6,8,12,20,50,120].forEach(n=>{ push("Half of "+n,n/2); push("Double "+n,n*2); });
+    }else{
+      [6,8,10,14,20,40].forEach(n=>{ push("Half of "+n,n/2); push("Double "+n,n*2); });
+      for(let k=2;k<=9;k++){ push("10 × "+k,10*k); push((10*k)+" ÷ 10",k); }
+    }
+    return out;
+  }
   sprintVals(){
     const st=this.state, sp=st.sprint, today=dayNo();
     const hist=st.sprintHist||{}, todays=hist[today];
     const startSprint=()=>{
       const all=this.allSetsForCurriculum(), ph=st.pHist||{};
-      let pool=all.filter(s=>ph[s.id]&&ph[s.id].length);
-      if(!pool.length) pool=this.sets();
+      const unitOf=id=>{ const m=String(id).match(/u(\d+)/); return m?+m[1]:1; };
+      const here=st.uview||1;
+      // Spiral: the sprint reviews ground already covered, so units finished a
+      // while ago get the most tickets and the unit being taught right now gets
+      // none — this week's work belongs to the Streak Run, not the warm-up.
+      let pool=all.filter(s=>ph[s.id]&&ph[s.id].length&&unitOf(s.id)<here);
+      if(!pool.length) pool=all.filter(s=>ph[s.id]&&ph[s.id].length);
       const tickets=[];
-      pool.forEach(s=>{ tickets.push(s); const runs=ph[s.id]||[], last=runs[runs.length-1];
+      pool.forEach(s=>{ const age=Math.min(Math.max(1,here-unitOf(s.id)),3);
+        for(let k=0;k<age;k++) tickets.push(s);
+        const runs=ph[s.id]||[], last=runs[runs.length-1];
         if(last&&last.n&&last.r/last.n<0.85) tickets.push(s,s); });
-      const items=[], seen={};
-      for(let g=0; g<400&&items.length<15; g++){
+      const items=[], seen={}, facts=this.sprintFacts(this.curricId());
+      const takeFact=()=>{ for(let g=0;g<60;g++){ const f=facts[Math.floor(Math.random()*facts.length)];
+        if(!seen[f.q]){ seen[f.q]=1; return {q:f.q,a:f.a,setId:null,label:f.label}; } } return null; };
+      // Warm-Up tier only. Serving Core or Challenge here turns the warm-up into
+      // a second test, which is what made the Year-Two sprints harder than the
+      // lesson they were meant to prepare for.
+      const takeSet=()=>{ for(let g=0;g<60;g++){ if(!tickets.length) return null;
         const s=tickets[Math.floor(Math.random()*tickets.length)];
-        const bank=s.items.filter(x=>x.t>=1), src=bank.length?bank:s.items;
+        const warm=s.items.filter(x=>x.t===0), core=s.items.filter(x=>x.t===1);
+        const src=warm.length?warm:core;
+        // u3p5 and u4p5 are Friday enrichment duels: Challenge tier only, no
+        // Warm-Up and no Core. Skip them rather than falling through to
+        // s.items, which would put "10⁶ ÷ 10³" in a warm-up.
+        if(!src.length) continue;
         const it=src[Math.floor(Math.random()*src.length)];
-        if(seen[it.q]) continue; seen[it.q]=1;
-        items.push({q:it.q,a:it.a,hint:it.hint,setId:s.id,label:s.title});
+        if(!seen[it.q]){ seen[it.q]=1; return {q:it.q,a:it.a,hint:it.hint,setId:s.id,label:s.title}; } } return null; };
+      // Open on three straight facts so the first half-minute is all wins, then
+      // alternate facts with prior-unit review. 40 queued: the clock ends the
+      // run, not the queue.
+      for(let n=0;n<40;n++){
+        const it=(n<3||n%2===0) ? (takeFact()||takeSet()) : (takeSet()||takeFact());
+        if(!it) break;
+        items.push(it);
       }
       clearInterval(this._spr);
       this._spr=setInterval(()=>{ const c=this.state.sprint;
@@ -4463,7 +4503,10 @@ class Component extends DCLogic {
     const grade=()=>{
       if(sp.rev) return;
       const right=this.normAns(sp.val)!==""&&this.normAns(sp.val)===this.normAns(it.a);
-      const perSet={...sp.perSet}; const e=perSet[it.setId]||{r:0,t:0}; perSet[it.setId]={r:e.r+(right?1:0),t:e.t+1};
+      // Number-fact items belong to no set, so they must not be logged into
+      // pHist — a fake set id would show up in Teacher HQ as a practice run.
+      const perSet={...sp.perSet};
+      if(it.setId){ const e=perSet[it.setId]||{r:0,t:0}; perSet[it.setId]={r:e.r+(right?1:0),t:e.t+1}; }
       const ns={...sp,rev:true,lastRight:right,att:sp.att+1,right:sp.right+(right?1:0),perSet};
       this.setState({sprint:ns});
       setTimeout(()=>{ const c=this.state.sprint; if(!c||c.done) return;

@@ -55,6 +55,6 @@ Live, and deliberately client-side. Do not "fix" these without reading `BACKEND.
 | Photo scan → app answers mapping | `index.html` — `pOnPaper` sheet numbering, `PaperReader.read` prompt, `paperPicked` |
 | Curriculum content, split by subject | `curriculum/shared.js`, `math-y1.js`, `math-y2.js`, `extra-banks.js`, `registry.js`, `CONTRIBUTING.md` |
 | QA + review agents | `scripts/qa-verify.js`, `scripts/check-paper-mapping.js`, `.claude/agents/` |
-| Japan history unit (8 weeks, 16 lessons, both boys) | `japan.dc.html`, `image-slot.js` — linked from the index.html header |
+| Japan history unit (8 weeks, 16 lessons, both boys) | `curriculum/japan-unit.js` — **not loaded**. `japan.dc.html` and `image-slot.js` have never been in this repo, so the card would 404. Add both files, then restore the script tag in index.html |
 | Security rules | `firestore.rules`, `firebase.json` |
 | Project notes | `HANDOFF.md`, `BACKEND.md` |

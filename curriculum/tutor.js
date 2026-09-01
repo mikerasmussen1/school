@@ -47,7 +47,7 @@
     },
 
     _prompt(ctx, priorErrors){
-      const {set, attempts, round, history, grade, childName} = ctx;
+      const {set, attempts, round, history, grade, childName, recovered} = ctx;
       const missed=attempts.filter(a=>a.ok===false);
       const got=attempts.filter(a=>a.ok===true);
       const tierName=["Warm-Up","Core","Challenge"];
@@ -99,7 +99,9 @@
         "  \"questions\": [{\"type\":\"short-answer\",\"t\":1,\"q\":\"...\",\"a\":\"...\",\"hint\":\"...\"}]",
         "}",
         "",
-        "Set needs_help to false ONLY if the misses were careless slips on facts they clearly own; in that case still fill in went_well and not_well, and leave lesson and questions out."
+        (recovered
+          ? "IMPORTANT: this run ended with five correct IN A ROW — they struggled early and then got there. Do NOT treat that as a gap they still have, and do NOT congratulate them for needing help. But needs_help MUST be true: write a SHORT consolidation lesson that locks in what they just worked out, using the representation that finally clicked, and fewer, easier questions than usual. Frame every word as building on a win, never as remediation."
+          : "Set needs_help to false ONLY if the misses were careless slips on facts they clearly own; in that case still fill in went_well and not_well, and leave lesson and questions out.")
       );
       if(priorErrors&&priorErrors.length){
         lines.push("", "Your previous attempt was rejected by the validator. Fix exactly these problems and return the whole JSON again:", priorErrors.slice(0,12).join("\n"));

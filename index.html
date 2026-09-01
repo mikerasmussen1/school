@@ -5671,11 +5671,12 @@ class Component extends DCLogic {
   runAttempts(setId, since){
     return ((this.state.pLog||{})[setId]||[]).filter(e=>!since||e.ts>=since);
   }
-  async maybeDynamic(set, since, pct){
+  async maybeDynamic(set, since, pct, opts){
     // Every exit is logged. "Nothing happened" is the hardest failure to debug
     // on a child's iPad, and until now every one of these returns was silent.
     const pctR=Math.round((pct||0)*100);
-    Diag.tutor("trigger", {set:set.id, pct:pctR, threshold:70, keyed:!!Tutor.enabled});
+    const recovered=!!(opts&&opts.recovered);
+    Diag.tutor("trigger", {set:set.id, pct:pctR, threshold:70, keyed:!!Tutor.enabled, recovered:recovered});
     if(pct>=0.70){ Diag.tutor("skip", {set:set.id, why:"scored at or above 70%", pct:pctR}); return; }
     if(!Tutor.enabled){ Diag.tutor("skip", {set:set.id, why:"no Gemini key on this device"}); return; }
     const rec=this.dynFor(set.id);
@@ -5695,7 +5696,7 @@ class Component extends DCLogic {
     Diag.tutor("calling", {set:set.id, round:rec.rounds.length+1, attempts:attempts.length,
                            missed:attempts.filter(a=>a.ok===false).length});
     const res=await Tutor.assess({
-      set, attempts, round, grade:bank,
+      set, attempts, round, grade:bank, recovered:recovered,
       childName:(this.state.profiles.find(p=>p.id===this.state.activeId)||{}).name||"",
       tier:missedTiers.length?missedTiers.sort((a,b)=>b-a)[0]:1,
       history:rec.rounds.map(r=>({n:r.n, concept:r.concept, title:r.title, score:r.score?r.score.r+"/"+r.score.n:"not taken", approach:r.approach}))
@@ -5727,7 +5728,7 @@ class Component extends DCLogic {
     // shared pool is an admin step, and Teacher HQ hands over the JSON for it.
 
     this.saveState(s=>({dynBusy:false, dyn:{...(s.dyn||{}),[set.id]:{...rec,
-      rounds:[...rec.rounds,{n:round, ts:Date.now(), closed:false, failed:false,
+      rounds:[...rec.rounds,{n:round, ts:Date.now(), closed:false, failed:false, recovered:recovered,
         concept:res.summary.concept, conceptLabel:res.summary.conceptLabel,
         approach:res.summary.approach, summary:res.summary,
         title:lesson.title, lessonId:lesson.id, source:source,
@@ -6029,7 +6030,11 @@ class Component extends DCLogic {
         pHist:logRun(prev.pHist||{},set.id,str.right,str.att,null),
         pStreak:{...(prev.pStreak||{}),[set.id]:{att:str.att,right:str.right,d:dayNo(),closed:str.streak>=STREAK_GOAL}}}));
       // Below the bar → read the run and, if it needs it, teach it again.
-      setTimeout(()=>this.maybeDynamic(set, str.t0||0, str.right/Math.max(1,str.att)), 60);
+      // A run that ends on a full streak still gets bonus content — they fought
+      // back to it, and the tutor is told so it reads as consolidation rather
+      // than remediation.
+      setTimeout(()=>this.maybeDynamic(set, str.t0||0, str.right/Math.max(1,str.att),
+                                       {recovered: str.streak>=STREAK_GOAL}), 60);
     };
     // Advance reads LIVE state, not the closure, so the auto-advance timer and
     // the button can never double-count the same answer.
@@ -6684,11 +6689,13 @@ class Component extends DCLogic {
         return {
           dynReady:true,
           dynReadyTitle:r.title||"A lesson made just for you",
-          dynReadyNote:(r.source==="reused"
-            ? "This one already helped somebody with the same thing. Work through it, then try "
-            : "Made from the questions you just did, for the part that tripped you up. Work through it, then try ")
+          dynReadyNote:(r.recovered
+            ? "You got five right in a row at the end — this locks in the bit you just worked out. Short, then "
+            : r.source==="reused"
+              ? "This one already helped somebody with the same thing. Work through it, then try "
+              : "Made from the questions you just did, for the part that tripped you up. Work through it, then try ")
             +(r.qCount||0)+" fresh questions.",
-          dynReadyCta:"Open it →",
+          dynReadyCta:r.recovered?"Lock it in →":"Open it →",
           dynReadyGo:()=>this.openCoach(cs.id, r.n)
         };
       }).call(this),

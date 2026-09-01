@@ -27,6 +27,14 @@
   const numOf = v => { const m=String(v==null?"":v).replace(/[\s,$]/g,"").match(/-?\d*\.?\d+/); return m?parseFloat(m[0]):NaN; };
   const unitOf = v => String(v==null?"":v).replace(/[\s,]/g," ").replace(/-?\d*\.?\d+/,"").trim().toLowerCase();
   const arr = v => Array.isArray(v)?v:(v==null?[]:[v]);
+  // Answers that can actually be answered. An empty or whitespace-only string
+  // is NOT an answer, but arr("") has length 1, so a plain length check waves
+  // it through — and grade() then returns false for every input a child could
+  // type, making the question impossible rather than merely hard. That matters
+  // most for tutor-generated lessons: validate() is the only gate between raw
+  // model output and a child's screen, and a hallucinated "a": "" used to pass
+  // it with zero errors, so no retry fired.
+  const answers = v => arr(v).filter(x => String(x==null?"":x).trim() !== "");
 
   /* Each type answers four questions:
    *   input   what the child is given to answer with
@@ -39,7 +47,7 @@
       label:"Short answer", input:"text", graded:true,
       grade:(it,r)=> norm(r)!=="" && arr(it.a).some(a=>norm(a)===norm(r)),
       text:it=> arr(it.a).join(" or "),
-      check:it=> arr(it.a).length ? null : "needs an answer"
+      check:it=> answers(it.a).length ? null : "needs an answer"
     },
 
     "number-units": {
@@ -107,7 +115,10 @@
       check:it=>{
         const blanks=(String(it.q).match(/_{2,}/g)||[]).length;
         if(!blanks) return "prompt has no ___ blank in it";
-        return arr(it.a).length===blanks ? null : "has "+blanks+" blanks but "+arr(it.a).length+" answers";
+        const a=arr(it.a);
+        if(a.length!==blanks) return "has "+blanks+" blanks but "+a.length+" answers";
+        // Right count, but a blank whose only answer is "" is still unanswerable.
+        return a.every(w=>answers(w).length) ? null : "a blank has no answer";
       }
     },
 

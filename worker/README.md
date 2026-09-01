@@ -17,6 +17,12 @@ npm install -g wrangler      # once
 cd worker
 wrangler login               # opens a browser
 wrangler secret put ANTHROPIC_API_KEY   # paste the key; it is never committed
+
+# ONLY if the key is "identity-linked" — the kind whose creation dialog says
+# "This key works across workspaces". Those REQUIRE a workspace id and every
+# call 400s without it. A workspace-scoped key needs neither line.
+wrangler secret put ANTHROPIC_WORKSPACE_ID
+
 wrangler deploy
 ```
 

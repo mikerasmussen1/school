@@ -36,8 +36,10 @@
      * one — see worker/tutor-proxy.js. It takes precedence over any key, so a
      * config document carrying both cannot accidentally keep shipping the key
      * to clients. */
-    configure(key, model, proxyUrl){
+    workspaceId:"",
+    configure(key, model, proxyUrl, workspaceId){
       this.apiKey=key||""; this.model=model||""; this.proxyUrl=proxyUrl||"";
+      this.workspaceId=workspaceId||"";
       return this;
     },
     get enabled(){ return !!(this.proxyUrl || this.apiKey); },
@@ -89,16 +91,20 @@
     },
 
     async _callClaude(prompt){
+      /* Identity-linked keys require anthropic-workspace-id and 400 without it;
+       * workspace-scoped keys ignore it. Set `workspaceId` on the config doc if
+       * calling Anthropic directly with the former. */
       /* anthropic-dangerous-direct-browser-access is REQUIRED: the API blocks
        * browser origins by default, and without it every call fails CORS. The
        * header name is a warning, not a formality — it exists because calling
        * this API from a browser means shipping a BILLED key to the client. */
       const r=await fetch("https://api.anthropic.com/v1/messages",{
         method:"POST",
-        headers:{"Content-Type":"application/json",
+        headers:Object.assign({"Content-Type":"application/json",
                  "x-api-key":this.apiKey,
                  "anthropic-version":"2023-06-01",
                  "anthropic-dangerous-direct-browser-access":"true"},
+                 this.workspaceId?{"anthropic-workspace-id":this.workspaceId}:{}),
         body:JSON.stringify({
           model:this.model||CLAUDE_MODEL,
           max_tokens:4096,

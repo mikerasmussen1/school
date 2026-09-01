@@ -124,13 +124,22 @@ export default {
     // bills you for the most expensive model available.
     const model = ALLOWED_MODELS.includes(body.model) ? body.model : DEFAULT_MODEL;
 
+    /* Identity-linked keys (the "works across workspaces" kind) REQUIRE an
+     * anthropic-workspace-id header and 400 without it. Workspace-scoped keys
+     * ignore it. Sending it whenever it is configured covers both, so the key
+     * type does not have to be known here. */
+    const anthropicHeaders = {
+      "Content-Type": "application/json",
+      "x-api-key": env.ANTHROPIC_API_KEY,
+      "anthropic-version": "2023-06-01",
+    };
+    if (env.ANTHROPIC_WORKSPACE_ID) {
+      anthropicHeaders["anthropic-workspace-id"] = env.ANTHROPIC_WORKSPACE_ID;
+    }
+
     const upstream = await fetch("https://api.anthropic.com/v1/messages", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "x-api-key": env.ANTHROPIC_API_KEY,
-        "anthropic-version": "2023-06-01",
-      },
+      headers: anthropicHeaders,
       body: JSON.stringify({
         model,
         max_tokens: MAX_TOKENS,

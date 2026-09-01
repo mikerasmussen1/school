@@ -4115,8 +4115,10 @@ const Remote = {
       const proxy=(f.proxyUrl&&f.proxyUrl.stringValue)||"";
       const k=proxy ? "" : ((f.apiKey&&f.apiKey.stringValue)||(f.gemini&&f.gemini.stringValue)||"");
       const model=(f.model&&f.model.stringValue)||"";
+      const ws=(f.workspaceId&&f.workspaceId.stringValue)||"";
       try{
         if(model) localStorage.setItem("GEMINI_API_MODEL", model);
+        if(ws) localStorage.setItem("ANTHROPIC_WORKSPACE_ID", ws);
         if(proxy){
           localStorage.setItem("TUTOR_PROXY_URL", proxy);
           // A key cached from before the switch must not linger on the device.
@@ -4126,7 +4128,7 @@ const Remote = {
           if(k) localStorage.setItem("GEMINI_API_KEY", k);
         }
       }catch(e){}
-      if(window.Tutor) Tutor.configure(k||localStorage.getItem("GEMINI_API_KEY")||"", model, proxy);
+      if(window.Tutor) Tutor.configure(k||localStorage.getItem("GEMINI_API_KEY")||"", model, proxy, ws);
       if(window.PaperReader && (proxy||k)) PaperReader.enabled = true;
       if(window.PaperReader) PaperReader.enabled = true;
     }catch(e){ /* offline or blocked: whatever is cached still applies */ }
@@ -4449,7 +4451,8 @@ class Component extends DCLogic {
     // same bank so the next child who misses this concept reuses them.
     Tutor.configure(GEMINI_API_KEY,
       (function(){ try{ return localStorage.getItem("GEMINI_API_MODEL")||""; }catch(e){ return ""; } })(),
-      (function(){ try{ return localStorage.getItem("TUTOR_PROXY_URL")||""; }catch(e){ return ""; } })());
+      (function(){ try{ return localStorage.getItem("TUTOR_PROXY_URL")||""; }catch(e){ return ""; } })(),
+      (function(){ try{ return localStorage.getItem("ANTHROPIC_WORKSPACE_ID")||""; }catch(e){ return ""; } })());
     // Every device picks the key up on its own, no teacher code, no setup.
     // Deliberately public — see Remote.loadSharedKey and BACKEND.md.
     Remote.loadSharedKey();

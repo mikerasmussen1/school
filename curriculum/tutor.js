@@ -37,6 +37,7 @@
         {method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)});
       if(!r.ok){
         let detail=""; try{ detail=((await r.json()).error||{}).message||""; }catch(e){}
+        try{ window.Diag && Diag.tutor("http-error", {status:r.status, detail:detail.slice(0,160)}); }catch(e){}
         throw new Error("Gemini "+r.status+(detail?": "+detail.slice(0,140):""));
       }
       const j=await r.json();

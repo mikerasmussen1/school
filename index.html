@@ -3594,6 +3594,17 @@
     <sc-if value="{{ dynHasErr }}" hint-placeholder-val="{{ false }}">
       <div style="font-size:13px;color:#FCA5A5;margin-bottom:16px">{{ dynErr }}</div>
     </sc-if>
+    <!-- BONUS CONTENT — a round is waiting. Announced loudly on purpose: this
+         is brand new material made for THIS child, and the old behaviour just
+         navigated there with no fanfare, so it read as an ordinary screen. -->
+    <sc-if value="{{ dynReady }}" hint-placeholder-val="{{ false }}">
+      <div style="background:linear-gradient(150deg,rgba(74,222,128,.16),rgba(251,191,36,.08));border:1px solid rgba(74,222,128,.42);border-radius:22px;padding:22px 26px;margin-bottom:20px">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#4ADE80;margin-bottom:8px">✨ Bonus content created</div>
+        <div style="font-family:Fredoka,sans-serif;font-size:27px;line-height:1.12;margin-bottom:6px">{{ dynReadyTitle }}</div>
+        <div style="font-size:14.5px;line-height:1.55;color:rgba(238,242,255,.72);max-width:620px;margin-bottom:16px">{{ dynReadyNote }}</div>
+        <button onClick="{{ dynReadyGo }}" style="font-family:Fredoka,sans-serif;font-size:15px;padding:12px 24px;border-radius:13px;border:0;cursor:pointer;background:#4ADE80;color:#052e16" style-hover="filter:brightness(1.1)">{{ dynReadyCta }}</button>
+      </div>
+    </sc-if>
     <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:50px;line-height:1.02;margin:0 0 14px;letter-spacing:-.5px">Check your own work.</h1>
     <p style="max-width:700px;margin:0 0 30px;font-size:16.5px;line-height:1.55;color:rgba(238,242,255,.72);text-wrap:pretty">Type your answers, press Check, and find out immediately. Wrong ones get a hint and you keep going until the bar hits 100%. Unlimited tries — nobody is counting how many you needed.</p>
 
@@ -4211,13 +4222,50 @@ const GEMINI_API_KEY = (function(){
   } catch (e) { return ""; }   // private mode / storage disabled
 })();
 
+/* Diagnostics both the photo reader and the tutor write to.
+ *
+ * Kept in one ring buffer, mirrored to paperlog/<pilot-or-device> so a grown-up
+ * can read what happened AFTER the fact from the Firebase console — which is
+ * the only way to debug something that runs on a child's iPad. Never includes
+ * a photo, an API key, or anything the child typed beyond pass/fail counts.
+ *
+ * In the browser console:  Diag.dump()   shows this device's log.
+ */
+const Diag = {
+  KEY: "abm.paperlog.v1",
+  MAX: 60,
+  write(ev){
+    try{
+      ev.t = new Date().toISOString();
+      console.log("[" + (ev.src || "app") + "]", ev);
+      const arr = JSON.parse(localStorage.getItem(this.KEY) || "[]");
+      arr.push(ev);
+      while(arr.length > this.MAX) arr.shift();
+      localStorage.setItem(this.KEY, JSON.stringify(arr));
+      if(Remote.enabled){
+        const sess = Remote.session();
+        const id = (sess && sess.key) || "device";
+        fetch(Remote._doc("paperlog", id), {method:"PATCH",
+          headers:{"Content-Type":"application/json"},
+          body: JSON.stringify({fields:{
+            events:{stringValue: JSON.stringify(arr)},
+            updated:{integerValue: String(Date.now())}}})}).catch(()=>{});
+      }
+    }catch(e){}
+  },
+  tutor(step, extra){ this.write(Object.assign({src:"tutor", step:step}, extra||{})); },
+  dump(){ try{ return JSON.parse(localStorage.getItem(this.KEY)||"[]"); }catch(e){ return []; } }
+};
+window.Diag = Diag;
+
 const PaperReader = {
   enabled: !!GEMINI_API_KEY,
   // Diagnostics: last 25 events, kept locally AND mirrored to Firestore
   // (paperlog/<pilot-or-device>) so grown-ups can watch tests from the
   // Firebase console without touching the kid's iPad. Never includes the
   // photo itself — just what happened.
-  log(ev){
+  log(ev){ ev.src=ev.src||"paper"; Diag.write(ev); },
+  _legacyLog(ev){
     try{
       ev.t=new Date().toISOString();
       console.log("[PaperReader]",ev);
@@ -5624,21 +5672,28 @@ class Component extends DCLogic {
     return ((this.state.pLog||{})[setId]||[]).filter(e=>!since||e.ts>=since);
   }
   async maybeDynamic(set, since, pct){
-    if(pct>=0.70) return;
-    if(!Tutor.enabled) return;
+    // Every exit is logged. "Nothing happened" is the hardest failure to debug
+    // on a child's iPad, and until now every one of these returns was silent.
+    const pctR=Math.round((pct||0)*100);
+    Diag.tutor("trigger", {set:set.id, pct:pctR, threshold:70, keyed:!!Tutor.enabled});
+    if(pct>=0.70){ Diag.tutor("skip", {set:set.id, why:"scored at or above 70%", pct:pctR}); return; }
+    if(!Tutor.enabled){ Diag.tutor("skip", {set:set.id, why:"no Gemini key on this device"}); return; }
     const rec=this.dynFor(set.id);
     const open=rec.rounds.filter(r=>!r.closed&&!r.failed);
-    if(open.length) return;                       // a round is already waiting
+    if(open.length){ Diag.tutor("skip", {set:set.id, why:"a round is already waiting", round:open[0].n}); return; }
     if(rec.rounds.length>=3){
+      Diag.tutor("skip", {set:set.id, why:"already had 3 rounds — flagged for a grown-up"});
       this.saveState(s=>({dyn:{...(s.dyn||{}),[set.id]:{...rec,flagged:true}}}));
       return;
     }
     const attempts=this.runAttempts(set.id, since);
-    if(!attempts.length) return;
+    if(!attempts.length){ Diag.tutor("skip", {set:set.id, why:"no attempts recorded in this run", since:since}); return; }
     const round=rec.rounds.length+1;
     const missedTiers=attempts.filter(a=>a.ok===false).map(a=>a.t);
     this.setState({dynBusy:true, dynErr:""});
     const bank=this.bankId();
+    Diag.tutor("calling", {set:set.id, round:rec.rounds.length+1, attempts:attempts.length,
+                           missed:attempts.filter(a=>a.ok===false).length});
     const res=await Tutor.assess({
       set, attempts, round, grade:bank,
       childName:(this.state.profiles.find(p=>p.id===this.state.activeId)||{}).name||"",
@@ -5646,10 +5701,13 @@ class Component extends DCLogic {
       history:rec.rounds.map(r=>({n:r.n, concept:r.concept, title:r.title, score:r.score?r.score.r+"/"+r.score.n:"not taken", approach:r.approach}))
     });
     if(!res.ok){
+      Diag.tutor("failed", {set:set.id, round:round, errors:(res.errors||[]).slice(0,3)});
       this.setState({dynBusy:false, dynErr:(res.errors||["The tutor could not be reached."])[0]});
       return;
     }
     if(!res.needsHelp){
+      Diag.tutor("no-lesson", {set:set.id, round:round, why:"model judged these slips, not a gap",
+                               concept:res.summary&&res.summary.concept});
       // Slips, not a gap. Record the read so Teacher HQ still shows it.
       this.saveState(s=>({dynBusy:false, dyn:{...(s.dyn||{}),[set.id]:{...rec,
         rounds:[...rec.rounds,{n:round, ts:Date.now(), slipsOnly:true, closed:true,
@@ -5675,6 +5733,8 @@ class Component extends DCLogic {
         title:lesson.title, lessonId:lesson.id, source:source,
         lesson:lesson,                     // kept inline so it works offline
         qCount:(lesson.items||[]).length}]}}}));
+    Diag.tutor("lesson-ready", {set:set.id, round:round, source:source,
+                                title:lesson.title, questions:(lesson.items||[]).length});
     // The lesson opens straight away — no waiting for a grown-up.
     this.openCoach(set.id, round);
   }
@@ -6609,6 +6669,24 @@ class Component extends DCLogic {
       ...this.coachVals(),
       isCoach:st.view==="coach"&&!!st.coach,
       dynBusy:!!st.dynBusy, dynHasErr:!!st.dynErr, dynErr:st.dynErr,
+      // A waiting round for THIS set, surfaced as an announcement rather than a
+      // silent navigation. Survives leaving the screen and coming back, so the
+      // child can find it again instead of it existing only in the moment it
+      // was generated.
+      ...(function(){
+        const r=(((st.dyn||{})[(set&&set.id)||""]||{}).rounds||[]).filter(x=>!x.closed&&!x.failed)[0];
+        if(!r) return {dynReady:false, dynReadyTitle:"", dynReadyNote:"", dynReadyCta:"", dynReadyGo:()=>{}};
+        return {
+          dynReady:true,
+          dynReadyTitle:r.title||"A lesson made just for you",
+          dynReadyNote:(r.source==="reused"
+            ? "This one already helped somebody with the same thing. Work through it, then try "
+            : "Made from the questions you just did, for the part that tripped you up. Work through it, then try ")
+            +(r.qCount||0)+" fresh questions.",
+          dynReadyCta:"Open it →",
+          dynReadyGo:()=>this.openCoach(set.id, r.n)
+        };
+      }).call(this),
       isStd1:st.uview===1&&!y5, isStd2:st.uview===2&&!y5, isStd3:st.uview===3&&!y5, isStd4:st.uview===4&&!y5, isStd5:st.uview===5&&!y5,
       isStd6:st.uview===6&&!y5, isStd7:st.uview===7&&!y5, isStd8:st.uview===8&&!y5,
       isStdY5:y5, stdY5Title:"Standards alignment · "+(this.unitsList()[st.uview-1]||sel).name,

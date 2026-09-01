@@ -32,13 +32,29 @@ right exercise and reads the child's WRITTEN answers (wrong ones included)
 into the boxes — then the normal Check flow grades them. "Just mark it
 done" keeps the old behavior.
 
-- Key: `GEMINI_API_KEY` in `index.html` — a browser key restricted to this
-  site's referrer AND to the Generative Language API only, so committing it
-  to the public repo is the intended model (that's what referrer-restricted
-  keys are for). Manage it under Google Cloud → Credentials in the
-  `big-math-adventures` project.
-- Cost: free tier; two kids won't dent it.
-- With the key empty, the button silently reverts to old behavior.
+- Key: **not committed, and it must stay that way.** The earlier guidance here
+  said committing a referrer-restricted browser key was the intended model. That
+  was wrong in practice: Google's secret scanner found the key in the public
+  repo and disabled it, and the app began returning "Your API key was reported
+  as leaked". Referrer restrictions limit who can USE a key, not who can READ
+  it, and environment variables do not help — this is a static site, so there is
+  no server to hold one and a build-time substitution still ships the key to the
+  browser.
+- The key now lives in `localStorage`, set once per device. In the browser
+  console on the site:
+  `localStorage.setItem("GEMINI_API_KEY", "PASTE_KEY_HERE")`, then reload.
+  Remove with `localStorage.removeItem("GEMINI_API_KEY")`.
+- Manage keys under Google Cloud → Credentials in the `big-math-adventures`
+  project. DELETE the leaked key rather than leaving it disabled, and create a
+  fresh one; keep the referrer and API restrictions, which are still worth
+  having as a second layer.
+- Cost: free tier; two kids won't dent it. The tutor sends roughly 1k tokens in
+  and a lesson back, capped at 2 attempts per round and 3 rounds per set.
+- With no key set, photo homework reverts to "mark it done" and dynamic lessons
+  do not generate. Nothing breaks.
+- If this ever outgrows one family, put the key behind a proxy so the browser
+  never sees it: a Cloudflare Worker on its free tier, or a Firebase Function
+  (Functions need the Blaze plan for outbound network calls).
 
 ## How the login works
 

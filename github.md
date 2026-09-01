@@ -66,11 +66,8 @@ date: 2026-08-22T16:06:43Z · commit e25c0114a253 — pulled full repo (18 files
 Live, and deliberately client-side. Do not "fix" these without reading `BACKEND.md` first.
 
 - `REMOTE_PROJECT_ID = "big-math-adventures"` (`index.html` ~3703) turns Firestore sync on. Empty string = local-only.
-- `GEMINI_API_KEY` (`index.html` ~3773) is a browser key by design: restricted to the
-  `mikerasmussen1.github.io` + localhost referrers and to the Generative Language API,
-  on a project with **no billing account attached**. Committing it is intended, and worst
-  case is free-tier quota burn, which degrades to the old "mark it done" button.
-  If a billing account is ever attached to this project, the key must move behind a proxy first.
+- `GEMINI_API_KEY` is **not in the repo**. It was, it leaked, Google disabled it.
+  It now lives in localStorage per device — see BACKEND.md. Do not re-commit it.
 - `firestore.rules` is committed and byte-identical to the deployed ruleset (verified Aug 12).
   `list` and `delete` are denied everywhere; `get`/`create`/`update` are open, with unguessable
   name+code doc ids acting as the login.

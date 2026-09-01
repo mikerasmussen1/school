@@ -4108,11 +4108,35 @@ const Storage = {
   async signOut(){ Remote.setSession(null); return true; }
 };
 
-/* PHOTO HOMEWORK CONFIG — paste a Gemini API key (referrer-restricted to
- * this site; setup steps in BACKEND.md) to let pilots photograph paper
- * work and have the answers read in. With "" the "I did this on paper"
- * button keeps its old mark-it-done behavior. */
-const GEMINI_API_KEY = "AIzaSyAdQaZOJXTY5fg7F-GdjjNWphY19Q4951Y";
+/* GEMINI CONFIG — photo homework AND the dynamic-difficulty tutor.
+ *
+ * THE KEY IS NOT IN THIS FILE, AND CANNOT BE. This is a static site on GitHub
+ * Pages: every byte here is downloaded by anyone who visits, so a committed key
+ * is a published key. The previous key WAS committed, Google's secret scanner
+ * found it in the public repo and disabled it, and the app began returning
+ * "Your API key was reported as leaked". Referrer restrictions did not prevent
+ * that — they limit who can USE a key, not who can READ it. Environment
+ * variables do not help either: there is no server, and a build-time
+ * substitution still ships the key to the browser.
+ *
+ * So the grown-up pastes a key once per device and it lives in localStorage,
+ * which is never uploaded and never committed. In the browser console on the
+ * site:
+ *
+ *     localStorage.setItem("GEMINI_API_KEY", "PASTE_KEY_HERE")
+ *
+ * then reload. To remove it: localStorage.removeItem("GEMINI_API_KEY").
+ *
+ * With no key nothing breaks: "I did this on paper" keeps its old mark-it-done
+ * behaviour, and dynamic lessons simply do not generate.
+ *
+ * The durable fix, if this ever outgrows one family, is a proxy that holds the
+ * key server-side — a Cloudflare Worker or a Firebase Function — so the browser
+ * never sees it at all. See BACKEND.md. */
+const GEMINI_API_KEY = (function(){
+  try { return localStorage.getItem("GEMINI_API_KEY") || ""; }
+  catch (e) { return ""; }   // private mode / storage disabled
+})();
 
 const PaperReader = {
   enabled: !!GEMINI_API_KEY,

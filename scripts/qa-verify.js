@@ -134,9 +134,20 @@ if (!base) {
 // ── 3. Printable artefacts ───────────────────────────────────────────────
 section("3. Print packs and worksheets");
 const dcFiles = fs.readdirSync(".").filter(f => f.endsWith(".dc.html"));
-for (const f of dcFiles) {
+// Only FROZEN print artefacts need a committed PDF, because the PDF is what a
+// teacher actually prints and a stale one silently disagrees with the app. Not
+// every .dc.html is one: japan.dc.html is a reading page for the screen, and
+// Worksheet Builder.dc.html generates sheets from the live bank, so neither has
+// fixed content to freeze. They are listed rather than silently skipped.
+const PRINTABLE = /(Print Pack|Worksheets)\.dc\.html$/;
+const printable = dcFiles.filter(f => PRINTABLE.test(f));
+const screenOnly = dcFiles.filter(f => !PRINTABLE.test(f));
+for (const f of printable) {
   const pdf = f.replace(/\.dc\.html$/, ".pdf");
   fs.existsSync(pdf) ? pass(`${f} has a matching PDF`) : fail(`${f} has no matching ${pdf}`);
+}
+if (screenOnly.length) {
+  console.log(`  ----  screen-only pages, no PDF expected: ${screenOnly.join(", ")}`);
 }
 for (const f of dcFiles.filter(f => /Print Pack/.test(f))) {
   const pages = (fs.readFileSync(f, "utf8").match(/class="page"/g) || []).length;

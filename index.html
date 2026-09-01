@@ -10,13 +10,19 @@
 };</script>
 <script src="./support.js"></script>
 <script src="./curriculum/subjects.js"></script>
+<script src="./curriculum/question-types.js"></script>
+<script src="./curriculum/qbank.js"></script>
 <script src="./curriculum/shared.js"></script>
 <script src="./curriculum/math-y1.js"></script>
 <script src="./curriculum/math-y2.js"></script>
 <script src="./curriculum/extra-banks.js"></script>
 <script src="./curriculum/registry.js"></script>
 <script src="./curriculum/language-arts.js"></script>
-<!-- The Japan unit is authored (curriculum/japan-unit.js) but deliberately NOT
+<script src="./curriculum/japan-unit.js"></script>
+<!-- Japan card note: japan.dc.html and image-slot.js exist locally but are NOT yet
+     committed to the repo. Commit them together with this script tag, or the card
+     404s on GitHub Pages.
+     Prior note (kept for context): the unit was deliberately NOT
      loaded yet: its card opens japan.dc.html, and that page plus image-slot.js
      have never existed in this repo, so a child tapping the card would get a 404.
      Marking it "soon" would not help - openSubject follows open.href regardless
@@ -2190,6 +2196,41 @@
                   </sc-if>
                   <div style="font-size:12.5px;line-height:1.5;color:rgba(238,242,255,.6)">{{ tStreakNote }}</div>
                 </div>
+                <div style="background:rgba(74,222,128,.05);border:1px solid rgba(74,222,128,.24);border-radius:16px;padding:18px 20px;grid-column:1/-1">
+                  <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:12px">
+                    <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:#4ADE80">Completed exercises</div>
+                    <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(238,242,255,.4)">{{ tExCount }} logged</div>
+                  </div>
+                  <sc-if value="{{ tExAny }}" hint-placeholder-val="{{ true }}">
+                    <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:12px">
+                      <sc-for list="{{ tExRows }}" as="x" hint-placeholder-count="3">
+                        <div style="background:rgba(0,0,0,.24);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:12px 14px">
+                          <div style="display:grid;grid-template-columns:1fr auto auto;gap:14px;align-items:baseline">
+                            <div>
+                              <div style="font-family:Fredoka,sans-serif;font-size:14.5px">{{ x.title }}</div>
+                              <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:rgba(238,242,255,.4);margin-top:4px">{{ x.unit }} · {{ x.mode }} · {{ x.when }}</div>
+                            </div>
+                            <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(238,242,255,.55)">{{ x.score }}</div>
+                            <div style="font-family:Fredoka,sans-serif;font-size:17px;color:{{ x.pctColor }}">{{ x.pct }}</div>
+                          </div>
+                          <div style="display:flex;flex-wrap:wrap;gap:5px;margin-top:10px">
+                            <sc-for list="{{ x.cells }}" as="c" hint-placeholder-count="6">
+                              <div title="{{ c.tip }}" style="{{ c.style }}">{{ c.mark }}</div>
+                            </sc-for>
+                          </div>
+                          <sc-if value="{{ x.hasMisses }}" hint-placeholder-val="{{ false }}">
+                            <div style="display:flex;flex-direction:column;gap:5px;margin-top:10px;padding-top:9px;border-top:1px dashed rgba(255,255,255,.12)">
+                              <sc-for list="{{ x.misses }}" as="w" hint-placeholder-count="2">
+                                <div style="font-size:12px;line-height:1.5;color:rgba(238,242,255,.6)"><span style="color:rgba(238,242,255,.85)">{{ w.q }}</span> — typed <span style="color:#FCA5A5">{{ w.given }}</span>, answer <span style="color:#4ADE80">{{ w.exp }}</span></div>
+                              </sc-for>
+                            </div>
+                          </sc-if>
+                        </div>
+                      </sc-for>
+                    </div>
+                  </sc-if>
+                  <div style="font-size:12.5px;line-height:1.5;color:rgba(238,242,255,.6)">{{ tExNote }}</div>
+                </div>
                 <div style="background:rgba(129,140,248,.05);border:1px solid rgba(129,140,248,.26);border-radius:16px;padding:18px 20px">
                   <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:#818CF8;margin-bottom:14px">Subjects</div>
                   <div style="display:flex;flex-direction:column;gap:6px">
@@ -2710,6 +2751,41 @@
                 </sc-if>
                 <div style="font-size:12.5px;line-height:1.5;color:rgba(238,242,255,.6)">{{ tStreakNote }}</div>
               </div>
+              <div style="background:rgba(74,222,128,.05);border:1px solid rgba(74,222,128,.24);border-radius:16px;padding:18px 20px;grid-column:1/-1">
+                <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:12px">
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:#4ADE80">Completed exercises</div>
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(238,242,255,.4)">{{ tExCount }} logged</div>
+                </div>
+                <sc-if value="{{ tExAny }}" hint-placeholder-val="{{ true }}">
+                  <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:12px">
+                    <sc-for list="{{ tExRows }}" as="x" hint-placeholder-count="3">
+                      <div style="background:rgba(0,0,0,.24);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:12px 14px">
+                        <div style="display:grid;grid-template-columns:1fr auto auto;gap:14px;align-items:baseline">
+                          <div>
+                            <div style="font-family:Fredoka,sans-serif;font-size:14.5px">{{ x.title }}</div>
+                            <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:rgba(238,242,255,.4);margin-top:4px">{{ x.unit }} · {{ x.mode }} · {{ x.when }}</div>
+                          </div>
+                          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(238,242,255,.55)">{{ x.score }}</div>
+                          <div style="font-family:Fredoka,sans-serif;font-size:17px;color:{{ x.pctColor }}">{{ x.pct }}</div>
+                        </div>
+                        <div style="display:flex;flex-wrap:wrap;gap:5px;margin-top:10px">
+                          <sc-for list="{{ x.cells }}" as="c" hint-placeholder-count="6">
+                            <div title="{{ c.tip }}" style="{{ c.style }}">{{ c.mark }}</div>
+                          </sc-for>
+                        </div>
+                        <sc-if value="{{ x.hasMisses }}" hint-placeholder-val="{{ false }}">
+                          <div style="display:flex;flex-direction:column;gap:5px;margin-top:10px;padding-top:9px;border-top:1px dashed rgba(255,255,255,.12)">
+                            <sc-for list="{{ x.misses }}" as="w" hint-placeholder-count="2">
+                              <div style="font-size:12px;line-height:1.5;color:rgba(238,242,255,.6)"><span style="color:rgba(238,242,255,.85)">{{ w.q }}</span> — typed <span style="color:#FCA5A5">{{ w.given }}</span>, answer <span style="color:#4ADE80">{{ w.exp }}</span></div>
+                            </sc-for>
+                          </div>
+                        </sc-if>
+                      </div>
+                    </sc-for>
+                  </div>
+                </sc-if>
+                <div style="font-size:12.5px;line-height:1.5;color:rgba(238,242,255,.6)">{{ tExNote }}</div>
+              </div>
               <div style="background:rgba(129,140,248,.05);border:1px solid rgba(129,140,248,.26);border-radius:16px;padding:18px 20px">
                 <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:#818CF8;margin-bottom:14px">Subjects</div>
                 <div style="display:flex;flex-direction:column;gap:6px">
@@ -3031,6 +3107,7 @@
   <sc-if value="{{ isPractice }}" hint-placeholder-val="{{ false }}">
   <main style="position:relative;padding:34px 44px 72px;max-width:1180px">
     <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#38BDF8;margin-bottom:12px">{{ pUnitLabel }}</div>
+    <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.13em;text-transform:uppercase;color:rgba(238,242,255,.38);margin-bottom:12px">{{ pBankLine }} · <a href="Worksheet Builder.dc.html">print these questions</a></div>
     <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:50px;line-height:1.02;margin:0 0 14px;letter-spacing:-.5px">Check your own work.</h1>
     <p style="max-width:700px;margin:0 0 30px;font-size:16.5px;line-height:1.55;color:rgba(238,242,255,.72);text-wrap:pretty">Type your answers, press Check, and find out immediately. Wrong ones get a hint and you keep going until the bar hits 100%. Unlimited tries — nobody is counting how many you needed.</p>
 
@@ -3632,6 +3709,7 @@ class Component extends DCLogic {
            recW:8, recH:3, ptX:3, ptY:5,
            dat:"4,7,7,9,13", bagR:3, bagB:5, fnM:3, fnB:2, eqOp:"+", eqA:7, eqB:19,
            ans:{}, pset:"p1", pAns:{}, pChecked:{}, pRuns:{}, pTier:null, pPaper:{}, lstep:{}, playing:false,
+           pLog:{}, qbank:"idle", qbankLine:"",
            pHist:{}, skills:{}, snooze:{}, pFull:{}, pweek:1, pStreak:{}, sprintHist:{}, stream:null, sprint:null,
            tCode:"", tRoster:null, tKey:null, tSel:"", tData:null, tBusy:false, tErr:"",
            tAddName:"", tAddPin:"", tCurric:"y3", tFront:false, tView:null, tFromGate:false,
@@ -3689,7 +3767,7 @@ class Component extends DCLogic {
     : u===8?PUZZLES_U8:u===7?PUZZLES_U7:u===6?PUZZLES_U6:u===5?PUZZLES_U5:u===4?PUZZLES_U4:u===3?PUZZLES_U3:u===2?PUZZLES_U2:PUZZLES; }
   standardsFor(u){ return this.isY5() ? (STANDARDS_Y5[u]||STANDARDS_Y5[1])
     : u===8?STANDARDS_U8:u===7?STANDARDS_U7:u===6?STANDARDS_U6:u===5?STANDARDS_U5:u===4?STANDARDS_U4:u===3?STANDARDS_U3:u===2?STANDARDS_U2:STANDARDS; }
-  setsFor(u){ return this.isY5() ? (PRACTICE_Y5[u]||PRACTICE_Y5[1])
+  fileSetsFor(u){ return this.isY5() ? (PRACTICE_Y5[u]||PRACTICE_Y5[1])
     : u===8 ? PRACTICE_U8.concat(PRACTICE_U8_W2, PRACTICE_U8_W3, PRACTICE_U8_W4)
     : u===7 ? PRACTICE_U7.concat(PRACTICE_U7_W2, PRACTICE_U7_W3)
     : u===6 ? PRACTICE_U6.concat(PRACTICE_U6_W2, PRACTICE_U6_W3, PRACTICE_U6_W4, PRACTICE_U6_W5)
@@ -3698,6 +3776,22 @@ class Component extends DCLogic {
     : u===3 ? PRACTICE_U3.concat(PRACTICE_U3_W2, PRACTICE_U3_W3, PRACTICE_U3_W4)
     : u===2 ? PRACTICE_U2.concat(PRACTICE_U2_W2, PRACTICE_U2_W3, PRACTICE_U2_W4, PRACTICE_U2_W5)
     : PRACTICE.concat(PRACTICE_U1_W2, PRACTICE_U1_W3, PRACTICE_U1_W4, PRACTICE_U1_W5); }
+  // Every exercise on screen comes through here. The published bank in the
+  // database wins; the arrays above are the fallback when it is unreachable or
+  // has nothing to say about this unit yet (see curriculum/qbank.js).
+  bankId(){ return this.isY5() ? "y5" : "y3"; }
+  setsFor(u){ return QBank.setsFor(this.bankId(), u, this.fileSetsFor(u)); }
+  allFileSets(){ let out=[]; for(let u=1;u<=8;u++){ const g=this.fileSetsFor(u)||[];
+    g.forEach(s=>out.push(s.u?s:{...s,u})); } return out; }
+  loadBank(){
+    const id=this.bankId();
+    if(this._bankLoaded===id) return;
+    this._bankLoaded=id;
+    QBank.configure(REMOTE_PROJECT_ID)
+      .load(id, this.allFileSets())
+      .then(()=>this.setState({qbank:QBank.sourceOf(id), qbankLine:QBank.statusLine(id)}))
+      .catch(()=>this.setState({qbank:"files"}));
+  }
   // Sets authored before weeks existed carry no `w` and belong to Week 1.
   setsForWeek(u,w){ const all=this.setsFor(u); const got=all.filter(s=>(s.w||1)===w); return got.length?got:all.filter(s=>(s.w||1)===1); }
   weeksWithSets(u){ return [...new Set(this.setsFor(u).map(s=>s.w||1))].sort((a,b)=>a-b); }
@@ -3753,7 +3847,7 @@ class Component extends DCLogic {
     if(active){ this.setState({profiles,activeId,gate:false,loaded:true,...this.blank(),...(this.store.data[activeId]||{})}); }
     else{ this.setState({profiles,gate:true,loaded:true}); }
   }
-  blank(){ return {pAns:{},pChecked:{},pRuns:{},pPaper:{},lstep:{},pHist:{},skills:{},snooze:{},pStreak:{},sprintHist:{},subjects:{},lastSubject:null,stream:null,sprint:null,pTier:null,pset:"p1"}; }
+  blank(){ return {pAns:{},pChecked:{},pRuns:{},pPaper:{},lstep:{},pHist:{},pLog:{},skills:{},snooze:{},pStreak:{},sprintHist:{},subjects:{},lastSubject:null,stream:null,sprint:null,pTier:null,pset:"p1"}; }
   // setState + write-through. Used by every handler that touches saved progress.
   saveState(updater){ this.setState(updater); setTimeout(()=>this.persist(),0); }
   persist(){
@@ -3761,7 +3855,7 @@ class Component extends DCLogic {
     this.store.profiles=profiles; this.store.activeId=activeId;
     const keepCurric=(this.store.data[activeId]||{}).curriculum
       || ((profiles.find(p=>p.id===activeId)||{}).curriculum);
-    if(activeId) this.store.data[activeId]={pAns,pChecked,pRuns,lstep,pHist,skills,snooze,pPaper:this.state.pPaper,pStreak:this.state.pStreak,sprintHist:this.state.sprintHist,subjects:this.state.subjects,lastSubject:this.state.lastSubject,curriculum:keepCurric,updated:Date.now()};
+    if(activeId) this.store.data[activeId]={pAns,pChecked,pRuns,lstep,pHist,skills,snooze,pLog:this.state.pLog,pPaper:this.state.pPaper,pStreak:this.state.pStreak,sprintHist:this.state.sprintHist,subjects:this.state.subjects,lastSubject:this.state.lastSubject,curriculum:keepCurric,updated:Date.now()};
     Storage.save(this.store); // local first — survives dropped wifi
     if(Remote.enabled && activeId){
       const prof=profiles.find(x=>x.id===activeId);
@@ -3934,6 +4028,7 @@ class Component extends DCLogic {
 
   componentDidMount(){
     this.loadStore();
+    this.loadBank();
     window.addEventListener("resize",this.measure);
     setTimeout(this.measure,60);
     this._t=setInterval(()=>{
@@ -3944,6 +4039,9 @@ class Component extends DCLogic {
       this.setState(s=>({lstep:{...s.lstep,[id]:cur+1}}));
     },2600);
   }
+  // The level a child picks decides which bank to pull, and the level is picked
+  // after mount, so the load has to be able to happen again.
+  componentDidUpdate(){ this.loadBank(); }
   componentWillUnmount(){ clearInterval(this._t); window.removeEventListener("resize",this.measure); }
 
   tabStyle(active){
@@ -4254,6 +4352,54 @@ class Component extends DCLogic {
     const spr7pct=spr7a?Math.round(spr7r/spr7a*100)+"%":"—";
 
     const setById={}; for(let u=1;u<=8;u++) this.setsFor(u).forEach(s=>{setById[s.id]={s:s,u:u};});
+
+    // ---- every completed exercise, with the answers ------------------------
+    // One row per set per day, newest first, each with a per-item grid. Green
+    // is right, red is wrong and carries what the child typed, amber is a
+    // written response waiting to be marked by hand.
+    const exLog=(slice&&slice.pLog)||{};
+    const exRows=[];
+    Object.keys(exLog).forEach(id=>{
+      const byDay={};
+      (exLog[id]||[]).forEach(e=>{ (byDay[e.d]=byDay[e.d]||[]).push(e); });
+      Object.keys(byDay).forEach(d=>{
+        // Same item answered twice in a day: the last answer is the one that counts.
+        const seen={}; byDay[d].forEach(e=>{ seen[e.qid||e.i]=e; });
+        const items=Object.keys(seen).map(k=>seen[k]).sort((a,b)=>a.ts-b.ts);
+        const marked=items.filter(e=>e.ok!==null);
+        const right=marked.filter(e=>e.ok).length;
+        const pct=marked.length?Math.round(right/marked.length*100):null;
+        const m=setById[id];
+        exRows.push({
+          key:id+"|"+d, day:Number(d), ts:items[items.length-1].ts,
+          unit:m?("Mission 0"+m.u+" · "+m.s.label):id,
+          title:m?m.s.title:id,
+          when:new Date(items[items.length-1].ts).toLocaleDateString(undefined,{month:"short",day:"numeric"}),
+          mode:items.some(e=>e.m==="streak")?(items.every(e=>e.m==="streak")?"Streak Run":"Streak + worksheet"):"Worksheet",
+          score:marked.length?right+" / "+marked.length:"—",
+          pct:pct==null?"—":pct+"%",
+          pctColor:pct==null?"rgba(238,242,255,.6)":pct>=85?"#4ADE80":pct>=70?"#FBBF24":"#F87171",
+          cells:items.map((e,k)=>({
+            n:k+1,
+            mark:e.ok===null?"·":e.ok?"✓":"✗",
+            tip:(e.q||"")+"  →  "+(e.ok===null?"written response, mark by hand":
+                 e.ok?("correct: "+(e.given||"")):("typed "+(e.given||"(blank)")+", answer "+(e.exp||""))),
+            style:"width:26px;height:26px;border-radius:8px;display:grid;place-items:center;font-size:12px;font-family:'JetBrains Mono',monospace;"+
+              (e.ok===null?"background:rgba(251,191,36,.16);color:#FBBF24;border:1px solid rgba(251,191,36,.4)"
+               :e.ok?"background:rgba(74,222,128,.16);color:#4ADE80;border:1px solid rgba(74,222,128,.4)"
+                    :"background:rgba(248,113,113,.18);color:#FCA5A5;border:1px solid rgba(248,113,113,.45)")
+          })),
+          misses:items.filter(e=>e.ok===false).map(e=>({
+            q:e.q, given:e.given||"(blank)", exp:e.exp||"",
+            tier:e.t==null?"":(TIER_NAME[e.t]||"")
+          })),
+          hasMisses:items.some(e=>e.ok===false)
+        });
+      });
+    });
+    exRows.sort((a,b)=>b.ts-a.ts);
+    const exShown=exRows.slice(0,40);
+
     const sIds=Object.keys(streaks).filter(id=>setById[id]);
     let closedN=0, closedAtt=0; const openRows=[];
     sIds.forEach(id=>{
@@ -4354,6 +4500,11 @@ class Component extends DCLogic {
       tSprNote:sprDaysDone?(sprRun>=3?"The habit is holding.":"Sprints are happening, but not every day yet."):"No sprint run yet. It is the first thing on the Practice Bay screen.",
       tStreakClosed:closedN, tStreakOpen:openRows.length, tStreakAvg:avgToClose?avgToClose+"":"—",
       tStreakRows:streakRows, tStreakRowsAny:!!streakRows.length,
+      tExRows:exShown, tExAny:!!exShown.length,
+      tExCount:exRows.length,
+      tExNote:exRows.length
+        ? "Newest first. Green is right, red shows what they typed, amber is a written response for you to mark."
+        : "Nothing graded yet on this pilot's record. Every checked worksheet and every Streak Run answer lands here.",
       tStreakNote:openRows.length?"Open runs are sets where five in a row has not happened yet.":"Every set the Streak Run has touched closed at five in a row.",
 
       // Per-subject record. Every subject on the landing page writes its own
@@ -4525,6 +4676,38 @@ class Component extends DCLogic {
 
   normAns(v){ return String(v==null?"":v).replace(/[\s,]/g,"").toLowerCase().replace(/^0+(?=\d)/,""); }
 
+  // ── Per-item attempt log ─────────────────────────────────────────────────
+  // pHist keeps one score per set per day, which is all the mastery signal
+  // needs. This keeps the individual answers — including what the child
+  // actually typed on a miss — so Teacher HQ can show the item grid. Capped
+  // per set so the synced record cannot grow without bound.
+  logAttempt(set, it, idx, given, verdict, mode){
+    const entry={ts:Date.now(), d:dayNo(), i:idx,
+      qid:it.id||(set.id+"-i"+(idx+1)), q:String(it.q||"").slice(0,160),
+      exp:String(QTypes.answerText(it)).slice(0,80),
+      given:String(given==null?"":given).slice(0,80),
+      ok:verdict===null?null:!!verdict, t:it.t==null?null:it.t, m:mode||"grid"};
+    this.saveState(s=>{
+      const log={...(s.pLog||{})};
+      log[set.id]=[...(log[set.id]||[]), entry].slice(-60);
+      return {pLog:log};
+    });
+  }
+  logAttempts(set, rows, mode){
+    if(!rows.length) return;
+    const d=dayNo(), ts=Date.now();
+    const entries=rows.map(r=>({ts, d, i:r.i,
+      qid:(r.it.id||(set.id+"-i"+(r.i+1))), q:String(r.it.q||"").slice(0,160),
+      exp:String(QTypes.answerText(r.it)).slice(0,80),
+      given:String(r.given==null?"":r.given).slice(0,80),
+      ok:r.ok===null?null:!!r.ok, t:r.it.t==null?null:r.it.t, m:mode||"grid"}));
+    this.saveState(s=>{
+      const log={...(s.pLog||{})};
+      log[set.id]=[...(log[set.id]||[]), ...entries].slice(-60);
+      return {pLog:log};
+    });
+  }
+
   // Put the cursor in the answer box for every new problem. autoFocus only
   // fires on first mount, so without this the child had to click the box
   // again after each question.
@@ -4550,13 +4733,18 @@ class Component extends DCLogic {
     const s = st.stream && st.stream.setId===set.id ? st.stream : null;
     const items=set.items;
     const STREAK_GOAL=5, MIN_ATT=5, MAX_ATT=Math.max(items.length+12, 30);
-    const start=()=>{ this.setState({stream:{setId:set.id,pos:0,streak:0,att:0,right:0,val:"",rev:false,lastRight:false,done:false,recycle:[]}}); this.focusStreak(); };
+    // Banks are authored easy-first, so walking them in order meant five in a
+    // row was five Warm-Up items. Every run now gets its own mixed order:
+    // repeating windows of 1 Warm-Up, 2 Core, 2 Challenge (QTypes.mixOrder).
+    const start=()=>{ this.setState({stream:{setId:set.id,order:QTypes.mixOrder(items),pos:0,streak:0,att:0,right:0,val:"",rev:false,lastRight:false,done:false,recycle:[]}}); this.focusStreak(); };
     if(!s) return {pStreamOn:false, pGridOn:true, smStart:start, smLive:false, smDone:false, smDots:[], smProgress:"", smUnrevealed:false, smRevealed:false};
     // Past the end of the bank, re-ask whatever was missed.
+    const ord=(s.order&&s.order.length)?s.order:items.map((_,i)=>i);
     const idxFor=(x)=>{
-      if(x.pos < items.length) return x.pos;
+      const o=(x.order&&x.order.length)?x.order:items.map((_,i)=>i);
+      if(x.pos < o.length) return o[x.pos];
       const q=x.recycle||[];
-      return q.length ? q[(x.pos-items.length)%q.length] : items.length-1;
+      return q.length ? q[(x.pos-o.length)%q.length] : o[o.length-1];
     };
     const it=items[idxFor(s)], tier=TIERS[it.t];
     const finish=(str)=>{
@@ -4577,7 +4765,7 @@ class Component extends DCLogic {
         ? (cur.recycle||[]).filter(i=>i!==curIdx)      // got it on the retry — retire it
         : [...(cur.recycle||[]), curIdx];              // missed — ask it again later
       const pos=cur.pos+1;
-      const nothingLeft = pos>=items.length && recycle.length===0;
+      const nothingLeft = pos>=ord.length && recycle.length===0;
       const closed=(att>=MIN_ATT && streak>=STREAK_GOAL) || nothingLeft || att>=MAX_ATT;
       const ns={...cur,att,right,streak,recycle,pos,val:"",rev:false,lastRight:false};
       if(closed) finish(ns); else { this.setState({stream:ns}); this.focusStreak(); }
@@ -4587,9 +4775,11 @@ class Component extends DCLogic {
     const check=()=>{
       const cur=(this.state.stream && this.state.stream.setId===set.id) ? this.state.stream : s;
       if(cur.rev || cur.done) return;
-      if(this.normAns(cur.val)==="") return;   // ignore an empty submit
-      const right=this.normAns(cur.val)===this.normAns(it.a);
+      if(String(cur.val||"").trim()==="") return;   // ignore an empty submit
+      const verdict=QTypes.grade(it,cur.val);       // null = a human marks this one
+      const right=verdict!==false;
       this.setState({stream:{...cur,rev:true,lastRight:right}});
+      this.logAttempt(set,it,idxFor(cur),cur.val,verdict,"streak");
       clearTimeout(this._smTimer);
       this._smTimer=setTimeout(next, right?900:2600);
     };
@@ -4598,7 +4788,7 @@ class Component extends DCLogic {
       pStreamOn:true, pGridOn:false, smStart:start,
       smLive:!s.done, smDone:s.done,
       smDots:Array.from({length:STREAK_GOAL},(_,i)=>i).map(i=>({style:"width:14px;height:14px;border-radius:50%;transition:.2s;background:"+(i<streakNow?"#4ADE80":"rgba(255,255,255,.12)")+(i<streakNow?";box-shadow:0 0 8px rgba(74,222,128,.6)":"")})),
-      smProgress:(s.pos<items.length?"Problem "+(s.pos+1):"Second look")+" · "+s.right+" right of "+s.att+(s.att<MIN_ATT?" · at least "+MIN_ATT+" to finish":""),
+      smProgress:(s.pos<ord.length?"Problem "+(s.pos+1):"Second look")+" · "+s.right+" right of "+s.att+(s.att<MIN_ATT?" · at least "+MIN_ATT+" to finish":""),
       smQ:it.q, smVal:s.val, smTierIcon:tier.icon, smTierName:tier.name,
       smTierChipStyle:`width:22px;height:22px;border-radius:7px;background:${tier.color}26;color:${tier.color};display:grid;place-items:center;font-size:11px;flex:none`,
       smCardStyle:"background:"+(s.rev?(s.lastRight?"rgba(74,222,128,.1)":"rgba(251,113,133,.1)"):"rgba(0,0,0,.24)")+";border:1.5px solid "+(s.rev?(s.lastRight?"rgba(74,222,128,.5)":"rgba(251,113,133,.5)"):"rgba(255,255,255,.12)")+";border-radius:20px;padding:26px 30px;transition:.25s",
@@ -4609,9 +4799,9 @@ class Component extends DCLogic {
       smCheck:check, smNext:next,
       smMark:s.lastRight?"✓":"✗", smMarkColor:s.lastRight?"#4ADE80":"#FB7185",
       smFeedbackColor:s.lastRight?"#4ADE80":"#FB7185",
-      smNextLabel:(()=>{const i=idxFor(s),q=s.lastRight?(s.recycle||[]).filter(x=>x!==i):[...(s.recycle||[]),i],a=s.att+1,k=s.lastRight?s.streak+1:0;return (a>=MIN_ATT&&k>=STREAK_GOAL)||(s.pos+1>=items.length&&!q.length)||a>=MAX_ATT;})()?"Finish →":"Next →",
+      smNextLabel:(()=>{const i=idxFor(s),q=s.lastRight?(s.recycle||[]).filter(x=>x!==i):[...(s.recycle||[]),i],a=s.att+1,k=s.lastRight?s.streak+1:0;return (a>=MIN_ATT&&k>=STREAK_GOAL)||(s.pos+1>=ord.length&&!q.length)||a>=MAX_ATT;})()?"Finish →":"Next →",
       smNextBg:s.lastRight?"#4ADE80":"#FBBF24",
-      smFeedback:s.rev?(s.lastRight?"CORRECT":("INCORRECT — the answer is "+it.a+"."+(it.hint?" "+it.hint:"")+" Your streak resets, and this one comes back later.")):"",
+      smFeedback:s.rev?(s.lastRight?"CORRECT":("INCORRECT — the answer is "+QTypes.answerText(it)+"."+(it.hint?" "+it.hint:"")+" Your streak resets, and this one comes back later.")):"",
       smDoneIcon:s.streak>=STREAK_GOAL?"🎯":"💪",
       smDoneTitle:s.streak>=STREAK_GOAL?"Five in a row — set closed!":"Bank finished",
       smDoneNote:s.right+" right out of "+s.att+" ("+Math.round(s.right/Math.max(1,s.att)*100)+"%). "+(s.streak>=STREAK_GOAL?"That's mastery-level closing. Logged for today.":"You worked the whole bank without a closing streak — it's logged, and this set will come back tomorrow."),
@@ -4743,7 +4933,11 @@ class Component extends DCLogic {
     const tf=st.pTier, key=set.id+"|"+(tf==null?"all":tf);
     const ans=st.pAns[set.id]||{}, checked=!!st.pChecked[key], runs=st.pRuns[key]||0;
     const norm=v=>String(v==null?"":v).replace(/[\s,]/g,"").toLowerCase().replace(/^0+(?=\d)/,"");
-    const isRight=(i,it)=>norm(ans[i])!=="" && norm(ans[i])===norm(it.a);
+    // Grading goes through the question-type registry, so a set loaded from the
+    // database can hold multiple-choice, units, ordering or a written response
+    // and be marked correctly. A legacy {t,q,a} item is a short-answer item.
+    const verdictOf=(i,it)=>QTypes.grade(it, ans[i]);
+    const isRight=(i,it)=>verdictOf(i,it)!==false;
     const sk=(st.skills||{})[set.id]||null;
     const spiralAge=sk&&sk.state==="spiral" ? dayNo()-(sk.d||0) : 0;
     const compressed=!!sk && sk.state==="spiral" && spiralAge < MASTERY.spiralDays && !(st.pFull||{})[set.id];
@@ -4767,6 +4961,7 @@ class Component extends DCLogic {
 
     return {...SM, ...SPR,
       pUnitLabel:"Practice Bay · Mission 0"+st.uview+" · Week "+(st.pweek||1),
+      pBankLine:QBank.statusLine(this.bankId()),
       pWeekTabs:this.weeksWithSets(st.uview).map(w=>{
         const on=(st.pweek||1)===w;
         return {n:w, label:"Week "+w,
@@ -4828,7 +5023,8 @@ class Component extends DCLogic {
             `border:2px solid ${shown?(right?"#4ADE80":"#FB7185"):"rgba(255,255,255,.18)"}`
         };
       }),
-      pCheck:()=>{this.saveState(s=>({pChecked:{...s.pChecked,[key]:true},pRuns:{...s.pRuns,[key]:(s.pRuns[key]||0)+1},pHist:logRun(s.pHist||{},set.id,score,visible.length,compressed?null:tf)}));},
+      pCheck:()=>{this.saveState(s=>({pChecked:{...s.pChecked,[key]:true},pRuns:{...s.pRuns,[key]:(s.pRuns[key]||0)+1},pHist:logRun(s.pHist||{},set.id,score,visible.length,compressed?null:tf)}));
+        this.logAttempts(set, visible.map(({it,i})=>({i,it,given:ans[i],ok:verdictOf(i,it)})), "grid");},
       pRetry:()=>{
         const kept={};
         set.items.forEach((it,i)=>{ if(isRight(i,it) || (tf!=null && it.t!==tf)) kept[i]=ans[i]; });

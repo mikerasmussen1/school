@@ -95,6 +95,64 @@ A subject can be a page of its own (`open:{href:"word-voyagers.dc.html"}`) — t
 Japan unit works that way — or it can ask for screens inside the app. A page of
 your own is the easier place to start: you own the whole file.
 
+## Question types
+
+Every exercise in every subject is a list of items, and `curriculum/question-types.js`
+is the one place that decides what an item is:
+
+```js
+{ id, type, t, q, a, hint }
+```
+
+- `id` — stable string, never reused or renumbered. The attempt log, the printed
+  sheets and the photo scanner all key off it. Retire a bad item with
+  `retired:true`; do not delete it.
+- `type` — one of: `short-answer` (the default), `number-units`,
+  `multiple-choice`, `true-false`, `fill-blank`, `ordering`, `multi-part`,
+  `written-response`. `QTypes.list()` prints them.
+- `t` — tier: `0` Warm-Up, `1` Core, `2` Challenge.
+- `q` — the prompt. `a` — the answer in the shape the type expects
+  (an array for `fill-blank` and `ordering`, an index or the option text for
+  `multiple-choice`, absent for `written-response`, which takes a `rubric`).
+
+An item written the old way — `q(t, question, answer, hint)` — is a
+`short-answer` item, which is why the existing math banks needed no rewriting.
+`QTypes.grade(item, response)` returns `true`, `false`, or `null` for
+"a human marks this one". Never compare answers by hand.
+
+Validate before you push: `QTypes.validateSet(set)` returns `{ok, errors}` and
+catches an answer that is not one of the options, a blank count that does not
+match, a missing rubric, a duplicate id.
+
+## Questions come from the database
+
+`curriculum/qbank.js` loads question sets from Firestore, one document per bank
+(`questionbanks/y3`, `y5`, `la`, `japan`), and the database is authoritative.
+Resolution order per bank:
+
+1. the live document
+2. the last document this device saw (localStorage) — an offline device keeps
+   the newest questions it has ever been given
+3. the files in this repo, unchanged
+
+Step 3 is why nothing breaks: with nothing published, every exercise is the one
+in the repo. A published bank that says nothing about a unit leaves that unit's
+file version alone, so you can publish one mission at a time.
+
+Publishing has no UI yet. From the browser console, on the app:
+
+```js
+QBank.publish("y3", mySets)   // validates first; refuses a broken bank
+```
+
+It bumps `version`, and both the app and the worksheet builder pick it up on
+next load. `firestore.rules` allows public read on `questionbanks` — deploy the
+rules before expecting a published bank to load.
+
+`Worksheet Builder.dc.html` prints from the same loader, so a question fixed in
+the database is fixed on the next printout. The 32 `Unit N` packs in this repo
+are frozen snapshots and do not follow the database.
+
 ## The math shapes (a reference, not a requirement)
 
 Math uses tiered problem banks because arithmetic has right answers. Reading and

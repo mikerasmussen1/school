@@ -28,5 +28,13 @@ service cloud.firestore {
       allow get, create, update: if true;
       allow list, delete: if false;
     }
+    // Question banks. Public read: these are the exercises themselves, and
+    // every child's device has to be able to fetch them. Writes are open on
+    // the same terms as the rest of this ruleset (two kids, low stakes) —
+    // publishing goes through QBank.publish, which validates first.
+    match /questionbanks/{id} {
+      allow get, create, update: if true;
+      allow list, delete: if false;
+    }
   }
 }

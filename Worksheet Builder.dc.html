@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Newsreader:opsz,wght@6..72,400;6..72,600&display=swap" rel="stylesheet">
+<style>
+  body{margin:0;background:#0B0F24;color:#EEF2FF;font-family:Newsreader,Georgia,serif}
+  a{color:#38BDF8}
+  a:hover{color:#7DD3FC}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .page{print-color-adjust:exact;-webkit-print-color-adjust:exact}
+</style>
+<script src="./curriculum/question-types.js"></script>
+<script src="./curriculum/qbank.js"></script>
+<script src="./curriculum/shared.js"></script>
+<script src="./curriculum/math-y1.js"></script>
+<script src="./curriculum/math-y2.js"></script>
+<script src="./curriculum/extra-banks.js"></script>
+<script src="./doc-page.js"></script>
+</helmet>
+
+<div style="min-height:100vh">
+
+  <div style="max-width:1000px;margin:0 auto;padding:30px 28px 0" data-om-print-hide="1">
+    <div style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:#FBBF24;margin-bottom:10px">Baskin School · print</div>
+    <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:38px;line-height:1.05;margin:0 0 10px">Worksheet builder</h1>
+    <p style="max-width:620px;margin:0 0 22px;font-size:16px;line-height:1.55;color:rgba(238,242,255,.7);text-wrap:pretty">Sheets are built from the question sets in the database, so a question fixed there is fixed on the next printout. Pick a level and a mission, then print.</p>
+
+    <div style="display:flex;flex-wrap:wrap;gap:22px;align-items:flex-start;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.11);border-radius:18px;padding:18px 20px;margin-bottom:16px">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(238,242,255,.45);margin-bottom:9px">Level</div>
+        <div style="display:flex;gap:8px">
+          <sc-for list="{{ levelTabs }}" as="l" hint-placeholder-count="2">
+            <button onClick="{{ l.go }}" style="{{ l.style }}">{{ l.label }}</button>
+          </sc-for>
+        </div>
+      </div>
+      <div style="flex:1;min-width:260px">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(238,242,255,.45);margin-bottom:9px">Mission</div>
+        <div style="display:flex;gap:7px;flex-wrap:wrap">
+          <sc-for list="{{ unitTabs }}" as="u" hint-placeholder-count="8">
+            <button onClick="{{ u.go }}" style="{{ u.style }}">{{ u.label }}</button>
+          </sc-for>
+        </div>
+      </div>
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(238,242,255,.45);margin-bottom:9px">Answer key</div>
+        <button onClick="{{ toggleKey }}" style="{{ keyStyle }}">{{ keyLabel }}</button>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:26px">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:{{ statusColor }}">{{ statusLine }}</div>
+      <button onClick="{{ reload }}" style="font-family:Fredoka,sans-serif;font-size:13px;padding:8px 15px;border-radius:11px;cursor:pointer;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.18);color:rgba(238,242,255,.8)">Refresh questions</button>
+    </div>
+  </div>
+
+  <sc-if value="{{ loading }}" hint-placeholder-val="{{ true }}">
+    <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;padding:90px 20px 130px">
+      <div style="width:46px;height:46px;border-radius:50%;border:3px solid rgba(255,255,255,.14);border-top-color:#FBBF24;animation:spin .9s linear infinite"></div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.5)">Loading question sets</div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ ready }}" hint-placeholder-val="{{ false }}">
+    <x-import component-from-global-scope="doc-page" from="./doc-page.js" size="letter" hint-size="100%,900px">
+      <sc-for list="{{ pages }}" as="pg" hint-placeholder-count="2">
+        <section class="page" style="background:#fff;color:#12162A;padding:52px 56px;display:flex;flex-direction:column;font-family:Newsreader,Georgia,serif">
+          <div style="display:flex;align-items:baseline;justify-content:space-between;gap:16px;border-bottom:2px solid #12162A;padding-bottom:10px;margin-bottom:6px">
+            <div style="font-family:Fredoka,sans-serif;font-size:23px;font-weight:600">{{ pg.title }}</div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:#5B6178">{{ pg.meta }}</div>
+          </div>
+          <div style="display:flex;gap:26px;align-items:baseline;margin-bottom:18px">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#5B6178">Name ______________________</div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#5B6178">Date __________</div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#5B6178">Score ______ / {{ pg.gradedCount }}</div>
+          </div>
+          <sc-if value="{{ pg.hasNote }}" hint-placeholder-val="{{ false }}">
+            <div style="font-size:13.5px;line-height:1.5;color:#3B4159;background:#F1F3F9;border-left:3px solid #12162A;padding:10px 13px;margin-bottom:18px">{{ pg.note }}</div>
+          </sc-if>
+
+          <div style="display:flex;flex-direction:column;gap:15px">
+            <sc-for list="{{ pg.items }}" as="it" hint-placeholder-count="6">
+              <div style="display:grid;grid-template-columns:26px 1fr;gap:12px;align-items:start;break-inside:avoid">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#5B6178;padding-top:2px">{{ it.n }}.</div>
+                <div>
+                  <div style="display:flex;gap:9px;align-items:baseline;flex-wrap:wrap">
+                    <div style="font-size:15.5px;line-height:1.45;color:#12162A">{{ it.q }}</div>
+                    <div style="font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;color:#8A90A6">{{ it.tag }}</div>
+                  </div>
+
+                  <sc-if value="{{ it.isChoice }}" hint-placeholder-val="{{ false }}">
+                    <div style="display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:8px">
+                      <sc-for list="{{ it.options }}" as="o" hint-placeholder-count="4">
+                        <div style="display:flex;align-items:center;gap:7px;font-size:14.5px;color:#12162A">
+                          <span style="width:14px;height:14px;border:1.5px solid #12162A;border-radius:50%;display:inline-block"></span>{{ o.label }}
+                        </div>
+                      </sc-for>
+                    </div>
+                  </sc-if>
+
+                  <sc-if value="{{ it.isParts }}" hint-placeholder-val="{{ false }}">
+                    <div style="display:flex;flex-direction:column;gap:9px;margin-top:8px">
+                      <sc-for list="{{ it.parts }}" as="p" hint-placeholder-count="3">
+                        <div style="display:flex;align-items:baseline;gap:10px">
+                          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#5B6178">{{ p.label }})</div>
+                          <div style="font-size:14.5px;color:#12162A">{{ p.q }}</div>
+                          <div style="flex:1;border-bottom:1px solid #A9AEC0;min-width:70px"></div>
+                        </div>
+                      </sc-for>
+                    </div>
+                  </sc-if>
+
+                  <sc-if value="{{ it.isOrdering }}" hint-placeholder-val="{{ false }}">
+                    <div style="margin-top:8px;font-size:14px;color:#3B4159">{{ it.scramble }}</div>
+                  </sc-if>
+
+                  <sc-if value="{{ it.isWritten }}" hint-placeholder-val="{{ false }}">
+                    <div style="margin-top:9px">
+                      <sc-if value="{{ it.hasRubric }}" hint-placeholder-val="{{ false }}">
+                        <div style="font-size:12.5px;line-height:1.5;color:#5B6178;margin-bottom:8px">Marked on: {{ it.rubricLine }}</div>
+                      </sc-if>
+                      <div style="border-bottom:1px solid #A9AEC0;height:26px"></div>
+                      <div style="border-bottom:1px solid #A9AEC0;height:26px"></div>
+                      <div style="border-bottom:1px solid #A9AEC0;height:26px"></div>
+                      <div style="border-bottom:1px solid #A9AEC0;height:26px"></div>
+                    </div>
+                  </sc-if>
+
+                  <sc-if value="{{ it.isBox }}" hint-placeholder-val="{{ true }}">
+                    <div style="margin-top:9px;display:flex;align-items:flex-end;gap:14px">
+                      <div style="flex:1;height:44px;border:1px dashed #C2C7D6;border-radius:6px"></div>
+                      <div style="width:118px;border-bottom:2px solid #12162A;height:26px"></div>
+                    </div>
+                  </sc-if>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+
+          <div style="margin-top:auto;padding-top:16px;border-top:1px solid #D6D9E4;font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:.12em;text-transform:uppercase;color:#8A90A6">{{ pg.footer }}</div>
+        </section>
+      </sc-for>
+
+      <sc-if value="{{ showKey }}" hint-placeholder-val="{{ false }}">
+        <section class="page" style="background:#fff;color:#12162A;padding:52px 56px;font-family:Newsreader,Georgia,serif">
+          <div style="display:flex;align-items:baseline;justify-content:space-between;gap:16px;border-bottom:2px solid #12162A;padding-bottom:10px;margin-bottom:20px">
+            <div style="font-family:Fredoka,sans-serif;font-size:23px;font-weight:600">Answer key</div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:#5B6178">{{ keyMeta }}</div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:16px">
+            <sc-for list="{{ keySets }}" as="k" hint-placeholder-count="3">
+              <div style="break-inside:avoid">
+                <div style="font-family:Fredoka,sans-serif;font-size:15px;margin-bottom:6px">{{ k.title }}</div>
+                <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:5px 16px">
+                  <sc-for list="{{ k.answers }}" as="a" hint-placeholder-count="8">
+                    <div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;color:#12162A">{{ a.n }}. {{ a.a }}</div>
+                  </sc-for>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+        </section>
+      </sc-if>
+    </x-import>
+  </sc-if>
+
+  <sc-if value="{{ empty }}" hint-placeholder-val="{{ false }}">
+    <div style="max-width:1000px;margin:0 auto;padding:40px 28px 90px;font-size:15px;color:rgba(238,242,255,.65)">{{ emptyNote }}</div>
+  </sc-if>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1100,&quot;height&quot;:900}}">
+class Component extends DCLogic {
+  state = {bank:"y3", unit:1, showKey:true, tick:0, loading:true};
+
+  // The loader arrives with the helmet scripts, which can still be in flight
+  // when this mounts. Wait for it rather than failing the first load.
+  componentDidMount(){ this.waitForLoader(0); }
+  waitForLoader(n){
+    if(window.QBank && window.QTypes){ this.pull(); return; }
+    if(n>60){ this.setState({loading:false}); return; }
+    setTimeout(()=>this.waitForLoader(n+1), 100);
+  }
+
+  // The DB is authoritative; the compiled-in banks below are the fallback the
+  // loader drops to when it cannot be reached (curriculum/qbank.js).
+  fileSets(bank, u){
+    const C=window.__CURR||{};
+    if(bank==="y5") return (C.PRACTICE_Y5&&(C.PRACTICE_Y5[u]||C.PRACTICE_Y5[1]))||[];
+    const g=n=>C[n]||[];
+    if(u===8) return g("PRACTICE_U8").concat(g("PRACTICE_U8_W2"),g("PRACTICE_U8_W3"),g("PRACTICE_U8_W4"));
+    if(u===7) return g("PRACTICE_U7").concat(g("PRACTICE_U7_W2"),g("PRACTICE_U7_W3"));
+    if(u===6) return g("PRACTICE_U6").concat(g("PRACTICE_U6_W2"),g("PRACTICE_U6_W3"),g("PRACTICE_U6_W4"),g("PRACTICE_U6_W5"));
+    if(u===5) return g("PRACTICE_U5").concat(g("PRACTICE_U5_W2"),g("PRACTICE_U5_W3"),g("PRACTICE_U5_W4"));
+    if(u===4) return g("PRACTICE_U4").concat(g("PRACTICE_U4_W2"),g("PRACTICE_U4_W3"),g("PRACTICE_U4_W4"),g("PRACTICE_U4_W5"),g("PRACTICE_U4_W6"));
+    if(u===3) return g("PRACTICE_U3").concat(g("PRACTICE_U3_W2"),g("PRACTICE_U3_W3"),g("PRACTICE_U3_W4"));
+    if(u===2) return g("PRACTICE_U2").concat(g("PRACTICE_U2_W2"),g("PRACTICE_U2_W3"),g("PRACTICE_U2_W4"),g("PRACTICE_U2_W5"));
+    return g("PRACTICE").concat(g("PRACTICE_U1_W2"),g("PRACTICE_U1_W3"),g("PRACTICE_U1_W4"),g("PRACTICE_U1_W5"));
+  }
+  allFileSets(bank){
+    let out=[];
+    for(let u=1;u<=8;u++) this.fileSets(bank,u).forEach(s=>out.push(s.u?s:{...s,u}));
+    return out;
+  }
+
+  pull(force){
+    const bank=this.state.bank;
+    this.setState({loading:true});
+    if(force) delete window.QBank.banks[bank];
+    window.QBank.configure("big-math-adventures")
+      .load(bank, this.allFileSets(bank))
+      .then(()=>this.setState({loading:false, tick:this.state.tick+1}))
+      .catch(()=>this.setState({loading:false}));
+  }
+
+  sets(){ return window.QBank.setsFor(this.state.bank, this.state.unit, this.fileSets(this.state.bank, this.state.unit)); }
+
+  tab(on, label, go){
+    return {label, go, style:"font-family:Fredoka,sans-serif;font-size:13.5px;padding:8px 15px;border-radius:11px;cursor:pointer;white-space:nowrap;transition:.15s;background:"+
+      (on?"rgba(251,191,36,.2)":"rgba(255,255,255,.05)")+";border:1px solid "+(on?"rgba(251,191,36,.6)":"rgba(255,255,255,.13)")+
+      ";color:"+(on?"#FBBF24":"rgba(238,242,255,.62)")};
+  }
+
+  itemVals(it, n){
+    const Q=window.QTypes, type=Q.typeOf(it), kind=Q.inputKind(it);
+    const opts = type==="true-false" ? ["True","False"] : (Array.isArray(it.options)?it.options:[]);
+    const parts = Array.isArray(it.parts)?it.parts:[];
+    return {
+      n, q:String(it.q||""),
+      tag:(["Warm-Up","Core","Challenge"][it.t==null?1:it.t]||"")+(type==="short-answer"?"":" · "+Q.typeLabel(it)),
+      isChoice:kind==="choice"&&opts.length>0,
+      options:opts.map(o=>({label:String(o)})),
+      isParts:type==="multi-part"&&parts.length>0,
+      parts:parts.map((p,i)=>({label:p.label||String.fromCharCode(97+i), q:String(p.q||"")})),
+      isOrdering:type==="ordering",
+      scramble:type==="ordering"?("In order: "+(Array.isArray(it.options)&&it.options.length?it.options:(it.a||[])).slice().sort(()=>Math.random()-0.5).join("   ·   ")):"",
+      isWritten:type==="written-response",
+      hasRubric:type==="written-response"&&Array.isArray(it.rubric)&&it.rubric.length>0,
+      rubricLine:Array.isArray(it.rubric)?it.rubric.join(" · "):"",
+      isBox:type==="short-answer"||type==="number-units"||type==="fill-blank"
+    };
+  }
+
+  renderVals(){
+    const st=this.state, Q=window.QTypes, B=window.QBank, bank=st.bank;
+    const loading=st.loading||B.isLoading(bank);
+    const sets=loading?[]:this.sets();
+    const src=B.sourceOf(bank);
+    const levelLabel=bank==="y5"?"5th Grade":"3rd Grade";
+
+    const pages=sets.map(s=>{
+      const items=(s.items||[]).filter(i=>!i.retired);
+      return {
+        title:s.title||s.label||s.id,
+        meta:levelLabel+" · Mission 0"+st.unit+" · Week "+(s.w||1),
+        note:s.note||"", hasNote:!!s.note,
+        gradedCount:items.filter(i=>Q.isAutoGraded(i)).length,
+        items:items.map((it,i)=>this.itemVals(it,i+1)),
+        footer:s.id+" · "+items.length+" items · "+(src==="db"?"questions v"+B.versionOf(bank):"local questions")
+      };
+    });
+
+    return {
+      loading, ready:!loading&&pages.length>0, empty:!loading&&pages.length===0,
+      emptyNote:"No sets for Mission 0"+st.unit+" in this level.",
+      statusLine:B.statusLine(bank),
+      statusColor:src==="db"?"#4ADE80":src==="cache"?"#FBBF24":"rgba(238,242,255,.45)",
+      reload:()=>this.pull(true),
+      levelTabs:[["y3","3rd Grade"],["y5","5th Grade"]].map(([id,label])=>
+        this.tab(bank===id,label,()=>this.setState({bank:id},()=>this.pull()))),
+      unitTabs:[1,2,3,4,5,6,7,8].map(u=>this.tab(st.unit===u,"0"+u,()=>this.setState({unit:u}))),
+      showKey:st.showKey&&pages.length>0,
+      toggleKey:()=>this.setState({showKey:!st.showKey}),
+      keyLabel:st.showKey?"Included":"Left out",
+      keyStyle:"font-family:Fredoka,sans-serif;font-size:13.5px;padding:8px 15px;border-radius:11px;cursor:pointer;background:"+
+        (st.showKey?"rgba(74,222,128,.18)":"rgba(255,255,255,.05)")+";border:1px solid "+
+        (st.showKey?"rgba(74,222,128,.5)":"rgba(255,255,255,.13)")+";color:"+(st.showKey?"#4ADE80":"rgba(238,242,255,.62)"),
+      keyMeta:levelLabel+" · Mission 0"+st.unit,
+      keySets:sets.map(s=>({
+        title:s.title||s.label||s.id,
+        answers:(s.items||[]).filter(i=>!i.retired).map((it,i)=>({n:i+1, a:Q.answerText(it)}))
+      })),
+      pages
+    };
+  }
+}
+
+</script>
+</body>
+</html>

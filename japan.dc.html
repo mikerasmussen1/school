@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kaisei+Decol:wght@400;500;700&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700;6..12,800&family=JetBrains+Mono:wght@400;700&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  body{margin:0;font-family:"Nunito Sans",system-ui,sans-serif;color:#2A2118;background:#F5EFE2}
+  a{color:#B23A28;text-decoration:none}
+  a:hover{color:#D8432C}
+  *{box-sizing:border-box}
+</style>
+<script src="./image-slot.js"></script>
+</helmet>
+
+<div style="min-height:100vh;background:#F5EFE2;display:flex;flex-direction:column">
+
+  <!-- ═══ Header ═══ -->
+  <div style="background:#1C2430;color:#F5EFE2;padding:16px 28px;display:flex;align-items:center;gap:18px;flex-wrap:wrap">
+    <div style="flex:none;width:44px;height:44px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#E8503A,#B23A28 75%);box-shadow:0 0 0 5px rgba(216,67,44,.18)"></div>
+    <div style="flex:1;min-width:200px">
+      <div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap">
+        <div style="font-family:'Kaisei Decol',serif;font-weight:700;font-size:22px;line-height:1.1">Adventures in Japan</div>
+        <div style="font-family:'Noto Sans JP',sans-serif;font-weight:900;font-size:18px;color:#E8A33D">日本</div>
+      </div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:rgba(245,239,226,.55);margin-top:3px">8-week history expedition · 2 lessons a week · fly together</div>
+    </div>
+    <div style="display:flex;align-items:center;gap:14px">
+      <div style="background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);border-radius:12px;padding:8px 14px;text-align:center">
+        <div style="font-family:'Kaisei Decol',serif;font-size:19px;color:#7FB77E;line-height:1">{{ doneCount }}<span style="font-size:12px;color:rgba(245,239,226,.45)">/16</span></div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(245,239,226,.5)">explored</div>
+      </div>
+      <a href="index.html" style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(245,239,226,.7);border:1px solid rgba(255,255,255,.2);border-radius:999px;padding:9px 16px" style-hover="background:rgba(255,255,255,.08);color:#F5EFE2">← Mission Control</a>
+    </div>
+  </div>
+  <div style="height:6px;background:repeating-linear-gradient(90deg,#B23A28 0 46px,#E8A33D 46px 52px)"></div>
+
+  <!-- ═══ Home: the expedition map ═══ -->
+  <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+    <div style="max-width:1060px;margin:0 auto;padding:38px 28px 70px;width:100%">
+      <div style="display:flex;gap:34px;align-items:flex-start;flex-wrap:wrap;margin-bottom:34px">
+        <div style="flex:1;min-width:320px">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:#B23A28;margin-bottom:10px">Sixteen stops on the road to Japan</div>
+          <h1 style="font-family:'Kaisei Decol',serif;font-weight:700;font-size:40px;line-height:1.08;margin:0 0 14px;letter-spacing:-.5px">From the world's oldest pottery to the bullet train — then you go stand in it.</h1>
+          <div style="font-size:15.5px;line-height:1.65;color:rgba(42,33,24,.78);max-width:560px">Two lessons a week, read together out loud. Each stop has the story, a few Japanese words, videos to watch, and questions to argue about at dinner. No grades — the trip is the test. Every lesson ends with exactly where you'll meet it in Japan.</div>
+          <div style="display:flex;gap:9px;flex-wrap:wrap;margin-top:18px">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.08em;background:rgba(178,58,40,.1);border:1px solid rgba(178,58,40,.3);border-radius:999px;padding:6px 12px;color:#B23A28">READ ALOUD TOGETHER</span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.08em;background:rgba(43,76,126,.08);border:1px solid rgba(43,76,126,.28);border-radius:999px;padding:6px 12px;color:#2B4C7E">3 WORDS PER STOP</span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.08em;background:rgba(46,125,107,.1);border:1px solid rgba(46,125,107,.3);border-radius:999px;padding:6px 12px;color:#2E7D6B">NO GRADES</span>
+          </div>
+        </div>
+        <div style="flex:none;width:280px;background:#FDFAF2;border:1.5px solid rgba(42,33,24,.14);border-radius:18px;padding:20px 22px">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:#B23A28;margin-bottom:9px">About the photo frames</div>
+          <div style="font-size:13px;line-height:1.6;color:rgba(42,33,24,.75)">Every lesson has empty photo frames — they're drop zones. Search the topic in Google Images and drag pictures straight in; they stick. After the trip, replace them with your own photos and the unit becomes your travel journal.</div>
+        </div>
+      </div>
+
+      <sc-for list="{{ weekCards }}" as="w" hint-placeholder-count="8">
+        <div style="margin-bottom:22px">
+          <div style="display:flex;align-items:baseline;gap:12px;margin-bottom:10px">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(42,33,24,.45)">{{ w.wk }}</div>
+            <div style="font-family:'Kaisei Decol',serif;font-size:19px;color:#2A2118">{{ w.theme }}</div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+            <sc-for list="{{ w.lessons }}" as="l" hint-placeholder-count="2">
+              <div onClick="{{ l.open }}" style="{{ l.cardStyle }}" style-hover="transform:translateY(-2px);box-shadow:0 10px 26px rgba(42,33,24,.14)">
+                <div style="flex:none;width:58px;height:58px;border-radius:14px;display:grid;place-items:center;font-family:'Noto Sans JP',sans-serif;font-weight:900;font-size:24px;background:{{ l.chipBg }};color:{{ l.color }}">{{ l.kanji }}</div>
+                <div style="flex:1;min-width:0">
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:{{ l.color }}">{{ l.meta }}</div>
+                  <div style="font-family:'Kaisei Decol',serif;font-weight:700;font-size:17.5px;line-height:1.15;margin:4px 0 3px">{{ l.title }}</div>
+                  <div style="font-size:12.5px;color:rgba(42,33,24,.6);line-height:1.4">{{ l.sub }}</div>
+                </div>
+                <div style="flex:none;font-size:17px;color:{{ l.doneColor }}">{{ l.doneMark }}</div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </sc-if>
+
+  <!-- ═══ Lesson view ═══ -->
+  <sc-if value="{{ isLesson }}" hint-placeholder-val="{{ false }}">
+    <div style="max-width:880px;margin:0 auto;padding:34px 28px 80px;width:100%">
+
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:22px">
+        <button onClick="{{ goHome }}" style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;background:none;border:1.5px solid rgba(42,33,24,.25);border-radius:999px;padding:8px 16px;cursor:pointer;color:#2A2118" style-hover="border-color:#B23A28;color:#B23A28">← All 16 stops</button>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(42,33,24,.5)">{{ lMeta }}</div>
+      </div>
+
+      <div style="display:flex;gap:22px;align-items:flex-start;flex-wrap:wrap">
+        <div style="flex:1;min-width:300px">
+          <div style="display:inline-block;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#FDFAF2;background:{{ lColor }};border-radius:999px;padding:5px 13px;margin-bottom:12px">{{ lEra }} · {{ lYears }}</div>
+          <h1 style="font-family:'Kaisei Decol',serif;font-weight:700;font-size:40px;line-height:1.05;margin:0 0 8px;letter-spacing:-.5px">{{ lTitle }}</h1>
+          <div style="font-size:16px;line-height:1.5;color:rgba(42,33,24,.7)">{{ lSub }}</div>
+        </div>
+        <div style="flex:none;font-family:'Noto Sans JP',sans-serif;font-weight:900;font-size:76px;line-height:1;color:{{ lColor }};opacity:.9">{{ lKanji }}</div>
+      </div>
+
+      <!-- timeline -->
+      <div style="display:flex;gap:5px;margin:24px 0 28px;flex-wrap:wrap">
+        <sc-for list="{{ lTimeline }}" as="t" hint-placeholder-count="10">
+          <div style="{{ t.style }}">{{ t.name }}</div>
+        </sc-for>
+      </div>
+
+      <sc-for list="{{ lStory }}" as="p" hint-placeholder-count="3">
+        <p style="font-size:16.5px;line-height:1.75;margin:0 0 16px;max-width:720px">{{ p.t }}</p>
+      </sc-for>
+
+      <div style="background:#FDFAF2;border:1.5px solid {{ lColor }};border-radius:16px;padding:16px 20px;margin:22px 0;display:flex;gap:14px;align-items:flex-start;max-width:720px">
+        <div style="flex:none;font-family:'Noto Sans JP',sans-serif;font-weight:900;font-size:22px;color:{{ lColor }}">凄</div>
+        <div><div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:{{ lColor }};margin-bottom:5px">Sugoi — the wow fact</div>
+        <div style="font-size:14.5px;line-height:1.6">{{ lWow }}</div></div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:26px 0">
+        <sc-for list="{{ lPhotos }}" as="ph" hint-placeholder-count="2">
+          <div>
+            <div style="height:225px;border-radius:14px;overflow:hidden;border:1.5px solid rgba(42,33,24,.15)">
+              <image-slot id="{{ ph.id }}" shape="rect" placeholder="{{ ph.drop }}"></image-slot>
+            </div>
+            <div style="font-size:12px;color:rgba(42,33,24,.6);margin-top:7px;line-height:1.45">{{ ph.cap }}</div>
+          </div>
+        </sc-for>
+      </div>
+
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(42,33,24,.5);margin:26px 0 10px">Words for the trip · 言葉</div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;max-width:720px">
+        <sc-for list="{{ lWords }}" as="wd" hint-placeholder-count="3">
+          <div onClick="{{ wd.speak }}" style="background:#FDFAF2;border:1.5px solid rgba(42,33,24,.13);border-radius:14px;padding:14px 16px;text-align:center;cursor:pointer;position:relative" style-hover="border-color:#B23A28;box-shadow:0 4px 14px rgba(42,33,24,.1)" title="Tap to hear it spoken">
+            <div style="position:absolute;top:8px;right:10px;font-size:11px;color:rgba(178,58,40,.55)">🔊</div>
+            <div style="font-family:'Noto Sans JP',sans-serif;font-weight:700;font-size:24px;line-height:1.2">{{ wd.jp }}</div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;color:#B23A28;margin:5px 0 3px">{{ wd.ro }}</div>
+            <div style="font-size:12.5px;color:rgba(42,33,24,.65)">{{ wd.en }}</div>
+          </div>
+        </sc-for>
+      </div>
+
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(42,33,24,.5);margin:26px 0 10px">Watch · two picks</div>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;max-width:720px">
+        <sc-for list="{{ lVids }}" as="v" hint-placeholder-count="2">
+          <a href="{{ v.href }}" target="_blank" rel="noopener" onClick="{{ v.open }}" style="display:flex;align-items:center;gap:11px;background:#1C2430;color:#F5EFE2;border-radius:12px;padding:12px 18px;font-size:13.5px" style-hover="background:#2B3648;color:#fff">
+            <span style="flex:none;width:0;height:0;border-left:11px solid #E8503A;border-top:7px solid transparent;border-bottom:7px solid transparent"></span>
+            <span>{{ v.t }}</span>
+          </a>
+        </sc-for>
+      </div>
+      <div style="font-size:11.5px;color:rgba(42,33,24,.5);margin-top:7px">Links open a YouTube search so they never go stale — pick a video together and preview length first.</div>
+
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(42,33,24,.5);margin:28px 0 10px">Talk about it · at dinner or in the car</div>
+      <div style="display:flex;flex-direction:column;gap:10px;max-width:720px">
+        <sc-for list="{{ lQs }}" as="qq" hint-placeholder-count="3">
+          <div style="display:flex;gap:13px;background:#FDFAF2;border:1.5px solid rgba(42,33,24,.13);border-radius:13px;padding:13px 17px;align-items:flex-start">
+            <div style="flex:none;width:24px;height:24px;border-radius:50%;background:{{ lColor }};color:#FDFAF2;display:grid;place-items:center;font-family:'JetBrains Mono',monospace;font-size:11.5px">{{ qq.n }}</div>
+            <div style="font-size:14.5px;line-height:1.55">{{ qq.t }}</div>
+          </div>
+        </sc-for>
+      </div>
+
+      <div style="background:linear-gradient(135deg,rgba(178,58,40,.09),rgba(232,163,61,.1));border:1.5px solid rgba(178,58,40,.35);border-radius:16px;padding:18px 22px;margin:28px 0;max-width:720px">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:#B23A28;margin-bottom:7px">⛩ You'll stand right here</div>
+        <div style="font-size:14.5px;line-height:1.6">{{ lTrip }}</div>
+      </div>
+
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;border-top:2px solid rgba(42,33,24,.12);padding-top:20px;margin-top:34px">
+        <button onClick="{{ goPrev }}" style="{{ prevStyle }}" style-hover="border-color:#B23A28;color:#B23A28">{{ prevLabel }}</button>
+        <button onClick="{{ toggleDone }}" style="{{ doneBtnStyle }}" style-hover="filter:brightness(1.08)">{{ doneBtnLabel }}</button>
+        <button onClick="{{ goNext }}" style="{{ nextStyle }}" style-hover="filter:brightness(1.12)">{{ nextLabel }}</button>
+      </div>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { sel: null, done: (()=>{ try{return JSON.parse(localStorage.getItem("jpn.done")||"{}")}catch(e){return {}} })() };
+
+  L = [
+{n:1,wk:1,era:"Geography",tIdx:9,years:"now",color:"#2E7D6B",kanji:"島",title:"Islands of Fire and Sea",sub:"Why Japan looks, eats and builds the way it does — the land explains almost everything.",
+ story:["Japan is not one island — it is 6,852 of them, strung in a long arc between the Pacific Ocean and the Sea of Japan. Four big ones hold almost everybody: Hokkaidō in the snowy north, the main island Honshū, and Shikoku and Kyūshū in the warm south.",
+ "About three quarters of the land is mountains, too steep to farm or build on. So nearly all of Japan's 125 million people squeeze onto the narrow flat strips along the coast — which is why cities grow tall, trains run everywhere, and homes are clever with small spaces.",
+ "The islands sit on the Ring of Fire, where pieces of the Earth's crust grind together. That gives Japan volcanoes like Mount Fuji, about 1,500 earthquakes a year (nearly all too small to feel), and — as a gift for putting up with it all — thousands of natural hot springs."],
+ wow:"Japan is smaller than California, yet holds 125 million people — living on roughly a quarter of its land. That one fact explains bullet trains, tiny apartments, and vending machines on every corner.",
+ photos:[{id:"jp01a",drop:"Drop a map of Japan",cap:"Find a map showing the four main islands — can you name them north to south?"},{id:"jp01b",drop:"Drop a photo of Mt. Fuji",cap:"Mount Fuji, 3,776 m — Japan's tallest mountain and a (sleeping) volcano."}],
+ vids:[{t:"Japan's geography, explained"},{t:"The Ring of Fire — why so many volcanoes"}],
+ words:[{jp:"島",ro:"shima",en:"island"},{jp:"山",ro:"yama",en:"mountain"},{jp:"海",ro:"umi",en:"sea"}],
+ qs:["If mountains cover most of the land, where do the people, farms and train lines all have to go — and what problems does that create?","Would you rather live at the foot of a volcano or on a crowded coast? Defend it.","Look around your own town: what shapes where things get built here?"],
+ trip:"Book a window seat: on a clear day you can spot Mount Fuji from the plane, and the flight map will trace the whole island arc below you."},
+
+{n:2,wk:1,era:"Jōmon",tIdx:0,years:"14,000–300 BC",color:"#8C6A4A",kanji:"土",title:"The First Japanese",sub:"Hunter-gatherers who made the oldest pottery on Earth — and stayed for ten thousand years.",
+ story:["Long before farms or kings, people lived in Japan's forests in pit houses, hunting, fishing, and gathering chestnuts. Around 14,000 BC they began pressing twisted cords into wet clay and firing it — the oldest known pottery in the world. We call them Jōmon, which literally means 'cord-marked.'",
+ "Pots changed everything. Suddenly you could boil acorns until they weren't bitter, stew fish, and store food for winter. The Jōmon lived so well off the land that they stayed put for over ten thousand years — longer than every era after them combined.",
+ "They left behind shell mounds (ancient trash heaps that tell archaeologists exactly what they ate) and strange clay figures called dogū, with huge goggle eyes, whose purpose is still a genuine mystery."],
+ wow:"Jōmon pottery is roughly 10,000 years older than Egypt's pyramids. When the pyramids went up, the Jōmon were already an ancient people.",
+ photos:[{id:"jp02a",drop:"Drop a Jōmon pot",cap:"A flame-style Jōmon pot — look for the rope patterns pressed into the clay."},{id:"jp02b",drop:"Drop a dogū figurine",cap:"A dogū figure with goggle eyes. Nobody knows for sure what they were for."}],
+ vids:[{t:"Jōmon period — prehistoric Japan"},{t:"The world's oldest pottery"}],
+ words:[{jp:"土",ro:"tsuchi",en:"earth · clay"},{jp:"森",ro:"mori",en:"forest"},{jp:"火",ro:"hi",en:"fire"}],
+ qs:["A shell mound is a 10,000-year-old trash pile. Why is old garbage one of the best treasures an archaeologist can find?","How does a simple clay pot change what a family can eat, store and survive?","What do YOU think the dogū were for? There's no wrong answer — even experts only guess."],
+ trip:"The Tokyo National Museum in Ueno Park has real Jōmon pots and dogū behind glass — you'll stand a foot away from the oldest pottery on Earth."},
+
+{n:3,wk:2,era:"Mythology",tIdx:1,years:"the oldest stories",color:"#D8432C",kanji:"神",title:"Kami and the Sun Goddess",sub:"Shintō — Japan's oldest religion — fills the world with spirits, and its chief one is the sun.",
+ story:["Shintō means 'the way of the kami.' Kami are spirits found everywhere — in a mountain, a twisted old tree, a waterfall, even a strangely shaped rock. A shrine marks a place where kami live, and a torii gate marks where the ordinary world ends and theirs begins.",
+ "The greatest kami is Amaterasu, goddess of the sun. In the most famous story, her brother behaves so badly that she hides in a cave — and the whole world goes dark. The other gods throw a wild party outside, and when curious Amaterasu peeks out, they catch her reflection in a mirror and pull her back into the sky.",
+ "Japan's emperors claimed to be her direct descendants, which is why the imperial family is the oldest royal line on Earth — and why Japan's flag is a single red sun."],
+ wow:"The white flag with the red circle IS Amaterasu — the country's name, Nihon (日本), means 'origin of the sun.'",
+ photos:[{id:"jp03a",drop:"Drop a torii gate photo",cap:"A vermillion torii gate — the doorway between the everyday world and the kami's."},{id:"jp03b",drop:"Drop the Fushimi Inari tunnel",cap:"Fushimi Inari in Kyoto: about 10,000 torii forming tunnels up the mountain."}],
+ vids:[{t:"Amaterasu and the cave — the myth"},{t:"What is Shintō?"}],
+ words:[{jp:"神",ro:"kami",en:"spirit · god"},{jp:"鳥居",ro:"torii",en:"shrine gate"},{jp:"太陽",ro:"taiyō",en:"the sun"}],
+ qs:["Why would island farmers and fishermen make the SUN their chief god, rather than war or the sea?","In the cave story, darkness is beaten by laughter and curiosity — not force. What is the story trying to teach?","If kami live in remarkable natural places, what spot near home would you nominate?"],
+ trip:"You'll walk through hundreds of torii on this trip. Small ritual: pause and bow once before entering — and at Fushimi Inari, try to count gates until you give up."},
+
+{n:4,wk:2,era:"Nara",tIdx:2,years:"552–794",color:"#A87F2E",kanji:"仏",title:"The Great Buddha of Nara",sub:"A new religion arrives by ship, and Japan answers with a statue that nearly emptied the treasury.",
+ story:["Around 552, ships from Korea brought something new: Buddhism, a religion from India about ending suffering through compassion and letting go. Instead of replacing the kami, Japan did something unusual — it kept both. Shintō for this world, Buddhism for the next.",
+ "Japan's first great capital, Nara, was laid out in 710 like a giant chessboard, copied from China's capital. Emperor Shōmu ordered a bronze Buddha so huge it took most of the bronze in the country and years of work: the Daibutsu, nearly 15 meters tall, seated inside Tōdai-ji temple.",
+ "Around the temple, deer roam free. They were considered sacred messengers of the gods — and about 1,200 of their descendants still wander Nara's park today, bowing to tourists for crackers."],
+ wow:"Tōdai-ji's Great Buddha Hall was the largest wooden building in the world for about 1,200 years — and today's hall is a REBUILD at only two-thirds the original size.",
+ photos:[{id:"jp04a",drop:"Drop the Nara Daibutsu",cap:"The Great Buddha — its hand alone is taller than a person."},{id:"jp04b",drop:"Drop a bowing deer",cap:"Nara's deer learned to bow for shika senbei (deer crackers)."}],
+ vids:[{t:"Tōdai-ji and the Great Buddha of Nara"},{t:"The bowing deer of Nara"}],
+ words:[{jp:"大仏",ro:"daibutsu",en:"Great Buddha"},{jp:"寺",ro:"tera",en:"temple"},{jp:"鹿",ro:"shika",en:"deer"}],
+ qs:["Japan kept BOTH religions instead of choosing. What does that tell you about how Japan handles new ideas?","Was spending most of the country's bronze on one statue wise, wasteful, or something else?","Why might a ruler WANT a building so big it awes everyone who enters?"],
+ trip:"Nara is a day trip from Kyoto. Bow to a deer and it will likely bow back — hold the crackers high or you'll be mobbed. Then find the pillar in Tōdai-ji with a hole the size of the Buddha's nostril: crawling through is said to bring enlightenment."},
+
+{n:5,wk:3,era:"Heian",tIdx:3,years:"794–1185",color:"#7C5CBF",kanji:"雅",title:"The Elegant Court of Heian",sub:"A capital of poets, where the world's first novel was written by a woman a thousand years ago.",
+ story:["In 794 the capital moved to Heian-kyō — today's Kyoto — and stayed for more than a thousand years. Inside the palace walls, nobles lived by rules of elegance: you were judged on your poetry, your handwriting, and whether the colors of your twelve-layered sleeves matched the season.",
+ "Around the year 1010, a court lady named Murasaki Shikibu wrote The Tale of Genji — a story of princes, love and loss so rich that many call it the world's first novel. A thousand years later, it is still read.",
+ "It happened partly because of a new invention: kana, simple letters for writing Japanese sounds. Chinese characters were for men's official documents; kana let women write freely — and the women out-wrote everyone."],
+ wow:"The world's first novel was written by a woman, in Japan, around 1010 — roughly 600 years before Shakespeare.",
+ photos:[{id:"jp05a",drop:"Drop a Genji scroll painting",cap:"A Tale of Genji picture scroll — note the 'blown-off roof' style letting you peek inside."},{id:"jp05b",drop:"Drop a jūnihitoe robe",cap:"The jūnihitoe: twelve layered robes. Matching the colors to the season was an art."}],
+ vids:[{t:"The Tale of Genji, animated"},{t:"Heian period court life"}],
+ words:[{jp:"都",ro:"miyako",en:"the capital"},{jp:"歌",ro:"uta",en:"poem · song"},{jp:"紫",ro:"murasaki",en:"purple"}],
+ qs:["At Heian court you were graded on poems and handwriting instead of tests. Better or worse than school? Why?","Why did giving women a way to write change WHAT got written?","Try it: write one 5-7-5 haiku about the trip you're about to take."],
+ trip:"Kyoto's straight, grid-pattern streets ARE Heian-kyō's original 794 street plan — you'll be navigating a 1,200-year-old city map."},
+
+{n:6,wk:3,era:"Kamakura",tIdx:4,years:"1185–1333",color:"#4A6B8A",kanji:"侍",title:"Rise of the Samurai",sub:"While the court wrote poems, warrior clans grew strong — and one of them took the country.",
+ story:["Far from the perfumed capital, tough warrior families kept order in the provinces. The two greatest — the Taira and the Minamoto — finally went to war. The Genpei War ended in 1185 with a sea battle at Dan-no-ura, where the Taira were destroyed.",
+ "The winner, Minamoto no Yoritomo, took the title shōgun — 'great general' — in 1192 and ruled from his own seaside city, Kamakura. The emperor stayed in Kyoto with all the ceremony and none of the power. That arrangement — emperor reigns, shōgun rules — lasted nearly 700 years.",
+ "The samurai lived by an unwritten code later called bushidō: loyalty to your lord, courage in battle, and honor valued above life itself. Their two swords marked their rank; their armor was laced silk and iron, built to move."],
+ wow:"For almost 700 years Japan had an emperor everyone honored and obeyed — ceremonially. The actual government answered to the shōgun. Two thrones, one real.",
+ photos:[{id:"jp06a",drop:"Drop samurai armor",cap:"Samurai armor — thousands of iron scales laced with silk cord."},{id:"jp06b",drop:"Drop the Kamakura Buddha",cap:"Kamakura's outdoor Great Buddha has sat through typhoons and tsunami since 1252."}],
+ vids:[{t:"The Genpei War and the first shōgun"},{t:"How samurai armor works"}],
+ words:[{jp:"侍",ro:"samurai",en:"warrior"},{jp:"刀",ro:"katana",en:"sword"},{jp:"将軍",ro:"shōgun",en:"great general"}],
+ qs:["Why would a shōgun with all the power KEEP the emperor instead of taking the throne?","Honor above life: admirable, dangerous, or both? Give an example either way.","Pick one bushidō virtue — loyalty, courage, honesty, self-control — you'd adopt this year. How would anyone notice?"],
+ trip:"Kamakura is an hour from Tokyo: the giant outdoor Buddha, the shōgun's shrine Tsurugaoka Hachimangū, and hawks that will steal your snacks on the beach."},
+
+{n:7,wk:4,era:"Kamakura",tIdx:4,years:"1274 & 1281",color:"#3E5C76",kanji:"風",title:"The Divine Wind",sub:"The largest empire in history came for Japan twice. The weather had other plans.",
+ story:["By the 1270s the Mongols under Kublai Khan had conquered more land than any empire ever — China, Korea, half of everything. Kublai sent letters ordering Japan to submit. The samurai government refused to even answer.",
+ "In 1274 a Mongol fleet stormed ashore at Hakata Bay with exploding bombs and massed arrows — nothing like the samurai's one-on-one dueling style. The invaders were held off just long enough for a storm to wreck their fleet. Japan spent the next seven years building a stone wall along the bay.",
+ "In 1281 the Mongols returned with one of the largest invasion fleets in world history — thousands of ships. The wall held them on the water for weeks... until a massive typhoon shattered the fleet. Japan named the storms kamikaze: the divine wind, sent — many believed — by the kami themselves."],
+ wow:"The 1281 armada was likely the biggest sea invasion the world would see until D-Day in 1944 — 663 years later. Marine archaeologists still pull Mongol anchors and bombs from Hakata Bay's floor.",
+ photos:[{id:"jp07a",drop:"Drop the invasion scroll art",cap:"From the Mongol Invasion scrolls: samurai Takezaki Suenaga charging under exploding bombs."},{id:"jp07b",drop:"Drop a typhoon satellite photo",cap:"A typhoon from space — the kind of storm that ended both invasions."}],
+ vids:[{t:"The Mongol invasions of Japan"},{t:"Kamikaze — the typhoons of 1274 and 1281"}],
+ words:[{jp:"風",ro:"kaze",en:"wind"},{jp:"嵐",ro:"arashi",en:"storm"},{jp:"壁",ro:"kabe",en:"wall"}],
+ qs:["Japan won by wall + weather. How much was luck, and how much preparation? Does it matter which?","How would surviving the world's biggest empire — twice — change how a country sees itself?","The samurai who fought got little reward, and their anger helped topple the Kamakura government. Why is winning a war sometimes ruinously expensive?"],
+ trip:"When you hear 'kamikaze' used about WWII pilots, you'll know where the word really comes from: two typhoons, 700 years earlier."},
+
+{n:8,wk:4,era:"Sengoku",tIdx:5,years:"1467–1600",color:"#8A2F2F",kanji:"城",title:"The Warring States",sub:"A century of chaos, ended by three very different men — the breaker, the builder, and the waiter.",
+ story:["When the shōgun's power crumbled in 1467, every lord — daimyō — fought every neighbor. For over a hundred years, Japan was a chessboard of private armies, spies, ninja, and castles sprouting on every strategic hill. This is the age most samurai movies are set in.",
+ "Three men ended it. Oda Nobunaga, the ruthless innovator, embraced the new Portuguese muskets and shattered a legendary cavalry charge at Nagashino in 1575. After his death, Toyotomi Hideyoshi — who had started life as a peasant sandal-bearer — finished unifying the country with deals as often as battles.",
+ "Then Tokugawa Ieyasu, who had waited patiently for decades, won the giant battle of Sekigahara in 1600 and took it all. A famous saying: Nobunaga pounded the rice, Hideyoshi kneaded the dough — and Ieyasu ate the cake."],
+ wow:"Hideyoshi rose from barefoot peasant to ruler of all Japan — in a world where your birth was supposed to decide everything. It was so unthinkable that he was never technically allowed the title of shōgun.",
+ photos:[{id:"jp08a",drop:"Drop Himeji Castle",cap:"Himeji, the White Heron — the most beautiful surviving castle in Japan."},{id:"jp08b",drop:"Drop the three unifiers art",cap:"Nobunaga, Hideyoshi, Ieyasu — the breaker, the builder, the waiter."}],
+ vids:[{t:"The Sengoku period explained"},{t:"Sekigahara — the battle that ended an era"}],
+ words:[{jp:"城",ro:"shiro",en:"castle"},{jp:"鉄砲",ro:"teppō",en:"musket"},{jp:"天下",ro:"tenka",en:"'all under heaven'"}],
+ qs:["Breaker, builder or waiter — whose strategy is most like how YOU play games? Be honest.","Why did guns from Portugal change Japanese battles almost overnight?","Castles exploded in size in exactly this era. What does an arms race do to architecture?"],
+ trip:"At Himeji or Osaka Castle, hunt for the defenses: triangle and circle gun-slits in the walls, stone-drop chutes over the gates, and gates angled so attackers turn their unshielded side to the defenders."},
+
+{n:9,wk:5,era:"Edo",tIdx:6,years:"1603–1853",color:"#2B6E4F",kanji:"平",title:"The Great Peace of Edo",sub:"250 years without war — bought with hostages, highways, and a locked front door.",
+ story:["Ieyasu became shōgun in 1603 and moved the government to his castle town, Edo — today's Tokyo. The Tokugawa family then kept the peace for two and a half centuries, one of the longest calms in world history.",
+ "Their cleverest trick was sankin-kōtai: every lord had to live in Edo every other year, and leave his family there when he went home. Rebellion meant abandoning your family — so nobody rebelled. All that traveling built great highways, post towns, inns, and a boomtown: by the 1700s Edo topped a million people, the largest city on Earth.",
+ "The shōguns also locked the country: the sakoku policy banned almost all foreign contact for 200+ years, except a trickle of Dutch and Chinese trade through Nagasaki. Inside the locked door, Japan grew a culture entirely its own — and samurai, with no wars to fight, became paper-pushing officials paid in rice."],
+ wow:"Edo hit one million people around 1720 — bigger than London or Paris — with no cars, no electricity, and firefighters who were the city's rock stars (wooden city + oil lamps = constant fires).",
+ photos:[{id:"jp09a",drop:"Drop an Edo street scene",cap:"A print of Nihonbashi bridge — mile zero of the five great highways."},{id:"jp09b",drop:"Drop a daimyō procession",cap:"A sankin-kōtai procession — some lords traveled with thousands of retainers."}],
+ vids:[{t:"Daily life in Edo Japan"},{t:"Sankin-kōtai — the alternate attendance system"}],
+ words:[{jp:"平和",ro:"heiwa",en:"peace"},{jp:"道",ro:"michi",en:"road · way"},{jp:"江戸",ro:"Edo",en:"old Tokyo"}],
+ qs:["Sankin-kōtai was a hostage system that accidentally built the best roads in Asia. Clever, cruel, or both?","List one thing a country gains and one it loses by closing itself off for 200 years.","What SHOULD a warrior class do when there are no wars left? What did they become here?"],
+ trip:"Tokyo IS Edo. The Imperial Palace sits on Edo Castle's moats and stone walls, and the Edo-Tokyo history exhibits show the city street by street. Nihonbashi bridge is still kilometer zero for Japan's highways."},
+
+{n:10,wk:5,era:"Edo",tIdx:6,years:"1700s–1853",color:"#1F6E7E",kanji:"波",title:"The Floating World",sub:"Peace made townspeople rich — and they spent it on theater, sumo, poems, and the most famous wave in art.",
+ story:["With no wars, merchants got rich — and Edo's townspeople built a playground culture they called ukiyo, 'the floating world': kabuki theater with its wild makeup and stage tricks, sumo tournaments, festivals, and cheap woodblock prints anyone could afford.",
+ "Those prints — ukiyo-e — were team art: an artist drew, a carver cut the design into cherry-wood blocks, a printer pressed one color at a time. A print cost about as much as a bowl of noodles. Around 1831, the artist Hokusai published 'The Great Wave off Kanagawa' — probably the most famous image ever made in Japan: a monster wave with claws of foam, and tiny, patient Mount Fuji in the distance.",
+ "Words got small and perfect too. The poet Bashō walked the length of Japan writing haiku — three lines, 5-7-5 sounds. His frog is still the most famous poem in Japan: old pond / a frog leaps in / the sound of water."],
+ wow:"When Japan opened up, ukiyo-e prints reached Europe — sometimes literally as packing paper around pottery. Van Gogh copied them stroke for stroke; Monet hung dozens. Cheap Edo street art rewired European painting.",
+ photos:[{id:"jp10a",drop:"Drop The Great Wave",cap:"Hokusai's Great Wave — find tiny Fuji, then find the three boats and their rowers."},{id:"jp10b",drop:"Drop a kabuki actor print",cap:"A kabuki star print — the celebrity posters of Edo."}],
+ vids:[{t:"Hokusai's Great Wave, explained"},{t:"How woodblock prints are made"}],
+ words:[{jp:"絵",ro:"e",en:"picture"},{jp:"波",ro:"nami",en:"wave"},{jp:"俳句",ro:"haiku",en:"haiku"}],
+ qs:["When art costs the same as noodles, who gets to have art? What changes?","In the Great Wave, the wave is huge and Fuji is tiny. Why might Hokusai have flipped their sizes?","Everyone writes one haiku about Japan tonight — 5-7-5. Read them aloud; no critiquing allowed."],
+ trip:"The Sumida Hokusai Museum in Tokyo stands in the neighborhood where he was born. Museum shops sell beautiful print reproductions — a Great Wave for your wall is the classic souvenir."},
+
+{n:11,wk:6,era:"Meiji",tIdx:7,years:"1853–1912",color:"#345995",kanji:"新",title:"Black Ships and the Meiji Miracle",sub:"Four smoke-belching warships ended 250 years of isolation — and Japan rebuilt itself in one generation.",
+ story:["In July 1853, four American warships under Commodore Matthew Perry steamed into Edo Bay — iron ships moving against the wind, guns bigger than anything in Japan. People called them the black ships. The message: open your ports, or else. After 250 closed years, Japan could see it had no way to stop them.",
+ "The shock brought down the shogunate. In 1868, power was 'restored' to the teenage Emperor Meiji, and the new government made an astonishing choice: instead of resisting the modern world, out-learn it. Missions sailed to America and Europe to study the best of everything — British navy, German army and medicine, American schools.",
+ "In one generation, Japan built railways (first line 1872), telegraphs, factories, newspapers, a constitution and a parliament. The samurai class was abolished; their topknots and swords became museum pieces. By 1905 Japan had defeated Russia, a European great power, at sea — fifty years after Perry."],
+ wow:"From sail-powered isolation to defeating a European empire in about 50 years — the fastest self-modernization in world history. The same country that had banned wheeled ox-carts on some roads was running its own railroads within 20 years of Perry.",
+ photos:[{id:"jp11a",drop:"Drop a black ships print",cap:"A Japanese print of Perry's steam frigate — artists drew it like a sea monster."},{id:"jp11b",drop:"Drop a Meiji-era train",cap:"Japan's first railway, 1872: Tokyo to Yokohama in 53 minutes."}],
+ vids:[{t:"Commodore Perry and the black ships"},{t:"The Meiji Restoration explained"}],
+ words:[{jp:"船",ro:"fune",en:"ship"},{jp:"電車",ro:"densha",en:"train"},{jp:"新しい",ro:"atarashii",en:"new"}],
+ qs:["Japan chose 'change everything' over 'fight and lose.' Was there a third option? What would you have advised the emperor?","If your country sent missions abroad today to copy the world's best ideas, what three things should they bring home?","Something was gained and something was lost when the samurai era ended in a single decade. Name one of each."],
+ trip:"Every train you ride in Japan descends from that 1872 line. Tokyo Station's red-brick building is itself a Meiji-era monument."},
+
+{n:12,wk:6,era:"Nature",tIdx:9,years:"always",color:"#2E7D6B",kanji:"泉",title:"Earthquakes and Hot Springs",sub:"The restless ground is Japan's oldest enemy and oldest gift — and it engineered a nation of problem-solvers.",
+ story:["Four tectonic plates meet under Japan, which is why the ground never fully sleeps: about 1,500 noticeable earthquakes a year, most harmless. Japan's answer is engineering — skyscrapers that sway on rubber and giant pendulums instead of snapping, schoolkids who drill for quakes the way you drill for fire, and phone alerts that arrive seconds before the shaking does.",
+ "The same restless ground gives back: more than 25,000 natural hot springs. Bathing in an onsen is a national art — mountain towns are built around them, and in Nagano, wild snow monkeys soak in their own steaming pool all winter, faces bright red, perfectly content.",
+ "And towering over it all is Fuji-san — a volcano, last eruption 1707, sacred for over a thousand years. Every summer, thousands climb through the night to watch sunrise from the summit."],
+ wow:"The shinkansen has carried billions of passengers since 1964 with ZERO deaths from crashes or derailments — and earthquake sensors auto-brake the trains before the shaking even arrives.",
+ photos:[{id:"jp12a",drop:"Drop snow monkeys in an onsen",cap:"Jigokudani's snow monkeys — the only wild monkeys on Earth that bathe in hot springs."},{id:"jp12b",drop:"Drop a shinkansen passing Fuji",cap:"The classic shot: a bullet train streaking past Mount Fuji."}],
+ vids:[{t:"Why Japan has so many earthquakes"},{t:"How Japan builds earthquake-proof buildings"}],
+ words:[{jp:"地震",ro:"jishin",en:"earthquake"},{jp:"温泉",ro:"onsen",en:"hot spring"},{jp:"雪",ro:"yuki",en:"snow"}],
+ qs:["How do you design a building for ground that moves? Brainstorm before you watch the video — then compare.","Earthquakes and onsen come from the exact same source. Where else does danger and gift arrive in one package?","Fuji is 'overdue' by some counts — its last eruption was 1707. Should people live near it? Would you climb it?"],
+ trip:"Onsen rules, so you're ready: wash and rinse completely BEFORE entering the bath, no swimsuits, and the little towel goes folded on your head — never in the water. Your phone may buzz with a quake drill alert; now you'll know exactly what it is."},
+
+{n:13,wk:7,era:"Food",tIdx:9,years:"2,000 years of dinner",color:"#C25E24",kanji:"飯",title:"A Nation of Food",sub:"Rice at the center, sushi born as street fast food, and manners that make the meal.",
+ story:["Rice has anchored Japan for 2,000 years — samurai were literally paid in it, taxes were counted in it, and the word for cooked rice, gohan, is also the word for 'meal.' Around the rice: fish from the sea on every side, seaweed, pickles, and soups.",
+ "Sushi as you know it was invented as Edo street fast food — a squeeze of rice, a slice of fresh fish from the bay, eaten standing up in seconds. It went from noodle-cart cheap to the world's fanciest food. Every region still fights about food: Osaka's takoyaki and okonomiyaki, Sapporo's butter ramen, Hiroshima's layered pancakes.",
+ "Manners are part of the flavor. Before eating: itadakimasu — 'I humbly receive.' Slurping noodles is a compliment to the cook. And never plant your chopsticks upright in rice — that's how rice is offered to the dead at funerals."],
+ wow:"Tokyo has more Michelin stars than any other city on Earth — more than Paris — and some of its most celebrated meals are served at counters with nine seats.",
+ photos:[{id:"jp13a",drop:"Drop a sushi counter photo",cap:"Edo fast food, now an art form — watch the chef's hands."},{id:"jp13b",drop:"Drop a depachika food hall",cap:"A depachika: the basement food floor of a department store. Training ground for brave eaters."}],
+ vids:[{t:"The history of sushi"},{t:"Japanese table manners for visitors"}],
+ words:[{jp:"ご飯",ro:"gohan",en:"rice · a meal"},{jp:"美味しい",ro:"oishii",en:"delicious!"},{jp:"いただきます",ro:"itadakimasu",en:"said before eating"}],
+ qs:["What food means 'home' to your family, the way rice means home in Japan?","How does street fast food become the fanciest food in the world? What had to change?","Slurping is polite in Japan and rude here. Where do table manners even come from?"],
+ trip:"Trip game: everyone tries at least one new food every day and keeps a ranked list — winner declared at the airport. Say 'oishii!' when you mean it and watch what happens."},
+
+{n:14,wk:7,era:"Money",tIdx:9,years:"¥ since 1871",color:"#6B7F2E",kanji:"円",title:"The Yen Game",sub:"Learn the money before you land — then run your own budget over there.",
+ story:["Japan's money is the yen — 円, en, which means 'circle.' Coins run ¥1 (aluminum, so light it floats on still water), ¥5 (brass, with a hole), ¥10, ¥50 (hole again), ¥100 and ¥500; notes start at ¥1,000. The ¥5 is the lucky one: its name, go-en, sounds exactly like the word for 'good fortune,' so it's the coin people drop in shrine offering boxes.",
+ "The rough exchange: about ¥150 to one US dollar (check the real rate the week you fly). Quick trick: knock off two zeros and take two-thirds. ¥1,500 → 15 → about $10. A ¥300 gachapon capsule is about $2; a ¥950 bowl of ramen is about $6.30.",
+ "Japan is still surprisingly cash-friendly: small restaurants and shrines often take coins and notes only. And there is NO tipping — ever, anywhere. Great service is simply the standard, and trying to tip mostly causes polite confusion."],
+ wow:"Japan runs on vending machines — one for roughly every 23 people, selling hot corn soup, cold coffee, umbrellas, even fresh eggs. Your coins will never be bored.",
+ photos:[{id:"jp14a",drop:"Drop yen coins and notes",cap:"All six coins and the notes — find the hole in the ¥5 and ¥50."},{id:"jp14b",drop:"Drop a vending machine wall",cap:"A wall of jidōhanbaiki. Blue labels are cold; red labels are HOT."}],
+ vids:[{t:"Japanese yen coins and notes explained"},{t:"Japan supermarket prices tour"}],
+ words:[{jp:"円",ro:"en",en:"yen · circle"},{jp:"いくら",ro:"ikura",en:"how much?"},{jp:"高い",ro:"takai",en:"expensive"}],
+ qs:["Ramen is ¥950 a bowl and all four of us are eating — what's the total in yen, and about what is that in dollars?","You hand over a ¥1,000 note for a ¥300 gachapon turn. How many turns can you get, and what's your change?","5th-grade bonus: a ¥3,600 souvenir at ¥150 per dollar — exactly how many dollars? 3rd-grade bonus: stack the six coins in order of value from memory."],
+ trip:"Each explorer gets a daily yen allowance and keeps his own paper ledger — every purchase logged in yen AND dollars. Best bargain of the trip earns a prize. All shrine wishes should be made with a lucky ¥5."},
+
+{n:15,wk:8,era:"Field Guide",tIdx:9,years:"1,300 years side by side",color:"#B23A28",kanji:"社",title:"Shrine or Temple?",sub:"You'll visit dozens. Here's how to tell them apart in five seconds — and what to do at each.",
+ story:["Shrine = Shintō, home of the kami. The giveaways: a torii gate (often vermillion), zigzag paper streamers, a water fountain for rinsing hands, guardian fox or lion-dog statues, and shimenawa ropes around sacred trees. At the hall: toss a coin (¥5!), bow twice, clap twice, make your wish, bow once.",
+ "Temple = Buddhist. The giveaways: a heavy wooden gate guarded by two fierce muscled statues (the Niō), incense smoke you waft over yourself, a big bell, sometimes a pagoda, and a Buddha inside. Hands together quietly — no clapping at temples.",
+ "Both sell omamori (small brocade charms — for luck, exams, safe travel) and omikuji (paper fortunes). Draw a bad fortune? Tie it to the rack and leave the bad luck behind. Many places are both shrine AND temple, tangled together for 1,300 years — Japan never made them choose."],
+ wow:"Fushimi Inari's ten thousand torii were each donated by a person or business whose name is painted on the back — a thousand years of thank-you notes you can walk through.",
+ photos:[{id:"jp15a",drop:"Drop a purification fountain",cap:"The temizuya fountain: rinse left hand, right hand, then mouth (from your hand)."},{id:"jp15b",drop:"Drop omikuji fortunes",cap:"Bad fortunes tied and left behind — knots of abandoned bad luck."}],
+ vids:[{t:"Shrine vs temple — how to tell the difference"},{t:"How to pray at a Japanese shrine"}],
+ words:[{jp:"神社",ro:"jinja",en:"Shintō shrine"},{jp:"お寺",ro:"otera",en:"Buddhist temple"},{jp:"お守り",ro:"omamori",en:"lucky charm"}],
+ qs:["Quiz each other: torii gate? clapping? incense? guardian statues? — shrine or temple?","Why tie a BAD fortune to a rack and leave it? What's satisfying about that idea?","Design your own omamori: what would it protect, and what two colors would it be?"],
+ trip:"Keep a running tally in a notebook: shrines vs temples visited. Buy a goshuin book early — at most sites a calligrapher will hand-stamp and ink it for a few hundred yen, and it becomes the best souvenir of the whole trip."},
+
+{n:16,wk:8,era:"Launch",tIdx:9,years:"wheels up",color:"#D8432C",kanji:"旅",title:"Mission: Japan",sub:"Everything you've learned, mapped onto the two weeks ahead. This lesson finishes at the airport.",
+ story:["Walk the timeline one last time, out loud, trading turns: cord-marked pots... the sun goddess... the Nara Buddha... Genji at court... samurai and shōgun... the divine wind... three unifiers... the great peace of Edo... the wave... the black ships... the bullet train. Eleven stops, fifteen thousand years. You know this now.",
+ "Here's the trick that makes the trip different: everything you see slots into that timeline. Deer bowing at you? Lesson 4. Kyoto's grid streets? Lesson 5. A castle's gun-slits? Lesson 8. The Imperial Palace moats? That's Edo Castle, Lesson 9. The Great Wave on a shop wall? Lesson 10. The train doing 285 km/h under Mount Fuji? Lessons 11 and 12, at once.",
+ "On the plane: run the question cards — each person picks their favorite 'talk about it' question from the unit and puts the family through it. Land knowing your three magic words: konnichiwa, arigatō gozaimasu, sumimasen. They open every door in Japan."],
+ wow:"Within two weeks you will physically stand inside every single lesson of this unit — 15,000 years of history, visitable by rail pass.",
+ photos:[{id:"jp16a",drop:"Drop your itinerary or rail map",cap:"Your route — mark which lesson lives at each stop."},{id:"jp16b",drop:"Drop a family photo — fill after landing",cap:"First photo on Japanese soil goes here."}],
+ vids:[{t:"Japan travel tips for families"},{t:"Basic Japanese phrases for travel"}],
+ words:[{jp:"こんにちは",ro:"konnichiwa",en:"hello"},{jp:"ありがとう",ro:"arigatō",en:"thank you"},{jp:"すみません",ro:"sumimasen",en:"excuse me · sorry"}],
+ qs:["Which lesson's place do you most want to stand in first, and why?","Time machine, one era, one week — where does each of you go?","What will you collect: goshuin stamps, prints, coins, ranked foods? Pick your trip project now."],
+ trip:"The whole trip is this lesson. Itterasshai — off you go!"}
+  ];
+
+  WEEKS = ["The Land & the First People","Gods & Buddhas","Court & Warriors","Storms & Warlords","Peace & Art","Machines & Mountains","Food & Money","Field Guide & Launch"];
+  TL = ["Jōmon","Yayoi·Kofun","Nara","Heian","Kamakura","Sengoku","Edo","Meiji","Shōwa","Now"];
+
+  save(done){ try{localStorage.setItem("jpn.done",JSON.stringify(done))}catch(e){} }
+
+  speak(text){
+    if(!window.speechSynthesis) return;
+    const say=()=>{
+      const u=new SpeechSynthesisUtterance(text);
+      u.lang="ja-JP"; u.rate=0.85;
+      const v=speechSynthesis.getVoices().find(v=>v.lang&&v.lang.startsWith("ja"));
+      if(v) u.voice=v;
+      speechSynthesis.cancel(); speechSynthesis.speak(u);
+    };
+    if(speechSynthesis.getVoices().length) say();
+    else speechSynthesis.onvoiceschanged=()=>{speechSynthesis.onvoiceschanged=null; say();};
+  }
+
+  renderVals(){
+    const st=this.state, L=this.L;
+    const doneCount=L.filter(l=>st.done[l.n]).length;
+    const base={doneCount, isHome:st.sel==null, isLesson:st.sel!=null, goHome:()=>this.setState({sel:null})};
+    if(st.sel==null){
+      const weekCards=this.WEEKS.map((theme,i)=>({wk:"Week "+(i+1),theme,
+        lessons:L.filter(l=>l.wk===i+1).map(l=>({
+          kanji:l.kanji,title:l.title,sub:l.sub,color:l.color,chipBg:l.color+"1f",
+          meta:"Stop "+String(l.n).padStart(2,"0")+" · "+l.era,
+          doneMark:st.done[l.n]?"✓":"→",doneColor:st.done[l.n]?"#2E7D6B":"rgba(42,33,24,.3)",
+          cardStyle:"display:flex;gap:15px;align-items:center;background:#FDFAF2;border:1.5px solid "+(st.done[l.n]?"rgba(46,125,107,.45)":"rgba(42,33,24,.13)")+";border-radius:16px;padding:16px 18px;cursor:pointer;transition:transform .15s,box-shadow .15s",
+          open:()=>{this.setState({sel:l.n});window.scrollTo(0,0);}
+        }))}));
+      return {...base, weekCards};
+    }
+    const l=L.find(x=>x.n===st.sel), isDone=!!st.done[l.n];
+    const nav=(d)=>{const t=l.n+d; if(t>=1&&t<=16){this.setState({sel:t});window.scrollTo(0,0);} else this.setState({sel:null});};
+    return {...base,
+      lMeta:"Week "+l.wk+" · Stop "+String(l.n).padStart(2,"0")+" of 16",
+      lColor:l.color,lEra:l.era,lYears:l.years,lTitle:l.title,lSub:l.sub,lKanji:l.kanji,lWow:l.wow,lTrip:l.trip,
+      lTimeline:this.TL.map((name,i)=>({name,style:"font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.06em;padding:5px 10px;border-radius:999px;"+(i===l.tIdx?"background:"+l.color+";color:#FDFAF2;font-weight:700":"background:rgba(42,33,24,.06);color:rgba(42,33,24,.5)")})),
+      lStory:l.story.map(t=>({t})),
+      lPhotos:l.photos,
+      lWords:l.words.map(w=>({...w,speak:()=>this.speak(w.jp)})),
+      lVids:l.vids.map(v=>{const href="https://www.youtube.com/results?search_query="+encodeURIComponent(v.t+" Japan");
+        return {t:v.t,href,open:(e)=>{e.preventDefault();window.open(href,"_blank","noopener");}};}),
+      lQs:l.qs.map((t,i)=>({t,n:i+1})),
+      toggleDone:()=>{const done={...st.done}; if(done[l.n]) delete done[l.n]; else done[l.n]=1; this.save(done); this.setState({done});},
+      doneBtnLabel:isDone?"✓ Explored — tap to undo":"Mark this stop explored",
+      doneBtnStyle:"font-family:'Kaisei Decol',serif;font-size:14.5px;padding:11px 24px;border-radius:999px;cursor:pointer;border:none;background:"+(isDone?"#2E7D6B":"#1C2430")+";color:#FDFAF2",
+      goPrev:()=>nav(-1),goNext:()=>nav(1),
+      prevLabel:l.n>1?"← Stop "+String(l.n-1).padStart(2,"0"):"← All stops",
+      nextLabel:l.n<16?"Stop "+String(l.n+1).padStart(2,"0")+" →":"Finish → All stops",
+      prevStyle:"font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.08em;background:none;border:1.5px solid rgba(42,33,24,.25);border-radius:999px;padding:10px 18px;cursor:pointer;color:#2A2118",
+      nextStyle:"font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.08em;background:"+l.color+";border:none;border-radius:999px;padding:10px 20px;cursor:pointer;color:#FDFAF2"
+    };
+  }
+}
+</script>
+</body>
+</html>

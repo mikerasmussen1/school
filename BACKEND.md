@@ -13,28 +13,11 @@ plain static host, no server anywhere.
    anything, e.g. `big-math`). Skip Analytics.
 2. In the project: **Build → Firestore Database → Create database** →
    Start in *production mode*, any region.
-3. **Rules** tab → replace everything with the rules below → Publish:
+3. **Rules** tab → paste the contents of **`firestore.rules`** in this repo →
+   Publish. That file is the single source of truth and is what is deployed;
+   this document used to carry its own copy of the rules and the copy went
+   stale, listing two collections when the ruleset had five.
 
-   ```
-   rules_version = '2';
-   service cloud.firestore {
-     match /databases/{database}/documents {
-       // A student doc id bakes the pilot's secret code into an
-       // unguessable hash — knowing the id IS the login. Nobody can
-       // list the collection to discover ids.
-       match /students/{id} {
-         allow get, create, update: if true;
-         allow list, delete: if false;
-       }
-       // Name registry so the gate can say "wrong code" instead of
-       // silently creating a duplicate pilot. Contains no secrets.
-       match /names/{id} {
-         allow get, create, update: if true;
-         allow list, delete: if false;
-       }
-     }
-   }
-   ```
 4. **Project settings** (gear icon) → copy the **Project ID**.
 5. In `index.html`, search for `REMOTE_PROJECT_ID` and paste it:
    `const REMOTE_PROJECT_ID = "big-math";`
@@ -70,6 +53,19 @@ done" keeps the old behavior.
   deliberately kid-grade — fine for two pilots, not for the internet at
   large. No plaintext code, no email, nothing about the child beyond a
   first name.
+- **The invariant that model rests on: every writable doc id is unguessable,
+  and `list` is denied everywhere so ids cannot be discovered.** Knowing the id
+  IS the login. Any new collection must either keep that property or protect
+  writes some other way.
+- `questionbanks` is the one collection whose ids are NOT secret — they are
+  `y3`, `y5`, `la`, `japan`, named in the client source. Reads are public,
+  which is correct since every device fetches the exercises. Writes therefore
+  cannot be `if true`: that would let anyone who reads our JavaScript replace
+  every question a third-grader is served, and `QBank.publish`'s validation is
+  client-side so a raw REST PATCH skips it. Instead a write must carry an
+  `editor` field holding the id of a roster document that exists — which is a
+  hash of the teacher code, so publishing is gated on knowing that code.
+  `QBank.publish(bankId, sets, version, teacherCode)` requires it.
 - With `REMOTE_PROJECT_ID = ""` the app behaves exactly as before
   (device-local, no codes).
 

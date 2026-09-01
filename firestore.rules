@@ -28,13 +28,47 @@ service cloud.firestore {
       allow get, create, update: if true;
       allow list, delete: if false;
     }
-    // Question banks. Public read: these are the exercises themselves, and
-    // every child's device has to be able to fetch them. Writes are open on
-    // the same terms as the rest of this ruleset (two kids, low stakes) —
-    // publishing goes through QBank.publish, which validates first.
+    // Question banks — the exercises themselves.
+    //
+    // Read is public and has to be: every child's device fetches these.
+    //
+    // WRITE IS NOT open the way the collections above are, and the difference
+    // matters. Everything else here is protected by an UNGUESSABLE DOC ID —
+    // knowing the id is the login, and `list` is denied so ids cannot be
+    // discovered. Question-bank ids are not secret: they are "y3", "y5", "la"
+    // and "japan", named in the client source. An `if true` write rule on a
+    // guessable id would let anyone who reads our JavaScript replace every
+    // question a third-grader is served. QBank.publish validates before
+    // writing, but that is client-side and a raw REST PATCH skips it entirely.
+    //
+    // So a write must carry `editor`: the id of a roster document that ACTUALLY
+    // EXISTS. Roster ids are SHA-256 of a teacher code that lives only in the
+    // grown-up's head (Remote.rosterKeyFor), and rosters cannot be listed — so
+    // producing a valid one is exactly as hard as knowing the teacher code.
+    // That puts question banks on the same footing as the rest of this ruleset
+    // rather than merely claiming to be.
     match /questionbanks/{id} {
-      allow get, create, update: if true;
+      allow get: if true;
       allow list, delete: if false;
+      allow create, update: if isEditor() && wellFormedBank();
+    }
+
+    function isEditor() {
+      return request.resource.data.editor is string
+          && request.resource.data.editor.size() > 8
+          && exists(/databases/$(database)/documents/rosters/$(request.resource.data.editor));
+    }
+
+    // Shape and size are enforced here too, so even a valid editor cannot write
+    // arbitrary junk, and a runaway payload cannot approach Firestore's 1 MiB
+    // document ceiling.
+    function wellFormedBank() {
+      return request.resource.data.keys().hasOnly(['sets', 'version', 'updated', 'editor'])
+          && request.resource.data.sets is string
+          && request.resource.data.sets.size() > 2
+          && request.resource.data.sets.size() < 900000
+          && request.resource.data.version is int
+          && request.resource.data.updated is int;
     }
   }
 }

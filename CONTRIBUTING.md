@@ -1,18 +1,73 @@
 # Adding curriculum
 
-Content lives in `curriculum/`. The app (`index.html`) reads it and never needs
-to change when you add a subject.
+Baskin School is one app with several subjects. Content lives in `curriculum/`;
+`index.html` reads it and does not need to change when a subject grows.
 
 ```
-curriculum/shared.js       tiers, gates, bands, weekly rhythm — all subjects
-curriculum/math-y1.js      Grade 3 math, Missions 01–08
-curriculum/math-y2.js      Grade 5 math, Missions 01–08
-curriculum/extra-banks.js  extra practice items, appended by set id
-curriculum/registry.js     the list of curricula the login screen offers
+curriculum/subjects.js        the subject registry — read this first
+curriculum/shared.js          tiers, gates, bands, weekly rhythm
+curriculum/math-y1.js         Grade 3 math, Missions 01–08
+curriculum/math-y2.js         Grade 5 math, Missions 01–08
+curriculum/extra-banks.js     extra practice items, appended by set id
+curriculum/registry.js        math's courses + its landing-page card
+curriculum/language-arts.js   Word Voyagers
+curriculum/japan-unit.js      the Japan unit's landing-page card
 ```
 
-Each file is a plain script that puts its exports on `window.__CURR`. They load
-in the order above, so a file can use anything defined in the ones before it.
+Each file is a plain script. They load in the order above, so a file can use
+anything defined in the ones before it.
+
+## The landing page
+
+When a child signs in they land on a subject picker, not on math. Each card
+comes from a `Subjects.register({...})` call. The full field list is documented
+at the top of `curriculum/subjects.js` — read that before writing a subject.
+
+```js
+window.Subjects.register({
+  id: "la",                       // permanent: progress is stored under it
+  name: "Word Voyagers",
+  tagline: "Reading · Writing · Words",
+  color: "#A78BFA",
+  glyph: "A",
+  gradient: "linear-gradient(150deg,#A78BFA,#60A5FA)",
+  blurb: "Two sentences for the card.",
+  status: "soon",                 // "live" once there is something to do
+  order: 20,
+  levels: [                       // optional — the child picks one on the card
+    {id:"g3", label:"3rd Grade", sub:"Year One"},
+    {id:"g5", label:"5th Grade", sub:"Year Two"}
+  ],
+  open: "stub",                   // "builtin" | "stub" | {href:"your-page.html"}
+  stub: {heading:"…", lines:["…"], footer:"…"}
+});
+```
+
+Levels are per subject and per child: a child can read at one level and do math
+at another. A subject that declares `levels` will not open until the child has
+picked one, and the pick is saved as `slice.subjects.<id>.level`. Leave `levels`
+off for a subject that has only one track — the Japan unit does.
+
+## Progress in the database
+
+Every subject gets its own namespace inside each child's record, and that record
+syncs to Firestore per child automatically:
+
+```
+slice.subjects.<id> = {
+  opened: 12,             // times started — the app maintains these four
+  last:   1756...,        // ms timestamp
+  days:   [20693, ...],   // day numbers, last 60
+  level:  "g5",           // which of your `levels` the child picked
+  data:   { ... }         // yours alone
+}
+```
+
+Put anything your subject needs in `data`. Nothing outside your subject reads
+or writes it. Do **not** write at the top level of the slice — the math keys
+(`pHist`, `pAns`, `pStreak`, `sprintHist`, `curriculum`) live there for
+historical reasons and are not yours. Teacher HQ shows sessions, last-opened and
+days-this-week per subject with no work from you.
 
 ## Working on this together
 
@@ -21,24 +76,30 @@ Add yourself as a collaborator on the repo and work on a branch:
 ```
 git checkout -b language-arts
 # edit curriculum/language-arts.js
-git add . && git commit -m "Language arts, Unit 01"
+git add . && git commit -m "Word Voyagers, Unit 01"
 git push -u origin language-arts
 ```
 
-Then open a pull request on GitHub. Nobody edits the same file, so merges stay
-clean — that is the whole reason the content is split out.
+Then open a pull request. Nobody edits the same file, so merges stay clean —
+that is the whole reason the content is split out. The only shared file a new
+subject touches is the one `<script src>` line in `index.html`.
 
 ## Adding a subject
 
-1. Copy `curriculum/math-y1.js` to `curriculum/language-arts.js` and replace the
-   content. Keep the `window.__CURR` header and footer; list your own names in
-   the footer's `Object.assign`.
-2. Add a `<script src="./curriculum/language-arts.js"></script>` line in
-   `index.html`, before `registry.js`.
-3. Add an entry to `CURRICULA` in `curriculum/registry.js`. That is what puts it
-   on the student login screen.
+1. Write `curriculum/<your-subject>.js` and call `Subjects.register({...})`.
+2. Add one `<script src="./curriculum/<your-subject>.js"></script>` line in
+   `index.html`, after `registry.js`.
+3. That is all. The landing page, the header and Teacher HQ pick it up.
 
-## The shapes
+A subject can be a page of its own (`open:{href:"word-voyagers.dc.html"}`) — the
+Japan unit works that way — or it can ask for screens inside the app. A page of
+your own is the easier place to start: you own the whole file.
+
+## The math shapes (a reference, not a requirement)
+
+Math uses tiered problem banks because arithmetic has right answers. Reading and
+writing probably want passages, prompts and rubrics instead. Borrow from the
+shapes below only where they fit.
 
 **Unit** — one mission.
 

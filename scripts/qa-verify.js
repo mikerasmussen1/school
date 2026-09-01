@@ -96,9 +96,17 @@ try {
 // content is simply gone. So compare counts against origin/main and fail on
 // any decrease.
 section("2b. Content volume vs origin/main");
-function countsFor(loader) {
+// Each side is loaded using ITS OWN index.html's script list. Using one list for
+// both sides meant that adding a curriculum file (the subject registry, 2026-09-01)
+// made `git show base:<newfile>` throw and disabled this entire check — turning the
+// one guard against content silently vanishing into a warning at exactly the moment
+// the tree was being restructured.
+function countsFor(loader, indexHtml) {
+  const files = [...indexHtml.matchAll(/<script src="([^"]+)"/g)]
+    .map(m => m[1].replace(/^\.\//, ""))
+    .filter(s => s.startsWith("curriculum/"));
   const sb = { __CURR: {} }; sb.window = sb;
-  for (const f of curriculumSrcs) new Function("window", "console", loader(f))(sb, { log() {}, warn() {}, error() {} });
+  for (const f of files) new Function("window", "console", loader(f))(sb, { log() {}, warn() {}, error() {} });
   const C = sb.__CURR;
   return {
     sets: (C.ALL_SETS || []).length,
@@ -110,8 +118,9 @@ if (!base) {
   warn("no origin/main to compare against — skipping shrink check"); warns++;
 } else {
   try {
-    const now = countsFor(f => fs.readFileSync(f, "utf8"));
-    const was = countsFor(f => execSync(`git show ${base}:${f}`, { encoding: "utf8", maxBuffer: 64 * 1024 * 1024 }));
+    const show = f => execSync(`git show ${base}:${f}`, { encoding: "utf8", maxBuffer: 64 * 1024 * 1024 });
+    const now = countsFor(f => fs.readFileSync(f, "utf8"), index);
+    const was = countsFor(show, show("index.html"));
     for (const [k, label] of [["sets", "practice sets"], ["lessons", "lessons"], ["curricula", "curricula"]]) {
       if (now[k] < was[k]) fail(`${label} DROPPED ${was[k]} -> ${now[k]} — content lost in regeneration?`);
       else pass(`${label}: ${was[k]} -> ${now[k]}`);

@@ -21,5 +21,24 @@ const ALL_LESSONS = Object.assign({}, LESSONS, LESSONS_U2, LESSONS_U3, LESSONS_U
 // Year Two sets join the global lookup list once both years have loaded.
 ALL_SETS.push(...ALL_SETS_Y5);
 
+/* Math's entry on the Baskin School landing page. The two courses inside it
+ * (3rd grade, 5th grade) stay a per-child setting — see CURRICULA above — so
+ * the landing page shows one Math card and the child's own course under it. */
+window.Subjects.register({
+  id: "math",
+  name: "Adventures in Big Math",
+  tagline: "Missions · Practice Bay · Streak Runs",
+  color: "#FF9F1C",
+  glyph: "×",
+  gradient: "linear-gradient(150deg,#FF9F1C,#F472B6)",
+  blurb: "Eight missions a year, each with a Big Question. Practice adapts to what you already know and stops when you have proved it.",
+  status: "live",
+  order: 10,
+  // The child picks their year on the landing card. Both years are the same
+  // eight-mission shape; the sets, banks and worksheets differ.
+  levels: Object.keys(CURRICULA).map(k=>({id:k, label:CURRICULA[k].label.replace(/ Math$/,""), sub:CURRICULA[k].sub.split(" · ")[0]})),
+  open: "builtin"
+});
+
 Object.assign(window.__CURR, {CURRICULA, lessonFor, ALL_LESSONS});
 })();

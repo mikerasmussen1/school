@@ -36,9 +36,22 @@ function sheetFor(set) {
 }
 
 // ── load the curriculum the way the browser does ─────────────────────────
+// The file list is READ FROM index.html rather than hardcoded. It used to be a
+// literal array, and the subject-registry change broke it the moment
+// registry.js started calling window.Subjects.register: subjects.js was not in
+// the list, so the load threw and this reported the paper mapping as broken
+// when nothing was wrong with it. Deriving the list means adding a subject can
+// never again produce a false failure here.
 const sb = { __CURR: {} }; sb.window = sb;
-for (const f of ["curriculum/shared.js", "curriculum/math-y1.js", "curriculum/math-y2.js",
-                 "curriculum/extra-banks.js", "curriculum/registry.js"]) {
+const curriculumFiles = [...fs.readFileSync("index.html", "utf8")
+  .matchAll(/<script src="([^"]+)"/g)]
+  .map(m => m[1].replace(/^\.\//, ""))
+  .filter(s => s.startsWith("curriculum/"));
+if (!curriculumFiles.length) {
+  console.log("  FAIL  index.html declares no curriculum/*.js scripts");
+  process.exit(1);
+}
+for (const f of curriculumFiles) {
   new Function("window", "console", fs.readFileSync(f, "utf8"))(sb, { log() {}, warn() {}, error() {} });
 }
 // Sets are addressed by id, not title — 25 titles are duplicated across the

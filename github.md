@@ -3,16 +3,23 @@ branch: main
 
 ## Last sync
 
-date: 2026-09-01T00:51:42Z
+date: 2026-09-01T12:52:00Z
 
 ### Updated in this project
 
-- Pulled index.html, CONTRIBUTING.md, github.md, HANDOFF.md, BACKEND.md and all 5 curriculum files from main, plus the new scripts/qa-verify.js and .claude/agents/ (pr-reviewer, qa-verifier).
-- Rebuilt all 16 worksheet packs as two-page sheets carrying each set's whole bank — front Warm-Up + Core with a printed stop rule, back Challenge + working space + error journal. Answer keys regenerated.
-- Worksheet problems now number 1..N straight through the sheet; `pOnPaper` builds the same deduped, tier-grouped list so the photo scanner maps printed number → bank index.
-- Teacher HQ gained Daily review sprint and Streak runs panels (both roster and front-door views).
+- Renamed the app to **Baskin School**; "Adventures in Big Math" is now the name of the math subject, not the product.
+- New subject registry `curriculum/subjects.js` — each subject self-registers from its own file, so a second author never edits a shared one. Adding a subject costs one `<script src>` line in index.html.
+- New `curriculum/language-arts.js` (**Word Voyagers**, stubbed) and `curriculum/japan-unit.js`. Math registers its card from `registry.js`.
+- Students land on a subject picker after sign-in (`view:"today"`), with a this-week strip; the header carries the current subject and an "All subjects" way back.
+- Grade level moved off the login screen onto the landing card, per subject: a child picks 3rd/5th for math and for language arts independently, and a subject with `levels` will not open until one is picked.
+- Per-subject progress is tracked per child in the synced record under `slice.subjects.<id>` (`opened`, `last`, `days`, plus a private `data` namespace); Teacher HQ gained a Subjects card reading it.
+- Earlier pull of main at tree 3601ea0 (28 files) — local copies were pre-commit drafts.
 
 ## Sync history
+
+date: 2026-09-01T12:30:04Z — pulled main at tree 3601ea0 (index.html, docs, 5 curriculum files, 16 worksheet packs); new upstream `scripts/check-paper-mapping.js`.
+
+date: 2026-09-01T00:51:42Z — rebuilt all 16 worksheet packs as two-page sheets (whole bank per set, printed stop rule, back page working space + error journal); wired printed-number → bank-index scanner mapping; Teacher HQ sprint + streak panels.
 
 date: 2026-08-31T00:21:36Z — pulled all 68 changed files from main (5 commits ahead); repo confirmed Claude Code's handoff: all 32 PDFs generated and committed.
 
@@ -37,7 +44,9 @@ Live, and deliberately client-side. Do not "fix" these without reading `BACKEND.
 
 | Screen / file | Built from |
 | --- | --- |
-| Main app (mission map, Practice Bay, Teacher HQ) | `index.html`, `support.js`, `vendor/react*.js` |
+| Landing page (subject picker) + subject registry | `index.html` — `subjectVals`, `openSubject`; `curriculum/subjects.js` |
+| Math subject (mission map, Practice Bay, Teacher HQ) | `index.html`, `support.js`, `vendor/react*.js`, `curriculum/registry.js` |
+| Word Voyagers (language arts, stub) | `curriculum/language-arts.js` |
 | Cloud progress sync seam | `index.html` — `REMOTE_PROJECT_ID`, `Remote` (~3703–3770) |
 | Photo-homework reader + diagnostics | `index.html` — `GEMINI_API_KEY`, `PaperReader` (~3773+), `paperlog/` |
 | Account gate (name + secret code) | `index.html` — `Remote` account key helpers |
@@ -45,7 +54,7 @@ Live, and deliberately client-side. Do not "fix" these without reading `BACKEND.
 | Worksheets, all weeks both years (two-page sheets) | `Unit N Worksheets.dc.html`, `Y2 Unit N Worksheets.dc.html`, banks in `curriculum/` |
 | Photo scan → app answers mapping | `index.html` — `pOnPaper` sheet numbering, `PaperReader.read` prompt, `paperPicked` |
 | Curriculum content, split by subject | `curriculum/shared.js`, `math-y1.js`, `math-y2.js`, `extra-banks.js`, `registry.js`, `CONTRIBUTING.md` |
-| QA + review agents | `scripts/qa-verify.js`, `.claude/agents/` |
+| QA + review agents | `scripts/qa-verify.js`, `scripts/check-paper-mapping.js`, `.claude/agents/` |
 | Japan history unit (8 weeks, 16 lessons, both boys) | `japan.dc.html`, `image-slot.js` — linked from the index.html header |
 | Security rules | `firestore.rules`, `firebase.json` |
 | Project notes | `HANDOFF.md`, `BACKEND.md` |

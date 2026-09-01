@@ -3864,7 +3864,6 @@ class Component extends DCLogic {
            dyn:{}, coach:null, dynBusy:false, dynErr:"",
            hqWho:null, hqWeek:null, hqDay:null, hqSet:null, hqAll:false, hqTier:null,
            hqSlices:{}, hqLoadingRoster:false,
-           tDay:null, tSet:null, tAll:false, tTier:null,
            pHist:{}, skills:{}, snooze:{}, pFull:{}, pweek:1, pStreak:{}, sprintHist:{}, stream:null, sprint:null,
            tCode:"", tRoster:null, tKey:null, tSel:"", tData:null, tBusy:false, tErr:"",
            tAddName:"", tAddPin:"", tFront:false, tView:null, tFromGate:false,
@@ -4565,75 +4564,9 @@ class Component extends DCLogic {
     const inCurric=roster;
     const chosen=inCurric.find(x=>x.key===st.tSel)||null;
 
-    // ---- read-only progress for the selected pilot -------------------------
-    const slice=st.tData||null;
-    const hist=(slice&&slice.pHist)||{}, skills=(slice&&slice.skills)||{}, checked=(slice&&slice.pChecked)||{};
-    const rows=[]; let secure=0, shaky=0, touched=0, graded=0, totalSets=0;
-    for(let u=1;u<=8;u++){
-      this.setsFor(u).forEach(s=>{
-        totalSets++;
-        const runs=(hist[s.id]||[]);
-        const everChecked=Object.keys(checked).some(k=>k.split("|")[0]===s.id);
-        if(everChecked) graded++;
-        if(!runs.length) return;
-        touched++;
-        const sig=readSignal(hist,s.id);
-        const sk=skills[s.id];
-        let label="Working on it", color="#38BDF8", bg="rgba(56,189,248,.14)";
-        if(sk&&sk.state==="spiral"){ label="Compressed"; color="#4ADE80"; bg="rgba(74,222,128,.14)"; }
-        else if(sk&&sk.state==="reteach"){ label="Flagged"; color="#FBBF24"; bg="rgba(251,191,36,.14)"; }
-        else if(sig&&sig.kind==="secure"){ label="Secure"; color="#4ADE80"; bg="rgba(74,222,128,.14)"; secure++; }
-        else if(sig&&sig.kind==="warmup"){ label="Warm-Up only"; color="#A78BFA"; bg="rgba(167,139,250,.14)"; }
-        else if(sig&&sig.kind==="shaky"){ label="Struggling"; color="#FBBF24"; bg="rgba(251,191,36,.14)"; shaky++; }
-        const last=runs[runs.length-1];
-        rows.push({
-          id:s.id, unit:"Mission 0"+u, label:s.label, title:s.title,
-          state:label,
-          chipStyle:"font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;padding:5px 10px;border-radius:999px;white-space:nowrap;background:"+bg+";color:"+color,
-          detail:runs.map(e=>e.r+"/"+e.n).join(" · ")+"  ·  "+new Set(runs.map(e=>e.d)).size+" days",
-          score:last?Math.round(last.r/(last.n||1)*100)+"%":"—",
-          scoreColor:last&&last.r/(last.n||1)>=MASTERY.secure?"#4ADE80":last&&last.r/(last.n||1)<MASTERY.shaky?"#FBBF24":"rgba(238,242,255,.75)"
-        });
-      });
-    }
-    const lastSeen=slice&&slice.updated ? new Date(slice.updated).toLocaleDateString(undefined,{month:"short",day:"numeric"}) : "—";
 
-    // ---- daily review sprint + streak runs --------------------------------
-    // Both come straight off the pilot's saved slice: sprintHist is one entry
-    // per day, pStreak one entry per set the Streak Run has touched.
-    const sprHist=(slice&&slice.sprintHist)||{}, streaks=(slice&&slice.pStreak)||{};
-    const today=dayNo();
-    const sprDays=[]; let spr7r=0, spr7a=0;
-    for(let i=13;i>=0;i--){
-      const d=today-i, e=sprHist[d];
-      const pct=e&&e.att?Math.round(e.right/e.att*100):null;
-      if(i<7&&e){ spr7r+=e.right; spr7a+=e.att; }
-      const col=e?(pct>=85?"#4ADE80":pct>=60?"#FBBF24":"#F87171"):"rgba(255,255,255,.09)";
-      sprDays.push({key:"d"+d, tip:e?(e.right+"/"+e.att+" · "+pct+"%"):"no sprint",
-        barStyle:"flex:1;min-width:0;border-radius:4px;background:"+col+";height:"+(e?Math.max(10,Math.round(pct*0.44)):5)+"px"});
-    }
-    let sprRun=0; for(let d=(sprHist[today]?today:today-1); sprHist[d]; d--) sprRun++;
-    const sprDaysDone=Object.keys(sprHist).length;
-    const spr7pct=spr7a?Math.round(spr7r/spr7a*100)+"%":"—";
 
-    const setById={}; for(let u=1;u<=8;u++) this.setsFor(u).forEach(s=>{setById[s.id]={s:s,u:u};});
 
-    const exRows=this.exerciseRows(slice, setById);
-    const exShown=exRows.slice(0,40);
-
-    const sIds=Object.keys(streaks).filter(id=>setById[id]);
-    let closedN=0, closedAtt=0; const openRows=[];
-    sIds.forEach(id=>{
-      const e=streaks[id], m=setById[id];
-      if(e.closed){ closedN++; closedAtt+=e.att||0; }
-      else openRows.push({id:id, unit:"Mission 0"+m.u+" · "+m.s.label, title:m.s.title,
-        detail:(e.right||0)+" right of "+(e.att||0)+" tried",
-        pct:Math.round((e.right||0)/((e.att||1))*100)+"%",
-        att:e.att||0});
-    });
-    openRows.sort((a,b)=>b.att-a.att);
-    const streakRows=openRows.slice(0,6);
-    const avgToClose=closedN?Math.round(closedAtt/closedN):0;
 
 
     // ---- pilot cards for the teacher's front door -------------------------
@@ -4648,47 +4581,6 @@ class Component extends DCLogic {
       avatarStyle:"width:72px;height:72px;border-radius:50%;background:radial-gradient(circle at 34% 28%, "+(x.color||"#38BDF8")+", "+(x.color||"#38BDF8")+"AA);color:#0B0F24;display:grid;place-items:center;font-family:Fredoka,sans-serif;font-size:29px"
     }));
 
-    // ---- recommendations for the pilot being viewed ------------------------
-    // Approving re-reads their record first and layers only the decision on
-    // top, so a teacher can never overwrite work the child did in the meantime.
-    const applyRemote=async(setId,stateName)=>{
-      if(!st.tSel) return;
-      this.setState({tBusy:true,tErr:""});
-      const fresh=await Remote.fetchStudent(st.tSel);
-      const base=(fresh&&fresh.slice)||{};
-      const next={...base, skills:{...(base.skills||{}), [setId]:{state:stateName,d:dayNo()}}, updated:Date.now()};
-      await Remote.pushStudent(st.tSel,{name:(fresh&&fresh.name)||(chosen&&chosen.name)||"",color:(fresh&&fresh.color)||"#38BDF8"},next);
-      this.setState({tBusy:false,tData:next});
-    };
-    const rbtn=(bg,bd,fg)=>"font-family:Fredoka,sans-serif;font-size:13.5px;padding:9px 16px;border-radius:11px;cursor:pointer;white-space:nowrap;background:"+bg+";border:1px solid "+bd+";color:"+fg;
-    const trecs=[];
-    if(chosen){
-      for(let u=1;u<=8;u++){
-        this.setsFor(u).forEach(s=>{
-          const sk=skills[s.id];
-          if(sk) return;
-          const sig=readSignal(hist,s.id);
-          if(!sig) return;
-          const pct=Math.round(sig.pct*100);
-          const spec = sig.kind==="secure"
-            ? {kind:"Ready to compress",c:"#4ADE80",bg:"rgba(74,222,128,.08)",bd:"rgba(74,222,128,.3)",cb:"rgba(74,222,128,.16)",
-               why:"Two separate days above the line. Drops to one spiral item instead of disappearing.",lab:"Compress it",act:"spiral"}
-            : sig.kind==="warmup"
-            ? {kind:"Needs a harder look",c:"#A78BFA",bg:"rgba(167,139,250,.08)",bd:"rgba(167,139,250,.3)",cb:"rgba(167,139,250,.16)",
-               why:"Scoring high, but only on Warm-Up items. Have them run the Core tier once first.",lab:"Compress anyway",act:"spiral"}
-            : {kind:"Needs a reteach",c:"#FBBF24",bg:"rgba(251,191,36,.08)",bd:"rgba(251,191,36,.3)",cb:"rgba(251,191,36,.16)",
-               why:"Two separate days below the line. Rebuild with the lesson walkthrough before moving on.",lab:"Flag for reteach",act:"reteach"};
-          trecs.push({
-            id:s.id, unit:"Mission 0"+u+" · "+s.label, title:s.title, kind:spec.kind,
-            color:spec.c, detail:sig.detail+"  ·  "+pct+"%", why:spec.why,
-            cardStyle:"display:grid;grid-template-columns:1fr auto;gap:20px;align-items:center;background:"+spec.bg+";border:1px solid "+spec.bd+";border-radius:16px;padding:16px 20px",
-            chipStyle:"font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;padding:5px 10px;border-radius:999px;background:"+spec.cb+";color:"+spec.c,
-            actLabel:spec.lab, actStyle:rbtn(spec.cb,spec.bd,spec.c),
-            act:()=>applyRemote(s.id,spec.act)
-          });
-        });
-      }
-    }
 
     return {
       tEnabled:Remote.enabled,
@@ -4704,67 +4596,19 @@ class Component extends DCLogic {
           label:x.name+" · "+(CURRICULA_MAP[x.curriculum||"y3"]||x.curriculum||"—")}))),
       tSel:st.tSel,
       tPickStudent:e=>pick(e.target.value),
-      tRosterEmpty:!inCurric.length,
 
       tAddName:st.tAddName, setTAddName:e=>this.setState({tAddName:e.target.value}),
       tAddPin:st.tAddPin, setTAddPin:e=>this.setState({tAddPin:e.target.value.replace(/\D/g,"").slice(0,6)}),
       tAdd:addPilot,
-
-      tChosen:!!chosen, tChosenName:chosen?chosen.name:"",
-      tDrop:()=>chosen&&dropPilot(chosen.key),
-      tLastSeen:lastSeen,
-      tSecure:secure, tShaky:shaky, tTouched:touched, tGraded:graded, tTotalSets:totalSets,
-
-      tDailyAny:!!(sprDaysDone||sIds.length),
-      tSprDays:sprDays, tSprRun:sprRun, tSprRunLabel:sprRun===1?"day in a row":"days in a row",
-      tSpr7:spr7a?spr7r+" / "+spr7a:"—", tSpr7Pct:spr7pct, tSprTotal:sprDaysDone,
-      tSprNote:sprDaysDone?(sprRun>=3?"The habit is holding.":"Sprints are happening, but not every day yet."):"No sprint run yet. It is the first thing on the Practice Bay screen.",
-      tStreakClosed:closedN, tStreakOpen:openRows.length, tStreakAvg:avgToClose?avgToClose+"":"—",
-      tStreakRows:streakRows, tStreakRowsAny:!!streakRows.length,
-      tExRows:exShown, tExAny:!!exShown.length,
-      tExCount:exRows.length,
       // No tD drill-down here any more: picking a pilot opens the one real
       // Mission Control, which runs its own (hqD) drill-down off the same
       // fetched slice. This used to compute a second, parallel copy.
-      tExNote:exRows.length
-        ? "Newest first. Green is right, red shows what they typed, amber is a written response for you to mark."
-        : "Nothing graded yet on this pilot's record. Every checked worksheet and every Streak Run answer lands here.",
-      tStreakNote:openRows.length?"Open runs are sets where five in a row has not happened yet.":"Every set the Streak Run has touched closed at five in a row.",
 
-      // Per-subject record. Every subject on the landing page writes its own
-      // namespace into the child's document (see curriculum/subjects.js), so
-      // this reads the same way whoever authored the subject.
-      tSubjRows:((window.Subjects&&window.Subjects.all())||[]).map(s=>{
-        const r=((slice&&slice.subjects)||{})[s.id]||{};
-        const days=r.days||[];
-        const last=days.length?Math.max.apply(null,days):null;
-        const wk=days.filter(d=>d>today-7).length;
-        const lv=(s.levels||[]).find(l=>l.id===r.level);
-        return {id:s.id, name:s.name+(lv?" · "+lv.label:""), color:s.color, glyph:s.glyph,
-          sessions:String(r.opened||0),
-          week:wk+" of last 7 days",
-          last: last==null ? "never opened"
-            : last===today ? "today"
-            : last===today-1 ? "yesterday"
-            : (today-last)+" days ago",
-          dotStyle:"flex:none;width:26px;height:26px;border-radius:8px;background:"+s.color+"22;border:1px solid "+s.color+"55;color:"+s.color+";display:grid;place-items:center;font-family:Fredoka,sans-serif;font-size:13px"};
-      }),
-
-      tRows:rows, tRowsAny:!!rows.length, tRowsEmpty:!rows.length,
 
       tFront:st.tFront,
       tOpenFront:()=>this.setState({tFront:true,tErr:""}),
       tCloseFront:()=>this.setState({tFront:false,tSel:"",tData:null,tErr:""}),
-      tCards:cards, tCardsAny:!!cards.length,
-      tRecs:trecs, tRecsAny:!!trecs.length, tRecsEmpty:chosen&&!trecs.length,
-      tBackToRoster:()=>this.setState({tSel:"",tData:null}),
-      tOpenHQ:()=>{
-        if(!chosen) return;
-        // The gate is a fixed overlay: closing the teacher screen without
-        // dropping it would land the teacher back on the pilot sign-in.
-        this.setState({tView:{key:chosen.key,name:chosen.name,curriculum:chosen.curriculum||"y3",slice:st.tData||{}},
-          tFront:false, tFromGate:st.gate, gate:false, view:"hq", uview:1, unit:1, week:1});
-      }
+      tCards:cards
     };
   }
 
@@ -5855,7 +5699,17 @@ class Component extends DCLogic {
     const tf=tiersPresent.indexOf(st.pTier)>=0 ? st.pTier
            : (tiersPresent.length?tiersPresent[0]:0);
     const key=set.id+"|"+tf;
-    const ans=st.pAns[set.id]||{}, checked=!!st.pChecked[key], runs=st.pRuns[key]||0;
+    /* Sets finished BEFORE tiers ran in order were graded in the combined
+     * "All tiers" view, which stored progress under "<setId>|all" (see the
+     * shape note above pChecked). Read through to that key so work a pilot has
+     * already done does not silently come back as unchecked. Writes always go
+     * to the new per-tier key and clear the old one, so a set migrates the
+     * first time it is touched again. */
+    const legacy=set.id+"|all";
+    const ans=st.pAns[set.id]||{};
+    const checked=!!(st.pChecked[key]||st.pChecked[legacy]);
+    const runs=st.pRuns[key]||st.pRuns[legacy]||0;
+    const onPaper=!!(st.pPaper[key]||st.pPaper[legacy]);
     const norm=v=>String(v==null?"":v).replace(/[\s,]/g,"").toLowerCase().replace(/^0+(?=\d)/,"");
     // Grading goes through the question-type registry, so a set loaded from the
     // database can hold multiple-choice, units, ordering or a written response
@@ -5910,7 +5764,7 @@ class Component extends DCLogic {
       pFlagNote:"Flagged for a reteach in Teacher HQ. Run the lesson walkthrough for this one before the worksheet.",
       pChecked:checked, pAllRight:allRight, pNotAllRight:checked&&!allRight, pRuns:runs,
       pBarStyle:`height:100%;width:${checked?Math.round(score/total*100):0}%;border-radius:999px;background:${allRight?"#4ADE80":"#38BDF8"};transition:width .5s cubic-bezier(.2,.8,.2,1)`,
-      pStatus: st.pPaper[key]
+      pStatus: onPaper
         ? "Marked done on paper. The answers are filled in below so you can check your sheet against them."
         : !checked
         ? "Fill in what you can, then press Check. Blanks count as wrong, so guess if you want to."
@@ -5921,7 +5775,7 @@ class Component extends DCLogic {
               ? "The ones marked ✗ have a hint under them now. "
               : "Look again at the ones marked ✗. ")+
             "Fix them and check again — there's no limit on tries.",
-      pStatusColor: st.pPaper[key] ? "#A78BFA" : !checked ? "rgba(238,242,255,.6)" : allRight ? "#4ADE80" : "#FBBF24",
+      pStatusColor: onPaper ? "#A78BFA" : !checked ? "rgba(238,242,255,.6)" : allRight ? "#4ADE80" : "#FBBF24",
       pTierChips:tiersPresent.map(t=>({k:t, l:TIERS[t].name, c:TIERS[t].color})).map(o=>({
         l:o.l, go:()=>this.setState({pTier:o.k}),
         style:`font-family:Fredoka,sans-serif;font-size:13.5px;padding:8px 16px;border-radius:999px;cursor:pointer;transition:.15s;`+
@@ -5950,13 +5804,13 @@ class Component extends DCLogic {
         };
       }),
       pCheck:()=>{const t0=Date.now();
-        this.saveState(s=>({pChecked:{...s.pChecked,[key]:true},pRuns:{...s.pRuns,[key]:(s.pRuns[key]||0)+1},pHist:logRun(s.pHist||{},set.id,score,visible.length,compressed?null:tf)}));
+        this.saveState(s=>({pChecked:{...s.pChecked,[key]:true,[legacy]:false},pRuns:{...s.pRuns,[key]:(s.pRuns[key]||s.pRuns[legacy]||0)+1,[legacy]:0},pHist:logRun(s.pHist||{},set.id,score,visible.length,compressed?null:tf)}));
         this.logAttempts(set, visible.map(({it,i})=>({i,it,given:ans[i],ok:verdictOf(i,it)})), "grid");
         setTimeout(()=>this.maybeDynamic(set, t0, score/Math.max(1,visible.length)), 80);},
       pRetry:()=>{
         const kept={};
         set.items.forEach((it,i)=>{ if(isRight(i,it) || (tf!=null && it.t!==tf)) kept[i]=ans[i]; });
-        this.saveState(s=>({pAns:{...s.pAns,[set.id]:kept},pChecked:{...s.pChecked,[key]:false}}));
+        this.saveState(s=>({pAns:{...s.pAns,[set.id]:kept},pChecked:{...s.pChecked,[key]:false,[legacy]:false}}));
       },
       pOnPaper:()=>{
         const markDone=()=>{
@@ -5964,9 +5818,9 @@ class Component extends DCLogic {
           visible.forEach(x=>{ filled[x.i]=x.it.a; });
           this.saveState(s=>({
             pAns:{...s.pAns,[set.id]:filled},
-            pChecked:{...s.pChecked,[key]:true},
-            pRuns:{...s.pRuns,[key]:(s.pRuns[key]||0)+1},
-            pPaper:{...s.pPaper,[key]:true}
+            pChecked:{...s.pChecked,[key]:true,[legacy]:false},
+            pRuns:{...s.pRuns,[key]:(s.pRuns[key]||s.pRuns[legacy]||0)+1,[legacy]:0},
+            pPaper:{...s.pPaper,[key]:true,[legacy]:false}
           }));
         };
         // The printed sheet always carries the WHOLE set, deduped in bank order
@@ -5995,13 +5849,13 @@ class Component extends DCLogic {
       paperPickedCb:this.paperPicked,
       paperMsgClose:()=>this.setState({paperMsg:""}),
       paperStop:e=>e.stopPropagation(),
-      pOnPaperDone:!!st.pPaper[key],
+      pOnPaperDone:onPaper,
       pReset:()=>this.saveState(s=>{
         const keep={...s.pAns[set.id]};
         visible.forEach(x=>{ delete keep[x.i]; });
-        return {pAns:{...s.pAns,[set.id]:keep},pChecked:{...s.pChecked,[key]:false},pRuns:{...s.pRuns,[key]:0},pPaper:{...s.pPaper,[key]:false}};
+        return {pAns:{...s.pAns,[set.id]:keep},pChecked:{...s.pChecked,[key]:false,[legacy]:false},pRuns:{...s.pRuns,[key]:0,[legacy]:0},pPaper:{...s.pPaper,[key]:false,[legacy]:false}};
       }),
-      pMascotLine: st.pPaper[key]
+      pMascotLine: onPaper
         ? "Paper counts. Check your sheet against these, and log anything you missed in the journal."
         : allRight
         ? "Logged, "+studentName+". Nothing left to fix here."

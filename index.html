@@ -19,15 +19,11 @@
 <script src="./curriculum/registry.js"></script>
 <script src="./curriculum/language-arts.js"></script>
 <script src="./curriculum/japan-unit.js"></script>
-<!-- Japan card note: japan.dc.html and image-slot.js exist locally but are NOT yet
-     committed to the repo. Commit them together with this script tag, or the card
-     404s on GitHub Pages.
-     Prior note (kept for context): the unit was deliberately NOT
-     loaded yet: its card opens japan.dc.html, and that page plus image-slot.js
-     have never existed in this repo, so a child tapping the card would get a 404.
-     Marking it "soon" would not help - openSubject follows open.href regardless
-     of status. To turn it on, add japan.dc.html and image-slot.js, then restore
-     the script tag for curriculum/japan-unit.js here. -->
+<!-- The Japan card opens japan.dc.html, a separate committed page rather than an
+     app screen. It and image-slot.js must stay committed alongside this script
+     tag or the card 404s on GitHub Pages. Note openSubject follows open.href
+     regardless of a subject's status, so marking it "soon" does NOT take it
+     offline - remove this script tag instead. -->
 </head>
 <body>
 <x-dc>

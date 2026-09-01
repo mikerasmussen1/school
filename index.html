@@ -6673,9 +6673,14 @@ class Component extends DCLogic {
       // silent navigation. Survives leaving the screen and coming back, so the
       // child can find it again instead of it existing only in the moment it
       // was generated.
+      // renderVals has no `set` in scope — the current set comes from curSet(),
+      // which can be undefined before a curriculum is picked.
       ...(function(){
-        const r=(((st.dyn||{})[(set&&set.id)||""]||{}).rounds||[]).filter(x=>!x.closed&&!x.failed)[0];
-        if(!r) return {dynReady:false, dynReadyTitle:"", dynReadyNote:"", dynReadyCta:"", dynReadyGo:()=>{}};
+        const cs=this.curSet && this.curSet();
+        const none={dynReady:false, dynReadyTitle:"", dynReadyNote:"", dynReadyCta:"", dynReadyGo:()=>{}};
+        if(!cs || !cs.id) return none;
+        const r=(((st.dyn||{})[cs.id]||{}).rounds||[]).filter(x=>!x.closed&&!x.failed)[0];
+        if(!r) return none;
         return {
           dynReady:true,
           dynReadyTitle:r.title||"A lesson made just for you",
@@ -6684,7 +6689,7 @@ class Component extends DCLogic {
             : "Made from the questions you just did, for the part that tripped you up. Work through it, then try ")
             +(r.qCount||0)+" fresh questions.",
           dynReadyCta:"Open it →",
-          dynReadyGo:()=>this.openCoach(set.id, r.n)
+          dynReadyGo:()=>this.openCoach(cs.id, r.n)
         };
       }).call(this),
       isStd1:st.uview===1&&!y5, isStd2:st.uview===2&&!y5, isStd3:st.uview===3&&!y5, isStd4:st.uview===4&&!y5, isStd5:st.uview===5&&!y5,

@@ -5668,14 +5668,17 @@ class Component extends DCLogic {
   practiceVals(mascot, studentName){
     const st=this.state;
     const SETS=this.sets();
-    /* Sequencing context. ALL_CUR must be every set in the CURRENT course, and
-     * MATH_SEQ re-sorts it into curriculum order — ALL_SETS is stored in
-     * authoring order, where all week-1 sets sit at the end. */
-    const SEQ=window.__CURR&&window.__CURR.MATH_SEQ;
-    const ALL_CUR=this.allSetsForCurriculum();
-    const SEQ_STATUS=SEQ?SEQ.statusOf(set.id, ALL_CUR, st.pChecked||{}):null;
-    const SEQ_SUM=SEQ?SEQ.summary(ALL_CUR, st.pChecked||{}):null;
     const set=this.curSet();
+    /* Sequencing context, deliberately AFTER `set` is bound: statusOf needs
+     * set.id, and reading it earlier is a temporal-dead-zone ReferenceError
+     * that takes the whole Practice Bay render down.
+     * ALL_CUR must be every set in the CURRENT course; MATH_SEQ re-sorts it
+     * into curriculum order, since ALL_SETS is stored in authoring order with
+     * all the week-1 sets at the end. */
+    const SEQ=window.__CURR&&window.__CURR.MATH_SEQ;
+    const ALL_CUR=(typeof this.allSetsForCurriculum==="function") ? this.allSetsForCurriculum() : [];
+    const SEQ_STATUS=(SEQ&&set)?SEQ.statusOf(set.id, ALL_CUR, st.pChecked||{}):null;
+    const SEQ_SUM=SEQ?SEQ.summary(ALL_CUR, st.pChecked||{}):null;
     /* Warm-Up, then Core, then Challenge, and no combined view: mixing the
      * tiers put a Challenge item directly beneath a Warm-Up one and made a set
      * read as harder than it is. Sets that have no Warm-Up at all — the Friday

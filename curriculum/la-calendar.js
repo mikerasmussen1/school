@@ -33,20 +33,13 @@
 
   /* Date ranges that are NOT school days, inclusive both ends.
    * Add your own; the year simply extends. */
-  /* Holiday schedule as supplied by the family, corrected to 2026-27.
+  /* Holiday schedule as supplied by the family.
    *
-   * LAST DAY. The family named Wednesday 19 May 2027 as the last day of
-   * school. From the first day, minus these breaks, that gives 166 school
-   * days. The curriculum is 180, so it runs 14 days past that date — day 180
-   * falls on Tuesday 8 June 2027. Nothing here truncates the course; the
-   * shortfall is reported on the For Parents tab so it stays a decision
-   * rather than becoming a surprise in May.
-   *
-   * To close the gap instead of extending: 14 days is a little under three
-   * weeks, so doubling up one day a week from January would absorb it, as
-   * would trimming the ten-weekday Christmas break.                          */
-  const LAST_DAY_TARGET = {y:2027, m:5, d:19};
-
+   * There is no fixed last day. The year runs its 180 school days and ends
+   * when they are used up: with the breaks below that is Tuesday 8 June 2027.
+   * Adding a break pushes that date later rather than costing a lesson, so
+   * BREAKS can be edited freely without doing arithmetic. It is the one part
+   * of this file a parent is expected to change.                             */
   const BREAKS = [
     {from:{y:2026,m:9, d:7},  to:{y:2026,m:9, d:7},  name:"Labor Day"},
     {from:{y:2026,m:11,d:23}, to:{y:2026,m:11,d:27}, name:"Thanksgiving Holidays"},
@@ -153,27 +146,11 @@
   }
 
   window.__CURR = window.__CURR || {};
-  /* How the 180-day course lines up with the family's stated last day. */
-  function lastDayCheck(){
-    const target = toDate(LAST_DAY_TARGET);
-    let n = 0;
-    const cur = startDate();
-    let guard = 0, atTarget = null;
-    while(guard++ < 1200){
-      if(isSchoolDay(cur)){
-        n++;
-        if(ymd(cur) === ymd(target)) atTarget = n;
-        if(n >= TOTAL) break;
-      }
-      cur.setDate(cur.getDate()+1);
-    }
-    return {targetDate: target, daysByTarget: atTarget, total: TOTAL,
-            shortfall: atTarget==null ? null : TOTAL - atTarget,
-            finishDate: new Date(cur)};
-  }
+  /* When the 180th school day falls, given the breaks. */
+  function yearEnd(){ return dateForIndex(TOTAL-1); }
 
   window.__CURR.LA_CALENDAR = {
-    START, BREAKS, TOTAL, DAYS, LAST_DAY_TARGET, lastDayCheck,
+    START, BREAKS, TOTAL, DAYS, yearEnd,
     startDate, isSchoolDay, inBreak, schoolDayNumber,
     scheduledDay, dateForIndex, longDate, shortDate, pacing
   };

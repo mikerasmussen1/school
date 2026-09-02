@@ -457,13 +457,12 @@
         <h2>The school year</h2>
         <div style="display:grid;grid-template-columns:150px 1fr;gap:8px 12px;font-size:.93rem">
           <div class="muted">First day</div><div>{{ calFirstDay }}</div>
-          <div class="muted">Last day</div><div>{{ calLastDay }}</div>
+          <div class="muted">Year ends</div><div>{{ calLastDay }}</div>
           <div class="muted">Today</div><div>{{ calToday }}</div>
           <div class="muted">Pace</div><div>{{ calPace }}</div>
         </div>
-        <div style="{{ lastDayStyle }}">{{ lastDayNote }}</div>
         <h3 style="font-size:1rem;margin:16px 0 5px">Scheduled breaks</h3>
-        <p class="muted">Break days are not school days, so the year simply runs later rather than losing lessons. To change these, edit BREAKS at the top of curriculum/la-calendar.js.</p>
+        <p class="muted">There is no fixed last day — the year runs its 180 school days and ends when they are used up. Break days are not school days, so adding a break pushes the end date later rather than costing a lesson. To change these, edit BREAKS at the top of curriculum/la-calendar.js.</p>
         <sc-for list="{{ calBreaks }}" as="b" hint-placeholder-count="3">
           <div style="background:var(--paper);border:1px solid var(--rule);border-radius:6px;padding:9px 13px;margin-top:7px">
             <div style="font-family:'Fraunces',serif;font-size:.92rem">{{ b.name }}</div>
@@ -1088,23 +1087,13 @@ class Component extends DCLogic {
       benchmarks:(Y.BENCHMARKS||[]).map(function(b){ return {text:b}; }),
       standards:Y.STANDARDS,
       calFirstDay: CAL ? CAL.longDate(CAL.startDate()) : "",
-      calLastDay:  CAL ? CAL.longDate(CAL.dateForIndex(179)) : "",
+      calLastDay:  CAL ? (CAL.longDate(CAL.yearEnd())+" \u2014 the 180th school day") : "",
       calToday: (function(){
         if(!CAL) return "";
         const now=new Date(), sch=CAL.scheduledDay(now);
         return CAL.longDate(now)+(sch.week?(" \u2014 week "+sch.week+", "+sch.day+" (day "+sch.dayNumber+" of 180)"):(" \u2014 "+(sch.note||"")));
       })(),
       calPace: CAL ? CAL.pacing(seq.frontier, new Date()).text : "",
-      lastDayNote: (function(){
-        if(!CAL || !CAL.lastDayCheck) return "";
-        const k=CAL.lastDayCheck();
-        if(k.daysByTarget==null) return "";
-        return "You named "+CAL.longDate(k.targetDate)+" as the last day of school. With the breaks above that is school day "+
-          k.daysByTarget+", but this curriculum is "+k.total+" days \u2014 "+k.shortfall+
-          " days longer. Day 180 falls on "+CAL.longDate(CAL.dateForIndex(179))+
-          ". Nothing has been cut; you can run past 20 May, shorten some breaks, or double up on days. Worth deciding now rather than in May.";
-      })(),
-      lastDayStyle: "background:var(--gold-light);color:#7A5A0C;border-radius:8px;padding:12px 15px;margin-top:12px;font-size:.9rem",
       calBreaks: CAL ? CAL.BREAKS.map(function(b){
         return {name:b.name, range: CAL.longDate(new Date(b.from.y,b.from.m-1,b.from.d))+
           " to "+CAL.longDate(new Date(b.to.y,b.to.m-1,b.to.d))};

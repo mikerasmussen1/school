@@ -43,6 +43,12 @@
 <script src="./curriculum/la-y1-reading.js"></script>
 <script src="./curriculum/la-y1-tasks.js"></script>
 <script src="./curriculum/la-books.js"></script>
+<script src="./curriculum/la-y2-spine.js"></script>
+<script src="./curriculum/la-y2-words.js"></script>
+<script src="./curriculum/la-y2-grammar.js"></script>
+<script src="./curriculum/la-y2-reading.js"></script>
+<script src="./curriculum/la-y2-tasks.js"></script>
+<script src="./curriculum/la-books-y2.js"></script>
 <script src="./curriculum/la-grader.js"></script>
 </helmet>
 
@@ -54,6 +60,9 @@
         <div style="font-family:'Fraunces',serif;font-weight:700;font-size:21px">Word Voyagers</div>
         <div style="font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(250,246,236,.55);margin-top:2px">{{ headerLine }}</div>
       </div>
+      <sc-for list="{{ yearItems }}" as="y" hint-placeholder-count="2">
+        <button onClick="{{ y.onClick }}" style="{{ y.style }}">{{ y.label }}</button>
+      </sc-for>
       <button onClick="{{ goPrevWeek }}" style="{{ weekNavStyle }}">&lsaquo;</button>
       <div style="font-family:'Fraunces',serif;font-size:14px;color:var(--gold-light);min-width:92px;text-align:center">{{ weekLabel }}</div>
       <button onClick="{{ goNextWeek }}" style="{{ weekNavStyle }}">&rsaquo;</button>
@@ -350,13 +359,24 @@
 class Component extends DCLogic {
   state = {
     view:"home",
+    year:(()=>{ try{ return localStorage.getItem("la.year")==="y2" ? "y2" : "y1"; }catch(e){ return "y1"; } })(),
     week:(()=>{ try{ return Math.min(36,Math.max(1,parseInt(localStorage.getItem("la.week")||"1",10)||1)); }catch(e){ return 1; } })(),
     done:(()=>{ try{ return JSON.parse(localStorage.getItem("la.done")||"{}"); }catch(e){ return {}; } })(),
     gz:null, sq:null, rq:null, rv:null,
     asKind:"handwriting", asImage:null, asStatus:"idle", asResult:null, asError:""
   };
 
-  Y = window.__CURR.LA_Y1;
+  // Both years expose the identical interface (UNITS, WEEKS, STANDARDS,
+  // unitOf, passageFor, grammarSetFor, spellingSetFor, taskFor, READ_ALOUDS,
+  // INDEPENDENT), so every view below works unchanged against either.
+  get Y(){ return this.state.year==="y2" ? window.__CURR.LA_Y2 : window.__CURR.LA_Y1; }
+
+  setYear=(y)=>{
+    try{ localStorage.setItem("la.year", y); localStorage.setItem("la.week","1"); }catch(e){}
+    this.setState({year:y, week:1, gz:null, sq:null, rq:null, rv:null,
+      asImage:null, asStatus:"idle", asResult:null, asError:""});
+    window.scrollTo(0,0);
+  };
 
   goto=(v)=>{ this.setState({view:v}); window.scrollTo(0,0); };
 
@@ -369,7 +389,7 @@ class Component extends DCLogic {
   };
 
   markDone=(key)=>{
-    const w=this.state.week;
+    const w=this.state.year+":"+this.state.week;
     const done={...this.state.done, [w]:{...(this.state.done[w]||{}), [key]:true}};
     try{ localStorage.setItem("la.done", JSON.stringify(done)); }catch(e){}
     this.setState({done});
@@ -393,6 +413,9 @@ class Component extends DCLogic {
     (ok?"background:var(--forest-light);color:#2E4E38":"background:#F3DCD5;color:var(--brick-dark)"); }
   navStyle(a){ return "font-family:'Fraunces',serif;font-weight:600;font-size:.88rem;padding:9px 14px;border-radius:8px 8px 0 0;cursor:pointer;border:none;background:"+(a?"var(--paper)":"#3C5064")+";color:"+(a?"var(--brick-dark)":"#CBD6DD"); }
   pill(a){ return "font-family:'Public Sans',sans-serif;font-weight:600;font-size:.85rem;padding:7px 14px;border-radius:999px;cursor:pointer;border:1px solid "+(a?"var(--brick)":"var(--rule)")+";background:"+(a?"var(--brick)":"transparent")+";color:"+(a?"#fff":"var(--ink)"); }
+  // The year switcher lives in the dark header, so it needs light text when
+  // unselected — pill() above is for light backgrounds and would be invisible.
+  pillDark(a){ return "font-family:'Public Sans',sans-serif;font-weight:600;font-size:.8rem;padding:6px 12px;border-radius:999px;cursor:pointer;border:1px solid "+(a?"var(--gold)":"rgba(250,246,236,.3)")+";background:"+(a?"var(--gold)":"transparent")+";color:"+(a?"#2C3B4A":"rgba(250,246,236,.85)"); }
   stepStyle(d){ return "display:flex;align-items:center;gap:12px;background:var(--paper);border:1px solid "+(d?"var(--forest)":"var(--rule)")+";border-radius:8px;padding:13px 15px;margin-bottom:10px"; }
   choice(s){
     const bg=s==="correct"?"var(--forest-light)":s==="incorrect"?"#F3DCD5":"#fff";
@@ -503,7 +526,7 @@ class Component extends DCLogic {
     const st=this.state, Y=this.Y, self=this;
     const wk=Y.WEEKS.find(function(w){ return w.n===st.week; });
     const unit=Y.unitOf(st.week);
-    const done=st.done[st.week]||{};
+    const done=st.done[st.year+":"+st.week]||{};
 
     const navDefs=[["home","Today"],["map","The Year"],["reading","Reading"],["grammar","Grammar"],
                    ["spelling","Spelling"],["writing","Handwriting"],["speaking","Speak & Show"],
@@ -545,7 +568,11 @@ class Component extends DCLogic {
 
     const base={
       navItems:navItems, steps:steps, unitCards:unitCards,
-      headerLine:"Year One \u00b7 36 weeks \u00b7 180 days",
+      yearItems:[["y1","Year 1 \u00b7 3rd"],["y2","Year 2 \u00b7 5th"]].map(function(y){
+        return {label:y[1], onClick:function(){ self.setYear(y[0]); },
+                style:self.pillDark(st.year===y[0])};
+      }),
+      headerLine:(st.year==="y2"?"Year Two \u00b7 5th grade":"Year One \u00b7 3rd grade")+" \u00b7 36 weeks \u00b7 180 days",
       weekLabel:"Week "+st.week+" of 36",
       weekNum:st.week,
       weekTitle:wk.title,

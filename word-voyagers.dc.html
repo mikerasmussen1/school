@@ -49,6 +49,7 @@
 <script src="./curriculum/la-y2-reading.js"></script>
 <script src="./curriculum/la-y2-tasks.js"></script>
 <script src="./curriculum/la-books-y2.js"></script>
+<script src="./curriculum/la-quotes.js"></script>
 <script src="./curriculum/la-grader.js"></script>
 </helmet>
 
@@ -79,6 +80,22 @@
 
     <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
       <div class="card">
+        <div style="background:var(--paper);border:1px solid var(--rule);border-left:4px solid var(--gold);border-radius:6px;padding:16px 18px;margin-bottom:18px">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap">
+            <div style="font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)">Reading for {{ qDayLabel }} · {{ qKind }}</div>
+            <button onClick="{{ qListen }}" style="{{ btnSecondary }}">Read it to me</button>
+          </div>
+          <div style="font-family:'Fraunces',serif;font-size:1.14rem;line-height:1.5;margin:9px 0 6px">{{ qText }}</div>
+          <div style="font-size:.85rem;color:var(--ink-soft);font-style:italic">{{ qSource }}</div>
+          <div style="margin-top:11px;padding-top:10px;border-top:1px solid var(--rule);font-size:.92rem">
+            <span style="color:var(--brick-dark);font-weight:600">Today: </span>{{ qThink }}
+          </div>
+          <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap">
+            <sc-for list="{{ qDayPicker }}" as="d" hint-placeholder-count="5">
+              <button onClick="{{ d.onClick }}" style="{{ d.style }}">{{ d.label }}</button>
+            </sc-for>
+          </div>
+        </div>
         <div style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)">{{ unitLine }}</div>
         <h2 style="margin:4px 0 2px">{{ weekTitle }}</h2>
         <p class="muted" style="margin-top:2px">{{ weekFocusLine }}</p>
@@ -369,6 +386,7 @@ class Component extends DCLogic {
     year:(()=>{ try{ return localStorage.getItem("la.year")==="y2" ? "y2" : "y1"; }catch(e){ return "y1"; } })(),
     week:(()=>{ try{ return Math.min(36,Math.max(1,parseInt(localStorage.getItem("la.week")||"1",10)||1)); }catch(e){ return 1; } })(),
     done:(()=>{ try{ return JSON.parse(localStorage.getItem("la.done")||"{}"); }catch(e){ return {}; } })(),
+    qDay:(function(){ const d=["Mon","Mon","Tue","Wed","Thu","Fri","Fri"][new Date().getDay()]; return d; })(),
     gz:null, sq:null, rq:null, rv:null,
     asKind:"handwriting", asImage:null, asStatus:"idle", asResult:null, asError:""
   };
@@ -570,6 +588,10 @@ class Component extends DCLogic {
     const skTask=Y.taskFor(st.week,"speaking");
     const asTask=st.asKind==="handwriting"?hwTask:wrTask;
 
+    const QT=window.__CURR.LA_QUOTES;
+    const q=QT ? QT.quoteFor(st.year, st.week, st.qDay)
+               : {text:"",source:"",think:"",kindLabel:""};
+
     const cats=[]; const seen={};
     Y.INDEPENDENT.forEach(function(b){ if(!seen[b.cat]){ seen[b.cat]=1; cats.push(b.cat); } });
 
@@ -657,7 +679,18 @@ class Component extends DCLogic {
       parentGradeHeading:(Y.GRADE?Y.GRADE.label:"")+" \u2014 how the year is built",
       standardsHeading:(Y.GRADE?Y.GRADE.label:"")+" skills and standards covered",
       benchmarks:(Y.BENCHMARKS||[]).map(function(b){ return {text:b}; }),
-      standards:Y.STANDARDS
+      standards:Y.STANDARDS,
+
+      // Quote of the day. Defaults to the real weekday so a child opening this
+      // on Wednesday reads Wednesday's, but every day of the week stays
+      // reachable — missing a day should not mean missing the reading.
+      qText:q.text, qSource:q.source, qThink:q.think, qKind:q.kindLabel,
+      qDayLabel:({Mon:"Monday",Tue:"Tuesday",Wed:"Wednesday",Thu:"Thursday",Fri:"Friday"}[st.qDay]||st.qDay),
+      qListen:function(){ self.speak(q.text+". "+q.source+". "+q.think); },
+      qDayPicker:["Mon","Tue","Wed","Thu","Fri"].map(function(d){
+        return {label:d, onClick:function(){ self.setState({qDay:d}); },
+                style:self.pill(st.qDay===d)};
+      })
     };
 
     const rq=this.quizVals("rq","rq","reading",function(){ self.quizStart("rq", self.prepMC(passage.questions)); });

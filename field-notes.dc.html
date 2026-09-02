@@ -29,6 +29,7 @@
   ol.steps{margin:8px 0 0;padding-left:22px} ol.steps li{margin-bottom:7px}
   ul.mats{margin:6px 0 0;padding-left:20px} ul.mats li{margin-bottom:3px;font-size:.93rem}
 </style>
+<script src="./curriculum/students.js"></script>
 <script src="./curriculum/subjects.js"></script>
 <script src="./curriculum/question-types.js"></script>
 <script src="./curriculum/science-y3-spine.js"></script>
@@ -232,7 +233,17 @@
 class Component extends DCLogic {
   state = {
     view:"week",
-    grade:(function(){ try{ return localStorage.getItem("sci.grade")==="y5"?"y5":"y3"; }catch(e){ return "y3"; } })(),
+    // A level passed in the URL is the boy just picked on the landing card,
+    // so it beats whatever this page stored last time.
+    grade:(function(){
+      try{
+        const m=(window.location.search||"").match(/[?&]level=([^&]+)/);
+        if(m){ const v=decodeURIComponent(m[1]);
+          if(v==="y5"||v==="y2") return "y5";
+          if(v==="y3"||v==="y1") return "y3"; }
+      }catch(e){}
+      try{ return localStorage.getItem("sci.grade")==="y5"?"y5":"y3"; }catch(e){ return "y3"; }
+    })(),
     week:(function(){ try{ return Math.min(36,Math.max(1,parseInt(localStorage.getItem("sci.week")||"1",10)||1)); }catch(e){ return 1; } })(),
     day:"A",
     q:null
@@ -322,9 +333,12 @@ class Component extends DCLogic {
     return Object.assign({
       headerLine:(S.GRADE?S.GRADE.label:"")+" \u00b7 "+(S.GRADE?S.GRADE.set:"")+" \u00b7 two lessons a week",
       weekLabel:"Week "+st.week+" of 36",
-      gradeItems:[["y3",(window.__CURR.SCI_Y3.GRADE||{}).label||"3rd"],["y5",(window.__CURR.SCI_Y5.GRADE||{}).label||"5th"]]
-        .map(function(g){ return {label:g[1].replace(" Science",""), onClick:function(){ self.setGrade(g[0]); },
-          style:self.pillDark(st.grade===g[0])}; }),
+      // Labelled by boy, from curriculum/students.js.
+      gradeItems:["y3","y5"].map(function(id){
+        const ST=window.__CURR.STUDENTS;
+        return {label: ST ? ST.tab(id) : id,
+          onClick:function(){ self.setGrade(id); },
+          style:self.pillDark(st.grade===id)}; }),
       navItems:navDefs.map(function(d){ return {label:d[1], onClick:function(){ self.goto(d[0]); }, style:self.navBtn(st.view===d[0])}; }),
       navStyle:"background:rgba(244,247,243,.1);color:var(--paper);border:1px solid rgba(244,247,243,.25);border-radius:6px;width:29px;height:29px;font-size:15px;cursor:pointer",
       goPrevWeek:function(){ self.setWeek(st.week-1); },

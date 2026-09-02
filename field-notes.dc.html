@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F4F7F3; --card:#E6EFE7; --ink:#22332C; --soft:#5B7268;
+    --rule:#C3D6C8; --deep:#2E7D6B; --deep-d:#1F5A4C; --gold:#C79319;
+    --gold-l:#F3E3B0; --clay:#B5651D; --forest-l:#DCEEE1;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:'Public Sans',system-ui,sans-serif;line-height:1.55}
+  h1,h2,h3{font-family:'Fraunces',serif;font-weight:600;margin:0}
+  .wrap{max-width:900px;margin:0 auto;padding:0 20px 70px}
+  .card{background:var(--card);border:1px solid var(--rule);border-radius:8px;padding:22px 24px;margin-bottom:20px}
+  .muted{color:var(--soft);font-size:.95rem}
+  .box{background:var(--paper);border:1px solid var(--rule);border-radius:6px;padding:18px 20px}
+  .unit-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:640px){.unit-grid{grid-template-columns:1fr}}
+  ol.steps{margin:8px 0 0;padding-left:22px} ol.steps li{margin-bottom:7px}
+  ul.mats{margin:6px 0 0;padding-left:20px} ul.mats li{margin-bottom:3px;font-size:.93rem}
+</style>
+<script src="./curriculum/subjects.js"></script>
+<script src="./curriculum/question-types.js"></script>
+<script src="./curriculum/science-y3-spine.js"></script>
+<script src="./curriculum/science-y5-spine.js"></script>
+<script src="./curriculum/science-lessons.js"></script>
+<script src="./curriculum/science-quiz.js"></script>
+</helmet>
+
+<div style="min-height:100vh;display:flex;flex-direction:column">
+  <div style="background:#22332C;color:var(--paper);padding:16px 24px 0">
+    <div style="max-width:900px;margin:0 auto;display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding-bottom:14px">
+      <div style="flex:1;min-width:180px">
+        <div style="font-family:'Fraunces',serif;font-weight:700;font-size:21px">Field Notes</div>
+        <div style="font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(244,247,243,.55);margin-top:2px">{{ headerLine }}</div>
+      </div>
+      <sc-for list="{{ gradeItems }}" as="g" hint-placeholder-count="2">
+        <button onClick="{{ g.onClick }}" style="{{ g.style }}">{{ g.label }}</button>
+      </sc-for>
+      <button onClick="{{ goPrevWeek }}" style="{{ navStyle }}">&lsaquo;</button>
+      <div style="font-family:'Fraunces',serif;font-size:13px;color:var(--gold-l);min-width:88px;text-align:center">{{ weekLabel }}</div>
+      <button onClick="{{ goNextWeek }}" style="{{ navStyle }}">&rsaquo;</button>
+      <a href="index.html" style="font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:rgba(244,247,243,.7);border:1px solid rgba(244,247,243,.25);border-radius:999px;padding:8px 13px;text-decoration:none">&larr; Mission Control</a>
+    </div>
+    <div style="max-width:900px;margin:0 auto;display:flex;gap:5px;flex-wrap:wrap">
+      <sc-for list="{{ navItems }}" as="n" hint-placeholder-count="5">
+        <button onClick="{{ n.onClick }}" style="{{ n.style }}">{{ n.label }}</button>
+      </sc-for>
+    </div>
+  </div>
+
+  <div class="wrap" style="padding-top:24px;flex:1">
+
+    <sc-if value="{{ isWeek }}" hint-placeholder-val="{{ true }}">
+      <div class="card">
+        <div style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)">{{ unitLine }}</div>
+        <h2 style="margin:4px 0 3px">{{ weekTitle }}</h2>
+        <p class="muted" style="margin-top:2px">{{ standardLine }}</p>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin:14px 0">
+          <sc-for list="{{ dayItems }}" as="d" hint-placeholder-count="2">
+            <button onClick="{{ d.onClick }}" style="{{ d.style }}">{{ d.label }}</button>
+          </sc-for>
+        </div>
+      </div>
+
+      <sc-if value="{{ isLab }}" hint-placeholder-val="{{ true }}">
+        <div class="card">
+          <div style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--deep)">Day A &middot; Investigate</div>
+          <h2 style="margin:4px 0 10px">{{ labQuestion }}</h2>
+          <sc-if value="{{ needsAdult }}" hint-placeholder-val="{{ false }}">
+            <div style="background:var(--gold-l);color:#7A5A0C;border-radius:8px;padding:11px 15px;margin-bottom:14px;font-size:.92rem">An adult should be with you for this one.</div>
+          </sc-if>
+          <div class="box">
+            <h3 style="font-size:1rem;margin-bottom:4px">What you need</h3>
+            <ul class="mats">
+              <sc-for list="{{ labMaterials }}" as="m" hint-placeholder-count="4">
+                <li>{{ m.text }}</li>
+              </sc-for>
+            </ul>
+            <h3 style="font-size:1rem;margin:16px 0 2px">What to do</h3>
+            <ol class="steps">
+              <sc-for list="{{ labSteps }}" as="s" hint-placeholder-count="4">
+                <li>{{ s.text }}</li>
+              </sc-for>
+            </ol>
+            <h3 style="font-size:1rem;margin:16px 0 2px">In your notebook</h3>
+            <p style="margin:0">{{ labNotebook }}</p>
+          </div>
+          <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap">
+            <button onClick="{{ labListen }}" style="{{ btnSecondary }}">Read this to me</button>
+            <button onClick="{{ goExplain }}" style="{{ btnPrimary }}">Go to Day B</button>
+          </div>
+          <p class="muted" style="margin-top:10px;font-size:.86rem">Day A is not graded. The notebook entry is the record.</p>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ isExplain }}" hint-placeholder-val="{{ false }}">
+        <div class="card">
+          <div style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--deep)">Day B &middot; Explain</div>
+          <h2 style="margin:4px 0 10px">{{ readTitle }}</h2>
+          <div class="box" style="font-size:1.02rem;line-height:1.7;max-width:66ch">{{ readText }}</div>
+          <div style="margin:14px 0"><button onClick="{{ readListen }}" style="{{ btnSecondary }}">Read this to me</button></div>
+          <div class="box" style="border-left:4px solid var(--clay)">
+            <h3 style="font-size:1rem;margin-bottom:4px">Write this in your notebook</h3>
+            <p style="margin:0">{{ claimPrompt }}</p>
+          </div>
+          <p class="muted" style="margin-top:9px;font-size:.86rem">This one is written by hand and read by a person. A computer cannot fairly judge whether your reasoning holds.</p>
+        </div>
+
+        <div class="card">
+          <h2>Check your understanding</h2>
+          <sc-if value="{{ hasCheck }}" hint-placeholder-val="{{ true }}">
+            <sc-if value="{{ qNotStarted }}" hint-placeholder-val="{{ true }}">
+              <div style="text-align:center;padding:16px"><button onClick="{{ qStart }}" style="{{ btnPrimary }}">Start the check</button></div>
+            </sc-if>
+            <sc-if value="{{ qActive }}" hint-placeholder-val="{{ false }}">
+              <div style="display:flex;justify-content:space-between;font-size:.88rem;color:var(--soft);margin-bottom:10px">
+                <span>{{ qProgress }}</span><span style="color:var(--deep);font-weight:600">{{ qScore }}</span>
+              </div>
+              <div class="box">
+                <div style="font-size:1.04rem;font-weight:600;margin-bottom:13px">{{ qPrompt }}</div>
+                <sc-for list="{{ qChoices }}" as="c" hint-placeholder-count="4">
+                  <button onClick="{{ c.onClick }}" style="{{ c.style }}">{{ c.text }}</button>
+                </sc-for>
+                <sc-if value="{{ qFbShow }}" hint-placeholder-val="{{ false }}"><div style="{{ qFbStyle }}">{{ qFb }}</div></sc-if>
+                <div style="margin-top:14px"><button onClick="{{ qNext }}" style="{{ qNextStyle }}">Next</button></div>
+              </div>
+            </sc-if>
+            <sc-if value="{{ qDone }}" hint-placeholder-val="{{ false }}">
+              <div style="text-align:center;padding:22px 10px">
+                <div style="font-family:'Fraunces',serif;font-size:2.1rem;color:var(--deep);font-weight:700">{{ qFinal }}</div>
+                <div class="muted">{{ qPct }}</div>
+                <button onClick="{{ qStart }}" style="{{ btnPrimary }}margin-top:12px">Try again</button>
+              </div>
+            </sc-if>
+          </sc-if>
+          <sc-if value="{{ noCheck }}" hint-placeholder-val="{{ false }}">
+            <div style="background:var(--gold-l);color:#7A5A0C;border-radius:8px;padding:13px 16px;font-size:.93rem">{{ noCheckNote }}</div>
+          </sc-if>
+        </div>
+      </sc-if>
+    </sc-if>
+
+    <sc-if value="{{ isMap }}" hint-placeholder-val="{{ false }}">
+      <div class="card">
+        <h2>{{ mapHeading }}</h2>
+        <p class="muted">{{ mapBlurb }}</p>
+      </div>
+      <div class="unit-grid">
+        <sc-for list="{{ unitCards }}" as="u" hint-placeholder-count="9">
+          <div onClick="{{ u.go }}" style="{{ u.style }}">
+            <div style="display:flex;align-items:baseline;gap:9px">
+              <div style="font-size:19px;color:{{ u.color }}">{{ u.badge }}</div>
+              <div style="font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--soft)">Unit {{ u.n }} &middot; wks {{ u.weeks }} &middot; {{ u.strand }}</div>
+            </div>
+            <h3 style="margin:5px 0 3px;font-size:1.06rem">{{ u.name }}</h3>
+            <div style="font-size:.86rem;color:var(--gold);font-style:italic;margin-bottom:5px">{{ u.code }}</div>
+            <div style="font-size:.9rem;color:var(--soft)">{{ u.bigQ }}</div>
+            <div style="margin-top:8px;font-size:.85rem;color:var(--soft)">Project: {{ u.project }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isKit }}" hint-placeholder-val="{{ false }}">
+      <div class="card">
+        <h2>What to gather, unit by unit</h2>
+        <p class="muted">Everything the Day A investigations call for, grouped so a unit can be prepared in one go. Weeks needing an adult in the room are flagged.</p>
+      </div>
+      <sc-for list="{{ kitUnits }}" as="k" hint-placeholder-count="9">
+        <div class="card">
+          <div style="font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--soft)">Unit {{ k.n }} &middot; weeks {{ k.weeks }}</div>
+          <h3 style="margin:3px 0 6px;font-size:1.05rem">{{ k.name }}</h3>
+          <ul class="mats">
+            <sc-for list="{{ k.materials }}" as="m" hint-placeholder-count="6">
+              <li>{{ m.text }}</li>
+            </sc-for>
+          </ul>
+          <div style="margin-top:9px;font-size:.88rem;color:var(--clay)">{{ k.supervision }}</div>
+        </div>
+      </sc-for>
+    </sc-if>
+
+    <sc-if value="{{ isParent }}" hint-placeholder-val="{{ false }}">
+      <div class="card">
+        <h2>{{ parentHeading }}</h2>
+        <p>Two lessons a week, 36 weeks, 72 lessons. Day A is a hands-on investigation and is not graded. Day B is a short reading, a claim written by hand, and where available a multiple-choice check.</p>
+        <p class="muted">{{ strandLine }}</p>
+        <p class="muted">{{ supervisionLine }}</p>
+      </div>
+      <div class="card">
+        <h2>Where the auto-graded checks stand</h2>
+        <div style="background:var(--gold-l);color:#7A5A0C;border-radius:8px;padding:13px 16px;font-size:.93rem">{{ coverageNote }}</div>
+        <p class="muted" style="margin-top:10px">The written claim runs every week regardless. It is the thing the Georgia practices standards actually ask for, and no multiple-choice item can stand in for it.</p>
+      </div>
+      <div class="card">
+        <h2>Standards covered</h2>
+        <sc-for list="{{ standards }}" as="s" hint-placeholder-count="10">
+          <div style="display:grid;grid-template-columns:92px 1fr;gap:12px;padding:8px 0;border-bottom:1px solid var(--rule)">
+            <div style="font-family:'Fraunces',serif;font-size:.85rem;color:var(--deep-d)">{{ s.tag }}</div>
+            <div><div style="font-size:.93rem">{{ s.text }}</div><div class="muted" style="font-size:.82rem">Weeks: {{ s.weeks }}</div></div>
+          </div>
+        </sc-for>
+      </div>
+      <sc-if value="{{ hasNotYet }}" hint-placeholder-val="{{ false }}">
+        <div class="card">
+          <h2>Deliberately not taught this year</h2>
+          <p class="muted">Georgia holds these back for later grades. Listed so nobody teaches ahead of the standard by accident.</p>
+          <ul class="mats">
+            <sc-for list="{{ notYet }}" as="n" hint-placeholder-count="4">
+              <li>{{ n.text }}</li>
+            </sc-for>
+          </ul>
+        </div>
+      </sc-if>
+    </sc-if>
+
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = {
+    view:"week",
+    grade:(function(){ try{ return localStorage.getItem("sci.grade")==="y5"?"y5":"y3"; }catch(e){ return "y3"; } })(),
+    week:(function(){ try{ return Math.min(36,Math.max(1,parseInt(localStorage.getItem("sci.week")||"1",10)||1)); }catch(e){ return 1; } })(),
+    day:"A",
+    q:null
+  };
+
+  get S(){ return this.state.grade==="y5" ? window.__CURR.SCI_Y5 : window.__CURR.SCI_Y3; }
+  get L(){ return window.__CURR.SCI_LESSONS; }
+  get Q(){ return window.__CURR.SCI_QUIZ; }
+
+  goto=(v)=>{ this.setState({view:v}); window.scrollTo(0,0); };
+  setGrade=(g)=>{ try{ localStorage.setItem("sci.grade",g); localStorage.setItem("sci.week","1"); }catch(e){}
+    this.setState({grade:g, week:1, day:"A", q:null}); window.scrollTo(0,0); };
+  setWeek=(w)=>{ const week=Math.min(36,Math.max(1,w));
+    try{ localStorage.setItem("sci.week",String(week)); }catch(e){}
+    this.setState({week:week, day:"A", q:null}); window.scrollTo(0,0); };
+  setDay=(d)=>{ this.setState({day:d, q:null}); window.scrollTo(0,0); };
+
+  speak(t){ if(!window.speechSynthesis) return; window.speechSynthesis.cancel();
+    const u=new SpeechSynthesisUtterance(t); u.rate=0.95; window.speechSynthesis.speak(u); }
+  shuffle(a){ a=[...a]; for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); const t=a[i]; a[i]=a[j]; a[j]=t; } return a; }
+  prep(items){ return this.shuffle(items).map(it=>({...it, a: it.options[it.a], options: this.shuffle(it.options)})); }
+
+  btn(kind,on){
+    if(!on) return "font-family:'Public Sans',sans-serif;font-weight:600;font-size:.89rem;background:#BFCFC4;color:#fff;border:none;border-radius:6px;padding:9px 17px;cursor:default";
+    return kind==="primary"
+      ? "font-family:'Public Sans',sans-serif;font-weight:600;font-size:.89rem;background:var(--deep);color:#fff;border:none;border-radius:6px;padding:9px 17px;cursor:pointer"
+      : "font-family:'Public Sans',sans-serif;font-weight:600;font-size:.89rem;background:transparent;color:var(--deep);border:1px solid var(--deep);border-radius:6px;padding:9px 17px;cursor:pointer";
+  }
+  pill(a){ return "font-family:'Public Sans',sans-serif;font-weight:600;font-size:.85rem;padding:7px 14px;border-radius:999px;cursor:pointer;border:1px solid "+(a?"var(--deep)":"var(--rule)")+";background:"+(a?"var(--deep)":"transparent")+";color:"+(a?"#fff":"var(--ink)"); }
+  pillDark(a){ return "font-family:'Public Sans',sans-serif;font-weight:600;font-size:.78rem;padding:6px 12px;border-radius:999px;cursor:pointer;border:1px solid "+(a?"var(--gold)":"rgba(244,247,243,.3)")+";background:"+(a?"var(--gold)":"transparent")+";color:"+(a?"#22332C":"rgba(244,247,243,.85)"); }
+  navBtn(a){ return "font-family:'Fraunces',serif;font-weight:600;font-size:.88rem;padding:9px 14px;border-radius:8px 8px 0 0;cursor:pointer;border:none;background:"+(a?"var(--paper)":"#33473E")+";color:"+(a?"var(--deep-d)":"#C9D8CE"); }
+  choice(s){
+    const bg=s==="correct"?"var(--forest-l)":s==="incorrect"?"#F6DED6":"#fff";
+    const bd=s==="correct"?"var(--deep)":s==="incorrect"?"var(--clay)":"var(--rule)";
+    return "display:block;width:100%;text-align:left;background:"+bg+";border:1px solid "+bd+";border-radius:6px;padding:10px 13px;font-family:'Public Sans',sans-serif;font-size:.95rem;cursor:pointer;color:var(--ink);margin-bottom:7px";
+  }
+  fbStyle(ok){ return "margin-top:10px;padding:10px 12px;border-radius:6px;font-size:.9rem;"+(ok?"background:var(--forest-l);color:#1F5A4C":"background:#F6DED6;color:#8A3E14"); }
+
+  qStart=()=>{ const set=this.Q.setFor(this.state.grade, this.state.week);
+    this.setState({q:{items:this.prep(set.items), idx:0, score:0, answered:false, chosen:null, ok:null}}); };
+  qAnswer=(text)=>{ const q=this.state.q; if(!q||q.answered) return;
+    const ok=window.QTypes.grade(q.items[q.idx], text);
+    this.setState({q:{...q, answered:true, chosen:text, ok:ok, score:q.score+(ok?1:0)}}); };
+  qNext=()=>{ const q=this.state.q; if(!q||!q.answered) return;
+    this.setState({q:{...q, idx:q.idx+1, answered:false, chosen:null, ok:null}}); };
+
+  renderVals(){
+    const st=this.state, S=this.S, L=this.L, Q=this.Q, self=this;
+    const wk=S.WEEKS.find(w=>w.n===st.week) || S.WEEKS[0];
+    const unit=S.UNITS[wk.unit-1];
+    const A=L.lessonFor(st.grade, st.week, "A");
+    const B=L.lessonFor(st.grade, st.week, "B");
+    const has=Q.hasCheck(st.grade, st.week);
+    const cov=Q.coverage(st.grade);
+    const sw=S.strandWeeks();
+
+    const navDefs=[["week","This Week"],["map","The Year"],["kit","Materials"],["parent","For Parents"]];
+    const q=st.q;
+    let qv={qNotStarted:!q, qActive:false, qDone:false, qProgress:"", qScore:"", qPrompt:"",
+            qChoices:[], qFbShow:false, qFb:"", qFbStyle:"", qNext:function(){},
+            qNextStyle:this.btn("primary",false), qFinal:"", qPct:"",
+            qStart:this.qStart};
+    if(q){
+      if(q.idx>=q.items.length){
+        const pct=Math.round((q.score/q.items.length)*100);
+        qv.qNotStarted=false; qv.qDone=true;
+        qv.qFinal=q.score+" / "+q.items.length; qv.qPct=pct+"% correct";
+      } else {
+        const it=q.items[q.idx];
+        qv.qNotStarted=false; qv.qActive=true;
+        qv.qProgress="Question "+(q.idx+1)+" of "+q.items.length;
+        qv.qScore="Score: "+q.score+"/"+q.idx;
+        qv.qPrompt=it.q;
+        qv.qChoices=it.options.map(function(o){
+          let s="default";
+          if(q.answered){ if(o===it.a) s="correct"; else if(o===q.chosen) s="incorrect"; }
+          return {text:o, style:self.choice(s), onClick: q.answered?function(){}:function(){ self.qAnswer(o); }};
+        });
+        qv.qFbShow=q.answered;
+        qv.qFb=q.answered ? ((q.ok?"Correct":"Not quite")+(it.hint?" \u2014 "+it.hint:".")) : "";
+        qv.qFbStyle=q.answered?this.fbStyle(q.ok):"";
+        qv.qNext=this.qNext;
+        qv.qNextStyle=this.btn("primary", q.answered);
+      }
+    }
+
+    return Object.assign({
+      headerLine:(S.GRADE?S.GRADE.label:"")+" \u00b7 "+(S.GRADE?S.GRADE.set:"")+" \u00b7 two lessons a week",
+      weekLabel:"Week "+st.week+" of 36",
+      gradeItems:[["y3",(window.__CURR.SCI_Y3.GRADE||{}).label||"3rd"],["y5",(window.__CURR.SCI_Y5.GRADE||{}).label||"5th"]]
+        .map(function(g){ return {label:g[1].replace(" Science",""), onClick:function(){ self.setGrade(g[0]); },
+          style:self.pillDark(st.grade===g[0])}; }),
+      navItems:navDefs.map(function(d){ return {label:d[1], onClick:function(){ self.goto(d[0]); }, style:self.navBtn(st.view===d[0])}; }),
+      navStyle:"background:rgba(244,247,243,.1);color:var(--paper);border:1px solid rgba(244,247,243,.25);border-radius:6px;width:29px;height:29px;font-size:15px;cursor:pointer",
+      goPrevWeek:function(){ self.setWeek(st.week-1); },
+      goNextWeek:function(){ self.setWeek(st.week+1); },
+      btnPrimary:this.btn("primary",true), btnSecondary:this.btn("secondary",true),
+
+      isWeek:st.view==="week", isMap:st.view==="map", isKit:st.view==="kit", isParent:st.view==="parent",
+      unitLine:"Unit "+unit.n+" \u00b7 "+unit.name+" \u00b7 "+unit.strand+" science",
+      weekTitle:wk.title,
+      standardLine:"Standard "+wk.standard+" \u00b7 "+unit.goal,
+      dayItems:[["A","Day A \u00b7 Investigate"],["B","Day B \u00b7 Explain"]].map(function(d){
+        return {label:d[1], onClick:function(){ self.setDay(d[0]); }, style:self.pill(st.day===d[0])}; }),
+      isLab:st.day==="A", isExplain:st.day==="B",
+
+      labQuestion:A.q||"", needsAdult:!!A.supervision,
+      labMaterials:(A.materials||[]).map(function(m){ return {text:m}; }),
+      labSteps:(A.steps||[]).map(function(s){ return {text:s}; }),
+      labNotebook:A.notebook||"",
+      labListen:function(){ self.speak((A.q||"")+". "+(A.steps||[]).join(". ")); },
+      goExplain:function(){ self.setDay("B"); },
+
+      readTitle:wk.readFocus||wk.title,
+      readText:B.read||"",
+      readListen:function(){ self.speak(B.read||""); },
+      claimPrompt:B.claim||"",
+
+      hasCheck:has, noCheck:!has,
+      noCheckNote:"No multiple-choice check is written for this week yet \u2014 "+cov.count+
+        " of 36 weeks have one so far. The written claim above is this week's work, and it is the part the standards actually ask for.",
+
+      mapHeading:(S.GRADE?S.GRADE.label:"")+" \u2014 nine units, 36 weeks, 72 lessons",
+      mapBlurb:"Weighted to the Georgia standards rather than split evenly. Tap a unit to jump to its first week.",
+      unitCards:S.UNITS.map(function(u){
+        const first=S.WEEKS.filter(function(w){ return w.unit===u.n; })[0];
+        return {n:u.n, name:u.name, weeks:u.weeks, strand:u.strand, code:u.code,
+          bigQ:u.bigQ, project:u.project, badge:u.badge, color:u.color,
+          style:"background:var(--card);border:1px solid "+(unit.n===u.n?"var(--deep)":"var(--rule)")+";border-radius:8px;padding:15px 17px;cursor:pointer",
+          go:function(){ self.setWeek(first?first.n:1); self.goto("week"); }};
+      }),
+
+      kitUnits:S.UNITS.map(function(u){
+        const sup=L.supervisedWeeks(st.grade, u.n);
+        return {n:u.n, name:u.name, weeks:u.weeks,
+          materials:L.materialsForUnit(st.grade, u.n).map(function(m){ return {text:m}; }),
+          supervision: sup.length ? ("An adult should be present in week"+(sup.length===1?" ":"s ")+sup.join(", ")+".")
+                                  : "No adult supervision flagged for this unit."};
+      }),
+
+      parentHeading:(S.GRADE?S.GRADE.label:"")+" \u2014 how the year works",
+      strandLine:"Strand balance: Earth "+sw.Earth+" weeks, life "+sw.Life+" weeks, physical "+sw.Physical+" weeks.",
+      supervisionLine:"Day B your child can do alone. Day A is a real investigation with real materials \u2014 "+
+        S.WEEKS.filter(function(w){ return L.lessonFor(st.grade,w.n,"A").supervision; }).length+
+        " of the 36 labs are flagged as needing an adult in the room.",
+      coverageNote: cov.count===36
+        ? "All 36 weeks have an auto-graded check."
+        : ("Auto-graded checks are written for "+cov.count+" of 36 weeks ("+cov.items+
+           " questions). The remaining weeks show the written claim only, and say so on the page rather than showing an empty drill."),
+      standards:S.STANDARDS,
+      hasNotYet:!!(S.NOT_YET && S.NOT_YET.length),
+      notYet:(S.NOT_YET||[]).map(function(t){ return {text:t}; })
+    }, qv);
+  }
+}
+</script>
+</body>
+</html>

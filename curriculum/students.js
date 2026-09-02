@@ -22,7 +22,7 @@
 
   const STUDENTS = {
     y3: {name:"BROCK", grade:"3rd Grade", short:"3rd", colour:"#FF9F1C"},
-    y5: {name:"HAND",  grade:"5th Grade", short:"5th", colour:"#38BDF8"}
+    y5: {name:"HANK",  grade:"5th Grade", short:"5th", colour:"#38BDF8"}
   };
 
   /* "BROCK · 3rd" — for a chip or tab where space is tight. */

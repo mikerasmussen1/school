@@ -290,12 +290,31 @@
   function allStaples(){
     if(_staplesCache) return _staplesCache;
     const seen = {}, out = [];
+    /* This is a "check the cupboard" reference, so it should read as a short
+     * scannable list. Without collapsing, it printed "Balloon, Balloons" and
+     * four separate kinds of paper, which makes it look careless and long.
+     * Singular/plural are merged and the shorter, more generic wording wins:
+     * you are checking whether you own paper, not which lab wants which paper. */
+    function key(name){
+      return String(name).toLowerCase()
+        .replace(/^\d+\s+/, "")
+        .replace(/^(a|an|the|two|three|four|five|six|ten|twenty)\s+/, "")
+        .replace(/\s+/g, " ")
+        .replace(/e?s$/, "")
+        .trim();
+    }
     byMonth().forEach(function(m){
       m.probablyHave.forEach(function(i){
-        const k = i.name.toLowerCase();
-        if(seen[k]) return;
-        seen[k] = 1;
-        out.push({name:i.name, month:m.label, monthShort:m.label.split(" ")[0]});
+        const k = key(i.name);
+        if(!k) return;
+        if(seen[k]){
+          // keep whichever wording is shorter and therefore more general
+          if(i.name.length < seen[k].name.length) seen[k].name = i.name;
+          return;
+        }
+        const entry = {name:i.name, month:m.label, monthShort:m.label.split(" ")[0]};
+        seen[k] = entry;
+        out.push(entry);
       });
     });
     return (_staplesCache = out.sort(function(a,b){ return a.name.localeCompare(b.name); }));

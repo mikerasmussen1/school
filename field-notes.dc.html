@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=56d0121"></script>
+<script src="./support.js?v=b7aba84"></script>
 </head>
 <body>
 <x-dc>
@@ -29,13 +29,15 @@
   ol.steps{margin:8px 0 0;padding-left:22px} ol.steps li{margin-bottom:7px}
   ul.mats{margin:6px 0 0;padding-left:20px} ul.mats li{margin-bottom:3px;font-size:.93rem}
 </style>
-<script src="./curriculum/students.js?v=56d0121"></script>
-<script src="./curriculum/subjects.js?v=56d0121"></script>
-<script src="./curriculum/question-types.js?v=56d0121"></script>
-<script src="./curriculum/science-y3-spine.js?v=56d0121"></script>
-<script src="./curriculum/science-y5-spine.js?v=56d0121"></script>
-<script src="./curriculum/science-lessons.js?v=56d0121"></script>
-<script src="./curriculum/science-quiz.js?v=56d0121"></script>
+<script src="./curriculum/students.js?v=b7aba84"></script>
+<script src="./curriculum/subjects.js?v=b7aba84"></script>
+<script src="./curriculum/question-types.js?v=b7aba84"></script>
+<script src="./curriculum/science-y3-spine.js?v=b7aba84"></script>
+<script src="./curriculum/science-y5-spine.js?v=b7aba84"></script>
+<script src="./curriculum/science-lessons.js?v=b7aba84"></script>
+<script src="./curriculum/science-quiz.js?v=b7aba84"></script>
+<script src="./curriculum/la-calendar.js?v=b7aba84"></script>
+<script src="./curriculum/science-shopping.js?v=b7aba84"></script>
 </helmet>
 
 <div style="min-height:100vh;display:flex;flex-direction:column">
@@ -175,9 +177,52 @@
 
     <sc-if value="{{ isKit }}" hint-placeholder-val="{{ false }}">
       <div class="card">
-        <h2>What to gather, unit by unit</h2>
-        <p class="muted">Everything the Day A investigations call for, grouped so a unit can be prepared in one go. Weeks needing an adult in the room are flagged.</p>
+        <h2>What to gather</h2>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin:12px 0">
+          <sc-for list="{{ kitModes }}" as="k" hint-placeholder-count="2">
+            <button onClick="{{ k.onClick }}" style="{{ k.style }}">{{ k.label }}</button>
+          </sc-for>
+        </div>
+        <p class="muted">{{ kitBlurb }}</p>
       </div>
+
+      <sc-if value="{{ isByMonth }}" hint-placeholder-val="{{ false }}">
+        <sc-for list="{{ shopMonths }}" as="m" hint-placeholder-count="9">
+          <div class="card">
+            <div style="display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap">
+              <h3 style="font-size:1.12rem">{{ m.label }}</h3>
+              <div class="muted" style="font-size:.85rem">{{ m.weeksLine }}</div>
+            </div>
+            <sc-if value="{{ m.hasBuy }}" hint-placeholder-val="{{ true }}">
+              <h3 style="font-size:.95rem;margin:12px 0 4px;color:var(--clay)">Buy this month &mdash; {{ m.buyCount }}</h3>
+              <sc-for list="{{ m.buy }}" as="b" hint-placeholder-count="8">
+                <div style="display:flex;gap:9px;padding:4px 0;font-size:.95rem">
+                  <div style="color:var(--clay)">&#9633;</div>
+                  <div style="flex:1">{{ b.name }}<span class="muted" style="font-size:.83rem"> {{ b.note }}</span></div>
+                </div>
+              </sc-for>
+            </sc-if>
+            <sc-if value="{{ m.noBuy }}" hint-placeholder-val="{{ false }}">
+              <div class="muted" style="margin-top:10px">Nothing to buy this month.</div>
+            </sc-if>
+            <sc-if value="{{ m.hasHave }}" hint-placeholder-val="{{ true }}">
+              <h3 style="font-size:.95rem;margin:14px 0 4px;color:var(--soft)">You probably have these</h3>
+              <div class="muted" style="font-size:.9rem">{{ m.haveLine }}</div>
+            </sc-if>
+          </div>
+        </sc-for>
+        <div class="card">
+          <h3 style="font-size:1.05rem;margin-bottom:5px">Worth ordering ahead</h3>
+          <p class="muted">These are the items least likely to be in a local shop. Ordering them with the September shop avoids a scramble later.</p>
+          <ul class="mats">
+            <sc-for list="{{ orderAhead }}" as="o" hint-placeholder-count="6">
+              <li>{{ o.text }}</li>
+            </sc-for>
+          </ul>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ isByUnit }}" hint-placeholder-val="{{ true }}">
       <sc-for list="{{ kitUnits }}" as="k" hint-placeholder-count="9">
         <div class="card">
           <div style="font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--soft)">Unit {{ k.n }} &middot; weeks {{ k.weeks }}</div>
@@ -190,6 +235,7 @@
           <div style="margin-top:9px;font-size:.88rem;color:var(--clay)">{{ k.supervision }}</div>
         </div>
       </sc-for>
+      </sc-if>
     </sc-if>
 
     <sc-if value="{{ isParent }}" hint-placeholder-val="{{ false }}">
@@ -246,6 +292,7 @@ class Component extends DCLogic {
     })(),
     week:(function(){ try{ return Math.min(36,Math.max(1,parseInt(localStorage.getItem("sci.week")||"1",10)||1)); }catch(e){ return 1; } })(),
     day:"A",
+    kitMode:"month",   // the shopping list is what a parent opens this tab for
     q:null
   };
 
@@ -382,6 +429,36 @@ class Component extends DCLogic {
           style:"background:var(--card);border:1px solid "+(unit.n===u.n?"var(--deep)":"var(--rule)")+";border-radius:8px;padding:15px 17px;cursor:pointer",
           go:function(){ self.setWeek(first?first.n:1); self.goto("week"); }};
       }),
+
+      // --- Materials tab: one shop per month, or the by-unit reference ---
+      kitModes:[["month","By month (shopping list)"],["unit","By unit"]].map(function(k){
+        return {label:k[1], onClick:function(){ self.setState({kitMode:k[0]}); },
+                style:self.pill(st.kitMode===k[0])}; }),
+      isByMonth: st.kitMode==="month",
+      isByUnit:  st.kitMode!=="month",
+      kitBlurb: st.kitMode==="month"
+        ? "One shop a month, both boys together. Anything already bought is not listed again \u2014 reusable items show the later weeks they are needed so nothing gets thrown out early."
+        : "Everything the Day A investigations call for, grouped so a whole unit can be prepared in one go. Weeks needing an adult are flagged.",
+      shopMonths:(function(){
+        const SH=window.__CURR.SCI_SHOPPING;
+        if(!SH) return [];
+        return SH.byMonth().map(function(m){
+          return {
+            label: m.label + (m.mergedFrom ? (" \u00b7 includes " + m.mergedFrom) : ""),
+            weeksLine: "weeks " + m.weeks.join(", "),
+            buyCount: m.buy.length + " item" + (m.buy.length===1?"":"s"),
+            hasBuy: m.buy.length>0, noBuy: m.buy.length===0,
+            buy: m.buy.map(function(i){
+              const who = i.who.length===2 ? "both boys" : i.who[0];
+              const reuse = i.alsoWeeks.length ? (", used again wk "+i.alsoWeeks.join(", ")) : "";
+              return {name:i.name, note:"("+who+", wk "+i.weeks.join(", ")+reuse+")"};
+            }),
+            hasHave: m.probablyHave.length>0,
+            haveLine: m.probablyHave.map(function(i){ return i.name; }).join(", ")
+          };
+        });
+      })(),
+      orderAhead:((window.__CURR.SCI_SHOPPING||{}).ORDER_AHEAD||[]).map(function(t){ return {text:t}; }),
 
       kitUnits:S.UNITS.map(function(u){
         const sup=L.supervisedWeeks(st.grade, u.n);

@@ -1,9 +1,16 @@
 /* ============================================================================
- * WORD VOYAGERS — YEAR ONE SPINE (36 weeks · 180 days)
+ * WORD VOYAGERS — 3RD GRADE (36 weeks · 180 days)
  * ----------------------------------------------------------------------------
  * Nine unit studies, four weeks each. Every unit carries a Big Question, a
  * virtue it is built around, and a project; every week names the one language
  * skill it drills and the standard it answers to.
+ *
+ * END-OF-YEAR BENCHMARKS this course is built to hit:
+ *   - Independent reading in the Lexile 420–820 range (guided-reading P–R)
+ *   - Fluent oral reading of grade-level text
+ *   - A coherent multi-paragraph piece with introduction, supporting details
+ *     and a conclusion
+ * These are listed in BENCHMARKS below and shown on the For Parents tab.
  *
  * This file is structure only — no questions, no passages. Content lives in:
  *   la-y1-words.js     36 weekly spelling lists (pattern-grouped)
@@ -200,6 +207,14 @@
     {tag:"RL/RI.3.10", text:"Read and comprehend at the high end of the 2–3 band (Lexile ~420–820).", weeks:"Monday every week"}
   ];
 
+  const GRADE = {label:"3rd Grade", short:"3rd", lexile:"420\u2013820", guided:"P\u2013R"};
+
+  const BENCHMARKS = [
+    "Independent reading of texts in the Lexile 420\u2013820 range (guided-reading levels around P\u2013R).",
+    "Fluent oral reading of grade-level text with appropriate rate and expression.",
+    "A coherent multi-paragraph piece with an introduction, supporting details and a conclusion."
+  ];
+
   window.__CURR = window.__CURR || {};
-  window.__CURR.LA_Y1 = Object.assign(window.__CURR.LA_Y1||{}, {UNITS, WEEKS, STANDARDS, unitOf, weeksOf});
+  window.__CURR.LA_Y1 = Object.assign(window.__CURR.LA_Y1||{}, {UNITS, WEEKS, STANDARDS, unitOf, weeksOf, GRADE, BENCHMARKS});
 })();

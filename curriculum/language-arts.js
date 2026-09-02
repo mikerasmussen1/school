@@ -3,8 +3,13 @@
  * ----------------------------------------------------------------------------
  * This file only puts the subject on the landing page. Two full courses sit
  * behind it, each 36 weeks / 180 days in nine unit studies:
- *   Year One  (3rd grade) — la-y1-*.js, la-books.js
- *   Year Two  (5th grade) — la-y2-*.js, la-books-y2.js
+ *   3rd Grade — la-y1-*.js, la-books.js
+ *   5th Grade — la-y2-*.js, la-books-y2.js
+ *
+ * The y1/y2 file prefixes and state keys are internal and stay as they are —
+ * renaming them would break every stored progress key ("y1:14"). What the
+ * child and parent see is the grade, which each spine declares in its GRADE
+ * export; the page reads that rather than hardcoding a label.
  * Both expose the identical interface (UNITS, WEEKS, STANDARDS, unitOf,
  * passageFor, grammarSetFor, spellingSetFor, taskFor, READ_ALOUDS,
  * INDEPENDENT) so the page renders either from one set of views.
@@ -30,11 +35,11 @@
   window.Subjects.register({
     id: "la",
     name: "Word Voyagers",
-    tagline: "Reading \u00b7 Writing \u00b7 Words",
+    tagline: "3rd \u0026 5th Grade \u00b7 Reading \u00b7 Writing \u00b7 Words",
     color: "#A78BFA",
     glyph: "A",
     gradient: "linear-gradient(150deg,#A78BFA,#60A5FA)",
-    blurb: "Two full years, 3rd and 5th grade. Each is 36 weeks in nine unit studies: reading, grammar and spelling drills that grade themselves, a handwritten page each week graded from a photo, and one speaking task done out loud.",
+    blurb: "3rd Grade and 5th Grade, each 36 weeks in nine unit studies. Reading, grammar and spelling drills that grade themselves, a handwritten page each week graded from a photo, and one speaking task done out loud.",
     status: "live",
     order: 20,
     open: {href:"word-voyagers.dc.html"}

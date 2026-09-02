@@ -1,7 +1,12 @@
 /* ============================================================================
  * FIELD NOTES — LESSONS, both grades
  * ----------------------------------------------------------------------------
- * 72 lessons per grade, 144 in all. Each week has two:
+ * 36 lessons per grade, 72 in all — ONE a week, in three parts.
+ *
+ * The data is still keyed `a` and `b` because that is what the two halves of
+ * a week's work are, and rewriting 144 lesson objects to flatten them would
+ * risk the content for no gain. What changed is presentation: both halves are
+ * now served together as one weekly lesson.
  *
  *   a  INVESTIGATE — question, materials, numbered steps, notebook entry.
  *      Not graded. `supervision:true` means an adult should be present, and
@@ -14,11 +19,12 @@
  * WHY THE READING IS SHORT. Georgia's practices standards ask children to
  * argue from evidence, keep unaltered records, and separate observation from
  * guess. Those are habits, not facts, and they are built by doing the
- * investigation and writing the claim — not by reading more text. So Day B's
- * reading is deliberately a few sentences that name the idea the child already
- * met with their hands on Day A.
+ * investigation and writing the claim — not by reading more text. So the
+ * reading is deliberately a few sentences naming the idea the child has just
+ * met with their hands. That matters more now the two run back to back: a
+ * long reading straight after a lab is where attention goes.
  *
- * THE CLAIM PROMPT IS THE POINT. Every Day B ends with a claim-evidence
+ * THE CLAIM PROMPT IS THE POINT. Every lesson ends with a claim-evidence
  * sentence, because that is the exact form the standards keep asking for and
  * the exact thing a multiple-choice question cannot test. It is written by
  * hand in the notebook and read by a person.
@@ -535,6 +541,24 @@
         claim:"State all three variables with your evidence for each, and name the one you tested most carefully."}}
   };
 
+  /* A whole week in one object: the investigation, the reading and the claim.
+   * This is what the page renders now that science runs once a week. */
+  function weekFor(grade, week){
+    const lab = lessonFor(grade, week, "A");
+    const exp = lessonFor(grade, week, "B");
+    const spine = window.__CURR[grade==="y5" ? "SCI_Y5" : "SCI_Y3"];
+    const meta = spine ? spine.WEEKS.find(w=>w.n===week) : null;
+    return {
+      id: "sci-"+grade+"-w"+week,
+      week: week,
+      title: meta ? meta.title : ("Week "+week),
+      standard: meta ? meta.standard : "",
+      supervision: !!lab.supervision,
+      lab: lab,
+      explain: exp
+    };
+  }
+
   function lessonFor(grade, week, day){
     const table = grade==="y5" ? Y5 : Y3;
     const wk = table[week] || table[1];
@@ -578,5 +602,5 @@
   }
 
   window.__CURR = window.__CURR || {};
-  window.__CURR.SCI_LESSONS = {Y3, Y5, lessonFor, materialsForUnit, supervisedWeeks};
+  window.__CURR.SCI_LESSONS = {Y3, Y5, lessonFor, weekFor, materialsForUnit, supervisedWeeks};
 })();

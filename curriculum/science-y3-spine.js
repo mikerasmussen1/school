@@ -1,12 +1,23 @@
 /* ============================================================================
  * FIELD NOTES — 3RD GRADE SCIENCE, Georgia Standards of Excellence
  * ----------------------------------------------------------------------------
- * 36 weeks, TWO lessons a week, 72 lessons total.
+ * 36 weeks, ONE lesson a week, 36 lessons total.
  *
- *   Day A — Investigate.  Hands-on. A question, a procedure, a notebook entry.
- *                         Nothing is graded on Day A.
- *   Day B — Explain.      Read, write one claim with its evidence, then a
- *                         short auto-graded check.
+ * Each week is a single sitting in three parts:
+ *   1 INVESTIGATE  hands-on. A question, a procedure, a notebook entry.
+ *   2 EXPLAIN      a short reading, then one claim written with its evidence.
+ *   3 CHECK        a few auto-graded questions, where they exist.
+ *
+ * WHAT CHANGED AND WHAT DID NOT. This course used to run twice a week. Going
+ * to once a week merged the two days rather than deleting one: every lab,
+ * every reading, every claim prompt and every standard is still here. What
+ * changed is that they now happen in one sitting instead of two.
+ *
+ * That is a real trade and worth saying plainly: the weekly session is now
+ * roughly twice as long as either old day. A lab, a reading and a written
+ * claim in one go is a substantial block for a third grader especially. If
+ * that proves too long, the honest fix is to cut content rather than to
+ * pretend it fits — say so and units can be shortened deliberately.
  *
  * HOW THE YEAR IS WEIGHTED. Georgia's Grade 3 content is fairly even across
  * Earth, physical and life — but that is even across STANDARDS, not across
@@ -39,10 +50,12 @@
  * invite it, the notebook prompt asks what the evidence shows and leaves the
  * larger question to you.
  *
- * A CONSTRAINT TO BE HONEST ABOUT. Day B a child can do alone. Day A is a
- * real investigation with real materials, and an adult should be nearby —
- * more so at this age than in fifth grade. Every lesson lists its materials
- * and flags supervision, so a week can be planned rather than discovered.
+ * A CONSTRAINT TO BE HONEST ABOUT. The reading and the check a child can do
+ * alone. The investigation is real, with real materials, and an adult should
+ * be nearby — more so at this age than in fifth grade. Every lesson lists its
+ * materials and flags supervision, so a week can be planned rather than
+ * discovered. Merging the days means that adult is now needed for part of
+ * every single science session rather than for one of two.
  * ==========================================================================*/
 (function(){
 
@@ -111,7 +124,7 @@
      project:"A two-week temperature chart comparing four surfaces in sun and shade."}
   ];
 
-  /* [week, unit, title, standard, Day A lab, Day B reading] */
+  /* [week, unit, title, standard, investigation focus, reading focus] */
   const W = [
     [1,1,"Colour and Texture","S3E1.a","Sorting eight rocks by eye and touch","Properties you can see"],
     [2,1,"Lustre","S3E1.a","Shiny or dull, wet and dry","How a rock catches light"],
@@ -151,13 +164,12 @@
     [36,9,"Proving It With Data","S3P1.c","Chart two weeks of readings","What the year's numbers show"]
   ];
 
-  const DAYS = ["A","B"];
-  const DAY_NAME = {A:"Investigate", B:"Explain"};
+  const DAYS = ["W"];
+  const DAY_NAME = {W:"Science"};
 
   const WEEKS = W.map(r=>({
     n:r[0], unit:r[1], title:r[2], standard:r[3], labFocus:r[4], readFocus:r[5],
-    days:[{day:"A", kind:"lab",     label:"Investigate"},
-          {day:"B", kind:"explain", label:"Explain"}]
+    days:[{day:"W", kind:"weekly", label:"Science"}]
   }));
 
   const unitOf = wk => UNITS[(WEEKS.find(w=>w.n===wk)||{unit:1}).unit - 1];

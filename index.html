@@ -8,38 +8,38 @@
   "https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js":"./vendor/react-dom.production.min.js",
   "https://unpkg.com/@babel/standalone@7.29.0/babel.min.js":"./vendor/babel.min.js"
 };</script>
-<script src="./support.js?v=41248a4"></script>
-<script src="./curriculum/students.js?v=41248a4"></script>
-<script src="./curriculum/subjects.js?v=41248a4"></script>
-<script src="./curriculum/question-types.js?v=41248a4"></script>
-<script src="./curriculum/qbank.js?v=41248a4"></script>
-<script src="./curriculum/lessons.js?v=41248a4"></script>
-<script src="./curriculum/tutor.js?v=41248a4"></script>
-<script src="./curriculum/shared.js?v=41248a4"></script>
-<script src="./curriculum/math-y1.js?v=41248a4"></script>
-<script src="./curriculum/math-y2.js?v=41248a4"></script>
-<script src="./curriculum/extra-banks.js?v=41248a4"></script>
-<script src="./curriculum/math-sequence.js?v=41248a4"></script>
-<script src="./curriculum/registry.js?v=41248a4"></script>
-<script src="./curriculum/la-y1-spine.js?v=41248a4"></script>
-<script src="./curriculum/la-y1-words.js?v=41248a4"></script>
-<script src="./curriculum/la-y1-grammar.js?v=41248a4"></script>
-<script src="./curriculum/la-y1-reading.js?v=41248a4"></script>
-<script src="./curriculum/la-y1-tasks.js?v=41248a4"></script>
-<script src="./curriculum/la-books.js?v=41248a4"></script>
-<script src="./curriculum/la-y2-spine.js?v=41248a4"></script>
-<script src="./curriculum/la-y2-words.js?v=41248a4"></script>
-<script src="./curriculum/la-y2-grammar.js?v=41248a4"></script>
-<script src="./curriculum/la-y2-reading.js?v=41248a4"></script>
-<script src="./curriculum/la-y2-tasks.js?v=41248a4"></script>
-<script src="./curriculum/la-books-y2.js?v=41248a4"></script>
-<script src="./curriculum/science-y3-spine.js?v=41248a4"></script>
-<script src="./curriculum/science-y5-spine.js?v=41248a4"></script>
-<script src="./curriculum/science-lessons.js?v=41248a4"></script>
-<script src="./curriculum/science-quiz.js?v=41248a4"></script>
-<script src="./curriculum/science.js?v=41248a4"></script>
-<script src="./curriculum/language-arts.js?v=41248a4"></script>
-<script src="./curriculum/japan-unit.js?v=41248a4"></script>
+<script src="./support.js?v=5d539c9"></script>
+<script src="./curriculum/students.js?v=5d539c9"></script>
+<script src="./curriculum/subjects.js?v=5d539c9"></script>
+<script src="./curriculum/question-types.js?v=5d539c9"></script>
+<script src="./curriculum/qbank.js?v=5d539c9"></script>
+<script src="./curriculum/lessons.js?v=5d539c9"></script>
+<script src="./curriculum/tutor.js?v=5d539c9"></script>
+<script src="./curriculum/shared.js?v=5d539c9"></script>
+<script src="./curriculum/math-y1.js?v=5d539c9"></script>
+<script src="./curriculum/math-y2.js?v=5d539c9"></script>
+<script src="./curriculum/extra-banks.js?v=5d539c9"></script>
+<script src="./curriculum/math-sequence.js?v=5d539c9"></script>
+<script src="./curriculum/registry.js?v=5d539c9"></script>
+<script src="./curriculum/la-y1-spine.js?v=5d539c9"></script>
+<script src="./curriculum/la-y1-words.js?v=5d539c9"></script>
+<script src="./curriculum/la-y1-grammar.js?v=5d539c9"></script>
+<script src="./curriculum/la-y1-reading.js?v=5d539c9"></script>
+<script src="./curriculum/la-y1-tasks.js?v=5d539c9"></script>
+<script src="./curriculum/la-books.js?v=5d539c9"></script>
+<script src="./curriculum/la-y2-spine.js?v=5d539c9"></script>
+<script src="./curriculum/la-y2-words.js?v=5d539c9"></script>
+<script src="./curriculum/la-y2-grammar.js?v=5d539c9"></script>
+<script src="./curriculum/la-y2-reading.js?v=5d539c9"></script>
+<script src="./curriculum/la-y2-tasks.js?v=5d539c9"></script>
+<script src="./curriculum/la-books-y2.js?v=5d539c9"></script>
+<script src="./curriculum/science-y3-spine.js?v=5d539c9"></script>
+<script src="./curriculum/science-y5-spine.js?v=5d539c9"></script>
+<script src="./curriculum/science-lessons.js?v=5d539c9"></script>
+<script src="./curriculum/science-quiz.js?v=5d539c9"></script>
+<script src="./curriculum/science.js?v=5d539c9"></script>
+<script src="./curriculum/language-arts.js?v=5d539c9"></script>
+<script src="./curriculum/japan-unit.js?v=5d539c9"></script>
 <!-- The Japan card opens japan.dc.html, a separate committed page rather than an
      app screen. It and image-slot.js must stay committed alongside this script
      tag or the card 404s on GitHub Pages. Note openSubject follows open.href
@@ -103,6 +103,20 @@
     <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#FBBF24">{{ todayDate }}</div>
     <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:52px;line-height:1.02;margin:10px 0 12px;letter-spacing:-.5px">{{ todayGreeting }}</h1>
     <p style="margin:0 0 34px;max-width:640px;font-size:16.5px;line-height:1.55;color:rgba(238,242,255,.72);text-wrap:pretty">{{ todayNote }}</p>
+
+    <div style="margin-bottom:30px">
+      <sc-for list="{{ quickRows }}" as="q" hint-placeholder-count="2">
+        <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:12px">
+          <div style="{{ q.nameStyle }}">
+            {{ q.name }}
+            <div style="{{ q.gradeStyle }}">{{ q.grade }}</div>
+          </div>
+          <sc-for list="{{ q.tabs }}" as="t" hint-placeholder-count="3">
+            <button onClick="{{ t.go }}" style="{{ t.style }}" style-hover="filter:brightness(1.3)">{{ t.label }}</button>
+          </sc-for>
+        </div>
+      </sc-for>
+    </div>
 
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:18px;margin-bottom:34px">
       <sc-for list="{{ todayCards }}" as="s" hint-placeholder-count="3">
@@ -3933,6 +3947,19 @@ class Component extends DCLogic {
     }
     return null;
   }
+  /* One tap from the home page into a boy's own course. Sets his track on the
+   * subject and opens it in the same gesture, so neither of them ever meets
+   * the "choose a level" step — that prompt exists for the shared cards, not
+   * for a link that already knows whose it is.
+   *
+   * saveState is asynchronous, so opening is deferred a tick: openSubject
+   * refuses to open a levelled subject until a level is actually recorded,
+   * and calling them back to back raced that check. */
+  openFor=(subjectId, levelId)=>{
+    this.setLevel(subjectId, levelId);
+    setTimeout(()=>{ this.openSubject(subjectId); }, 0);
+  };
+
   setLevel=(subjectId,levelId)=>{
     this.saveState(st=>{
       const subs={...(st.subjects||{})};
@@ -5981,6 +6008,31 @@ class Component extends DCLogic {
       todayNote:doneToday.length
         ? "Done today: "+andList(doneToday.map(s=>s.name))+". Pick another one, or go back to what you were doing."
         : "Pick what you're doing today. Whatever you choose, your place in it is saved.",
+      // Canvas-style direct links: one row per boy, colour-coded, three
+      // courses each, straight into his own curriculum.
+      quickRows:(function(){
+        const ST=window.__CURR&&window.__CURR.STUDENTS;
+        if(!ST||!ST.tabsFor) return [];
+        return ["y3","y5"].map(function(id){
+          const who=ST.STUDENTS[id];
+          return {
+            name:who.name,
+            grade:who.grade,
+            nameStyle:"font-family:Fredoka,sans-serif;font-size:17px;color:"+who.colour+";min-width:74px",
+            gradeStyle:"font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.13em;"+
+              "text-transform:uppercase;color:rgba(238,242,255,.38)",
+            tabs:ST.tabsFor(id)
+              .filter(function(t){ return window.Subjects && window.Subjects.get(t.subject); })
+              .map(function(t){
+                return {label:t.label,
+                  go:()=>this.openFor(t.subject, t.level),
+                  style:"font-family:Fredoka,sans-serif;font-size:15px;padding:11px 20px;"+
+                    "border-radius:13px;cursor:pointer;white-space:nowrap;transition:.15s;"+
+                    "background:"+t.tint+";border:1px solid "+t.edge+";color:"+t.colour};
+              }, this)
+          };
+        }, this);
+      }).call(this),
       todayCards:cards,
       todayWeek:week,
       todayWeekNote:"Every subject keeps its own record for you.",

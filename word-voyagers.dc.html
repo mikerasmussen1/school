@@ -459,7 +459,7 @@
           <div class="muted">First day</div><div>{{ calFirstDay }}</div>
           <div class="muted">Year ends</div><div>{{ calLastDay }}</div>
           <div class="muted">Today</div><div>{{ calToday }}</div>
-          <div class="muted">Pace</div><div>{{ calPace }}</div>
+          <div class="muted">Progress</div><div>{{ calPace }}</div>
         </div>
         <h3 style="font-size:1rem;margin:16px 0 5px">Scheduled breaks</h3>
         <p class="muted">There is no fixed last day — the year runs its 180 school days and ends when they are used up. Break days are not school days, so adding a break pushes the end date later rather than costing a lesson. To change these, edit BREAKS at the top of curriculum/la-calendar.js.</p>
@@ -469,7 +469,7 @@
             <div class="muted" style="font-size:.86rem">{{ b.range }}</div>
           </div>
         </sc-for>
-        <p class="muted" style="margin-top:10px;font-size:.86rem">If you take an unplanned week off and do not add it here, he will read as five days behind. That is accurate — but if you never intend to make those days up, excuse them below and the count corrects itself.</p>
+        <p class="muted" style="margin-top:10px;font-size:.86rem">An unplanned week off costs nothing here — there is no pace to fall off. Those days simply wait. Add them above if you want them off the calendar, or leave them; either way the year ends when the 180 days are done.</p>
       </div>
 
       <div class="card">
@@ -1093,7 +1093,7 @@ class Component extends DCLogic {
         const now=new Date(), sch=CAL.scheduledDay(now);
         return CAL.longDate(now)+(sch.week?(" \u2014 week "+sch.week+", "+sch.day+" (day "+sch.dayNumber+" of 180)"):(" \u2014 "+(sch.note||"")));
       })(),
-      calPace: CAL ? CAL.pacing(seq.frontier, new Date()).text : "",
+      calPace: CAL ? (seq.frontier+" of 180 school days finished. The year ends when they are done \u2014 there is no date to hit.") : "",
       calBreaks: CAL ? CAL.BREAKS.map(function(b){
         return {name:b.name, range: CAL.longDate(new Date(b.from.y,b.from.m-1,b.from.d))+
           " to "+CAL.longDate(new Date(b.to.y,b.to.m-1,b.to.d))};
@@ -1132,28 +1132,12 @@ class Component extends DCLogic {
         const n=seq.idx+1;
         return (dt?CAL.longDate(dt)+" \u00b7 ":"")+"school day "+n+" of 180";
       })(),
-      pacingText: (function(){
-        if(!CAL) return "";
-        const now=new Date();
-        const p=CAL.pacing(seq.frontier, now);
-        const sch=CAL.scheduledDay(now);
-        const today = sch.week
-          ? ("Today is "+CAL.longDate(now)+" \u2014 week "+sch.week+", "+sch.day+". ")
-          : (CAL.longDate(now)+". "+(sch.note||"")+" ");
-        return today + p.text;
-      })(),
-      pacingStyle: (function(){
-        if(!CAL) return "display:none";
-        const p=CAL.pacing(seq.frontier, new Date());
-        const bg = p.state==="behind" ? "#F3DCD5"
-                 : p.state==="ahead"  ? "var(--forest-light)"
-                 : p.state==="on"     ? "var(--forest-light)"
-                 : "var(--gold-light)";
-        const col = p.state==="behind" ? "var(--brick-dark)"
-                  : (p.state==="ahead"||p.state==="on") ? "#2E4E38" : "#7A5A0C";
-        return "background:"+bg+";color:"+col+";border-radius:8px;padding:9px 13px;"+
-               "margin-bottom:12px;font-size:.9rem;font-weight:600";
-      })(),
+      pacingText: CAL ? CAL.progress(seq.frontier, new Date()).text : "",
+      // One neutral style. There is no good or bad state to colour any more.
+      pacingStyle: CAL
+        ? "background:var(--paper);border:1px solid var(--rule);color:var(--ink-soft);"+
+          "border-radius:8px;padding:9px 13px;margin-bottom:12px;font-size:.88rem"
+        : "display:none",
       startSummary: plan.steps.length+" steps today. Each one unlocks the next, and the "+
         "drills need "+Math.round(MS.MASTERY*100)+"% to count as done.",
       startDay: this.startDay,

@@ -126,24 +126,38 @@
     return WEEKDAYS[dt.getDay()].slice(0,3)+" "+dt.getDate()+" "+MONTHS[dt.getMonth()].slice(0,3);
   }
 
-  /* Compare where he is against where the calendar says he should be.
-   * frontierIndex comes from la-mastery.firstIncomplete().                  */
-  function pacing(frontierIndex, dt){
-    const sch = scheduledDay(dt);
-    if(sch.before)   return {state:"before",  text:sch.note};
-    if(sch.after)    return {state:"after",   text:sch.note};
-    const expected = (sch.weekend || sch.onBreak)
-      ? schoolDayNumber(dt || new Date())      // days that should be finished
-      : sch.index;                             // today's day is not owed yet
-    const diff = expected - frontierIndex;
-    if(sch.onBreak) return {state:"break", diff:diff, text:sch.note};
-    if(sch.weekend) return {state:"weekend", diff:diff, text:sch.note};
-    if(diff > 0)  return {state:"behind", diff:diff,
-      text:"Behind by "+diff+" day"+(diff===1?"":"s")+". Finish those before today's work opens."};
-    if(diff < 0)  return {state:"ahead", diff:-diff,
-      text:"Ahead by "+(-diff)+" day"+(diff===-1?"":"s")+". Good — that is how to cover a day you will be away."};
-    return {state:"on", diff:0, text:"On schedule."};
+  /* WHERE HE IS IN THE YEAR — stated, not judged.
+   *
+   * This used to return "behind by 2 days" / "ahead by 3 days" by measuring
+   * him against the calendar. That was right when there was a fixed last day
+   * to hit. There is not one any more: the year ends when the 180 days are
+   * done. So a pace verdict would be inventing a deadline nobody set, and
+   * telling a nine-year-old he is failing to keep up with it.
+   *
+   * What is left is the useful half: which day it is, which school day he is
+   * on, and how many remain. No behind, no ahead, no schedule to fall off.
+   * The one thing still flagged is an actual GAP — a day skipped over — and
+   * that is a fact about his work, not about the calendar.                  */
+  function progress(frontierIndex, dt){
+    const d = dt || new Date();
+    const done = Math.max(0, Math.min(TOTAL, frontierIndex));
+    const onDay = Math.min(TOTAL, done + 1);
+    const br = inBreak(d);
+    const today = br ? (br.name+" \u2014 no school today.")
+                : isWeekend(d) ? "It is the weekend."
+                : longDate(d)+".";
+    if(done >= TOTAL){
+      return {complete:true, done:done,
+              text:today+" All 180 school days are finished. That is the whole year."};
+    }
+    return {complete:false, done:done, onDay:onDay,
+            text:today+" You are on school day "+onDay+" of "+TOTAL+
+                 ". "+(TOTAL-done)+" to go, and no deadline on them."};
   }
+
+  /* Kept under the old name so nothing calling pacing() breaks; it simply no
+   * longer returns a verdict. */
+  const pacing = progress;
 
   window.__CURR = window.__CURR || {};
   /* When the 180th school day falls, given the breaks. */
@@ -152,6 +166,6 @@
   window.__CURR.LA_CALENDAR = {
     START, BREAKS, TOTAL, DAYS, yearEnd,
     startDate, isSchoolDay, inBreak, schoolDayNumber,
-    scheduledDay, dateForIndex, longDate, shortDate, pacing
+    scheduledDay, dateForIndex, longDate, shortDate, progress, pacing
   };
 })();

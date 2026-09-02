@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FAF6EC; --paper-card:#F1EAD6; --ink:#2C3B4A; --ink-soft:#5B6B78;
+    --rule:#D8CDAE; --brick:#B23A2E; --brick-dark:#8E2C22; --gold:#C79319;
+    --gold-light:#F3D98B; --forest:#3E6B4F; --forest-light:#E4EEE3;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:'Public Sans',system-ui,sans-serif;line-height:1.55}
+  h1,h2,h3{font-family:'Fraunces',serif;font-weight:600;margin:0}
+  a{color:var(--brick)}
+  .wrap{max-width:880px;margin:0 auto;padding:0 20px 70px}
+  .card{background:var(--paper-card);border:1px solid var(--rule);border-radius:8px;padding:22px 24px;margin-bottom:20px}
+  .muted{color:var(--ink-soft);font-size:.95rem}
+  .q-box{background:var(--paper);border:1px solid var(--rule);border-radius:6px;padding:20px}
+  .word-chip{background:var(--paper);border:1px solid var(--rule);border-radius:6px;padding:8px 12px;font-size:.92rem;text-align:center}
+  .word-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;margin:12px 0 18px}
+  .upload-box{border:2px dashed var(--rule);border-radius:8px;padding:20px;text-align:center;background:var(--paper)}
+  .passage-box{background:var(--paper);border:1px solid var(--rule);border-radius:6px;padding:18px 20px;white-space:pre-wrap;font-size:1rem;max-width:70ch}
+  .preview-img{max-width:100%;max-height:320px;border-radius:6px;border:1px solid var(--rule);margin-top:12px}
+  .book{display:grid;grid-template-columns:auto 1fr;gap:14px;background:var(--paper);border:1px solid var(--rule);border-radius:6px;padding:14px 16px;margin-bottom:10px}
+  .book-age{font-family:'Fraunces',serif;font-style:italic;color:var(--gold);font-size:.85rem;white-space:nowrap}
+  .book-title{font-family:'Fraunces',serif;font-size:1.02rem;color:var(--brick-dark);margin:0 0 4px}
+  .step-title{margin:0 0 3px;font-size:1.02rem}
+  .step-desc{margin:0;font-size:.9rem;color:var(--ink-soft)}
+  .done-banner{text-align:center;padding:24px;margin-top:6px;background:var(--forest-light);border-radius:8px;color:#2E4E38}
+</style>
+<script src="./curriculum/subjects.js"></script>
+<script src="./curriculum/question-types.js"></script>
+<script src="./curriculum/language-arts.js"></script>
+<script src="./curriculum/la-grader.js"></script>
+</helmet>
+
+<div style="min-height:100vh;display:flex;flex-direction:column">
+
+  <!-- ═══ Header ═══ -->
+  <div style="background:#2C3B4A;color:var(--paper);padding:18px 24px 0">
+    <div style="max-width:880px;margin:0 auto;display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding-bottom:16px">
+      <div style="flex:1;min-width:200px">
+        <div style="font-family:'Fraunces',serif;font-weight:700;font-size:22px">Word Voyagers</div>
+        <div style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:rgba(250,246,236,.55);margin-top:2px">Reading · Grammar · Spelling · Writing</div>
+      </div>
+      <sc-for list="{{ levelItems }}" as="lv" hint-placeholder-count="2">
+        <button onClick="{{ lv.onClick }}" style="{{ lv.style }}">{{ lv.label }}</button>
+      </sc-for>
+      <a href="index.html" style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:rgba(250,246,236,.7);border:1px solid rgba(250,246,236,.25);border-radius:999px;padding:8px 14px">← Mission Control</a>
+    </div>
+    <div style="max-width:880px;margin:0 auto;display:flex;gap:6px;flex-wrap:wrap">
+      <sc-for list="{{ navItems }}" as="n" hint-placeholder-count="6">
+        <button onClick="{{ n.onClick }}" style="{{ n.style }}">{{ n.label }}</button>
+      </sc-for>
+    </div>
+  </div>
+
+  <div class="wrap" style="padding-top:26px;flex:1">
+
+    <!-- ═══ HOME / TODAY ═══ -->
+    <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+      <div class="card">
+        <h2>Today's plan</h2>
+        <p class="muted">Work through each step in order. Press Start on the first one, and when you finish it, come back and press Start on the next.</p>
+        <sc-for list="{{ steps }}" as="s" hint-placeholder-count="4">
+          <div style="{{ s.style }}">
+            <div style="flex:1">
+              <h3 class="step-title">{{ s.title }}</h3>
+              <p class="step-desc">{{ s.desc }}</p>
+            </div>
+            <button onClick="{{ s.go }}" style="{{ s.btnStyle }}">{{ s.btnLabel }}</button>
+          </div>
+        </sc-for>
+        <sc-if value="{{ allDone }}" hint-placeholder-val="{{ false }}">
+          <div class="done-banner">
+            <div style="font-family:'Fraunces',serif;font-size:1.3rem;margin-bottom:6px">You finished today's lesson! 🎉</div>
+            <div class="muted">Great work today. Explore the Book List for something new to read.</div>
+          </div>
+        </sc-if>
+      </div>
+    </sc-if>
+
+    <!-- ═══ GRAMMAR ═══ -->
+    <sc-if value="{{ isGrammar }}" hint-placeholder-val="{{ false }}">
+      <div class="card">
+        <h2>Grammar Drill</h2>
+        <p class="muted">Ten questions, a new random set each time you press Start.</p>
+
+        <sc-if value="{{ gzNotStarted }}" hint-placeholder-val="{{ true }}">
+          <div style="text-align:center;padding:20px">
+            <button onClick="{{ gzStart }}" style="{{ btnPrimary }}">Start drill</button>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ gzActive }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;justify-content:space-between;font-size:.9rem;color:var(--ink-soft);margin-bottom:12px">
+            <span>{{ gzProgress }}</span>
+            <span style="color:var(--forest);font-weight:600">{{ gzScore }}</span>
+          </div>
+          <div class="q-box">
+            <div style="font-size:1.06rem;font-weight:600;margin-bottom:14px">{{ gzPrompt }}</div>
+            <sc-for list="{{ gzChoices }}" as="c" hint-placeholder-count="4">
+              <button onClick="{{ c.onClick }}" style="{{ c.style }}">{{ c.text }}</button>
+            </sc-for>
+            <sc-if value="{{ gzFeedbackShow }}" hint-placeholder-val="{{ false }}">
+              <div style="{{ gzFeedbackStyle }}">{{ gzFeedback }}</div>
+            </sc-if>
+            <div style="margin-top:16px">
+              <button onClick="{{ gzNext }}" style="{{ gzNextStyle }}">Next</button>
+            </div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ gzDone }}" hint-placeholder-val="{{ false }}">
+          <div style="text-align:center;padding:30px 10px">
+            <div class="muted">All done</div>
+            <div style="font-family:'Fraunces',serif;font-size:2.4rem;color:var(--forest);font-weight:700">{{ gzFinalScore }}</div>
+            <div class="muted">{{ gzFinalPct }}</div>
+            <button onClick="{{ gzRestart }}" style="{{ btnPrimary }}margin-top:10px">Try again</button>
+          </div>
+        </sc-if>
+      </div>
+    </sc-if>
+
+    <!-- ═══ SPELLING ═══ -->
+    <sc-if value="{{ isSpelling }}" hint-placeholder-val="{{ false }}">
+      <div class="card">
+        <h2>This week's word list</h2>
+        <p class="muted">Grouped by pattern. Knowing the pattern helps you spell other words that share it.</p>
+        <sc-for list="{{ spGroups }}" as="g" hint-placeholder-count="4">
+          <h3 style="font-size:1rem;margin:14px 0 4px">{{ g.title }}</h3>
+          <div class="word-grid">
+            <sc-for list="{{ g.words }}" as="w" hint-placeholder-count="6">
+              <div class="word-chip">{{ w.text }}</div>
+            </sc-for>
+          </div>
+        </sc-for>
+      </div>
+
+      <div class="card">
+        <h2>Spelling Drill — type the word</h2>
+        <p class="muted">Listen to the word, then type it correctly.</p>
+
+        <sc-if value="{{ sqNotStarted }}" hint-placeholder-val="{{ true }}">
+          <div style="text-align:center;padding:20px">
+            <button onClick="{{ sqStart }}" style="{{ btnPrimary }}">Start drill</button>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ sqActive }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;justify-content:space-between;font-size:.9rem;color:var(--ink-soft);margin-bottom:12px">
+            <span>{{ sqProgress }}</span>
+            <span style="color:var(--forest);font-weight:600">{{ sqScore }}</span>
+          </div>
+          <div class="q-box">
+            <div style="margin-bottom:12px">Listen to the word, then type it below.</div>
+            <button onClick="{{ sqHear }}" style="{{ btnSecondary }}">🔊 Hear the word</button>
+            <div style="display:flex;gap:10px;align-items:center;margin-top:14px">
+              <input value="{{ sqInputValue }}" onChange="{{ sqSetValue }}" placeholder="Type the word here" style="flex:1;padding:10px 12px;font-size:1rem;border:1px solid var(--rule);border-radius:6px;font-family:'Public Sans',sans-serif">
+              <button onClick="{{ sqCheck }}" style="{{ btnPrimary }}">Check</button>
+            </div>
+            <sc-if value="{{ sqFeedbackShow }}" hint-placeholder-val="{{ false }}">
+              <div style="{{ sqFeedbackStyle }}">{{ sqFeedback }}</div>
+            </sc-if>
+            <div style="margin-top:16px">
+              <button onClick="{{ sqNext }}" style="{{ sqNextStyle }}">Next</button>
+            </div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ sqDone }}" hint-placeholder-val="{{ false }}">
+          <div style="text-align:center;padding:30px 10px">
+            <div class="muted">All done</div>
+            <div style="font-family:'Fraunces',serif;font-size:2.4rem;color:var(--forest);font-weight:700">{{ sqFinalScore }}</div>
+            <div class="muted">{{ sqFinalPct }}</div>
+            <button onClick="{{ sqRestart }}" style="{{ btnPrimary }}margin-top:10px">Try again</button>
+          </div>
+        </sc-if>
+      </div>
+    </sc-if>
+
+    <!-- ═══ READING ═══ -->
+    <sc-if value="{{ isReading }}" hint-placeholder-val="{{ false }}">
+      <div class="card">
+        <h2>Reading Comprehension</h2>
+        <p class="muted">Choose a passage, read it — or press listen — then answer using evidence from the text.</p>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px">
+          <sc-for list="{{ passageItems }}" as="p" hint-placeholder-count="2">
+            <button onClick="{{ p.onClick }}" style="{{ p.style }}">{{ p.label }}</button>
+          </sc-for>
+        </div>
+
+        <div style="margin-bottom:14px">
+          <button onClick="{{ passageListen }}" style="{{ btnSecondary }}">🔊 Read this passage to me</button>
+        </div>
+        <div class="passage-box">{{ passageText }}</div>
+
+        <h3 style="margin:22px 0 10px;font-size:1.1rem">Comprehension check</h3>
+
+        <sc-if value="{{ rqNotStarted }}" hint-placeholder-val="{{ true }}">
+          <div style="text-align:center;padding:20px">
+            <button onClick="{{ rqStart }}" style="{{ btnPrimary }}">Start questions</button>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ rqActive }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;justify-content:space-between;font-size:.9rem;color:var(--ink-soft);margin-bottom:12px">
+            <span>{{ rqProgress }}</span>
+            <span style="color:var(--forest);font-weight:600">{{ rqScore }}</span>
+          </div>
+          <div class="q-box">
+            <div style="font-size:1.06rem;font-weight:600;margin-bottom:14px">{{ rqPrompt }}</div>
+            <sc-for list="{{ rqChoices }}" as="c" hint-placeholder-count="4">
+              <button onClick="{{ c.onClick }}" style="{{ c.style }}">{{ c.text }}</button>
+            </sc-for>
+            <sc-if value="{{ rqFeedbackShow }}" hint-placeholder-val="{{ false }}">
+              <div style="{{ rqFeedbackStyle }}">{{ rqFeedback }}</div>
+            </sc-if>
+            <div style="margin-top:16px">
+              <button onClick="{{ rqNext }}" style="{{ rqNextStyle }}">Next</button>
+            </div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ rqDone }}" hint-placeholder-val="{{ false }}">
+          <div style="text-align:center;padding:30px 10px">
+            <div class="muted">All done</div>
+            <div style="font-family:'Fraunces',serif;font-size:2.4rem;color:var(--forest);font-weight:700">{{ rqFinalScore }}</div>
+            <div class="muted">{{ rqFinalPct }}</div>
+            <button onClick="{{ rqRestart }}" style="{{ btnPrimary }}margin-top:10px">Try again</button>
+          </div>
+        </sc-if>
+      </div>
+    </sc-if>
+
+    <!-- ═══ DAILY ASSIGNMENTS ═══ -->
+    <sc-if value="{{ isAssignments }}" hint-placeholder-val="{{ false }}">
+      <div class="card">
+        <h2>Daily handwritten assignment</h2>
+        <p class="muted">Press listen to hear the assignment, write it on paper, photograph it, then press "Grade this work."</p>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px">
+          <sc-for list="{{ asCatItems }}" as="c" hint-placeholder-count="4">
+            <button onClick="{{ c.onClick }}" style="{{ c.style }}">{{ c.label }}</button>
+          </sc-for>
+        </div>
+
+        <p class="muted">{{ asInstructions }}</p>
+        <div class="q-box" style="border-left:4px solid var(--brick)">{{ asPrompt }}</div>
+
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin:14px 0">
+          <button onClick="{{ asNewPrompt }}" style="{{ btnSecondary }}">New assignment</button>
+          <button onClick="{{ asListen }}" style="{{ btnSecondary }}">🔊 Read this to me</button>
+        </div>
+
+        <div class="upload-box">
+          <input ref="{{ asFileRef }}" onChange="{{ asFilePicked }}" type="file" accept="image/*" capture="environment" style="display:none">
+          <button onClick="{{ asPickPhoto }}" style="{{ btnPrimary }}">📷 Upload or take a photo</button>
+          <sc-if value="{{ asHasImage }}" hint-placeholder-val="{{ false }}">
+            <div><img src="{{ asPreviewUrl }}" class="preview-img" alt="Photo of handwritten assignment"></div>
+          </sc-if>
+        </div>
+
+        <div style="margin-top:14px">
+          <button onClick="{{ asGrade }}" style="{{ asGradeStyle }}">Grade this work</button>
+        </div>
+
+        <sc-if value="{{ asGrading }}" hint-placeholder-val="{{ false }}">
+          <div style="margin-top:14px;color:var(--ink-soft)">Reading the photo and checking the work…</div>
+        </sc-if>
+
+        <sc-if value="{{ asHasError }}" hint-placeholder-val="{{ false }}">
+          <div style="margin-top:14px;background:#F3DCD5;color:var(--brick-dark);border-radius:6px;padding:10px 14px">{{ asError }}</div>
+        </sc-if>
+
+        <sc-if value="{{ asHasResult }}" hint-placeholder-val="{{ false }}">
+          <div class="q-box" style="margin-top:14px">
+            <div style="{{ asTierStyle }}">{{ asTierLabel }}</div>
+            <h3 style="font-size:.95rem;margin:10px 0 4px;color:var(--brick-dark)">What went well</h3>
+            <p style="margin:0 0 4px">{{ asStrengths }}</p>
+            <h3 style="font-size:.95rem;margin:10px 0 4px;color:var(--brick-dark)">What to work on next</h3>
+            <p style="margin:0 0 4px">{{ asFocus }}</p>
+            <h3 style="font-size:.95rem;margin:10px 0 4px;color:var(--brick-dark)">Note to parent</h3>
+            <p class="muted" style="margin:0">{{ asNoteToParent }}</p>
+          </div>
+        </sc-if>
+      </div>
+    </sc-if>
+
+    <!-- ═══ BOOK LIST ═══ -->
+    <sc-if value="{{ isBooks }}" hint-placeholder-val="{{ false }}">
+      <div class="card">
+        <h2>A Christian family's book list</h2>
+        <p>Chosen for strong storytelling and character-building content, this list leans on books that model honesty, courage, kindness, and gratitude, and treat faith as ordinary and good rather than something to hide.</p>
+        <sc-for list="{{ bookGroups }}" as="g" hint-placeholder-count="4">
+          <h3 style="margin:20px 0 10px;font-size:1.05rem">{{ g.title }}</h3>
+          <sc-for list="{{ g.books }}" as="b" hint-placeholder-count="3">
+            <div class="book">
+              <div class="book-age">ages {{ b.age }}</div>
+              <div>
+                <div class="book-title">{{ b.title }} — {{ b.author }}</div>
+                <div class="muted">{{ b.blurb }}</div>
+              </div>
+            </div>
+          </sc-for>
+        </sc-for>
+      </div>
+    </sc-if>
+
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = {
+    view: "home",
+    level: (()=>{ try{ return localStorage.getItem("la.level") || "g3"; }catch(e){ return "g3"; } })(),
+    done: (()=>{ try{ return JSON.parse(localStorage.getItem("la.done")||"{}"); }catch(e){ return {}; } })(),
+    gz: null,
+    sq: null,
+    passageId: null,
+    rq: null,
+    asCat: "handwriting",
+    asIdx: {handwriting:0, spelling:0, grammar:0, reading:0},
+    asImage: null,
+    asStatus: "idle",
+    asResult: null,
+    asError: ""
+  };
+
+  LA = window.__CURR.LA;
+
+  // ---- navigation & persistence ----
+  goto=(v)=>{ this.setState({view:v}); window.scrollTo(0,0); };
+
+  setLevel=(lvl)=>{
+    try{ localStorage.setItem("la.level", lvl); }catch(e){}
+    this.setState({level:lvl, gz:null, sq:null, rq:null, passageId:null,
+      asImage:null, asStatus:"idle", asResult:null, asError:""});
+  };
+
+  markDone=(key)=>{
+    const level=this.state.level;
+    const done={...this.state.done, [level]:{...(this.state.done[level]||{}), [key]:true}};
+    try{ localStorage.setItem("la.done", JSON.stringify(done)); }catch(e){}
+    this.setState({done});
+  };
+
+  speak(text){
+    if(!window.speechSynthesis) return;
+    window.speechSynthesis.cancel();
+    const u=new SpeechSynthesisUtterance(text);
+    u.rate=0.95;
+    window.speechSynthesis.speak(u);
+  }
+
+  shuffle(arr){
+    const a=[...arr];
+    for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; }
+    return a;
+  }
+
+  // Multiple-choice items ship with `a` as an index into `options`. Once the
+  // options get shuffled for display that index is meaningless, so this
+  // resolves the correct answer to its TEXT first, then shuffles — QTypes
+  // grades multiple-choice by text just as well as by index.
+  prepMC(bank, n){
+    const pool = n ? this.shuffle(bank).slice(0, Math.min(n, bank.length)) : bank;
+    return pool.map(it=>{
+      const correctText = it.options[it.a];
+      return {...it, a: correctText, options: this.shuffle(it.options)};
+    });
+  }
+
+  feedbackStyle(ok){
+    return "margin-top:10px;padding:10px 12px;border-radius:6px;font-size:.92rem;"+
+      (ok ? "background:var(--forest-light);color:#2E4E38" : "background:#F3DCD5;color:var(--brick-dark)");
+  }
+
+  // ---- style helpers (all dynamic look-and-feel goes through these, since
+  // this template system only proved out {{ }} bindings for style strings,
+  // not for conditional class names) ----
+  pillStyle(active){
+    return "font-family:'Public Sans',sans-serif;font-weight:600;font-size:.85rem;padding:7px 14px;"+
+      "border-radius:999px;cursor:pointer;border:1px solid "+(active?"var(--brick)":"rgba(250,246,236,.3)")+";"+
+      "background:"+(active?"var(--brick)":"transparent")+";color:"+(active?"#fff":"var(--paper)");
+  }
+  pillStyleLight(active){
+    return "font-family:'Public Sans',sans-serif;font-weight:600;font-size:.85rem;padding:7px 14px;"+
+      "border-radius:999px;cursor:pointer;border:1px solid "+(active?"var(--brick)":"var(--rule)")+";"+
+      "background:"+(active?"var(--brick)":"transparent")+";color:"+(active?"#fff":"var(--ink)");
+  }
+  navBtnStyle(active){
+    return "font-family:'Fraunces',serif;font-weight:600;font-size:.92rem;padding:10px 16px;"+
+      "border-radius:8px 8px 0 0;cursor:pointer;border:none;"+
+      "background:"+(active?"var(--paper)":"#3C5064")+";color:"+(active?"var(--brick-dark)":"#CBD6DD");
+  }
+  stepStyle(done){
+    return "display:flex;align-items:center;gap:16px;background:var(--paper);"+
+      "border:1px solid "+(done?"var(--forest)":"var(--rule)")+";border-radius:8px;padding:16px 18px;margin-bottom:12px";
+  }
+  choiceStyle(state){
+    const bg = state==="correct" ? "var(--forest-light)" : state==="incorrect" ? "#F3DCD5" : "#fff";
+    const bd = state==="correct" ? "var(--forest)" : state==="incorrect" ? "var(--brick)" : "var(--rule)";
+    return "display:block;width:100%;text-align:left;background:"+bg+";border:1px solid "+bd+";"+
+      "border-radius:6px;padding:10px 14px;font-family:'Public Sans',sans-serif;font-size:.96rem;"+
+      "cursor:pointer;color:var(--ink);margin-bottom:8px";
+  }
+  btn(kind, enabled){
+    if(!enabled) return "font-family:'Public Sans',sans-serif;font-weight:600;font-size:.9rem;"+
+      "background:#C9BFA6;color:#fff;border:none;border-radius:6px;padding:9px 18px;cursor:default";
+    return kind==="primary"
+      ? "font-family:'Public Sans',sans-serif;font-weight:600;font-size:.9rem;background:var(--brick);color:#fff;border:none;border-radius:6px;padding:9px 18px;cursor:pointer"
+      : "font-family:'Public Sans',sans-serif;font-weight:600;font-size:.9rem;background:transparent;color:var(--brick);border:1px solid var(--brick);border-radius:6px;padding:9px 18px;cursor:pointer";
+  }
+  tierStyle(tier){
+    const bg = tier==="excellent" ? "var(--forest-light)" : tier==="good" ? "var(--gold-light)" : "#F3DCD5";
+    const col = tier==="excellent" ? "#2E4E38" : tier==="good" ? "#7A5A0C" : "var(--brick-dark)";
+    return "display:inline-block;font-family:'Fraunces',serif;font-weight:600;font-size:.85rem;"+
+      "padding:5px 14px;border-radius:20px;background:"+bg+";color:"+col;
+  }
+
+  // ---- grammar ----
+  startGrammar=()=>{
+    const bank=this.LA.GRAMMAR[this.state.level].items;
+    const items=this.prepMC(bank, 10);
+    this.setState({gz:{items, idx:0, score:0, answered:false, chosen:null, correct:null}});
+  };
+  answerGrammar=(choiceText)=>{
+    const gz=this.state.gz; if(!gz || gz.answered) return;
+    const item=gz.items[gz.idx];
+    const ok=window.QTypes.grade(item, choiceText);
+    this.setState({gz:{...gz, answered:true, chosen:choiceText, correct:ok, score: gz.score+(ok?1:0)}});
+  };
+  nextGrammar=()=>{
+    const gz=this.state.gz; if(!gz || !gz.answered) return;
+    const idx=gz.idx+1;
+    this.setState({gz:{...gz, idx, answered:false, chosen:null, correct:null}});
+    if(idx>=gz.items.length) this.markDone("grammar");
+  };
+
+  // ---- spelling ----
+  startSpelling=()=>{
+    const bank=this.LA.SPELLING[this.state.level].items;
+    const items=this.shuffle(bank).slice(0,8);
+    this.setState({sq:{items, idx:0, score:0, value:"", answered:false, correct:null}});
+    this.speak(items[0].a[0]);
+  };
+  setSpellValue=(e)=>{
+    const sq=this.state.sq; if(!sq || sq.answered) return;
+    this.setState({sq:{...sq, value:e.target.value}});
+  };
+  checkSpelling=()=>{
+    const sq=this.state.sq; if(!sq || sq.answered) return;
+    const item=sq.items[sq.idx];
+    const ok=window.QTypes.grade(item, sq.value);
+    this.setState({sq:{...sq, answered:true, correct:ok, score: sq.score+(ok?1:0)}});
+  };
+  nextSpelling=()=>{
+    const sq=this.state.sq; if(!sq || !sq.answered) return;
+    const idx=sq.idx+1;
+    this.setState({sq:{...sq, idx, value:"", answered:false, correct:null}});
+    if(idx<sq.items.length) this.speak(sq.items[idx].a[0]);
+    else this.markDone("spelling");
+  };
+
+  // ---- reading ----
+  choosePassage=(id)=>{ this.setState({passageId:id, rq:null}); };
+  startReading=(passageId)=>{
+    const passage=this.LA.PASSAGES[this.state.level].find(p=>p.id===passageId);
+    const items=this.prepMC(passage.questions);
+    this.setState({rq:{passageId, items, idx:0, score:0, answered:false, chosen:null, correct:null}});
+  };
+  answerReading=(choiceText)=>{
+    const rq=this.state.rq; if(!rq || rq.answered) return;
+    const item=rq.items[rq.idx];
+    const ok=window.QTypes.grade(item, choiceText);
+    this.setState({rq:{...rq, answered:true, chosen:choiceText, correct:ok, score: rq.score+(ok?1:0)}});
+  };
+  nextReading=()=>{
+    const rq=this.state.rq; if(!rq || !rq.answered) return;
+    const idx=rq.idx+1;
+    this.setState({rq:{...rq, idx, answered:false, chosen:null, correct:null}});
+    if(idx>=rq.items.length) this.markDone("reading");
+  };
+
+  // ---- assignments ----
+  chooseAsCat=(cat)=>{
+    this.setState({asCat:cat, asImage:null, asStatus:"idle", asResult:null, asError:""});
+  };
+  nextAssignmentPrompt=()=>{
+    const cat=this.state.asCat;
+    const asIdx={...this.state.asIdx, [cat]: (this.state.asIdx[cat]||0)+1};
+    this.setState({asIdx, asImage:null, asStatus:"idle", asResult:null, asError:""});
+  };
+  assignmentFilePicked=(e)=>{
+    const file=e.target.files && e.target.files[0];
+    e.target.value=""; // same-file re-pick must still fire change
+    if(!file) return;
+    const previewUrl=URL.createObjectURL(file);
+    this.setState({asImage:{file, previewUrl}, asStatus:"idle", asResult:null, asError:""});
+  };
+  gradeAssignment=async ()=>{
+    const st=this.state, LA=this.LA;
+    if(!st.asImage || st.asStatus==="grading") return;
+    this.setState({asStatus:"grading", asError:""});
+    try{
+      if(!window.LAGrader) throw new Error("Grading isn't available on this page.");
+      if(!window.LAGrader.enabled) await window.LAGrader.loadConfig();
+      if(!window.LAGrader.enabled) throw new Error("Photo grading isn't set up for this site yet — ask a grown-up to check the site's model configuration. You can still do this assignment on paper.");
+      const data=LA.HANDWRITTEN[st.level][st.asCat];
+      const idx=st.asIdx[st.asCat]||0;
+      const promptText=data.prompts[idx % data.prompts.length];
+      const labelMap={handwriting:"handwriting", spelling:"spelling", grammar:"grammar", reading:"reading response"};
+      const result=await window.LAGrader.grade(labelMap[st.asCat], data.instructions, data.rubric, promptText, st.asImage.file);
+      this.setState({asStatus:"done", asResult:result});
+      this.markDone("assignments");
+    }catch(err){
+      this.setState({asStatus:"error", asError:String(err&&err.message||err)});
+    }
+  };
+
+  // ---- view-model ----
+  renderVals(){
+    const st=this.state, LA=this.LA, level=st.level;
+
+    const levelItems=[{id:"g3",label:"3rd Grade"},{id:"g5",label:"5th Grade"}].map(l=>({
+      label:l.label, onClick:()=>this.setLevel(l.id), style:this.pillStyle(level===l.id)
+    }));
+
+    const navDefs=[
+      {key:"home",label:"Today"}, {key:"reading",label:"Reading"}, {key:"grammar",label:"Grammar"},
+      {key:"spelling",label:"Spelling"}, {key:"assignments",label:"Assignments"}, {key:"books",label:"Book List"}
+    ];
+    const navItems=navDefs.map(n=>({label:n.label, onClick:()=>this.goto(n.key), style:this.navBtnStyle(st.view===n.key)}));
+
+    const done=st.done[level]||{};
+    const stepDefs=[
+      {key:"reading", title:"1. Reading Comprehension", desc:"Pick a passage, read or listen, then answer with evidence.", view:"reading"},
+      {key:"grammar", title:"2. Grammar Drill", desc:"Answer 10 grammar questions.", view:"grammar"},
+      {key:"spelling", title:"3. Spelling Drill", desc:"Listen to each word and type the spelling.", view:"spelling"},
+      {key:"assignments", title:"4. Handwritten Assignment", desc:"Write one on paper, photograph it, and get feedback.", view:"assignments"}
+    ];
+    const steps=stepDefs.map(s=>({
+      title:s.title, desc:s.desc, style:this.stepStyle(!!done[s.key]),
+      btnLabel: done[s.key] ? "Review" : "Start",
+      btnStyle: this.btn(done[s.key]?"secondary":"primary", true),
+      go:()=>this.goto(s.view)
+    }));
+    const allDone = stepDefs.every(s=>!!done[s.key]);
+
+    const base = {
+      navItems, levelItems, steps, allDone,
+      isHome: st.view==="home", isReading: st.view==="reading", isGrammar: st.view==="grammar",
+      isSpelling: st.view==="spelling", isAssignments: st.view==="assignments", isBooks: st.view==="books",
+      btnPrimary: this.btn("primary", true), btnSecondary: this.btn("secondary", true)
+    };
+
+    return {...base,
+      ...this.grammarVals(),
+      ...this.spellingVals(),
+      ...this.readingVals(),
+      ...this.assignmentVals(),
+      ...this.booksVals(level)
+    };
+  }
+
+  grammarVals(){
+    const gz=this.state.gz;
+    if(!gz){
+      return {gzNotStarted:true, gzActive:false, gzDone:false, gzStart:this.startGrammar, gzRestart:this.startGrammar,
+        gzChoices:[], gzPrompt:"", gzProgress:"", gzScore:"", gzFeedback:"", gzFeedbackStyle:"", gzFeedbackShow:false,
+        gzNext:()=>{}, gzNextStyle:this.btn("primary",false), gzFinalScore:"", gzFinalPct:""};
+    }
+    const complete = gz.idx>=gz.items.length;
+    if(complete){
+      const pct=Math.round((gz.score/gz.items.length)*100);
+      return {gzNotStarted:false, gzActive:false, gzDone:true, gzRestart:this.startGrammar, gzStart:this.startGrammar,
+        gzFinalScore: gz.score+" / "+gz.items.length, gzFinalPct: pct+"% correct",
+        gzChoices:[], gzPrompt:"", gzProgress:"", gzScore:"", gzFeedback:"", gzFeedbackStyle:"", gzFeedbackShow:false,
+        gzNext:()=>{}, gzNextStyle:this.btn("primary",false)};
+    }
+    const item=gz.items[gz.idx];
+    const choices=item.options.map(opt=>{
+      let s="default";
+      if(gz.answered){ if(opt===item.a) s="correct"; else if(opt===gz.chosen) s="incorrect"; }
+      return {text:opt, style:this.choiceStyle(s), onClick: gz.answered?()=>{}:()=>this.answerGrammar(opt)};
+    });
+    return {
+      gzNotStarted:false, gzActive:true, gzDone:false, gzStart:this.startGrammar, gzRestart:this.startGrammar,
+      gzPrompt:item.q, gzProgress:"Question "+(gz.idx+1)+" of "+gz.items.length, gzScore:"Score: "+gz.score+"/"+gz.idx,
+      gzChoices:choices, gzFeedbackShow:gz.answered,
+      gzFeedback: gz.answered ? ((gz.correct?"Correct":"Not quite")+(item.hint?" — "+item.hint:".")) : "",
+      gzFeedbackStyle: gz.answered ? this.feedbackStyle(gz.correct) : "",
+      gzNext:this.nextGrammar, gzNextStyle:this.btn("primary", gz.answered),
+      gzFinalScore:"", gzFinalPct:""
+    };
+  }
+
+  spellingVals(){
+    const st=this.state, level=st.level, LA=this.LA;
+    const spGroups = LA.SPELLING_GROUPS[level].map(g=>({title:g.title, words: g.words.map(w=>({text:w}))}));
+    const sq=st.sq;
+    if(!sq){
+      return {spGroups, sqNotStarted:true, sqActive:false, sqDone:false, sqStart:this.startSpelling, sqRestart:this.startSpelling,
+        sqProgress:"", sqScore:"", sqInputValue:"", sqSetValue:()=>{}, sqHear:()=>{}, sqCheck:()=>{},
+        sqFeedbackShow:false, sqFeedback:"", sqFeedbackStyle:"",
+        sqNext:()=>{}, sqNextStyle:this.btn("primary",false), sqFinalScore:"", sqFinalPct:""};
+    }
+    const complete = sq.idx>=sq.items.length;
+    if(complete){
+      const pct=Math.round((sq.score/sq.items.length)*100);
+      return {spGroups, sqNotStarted:false, sqActive:false, sqDone:true, sqRestart:this.startSpelling, sqStart:this.startSpelling,
+        sqFinalScore: sq.score+" / "+sq.items.length, sqFinalPct: pct+"% correct",
+        sqProgress:"", sqScore:"", sqInputValue:"", sqSetValue:()=>{}, sqHear:()=>{}, sqCheck:()=>{},
+        sqFeedbackShow:false, sqFeedback:"", sqFeedbackStyle:"",
+        sqNext:()=>{}, sqNextStyle:this.btn("primary",false)};
+    }
+    const item=sq.items[sq.idx];
+    return {
+      spGroups, sqNotStarted:false, sqActive:true, sqDone:false, sqStart:this.startSpelling, sqRestart:this.startSpelling,
+      sqProgress:"Word "+(sq.idx+1)+" of "+sq.items.length, sqScore:"Score: "+sq.score+"/"+sq.idx,
+      sqInputValue: sq.value, sqSetValue:this.setSpellValue, sqHear:()=>this.speak(item.a[0]),
+      sqCheck: sq.answered? ()=>{} : this.checkSpelling,
+      sqFeedbackShow: sq.answered,
+      sqFeedback: sq.answered ? (sq.correct? ("Correct! \""+item.a[0]+"\" spelled right.") : ("Not quite — the correct spelling is \""+item.a[0]+"\".")) : "",
+      sqFeedbackStyle: sq.answered ? this.feedbackStyle(sq.correct) : "",
+      sqNext:this.nextSpelling, sqNextStyle:this.btn("primary", sq.answered),
+      sqFinalScore:"", sqFinalPct:""
+    };
+  }
+
+  readingVals(){
+    const st=this.state, level=st.level, LA=this.LA;
+    const passages=LA.PASSAGES[level];
+    const currentId=st.passageId || passages[0].id;
+    const passage=passages.find(p=>p.id===currentId) || passages[0];
+    const passageItems=passages.map(p=>({label:p.label, style:this.pillStyleLight(p.id===currentId), onClick:()=>this.choosePassage(p.id)}));
+    const listen=()=>this.speak(passage.text.replace(/\n+/g," "));
+    const base={passageItems, passageText:passage.text, passageListen:listen};
+
+    const rq=st.rq;
+    if(!rq || rq.passageId!==currentId){
+      return {...base, rqNotStarted:true, rqActive:false, rqDone:false,
+        rqStart:()=>this.startReading(currentId), rqRestart:()=>this.startReading(currentId),
+        rqProgress:"", rqScore:"", rqPrompt:"", rqChoices:[], rqFeedbackShow:false, rqFeedback:"", rqFeedbackStyle:"",
+        rqNext:()=>{}, rqNextStyle:this.btn("primary",false), rqFinalScore:"", rqFinalPct:""};
+    }
+    const complete = rq.idx>=rq.items.length;
+    if(complete){
+      const pct=Math.round((rq.score/rq.items.length)*100);
+      return {...base, rqNotStarted:false, rqActive:false, rqDone:true,
+        rqRestart:()=>this.startReading(currentId), rqStart:()=>this.startReading(currentId),
+        rqFinalScore: rq.score+" / "+rq.items.length, rqFinalPct: pct+"% correct",
+        rqProgress:"", rqScore:"", rqPrompt:"", rqChoices:[], rqFeedbackShow:false, rqFeedback:"", rqFeedbackStyle:"",
+        rqNext:()=>{}, rqNextStyle:this.btn("primary",false)};
+    }
+    const item=rq.items[rq.idx];
+    const choices=item.options.map(opt=>{
+      let s="default";
+      if(rq.answered){ if(opt===item.a) s="correct"; else if(opt===rq.chosen) s="incorrect"; }
+      return {text:opt, style:this.choiceStyle(s), onClick: rq.answered?()=>{}:()=>this.answerReading(opt)};
+    });
+    return {...base, rqNotStarted:false, rqActive:true, rqDone:false,
+      rqStart:()=>this.startReading(currentId), rqRestart:()=>this.startReading(currentId),
+      rqPrompt:item.q, rqProgress:"Question "+(rq.idx+1)+" of "+rq.items.length, rqScore:"Score: "+rq.score+"/"+rq.idx,
+      rqChoices:choices, rqFeedbackShow:rq.answered,
+      rqFeedback: rq.answered ? ((rq.correct?"Correct":"Not quite")+(item.hint?" — "+item.hint:".")) : "",
+      rqFeedbackStyle: rq.answered ? this.feedbackStyle(rq.correct) : "",
+      rqNext:this.nextReading, rqNextStyle:this.btn("primary", rq.answered),
+      rqFinalScore:"", rqFinalPct:""
+    };
+  }
+
+  assignmentVals(){
+    const st=this.state, level=st.level, LA=this.LA;
+    const catDefs=[
+      {key:"handwriting",label:"Handwriting"}, {key:"spelling",label:"Spelling"},
+      {key:"grammar",label:"Grammar"}, {key:"reading",label:"Reading Response"}
+    ];
+    const asCatItems=catDefs.map(c=>({label:c.label, style:this.pillStyleLight(st.asCat===c.key), onClick:()=>this.chooseAsCat(c.key)}));
+    const data=LA.HANDWRITTEN[level][st.asCat];
+    const idx=st.asIdx[st.asCat]||0;
+    const promptText=data.prompts[idx % data.prompts.length];
+    const result=st.asResult;
+
+    return {
+      asCatItems, asInstructions:data.instructions, asPrompt:promptText,
+      asListen:()=>this.speak(promptText), asNewPrompt:this.nextAssignmentPrompt,
+      asFileRef: el=>{ this._asInput=el; },
+      asFilePicked: this.assignmentFilePicked,
+      asPickPhoto: ()=>{ if(this._asInput) this._asInput.click(); },
+      asHasImage: !!st.asImage,
+      asPreviewUrl: st.asImage ? st.asImage.previewUrl : "",
+      asGrade: this.gradeAssignment,
+      asGradeStyle: this.btn("primary", !!st.asImage && st.asStatus!=="grading"),
+      asGrading: st.asStatus==="grading",
+      asHasResult: st.asStatus==="done" && !!result,
+      asHasError: st.asStatus==="error",
+      asError: st.asError,
+      asTierLabel: result ? (result.tier==="excellent"?"Excellent work!":result.tier==="good"?"Good work":"Keep practicing") : "",
+      asTierStyle: result ? this.tierStyle(result.tier) : "",
+      asStrengths: result ? result.strengths : "",
+      asFocus: result ? result.focus_area : "",
+      asNoteToParent: result ? result.note_to_parent : ""
+    };
+  }
+
+  booksVals(level){
+    const LA=this.LA;
+    const cats=[]; const seen={};
+    LA.BOOKS[level].forEach(b=>{ if(!seen[b.category]){ seen[b.category]=true; cats.push(b.category); } });
+    const bookGroups=cats.map(cat=>({
+      title:cat,
+      books: LA.BOOKS[level].filter(b=>b.category===cat).map(b=>({title:b.title, author:b.author, age:b.ageRange, blurb:b.blurb}))
+    }));
+    return {bookGroups};
+  }
+}
+</script>
+</body>
+</html>

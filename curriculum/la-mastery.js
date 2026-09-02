@@ -126,6 +126,63 @@
     };
   }
 
+  /* ---- Day sequencing --------------------------------------------------
+   * The whole year is 180 ordered slots: (week-1)*5 + dayIndex, 0..179.
+   *
+   * THE RULE, which reconciles two things that sound opposed:
+   *   You may not leave a GAP behind you. Day N is unavailable while any
+   *   earlier day is unfinished — skipping Monday blocks Wednesday until
+   *   Monday is done.
+   *   There is NO CAP in front of you. The moment you are caught up, the next
+   *   day opens, and finishing it opens the one after. A child preparing for
+   *   a field trip can work as far forward in one sitting as he has stamina
+   *   for; he simply cannot jump over anything.
+   *
+   * So "get current" and "get ahead" are the same mechanism seen from two
+   * sides: the frontier is always the first unfinished day.
+   *
+   * excused: a parent can excuse a day (see excuseKey). An excused day counts
+   * as finished for sequencing only. Without that, a family starting at week
+   * 12, or one that genuinely lost a week to illness, would be walled out of
+   * the rest of the year with no way through — a rule with no release valve
+   * stops being a rule and becomes a trap.                                  */
+  function absIndex(week, day){
+    const d = DAYS.indexOf(day);
+    return (week-1)*DAYS.length + (d<0?0:d);
+  }
+  function fromAbs(idx){
+    const i = Math.max(0, Math.min(TOTAL_DAYS-1, idx));
+    return {week: Math.floor(i/DAYS.length)+1, day: DAYS[i%DAYS.length]};
+  }
+  const TOTAL_DAYS = 36 * 5;
+
+  function endKey(grade, week, day){ return grade+":"+week+":"+day+":end"; }
+  function excuseKey(grade, week, day){ return grade+":"+week+":"+day+":excused"; }
+
+  function dayFinished(grade, week, day, stepDone, excused){
+    return !!(stepDone && stepDone[endKey(grade,week,day)]) ||
+           !!(excused  && excused[excuseKey(grade,week,day)]);
+  }
+
+  /* The frontier: index of the first day not yet finished. 180 means the
+   * whole year is done. */
+  function firstIncomplete(grade, stepDone, excused){
+    for(let i=0;i<TOTAL_DAYS;i++){
+      const p = fromAbs(i);
+      if(!dayFinished(grade, p.week, p.day, stepDone, excused)) return i;
+    }
+    return TOTAL_DAYS;
+  }
+
+  /* "past" already done · "current" the frontier · "ahead" blocked by a gap */
+  function dayStatus(grade, week, day, stepDone, excused){
+    const idx = absIndex(week, day);
+    const frontier = firstIncomplete(grade, stepDone, excused);
+    if(idx < frontier)  return {state:"past",    idx, frontier, blocked:false};
+    if(idx === frontier) return {state:"current", idx, frontier, blocked:false};
+    return {state:"ahead", idx, frontier, blocked:true, mustFinish:fromAbs(frontier)};
+  }
+
   /* ---- Mastery --------------------------------------------------------- */
   function passed(score, total){
     if(!total) return false;
@@ -210,6 +267,8 @@
   window.__CURR.LA_MASTERY = {
     MASTERY, MAX_ROUNDS, DAYS, DAY_NAME, PLANS,
     dayPlan, passed, neededFor,
+    TOTAL_DAYS, absIndex, fromAbs, endKey, excuseKey,
+    dayFinished, firstIncomplete, dayStatus,
     extraGrammarItems, extraSpellingItems, remediationRound, stuckMessage
   };
 })();

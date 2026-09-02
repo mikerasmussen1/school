@@ -104,6 +104,16 @@
         <h2 style="margin:4px 0 2px">{{ dayHeading }}</h2>
         <p class="muted" style="margin-top:2px">{{ weekFocusLine }}</p>
 
+        <!-- BLOCKED: unfinished work behind this day -->
+        <sc-if value="{{ showBlocked }}" hint-placeholder-val="{{ false }}">
+          <div style="text-align:center;border:2px solid var(--brick-dark);border-radius:10px;padding:24px 18px;margin:16px 0;background:#F3DCD5">
+            <div style="font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--brick-dark);margin-bottom:6px">Day locked</div>
+            <div style="font-family:'Fraunces',serif;font-size:1.22rem;margin-bottom:8px;color:var(--brick-dark)">{{ blockedHeading }}</div>
+            <div class="muted" style="max-width:46ch;margin:0 auto 14px">{{ blockedText }}</div>
+            <button onClick="{{ goToFrontier }}" style="{{ startBtnStyle }}">{{ blockedBtnLabel }}</button>
+          </div>
+        </sc-if>
+
         <!-- START -->
         <sc-if value="{{ showStart }}" hint-placeholder-val="{{ true }}">
           <div style="text-align:center;border:2px solid var(--brick);border-radius:10px;padding:24px 18px;margin:16px 0;background:var(--paper)">
@@ -112,6 +122,9 @@
             <div class="muted" style="margin-bottom:14px">{{ startSummary }}</div>
             <button onClick="{{ startDay }}" style="{{ startBtnStyle }}">START TODAY</button>
           </div>
+        </sc-if>
+        <sc-if value="{{ showAheadNote }}" hint-placeholder-val="{{ false }}">
+          <div style="background:var(--forest-light);color:#2E4E38;border-radius:8px;padding:12px 15px;margin-bottom:14px;font-size:.92rem">{{ aheadNote }}</div>
         </sc-if>
 
         <!-- CHECKLIST -->
@@ -438,6 +451,23 @@
       </div>
 
       <div class="card">
+        <h2>Catching up and working ahead</h2>
+        <p class="muted">Days run in order. An unfinished day locks everything after it until it is done, so nothing gets quietly skipped. There is no limit in the other direction: once your child is caught up, finishing a day immediately opens the next one, so he can work as far forward as he likes to cover a day he will be away.</p>
+        <div style="background:var(--paper);border:1px solid var(--rule);border-radius:6px;padding:13px 15px;margin-top:10px">
+          <div style="font-family:'Fraunces',serif;font-size:.95rem;margin-bottom:3px">{{ frontierLabel }}</div>
+          <div class="muted" style="font-size:.9rem">{{ frontierDetail }}</div>
+        </div>
+        <h3 style="font-size:1rem;margin:16px 0 5px">Excuse a day</h3>
+        <p class="muted">If a day is genuinely never going to be made up — illness, a family week, or you started partway through the year — excuse it here. An excused day counts as finished for ordering only, so the rest of the year opens. Without this, one lost week would wall your child out of everything after it, and a rule with no release valve is a trap rather than a rule.</p>
+        <div style="display:flex;gap:7px;flex-wrap:wrap;margin-top:9px">
+          <sc-for list="{{ excuseButtons }}" as="e" hint-placeholder-count="5">
+            <button onClick="{{ e.onClick }}" style="{{ e.style }}">{{ e.label }}</button>
+          </sc-for>
+        </div>
+        <p class="muted" style="margin-top:7px;font-size:.85rem">{{ excuseHint }}</p>
+      </div>
+
+      <div class="card">
         <h2>Things flagged for you</h2>
         <p class="muted">A drill that could not be cleared in three tries stops looping and gets flagged here instead of trapping your child. This is the list of those moments.</p>
         <sc-if value="{{ hasFlags }}" hint-placeholder-val="{{ false }}">
@@ -483,6 +513,7 @@ class Component extends DCLogic {
     lastResult:null,        // {kind, score, total, passed, missed:[], seen:[]}
     remediation:null,       // {items, note, round, isFinalRound}
     stuck:(function(){ try{ return JSON.parse(localStorage.getItem("la.stuck")||"{}"); }catch(e){ return {}; } })(),
+    excused:(function(){ try{ return JSON.parse(localStorage.getItem("la.excused")||"{}"); }catch(e){ return {}; } })(),
     gz:null, sq:null, rq:null, rv:null,
     asKind:"handwriting", asImage:null, asStatus:"idle", asResult:null, asError:""
   };
@@ -720,6 +751,20 @@ class Component extends DCLogic {
     this.completeStep(step);   // the valve: do not trap the child
   };
 
+  toggleExcused=(grade, week, day)=>{
+    const M=window.__CURR.LA_MASTERY;
+    const k=M.excuseKey(grade, week, day);
+    const excused={...this.state.excused};
+    if(excused[k]) delete excused[k]; else excused[k]=true;
+    try{ localStorage.setItem("la.excused", JSON.stringify(excused)); }catch(e){}
+    this.setState({excused});
+  };
+
+  jumpTo=(week, day)=>{
+    this.setWeek(week);
+    this.setDay(day);
+  };
+
   startDay=()=>{ this.setState({started:true, round:1, lastResult:null, remediation:null}); window.scrollTo(0,0); };
 
   setDay=(d)=>{
@@ -814,6 +859,13 @@ class Component extends DCLogic {
       }
     };
     const plan=MS.dayPlan(st.year, st.week, st.day);
+
+    /* Sequencing: no gaps behind, no cap ahead. */
+    const seq = MS.dayStatus ? MS.dayStatus(st.year, st.week, st.day, st.stepDone, st.excused)
+                             : {state:"current", blocked:false, frontier:0, idx:0};
+    const frontierPos = MS.fromAbs ? MS.fromAbs(seq.frontier) : {week:st.week, day:st.day};
+    const yearFinished = MS.TOTAL_DAYS ? seq.frontier >= MS.TOTAL_DAYS : false;
+
     const stepStates=plan.steps.map(function(step){
       return {step:step, done:self.isStepDone(step), stuck:self.isStepStuck(step)};
     });
@@ -893,14 +945,19 @@ class Component extends DCLogic {
       weekFocusLine:"Spelling pattern: "+wk.spelling+" \u00b7 Standard "+wk.standard,
       unitLine:"Unit "+unit.n+" \u00b7 "+unit.name+" \u00b7 "+unit.virtue,
       dayPicker: MS.DAYS.map(function(d){
-        const k=st.year+":"+st.week+":"+d+":end";
-        const dayDone=!!st.stepDone[k];
-        return {label:d, onClick:function(){ self.setDay(d); },
+        const stt = MS.dayStatus ? MS.dayStatus(st.year, st.week, d, st.stepDone, st.excused)
+                                 : {state:"current"};
+        const isSel = st.day===d;
+        const bg = isSel ? "var(--gold)"
+                 : stt.state==="past" ? "rgba(62,107,79,.55)"
+                 : stt.state==="ahead" ? "rgba(178,58,46,.28)"
+                 : "transparent";
+        return {label: d + (stt.state==="ahead" ? "\u00b7" : ""),
+          onClick:function(){ self.setDay(d); },
           style:"font-family:'Public Sans',sans-serif;font-weight:600;font-size:.74rem;padding:5px 9px;"+
             "border-radius:6px;cursor:pointer;border:1px solid "+
-            (st.day===d?"var(--gold)":"rgba(250,246,236,.25)")+";background:"+
-            (st.day===d?"var(--gold)":(dayDone?"rgba(62,107,79,.55)":"transparent"))+";color:"+
-            (st.day===d?"#2C3B4A":"rgba(250,246,236,.85)")};
+            (isSel?"var(--gold)":"rgba(250,246,236,.25)")+";background:"+bg+";color:"+
+            (isSel?"#2C3B4A":"rgba(250,246,236,.85)")};
       }),
       goPrevWeek:function(){ self.setWeek(st.week-1); },
       goNextWeek:function(){ self.setWeek(st.week+1); },
@@ -984,6 +1041,24 @@ class Component extends DCLogic {
       standardsHeading:(Y.GRADE?Y.GRADE.label:"")+" skills and standards covered",
       benchmarks:(Y.BENCHMARKS||[]).map(function(b){ return {text:b}; }),
       standards:Y.STANDARDS,
+      frontierLabel: yearFinished
+        ? "The whole year is finished."
+        : "Currently on: "+(MS.DAY_NAME[frontierPos.day]||frontierPos.day)+", week "+frontierPos.week,
+      frontierDetail: yearFinished
+        ? "All 180 days complete."
+        : (seq.frontier)+" of "+(MS.TOTAL_DAYS||180)+" days finished. Everything after "+
+          (MS.DAY_NAME[frontierPos.day]||frontierPos.day)+" of week "+frontierPos.week+" is locked until that day is done.",
+      excuseButtons: MS.DAYS.map(function(d){
+        const k=MS.excuseKey(st.year, st.week, d);
+        const on=!!st.excused[k];
+        const finished=!!st.stepDone[st.year+":"+st.week+":"+d+":end"];
+        return {label:d+(on?" \u2713":""),
+          onClick:function(){ self.toggleExcused(st.year, st.week, d); },
+          style:"font-family:'Public Sans',sans-serif;font-weight:600;font-size:.82rem;padding:6px 12px;"+
+            "border-radius:6px;cursor:pointer;border:1px solid "+(on?"var(--gold)":"var(--rule)")+";"+
+            "background:"+(on?"var(--gold-light)":(finished?"var(--forest-light)":"transparent"))+";color:var(--ink)"};
+      }),
+      excuseHint: "Excusing week "+st.week+". Change the week with the arrows at the top. Green means already completed; a tick means excused.",
       themeRows:(function(){
         if(!QT || !QT.themeCounts) return [];
         const c=QT.themeCounts(st.year), max=Math.max.apply(null,Object.keys(c).map(function(k){return c[k];}))||1;
@@ -1000,9 +1075,24 @@ class Component extends DCLogic {
       startDay: this.startDay,
       startBtnStyle:"font-family:'Fraunces',serif;font-weight:700;font-size:1.05rem;letter-spacing:.06em;"+
         "background:var(--brick);color:#fff;border:none;border-radius:8px;padding:13px 34px;cursor:pointer",
-      showStart: !st.started && !dayComplete,
-      showChecklist: st.started && !dayComplete,
-      showDayComplete: dayComplete,
+      // A blocked day shows the catch-up panel instead of START.
+      showStart: !seq.blocked && !st.started && !dayComplete,
+      showChecklist: !seq.blocked && st.started && !dayComplete,
+      showDayComplete: !seq.blocked && dayComplete,
+      showBlocked: seq.blocked,
+      blockedHeading: seq.blocked
+        ? "Finish "+(MS.DAY_NAME[frontierPos.day]||frontierPos.day)+" of week "+frontierPos.week+" first"
+        : "",
+      blockedText: seq.blocked
+        ? "School days are done in order. There is unfinished work behind this one, so this day is closed until that is done. Go back, finish it, and this opens by itself."
+        : "",
+      blockedBtnLabel: seq.blocked
+        ? "Go to "+(MS.DAY_NAME[frontierPos.day]||frontierPos.day)+", week "+frontierPos.week
+        : "",
+      goToFrontier: function(){ self.jumpTo(frontierPos.week, frontierPos.day); },
+      // Working ahead is the same mechanism seen from the other side.
+      showAheadNote: !seq.blocked && seq.state==="current" && !dayComplete && !st.started,
+      aheadNote: "You are caught up. Finish today and the next day opens straight away \u2014 you can work as far ahead as you like, which is how to cover a day you will be away for.",
       daySteps: daySteps,
       progressLabel:"Today's checklist",
       progressCount: doneCount+" of "+plan.steps.length+" done",

@@ -10,7 +10,7 @@
 <helmet data-dc-atomics>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
     --paper:#FAF6EC; --paper-card:#F1EAD6; --ink:#2C3B4A; --ink-soft:#5B6B78;
@@ -20,297 +20,325 @@
   *{box-sizing:border-box}
   body{margin:0;background:var(--paper);color:var(--ink);font-family:'Public Sans',system-ui,sans-serif;line-height:1.55}
   h1,h2,h3{font-family:'Fraunces',serif;font-weight:600;margin:0}
-  a{color:var(--brick)}
   .wrap{max-width:880px;margin:0 auto;padding:0 20px 70px}
   .card{background:var(--paper-card);border:1px solid var(--rule);border-radius:8px;padding:22px 24px;margin-bottom:20px}
   .muted{color:var(--ink-soft);font-size:.95rem}
   .q-box{background:var(--paper);border:1px solid var(--rule);border-radius:6px;padding:20px}
-  .word-chip{background:var(--paper);border:1px solid var(--rule);border-radius:6px;padding:8px 12px;font-size:.92rem;text-align:center}
-  .word-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;margin:12px 0 18px}
+  .word-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:9px;margin:12px 0 6px}
+  .word-chip{background:var(--paper);border:1px solid var(--rule);border-radius:6px;padding:8px 10px;font-size:.92rem;text-align:center}
   .upload-box{border:2px dashed var(--rule);border-radius:8px;padding:20px;text-align:center;background:var(--paper)}
-  .passage-box{background:var(--paper);border:1px solid var(--rule);border-radius:6px;padding:18px 20px;white-space:pre-wrap;font-size:1rem;max-width:70ch}
-  .preview-img{max-width:100%;max-height:320px;border-radius:6px;border:1px solid var(--rule);margin-top:12px}
-  .book{display:grid;grid-template-columns:auto 1fr;gap:14px;background:var(--paper);border:1px solid var(--rule);border-radius:6px;padding:14px 16px;margin-bottom:10px}
-  .book-age{font-family:'Fraunces',serif;font-style:italic;color:var(--gold);font-size:.85rem;white-space:nowrap}
-  .book-title{font-family:'Fraunces',serif;font-size:1.02rem;color:var(--brick-dark);margin:0 0 4px}
-  .step-title{margin:0 0 3px;font-size:1.02rem}
-  .step-desc{margin:0;font-size:.9rem;color:var(--ink-soft)}
-  .done-banner{text-align:center;padding:24px;margin-top:6px;background:var(--forest-light);border-radius:8px;color:#2E4E38}
+  .passage-box{background:var(--paper);border:1px solid var(--rule);border-radius:6px;padding:18px 20px;white-space:pre-wrap;font-size:1.02rem;line-height:1.7;max-width:66ch}
+  .preview-img{max-width:100%;max-height:300px;border-radius:6px;border:1px solid var(--rule);margin-top:12px}
+  .unit-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:620px){.unit-grid{grid-template-columns:1fr}}
+  .book{background:var(--paper);border:1px solid var(--rule);border-radius:6px;padding:13px 15px;margin-bottom:9px}
+  .book-title{font-family:'Fraunces',serif;font-size:1rem;color:var(--brick-dark);margin:0 0 3px}
+  .done-banner{text-align:center;padding:22px;margin-top:6px;background:var(--forest-light);border-radius:8px;color:#2E4E38}
 </style>
 <script src="./curriculum/subjects.js"></script>
 <script src="./curriculum/question-types.js"></script>
-<script src="./curriculum/language-arts.js"></script>
+<script src="./curriculum/la-y1-spine.js"></script>
+<script src="./curriculum/la-y1-words.js"></script>
+<script src="./curriculum/la-y1-grammar.js"></script>
+<script src="./curriculum/la-y1-reading.js"></script>
+<script src="./curriculum/la-y1-tasks.js"></script>
+<script src="./curriculum/la-books.js"></script>
 <script src="./curriculum/la-grader.js"></script>
 </helmet>
 
 <div style="min-height:100vh;display:flex;flex-direction:column">
 
-  <!-- ═══ Header ═══ -->
-  <div style="background:#2C3B4A;color:var(--paper);padding:18px 24px 0">
-    <div style="max-width:880px;margin:0 auto;display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding-bottom:16px">
-      <div style="flex:1;min-width:200px">
-        <div style="font-family:'Fraunces',serif;font-weight:700;font-size:22px">Word Voyagers</div>
-        <div style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:rgba(250,246,236,.55);margin-top:2px">Reading · Grammar · Spelling · Writing</div>
+  <div style="background:#2C3B4A;color:var(--paper);padding:16px 24px 0">
+    <div style="max-width:880px;margin:0 auto;display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding-bottom:14px">
+      <div style="flex:1;min-width:190px">
+        <div style="font-family:'Fraunces',serif;font-weight:700;font-size:21px">Word Voyagers</div>
+        <div style="font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(250,246,236,.55);margin-top:2px">{{ headerLine }}</div>
       </div>
-      <sc-for list="{{ levelItems }}" as="lv" hint-placeholder-count="2">
-        <button onClick="{{ lv.onClick }}" style="{{ lv.style }}">{{ lv.label }}</button>
-      </sc-for>
-      <a href="index.html" style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:rgba(250,246,236,.7);border:1px solid rgba(250,246,236,.25);border-radius:999px;padding:8px 14px">← Mission Control</a>
+      <button onClick="{{ goPrevWeek }}" style="{{ weekNavStyle }}">&lsaquo;</button>
+      <div style="font-family:'Fraunces',serif;font-size:14px;color:var(--gold-light);min-width:92px;text-align:center">{{ weekLabel }}</div>
+      <button onClick="{{ goNextWeek }}" style="{{ weekNavStyle }}">&rsaquo;</button>
+      <a href="index.html" style="font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:rgba(250,246,236,.7);border:1px solid rgba(250,246,236,.25);border-radius:999px;padding:8px 13px;text-decoration:none">&larr; Mission Control</a>
     </div>
-    <div style="max-width:880px;margin:0 auto;display:flex;gap:6px;flex-wrap:wrap">
-      <sc-for list="{{ navItems }}" as="n" hint-placeholder-count="6">
+    <div style="max-width:880px;margin:0 auto;display:flex;gap:5px;flex-wrap:wrap">
+      <sc-for list="{{ navItems }}" as="n" hint-placeholder-count="9">
         <button onClick="{{ n.onClick }}" style="{{ n.style }}">{{ n.label }}</button>
       </sc-for>
     </div>
   </div>
 
-  <div class="wrap" style="padding-top:26px;flex:1">
+  <div class="wrap" style="padding-top:24px;flex:1">
 
-    <!-- ═══ HOME / TODAY ═══ -->
     <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
       <div class="card">
-        <h2>Today's plan</h2>
-        <p class="muted">Work through each step in order. Press Start on the first one, and when you finish it, come back and press Start on the next.</p>
-        <sc-for list="{{ steps }}" as="s" hint-placeholder-count="4">
+        <div style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)">{{ unitLine }}</div>
+        <h2 style="margin:4px 0 2px">{{ weekTitle }}</h2>
+        <p class="muted" style="margin-top:2px">{{ weekFocusLine }}</p>
+        <sc-for list="{{ steps }}" as="s" hint-placeholder-count="5">
           <div style="{{ s.style }}">
-            <div style="flex:1">
-              <h3 class="step-title">{{ s.title }}</h3>
-              <p class="step-desc">{{ s.desc }}</p>
+            <div style="flex:none;width:34px;font-family:'Fraunces',serif;font-size:12px;color:var(--ink-soft)">{{ s.day }}</div>
+            <div style="flex:1;min-width:0">
+              <h3 style="margin:0 0 2px;font-size:1rem">{{ s.title }}</h3>
+              <p style="margin:0;font-size:.88rem;color:var(--ink-soft)">{{ s.desc }}</p>
             </div>
             <button onClick="{{ s.go }}" style="{{ s.btnStyle }}">{{ s.btnLabel }}</button>
           </div>
         </sc-for>
         <sc-if value="{{ allDone }}" hint-placeholder-val="{{ false }}">
           <div class="done-banner">
-            <div style="font-family:'Fraunces',serif;font-size:1.3rem;margin-bottom:6px">You finished today's lesson! 🎉</div>
-            <div class="muted">Great work today. Explore the Book List for something new to read.</div>
+            <div style="font-family:'Fraunces',serif;font-size:1.25rem;margin-bottom:5px">Week {{ weekNum }} finished!</div>
+            <div class="muted">Press the arrow at the top to start the next week.</div>
           </div>
         </sc-if>
       </div>
     </sc-if>
 
-    <!-- ═══ GRAMMAR ═══ -->
-    <sc-if value="{{ isGrammar }}" hint-placeholder-val="{{ false }}">
+    <sc-if value="{{ isMap }}" hint-placeholder-val="{{ false }}">
       <div class="card">
-        <h2>Grammar Drill</h2>
-        <p class="muted">Ten questions, a new random set each time you press Start.</p>
-
-        <sc-if value="{{ gzNotStarted }}" hint-placeholder-val="{{ true }}">
-          <div style="text-align:center;padding:20px">
-            <button onClick="{{ gzStart }}" style="{{ btnPrimary }}">Start drill</button>
-          </div>
-        </sc-if>
-
-        <sc-if value="{{ gzActive }}" hint-placeholder-val="{{ false }}">
-          <div style="display:flex;justify-content:space-between;font-size:.9rem;color:var(--ink-soft);margin-bottom:12px">
-            <span>{{ gzProgress }}</span>
-            <span style="color:var(--forest);font-weight:600">{{ gzScore }}</span>
-          </div>
-          <div class="q-box">
-            <div style="font-size:1.06rem;font-weight:600;margin-bottom:14px">{{ gzPrompt }}</div>
-            <sc-for list="{{ gzChoices }}" as="c" hint-placeholder-count="4">
-              <button onClick="{{ c.onClick }}" style="{{ c.style }}">{{ c.text }}</button>
-            </sc-for>
-            <sc-if value="{{ gzFeedbackShow }}" hint-placeholder-val="{{ false }}">
-              <div style="{{ gzFeedbackStyle }}">{{ gzFeedback }}</div>
-            </sc-if>
-            <div style="margin-top:16px">
-              <button onClick="{{ gzNext }}" style="{{ gzNextStyle }}">Next</button>
+        <h2>The year: nine unit studies, 36 weeks, 180 days</h2>
+        <p class="muted">Four weeks each. Tap any unit to jump to its first week.</p>
+      </div>
+      <div class="unit-grid">
+        <sc-for list="{{ unitCards }}" as="u" hint-placeholder-count="9">
+          <div onClick="{{ u.go }}" style="{{ u.style }}">
+            <div style="display:flex;align-items:baseline;gap:9px">
+              <div style="font-size:20px;color:{{ u.color }}">{{ u.badge }}</div>
+              <div style="font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft)">Unit {{ u.n }} &middot; weeks {{ u.weeks }}</div>
             </div>
-          </div>
-        </sc-if>
-
-        <sc-if value="{{ gzDone }}" hint-placeholder-val="{{ false }}">
-          <div style="text-align:center;padding:30px 10px">
-            <div class="muted">All done</div>
-            <div style="font-family:'Fraunces',serif;font-size:2.4rem;color:var(--forest);font-weight:700">{{ gzFinalScore }}</div>
-            <div class="muted">{{ gzFinalPct }}</div>
-            <button onClick="{{ gzRestart }}" style="{{ btnPrimary }}margin-top:10px">Try again</button>
-          </div>
-        </sc-if>
-      </div>
-    </sc-if>
-
-    <!-- ═══ SPELLING ═══ -->
-    <sc-if value="{{ isSpelling }}" hint-placeholder-val="{{ false }}">
-      <div class="card">
-        <h2>This week's word list</h2>
-        <p class="muted">Grouped by pattern. Knowing the pattern helps you spell other words that share it.</p>
-        <sc-for list="{{ spGroups }}" as="g" hint-placeholder-count="4">
-          <h3 style="font-size:1rem;margin:14px 0 4px">{{ g.title }}</h3>
-          <div class="word-grid">
-            <sc-for list="{{ g.words }}" as="w" hint-placeholder-count="6">
-              <div class="word-chip">{{ w.text }}</div>
-            </sc-for>
+            <h3 style="margin:5px 0 3px;font-size:1.08rem">{{ u.name }}</h3>
+            <div style="font-size:.85rem;color:var(--gold);font-style:italic;margin-bottom:5px">{{ u.virtue }}</div>
+            <div style="font-size:.9rem;color:var(--ink-soft)">{{ u.bigQ }}</div>
+            <div style="margin-top:8px;font-size:.85rem;color:var(--ink-soft)">Project: {{ u.project }}</div>
           </div>
         </sc-for>
       </div>
-
-      <div class="card">
-        <h2>Spelling Drill — type the word</h2>
-        <p class="muted">Listen to the word, then type it correctly.</p>
-
-        <sc-if value="{{ sqNotStarted }}" hint-placeholder-val="{{ true }}">
-          <div style="text-align:center;padding:20px">
-            <button onClick="{{ sqStart }}" style="{{ btnPrimary }}">Start drill</button>
-          </div>
-        </sc-if>
-
-        <sc-if value="{{ sqActive }}" hint-placeholder-val="{{ false }}">
-          <div style="display:flex;justify-content:space-between;font-size:.9rem;color:var(--ink-soft);margin-bottom:12px">
-            <span>{{ sqProgress }}</span>
-            <span style="color:var(--forest);font-weight:600">{{ sqScore }}</span>
-          </div>
-          <div class="q-box">
-            <div style="margin-bottom:12px">Listen to the word, then type it below.</div>
-            <button onClick="{{ sqHear }}" style="{{ btnSecondary }}">🔊 Hear the word</button>
-            <div style="display:flex;gap:10px;align-items:center;margin-top:14px">
-              <input value="{{ sqInputValue }}" onChange="{{ sqSetValue }}" placeholder="Type the word here" style="flex:1;padding:10px 12px;font-size:1rem;border:1px solid var(--rule);border-radius:6px;font-family:'Public Sans',sans-serif">
-              <button onClick="{{ sqCheck }}" style="{{ btnPrimary }}">Check</button>
-            </div>
-            <sc-if value="{{ sqFeedbackShow }}" hint-placeholder-val="{{ false }}">
-              <div style="{{ sqFeedbackStyle }}">{{ sqFeedback }}</div>
-            </sc-if>
-            <div style="margin-top:16px">
-              <button onClick="{{ sqNext }}" style="{{ sqNextStyle }}">Next</button>
-            </div>
-          </div>
-        </sc-if>
-
-        <sc-if value="{{ sqDone }}" hint-placeholder-val="{{ false }}">
-          <div style="text-align:center;padding:30px 10px">
-            <div class="muted">All done</div>
-            <div style="font-family:'Fraunces',serif;font-size:2.4rem;color:var(--forest);font-weight:700">{{ sqFinalScore }}</div>
-            <div class="muted">{{ sqFinalPct }}</div>
-            <button onClick="{{ sqRestart }}" style="{{ btnPrimary }}margin-top:10px">Try again</button>
-          </div>
-        </sc-if>
-      </div>
     </sc-if>
 
-    <!-- ═══ READING ═══ -->
     <sc-if value="{{ isReading }}" hint-placeholder-val="{{ false }}">
       <div class="card">
-        <h2>Reading Comprehension</h2>
-        <p class="muted">Choose a passage, read it — or press listen — then answer using evidence from the text.</p>
-        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px">
-          <sc-for list="{{ passageItems }}" as="p" hint-placeholder-count="2">
-            <button onClick="{{ p.onClick }}" style="{{ p.style }}">{{ p.label }}</button>
-          </sc-for>
-        </div>
-
-        <div style="margin-bottom:14px">
-          <button onClick="{{ passageListen }}" style="{{ btnSecondary }}">🔊 Read this passage to me</button>
-        </div>
-        <div class="passage-box">{{ passageText }}</div>
-
-        <h3 style="margin:22px 0 10px;font-size:1.1rem">Comprehension check</h3>
-
+        <div style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)">{{ rdTypeLine }}</div>
+        <h2 style="margin:3px 0 8px">{{ rdTitle }}</h2>
+        <div style="background:var(--gold-light);border-radius:6px;padding:9px 13px;font-size:.9rem;margin-bottom:13px">{{ rdReadAloud }}</div>
+        <div style="margin-bottom:12px"><button onClick="{{ rdListen }}" style="{{ btnSecondary }}">Read it to me</button></div>
+        <div class="passage-box">{{ rdText }}</div>
+        <h3 style="margin:20px 0 10px;font-size:1.05rem">Comprehension check</h3>
         <sc-if value="{{ rqNotStarted }}" hint-placeholder-val="{{ true }}">
-          <div style="text-align:center;padding:20px">
-            <button onClick="{{ rqStart }}" style="{{ btnPrimary }}">Start questions</button>
-          </div>
+          <div style="text-align:center;padding:16px"><button onClick="{{ rqStart }}" style="{{ btnPrimary }}">Start questions</button></div>
         </sc-if>
-
         <sc-if value="{{ rqActive }}" hint-placeholder-val="{{ false }}">
-          <div style="display:flex;justify-content:space-between;font-size:.9rem;color:var(--ink-soft);margin-bottom:12px">
-            <span>{{ rqProgress }}</span>
-            <span style="color:var(--forest);font-weight:600">{{ rqScore }}</span>
+          <div style="display:flex;justify-content:space-between;font-size:.88rem;color:var(--ink-soft);margin-bottom:10px">
+            <span>{{ rqProgress }}</span><span style="color:var(--forest);font-weight:600">{{ rqScore }}</span>
           </div>
           <div class="q-box">
-            <div style="font-size:1.06rem;font-weight:600;margin-bottom:14px">{{ rqPrompt }}</div>
+            <div style="font-size:1.04rem;font-weight:600;margin-bottom:13px">{{ rqPrompt }}</div>
             <sc-for list="{{ rqChoices }}" as="c" hint-placeholder-count="4">
               <button onClick="{{ c.onClick }}" style="{{ c.style }}">{{ c.text }}</button>
             </sc-for>
-            <sc-if value="{{ rqFeedbackShow }}" hint-placeholder-val="{{ false }}">
-              <div style="{{ rqFeedbackStyle }}">{{ rqFeedback }}</div>
-            </sc-if>
-            <div style="margin-top:16px">
-              <button onClick="{{ rqNext }}" style="{{ rqNextStyle }}">Next</button>
-            </div>
+            <sc-if value="{{ rqFbShow }}" hint-placeholder-val="{{ false }}"><div style="{{ rqFbStyle }}">{{ rqFb }}</div></sc-if>
+            <div style="margin-top:14px"><button onClick="{{ rqNext }}" style="{{ rqNextStyle }}">Next</button></div>
           </div>
         </sc-if>
-
         <sc-if value="{{ rqDone }}" hint-placeholder-val="{{ false }}">
-          <div style="text-align:center;padding:30px 10px">
+          <div style="text-align:center;padding:24px 10px">
             <div class="muted">All done</div>
-            <div style="font-family:'Fraunces',serif;font-size:2.4rem;color:var(--forest);font-weight:700">{{ rqFinalScore }}</div>
-            <div class="muted">{{ rqFinalPct }}</div>
-            <button onClick="{{ rqRestart }}" style="{{ btnPrimary }}margin-top:10px">Try again</button>
+            <div style="font-family:'Fraunces',serif;font-size:2.2rem;color:var(--forest);font-weight:700">{{ rqFinal }}</div>
+            <div class="muted">{{ rqPct }}</div>
+            <button onClick="{{ rqStart }}" style="{{ btnPrimary }}">Try again</button>
           </div>
         </sc-if>
       </div>
     </sc-if>
 
-    <!-- ═══ DAILY ASSIGNMENTS ═══ -->
-    <sc-if value="{{ isAssignments }}" hint-placeholder-val="{{ false }}">
+    <sc-if value="{{ isGrammar }}" hint-placeholder-val="{{ false }}">
       <div class="card">
-        <h2>Daily handwritten assignment</h2>
-        <p class="muted">Press listen to hear the assignment, write it on paper, photograph it, then press "Grade this work."</p>
-        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px">
-          <sc-for list="{{ asCatItems }}" as="c" hint-placeholder-count="4">
-            <button onClick="{{ c.onClick }}" style="{{ c.style }}">{{ c.label }}</button>
+        <div style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)">{{ gzStandard }}</div>
+        <h2 style="margin:3px 0 4px">{{ gzTitle }}</h2>
+        <p class="muted">Six questions. Read each one twice before you answer.</p>
+        <sc-if value="{{ gzNotStarted }}" hint-placeholder-val="{{ true }}">
+          <div style="text-align:center;padding:18px"><button onClick="{{ gzStart }}" style="{{ btnPrimary }}">Start drill</button></div>
+        </sc-if>
+        <sc-if value="{{ gzActive }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;justify-content:space-between;font-size:.88rem;color:var(--ink-soft);margin-bottom:10px">
+            <span>{{ gzProgress }}</span><span style="color:var(--forest);font-weight:600">{{ gzScore }}</span>
+          </div>
+          <div class="q-box">
+            <div style="font-size:1.04rem;font-weight:600;margin-bottom:13px">{{ gzPrompt }}</div>
+            <sc-for list="{{ gzChoices }}" as="c" hint-placeholder-count="4">
+              <button onClick="{{ c.onClick }}" style="{{ c.style }}">{{ c.text }}</button>
+            </sc-for>
+            <sc-if value="{{ gzFbShow }}" hint-placeholder-val="{{ false }}"><div style="{{ gzFbStyle }}">{{ gzFb }}</div></sc-if>
+            <div style="margin-top:14px"><button onClick="{{ gzNext }}" style="{{ gzNextStyle }}">Next</button></div>
+          </div>
+        </sc-if>
+        <sc-if value="{{ gzDone }}" hint-placeholder-val="{{ false }}">
+          <div style="text-align:center;padding:24px 10px">
+            <div class="muted">All done</div>
+            <div style="font-family:'Fraunces',serif;font-size:2.2rem;color:var(--forest);font-weight:700">{{ gzFinal }}</div>
+            <div class="muted">{{ gzPct }}</div>
+            <button onClick="{{ gzStart }}" style="{{ btnPrimary }}">Try again</button>
+          </div>
+        </sc-if>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isSpelling }}" hint-placeholder-val="{{ false }}">
+      <div class="card">
+        <h2>{{ spTitle }}</h2>
+        <p class="muted">Study these first. Say each one out loud, then start the drill.</p>
+        <div class="word-grid">
+          <sc-for list="{{ spWords }}" as="w" hint-placeholder-count="12">
+            <div class="word-chip">{{ w.text }}</div>
           </sc-for>
         </div>
+      </div>
+      <div class="card">
+        <h2>Spelling drill</h2>
+        <p class="muted">Listen to each word, then type it. The word is never shown on screen.</p>
+        <sc-if value="{{ sqNotStarted }}" hint-placeholder-val="{{ true }}">
+          <div style="text-align:center;padding:18px"><button onClick="{{ sqStart }}" style="{{ btnPrimary }}">Start drill</button></div>
+        </sc-if>
+        <sc-if value="{{ sqActive }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;justify-content:space-between;font-size:.88rem;color:var(--ink-soft);margin-bottom:10px">
+            <span>{{ sqProgress }}</span><span style="color:var(--forest);font-weight:600">{{ sqScore }}</span>
+          </div>
+          <div class="q-box">
+            <button onClick="{{ sqHear }}" style="{{ btnSecondary }}">Hear the word again</button>
+            <div style="display:flex;gap:9px;align-items:center;margin-top:13px">
+              <input value="{{ sqValue }}" onChange="{{ sqSet }}" placeholder="Type the word" style="flex:1;padding:10px 12px;font-size:1rem;border:1px solid var(--rule);border-radius:6px;font-family:'Public Sans',sans-serif">
+              <button onClick="{{ sqCheck }}" style="{{ btnPrimary }}">Check</button>
+            </div>
+            <sc-if value="{{ sqFbShow }}" hint-placeholder-val="{{ false }}"><div style="{{ sqFbStyle }}">{{ sqFb }}</div></sc-if>
+            <div style="margin-top:14px"><button onClick="{{ sqNext }}" style="{{ sqNextStyle }}">Next</button></div>
+          </div>
+        </sc-if>
+        <sc-if value="{{ sqDone }}" hint-placeholder-val="{{ false }}">
+          <div style="text-align:center;padding:24px 10px">
+            <div class="muted">All done</div>
+            <div style="font-family:'Fraunces',serif;font-size:2.2rem;color:var(--forest);font-weight:700">{{ sqFinal }}</div>
+            <div class="muted">{{ sqPct }}</div>
+            <button onClick="{{ sqStart }}" style="{{ btnPrimary }}">Try again</button>
+          </div>
+        </sc-if>
+      </div>
+    </sc-if>
 
+    <sc-if value="{{ isWriting }}" hint-placeholder-val="{{ false }}">
+      <div class="card">
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px">
+          <sc-for list="{{ asKinds }}" as="k" hint-placeholder-count="2">
+            <button onClick="{{ k.onClick }}" style="{{ k.style }}">{{ k.label }}</button>
+          </sc-for>
+        </div>
+        <h2>{{ asTitle }}</h2>
         <p class="muted">{{ asInstructions }}</p>
         <div class="q-box" style="border-left:4px solid var(--brick)">{{ asPrompt }}</div>
-
-        <div style="display:flex;gap:10px;flex-wrap:wrap;margin:14px 0">
-          <button onClick="{{ asNewPrompt }}" style="{{ btnSecondary }}">New assignment</button>
-          <button onClick="{{ asListen }}" style="{{ btnSecondary }}">🔊 Read this to me</button>
-        </div>
-
+        <div style="margin:13px 0"><button onClick="{{ asListen }}" style="{{ btnSecondary }}">Read this to me</button></div>
         <div class="upload-box">
           <input ref="{{ asFileRef }}" onChange="{{ asFilePicked }}" type="file" accept="image/*" capture="environment" style="display:none">
-          <button onClick="{{ asPickPhoto }}" style="{{ btnPrimary }}">📷 Upload or take a photo</button>
+          <button onClick="{{ asPick }}" style="{{ btnPrimary }}">Photograph your page</button>
           <sc-if value="{{ asHasImage }}" hint-placeholder-val="{{ false }}">
-            <div><img src="{{ asPreviewUrl }}" class="preview-img" alt="Photo of handwritten assignment"></div>
+            <div><img src="{{ asPreview }}" class="preview-img" alt="Photo of the handwritten page"></div>
           </sc-if>
         </div>
-
-        <div style="margin-top:14px">
-          <button onClick="{{ asGrade }}" style="{{ asGradeStyle }}">Grade this work</button>
-        </div>
-
+        <div style="margin-top:13px"><button onClick="{{ asGrade }}" style="{{ asGradeStyle }}">Grade this work</button></div>
         <sc-if value="{{ asGrading }}" hint-placeholder-val="{{ false }}">
-          <div style="margin-top:14px;color:var(--ink-soft)">Reading the photo and checking the work…</div>
+          <div style="margin-top:13px;color:var(--ink-soft)">Reading your page...</div>
         </sc-if>
-
         <sc-if value="{{ asHasError }}" hint-placeholder-val="{{ false }}">
-          <div style="margin-top:14px;background:#F3DCD5;color:var(--brick-dark);border-radius:6px;padding:10px 14px">{{ asError }}</div>
+          <div style="margin-top:13px;background:#F3DCD5;color:var(--brick-dark);border-radius:6px;padding:10px 13px">{{ asError }}</div>
         </sc-if>
-
         <sc-if value="{{ asHasResult }}" hint-placeholder-val="{{ false }}">
-          <div class="q-box" style="margin-top:14px">
+          <div class="q-box" style="margin-top:13px">
             <div style="{{ asTierStyle }}">{{ asTierLabel }}</div>
-            <h3 style="font-size:.95rem;margin:10px 0 4px;color:var(--brick-dark)">What went well</h3>
-            <p style="margin:0 0 4px">{{ asStrengths }}</p>
-            <h3 style="font-size:.95rem;margin:10px 0 4px;color:var(--brick-dark)">What to work on next</h3>
-            <p style="margin:0 0 4px">{{ asFocus }}</p>
-            <h3 style="font-size:.95rem;margin:10px 0 4px;color:var(--brick-dark)">Note to parent</h3>
-            <p class="muted" style="margin:0">{{ asNoteToParent }}</p>
+            <h3 style="font-size:.92rem;margin:10px 0 3px;color:var(--brick-dark)">What went well</h3>
+            <p style="margin:0">{{ asStrengths }}</p>
+            <h3 style="font-size:.92rem;margin:10px 0 3px;color:var(--brick-dark)">What to work on next</h3>
+            <p style="margin:0">{{ asFocus }}</p>
+            <h3 style="font-size:.92rem;margin:10px 0 3px;color:var(--brick-dark)">Note to parent</h3>
+            <p class="muted" style="margin:0">{{ asNote }}</p>
           </div>
         </sc-if>
       </div>
     </sc-if>
 
-    <!-- ═══ BOOK LIST ═══ -->
+    <sc-if value="{{ isSpeaking }}" hint-placeholder-val="{{ false }}">
+      <div class="card">
+        <h2>{{ skTitle }}</h2>
+        <div style="background:var(--gold-light);border-radius:6px;padding:10px 13px;font-size:.9rem;margin:10px 0 13px">This one is done out loud with another person. Nothing here is scored by the computer. Do it, then mark it done.</div>
+        <div class="q-box" style="border-left:4px solid var(--forest)">{{ skPrompt }}</div>
+        <div style="margin:13px 0"><button onClick="{{ skListen }}" style="{{ btnSecondary }}">Read this to me</button></div>
+        <button onClick="{{ skMarkDone }}" style="{{ skDoneStyle }}">{{ skDoneLabel }}</button>
+      </div>
+      <div class="card">
+        <h2>Week {{ weekNum }} review</h2>
+        <p class="muted">Four mixed questions from this week's grammar, before you move on.</p>
+        <sc-if value="{{ rvNotStarted }}" hint-placeholder-val="{{ true }}">
+          <div style="text-align:center;padding:16px"><button onClick="{{ rvStart }}" style="{{ btnPrimary }}">Start review</button></div>
+        </sc-if>
+        <sc-if value="{{ rvActive }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;justify-content:space-between;font-size:.88rem;color:var(--ink-soft);margin-bottom:10px">
+            <span>{{ rvProgress }}</span><span style="color:var(--forest);font-weight:600">{{ rvScore }}</span>
+          </div>
+          <div class="q-box">
+            <div style="font-size:1.04rem;font-weight:600;margin-bottom:13px">{{ rvPrompt }}</div>
+            <sc-for list="{{ rvChoices }}" as="c" hint-placeholder-count="4">
+              <button onClick="{{ c.onClick }}" style="{{ c.style }}">{{ c.text }}</button>
+            </sc-for>
+            <sc-if value="{{ rvFbShow }}" hint-placeholder-val="{{ false }}"><div style="{{ rvFbStyle }}">{{ rvFb }}</div></sc-if>
+            <div style="margin-top:14px"><button onClick="{{ rvNext }}" style="{{ rvNextStyle }}">Next</button></div>
+          </div>
+        </sc-if>
+        <sc-if value="{{ rvDone }}" hint-placeholder-val="{{ false }}">
+          <div style="text-align:center;padding:24px 10px">
+            <div style="font-family:'Fraunces',serif;font-size:2.2rem;color:var(--forest);font-weight:700">{{ rvFinal }}</div>
+            <div class="muted">{{ rvPct }}</div>
+          </div>
+        </sc-if>
+      </div>
+    </sc-if>
+
     <sc-if value="{{ isBooks }}" hint-placeholder-val="{{ false }}">
       <div class="card">
-        <h2>A Christian family's book list</h2>
-        <p>Chosen for strong storytelling and character-building content, this list leans on books that model honesty, courage, kindness, and gratitude, and treat faith as ordinary and good rather than something to hide.</p>
-        <sc-for list="{{ bookGroups }}" as="g" hint-placeholder-count="4">
-          <h3 style="margin:20px 0 10px;font-size:1.05rem">{{ g.title }}</h3>
+        <h2>Read-alouds, one per unit</h2>
+        <p class="muted">A read-aloud should be harder than what you read alone, because a grown-up is there. Several of these sit above the year's independent band on purpose.</p>
+        <sc-for list="{{ readAlouds }}" as="b" hint-placeholder-count="9">
+          <div class="book">
+            <div style="font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold)">Unit {{ b.unit }} &middot; {{ b.lexile }}</div>
+            <h3 class="book-title">{{ b.title }} &mdash; {{ b.author }}</h3>
+            <div class="muted">{{ b.why }}</div>
+            <sc-if value="{{ b.hasDiscuss }}" hint-placeholder-val="{{ false }}">
+              <div style="margin-top:6px;font-size:.86rem;color:var(--brick-dark)">Read ahead: {{ b.discuss }}</div>
+            </sc-if>
+          </div>
+        </sc-for>
+      </div>
+      <div class="card">
+        <h2>Independent reading</h2>
+        <sc-for list="{{ bookGroups }}" as="g" hint-placeholder-count="5">
+          <h3 style="margin:16px 0 8px;font-size:1.02rem">{{ g.title }}</h3>
           <sc-for list="{{ g.books }}" as="b" hint-placeholder-count="3">
             <div class="book">
-              <div class="book-age">ages {{ b.age }}</div>
-              <div>
-                <div class="book-title">{{ b.title }} — {{ b.author }}</div>
-                <div class="muted">{{ b.blurb }}</div>
-              </div>
+              <div style="font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold)">{{ b.lexile }}</div>
+              <h3 class="book-title">{{ b.title }} &mdash; {{ b.author }}</h3>
+              <div class="muted">{{ b.why }}</div>
             </div>
           </sc-for>
+        </sc-for>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isParent }}" hint-placeholder-val="{{ false }}">
+      <div class="card">
+        <h2>How the year is built</h2>
+        <p>Nine unit studies, four weeks each: 36 weeks, 180 days. Every week runs the same five-day rhythm, and each day is one screen your child can start alone. Monday reading, Tuesday grammar, Wednesday spelling, Thursday handwriting, Friday speaking and review.</p>
+        <p class="muted">Grammar, spelling and reading questions grade themselves instantly with an explanation. Thursday's handwritten page is photographed and read by the model. Friday's speaking task is deliberately NOT machine-graded: there is no honest way to score a child reporting aloud or building on someone's idea in a discussion, so the page gives the task and the rubric and your child marks it done with whoever they did it with. That is the one place in the week that genuinely needs another person.</p>
+      </div>
+      <div class="card">
+        <h2>Standards covered</h2>
+        <sc-for list="{{ standards }}" as="s" hint-placeholder-count="10">
+          <div style="display:grid;grid-template-columns:92px 1fr;gap:12px;padding:8px 0;border-bottom:1px solid var(--rule)">
+            <div style="font-family:'Fraunces',serif;font-size:.85rem;color:var(--brick-dark)">{{ s.tag }}</div>
+            <div><div style="font-size:.93rem">{{ s.text }}</div><div class="muted" style="font-size:.82rem">Weeks: {{ s.weeks }}</div></div>
+          </div>
         </sc-for>
       </div>
     </sc-if>
@@ -321,35 +349,28 @@
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
   state = {
-    view: "home",
-    level: (()=>{ try{ return localStorage.getItem("la.level") || "g3"; }catch(e){ return "g3"; } })(),
-    done: (()=>{ try{ return JSON.parse(localStorage.getItem("la.done")||"{}"); }catch(e){ return {}; } })(),
-    gz: null,
-    sq: null,
-    passageId: null,
-    rq: null,
-    asCat: "handwriting",
-    asIdx: {handwriting:0, spelling:0, grammar:0, reading:0},
-    asImage: null,
-    asStatus: "idle",
-    asResult: null,
-    asError: ""
+    view:"home",
+    week:(()=>{ try{ return Math.min(36,Math.max(1,parseInt(localStorage.getItem("la.week")||"1",10)||1)); }catch(e){ return 1; } })(),
+    done:(()=>{ try{ return JSON.parse(localStorage.getItem("la.done")||"{}"); }catch(e){ return {}; } })(),
+    gz:null, sq:null, rq:null, rv:null,
+    asKind:"handwriting", asImage:null, asStatus:"idle", asResult:null, asError:""
   };
 
-  LA = window.__CURR.LA;
+  Y = window.__CURR.LA_Y1;
 
-  // ---- navigation & persistence ----
   goto=(v)=>{ this.setState({view:v}); window.scrollTo(0,0); };
 
-  setLevel=(lvl)=>{
-    try{ localStorage.setItem("la.level", lvl); }catch(e){}
-    this.setState({level:lvl, gz:null, sq:null, rq:null, passageId:null,
+  setWeek=(w)=>{
+    const week=Math.min(36,Math.max(1,w));
+    try{ localStorage.setItem("la.week",String(week)); }catch(e){}
+    this.setState({week, gz:null, sq:null, rq:null, rv:null,
       asImage:null, asStatus:"idle", asResult:null, asError:""});
+    window.scrollTo(0,0);
   };
 
   markDone=(key)=>{
-    const level=this.state.level;
-    const done={...this.state.done, [level]:{...(this.state.done[level]||{}), [key]:true}};
+    const w=this.state.week;
+    const done={...this.state.done, [w]:{...(this.state.done[w]||{}), [key]:true}};
     try{ localStorage.setItem("la.done", JSON.stringify(done)); }catch(e){}
     this.setState({done});
   };
@@ -357,372 +378,256 @@ class Component extends DCLogic {
   speak(text){
     if(!window.speechSynthesis) return;
     window.speechSynthesis.cancel();
-    const u=new SpeechSynthesisUtterance(text);
-    u.rate=0.95;
+    const u=new SpeechSynthesisUtterance(text); u.rate=0.95;
     window.speechSynthesis.speak(u);
   }
 
-  shuffle(arr){
-    const a=[...arr];
-    for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; }
-    return a;
+  shuffle(a){ a=[...a]; for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); const t=a[i]; a[i]=a[j]; a[j]=t; } return a; }
+
+  prepMC(bank,n){
+    const pool = n ? this.shuffle(bank).slice(0,Math.min(n,bank.length)) : bank;
+    return pool.map(it=>({...it, a: it.options[it.a], options: this.shuffle(it.options)}));
   }
 
-  // Multiple-choice items ship with `a` as an index into `options`. Once the
-  // options get shuffled for display that index is meaningless, so this
-  // resolves the correct answer to its TEXT first, then shuffles — QTypes
-  // grades multiple-choice by text just as well as by index.
-  prepMC(bank, n){
-    const pool = n ? this.shuffle(bank).slice(0, Math.min(n, bank.length)) : bank;
-    return pool.map(it=>{
-      const correctText = it.options[it.a];
-      return {...it, a: correctText, options: this.shuffle(it.options)};
-    });
+  fbStyle(ok){ return "margin-top:10px;padding:10px 12px;border-radius:6px;font-size:.9rem;"+
+    (ok?"background:var(--forest-light);color:#2E4E38":"background:#F3DCD5;color:var(--brick-dark)"); }
+  navStyle(a){ return "font-family:'Fraunces',serif;font-weight:600;font-size:.88rem;padding:9px 14px;border-radius:8px 8px 0 0;cursor:pointer;border:none;background:"+(a?"var(--paper)":"#3C5064")+";color:"+(a?"var(--brick-dark)":"#CBD6DD"); }
+  pill(a){ return "font-family:'Public Sans',sans-serif;font-weight:600;font-size:.85rem;padding:7px 14px;border-radius:999px;cursor:pointer;border:1px solid "+(a?"var(--brick)":"var(--rule)")+";background:"+(a?"var(--brick)":"transparent")+";color:"+(a?"#fff":"var(--ink)"); }
+  stepStyle(d){ return "display:flex;align-items:center;gap:12px;background:var(--paper);border:1px solid "+(d?"var(--forest)":"var(--rule)")+";border-radius:8px;padding:13px 15px;margin-bottom:10px"; }
+  choice(s){
+    const bg=s==="correct"?"var(--forest-light)":s==="incorrect"?"#F3DCD5":"#fff";
+    const bd=s==="correct"?"var(--forest)":s==="incorrect"?"var(--brick)":"var(--rule)";
+    return "display:block;width:100%;text-align:left;background:"+bg+";border:1px solid "+bd+";border-radius:6px;padding:10px 13px;font-family:'Public Sans',sans-serif;font-size:.95rem;cursor:pointer;color:var(--ink);margin-bottom:7px";
   }
-
-  feedbackStyle(ok){
-    return "margin-top:10px;padding:10px 12px;border-radius:6px;font-size:.92rem;"+
-      (ok ? "background:var(--forest-light);color:#2E4E38" : "background:#F3DCD5;color:var(--brick-dark)");
-  }
-
-  // ---- style helpers (all dynamic look-and-feel goes through these, since
-  // this template system only proved out {{ }} bindings for style strings,
-  // not for conditional class names) ----
-  pillStyle(active){
-    return "font-family:'Public Sans',sans-serif;font-weight:600;font-size:.85rem;padding:7px 14px;"+
-      "border-radius:999px;cursor:pointer;border:1px solid "+(active?"var(--brick)":"rgba(250,246,236,.3)")+";"+
-      "background:"+(active?"var(--brick)":"transparent")+";color:"+(active?"#fff":"var(--paper)");
-  }
-  pillStyleLight(active){
-    return "font-family:'Public Sans',sans-serif;font-weight:600;font-size:.85rem;padding:7px 14px;"+
-      "border-radius:999px;cursor:pointer;border:1px solid "+(active?"var(--brick)":"var(--rule)")+";"+
-      "background:"+(active?"var(--brick)":"transparent")+";color:"+(active?"#fff":"var(--ink)");
-  }
-  navBtnStyle(active){
-    return "font-family:'Fraunces',serif;font-weight:600;font-size:.92rem;padding:10px 16px;"+
-      "border-radius:8px 8px 0 0;cursor:pointer;border:none;"+
-      "background:"+(active?"var(--paper)":"#3C5064")+";color:"+(active?"var(--brick-dark)":"#CBD6DD");
-  }
-  stepStyle(done){
-    return "display:flex;align-items:center;gap:16px;background:var(--paper);"+
-      "border:1px solid "+(done?"var(--forest)":"var(--rule)")+";border-radius:8px;padding:16px 18px;margin-bottom:12px";
-  }
-  choiceStyle(state){
-    const bg = state==="correct" ? "var(--forest-light)" : state==="incorrect" ? "#F3DCD5" : "#fff";
-    const bd = state==="correct" ? "var(--forest)" : state==="incorrect" ? "var(--brick)" : "var(--rule)";
-    return "display:block;width:100%;text-align:left;background:"+bg+";border:1px solid "+bd+";"+
-      "border-radius:6px;padding:10px 14px;font-family:'Public Sans',sans-serif;font-size:.96rem;"+
-      "cursor:pointer;color:var(--ink);margin-bottom:8px";
-  }
-  btn(kind, enabled){
-    if(!enabled) return "font-family:'Public Sans',sans-serif;font-weight:600;font-size:.9rem;"+
-      "background:#C9BFA6;color:#fff;border:none;border-radius:6px;padding:9px 18px;cursor:default";
+  btn(kind,on){
+    if(!on) return "font-family:'Public Sans',sans-serif;font-weight:600;font-size:.89rem;background:#C9BFA6;color:#fff;border:none;border-radius:6px;padding:9px 17px;cursor:default";
     return kind==="primary"
-      ? "font-family:'Public Sans',sans-serif;font-weight:600;font-size:.9rem;background:var(--brick);color:#fff;border:none;border-radius:6px;padding:9px 18px;cursor:pointer"
-      : "font-family:'Public Sans',sans-serif;font-weight:600;font-size:.9rem;background:transparent;color:var(--brick);border:1px solid var(--brick);border-radius:6px;padding:9px 18px;cursor:pointer";
+      ? "font-family:'Public Sans',sans-serif;font-weight:600;font-size:.89rem;background:var(--brick);color:#fff;border:none;border-radius:6px;padding:9px 17px;cursor:pointer"
+      : "font-family:'Public Sans',sans-serif;font-weight:600;font-size:.89rem;background:transparent;color:var(--brick);border:1px solid var(--brick);border-radius:6px;padding:9px 17px;cursor:pointer";
   }
-  tierStyle(tier){
-    const bg = tier==="excellent" ? "var(--forest-light)" : tier==="good" ? "var(--gold-light)" : "#F3DCD5";
-    const col = tier==="excellent" ? "#2E4E38" : tier==="good" ? "#7A5A0C" : "var(--brick-dark)";
-    return "display:inline-block;font-family:'Fraunces',serif;font-weight:600;font-size:.85rem;"+
-      "padding:5px 14px;border-radius:20px;background:"+bg+";color:"+col;
+  tierStyle(t){
+    const bg=t==="excellent"?"var(--forest-light)":t==="good"?"var(--gold-light)":"#F3DCD5";
+    const c =t==="excellent"?"#2E4E38":t==="good"?"#7A5A0C":"var(--brick-dark)";
+    return "display:inline-block;font-family:'Fraunces',serif;font-weight:600;font-size:.85rem;padding:5px 13px;border-radius:20px;background:"+bg+";color:"+c;
   }
 
-  // ---- grammar ----
-  startGrammar=()=>{
-    const bank=this.LA.GRAMMAR[this.state.level].items;
-    const items=this.prepMC(bank, 10);
-    this.setState({gz:{items, idx:0, score:0, answered:false, chosen:null, correct:null}});
-  };
-  answerGrammar=(choiceText)=>{
-    const gz=this.state.gz; if(!gz || gz.answered) return;
-    const item=gz.items[gz.idx];
-    const ok=window.QTypes.grade(item, choiceText);
-    this.setState({gz:{...gz, answered:true, chosen:choiceText, correct:ok, score: gz.score+(ok?1:0)}});
-  };
-  nextGrammar=()=>{
-    const gz=this.state.gz; if(!gz || !gz.answered) return;
-    const idx=gz.idx+1;
-    this.setState({gz:{...gz, idx, answered:false, chosen:null, correct:null}});
-    if(idx>=gz.items.length) this.markDone("grammar");
-  };
+  quizStart(slot, items){ const p={}; p[slot]={items, idx:0, score:0, answered:false, chosen:null, ok:null}; this.setState(p); }
+  quizAnswer(slot, text){
+    const q=this.state[slot]; if(!q||q.answered) return;
+    const ok=window.QTypes.grade(q.items[q.idx], text);
+    const p={}; p[slot]={...q, answered:true, chosen:text, ok:ok, score:q.score+(ok?1:0)};
+    this.setState(p);
+  }
+  quizNext(slot, doneKey){
+    const q=this.state[slot]; if(!q||!q.answered) return;
+    const idx=q.idx+1;
+    const p={}; p[slot]={...q, idx:idx, answered:false, chosen:null, ok:null};
+    this.setState(p);
+    if(idx>=q.items.length && doneKey) this.markDone(doneKey);
+  }
+  quizVals(slot, prefix, doneKey, starter){
+    const q=this.state[slot];
+    const off={};
+    off[prefix+"NotStarted"]=!q; off[prefix+"Active"]=false; off[prefix+"Done"]=false;
+    off[prefix+"Start"]=starter; off[prefix+"Progress"]=""; off[prefix+"Score"]="";
+    off[prefix+"Prompt"]=""; off[prefix+"Choices"]=[]; off[prefix+"FbShow"]=false;
+    off[prefix+"Fb"]=""; off[prefix+"FbStyle"]=""; off[prefix+"Next"]=function(){};
+    off[prefix+"NextStyle"]=this.btn("primary",false); off[prefix+"Final"]=""; off[prefix+"Pct"]="";
+    if(!q) return off;
+    if(q.idx>=q.items.length){
+      const pct=Math.round((q.score/q.items.length)*100);
+      off[prefix+"NotStarted"]=false; off[prefix+"Done"]=true;
+      off[prefix+"Final"]=q.score+" / "+q.items.length; off[prefix+"Pct"]=pct+"% correct";
+      return off;
+    }
+    const it=q.items[q.idx];
+    const self=this;
+    off[prefix+"NotStarted"]=false; off[prefix+"Active"]=true;
+    off[prefix+"Progress"]="Question "+(q.idx+1)+" of "+q.items.length;
+    off[prefix+"Score"]="Score: "+q.score+"/"+q.idx;
+    off[prefix+"Prompt"]=it.q;
+    off[prefix+"Choices"]=it.options.map(function(o){
+      let s="default";
+      if(q.answered){ if(o===it.a) s="correct"; else if(o===q.chosen) s="incorrect"; }
+      return {text:o, style:self.choice(s), onClick: q.answered?function(){}:function(){ self.quizAnswer(slot,o); }};
+    });
+    off[prefix+"FbShow"]=q.answered;
+    off[prefix+"Fb"]= q.answered ? ((q.ok?"Correct":"Not quite")+(it.hint?" - "+it.hint:".")) : "";
+    off[prefix+"FbStyle"]= q.answered ? this.fbStyle(q.ok) : "";
+    off[prefix+"Next"]=function(){ self.quizNext(slot,doneKey); };
+    off[prefix+"NextStyle"]=this.btn("primary", q.answered);
+    return off;
+  }
 
-  // ---- spelling ----
-  startSpelling=()=>{
-    const bank=this.LA.SPELLING[this.state.level].items;
-    const items=this.shuffle(bank).slice(0,8);
-    this.setState({sq:{items, idx:0, score:0, value:"", answered:false, correct:null}});
+  sqStart=()=>{
+    const set=this.Y.spellingSetFor(this.state.week);
+    const items=this.shuffle(set.items).slice(0,8);
+    this.setState({sq:{items, idx:0, score:0, value:"", answered:false, ok:null}});
     this.speak(items[0].a[0]);
   };
-  setSpellValue=(e)=>{
-    const sq=this.state.sq; if(!sq || sq.answered) return;
-    this.setState({sq:{...sq, value:e.target.value}});
+  sqSet=(e)=>{ const s=this.state.sq; if(!s||s.answered) return; this.setState({sq:{...s, value:e.target.value}}); };
+  sqCheck=()=>{
+    const s=this.state.sq; if(!s||s.answered) return;
+    const ok=window.QTypes.grade(s.items[s.idx], s.value);
+    this.setState({sq:{...s, answered:true, ok:ok, score:s.score+(ok?1:0)}});
   };
-  checkSpelling=()=>{
-    const sq=this.state.sq; if(!sq || sq.answered) return;
-    const item=sq.items[sq.idx];
-    const ok=window.QTypes.grade(item, sq.value);
-    this.setState({sq:{...sq, answered:true, correct:ok, score: sq.score+(ok?1:0)}});
-  };
-  nextSpelling=()=>{
-    const sq=this.state.sq; if(!sq || !sq.answered) return;
-    const idx=sq.idx+1;
-    this.setState({sq:{...sq, idx, value:"", answered:false, correct:null}});
-    if(idx<sq.items.length) this.speak(sq.items[idx].a[0]);
-    else this.markDone("spelling");
+  sqNext=()=>{
+    const s=this.state.sq; if(!s||!s.answered) return;
+    const idx=s.idx+1;
+    this.setState({sq:{...s, idx:idx, value:"", answered:false, ok:null}});
+    if(idx<s.items.length) this.speak(s.items[idx].a[0]); else this.markDone("spelling");
   };
 
-  // ---- reading ----
-  choosePassage=(id)=>{ this.setState({passageId:id, rq:null}); };
-  startReading=(passageId)=>{
-    const passage=this.LA.PASSAGES[this.state.level].find(p=>p.id===passageId);
-    const items=this.prepMC(passage.questions);
-    this.setState({rq:{passageId, items, idx:0, score:0, answered:false, chosen:null, correct:null}});
+  asPickKind=(k)=>this.setState({asKind:k, asImage:null, asStatus:"idle", asResult:null, asError:""});
+  asFilePicked=(e)=>{
+    const f=e.target.files&&e.target.files[0]; e.target.value="";
+    if(!f) return;
+    this.setState({asImage:{file:f, url:URL.createObjectURL(f)}, asStatus:"idle", asResult:null, asError:""});
   };
-  answerReading=(choiceText)=>{
-    const rq=this.state.rq; if(!rq || rq.answered) return;
-    const item=rq.items[rq.idx];
-    const ok=window.QTypes.grade(item, choiceText);
-    this.setState({rq:{...rq, answered:true, chosen:choiceText, correct:ok, score: rq.score+(ok?1:0)}});
-  };
-  nextReading=()=>{
-    const rq=this.state.rq; if(!rq || !rq.answered) return;
-    const idx=rq.idx+1;
-    this.setState({rq:{...rq, idx, answered:false, chosen:null, correct:null}});
-    if(idx>=rq.items.length) this.markDone("reading");
-  };
-
-  // ---- assignments ----
-  chooseAsCat=(cat)=>{
-    this.setState({asCat:cat, asImage:null, asStatus:"idle", asResult:null, asError:""});
-  };
-  nextAssignmentPrompt=()=>{
-    const cat=this.state.asCat;
-    const asIdx={...this.state.asIdx, [cat]: (this.state.asIdx[cat]||0)+1};
-    this.setState({asIdx, asImage:null, asStatus:"idle", asResult:null, asError:""});
-  };
-  assignmentFilePicked=(e)=>{
-    const file=e.target.files && e.target.files[0];
-    e.target.value=""; // same-file re-pick must still fire change
-    if(!file) return;
-    const previewUrl=URL.createObjectURL(file);
-    this.setState({asImage:{file, previewUrl}, asStatus:"idle", asResult:null, asError:""});
-  };
-  gradeAssignment=async ()=>{
-    const st=this.state, LA=this.LA;
-    if(!st.asImage || st.asStatus==="grading") return;
+  asGrade=async ()=>{
+    const st=this.state;
+    if(!st.asImage||st.asStatus==="grading") return;
     this.setState({asStatus:"grading", asError:""});
     try{
       if(!window.LAGrader) throw new Error("Grading isn't available on this page.");
       if(!window.LAGrader.enabled) await window.LAGrader.loadConfig();
-      if(!window.LAGrader.enabled) throw new Error("Photo grading isn't set up for this site yet — ask a grown-up to check the site's model configuration. You can still do this assignment on paper.");
-      const data=LA.HANDWRITTEN[st.level][st.asCat];
-      const idx=st.asIdx[st.asCat]||0;
-      const promptText=data.prompts[idx % data.prompts.length];
-      const labelMap={handwriting:"handwriting", spelling:"spelling", grammar:"grammar", reading:"reading response"};
-      const result=await window.LAGrader.grade(labelMap[st.asCat], data.instructions, data.rubric, promptText, st.asImage.file);
-      this.setState({asStatus:"done", asResult:result});
-      this.markDone("assignments");
-    }catch(err){
-      this.setState({asStatus:"error", asError:String(err&&err.message||err)});
-    }
+      if(!window.LAGrader.enabled) throw new Error("Photo grading isn't set up for this site yet - a grown-up needs to configure it. Your written page still counts; show it to them instead.");
+      const t=this.Y.taskFor(st.week, st.asKind);
+      const r=await window.LAGrader.grade(st.asKind, t.instructions, t.rubric, t.prompt, st.asImage.file);
+      this.setState({asStatus:"done", asResult:r});
+      this.markDone(st.asKind==="handwriting"?"handwriting":"writing");
+    }catch(err){ this.setState({asStatus:"error", asError:String(err&&err.message||err)}); }
   };
 
-  // ---- view-model ----
   renderVals(){
-    const st=this.state, LA=this.LA, level=st.level;
+    const st=this.state, Y=this.Y, self=this;
+    const wk=Y.WEEKS.find(function(w){ return w.n===st.week; });
+    const unit=Y.unitOf(st.week);
+    const done=st.done[st.week]||{};
 
-    const levelItems=[{id:"g3",label:"3rd Grade"},{id:"g5",label:"5th Grade"}].map(l=>({
-      label:l.label, onClick:()=>this.setLevel(l.id), style:this.pillStyle(level===l.id)
-    }));
+    const navDefs=[["home","Today"],["map","The Year"],["reading","Reading"],["grammar","Grammar"],
+                   ["spelling","Spelling"],["writing","Handwriting"],["speaking","Speak & Show"],
+                   ["books","Books"],["parent","For Parents"]];
+    const navItems=navDefs.map(function(d){
+      return {label:d[1], onClick:function(){ self.goto(d[0]); }, style:self.navStyle(st.view===d[0])};
+    });
 
-    const navDefs=[
-      {key:"home",label:"Today"}, {key:"reading",label:"Reading"}, {key:"grammar",label:"Grammar"},
-      {key:"spelling",label:"Spelling"}, {key:"assignments",label:"Assignments"}, {key:"books",label:"Book List"}
-    ];
-    const navItems=navDefs.map(n=>({label:n.label, onClick:()=>this.goto(n.key), style:this.navBtnStyle(st.view===n.key)}));
-
-    const done=st.done[level]||{};
     const stepDefs=[
-      {key:"reading", title:"1. Reading Comprehension", desc:"Pick a passage, read or listen, then answer with evidence.", view:"reading"},
-      {key:"grammar", title:"2. Grammar Drill", desc:"Answer 10 grammar questions.", view:"grammar"},
-      {key:"spelling", title:"3. Spelling Drill", desc:"Listen to each word and type the spelling.", view:"spelling"},
-      {key:"assignments", title:"4. Handwritten Assignment", desc:"Write one on paper, photograph it, and get feedback.", view:"assignments"}
+      ["reading","Mon","Reading","Read the passage aloud, then answer.","reading"],
+      ["grammar","Tue","Grammar","Six questions on "+wk.title.toLowerCase()+".","grammar"],
+      ["spelling","Wed","Spelling","Study the list, then spell from listening.","spelling"],
+      ["handwriting","Thu","Handwriting","Write on paper, photograph it, get feedback.","writing"],
+      ["speaking","Fri","Speak & Show","Out loud with someone, then a review drill.","speaking"]
     ];
-    const steps=stepDefs.map(s=>({
-      title:s.title, desc:s.desc, style:this.stepStyle(!!done[s.key]),
-      btnLabel: done[s.key] ? "Review" : "Start",
-      btnStyle: this.btn(done[s.key]?"secondary":"primary", true),
-      go:()=>this.goto(s.view)
-    }));
-    const allDone = stepDefs.every(s=>!!done[s.key]);
-
-    const base = {
-      navItems, levelItems, steps, allDone,
-      isHome: st.view==="home", isReading: st.view==="reading", isGrammar: st.view==="grammar",
-      isSpelling: st.view==="spelling", isAssignments: st.view==="assignments", isBooks: st.view==="books",
-      btnPrimary: this.btn("primary", true), btnSecondary: this.btn("secondary", true)
-    };
-
-    return {...base,
-      ...this.grammarVals(),
-      ...this.spellingVals(),
-      ...this.readingVals(),
-      ...this.assignmentVals(),
-      ...this.booksVals(level)
-    };
-  }
-
-  grammarVals(){
-    const gz=this.state.gz;
-    if(!gz){
-      return {gzNotStarted:true, gzActive:false, gzDone:false, gzStart:this.startGrammar, gzRestart:this.startGrammar,
-        gzChoices:[], gzPrompt:"", gzProgress:"", gzScore:"", gzFeedback:"", gzFeedbackStyle:"", gzFeedbackShow:false,
-        gzNext:()=>{}, gzNextStyle:this.btn("primary",false), gzFinalScore:"", gzFinalPct:""};
-    }
-    const complete = gz.idx>=gz.items.length;
-    if(complete){
-      const pct=Math.round((gz.score/gz.items.length)*100);
-      return {gzNotStarted:false, gzActive:false, gzDone:true, gzRestart:this.startGrammar, gzStart:this.startGrammar,
-        gzFinalScore: gz.score+" / "+gz.items.length, gzFinalPct: pct+"% correct",
-        gzChoices:[], gzPrompt:"", gzProgress:"", gzScore:"", gzFeedback:"", gzFeedbackStyle:"", gzFeedbackShow:false,
-        gzNext:()=>{}, gzNextStyle:this.btn("primary",false)};
-    }
-    const item=gz.items[gz.idx];
-    const choices=item.options.map(opt=>{
-      let s="default";
-      if(gz.answered){ if(opt===item.a) s="correct"; else if(opt===gz.chosen) s="incorrect"; }
-      return {text:opt, style:this.choiceStyle(s), onClick: gz.answered?()=>{}:()=>this.answerGrammar(opt)};
+    const steps=stepDefs.map(function(s){
+      return {day:s[1], title:s[2], desc:s[3], style:self.stepStyle(!!done[s[0]]),
+        btnLabel: done[s[0]]?"Again":"Start", btnStyle:self.btn(done[s[0]]?"secondary":"primary",true),
+        go:function(){ self.goto(s[4]); }};
     });
-    return {
-      gzNotStarted:false, gzActive:true, gzDone:false, gzStart:this.startGrammar, gzRestart:this.startGrammar,
-      gzPrompt:item.q, gzProgress:"Question "+(gz.idx+1)+" of "+gz.items.length, gzScore:"Score: "+gz.score+"/"+gz.idx,
-      gzChoices:choices, gzFeedbackShow:gz.answered,
-      gzFeedback: gz.answered ? ((gz.correct?"Correct":"Not quite")+(item.hint?" — "+item.hint:".")) : "",
-      gzFeedbackStyle: gz.answered ? this.feedbackStyle(gz.correct) : "",
-      gzNext:this.nextGrammar, gzNextStyle:this.btn("primary", gz.answered),
-      gzFinalScore:"", gzFinalPct:""
-    };
-  }
 
-  spellingVals(){
-    const st=this.state, level=st.level, LA=this.LA;
-    const spGroups = LA.SPELLING_GROUPS[level].map(g=>({title:g.title, words: g.words.map(w=>({text:w}))}));
-    const sq=st.sq;
-    if(!sq){
-      return {spGroups, sqNotStarted:true, sqActive:false, sqDone:false, sqStart:this.startSpelling, sqRestart:this.startSpelling,
-        sqProgress:"", sqScore:"", sqInputValue:"", sqSetValue:()=>{}, sqHear:()=>{}, sqCheck:()=>{},
-        sqFeedbackShow:false, sqFeedback:"", sqFeedbackStyle:"",
-        sqNext:()=>{}, sqNextStyle:this.btn("primary",false), sqFinalScore:"", sqFinalPct:""};
-    }
-    const complete = sq.idx>=sq.items.length;
-    if(complete){
-      const pct=Math.round((sq.score/sq.items.length)*100);
-      return {spGroups, sqNotStarted:false, sqActive:false, sqDone:true, sqRestart:this.startSpelling, sqStart:this.startSpelling,
-        sqFinalScore: sq.score+" / "+sq.items.length, sqFinalPct: pct+"% correct",
-        sqProgress:"", sqScore:"", sqInputValue:"", sqSetValue:()=>{}, sqHear:()=>{}, sqCheck:()=>{},
-        sqFeedbackShow:false, sqFeedback:"", sqFeedbackStyle:"",
-        sqNext:()=>{}, sqNextStyle:this.btn("primary",false)};
-    }
-    const item=sq.items[sq.idx];
-    return {
-      spGroups, sqNotStarted:false, sqActive:true, sqDone:false, sqStart:this.startSpelling, sqRestart:this.startSpelling,
-      sqProgress:"Word "+(sq.idx+1)+" of "+sq.items.length, sqScore:"Score: "+sq.score+"/"+sq.idx,
-      sqInputValue: sq.value, sqSetValue:this.setSpellValue, sqHear:()=>this.speak(item.a[0]),
-      sqCheck: sq.answered? ()=>{} : this.checkSpelling,
-      sqFeedbackShow: sq.answered,
-      sqFeedback: sq.answered ? (sq.correct? ("Correct! \""+item.a[0]+"\" spelled right.") : ("Not quite — the correct spelling is \""+item.a[0]+"\".")) : "",
-      sqFeedbackStyle: sq.answered ? this.feedbackStyle(sq.correct) : "",
-      sqNext:this.nextSpelling, sqNextStyle:this.btn("primary", sq.answered),
-      sqFinalScore:"", sqFinalPct:""
-    };
-  }
-
-  readingVals(){
-    const st=this.state, level=st.level, LA=this.LA;
-    const passages=LA.PASSAGES[level];
-    const currentId=st.passageId || passages[0].id;
-    const passage=passages.find(p=>p.id===currentId) || passages[0];
-    const passageItems=passages.map(p=>({label:p.label, style:this.pillStyleLight(p.id===currentId), onClick:()=>this.choosePassage(p.id)}));
-    const listen=()=>this.speak(passage.text.replace(/\n+/g," "));
-    const base={passageItems, passageText:passage.text, passageListen:listen};
-
-    const rq=st.rq;
-    if(!rq || rq.passageId!==currentId){
-      return {...base, rqNotStarted:true, rqActive:false, rqDone:false,
-        rqStart:()=>this.startReading(currentId), rqRestart:()=>this.startReading(currentId),
-        rqProgress:"", rqScore:"", rqPrompt:"", rqChoices:[], rqFeedbackShow:false, rqFeedback:"", rqFeedbackStyle:"",
-        rqNext:()=>{}, rqNextStyle:this.btn("primary",false), rqFinalScore:"", rqFinalPct:""};
-    }
-    const complete = rq.idx>=rq.items.length;
-    if(complete){
-      const pct=Math.round((rq.score/rq.items.length)*100);
-      return {...base, rqNotStarted:false, rqActive:false, rqDone:true,
-        rqRestart:()=>this.startReading(currentId), rqStart:()=>this.startReading(currentId),
-        rqFinalScore: rq.score+" / "+rq.items.length, rqFinalPct: pct+"% correct",
-        rqProgress:"", rqScore:"", rqPrompt:"", rqChoices:[], rqFeedbackShow:false, rqFeedback:"", rqFeedbackStyle:"",
-        rqNext:()=>{}, rqNextStyle:this.btn("primary",false)};
-    }
-    const item=rq.items[rq.idx];
-    const choices=item.options.map(opt=>{
-      let s="default";
-      if(rq.answered){ if(opt===item.a) s="correct"; else if(opt===rq.chosen) s="incorrect"; }
-      return {text:opt, style:this.choiceStyle(s), onClick: rq.answered?()=>{}:()=>this.answerReading(opt)};
+    const unitCards=Y.UNITS.map(function(u){
+      return {n:u.n, name:u.name, weeks:u.weeks, virtue:u.virtue, bigQ:u.bigQ, badge:u.badge,
+        color:u.color, project:u.project,
+        style:"background:var(--paper-card);border:1px solid "+(unit.n===u.n?"var(--brick)":"var(--rule)")+";border-radius:8px;padding:15px 17px;cursor:pointer",
+        go:function(){ self.setWeek((u.n-1)*4+1); self.goto("home"); }};
     });
-    return {...base, rqNotStarted:false, rqActive:true, rqDone:false,
-      rqStart:()=>this.startReading(currentId), rqRestart:()=>this.startReading(currentId),
-      rqPrompt:item.q, rqProgress:"Question "+(rq.idx+1)+" of "+rq.items.length, rqScore:"Score: "+rq.score+"/"+rq.idx,
-      rqChoices:choices, rqFeedbackShow:rq.answered,
-      rqFeedback: rq.answered ? ((rq.correct?"Correct":"Not quite")+(item.hint?" — "+item.hint:".")) : "",
-      rqFeedbackStyle: rq.answered ? this.feedbackStyle(rq.correct) : "",
-      rqNext:this.nextReading, rqNextStyle:this.btn("primary", rq.answered),
-      rqFinalScore:"", rqFinalPct:""
-    };
-  }
 
-  assignmentVals(){
-    const st=this.state, level=st.level, LA=this.LA;
-    const catDefs=[
-      {key:"handwriting",label:"Handwriting"}, {key:"spelling",label:"Spelling"},
-      {key:"grammar",label:"Grammar"}, {key:"reading",label:"Reading Response"}
-    ];
-    const asCatItems=catDefs.map(c=>({label:c.label, style:this.pillStyleLight(st.asCat===c.key), onClick:()=>this.chooseAsCat(c.key)}));
-    const data=LA.HANDWRITTEN[level][st.asCat];
-    const idx=st.asIdx[st.asCat]||0;
-    const promptText=data.prompts[idx % data.prompts.length];
-    const result=st.asResult;
+    const passage=Y.passageFor(st.week);
+    const grammarSet=Y.grammarSetFor(st.week);
+    const spellingSet=Y.spellingSetFor(st.week);
+    const hwTask=Y.taskFor(st.week,"handwriting");
+    const wrTask=Y.taskFor(st.week,"writing");
+    const skTask=Y.taskFor(st.week,"speaking");
+    const asTask=st.asKind==="handwriting"?hwTask:wrTask;
 
-    return {
-      asCatItems, asInstructions:data.instructions, asPrompt:promptText,
-      asListen:()=>this.speak(promptText), asNewPrompt:this.nextAssignmentPrompt,
-      asFileRef: el=>{ this._asInput=el; },
-      asFilePicked: this.assignmentFilePicked,
-      asPickPhoto: ()=>{ if(this._asInput) this._asInput.click(); },
-      asHasImage: !!st.asImage,
-      asPreviewUrl: st.asImage ? st.asImage.previewUrl : "",
-      asGrade: this.gradeAssignment,
-      asGradeStyle: this.btn("primary", !!st.asImage && st.asStatus!=="grading"),
-      asGrading: st.asStatus==="grading",
-      asHasResult: st.asStatus==="done" && !!result,
-      asHasError: st.asStatus==="error",
-      asError: st.asError,
-      asTierLabel: result ? (result.tier==="excellent"?"Excellent work!":result.tier==="good"?"Good work":"Keep practicing") : "",
-      asTierStyle: result ? this.tierStyle(result.tier) : "",
-      asStrengths: result ? result.strengths : "",
-      asFocus: result ? result.focus_area : "",
-      asNoteToParent: result ? result.note_to_parent : ""
-    };
-  }
-
-  booksVals(level){
-    const LA=this.LA;
     const cats=[]; const seen={};
-    LA.BOOKS[level].forEach(b=>{ if(!seen[b.category]){ seen[b.category]=true; cats.push(b.category); } });
-    const bookGroups=cats.map(cat=>({
-      title:cat,
-      books: LA.BOOKS[level].filter(b=>b.category===cat).map(b=>({title:b.title, author:b.author, age:b.ageRange, blurb:b.blurb}))
-    }));
-    return {bookGroups};
+    Y.INDEPENDENT.forEach(function(b){ if(!seen[b.cat]){ seen[b.cat]=1; cats.push(b.cat); } });
+
+    const base={
+      navItems:navItems, steps:steps, unitCards:unitCards,
+      headerLine:"Year One \u00b7 36 weeks \u00b7 180 days",
+      weekLabel:"Week "+st.week+" of 36",
+      weekNum:st.week,
+      weekTitle:wk.title,
+      weekFocusLine:"Spelling pattern: "+wk.spelling+" \u00b7 Standard "+wk.standard,
+      unitLine:"Unit "+unit.n+" \u00b7 "+unit.name+" \u00b7 "+unit.virtue,
+      goPrevWeek:function(){ self.setWeek(st.week-1); },
+      goNextWeek:function(){ self.setWeek(st.week+1); },
+      weekNavStyle:"background:rgba(250,246,236,.1);color:var(--paper);border:1px solid rgba(250,246,236,.25);border-radius:6px;width:30px;height:30px;font-size:15px;cursor:pointer",
+      allDone: stepDefs.every(function(s){ return !!done[s[0]]; }),
+
+      isHome:st.view==="home", isMap:st.view==="map", isReading:st.view==="reading",
+      isGrammar:st.view==="grammar", isSpelling:st.view==="spelling",
+      isWriting:st.view==="writing", isSpeaking:st.view==="speaking",
+      isBooks:st.view==="books", isParent:st.view==="parent",
+      btnPrimary:this.btn("primary",true), btnSecondary:this.btn("secondary",true),
+
+      rdTitle:passage.title, rdTypeLine:passage.type+" \u00b7 Week "+st.week,
+      rdText:passage.text, rdReadAloud:passage.readAloud,
+      rdListen:function(){ self.speak(passage.text.replace(/\n+/g," ")); },
+
+      gzTitle:grammarSet.title, gzStandard:"Standard "+(grammarSet.standard||""),
+
+      spTitle:spellingSet.title,
+      spWords:spellingSet.words.map(function(w){ return {text:w}; }),
+      sqNotStarted:!st.sq,
+      sqActive:!!st.sq && st.sq.idx<st.sq.items.length,
+      sqDone:!!st.sq && st.sq.idx>=st.sq.items.length,
+      sqStart:this.sqStart, sqSet:this.sqSet,
+      sqCheck:(st.sq&&st.sq.answered)?function(){}:this.sqCheck,
+      sqNext:this.sqNext,
+      sqHear:function(){ if(st.sq&&st.sq.idx<st.sq.items.length) self.speak(st.sq.items[st.sq.idx].a[0]); },
+      sqValue:st.sq?st.sq.value:"",
+      sqProgress:st.sq?("Word "+Math.min(st.sq.idx+1,st.sq.items.length)+" of "+st.sq.items.length):"",
+      sqScore:st.sq?("Score: "+st.sq.score+"/"+st.sq.idx):"",
+      sqFbShow:!!(st.sq&&st.sq.answered),
+      sqFb:(st.sq&&st.sq.answered)
+        ? (st.sq.ok?("Correct! \""+st.sq.items[st.sq.idx].a[0]+"\" spelled right.")
+                   :("Not quite - it is spelled \""+st.sq.items[st.sq.idx].a[0]+"\"."))
+        : "",
+      sqFbStyle:(st.sq&&st.sq.answered)?this.fbStyle(st.sq.ok):"",
+      sqNextStyle:this.btn("primary", !!(st.sq&&st.sq.answered)),
+      sqFinal:st.sq?(st.sq.score+" / "+st.sq.items.length):"",
+      sqPct:st.sq?(Math.round((st.sq.score/st.sq.items.length)*100)+"% correct"):"",
+
+      asKinds:[["handwriting","Handwriting"],["writing","Writing"]].map(function(k){
+        return {label:k[1], onClick:function(){ self.asPickKind(k[0]); }, style:self.pill(st.asKind===k[0])};
+      }),
+      asTitle:asTask.title, asInstructions:asTask.instructions, asPrompt:asTask.prompt,
+      asListen:function(){ self.speak(asTask.prompt); },
+      asFileRef:function(el){ self._asInput=el; }, asFilePicked:this.asFilePicked,
+      asPick:function(){ if(self._asInput) self._asInput.click(); },
+      asHasImage:!!st.asImage, asPreview:st.asImage?st.asImage.url:"",
+      asGrade:this.asGrade,
+      asGradeStyle:this.btn("primary", !!st.asImage && st.asStatus!=="grading"),
+      asGrading:st.asStatus==="grading",
+      asHasResult:st.asStatus==="done"&&!!st.asResult,
+      asHasError:st.asStatus==="error", asError:st.asError,
+      asTierLabel:st.asResult?(st.asResult.tier==="excellent"?"Excellent work!":st.asResult.tier==="good"?"Good work":"Keep practicing"):"",
+      asTierStyle:st.asResult?this.tierStyle(st.asResult.tier):"",
+      asStrengths:st.asResult?st.asResult.strengths:"",
+      asFocus:st.asResult?st.asResult.focus_area:"",
+      asNote:st.asResult?st.asResult.note_to_parent:"",
+
+      skTitle:skTask.title, skPrompt:skTask.prompt,
+      skListen:function(){ self.speak(skTask.prompt); },
+      skMarkDone:function(){ self.markDone("speaking"); },
+      skDoneLabel:done.speaking?"Marked done":"I did this - mark it done",
+      skDoneStyle:this.btn(done.speaking?"secondary":"primary",true),
+
+      readAlouds:Y.READ_ALOUDS.map(function(b){ return {unit:b.unit, title:b.title, author:b.author,
+        lexile:b.lexile, why:b.why, discuss:b.discuss, hasDiscuss:!!b.discuss}; }),
+      bookGroups:cats.map(function(c){
+        return {title:c, books:Y.INDEPENDENT.filter(function(b){ return b.cat===c; })};
+      }),
+      standards:Y.STANDARDS
+    };
+
+    const rq=this.quizVals("rq","rq","reading",function(){ self.quizStart("rq", self.prepMC(passage.questions)); });
+    const gz=this.quizVals("gz","gz","grammar",function(){ self.quizStart("gz", self.prepMC(grammarSet.items)); });
+    const rv=this.quizVals("rv","rv",null,function(){ self.quizStart("rv", self.prepMC(grammarSet.items,4)); });
+
+    return Object.assign(base, rq, gz, rv);
   }
 }
 </script>

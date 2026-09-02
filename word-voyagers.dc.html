@@ -51,6 +51,7 @@
 <script src="./curriculum/la-books-y2.js"></script>
 <script src="./curriculum/la-quotes.js"></script>
 <script src="./curriculum/la-mastery.js"></script>
+<script src="./curriculum/la-calendar.js"></script>
 <script src="./curriculum/la-grader.js"></script>
 </helmet>
 
@@ -100,8 +101,10 @@
             </sc-for>
           </div>
         </div>
+        <div style="{{ pacingStyle }}">{{ pacingText }}</div>
         <div style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)">{{ unitLine }}</div>
         <h2 style="margin:4px 0 2px">{{ dayHeading }}</h2>
+        <p class="muted" style="margin-top:2px">{{ dayDateLine }}</p>
         <p class="muted" style="margin-top:2px">{{ weekFocusLine }}</p>
 
         <!-- BLOCKED: unfinished work behind this day -->
@@ -451,6 +454,25 @@
       </div>
 
       <div class="card">
+        <h2>The school year</h2>
+        <div style="display:grid;grid-template-columns:150px 1fr;gap:8px 12px;font-size:.93rem">
+          <div class="muted">First day</div><div>{{ calFirstDay }}</div>
+          <div class="muted">Last day</div><div>{{ calLastDay }}</div>
+          <div class="muted">Today</div><div>{{ calToday }}</div>
+          <div class="muted">Pace</div><div>{{ calPace }}</div>
+        </div>
+        <h3 style="font-size:1rem;margin:16px 0 5px">Scheduled breaks</h3>
+        <p class="muted">Break days are not school days, so the year simply runs later rather than losing lessons. To change these, edit BREAKS at the top of curriculum/la-calendar.js.</p>
+        <sc-for list="{{ calBreaks }}" as="b" hint-placeholder-count="3">
+          <div style="background:var(--paper);border:1px solid var(--rule);border-radius:6px;padding:9px 13px;margin-top:7px">
+            <div style="font-family:'Fraunces',serif;font-size:.92rem">{{ b.name }}</div>
+            <div class="muted" style="font-size:.86rem">{{ b.range }}</div>
+          </div>
+        </sc-for>
+        <p class="muted" style="margin-top:10px;font-size:.86rem">If you take an unplanned week off and do not add it here, he will read as five days behind. That is accurate — but if you never intend to make those days up, excuse them below and the count corrects itself.</p>
+      </div>
+
+      <div class="card">
         <h2>Catching up and working ahead</h2>
         <p class="muted">Days run in order. An unfinished day locks everything after it until it is done, so nothing gets quietly skipped. There is no limit in the other direction: once your child is caught up, finishing a day immediately opens the next one, so he can work as far forward as he likes to cover a day he will be away.</p>
         <div style="background:var(--paper);border:1px solid var(--rule);border-radius:6px;padding:13px 15px;margin-top:10px">
@@ -507,6 +529,7 @@ class Component extends DCLogic {
     qDay:(function(){ return ["Mon","Mon","Tue","Wed","Thu","Fri","Fri"][new Date().getDay()]; })(),
     day:(function(){ try{ const d=localStorage.getItem("la.day"); if(d) return d; }catch(e){}
       return ["Mon","Mon","Tue","Wed","Thu","Fri","Fri"][new Date().getDay()]; })(),
+    landed:false,           // has the opening jump-to-frontier happened yet
     started:false,          // has START TODAY been pressed
     stepDone:(function(){ try{ return JSON.parse(localStorage.getItem("la.stepDone")||"{}"); }catch(e){ return {}; } })(),
     round:1,                // which attempt of the current scored step
@@ -858,6 +881,20 @@ class Component extends DCLogic {
                   detail:"Checklist unavailable — use the tabs above.", done:"Done."}]};
       }
     };
+    /* On the first render of a session, land on the frontier — the first
+     * unfinished day — rather than whatever day was stored last time. That is
+     * always the actionable one, whether he is behind or working ahead. */
+    const CAL=window.__CURR.LA_CALENDAR;
+    if(!st.landed && MS.firstIncomplete && MS.fromAbs){
+      const f=MS.firstIncomplete(st.year, st.stepDone, st.excused);
+      const pos=MS.fromAbs(Math.min(f, (MS.TOTAL_DAYS||180)-1));
+      if(pos.week!==st.week || pos.day!==st.day){
+        setTimeout(function(){ self.setState({landed:true, week:pos.week, day:pos.day}); },0);
+      } else if(!st.landed){
+        setTimeout(function(){ self.setState({landed:true}); },0);
+      }
+    }
+
     const plan=MS.dayPlan(st.year, st.week, st.day);
 
     /* Sequencing: no gaps behind, no cap ahead. */
@@ -1041,6 +1078,18 @@ class Component extends DCLogic {
       standardsHeading:(Y.GRADE?Y.GRADE.label:"")+" skills and standards covered",
       benchmarks:(Y.BENCHMARKS||[]).map(function(b){ return {text:b}; }),
       standards:Y.STANDARDS,
+      calFirstDay: CAL ? CAL.longDate(CAL.startDate()) : "",
+      calLastDay:  CAL ? CAL.longDate(CAL.dateForIndex(179)) : "",
+      calToday: (function(){
+        if(!CAL) return "";
+        const now=new Date(), sch=CAL.scheduledDay(now);
+        return CAL.longDate(now)+(sch.week?(" \u2014 week "+sch.week+", "+sch.day+" (day "+sch.dayNumber+" of 180)"):(" \u2014 "+(sch.note||"")));
+      })(),
+      calPace: CAL ? CAL.pacing(seq.frontier, new Date()).text : "",
+      calBreaks: CAL ? CAL.BREAKS.map(function(b){
+        return {name:b.name, range: CAL.longDate(new Date(b.from.y,b.from.m-1,b.from.d))+
+          " to "+CAL.longDate(new Date(b.to.y,b.to.m-1,b.to.d))};
+      }) : [],
       frontierLabel: yearFinished
         ? "The whole year is finished."
         : "Currently on: "+(MS.DAY_NAME[frontierPos.day]||frontierPos.day)+", week "+frontierPos.week,
@@ -1070,6 +1119,34 @@ class Component extends DCLogic {
 
       // --- daily checklist: clear start, gated steps, clear end ---
       dayHeading: plan.dayName+" \u00b7 Day "+plan.dayNumber+" of "+plan.totalDays,
+      dayDateLine: (function(){
+        if(!CAL) return "";
+        const dt=CAL.dateForIndex(seq.idx);
+        const n=seq.idx+1;
+        return (dt?CAL.longDate(dt)+" \u00b7 ":"")+"school day "+n+" of 180";
+      })(),
+      pacingText: (function(){
+        if(!CAL) return "";
+        const now=new Date();
+        const p=CAL.pacing(seq.frontier, now);
+        const sch=CAL.scheduledDay(now);
+        const today = sch.week
+          ? ("Today is "+CAL.longDate(now)+" \u2014 week "+sch.week+", "+sch.day+". ")
+          : (CAL.longDate(now)+". "+(sch.note||"")+" ");
+        return today + p.text;
+      })(),
+      pacingStyle: (function(){
+        if(!CAL) return "display:none";
+        const p=CAL.pacing(seq.frontier, new Date());
+        const bg = p.state==="behind" ? "#F3DCD5"
+                 : p.state==="ahead"  ? "var(--forest-light)"
+                 : p.state==="on"     ? "var(--forest-light)"
+                 : "var(--gold-light)";
+        const col = p.state==="behind" ? "var(--brick-dark)"
+                  : (p.state==="ahead"||p.state==="on") ? "#2E4E38" : "#7A5A0C";
+        return "background:"+bg+";color:"+col+";border-radius:8px;padding:9px 13px;"+
+               "margin-bottom:12px;font-size:.9rem;font-weight:600";
+      })(),
       startSummary: plan.steps.length+" steps today. Each one unlocks the next, and the "+
         "drills need "+Math.round(MS.MASTERY*100)+"% to count as done.",
       startDay: this.startDay,

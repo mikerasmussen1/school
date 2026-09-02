@@ -1,12 +1,20 @@
 /* ============================================================================
  * FIELD NOTES — 5TH GRADE SCIENCE, Georgia Standards of Excellence
  * ----------------------------------------------------------------------------
- * 36 weeks, TWO lessons a week, 72 lessons total.
+ * 36 weeks, ONE lesson a week, 36 lessons total.
  *
- *   Day A — Investigate.  Hands-on. A question, a procedure, and a notebook
- *                         entry. Nothing is graded on Day A.
- *   Day B — Explain.      Read, then write one claim with the evidence that
- *                         supports it, then a short auto-graded check.
+ * Each week is a single sitting in three parts:
+ *   1 INVESTIGATE  hands-on. A question, a procedure, a notebook entry.
+ *   2 EXPLAIN      a short reading, then one claim written with its evidence.
+ *   3 CHECK        a few auto-graded questions, where they exist.
+ *
+ * WHAT CHANGED AND WHAT DID NOT. This course used to run twice a week. Going
+ * to once a week merged the two days rather than deleting one: every lab,
+ * every reading, every claim prompt and every standard is still here. What
+ * changed is that they now happen in one sitting instead of two, so the
+ * weekly session is roughly twice as long as either old day. If that proves
+ * too long, the honest fix is to cut content deliberately rather than to
+ * pretend it fits.
  *
  * WEIGHTED TO THE STATE TEST, not split evenly. Georgia Milestones Grade 5
  * Science is roughly 42% life, 35% physical, 23% earth, so the year is
@@ -30,11 +38,12 @@
  * grade, and it should be met honestly then rather than pre-empted now.
  *
  * A CONSTRAINT TO BE HONEST ABOUT. The other subjects here are self-led.
- * Science only half is. Day B a child can do alone. Day A is a real
- * investigation with real materials — vinegar, batteries, magnets, a candle
+ * Science is not. The reading and the check a child can do alone, but the
+ * investigation uses real materials — vinegar, batteries, magnets, a candle
  * in two of them — and an adult should be in the room. Every lesson lists its
- * materials and flags the ones needing supervision, so this can be planned
- * rather than discovered mid-week.
+ * materials and flags the ones needing supervision. Now that the days are
+ * merged, that adult is needed during part of every science session rather
+ * than one of two.
  * ==========================================================================*/
 (function(){
 
@@ -143,13 +152,12 @@
     [36,9,"Stronger and Weaker","S5P3.a","Three variables tested","What the year proved"]
   ];
 
-  const DAYS = ["A","B"];
-  const DAY_NAME = {A:"Investigate", B:"Explain"};
+  const DAYS = ["W"];
+  const DAY_NAME = {W:"Science"};
 
   const WEEKS = W.map(r=>({
     n:r[0], unit:r[1], title:r[2], standard:r[3], labFocus:r[4], readFocus:r[5],
-    days:[{day:"A", kind:"lab",    label:"Investigate"},
-          {day:"B", kind:"explain", label:"Explain"}]
+    days:[{day:"W", kind:"weekly", label:"Science"}]
   }));
 
   const unitOf = wk => UNITS[(WEEKS.find(w=>w.n===wk)||{unit:1}).unit - 1];

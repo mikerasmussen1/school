@@ -1,5 +1,5 @@
 /* ============================================================================
- * FIELD NOTES — auto-graded checks for Day B
+ * FIELD NOTES — the auto-graded check that closes each weekly lesson
  * ----------------------------------------------------------------------------
  * Four multiple-choice items per week, drawn from that week's own
  * investigation and reading — never generic science trivia.

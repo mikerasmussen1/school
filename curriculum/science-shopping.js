@@ -1,7 +1,7 @@
 /* ============================================================================
  * SCIENCE SHOPPING — one shop per month, both boys at once
  * ----------------------------------------------------------------------------
- * Builds the list from the actual Day A material lists in science-lessons.js,
+ * Builds the list from the actual investigation material lists in science-lessons.js,
  * so it can never drift from what the labs need. Change a lab's materials and
  * next month's list changes with it.
  *

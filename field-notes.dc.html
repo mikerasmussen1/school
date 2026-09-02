@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=5d539c9"></script>
+<script src="./support.js?v=ffd548b"></script>
 </head>
 <body>
 <x-dc>
@@ -29,15 +29,15 @@
   ol.steps{margin:8px 0 0;padding-left:22px} ol.steps li{margin-bottom:7px}
   ul.mats{margin:6px 0 0;padding-left:20px} ul.mats li{margin-bottom:3px;font-size:.93rem}
 </style>
-<script src="./curriculum/students.js?v=5d539c9"></script>
-<script src="./curriculum/subjects.js?v=5d539c9"></script>
-<script src="./curriculum/question-types.js?v=5d539c9"></script>
-<script src="./curriculum/science-y3-spine.js?v=5d539c9"></script>
-<script src="./curriculum/science-y5-spine.js?v=5d539c9"></script>
-<script src="./curriculum/science-lessons.js?v=5d539c9"></script>
-<script src="./curriculum/science-quiz.js?v=5d539c9"></script>
-<script src="./curriculum/la-calendar.js?v=5d539c9"></script>
-<script src="./curriculum/science-shopping.js?v=5d539c9"></script>
+<script src="./curriculum/students.js?v=ffd548b"></script>
+<script src="./curriculum/subjects.js?v=ffd548b"></script>
+<script src="./curriculum/question-types.js?v=ffd548b"></script>
+<script src="./curriculum/science-y3-spine.js?v=ffd548b"></script>
+<script src="./curriculum/science-y5-spine.js?v=ffd548b"></script>
+<script src="./curriculum/science-lessons.js?v=ffd548b"></script>
+<script src="./curriculum/science-quiz.js?v=ffd548b"></script>
+<script src="./curriculum/la-calendar.js?v=ffd548b"></script>
+<script src="./curriculum/science-shopping.js?v=ffd548b"></script>
 </helmet>
 
 <div style="min-height:100vh;display:flex;flex-direction:column">
@@ -69,16 +69,11 @@
         <div style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)">{{ unitLine }}</div>
         <h2 style="margin:4px 0 3px">{{ weekTitle }}</h2>
         <p class="muted" style="margin-top:2px">{{ standardLine }}</p>
-        <div style="display:flex;gap:8px;flex-wrap:wrap;margin:14px 0">
-          <sc-for list="{{ dayItems }}" as="d" hint-placeholder-count="2">
-            <button onClick="{{ d.onClick }}" style="{{ d.style }}">{{ d.label }}</button>
-          </sc-for>
-        </div>
+        <div class="muted" style="margin-top:10px;font-size:.9rem">{{ weekShape }}</div>
       </div>
 
-      <sc-if value="{{ isLab }}" hint-placeholder-val="{{ true }}">
-        <div class="card">
-          <div style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--deep)">Day A &middot; Investigate</div>
+      <div class="card">
+          <div style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--deep)">Part 1 &middot; Investigate</div>
           <h2 style="margin:4px 0 10px">{{ labQuestion }}</h2>
           <sc-if value="{{ needsAdult }}" hint-placeholder-val="{{ false }}">
             <div style="background:var(--gold-l);color:#7A5A0C;border-radius:8px;padding:11px 15px;margin-bottom:14px;font-size:.92rem">An adult should be with you for this one.</div>
@@ -99,17 +94,14 @@
             <h3 style="font-size:1rem;margin:16px 0 2px">In your notebook</h3>
             <p style="margin:0">{{ labNotebook }}</p>
           </div>
-          <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap">
+          <div style="margin-top:14px">
             <button onClick="{{ labListen }}" style="{{ btnSecondary }}">Read this to me</button>
-            <button onClick="{{ goExplain }}" style="{{ btnPrimary }}">Go to Day B</button>
           </div>
-          <p class="muted" style="margin-top:10px;font-size:.86rem">Day A is not graded. The notebook entry is the record.</p>
-        </div>
-      </sc-if>
+          <p class="muted" style="margin-top:10px;font-size:.86rem">This part is not graded. The notebook entry is the record.</p>
+      </div>
 
-      <sc-if value="{{ isExplain }}" hint-placeholder-val="{{ false }}">
-        <div class="card">
-          <div style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--deep)">Day B &middot; Explain</div>
+      <div class="card">
+          <div style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--deep)">Part 2 &middot; Explain</div>
           <h2 style="margin:4px 0 10px">{{ readTitle }}</h2>
           <div class="box" style="font-size:1.02rem;line-height:1.7;max-width:66ch">{{ readText }}</div>
           <div style="margin:14px 0"><button onClick="{{ readListen }}" style="{{ btnSecondary }}">Read this to me</button></div>
@@ -118,10 +110,11 @@
             <p style="margin:0">{{ claimPrompt }}</p>
           </div>
           <p class="muted" style="margin-top:9px;font-size:.86rem">This one is written by hand and read by a person. A computer cannot fairly judge whether your reasoning holds.</p>
-        </div>
+      </div>
 
-        <div class="card">
-          <h2>Check your understanding</h2>
+      <div class="card">
+          <div style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--deep);margin-bottom:3px">Part 3 &middot; Check</div>
+          <h2 style="margin-bottom:8px">Check your understanding</h2>
           <sc-if value="{{ hasCheck }}" hint-placeholder-val="{{ true }}">
             <sc-if value="{{ qNotStarted }}" hint-placeholder-val="{{ true }}">
               <div style="text-align:center;padding:16px"><button onClick="{{ qStart }}" style="{{ btnPrimary }}">Start the check</button></div>
@@ -272,7 +265,8 @@
     <sc-if value="{{ isParent }}" hint-placeholder-val="{{ false }}">
       <div class="card">
         <h2>{{ parentHeading }}</h2>
-        <p>Two lessons a week, 36 weeks, 72 lessons. Day A is a hands-on investigation and is not graded. Day B is a short reading, a claim written by hand, and where available a multiple-choice check.</p>
+        <p>One lesson a week, 36 weeks, 36 lessons. Each is a single sitting in three parts: a hands-on investigation (not graded), a short reading with a claim written by hand, and where available a multiple-choice check.</p>
+        <p class="muted">This course ran twice a week until recently. Going to once a week merged the two days rather than deleting one — every lab, reading, claim and standard is still here, so the weekly session is roughly twice as long as either old day. If that proves too long, say so and units can be shortened deliberately rather than quietly overrunning.</p>
         <p class="muted">{{ strandLine }}</p>
         <p class="muted">{{ supervisionLine }}</p>
       </div>
@@ -322,7 +316,6 @@ class Component extends DCLogic {
       try{ return localStorage.getItem("sci.grade")==="y5"?"y5":"y3"; }catch(e){ return "y3"; }
     })(),
     week:(function(){ try{ return Math.min(36,Math.max(1,parseInt(localStorage.getItem("sci.week")||"1",10)||1)); }catch(e){ return 1; } })(),
-    day:"A",
     kitMode:"all",     // one printable list is what a parent wants first
     q:null
   };
@@ -333,11 +326,10 @@ class Component extends DCLogic {
 
   goto=(v)=>{ this.setState({view:v}); window.scrollTo(0,0); };
   setGrade=(g)=>{ try{ localStorage.setItem("sci.grade",g); localStorage.setItem("sci.week","1"); }catch(e){}
-    this.setState({grade:g, week:1, day:"A", q:null}); window.scrollTo(0,0); };
+    this.setState({grade:g, week:1, q:null}); window.scrollTo(0,0); };
   setWeek=(w)=>{ const week=Math.min(36,Math.max(1,w));
     try{ localStorage.setItem("sci.week",String(week)); }catch(e){}
-    this.setState({week:week, day:"A", q:null}); window.scrollTo(0,0); };
-  setDay=(d)=>{ this.setState({day:d, q:null}); window.scrollTo(0,0); };
+    this.setState({week:week, q:null}); window.scrollTo(0,0); };
 
   speak(t){ if(!window.speechSynthesis) return; window.speechSynthesis.cancel();
     const u=new SpeechSynthesisUtterance(t); u.rate=0.95; window.speechSynthesis.speak(u); }
@@ -372,8 +364,8 @@ class Component extends DCLogic {
     const st=this.state, S=this.S, L=this.L, Q=this.Q, self=this;
     const wk=S.WEEKS.find(w=>w.n===st.week) || S.WEEKS[0];
     const unit=S.UNITS[wk.unit-1];
-    const A=L.lessonFor(st.grade, st.week, "A");
-    const B=L.lessonFor(st.grade, st.week, "B");
+    const WK=L.weekFor(st.grade, st.week);
+    const A=WK.lab, B=WK.explain;
     const has=Q.hasCheck(st.grade, st.week);
     const cov=Q.coverage(st.grade);
     const sw=S.strandWeeks();
@@ -409,7 +401,7 @@ class Component extends DCLogic {
     }
 
     return Object.assign({
-      headerLine:(S.GRADE?S.GRADE.label:"")+" \u00b7 "+(S.GRADE?S.GRADE.set:"")+" \u00b7 two lessons a week",
+      headerLine:(S.GRADE?S.GRADE.label:"")+" \u00b7 "+(S.GRADE?S.GRADE.set:"")+" \u00b7 one lesson a week",
       weekLabel:"Week "+st.week+" of 36",
       // Labelled by boy, from curriculum/students.js.
       gradeItems:["y3","y5"].map(function(id){
@@ -431,16 +423,13 @@ class Component extends DCLogic {
       unitLine:"Unit "+unit.n+" \u00b7 "+unit.name+" \u00b7 "+unit.strand+" science",
       weekTitle:wk.title,
       standardLine:"Standard "+wk.standard+" \u00b7 "+unit.goal,
-      dayItems:[["A","Day A \u00b7 Investigate"],["B","Day B \u00b7 Explain"]].map(function(d){
-        return {label:d[1], onClick:function(){ self.setDay(d[0]); }, style:self.pill(st.day===d[0])}; }),
-      isLab:st.day==="A", isExplain:st.day==="B",
+      weekShape:"One lesson this week, in three parts: investigate, explain, then check. Expect a single longer sitting rather than two short ones.",
 
       labQuestion:A.q||"", needsAdult:!!A.supervision,
       labMaterials:(A.materials||[]).map(function(m){ return {text:m}; }),
       labSteps:(A.steps||[]).map(function(s){ return {text:s}; }),
       labNotebook:A.notebook||"",
       labListen:function(){ self.speak((A.q||"")+". "+(A.steps||[]).join(". ")); },
-      goExplain:function(){ self.setDay("B"); },
 
       readTitle:wk.readFocus||wk.title,
       readText:B.read||"",
@@ -451,7 +440,7 @@ class Component extends DCLogic {
       noCheckNote:"No multiple-choice check is written for this week yet \u2014 "+cov.count+
         " of 36 weeks have one so far. The written claim above is this week's work, and it is the part the standards actually ask for.",
 
-      mapHeading:(S.GRADE?S.GRADE.label:"")+" \u2014 nine units, 36 weeks, 72 lessons",
+      mapHeading:(S.GRADE?S.GRADE.label:"")+" \u2014 nine units, 36 weeks, 36 lessons",
       mapBlurb:"Weighted to the Georgia standards rather than split evenly. Tap a unit to jump to its first week.",
       unitCards:S.UNITS.map(function(u){
         const first=S.WEEKS.filter(function(w){ return w.unit===u.n; })[0];
@@ -472,7 +461,7 @@ class Component extends DCLogic {
         ? "The whole year on one list, in the order things are needed, each line marked with the month it is for. Print it once and tick it off as you go."
         : st.kitMode==="month"
         ? "One shop a month, both boys together. Anything already bought is not listed again \u2014 reusable items show the later weeks they are needed so nothing gets thrown out early."
-        : "Everything the Day A investigations call for, grouped so a whole unit can be prepared in one go. Weeks needing an adult are flagged.",
+        : "Everything the investigations call for, grouped so a whole unit can be prepared in one go. Weeks needing an adult are flagged.",
       allCount:(function(){
         const SH=window.__CURR.SCI_SHOPPING;
         return SH ? (SH.allItems().length+" items across the year") : "";
@@ -532,9 +521,9 @@ class Component extends DCLogic {
 
       parentHeading:(S.GRADE?S.GRADE.label:"")+" \u2014 how the year works",
       strandLine:"Strand balance: Earth "+sw.Earth+" weeks, life "+sw.Life+" weeks, physical "+sw.Physical+" weeks.",
-      supervisionLine:"Day B your child can do alone. Day A is a real investigation with real materials \u2014 "+
+      supervisionLine:"The reading and the check your child can do alone. The investigation uses real materials \u2014 "+
         S.WEEKS.filter(function(w){ return L.lessonFor(st.grade,w.n,"A").supervision; }).length+
-        " of the 36 labs are flagged as needing an adult in the room.",
+        " of the 36 labs are flagged as needing an adult in the room, and since the days are merged that adult is now needed during part of every science session.",
       coverageNote: cov.count===36
         ? "All 36 weeks have an auto-graded check."
         : ("Auto-graded checks are written for "+cov.count+" of 36 weeks ("+cov.items+

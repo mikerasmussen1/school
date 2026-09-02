@@ -33,31 +33,25 @@
 
   /* Date ranges that are NOT school days, inclusive both ends.
    * Add your own; the year simply extends. */
-  /* Holiday schedule as supplied by the family.
+  /* Holiday schedule as supplied by the family, corrected to 2026-27.
    *
-   * A NOTE ON THE YEAR, because it matters and should not be silent. The list
-   * given was a 2025-26 calendar (Labor Day 1 Sep 2025 ... last day 20 May
-   * 2026), but the requested first day was Monday 31 August, and 31 Aug 2025
-   * is a Sunday while 31 Aug 2026 is a Monday. The 2025-26 year also ended
-   * three months before today. So the same PATTERN has been mapped onto
-   * 2026-27 to match the start date. If the intent really was 2025-26, every
-   * year below drops by one and the start moves to Mon 1 Sep 2025.
+   * LAST DAY. The family named Wednesday 19 May 2027 as the last day of
+   * school. From the first day, minus these breaks, that gives 166 school
+   * days. The curriculum is 180, so it runs 14 days past that date — day 180
+   * falls on Tuesday 8 June 2027. Nothing here truncates the course; the
+   * shortfall is reported on the For Parents tab so it stays a decision
+   * rather than becoming a surprise in May.
    *
-   * LAST DAY. The family named 20 May as the last day of school. With these
-   * breaks that is school day 157, but the curriculum is 180 days, so the
-   * year runs 23 days longer than that — day 180 falls on Tue 22 June 2027.
-   * Nothing here truncates the course; the shortfall is reported on the For
-   * Parents tab so it is a decision rather than a surprise in May.          */
-  const LAST_DAY_TARGET = {y:2027, m:5, d:20};
+   * To close the gap instead of extending: 14 days is a little under three
+   * weeks, so doubling up one day a week from January would absorb it, as
+   * would trimming the ten-weekday Christmas break.                          */
+  const LAST_DAY_TARGET = {y:2027, m:5, d:19};
 
   const BREAKS = [
     {from:{y:2026,m:9, d:7},  to:{y:2026,m:9, d:7},  name:"Labor Day"},
-    {from:{y:2026,m:10,d:12}, to:{y:2026,m:10,d:16}, name:"Fall Break"},
-    {from:{y:2026,m:11,d:23}, to:{y:2026,m:11,d:27}, name:"Thanksgiving Break"},
-    {from:{y:2026,m:12,d:21}, to:{y:2027,m:1, d:1},  name:"Winter / Christmas Break"},
-    {from:{y:2027,m:1, d:18}, to:{y:2027,m:1, d:18}, name:"Martin Luther King Jr. Day"},
-    {from:{y:2027,m:2, d:15}, to:{y:2027,m:2, d:19}, name:"Winter Break / Presidents' Day"},
-    {from:{y:2027,m:4, d:5},  to:{y:2027,m:4, d:9},  name:"Spring Break"}
+    {from:{y:2026,m:11,d:23}, to:{y:2026,m:11,d:27}, name:"Thanksgiving Holidays"},
+    {from:{y:2026,m:12,d:21}, to:{y:2027,m:1, d:1},  name:"Christmas / Winter Holidays"},
+    {from:{y:2027,m:3, d:26}, to:{y:2027,m:4, d:2},  name:"Spring Holidays"}
   ];
 
   const toDate = o => new Date(o.y, o.m-1, o.d);

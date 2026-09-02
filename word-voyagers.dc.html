@@ -109,11 +109,11 @@
 
         <!-- BLOCKED: unfinished work behind this day -->
         <sc-if value="{{ showBlocked }}" hint-placeholder-val="{{ false }}">
-          <div style="text-align:center;border:2px solid var(--brick-dark);border-radius:10px;padding:24px 18px;margin:16px 0;background:#F3DCD5">
-            <div style="font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--brick-dark);margin-bottom:6px">Day locked</div>
-            <div style="font-family:'Fraunces',serif;font-size:1.22rem;margin-bottom:8px;color:var(--brick-dark)">{{ blockedHeading }}</div>
-            <div class="muted" style="max-width:46ch;margin:0 auto 14px">{{ blockedText }}</div>
-            <button onClick="{{ goToFrontier }}" style="{{ startBtnStyle }}">{{ blockedBtnLabel }}</button>
+          <div style="border:2px solid var(--gold);border-radius:10px;padding:18px;margin:16px 0;background:var(--gold-light);text-align:center">
+            <div style="font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#7A5A0C;margin-bottom:6px">Unfinished work behind you</div>
+            <div style="font-family:'Fraunces',serif;font-size:1.1rem;margin-bottom:6px;color:#7A5A0C">{{ blockedHeading }}</div>
+            <div class="muted" style="max-width:48ch;margin:0 auto 12px">{{ blockedText }}</div>
+            <button onClick="{{ goToFrontier }}" style="{{ btnSecondary }}">{{ blockedBtnLabel }}</button>
           </div>
         </sc-if>
 
@@ -222,7 +222,7 @@
               <button onClick="{{ goHome }}" style="{{ btnPrimary }}margin-top:12px">Back to today's checklist</button>
             </sc-if>
             <sc-if value="{{ rqFailed }}" hint-placeholder-val="{{ false }}">
-              <div style="background:var(--gold-light);color:#7A5A0C;border-radius:8px;padding:13px;margin-top:12px;text-align:left">{{ rqRemNote }}</div>
+              <div style="background:var(--gold-light);color:#7A5A0C;border-radius:8px;padding:13px;margin-top:12px;text-align:left">This step is ticked off either way — but you came in under 80%, and it is worth another round while it is fresh. {{ rqRemNote }}</div>
               <button onClick="{{ rqRemStart }}" style="{{ btnPrimary }}margin-top:12px">{{ rqRemLabel }}</button>
             </sc-if>
           </div>
@@ -260,7 +260,7 @@
               <button onClick="{{ goHome }}" style="{{ btnPrimary }}margin-top:12px">Back to today's checklist</button>
             </sc-if>
             <sc-if value="{{ gzFailed }}" hint-placeholder-val="{{ false }}">
-              <div style="background:var(--gold-light);color:#7A5A0C;border-radius:8px;padding:13px;margin-top:12px;text-align:left">{{ gzRemNote }}</div>
+              <div style="background:var(--gold-light);color:#7A5A0C;border-radius:8px;padding:13px;margin-top:12px;text-align:left">This step is ticked off either way — but you came in under 80%, and it is worth another round while it is fresh. {{ gzRemNote }}</div>
               <button onClick="{{ gzRemStart }}" style="{{ btnPrimary }}margin-top:12px">{{ gzRemLabel }}</button>
             </sc-if>
           </div>
@@ -307,7 +307,7 @@
               <button onClick="{{ goHome }}" style="{{ btnPrimary }}margin-top:12px">Back to today's checklist</button>
             </sc-if>
             <sc-if value="{{ sqFailed }}" hint-placeholder-val="{{ false }}">
-              <div style="background:var(--gold-light);color:#7A5A0C;border-radius:8px;padding:13px;margin-top:12px;text-align:left">{{ sqRemNote }}</div>
+              <div style="background:var(--gold-light);color:#7A5A0C;border-radius:8px;padding:13px;margin-top:12px;text-align:left">This step is ticked off either way — but you came in under 80%, and it is worth another round while it is fresh. {{ sqRemNote }}</div>
               <button onClick="{{ sqRemStart }}" style="{{ btnPrimary }}margin-top:12px">{{ sqRemLabel }}</button>
             </sc-if>
           </div>
@@ -390,7 +390,7 @@
               <button onClick="{{ goHome }}" style="{{ btnPrimary }}margin-top:12px">Back to today's checklist</button>
             </sc-if>
             <sc-if value="{{ rvFailed }}" hint-placeholder-val="{{ false }}">
-              <div style="background:var(--gold-light);color:#7A5A0C;border-radius:8px;padding:13px;margin-top:12px;text-align:left">{{ rvRemNote }}</div>
+              <div style="background:var(--gold-light);color:#7A5A0C;border-radius:8px;padding:13px;margin-top:12px;text-align:left">This step is ticked off either way — but you came in under 80%, and it is worth another round while it is fresh. {{ rvRemNote }}</div>
               <button onClick="{{ rvRemStart }}" style="{{ btnPrimary }}margin-top:12px">{{ rvRemLabel }}</button>
             </sc-if>
           </div>
@@ -461,6 +461,7 @@
           <div class="muted">Today</div><div>{{ calToday }}</div>
           <div class="muted">Pace</div><div>{{ calPace }}</div>
         </div>
+        <div style="{{ lastDayStyle }}">{{ lastDayNote }}</div>
         <h3 style="font-size:1rem;margin:16px 0 5px">Scheduled breaks</h3>
         <p class="muted">Break days are not school days, so the year simply runs later rather than losing lessons. To change these, edit BREAKS at the top of curriculum/la-calendar.js.</p>
         <sc-for list="{{ calBreaks }}" as="b" hint-placeholder-count="3">
@@ -474,7 +475,8 @@
 
       <div class="card">
         <h2>Catching up and working ahead</h2>
-        <p class="muted">Days run in order. An unfinished day locks everything after it until it is done, so nothing gets quietly skipped. There is no limit in the other direction: once your child is caught up, finishing a day immediately opens the next one, so he can work as far forward as he likes to cover a day he will be away.</p>
+        <p class="muted">Nothing is locked anywhere in this curriculum. Every day and every step is open, in any order, and a drill that comes in under 80% still ticks its step off. What the app does instead is <strong>tell</strong> him: a day with unfinished work behind it opens with a warning naming that day and a button back to it, and a short score offers another round rather than demanding one. He can also work as far ahead as he likes.</p>
+        <p class="muted">The trade is deliberate and yours to reverse: he cannot be walled out of school by a bad morning, and he also cannot be stopped from skipping something. The two lists below are how you see what actually happened.</p>
         <div style="background:var(--paper);border:1px solid var(--rule);border-radius:6px;padding:13px 15px;margin-top:10px">
           <div style="font-family:'Fraunces',serif;font-size:.95rem;margin-bottom:3px">{{ frontierLabel }}</div>
           <div class="muted" style="font-size:.9rem">{{ frontierDetail }}</div>
@@ -668,7 +670,7 @@ class Component extends DCLogic {
       off[prefix+"Passed"]=ok;
       off[prefix+"Failed"]=!ok && !!rem;
       off[prefix+"RemNote"]=rem?rem.note:"";
-      off[prefix+"RemLabel"]=rem?("Try again \u00b7 round "+rem.round+" of "+M.MAX_ROUNDS):"";
+      off[prefix+"RemLabel"]=rem?("Practise the ones you missed \u00b7 round "+rem.round):"";
       off[prefix+"RemStart"]=rem?function(){
         self2.quizStart(slot, self2.prepMC(rem.items), (q.seenBefore||[]).concat(q.items.map(function(i){return i.id;})));
       }:function(){};
@@ -811,7 +813,10 @@ class Component extends DCLogic {
     const ok=M.passed(score,total);
     this.setState({lastResult:{kind, score, total, passed:ok,
       missed:missedItems||[], seen:seenIds||[]}});
-    if(ok){ this.completeStep(step); this.setState({remediation:null, round:1}); return true; }
+    // Nothing is withheld: the step completes either way. Falling short offers
+    // a practice round and is recorded for the parent, but never bars the day.
+    this.completeStep(step);
+    if(ok){ this.setState({remediation:null, round:1}); return true; }
     const round=this.state.round+1;
     if(round > M.MAX_ROUNDS){ this.markStuck(step); this.setState({remediation:null}); return false; }
     const rem=M.remediationRound(this.state.year, this.state.week, kind,
@@ -926,9 +931,13 @@ class Component extends DCLogic {
         btnStyle = self.btn("secondary", false);
         onClick = function(){};
       } else if(locked){
-        btnLabel = "Locked";
-        btnStyle = self.btn("primary", false);
-        onClick = function(){};
+        // Not locked, just out of order: still usable, visually secondary.
+        btnLabel = x.step.gate==="ack" ? "I did this"
+                 : x.step.gate==="end" ? "Finish the day" : "Go";
+        btnStyle = self.btn("secondary", true);
+        onClick = x.step.gate==="ack" ? function(){ self.completeStep(x.step); }
+                : x.step.gate==="end" ? function(){ self.completeStep(x.step); window.scrollTo(0,0); }
+                : function(){ self.goto(stepPanel[x.step.key]||"home"); };
       } else if(x.step.gate==="ack"){
         btnLabel = "I did this";
         btnStyle = self.btn("primary", true);
@@ -944,7 +953,7 @@ class Component extends DCLogic {
       }
       return {
         label:x.step.n+". "+x.step.label,
-        detail: locked ? "Unlocks when the step above is done." : x.step.detail,
+        detail: locked ? (x.step.detail+" (Step "+(currentIdx+1)+" comes first, but you can do this now if you need to.)") : x.step.detail,
         doneNote: done ? (x.stuck ? "Marked for a grown-up to look at." : x.step.done) : "",
         doneNoteStyle: done
           ? "margin:4px 0 0;font-size:.84rem;color:"+(x.stuck?"var(--brick-dark)":"var(--forest)")+";font-weight:600"
@@ -1086,6 +1095,16 @@ class Component extends DCLogic {
         return CAL.longDate(now)+(sch.week?(" \u2014 week "+sch.week+", "+sch.day+" (day "+sch.dayNumber+" of 180)"):(" \u2014 "+(sch.note||"")));
       })(),
       calPace: CAL ? CAL.pacing(seq.frontier, new Date()).text : "",
+      lastDayNote: (function(){
+        if(!CAL || !CAL.lastDayCheck) return "";
+        const k=CAL.lastDayCheck();
+        if(k.daysByTarget==null) return "";
+        return "You named "+CAL.longDate(k.targetDate)+" as the last day of school. With the breaks above that is school day "+
+          k.daysByTarget+", but this curriculum is "+k.total+" days \u2014 "+k.shortfall+
+          " days longer. Day 180 falls on "+CAL.longDate(CAL.dateForIndex(179))+
+          ". Nothing has been cut; you can run past 20 May, shorten some breaks, or double up on days. Worth deciding now rather than in May.";
+      })(),
+      lastDayStyle: "background:var(--gold-light);color:#7A5A0C;border-radius:8px;padding:12px 15px;margin-top:12px;font-size:.9rem",
       calBreaks: CAL ? CAL.BREAKS.map(function(b){
         return {name:b.name, range: CAL.longDate(new Date(b.from.y,b.from.m-1,b.from.d))+
           " to "+CAL.longDate(new Date(b.to.y,b.to.m-1,b.to.d))};
@@ -1095,8 +1114,7 @@ class Component extends DCLogic {
         : "Currently on: "+(MS.DAY_NAME[frontierPos.day]||frontierPos.day)+", week "+frontierPos.week,
       frontierDetail: yearFinished
         ? "All 180 days complete."
-        : (seq.frontier)+" of "+(MS.TOTAL_DAYS||180)+" days finished. Everything after "+
-          (MS.DAY_NAME[frontierPos.day]||frontierPos.day)+" of week "+frontierPos.week+" is locked until that day is done.",
+        : (seq.frontier)+" of "+(MS.TOTAL_DAYS||180)+" days finished. That is the first day still outstanding \u2014 nothing is locked, so he can work anywhere, but this is where the gap is.",
       excuseButtons: MS.DAYS.map(function(d){
         const k=MS.excuseKey(st.year, st.week, d);
         const on=!!st.excused[k];
@@ -1152,19 +1170,20 @@ class Component extends DCLogic {
       startDay: this.startDay,
       startBtnStyle:"font-family:'Fraunces',serif;font-weight:700;font-size:1.05rem;letter-spacing:.06em;"+
         "background:var(--brick);color:#fff;border:none;border-radius:8px;padding:13px 34px;cursor:pointer",
-      // A blocked day shows the catch-up panel instead of START.
-      showStart: !seq.blocked && !st.started && !dayComplete,
-      showChecklist: !seq.blocked && st.started && !dayComplete,
-      showDayComplete: !seq.blocked && dayComplete,
-      showBlocked: seq.blocked,
+      // Nothing is locked. An out-of-order day still opens; it just carries a
+      // warning naming the unfinished work behind it.
+      showStart: !st.started && !dayComplete,
+      showChecklist: st.started && !dayComplete,
+      showDayComplete: dayComplete,
+      showBlocked: seq.blocked && !st.started && !dayComplete,
       blockedHeading: seq.blocked
-        ? "Finish "+(MS.DAY_NAME[frontierPos.day]||frontierPos.day)+" of week "+frontierPos.week+" first"
+        ? (MS.DAY_NAME[frontierPos.day]||frontierPos.day)+" of week "+frontierPos.week+" is still unfinished"
         : "",
       blockedText: seq.blocked
-        ? "School days are done in order. There is unfinished work behind this one, so this day is closed until that is done. Go back, finish it, and this opens by itself."
+        ? "You have unfinished work behind this day. You can still do today's work, but the skipped day will not fill itself in \u2014 go back to it when you can."
         : "",
       blockedBtnLabel: seq.blocked
-        ? "Go to "+(MS.DAY_NAME[frontierPos.day]||frontierPos.day)+", week "+frontierPos.week
+        ? "Go back and finish "+(MS.DAY_NAME[frontierPos.day]||frontierPos.day)+", week "+frontierPos.week
         : "",
       goToFrontier: function(){ self.jumpTo(frontierPos.week, frontierPos.day); },
       // Working ahead is the same mechanism seen from the other side.

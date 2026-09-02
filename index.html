@@ -18,6 +18,7 @@
 <script src="./curriculum/math-y1.js"></script>
 <script src="./curriculum/math-y2.js"></script>
 <script src="./curriculum/extra-banks.js"></script>
+<script src="./curriculum/math-sequence.js"></script>
 <script src="./curriculum/registry.js"></script>
 <script src="./curriculum/la-y1-spine.js"></script>
 <script src="./curriculum/la-y1-words.js"></script>
@@ -3108,6 +3109,16 @@
         <button onClick="{{ s.go }}" style="{{ s.style }}" style-hover="filter:brightness(1.2)">{{ s.label }}<span style="{{ s.dotStyle }}">{{ s.dot }}</span></button>
       </sc-for>
     </div>
+
+    <sc-if value="{{ pSeqGap }}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap;background:rgba(251,191,36,.1);border:1px solid rgba(251,191,36,.35);border-radius:16px;padding:14px 18px;margin-bottom:16px">
+        <span style="font-size:13.5px;line-height:1.5;color:rgba(238,242,255,.8);flex:1;min-width:260px">{{ pSeqNote }}</span>
+        <button onClick="{{ pSeqGo }}" style="font-family:Fredoka,sans-serif;font-size:14px;padding:9px 17px;border-radius:12px;border:1px solid rgba(251,191,36,.5);cursor:pointer;background:rgba(251,191,36,.16);color:#FBBF24;white-space:nowrap" style-hover="filter:brightness(1.15)">{{ pSeqGoLabel }}</button>
+      </div>
+    </sc-if>
+    <sc-if value="{{ pSeqAhead }}" hint-placeholder-val="{{ true }}">
+      <div style="font-size:12.5px;color:rgba(238,242,255,.45);margin-bottom:16px">{{ pSeqAheadNote }}</div>
+    </sc-if>
     <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:24px">
       <sc-for list="{{ pTierChips }}" as="tc" hint-placeholder-count="4">
         <button onClick="{{ tc.go }}" style="{{ tc.style }}" style-hover="filter:brightness(1.2)">{{ tc.l }}</button>
@@ -5657,6 +5668,13 @@ class Component extends DCLogic {
   practiceVals(mascot, studentName){
     const st=this.state;
     const SETS=this.sets();
+    /* Sequencing context. ALL_CUR must be every set in the CURRENT course, and
+     * MATH_SEQ re-sorts it into curriculum order — ALL_SETS is stored in
+     * authoring order, where all week-1 sets sit at the end. */
+    const SEQ=window.__CURR&&window.__CURR.MATH_SEQ;
+    const ALL_CUR=this.allSetsForCurriculum();
+    const SEQ_STATUS=SEQ?SEQ.statusOf(set.id, ALL_CUR, st.pChecked||{}):null;
+    const SEQ_SUM=SEQ?SEQ.summary(ALL_CUR, st.pChecked||{}):null;
     const set=this.curSet();
     /* Warm-Up, then Core, then Challenge, and no combined view: mixing the
      * tiers put a Challenge item directly beneath a Warm-Up one and made a set
@@ -5716,14 +5734,43 @@ class Component extends DCLogic {
           style:"font-family:Fredoka,sans-serif;font-size:14px;padding:9px 17px;border-radius:11px;cursor:pointer;white-space:nowrap;background:"+(on?"rgba(56,189,248,.2)":"rgba(255,255,255,.05)")+";border:1px solid "+(on?"rgba(56,189,248,.6)":"rgba(255,255,255,.13)")+";color:"+(on?"#7DD3FC":"rgba(238,242,255,.62)")};
       }),
       pManyWeeks:this.weeksWithSets(st.uview).length>1,
-      pSets:SETS.map(s=>({label:s.label,
-        dot:((st.skills||{})[s.id]||{}).state==="spiral" ? "●" : ((st.skills||{})[s.id]||{}).state==="reteach" ? "▲" : "",
-        dotStyle:"font-size:8px;margin-left:7px;color:"+(((st.skills||{})[s.id]||{}).state==="spiral"?"#4ADE80":"#FBBF24"),
-        go:()=>this.setState({pset:s.id}),
-        style:"background:"+(set.id===s.id?"rgba(56,189,248,.2)":"rgba(255,255,255,.05)")+
-          ";border:1px solid "+(set.id===s.id?"rgba(56,189,248,.55)":"rgba(255,255,255,.1)")+
-          ";border-radius:13px;padding:11px 20px;cursor:pointer;font-family:Fredoka,sans-serif;font-size:15px;color:"+
-          (set.id===s.id?"#38BDF8":"rgba(238,242,255,.7)")+";transition:.15s"})),
+      pSets:SETS.map(s=>{
+        // Sequence status tints the chip. Nothing is disabled — an out-of-order
+        // set is still one click away, it just looks unvisited and the banner
+        // below names what was skipped.
+        const seqS = SEQ ? SEQ.statusOf(s.id, ALL_CUR, st.pChecked||{}) : {state:"current"};
+        const sel = set.id===s.id;
+        const bg = sel ? "rgba(56,189,248,.2)"
+                 : seqS.state==="past"  ? "rgba(74,222,128,.12)"
+                 : seqS.state==="ahead" ? "rgba(251,191,36,.10)"
+                 : "rgba(255,255,255,.05)";
+        const bd = sel ? "rgba(56,189,248,.55)"
+                 : seqS.state==="past"  ? "rgba(74,222,128,.28)"
+                 : seqS.state==="ahead" ? "rgba(251,191,36,.30)"
+                 : "rgba(255,255,255,.1)";
+        return {label:s.label,
+          dot:((st.skills||{})[s.id]||{}).state==="spiral" ? "●" : ((st.skills||{})[s.id]||{}).state==="reteach" ? "▲" : "",
+          dotStyle:"font-size:8px;margin-left:7px;color:"+(((st.skills||{})[s.id]||{}).state==="spiral"?"#4ADE80":"#FBBF24"),
+          go:()=>this.setState({pset:s.id}),
+          style:"background:"+bg+";border:1px solid "+bd+
+            ";border-radius:13px;padding:11px 20px;cursor:pointer;font-family:Fredoka,sans-serif;font-size:15px;color:"+
+            (sel?"#38BDF8":"rgba(238,242,255,.7)")+";transition:.15s"};
+      }),
+      pSeqGap: !!(SEQ_STATUS && SEQ_STATUS.gap),
+      pSeqNote: (SEQ_STATUS && SEQ_STATUS.gap && SEQ_STATUS.mustFinish)
+        ? ("You have skipped ahead. "+SEQ_STATUS.skipped+" set"+(SEQ_STATUS.skipped===1?"":"s")+
+           " before this one are still unfinished, starting with "+SEQ_STATUS.mustFinish.fullLabel+
+           ". You can carry on here \u2014 nothing is locked \u2014 but that gap will not fill itself in.")
+        : "",
+      pSeqGoLabel: (SEQ_STATUS && SEQ_STATUS.mustFinish) ? ("Go to "+SEQ_STATUS.mustFinish.fullLabel) : "",
+      pSeqGo: ()=>{ if(SEQ_STATUS && SEQ_STATUS.mustFinish){
+        const t=SEQ.parseId(SEQ_STATUS.mustFinish.id);
+        this.setState({pset:SEQ_STATUS.mustFinish.id, uview:(t?t.u:this.state.uview), pweek:(t?t.w:1)});
+      } },
+      pSeqAhead: !!(SEQ_SUM && !SEQ_SUM.complete && !(SEQ_STATUS&&SEQ_STATUS.gap)),
+      pSeqAheadNote: SEQ_SUM
+        ? (SEQ_SUM.done+" of "+SEQ_SUM.total+" sets done, no gaps behind you. Work as far ahead as you like.")
+        : "",
       pTitle:set.title, pNote:set.note, pScore:score, pTotal:total, pPct:Math.round(score/total*100),
       pCompressed:compressed,
       pCompressNote:"Compressed — one spiral item today, because this one has been solid on two separate days. The full set comes back in "+Math.max(0,MASTERY.spiralDays-spiralAge)+" days.",

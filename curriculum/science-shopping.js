@@ -140,9 +140,26 @@
   const MONTHS = ["January","February","March","April","May","June","July",
                   "August","September","October","November","December"];
 
+  /* CACHING, and why it is not premature. Every one of these walks the school
+   * calendar day by day, and shopKeyOfWeek() used to re-derive all 36 weeks on
+   * each call just to count how many share a month. Called once per row per
+   * render, that is roughly 36 x 36 x 1200 date steps for a single frame - the
+   * page test went from instant to hanging, and a browser would have stuttered
+   * the same way. The calendar and the lessons never change at runtime, so the
+   * whole result is computed once and reused. */
+  let _monthCache = null, _countCache = null, _byMonthCache = null;
+
   /* Which calendar month each school week falls in, using the shared school
    * calendar so breaks are already accounted for. */
   function monthOfWeek(week){
+    if(!_monthCache){
+      _monthCache = {};
+      for(let w=1; w<=36; w++) _monthCache[w] = _monthOfWeekUncached(w);
+    }
+    return _monthCache[week] || null;
+  }
+
+  function _monthOfWeekUncached(week){
     const CAL = window.__CURR && window.__CURR.LA_CALENDAR;
     if(!CAL || !CAL.dateForIndex) return null;
     const dt = CAL.dateForIndex((week-1)*5);       // the Monday of that week
@@ -151,12 +168,19 @@
             label:MONTHS[dt.getMonth()]+" "+dt.getFullYear()};
   }
 
+  function monthCounts(){
+    if(!_countCache){
+      _countCache = {};
+      for(let w=1; w<=36; w++){ const x=monthOfWeek(w); if(x) _countCache[x.key]=(_countCache[x.key]||0)+1; }
+    }
+    return _countCache;
+  }
+
   /* Merge the one-week orphan months into their neighbours. */
   function shopKeyOfWeek(week){
     const m = monthOfWeek(week);
     if(!m) return null;
-    const counts = {};
-    for(let w=1; w<=36; w++){ const x=monthOfWeek(w); if(x) counts[x.key]=(counts[x.key]||0)+1; }
+    const counts = monthCounts();
     if(counts[m.key] > 1) return m;
     // orphan: fold forward at the start of the year, backward at the end
     const step = (week <= 6) ? 1 : -1;
@@ -169,8 +193,13 @@
     return m;
   }
 
-  /* The whole year's shopping, month by month. */
+  /* The whole year's shopping, month by month. Computed once. */
   function byMonth(){
+    if(_byMonthCache) return _byMonthCache;
+    return (_byMonthCache = _byMonthUncached());
+  }
+
+  function _byMonthUncached(){
     const L = window.__CURR.SCI_LESSONS;
     if(!L) return [];
     const shops = {};   // key -> {label, weeks, items:{name -> entry}}
@@ -228,6 +257,50 @@
     });
   }
 
+  /* Everything for the year as ONE continuous list, in the order it is
+   * needed, each line carrying the month it is wanted for.
+   *
+   * The month-by-month view answers "what do I buy today?". This one answers
+   * "what does this course cost me, and what am I in for?" — it is the list
+   * to print once, stick inside a cupboard, and tick off across the year.
+   * Same items, same dedupe rules, one column added. */
+  let _allCache = null, _staplesCache = null;
+  function allItems(){
+    if(_allCache) return _allCache;
+    const out = [];
+    byMonth().forEach(function(m){
+      m.buy.forEach(function(i){
+        out.push({
+          name: i.name,
+          month: m.label,
+          monthShort: m.label.split(" ")[0],
+          weeks: i.weeks.slice(),
+          alsoWeeks: i.alsoWeeks.slice(),
+          who: i.who.slice(),
+          consumable: !!i.consumable,
+          section: "buy"
+        });
+      });
+    });
+    return (_allCache = out);
+  }
+
+  /* The staples, gathered once across the whole year rather than repeated in
+   * every month — a parent only needs to check the cupboard for these once. */
+  function allStaples(){
+    if(_staplesCache) return _staplesCache;
+    const seen = {}, out = [];
+    byMonth().forEach(function(m){
+      m.probablyHave.forEach(function(i){
+        const k = i.name.toLowerCase();
+        if(seen[k]) return;
+        seen[k] = 1;
+        out.push({name:i.name, month:m.label, monthShort:m.label.split(" ")[0]});
+      });
+    });
+    return (_staplesCache = out.sort(function(a,b){ return a.name.localeCompare(b.name); }));
+  }
+
   /* Anything worth ordering ahead rather than finding locally. */
   const ORDER_AHEAD = [
     "hand lens or microscope","real or replica fossils","iron filings",
@@ -236,5 +309,5 @@
   ];
 
   window.__CURR = window.__CURR || {};
-  window.__CURR.SCI_SHOPPING = {byMonth, monthOfWeek, shopKeyOfWeek, ORDER_AHEAD, MONTHS};
+  window.__CURR.SCI_SHOPPING = {byMonth, allItems, allStaples, monthOfWeek, shopKeyOfWeek, ORDER_AHEAD, MONTHS};
 })();

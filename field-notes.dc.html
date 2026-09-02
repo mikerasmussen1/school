@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=b7aba84"></script>
+<script src="./support.js?v=d1bd204"></script>
 </head>
 <body>
 <x-dc>
@@ -29,15 +29,15 @@
   ol.steps{margin:8px 0 0;padding-left:22px} ol.steps li{margin-bottom:7px}
   ul.mats{margin:6px 0 0;padding-left:20px} ul.mats li{margin-bottom:3px;font-size:.93rem}
 </style>
-<script src="./curriculum/students.js?v=b7aba84"></script>
-<script src="./curriculum/subjects.js?v=b7aba84"></script>
-<script src="./curriculum/question-types.js?v=b7aba84"></script>
-<script src="./curriculum/science-y3-spine.js?v=b7aba84"></script>
-<script src="./curriculum/science-y5-spine.js?v=b7aba84"></script>
-<script src="./curriculum/science-lessons.js?v=b7aba84"></script>
-<script src="./curriculum/science-quiz.js?v=b7aba84"></script>
-<script src="./curriculum/la-calendar.js?v=b7aba84"></script>
-<script src="./curriculum/science-shopping.js?v=b7aba84"></script>
+<script src="./curriculum/students.js?v=d1bd204"></script>
+<script src="./curriculum/subjects.js?v=d1bd204"></script>
+<script src="./curriculum/question-types.js?v=d1bd204"></script>
+<script src="./curriculum/science-y3-spine.js?v=d1bd204"></script>
+<script src="./curriculum/science-y5-spine.js?v=d1bd204"></script>
+<script src="./curriculum/science-lessons.js?v=d1bd204"></script>
+<script src="./curriculum/science-quiz.js?v=d1bd204"></script>
+<script src="./curriculum/la-calendar.js?v=d1bd204"></script>
+<script src="./curriculum/science-shopping.js?v=d1bd204"></script>
 </helmet>
 
 <div style="min-height:100vh;display:flex;flex-direction:column">
@@ -186,6 +186,37 @@
         <p class="muted">{{ kitBlurb }}</p>
       </div>
 
+      <sc-if value="{{ isOneList }}" hint-placeholder-val="{{ true }}">
+        <div class="card">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:6px">
+            <h3 style="font-size:1.1rem">Everything for the year</h3>
+            <div class="muted" style="font-size:.85rem">{{ allCount }}</div>
+          </div>
+          <sc-for list="{{ allRows }}" as="r" hint-placeholder-count="20">
+            <div style="{{ r.rowStyle }}">
+              <div style="{{ r.monthStyle }}">{{ r.month }}</div>
+              <div style="color:var(--clay);flex:none">&#9633;</div>
+              <div style="flex:1;min-width:0">{{ r.name }}</div>
+              <div class="muted" style="font-size:.82rem;white-space:nowrap">{{ r.note }}</div>
+            </div>
+          </sc-for>
+        </div>
+        <div class="card">
+          <h3 style="font-size:1.05rem;margin-bottom:4px">Check the cupboard once</h3>
+          <p class="muted">Everything the labs assume you already own, gathered across the whole year instead of repeated every month. Anything missing here is worth picking up with the September shop.</p>
+          <div class="muted" style="font-size:.9rem;margin-top:8px">{{ staplesLine }}</div>
+        </div>
+        <div class="card">
+          <h3 style="font-size:1.05rem;margin-bottom:5px">Worth ordering ahead</h3>
+          <p class="muted">Least likely to be in a local shop. Order these with the September trip.</p>
+          <ul class="mats">
+            <sc-for list="{{ orderAhead }}" as="o" hint-placeholder-count="6">
+              <li>{{ o.text }}</li>
+            </sc-for>
+          </ul>
+        </div>
+      </sc-if>
+
       <sc-if value="{{ isByMonth }}" hint-placeholder-val="{{ false }}">
         <sc-for list="{{ shopMonths }}" as="m" hint-placeholder-count="9">
           <div class="card">
@@ -292,7 +323,7 @@ class Component extends DCLogic {
     })(),
     week:(function(){ try{ return Math.min(36,Math.max(1,parseInt(localStorage.getItem("sci.week")||"1",10)||1)); }catch(e){ return 1; } })(),
     day:"A",
-    kitMode:"month",   // the shopping list is what a parent opens this tab for
+    kitMode:"all",     // one printable list is what a parent wants first
     q:null
   };
 
@@ -431,14 +462,45 @@ class Component extends DCLogic {
       }),
 
       // --- Materials tab: one shop per month, or the by-unit reference ---
-      kitModes:[["month","By month (shopping list)"],["unit","By unit"]].map(function(k){
+      kitModes:[["all","One list"],["month","Month by month"],["unit","By unit"]].map(function(k){
         return {label:k[1], onClick:function(){ self.setState({kitMode:k[0]}); },
                 style:self.pill(st.kitMode===k[0])}; }),
+      isOneList: st.kitMode==="all",
       isByMonth: st.kitMode==="month",
-      isByUnit:  st.kitMode!=="month",
-      kitBlurb: st.kitMode==="month"
+      isByUnit:  st.kitMode==="unit",
+      kitBlurb: st.kitMode==="all"
+        ? "The whole year on one list, in the order things are needed, each line marked with the month it is for. Print it once and tick it off as you go."
+        : st.kitMode==="month"
         ? "One shop a month, both boys together. Anything already bought is not listed again \u2014 reusable items show the later weeks they are needed so nothing gets thrown out early."
         : "Everything the Day A investigations call for, grouped so a whole unit can be prepared in one go. Weeks needing an adult are flagged.",
+      allCount:(function(){
+        const SH=window.__CURR.SCI_SHOPPING;
+        return SH ? (SH.allItems().length+" items across the year") : "";
+      })(),
+      allRows:(function(){
+        const SH=window.__CURR.SCI_SHOPPING;
+        if(!SH) return [];
+        let last="";
+        return SH.allItems().map(function(i){
+          const isNew = i.monthShort!==last;
+          last = i.monthShort;
+          const who = i.who.length===2 ? "both" : i.who[0];
+          const reuse = i.alsoWeeks.length ? (" \u00b7 again wk "+i.alsoWeeks.join(", ")) : "";
+          return {
+            name:i.name,
+            month: isNew ? i.monthShort : "",
+            note: who+" \u00b7 wk "+i.weeks.join(", ")+reuse,
+            monthStyle:"flex:none;width:82px;font-family:'Fraunces',serif;font-size:.85rem;color:"+
+              (isNew?"var(--deep)":"transparent"),
+            rowStyle:"display:flex;gap:9px;align-items:baseline;padding:5px 0;font-size:.95rem"+
+              (isNew?";border-top:1px solid var(--rule);margin-top:5px":"")
+          };
+        });
+      })(),
+      staplesLine:(function(){
+        const SH=window.__CURR.SCI_SHOPPING;
+        return SH ? SH.allStaples().map(function(x){ return x.name; }).join(", ") : "";
+      })(),
       shopMonths:(function(){
         const SH=window.__CURR.SCI_SHOPPING;
         if(!SH) return [];

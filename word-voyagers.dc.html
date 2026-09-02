@@ -994,8 +994,12 @@ class Component extends DCLogic {
       // Labelled by boy so each knows which switch is his. Word Voyagers uses
       // y1/y2 internally where the other subjects use y3/y5, so map across.
       yearItems:[["y1","y3"],["y2","y5"]].map(function(pair){
+        // shortTab here, not tab: this switcher sits in the header beside the
+        // week arrows, and the full "BROCK - 3rd Grade" crowds it on a phone.
+        // The home-page cards, where the choice is actually made, use the
+        // full grade name.
         const ST=window.__CURR.STUDENTS;
-        const y=[pair[0], ST ? ST.tab(pair[1])
+        const y=[pair[0], ST ? ST.shortTab(pair[1])
                              : ((pair[0]==="y1"?window.__CURR.LA_Y1:window.__CURR.LA_Y2).GRADE||{}).label];
         return y; }).map(function(y){
         return {label:y[1], onClick:function(){ self.setYear(y[0]); },

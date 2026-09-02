@@ -335,8 +335,12 @@ class Component extends DCLogic {
       weekLabel:"Week "+st.week+" of 36",
       // Labelled by boy, from curriculum/students.js.
       gradeItems:["y3","y5"].map(function(id){
+        // shortTab here, not tab: this switcher sits in the header beside the
+        // week arrows, and the full "BROCK - 3rd Grade" crowds it on a phone.
+        // The home-page cards, where the choice is actually made, use the
+        // full grade name.
         const ST=window.__CURR.STUDENTS;
-        return {label: ST ? ST.tab(id) : id,
+        return {label: ST ? ST.shortTab(id) : id,
           onClick:function(){ self.setGrade(id); },
           style:self.pillDark(st.grade===id)}; }),
       navItems:navDefs.map(function(d){ return {label:d[1], onClick:function(){ self.goto(d[0]); }, style:self.navBtn(st.view===d[0])}; }),

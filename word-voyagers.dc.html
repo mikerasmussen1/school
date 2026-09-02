@@ -86,7 +86,7 @@
       <div class="card">
         <div style="background:var(--paper);border:1px solid var(--rule);border-left:4px solid var(--gold);border-radius:6px;padding:16px 18px;margin-bottom:18px">
           <div style="display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap">
-            <div style="font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)">Reading for {{ qDayLabel }} · {{ qKind }}</div>
+            <div style="font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)">Reading for {{ qDayLabel }} · {{ qTheme }} · {{ qKind }}</div>
             <button onClick="{{ qListen }}" style="{{ btnSecondary }}">Read it to me</button>
           </div>
           <div style="font-family:'Fraunces',serif;font-size:1.14rem;line-height:1.5;margin:9px 0 6px">{{ qText }}</div>
@@ -425,6 +425,18 @@
         <p>Nine unit studies, four weeks each: 36 weeks, 180 days. Every week runs the same five-day rhythm, and each day is one screen your child can start alone. Monday reading, Tuesday grammar, Wednesday spelling, Thursday handwriting, Friday speaking and review.</p>
         <p class="muted">Grammar, spelling and reading questions grade themselves instantly with an explanation. Thursday's handwritten page is photographed and read by the model. Friday's speaking task is deliberately NOT machine-graded: there is no honest way to score a child reporting aloud or building on someone's idea in a discussion, so the page gives the task and the rubric and your child marks it done with whoever they did it with. That is the one place in the week that genuinely needs another person.</p>
       </div>
+      <div class="card">
+        <h2>Daily readings — what they cover</h2>
+        <p class="muted">One reading a day, 180 across the year, each tagged so you can see the balance rather than take my word for it.</p>
+        <sc-for list="{{ themeRows }}" as="t" hint-placeholder-count="8">
+          <div style="display:grid;grid-template-columns:120px 46px 1fr;gap:10px;align-items:center;padding:5px 0">
+            <div style="font-family:'Fraunces',serif;font-size:.9rem">{{ t.label }}</div>
+            <div style="font-size:.86rem;color:var(--ink-soft);text-align:right">{{ t.count }}</div>
+            <div style="{{ t.barStyle }}"></div>
+          </div>
+        </sc-for>
+      </div>
+
       <div class="card">
         <h2>Things flagged for you</h2>
         <p class="muted">A drill that could not be cleared in three tries stops looping and gets flagged here instead of trapping your child. This is the list of those moments.</p>
@@ -972,6 +984,14 @@ class Component extends DCLogic {
       standardsHeading:(Y.GRADE?Y.GRADE.label:"")+" skills and standards covered",
       benchmarks:(Y.BENCHMARKS||[]).map(function(b){ return {text:b}; }),
       standards:Y.STANDARDS,
+      themeRows:(function(){
+        if(!QT || !QT.themeCounts) return [];
+        const c=QT.themeCounts(st.year), max=Math.max.apply(null,Object.keys(c).map(function(k){return c[k];}))||1;
+        return Object.keys(c).map(function(k){
+          return {label:QT.THEME[k], count:c[k]+" days",
+            barStyle:"height:9px;border-radius:5px;background:var(--gold);width:"+Math.round((c[k]/max)*100)+"%"};
+        });
+      })(),
 
       // --- daily checklist: clear start, gated steps, clear end ---
       dayHeading: plan.dayName+" \u00b7 Day "+plan.dayNumber+" of "+plan.totalDays,
@@ -1008,6 +1028,7 @@ class Component extends DCLogic {
       // on Wednesday reads Wednesday's, but every day of the week stays
       // reachable — missing a day should not mean missing the reading.
       qText:q.text, qSource:q.source, qThink:q.think, qKind:q.kindLabel,
+      qTheme:q.themeLabel||"",
       qDayLabel:({Mon:"Monday",Tue:"Tuesday",Wed:"Wednesday",Thu:"Thursday",Fri:"Friday"}[st.qDay]||st.qDay),
       qListen:function(){ self.speak(q.text+". "+q.source+". "+q.think); },
       qDayPicker:["Mon","Tue","Wed","Thu","Fri"].map(function(d){

@@ -181,6 +181,8 @@
     {tag:"L.3.1a", text:"Explain the function of nouns, pronouns, verbs, adjectives and adverbs.", weeks:"1, 2, 4, 9, 10"},
     {tag:"L.3.1b", text:"Form and use regular and irregular plural nouns.", weeks:"5, 6"},
     {tag:"L.3.1c", text:"Use abstract nouns.", weeks:"7"},
+    {tag:"L.3.1d", text:"Form and use regular and irregular verbs.", weeks:"2"},
+    {tag:"L.3.1e", text:"Form and use the simple verb tenses (I walked; I walk; I will walk).", weeks:"2"},
     {tag:"L.3.1f", text:"Ensure subject-verb and pronoun-antecedent agreement.", weeks:"8, 23"},
     {tag:"L.3.1g", text:"Form and use comparative and superlative adjectives and adverbs.", weeks:"11, 12"},
     {tag:"L.3.1h", text:"Use coordinating and subordinating conjunctions.", weeks:"13, 14"},
@@ -195,6 +197,9 @@
     {tag:"L.3.5a", text:"Distinguish literal from nonliteral language.", weeks:"29, 30, 31"},
     {tag:"L.3.5c", text:"Distinguish shades of meaning among related words.", weeks:"32"},
     {tag:"L.3.6", text:"Acquire grade-appropriate academic and domain-specific words, including time and space words.", weeks:"33, 34, 35"},
+    {tag:"W.3.1", text:"Opinion writing: introduce the topic, state an opinion, give reasons, use linking words, provide a conclusion.", weeks:"Thursdays; Unit 3 and 9 projects"},
+    {tag:"W.3.2", text:"Informative/explanatory writing: introduce a topic, group related information, develop with facts and details, conclude.", weeks:"Thursdays; Unit 2 and 6 projects"},
+    {tag:"W.3.3", text:"Narrative writing: establish a situation, introduce characters, use dialogue and description, provide closure.", weeks:"Thursdays; Unit 5 and 8 projects"},
     {tag:"W.3.4-6", text:"Plan, revise and edit with guidance; use technology to produce and publish.", weeks:"Thursday every week; Unit 9"},
     {tag:"W.3.8",  text:"Conduct short research projects; take notes and sort evidence.", weeks:"33, 34"},
     {tag:"W.3.10", text:"Write routinely over short and extended time frames.", weeks:"Thursday every week"},
@@ -203,6 +208,7 @@
     {tag:"SL.3.3", text:"Ask and answer questions about a speaker's information.", weeks:"Friday, Units 3, 6"},
     {tag:"SL.3.4", text:"Report on a topic or text, tell a story, or recount an experience.", weeks:"Friday every week; Week 36"},
     {tag:"SL.3.5", text:"Create audio recordings or visual displays.", weeks:"Units 4, 7, 9"},
+    {tag:"RF.3.3", text:"Apply phonics and word-analysis skills: prefixes and suffixes, multisyllabic words, irregularly spelled words.", weeks:"every spelling day; 25–28"},
     {tag:"RF.3.4", text:"Read grade-level text orally with accuracy, appropriate rate and expression.", weeks:"Monday every week"},
     {tag:"RL/RI.3.10", text:"Read and comprehend at the high end of the 2–3 band (Lexile ~420–820).", weeks:"Monday every week"}
   ];

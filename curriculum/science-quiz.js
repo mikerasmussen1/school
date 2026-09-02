@@ -4,11 +4,13 @@
  * Four multiple-choice items per week, drawn from that week's own
  * investigation and reading — never generic science trivia.
  *
- * COVERAGE IS PARTIAL AND THE PAGE KNOWS IT. Weeks with items get a check;
- * weeks without get the written claim-and-evidence only, and the page says so
- * rather than showing an empty drill. That is not a placeholder pretending to
- * be finished: hasCheck() is the honest test, and the For Parents tab reports
- * exactly which weeks are covered.
+ * COVERAGE, STATED HONESTLY. Third grade is now complete: all 36 weeks, 144
+ * items. Fifth grade has none yet.
+ *
+ * Weeks without items get the written claim-and-evidence only, and the page
+ * says so rather than showing an empty drill. hasCheck() is the honest test
+ * and the For Parents tab reports the exact count, so a gap is visible rather
+ * than disguised as a finished feature.
  *
  * This ordering is deliberate. The claim-with-evidence sentence is the thing
  * Georgia's practices standards actually ask for, and it is written by hand
@@ -95,9 +97,114 @@
    ["A shell between two layers arrived:",["before both", "after both", "after the lower, before the upper", "at no time"],2,"It is bracketed by the two layers."],
    ["Layering tells you:",["exact dates", "the order of events", "the temperature", "the weight"],1,"Sequence, not age."],
    ["Sequence and age are:",["the same question", "different questions", "both unanswerable", "both about colour"],1,"Order can be known without dates."]],
+  16:[
+   ["How many geographic regions does Georgia have?",["three", "four", "five", "seven"],2,"Blue Ridge, Valley and Ridge, Appalachian Plateau, Piedmont, Coastal Plain."],
+   ["Which region covers the middle of the state?",["Blue Ridge", "Piedmont", "Coastal Plain", "Appalachian Plateau"],1,"The Piedmont is the wide band of rolling hills."],
+   ["Georgia has five regions because it has five kinds of:",["weather", "land", "animals", "rivers"],1,"The land itself differs from north to south."],
+   ["The smallest region, in the far northwest corner, is the:",["Piedmont", "Coastal Plain", "Appalachian Plateau", "Blue Ridge"],2,"It is a small flat-topped corner with caves."]],
+  17:[
+   ["The Blue Ridge is Georgia's:",["flattest land", "highest ground", "driest land", "saltiest land"],1,"Height is what makes it different."],
+   ["Compared with the rest of the state, the Blue Ridge is:",["hotter and drier", "cooler and wetter", "flatter", "sandier"],1,"Elevation cools and wets it."],
+   ["Trout live in mountain streams because they need:",["salt water", "cold water", "still water", "muddy water"],1,"Cold fast water is their requirement."],
+   ["Height changes what lives somewhere because it changes:",["the temperature", "the colour", "the day length", "the soil colour only"],0,"Cooler air supports different trees and animals."]],
+  18:[
+   ["Valley and Ridge is made of:",["flat plains", "long parallel ridges and valleys", "sand dunes", "marshes"],1,"Ridges and valleys run northeast to southwest."],
+   ["The ridges stand higher because their rock is:",["softer", "harder", "wetter", "younger"],1,"Softer rock wore down into valleys."],
+   ["Farms there usually sit:",["on the ridge tops", "in the valleys", "in caves", "on the coast"],1,"Valley soil is deeper."],
+   ["Folding the clay strips modelled how:",["rain falls", "rock layers buckle", "animals move", "soil forms"],1,"Pushing from both ends folds the layers."]],
+  19:[
+   ["Most Georgians live in which region?",["Blue Ridge", "Piedmont", "Appalachian Plateau", "Valley and Ridge"],1,"Atlanta, Macon and Athens are all in it."],
+   ["Piedmont clay is red because of:",["iron", "salt", "plants", "sand"],0,"Iron in the soil gives the colour."],
+   ["Clay soil drains:",["quickly", "badly", "not at all in any soil", "only uphill"],1,"Packed clay holds water and drains slowly."],
+   ["Describing your own soil as 'gritty' is:",["a conclusion", "an observation", "a prediction", "a guess"],1,"You felt it directly."]],
+  20:[
+   ["The Coastal Plain covers which part of Georgia?",["the north", "the middle", "the southern half", "only the islands"],2,"It is flat, sandy and low."],
+   ["A salt marsh is:",["dry land", "open sea", "between land and sea", "a mountain lake"],2,"It is neither fully land nor fully sea."],
+   ["Barrier islands protect the mainland by:",["blocking rivers", "taking storm force first", "growing trees", "holding salt"],1,"They absorb the first impact."],
+   ["Many young fish and crabs grow up in the marsh, which makes it:",["unimportant", "a nursery", "a desert", "a mountain"],1,"It shelters juveniles."]],
+  21:[
+   ["Camouflage helps an animal by making it:",["faster", "harder to see", "larger", "louder"],1,"It avoids being spotted."],
+   ["Camouflage only works:",["everywhere", "in the right place", "at night", "in water"],1,"A pale moth is obvious on dark bark."],
+   ["Camouflage can help a predator by letting it:",["run faster", "sneak up on prey", "see better", "smell better"],1,"It works in both directions."],
+   ["Which moths were hardest to find in your test?",["the brightest", "the ones matching the bark", "the largest", "the ones on top"],1,"Matching the background is the point."]],
+  22:[
+   ["Hibernation helps an animal survive a season when:",["it is too bright", "food is scarce", "it rains", "days are long"],1,"It waits out the shortage."],
+   ["During hibernation an animal's heartbeat:",["speeds up", "slows down", "stops", "stays the same"],1,"Everything slows to save energy."],
+   ["A hibernating animal lives off:",["stored fat", "fresh food", "water only", "sunlight"],0,"Fat built up beforehand."],
+   ["Georgia black bears den less deeply than northern bears because:",["they are smaller", "winters here are milder", "they are older", "they eat more"],1,"Food is not gone as completely."]],
+  23:[
+   ["Migration means moving:",["only once", "with the seasons", "underground", "in circles"],1,"Animals follow the food."],
+   ["Many birds breed in the north in summer because:",["it is warmer there", "insects are plentiful", "it is quieter", "it is darker"],1,"Food supply drives it."],
+   ["Migration is worth its enormous energy cost because:",["staying would cost more", "it is fun", "birds get lost", "it is short"],0,"Staying through winter would be worse."],
+   ["Some birds pass through Georgia twice a year without staying. They are:",["hibernating", "migrating", "nesting", "lost"],1,"Georgia sits on their route."]],
+  24:[
+   ["Mimicry means one animal:",["hides underground", "resembles another", "changes colour daily", "sleeps all winter"],1,"Looking like something else helps it."],
+   ["A harmless animal that looks like a harmful one may be:",["eaten first", "left alone", "brighter", "larger"],1,"Predators avoid the original."],
+   ["Mimicry stops working if the copies become:",["rarer", "more common than the real thing", "smaller", "faster"],1,"Predators stop avoiding the pattern."],
+   ["Comparing a viceroy and a monarch shows mimicry because they:",["are the same species", "look similar but are different species", "both migrate", "both hibernate"],1,"Resemblance across species is the point."]],
+  25:[
+   ["An organism thrives where its needs are met, including:",["colour and size", "food, water, shelter and temperature", "name and group", "age and weight"],1,"Those four decide where it can live."],
+   ["Trout live in mountain streams because they need:",["tidal mud", "cold fast water", "salt water", "dry sand"],1,"Their requirement is cold moving water."],
+   ["Fiddler crabs live in the marsh because they need:",["tidal mud", "mountain rock", "pine forest", "cold streams"],0,"They burrow in tidal mud."],
+   ["Matching an animal to a place means matching its:",["picture", "needs", "colour", "size"],1,"Needs, not appearance."]],
+  26:[
+   ["A fiddler crab in the mountains would first lack:",["friends", "tidal mud and salt water", "sunlight", "air"],1,"Its habitat requirements are absent."],
+   ["Asking why an animal CANNOT live somewhere is useful because it:",["is easier", "reveals what it actually needs", "takes less time", "avoids evidence"],1,"The failures name the requirements."],
+   ["An animal is not merely near its habitat; it is:",["bored by it", "fitted to it", "larger than it", "older than it"],1,"Its features match the place."],
+   ["Listing three problems instead of one makes your answer:",["longer only", "better evidenced", "harder to read", "less accurate"],1,"More evidence supports the claim."]],
+  27:[
+   ["A claim is:",["what you observed", "what you think is true", "a measurement", "a question"],1,"It is the position you are arguing."],
+   ["Evidence is:",["your opinion", "what you observed", "your conclusion", "a guess"],1,"It is the record of what happened."],
+   ["Reasoning is the part that:",["repeats the claim", "connects evidence to claim", "adds new data", "asks a question"],1,"It explains why the evidence supports the claim."],
+   ["Giving a claim with no evidence means your argument is:",["complete", "incomplete", "proven", "measured"],1,"Assertion is not support."]],
+  28:[
+   ["Pollution is anything added to air, land or water that:",["looks untidy", "harms living things", "costs money", "smells"],1,"Harm is what defines it."],
+   ["Litter is obvious pollution. Fertiliser running into a creek is:",["not pollution", "less obvious pollution", "only a smell", "harmless"],1,"Runoff is harder to see but still harmful."],
+   ["Recording where and how much you found turns an impression into:",["an opinion", "evidence", "a guess", "a story"],1,"Records make it checkable."],
+   ["Keeping a record of sources and effects is asked for by:",["nobody", "the standards", "the weather", "the map"],1,"S3L2.a asks for exactly this."]],
+  29:[
+   ["Oil harms a bird mainly by:",["poisoning it instantly", "ruining the feathers' ability to trap air", "making it heavy only", "scaring it"],1,"It cannot stay warm or float."],
+   ["The feather was hardest to clean with:",["soap and water", "water alone", "a dry wipe", "nothing"],2,"A dry wipe removed the least."],
+   ["Pollution often harms animals by:",["being eaten", "ruining something they depended on", "changing their colour", "making noise"],1,"It removes what they needed."],
+   ["This investigation is a model, so it:",["proves everything", "shows the idea but not every detail", "is useless", "replaces real study"],1,"Models simplify."]],
+  30:[
+   ["Recycling means:",["throwing away", "using a material again", "burning waste", "burying waste"],1,"The material re-enters use."],
+   ["Which materials recycle best, many times over?",["paper", "metal and glass", "food waste", "cloth"],1,"They can be melted and reused repeatedly."],
+   ["Paper can be recycled:",["forever", "a limited number of times", "never", "only once"],1,"Fibres shorten each time."],
+   ["Whether a plastic can be recycled depends on:",["its colour", "your local area's rules", "its weight", "its age"],1,"Acceptance varies by place."]],
+  31:[
+   ["Conservation means:",["using it again", "using less so more is left", "burning it", "burying it"],1,"It reduces use in the first place."],
+   ["Conservation differs from recycling because it deals with:",["what you already used", "what you have not used yet", "only metal", "only water"],1,"It prevents the use."],
+   ["Turning off the tap while brushing saves water that was:",["already dirty", "never dirtied", "recycled", "frozen"],1,"It never entered the waste stream."],
+   ["Small changes matter most when they are:",["intended", "measured and kept", "announced", "short"],1,"Measurement is what makes it real."]],
+  32:[
+   ["Which is a source of heat?",["sunlight", "friction", "burning", "all three"],3,"All three appear in S3P1.a."],
+   ["Rubbing your hands warms them through:",["sunlight", "friction", "burning", "cooling"],1,"Movement becomes heat."],
+   ["Brakes get hot because of:",["sunlight", "friction", "burning", "freezing"],1,"Rubbing surfaces produce heat."],
+   ["Burning releases heat that was:",["created from nothing", "stored in a fuel", "taken from the air", "made by light"],1,"The fuel held the energy."]],
+  33:[
+   ["A thermometer is useful because it turns a feeling into:",["a colour", "a number", "a guess", "a picture"],1,"Numbers can be compared and checked."],
+   ["You should wait before reading a thermometer until:",["one second passes", "the reading stops moving", "it looks right", "it is warm"],1,"It needs to reach the temperature."],
+   ["Always write the temperature with its:",["colour", "unit", "date only", "name"],1,"20\u00b0C and 20\u00b0F are very different."],
+   ["Reading at eye level prevents:",["breaking it", "a misread number", "heat loss", "evaporation"],1,"Angle can distort the reading."]],
+  34:[
+   ["Dark surfaces heat faster because they:",["reflect more light", "absorb more light", "are heavier", "are thinner"],1,"Absorbed light becomes heat."],
+   ["Light surfaces stay cooler because they:",["absorb more", "reflect more away", "are colder", "are thicker"],1,"Reflected light does not warm them."],
+   ["A black car is hotter inside than a white one on the same day because of:",["size", "colour and absorption", "age", "windows only"],1,"Colour changes how much light is absorbed."],
+   ["Recording temperatures every five minutes gives you:",["one reading", "a pattern over time", "a guess", "a colour"],1,"Repeated readings show a trend."]],
+  35:[
+   ["Heat always moves from:",["cooler to warmer", "warmer to cooler", "light to dark", "high to low"],1,"That direction never reverses."],
+   ["The spoon in warm water will:",["cool down", "warm up", "stay the same", "freeze"],1,"Heat flows into the cooler spoon."],
+   ["The water with the spoon in it will:",["warm slightly", "cool slightly", "boil", "freeze"],1,"It gives up heat to the spoon."],
+   ["A cold drink warms in a room because:",["the room cools it", "heat moves from the room into the drink", "cold rises", "nothing happens"],1,"Heat moves toward the cooler thing."]],
+  36:[
+   ["A single reading is an anecdote; many readings are:",["a guess", "evidence", "an opinion", "a colour"],1,"Repetition makes a pattern visible."],
+   ["Charting your data makes visible:",["your handwriting", "a pattern", "the temperature only", "nothing"],1,"Graphs show trends numbers hide."],
+   ["Saying what your data does NOT show is:",["a weakness", "part of an honest result", "unnecessary", "a mistake"],1,"Limits are part of the finding."],
+   ["Which is the most honest statement?",["my data proves everything", "my data shows the black paper got hotter, but I only tested one day", "black is always hotter", "colour never matters"],1,"It states the finding and its limit."]],
   };
 
-  const Y5 = {};   // authored next; hasCheck() returns false meanwhile
+  const Y5 = {};   // not yet authored; hasCheck() returns false, page adapts
 
   function hasCheck(grade, week){
     const t = grade==="y5" ? Y5 : Y3;

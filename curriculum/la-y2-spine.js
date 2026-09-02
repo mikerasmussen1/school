@@ -1,5 +1,5 @@
 /* ============================================================================
- * WORD VOYAGERS — YEAR TWO SPINE (5th grade · 36 weeks · 180 days)
+ * WORD VOYAGERS — 5TH GRADE (36 weeks · 180 days)
  * ----------------------------------------------------------------------------
  * Same architecture as Year One, one grade up. The jump that matters at this
  * level is from "refer to the text" to QUOTING it accurately and explaining
@@ -186,6 +186,14 @@
     {tag:"L.5.6", text:"Acquire academic words, including those signaling contrast, addition and logical relationships.", weeks:"35; every spelling day"}
   ];
 
+  const GRADE = {label:"5th Grade", short:"5th", lexile:"830\u20131010", guided:"grades 4\u20135 band"};
+
+  const BENCHMARKS = [
+    "Independent reading and comprehension in the grades 4\u20135 complexity band (roughly Lexile 830\u20131010).",
+    "Fluent oral reading with accuracy, appropriate rate and expression, self-correcting from context.",
+    "Organized multi-paragraph writing that uses evidence, quotes sources accurately, and follows a clear structure."
+  ];
+
   window.__CURR = window.__CURR || {};
-  window.__CURR.LA_Y2 = Object.assign(window.__CURR.LA_Y2||{}, {UNITS, WEEKS, STANDARDS, unitOf});
+  window.__CURR.LA_Y2 = Object.assign(window.__CURR.LA_Y2||{}, {UNITS, WEEKS, STANDARDS, unitOf, GRADE, BENCHMARKS});
 })();

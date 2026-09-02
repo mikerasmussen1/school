@@ -337,12 +337,19 @@
 
     <sc-if value="{{ isParent }}" hint-placeholder-val="{{ false }}">
       <div class="card">
-        <h2>How the year is built</h2>
+        <h2>{{ parentGradeHeading }}</h2>
+        <h3 style="font-size:1rem;margin:12px 0 6px">Where your child should be by the end of the year</h3>
+        <sc-for list="{{ benchmarks }}" as="b" hint-placeholder-count="3">
+          <div style="display:flex;gap:9px;padding:5px 0;font-size:.94rem">
+            <div style="color:var(--gold)">&bull;</div><div>{{ b.text }}</div>
+          </div>
+        </sc-for>
+        <h3 style="font-size:1rem;margin:16px 0 6px">How the days are shaped</h3>
         <p>Nine unit studies, four weeks each: 36 weeks, 180 days. Every week runs the same five-day rhythm, and each day is one screen your child can start alone. Monday reading, Tuesday grammar, Wednesday spelling, Thursday handwriting, Friday speaking and review.</p>
         <p class="muted">Grammar, spelling and reading questions grade themselves instantly with an explanation. Thursday's handwritten page is photographed and read by the model. Friday's speaking task is deliberately NOT machine-graded: there is no honest way to score a child reporting aloud or building on someone's idea in a discussion, so the page gives the task and the rubric and your child marks it done with whoever they did it with. That is the one place in the week that genuinely needs another person.</p>
       </div>
       <div class="card">
-        <h2>Standards covered</h2>
+        <h2>{{ standardsHeading }}</h2>
         <sc-for list="{{ standards }}" as="s" hint-placeholder-count="10">
           <div style="display:grid;grid-template-columns:92px 1fr;gap:12px;padding:8px 0;border-bottom:1px solid var(--rule)">
             <div style="font-family:'Fraunces',serif;font-size:.85rem;color:var(--brick-dark)">{{ s.tag }}</div>
@@ -568,11 +575,11 @@ class Component extends DCLogic {
 
     const base={
       navItems:navItems, steps:steps, unitCards:unitCards,
-      yearItems:[["y1","Year 1 \u00b7 3rd"],["y2","Year 2 \u00b7 5th"]].map(function(y){
+      yearItems:[["y1",(window.__CURR.LA_Y1.GRADE||{}).label||"3rd Grade"],["y2",(window.__CURR.LA_Y2.GRADE||{}).label||"5th Grade"]].map(function(y){
         return {label:y[1], onClick:function(){ self.setYear(y[0]); },
                 style:self.pillDark(st.year===y[0])};
       }),
-      headerLine:(st.year==="y2"?"Year Two \u00b7 5th grade":"Year One \u00b7 3rd grade")+" \u00b7 36 weeks \u00b7 180 days",
+      headerLine:(Y.GRADE?Y.GRADE.label:"")+" \u00b7 36 weeks \u00b7 180 days \u00b7 Lexile "+(Y.GRADE?Y.GRADE.lexile:""),
       weekLabel:"Week "+st.week+" of 36",
       weekNum:st.week,
       weekTitle:wk.title,
@@ -647,6 +654,9 @@ class Component extends DCLogic {
       bookGroups:cats.map(function(c){
         return {title:c, books:Y.INDEPENDENT.filter(function(b){ return b.cat===c; })};
       }),
+      parentGradeHeading:(Y.GRADE?Y.GRADE.label:"")+" \u2014 how the year is built",
+      standardsHeading:(Y.GRADE?Y.GRADE.label:"")+" skills and standards covered",
+      benchmarks:(Y.BENCHMARKS||[]).map(function(b){ return {text:b}; }),
       standards:Y.STANDARDS
     };
 

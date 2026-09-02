@@ -25,6 +25,11 @@
     blurb: "Science twice a week: one hands-on investigation, one reading with a claim to defend. Nine units a year, weighted to the Georgia standards.",
     status: "live",
     order: 25,
+    // Chips on the landing card so each boy picks his own track first.
+    levels: [
+      {id:"y3", label:(window.__CURR&&window.__CURR.STUDENTS)?window.__CURR.STUDENTS.tab("y3"):"3rd", sub:"3rd Grade"},
+      {id:"y5", label:(window.__CURR&&window.__CURR.STUDENTS)?window.__CURR.STUDENTS.tab("y5"):"5th", sub:"5th Grade"}
+    ],
     open: {href:"field-notes.dc.html"}
   });
 })();

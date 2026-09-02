@@ -35,6 +35,7 @@
   .book-title{font-family:'Fraunces',serif;font-size:1rem;color:var(--brick-dark);margin:0 0 3px}
   .done-banner{text-align:center;padding:22px;margin-top:6px;background:var(--forest-light);border-radius:8px;color:#2E4E38}
 </style>
+<script src="./curriculum/students.js"></script>
 <script src="./curriculum/subjects.js"></script>
 <script src="./curriculum/question-types.js"></script>
 <script src="./curriculum/la-y1-spine.js"></script>
@@ -524,7 +525,18 @@
 class Component extends DCLogic {
   state = {
     view:"home",
-    year:(()=>{ try{ return localStorage.getItem("la.year")==="y2" ? "y2" : "y1"; }catch(e){ return "y1"; } })(),
+    // A level passed in the URL is the boy who was just picked on the landing
+    // card, so it beats whatever this page stored last time. Accepts the
+    // shared y3/y5 ids as well as this page's own y1/y2.
+    year:(()=>{
+      try{
+        const m=(window.location.search||"").match(/[?&]level=([^&]+)/);
+        if(m){ const v=decodeURIComponent(m[1]);
+          if(v==="y2"||v==="y5") return "y2";
+          if(v==="y1"||v==="y3") return "y1"; }
+      }catch(e){}
+      try{ return localStorage.getItem("la.year")==="y2" ? "y2" : "y1"; }catch(e){ return "y1"; }
+    })(),
     week:(()=>{ try{ return Math.min(36,Math.max(1,parseInt(localStorage.getItem("la.week")||"1",10)||1)); }catch(e){ return 1; } })(),
     done:(()=>{ try{ return JSON.parse(localStorage.getItem("la.done")||"{}"); }catch(e){ return {}; } })(),
     qDay:(function(){ return ["Mon","Mon","Tue","Wed","Thu","Fri","Fri"][new Date().getDay()]; })(),
@@ -979,7 +991,13 @@ class Component extends DCLogic {
 
     const base={
       navItems:navItems, steps:steps, unitCards:unitCards,
-      yearItems:[["y1",(window.__CURR.LA_Y1.GRADE||{}).label||"3rd Grade"],["y2",(window.__CURR.LA_Y2.GRADE||{}).label||"5th Grade"]].map(function(y){
+      // Labelled by boy so each knows which switch is his. Word Voyagers uses
+      // y1/y2 internally where the other subjects use y3/y5, so map across.
+      yearItems:[["y1","y3"],["y2","y5"]].map(function(pair){
+        const ST=window.__CURR.STUDENTS;
+        const y=[pair[0], ST ? ST.tab(pair[1])
+                             : ((pair[0]==="y1"?window.__CURR.LA_Y1:window.__CURR.LA_Y2).GRADE||{}).label];
+        return y; }).map(function(y){
         return {label:y[1], onClick:function(){ self.setYear(y[0]); },
                 style:self.pillDark(st.year===y[0])};
       }),

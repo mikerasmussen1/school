@@ -9,6 +9,7 @@
   "https://unpkg.com/@babel/standalone@7.29.0/babel.min.js":"./vendor/babel.min.js"
 };</script>
 <script src="./support.js"></script>
+<script src="./curriculum/students.js"></script>
 <script src="./curriculum/subjects.js"></script>
 <script src="./curriculum/question-types.js"></script>
 <script src="./curriculum/qbank.js"></script>
@@ -4021,7 +4022,13 @@ class Component extends DCLogic {
       return {subjects:subs,lastSubject:id};
     });
     else this.setState({lastSubject:id});
-    if(s.open&&s.open.href){ setTimeout(()=>{ window.location.href=s.open.href; },80); return; }
+    if(s.open&&s.open.href){
+      // Carry the chosen boy through to the page, so picking BROCK on the card
+      // lands on BROCK's work rather than on whatever the page last stored.
+      const lv=this.levelOf(id);
+      const href=s.open.href+(lv?((s.open.href.indexOf("?")<0?"?":"&")+"level="+encodeURIComponent(lv)):"");
+      setTimeout(()=>{ window.location.href=href; },80); return;
+    }
     if(s.open==="builtin"){ this.setState({view:"map",subjectView:null}); return; }
     this.setState({view:"stub",subjectView:id});
   };

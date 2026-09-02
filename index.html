@@ -5929,7 +5929,10 @@ class Component extends DCLogic {
         go:()=>this.openSubject(s.id),
         record,
         hasLevels:levels.length>0,
-        levelLabel:picked?"Level":"Choose a level",
+        // Always "Choose a level", including after one is picked. Two boys
+        // share this page, so the prompt is not a one-time question — the
+        // other brother needs it there every time he sits down.
+        levelLabel:"Choose a level",
         levels:levels.map(l=>{
           const on=l.id===picked;
           return {id:l.id, label:l.label,

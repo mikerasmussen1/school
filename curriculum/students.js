@@ -25,8 +25,17 @@
     y5: {name:"HANK",  grade:"5th Grade", short:"5th", colour:"#38BDF8"}
   };
 
-  /* "BROCK · 3rd" — for a chip or tab where space is tight. */
+  /* "BROCK - 3rd Grade" — the label on every level tab.
+   * Spelled out in full rather than abbreviated to "3rd": these tabs are the
+   * one place a boy decides which course is his, and a full grade name is
+   * unambiguous where "3rd" alone reads as a rank or a date. */
   function tab(id){
+    const s = STUDENTS[id];
+    return s ? (s.name + " - " + s.grade) : String(id||"");
+  }
+
+  /* The short form, kept for anywhere genuinely tight. Not used on the tabs. */
+  function shortTab(id){
     const s = STUDENTS[id];
     return s ? (s.name + " \u00b7 " + s.short) : String(id||"");
   }
@@ -41,5 +50,5 @@
   function gradeOf(id){ const s=STUDENTS[id]; return s?s.grade:""; }
 
   window.__CURR = window.__CURR || {};
-  window.__CURR.STUDENTS = {STUDENTS, tab, full, nameOf, gradeOf};
+  window.__CURR.STUDENTS = {STUDENTS, tab, shortTab, full, nameOf, gradeOf};
 })();

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=ffd548b"></script>
+<script src="./support.js?v=9b1877f"></script>
 </head>
 <body>
 <x-dc>
@@ -29,15 +29,15 @@
   ol.steps{margin:8px 0 0;padding-left:22px} ol.steps li{margin-bottom:7px}
   ul.mats{margin:6px 0 0;padding-left:20px} ul.mats li{margin-bottom:3px;font-size:.93rem}
 </style>
-<script src="./curriculum/students.js?v=ffd548b"></script>
-<script src="./curriculum/subjects.js?v=ffd548b"></script>
-<script src="./curriculum/question-types.js?v=ffd548b"></script>
-<script src="./curriculum/science-y3-spine.js?v=ffd548b"></script>
-<script src="./curriculum/science-y5-spine.js?v=ffd548b"></script>
-<script src="./curriculum/science-lessons.js?v=ffd548b"></script>
-<script src="./curriculum/science-quiz.js?v=ffd548b"></script>
-<script src="./curriculum/la-calendar.js?v=ffd548b"></script>
-<script src="./curriculum/science-shopping.js?v=ffd548b"></script>
+<script src="./curriculum/students.js?v=9b1877f"></script>
+<script src="./curriculum/subjects.js?v=9b1877f"></script>
+<script src="./curriculum/question-types.js?v=9b1877f"></script>
+<script src="./curriculum/science-y3-spine.js?v=9b1877f"></script>
+<script src="./curriculum/science-y5-spine.js?v=9b1877f"></script>
+<script src="./curriculum/science-lessons.js?v=9b1877f"></script>
+<script src="./curriculum/science-quiz.js?v=9b1877f"></script>
+<script src="./curriculum/la-calendar.js?v=9b1877f"></script>
+<script src="./curriculum/science-shopping.js?v=9b1877f"></script>
 </helmet>
 
 <div style="min-height:100vh;display:flex;flex-direction:column">
@@ -75,16 +75,25 @@
       <div class="card">
           <div style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--deep)">Part 1 &middot; Investigate</div>
           <h2 style="margin:4px 0 10px">{{ labQuestion }}</h2>
-          <sc-if value="{{ needsAdult }}" hint-placeholder-val="{{ false }}">
-            <div style="background:var(--gold-l);color:#7A5A0C;border-radius:8px;padding:11px 15px;margin-bottom:14px;font-size:.92rem">An adult should be with you for this one.</div>
+          <div style="{{ tierStyle }}">{{ tierLabel }}</div>
+          <sc-if value="{{ hasRule }}" hint-placeholder-val="{{ false }}">
+            <div style="background:var(--gold-l);color:#7A5A0C;border-radius:8px;padding:12px 15px;margin-bottom:14px;font-size:.93rem">
+              <strong>Read this first:</strong> {{ safetyRule }}
+            </div>
+          </sc-if>
+          <sc-if value="{{ hasSwap }}" hint-placeholder-val="{{ false }}">
+            <div style="background:#F3DCD5;color:var(--brick-dark);border-radius:8px;padding:13px 16px;margin-bottom:14px;font-size:.93rem">
+              <div style="margin-bottom:6px"><strong>Why:</strong> {{ swapHazard }}</div>
+              <div style="margin-bottom:6px"><strong>Or do it on your own this way:</strong> {{ swapText }}</div>
+              <div class="muted" style="font-size:.86rem">{{ swapKeeps }}</div>
+            </div>
           </sc-if>
           <div class="box">
-            <h3 style="font-size:1rem;margin-bottom:4px">What you need</h3>
-            <ul class="mats">
-              <sc-for list="{{ labMaterials }}" as="m" hint-placeholder-count="4">
-                <li>{{ m.text }}</li>
-              </sc-for>
-            </ul>
+            <h3 style="font-size:1rem;margin-bottom:2px">Gather these yourself</h3>
+            <p class="muted" style="font-size:.86rem;margin:0 0 6px">Collect everything before you start. If something is missing, write it down and tell a grown-up — do not go looking in cupboards you are not allowed in.</p>
+            <sc-for list="{{ labMaterials }}" as="m" hint-placeholder-count="4">
+              <div style="display:flex;gap:8px;padding:3px 0;font-size:.93rem"><span style="color:var(--deep)">&#9633;</span><span>{{ m.text }}</span></div>
+            </sc-for>
             <h3 style="font-size:1rem;margin:16px 0 2px">What to do</h3>
             <ol class="steps">
               <sc-for list="{{ labSteps }}" as="s" hint-placeholder-count="4">
@@ -109,7 +118,14 @@
             <h3 style="font-size:1rem;margin-bottom:4px">Write this in your notebook</h3>
             <p style="margin:0">{{ claimPrompt }}</p>
           </div>
-          <p class="muted" style="margin-top:9px;font-size:.86rem">This one is written by hand and read by a person. A computer cannot fairly judge whether your reasoning holds.</p>
+          <div style="margin-top:12px;background:var(--paper);border:1px solid var(--rule);border-radius:6px;padding:14px 16px">
+            <h3 style="font-size:.98rem;margin-bottom:3px">Check your own sentence before anyone else does</h3>
+            <p class="muted" style="font-size:.86rem;margin:0 0 7px">Read what you wrote and answer these five. If any answer is no, fix it now.</p>
+            <sc-for list="{{ claimCheck }}" as="c" hint-placeholder-count="5">
+              <div style="display:flex;gap:8px;padding:3px 0;font-size:.92rem"><span style="color:var(--deep)">&#9633;</span><span>{{ c.text }}</span></div>
+            </sc-for>
+          </div>
+          <p class="muted" style="margin-top:9px;font-size:.86rem">A computer cannot fairly judge whether your reasoning holds, so a person still reads this one — but the checklist is the same thing they will be looking for, so most of it you can fix yourself.</p>
       </div>
 
       <div class="card">
@@ -271,6 +287,20 @@
         <p class="muted">{{ supervisionLine }}</p>
       </div>
       <div class="card">
+        <h2>How much of this he can do alone</h2>
+        <p class="muted">The old supervision flag was one bit: adult, or not, and it was set cautiously. It is now three tiers, because "go out to the yard" and "light a candle" are not the same request.</p>
+        <div style="display:grid;grid-template-columns:1fr;gap:7px;margin-top:12px">
+          <sc-for list="{{ autonomyRows }}" as="a" hint-placeholder-count="3">
+            <div style="{{ a.style }}">
+              <strong>{{ a.count }}</strong> {{ a.text }}
+            </div>
+          </sc-for>
+        </div>
+        <p class="muted" style="margin-top:12px">{{ adultWeeksLine }}</p>
+        <p class="muted">{{ swapLine }}</p>
+      </div>
+
+      <div class="card">
         <h2>Where the auto-graded checks stand</h2>
         <div style="background:var(--gold-l);color:#7A5A0C;border-radius:8px;padding:13px 16px;font-size:.93rem">{{ coverageNote }}</div>
         <p class="muted" style="margin-top:10px">The written claim runs every week regardless. It is the thing the Georgia practices standards actually ask for, and no multiple-choice item can stand in for it.</p>
@@ -367,6 +397,7 @@ class Component extends DCLogic {
     const WK=L.weekFor(st.grade, st.week);
     const A=WK.lab, B=WK.explain;
     const has=Q.hasCheck(st.grade, st.week);
+    const AUT=window.__CURR.SCI_AUTONOMY;
     const cov=Q.coverage(st.grade);
     const sw=S.strandWeeks();
 
@@ -425,7 +456,24 @@ class Component extends DCLogic {
       standardLine:"Standard "+wk.standard+" \u00b7 "+unit.goal,
       weekShape:"One lesson this week, in three parts: investigate, explain, then check. Expect a single longer sitting rather than two short ones.",
 
-      labQuestion:A.q||"", needsAdult:!!A.supervision,
+      labQuestion:A.q||"",
+      // How independent this week can be. Three tiers, not one adult flag.
+      tierLabel:(function(){ const T=AUT?AUT.tierFor(st.grade,st.week):null; return T?T.label:""; })(),
+      tierStyle:(function(){
+        if(!AUT) return "display:none";
+        const T=AUT.tierFor(st.grade,st.week);
+        const bg = T.tier==="solo" ? "var(--forest-l)" : T.tier==="rule" ? "var(--gold-l)" : "#F3DCD5";
+        const col= T.tier==="solo" ? "#2E4E38"        : T.tier==="rule" ? "#7A5A0C"      : "var(--brick-dark)";
+        return "display:inline-block;background:"+bg+";color:"+col+";border-radius:999px;"+
+               "padding:6px 14px;margin-bottom:12px;font-size:.85rem;font-weight:600";
+      })(),
+      hasRule:!!(AUT && AUT.tierFor(st.grade,st.week).rule),
+      safetyRule:(function(){ const T=AUT?AUT.tierFor(st.grade,st.week):null; return (T&&T.rule)||""; })(),
+      hasSwap:!!(AUT && AUT.tierFor(st.grade,st.week).swap),
+      swapHazard:(function(){ const T=AUT?AUT.tierFor(st.grade,st.week):null; return (T&&T.swap)?T.swap.hazard:""; })(),
+      swapText:(function(){ const T=AUT?AUT.tierFor(st.grade,st.week):null; return (T&&T.swap)?T.swap.swap:""; })(),
+      swapKeeps:(function(){ const T=AUT?AUT.tierFor(st.grade,st.week):null; return (T&&T.swap)?T.swap.keeps:""; })(),
+      claimCheck:((AUT&&AUT.CLAIM_CHECK)||[]).map(function(t){ return {text:t}; }),
       labMaterials:(A.materials||[]).map(function(m){ return {text:m}; }),
       labSteps:(A.steps||[]).map(function(s){ return {text:s}; }),
       labNotebook:A.notebook||"",
@@ -528,6 +576,28 @@ class Component extends DCLogic {
         ? "All 36 weeks have an auto-graded check."
         : ("Auto-graded checks are written for "+cov.count+" of 36 weeks ("+cov.items+
            " questions). The remaining weeks show the written claim only, and say so on the page rather than showing an empty drill."),
+      autonomyRows:(function(){
+        if(!AUT) return [];
+        const c=AUT.counts(st.grade);
+        return [
+          {count:c.solo+" weeks", text:"he does entirely on his own.",
+           style:"background:var(--forest-l);color:#2E4E38;border-radius:6px;padding:10px 14px;font-size:.93rem"},
+          {count:c.rule+" weeks", text:"he does alone after reading one safety rule on the page — goggles on, gloves on, stay in the yard, keep the bag sealed. The rule is the control, not you.",
+           style:"background:var(--gold-l);color:#7A5A0C;border-radius:6px;padding:10px 14px;font-size:.93rem"},
+          {count:c.adult+" weeks", text:"genuinely need you there: flame, a heat source, stains, plaster dust, biological samples. These were not downgraded to flatter the number.",
+           style:"background:#F3DCD5;color:var(--brick-dark);border-radius:6px;padding:10px 14px;font-size:.93rem"}
+        ];
+      })(),
+      adultWeeksLine:(function(){
+        if(!AUT) return "";
+        const w=AUT.adultWeeks(st.grade);
+        return w.length ? ("Put these in the diary now: weeks "+w.join(", ")+". They are the only ones that need you in the room.")
+                        : "No week needs you in the room.";
+      })(),
+      swapLine:(function(){
+        if(!AUT) return "";
+        return "Every one of those weeks offers a swap on the page — an alternative version of the same investigation with the hazard removed, hitting the same standard. Take all of them and all 36 weeks run without you. Refuse them and he keeps the richer lab and you sit with him for twenty minutes. Both are reasonable; the point is being told which is which.";
+      })(),
       standards:S.STANDARDS,
       hasNotYet:!!(S.NOT_YET && S.NOT_YET.length),
       notYet:(S.NOT_YET||[]).map(function(t){ return {text:t}; })

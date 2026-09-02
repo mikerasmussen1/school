@@ -50,6 +50,7 @@
 <script src="./curriculum/la-y2-tasks.js"></script>
 <script src="./curriculum/la-books-y2.js"></script>
 <script src="./curriculum/la-quotes.js"></script>
+<script src="./curriculum/la-mastery.js"></script>
 <script src="./curriculum/la-grader.js"></script>
 </helmet>
 
@@ -63,6 +64,9 @@
       </div>
       <sc-for list="{{ yearItems }}" as="y" hint-placeholder-count="2">
         <button onClick="{{ y.onClick }}" style="{{ y.style }}">{{ y.label }}</button>
+      </sc-for>
+      <sc-for list="{{ dayPicker }}" as="d" hint-placeholder-count="5">
+        <button onClick="{{ d.onClick }}" style="{{ d.style }}">{{ d.label }}</button>
       </sc-for>
       <button onClick="{{ goPrevWeek }}" style="{{ weekNavStyle }}">&lsaquo;</button>
       <div style="font-family:'Fraunces',serif;font-size:14px;color:var(--gold-light);min-width:92px;text-align:center">{{ weekLabel }}</div>
@@ -97,22 +101,52 @@
           </div>
         </div>
         <div style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)">{{ unitLine }}</div>
-        <h2 style="margin:4px 0 2px">{{ weekTitle }}</h2>
+        <h2 style="margin:4px 0 2px">{{ dayHeading }}</h2>
         <p class="muted" style="margin-top:2px">{{ weekFocusLine }}</p>
-        <sc-for list="{{ steps }}" as="s" hint-placeholder-count="5">
-          <div style="{{ s.style }}">
-            <div style="flex:none;width:34px;font-family:'Fraunces',serif;font-size:12px;color:var(--ink-soft)">{{ s.day }}</div>
-            <div style="flex:1;min-width:0">
-              <h3 style="margin:0 0 2px;font-size:1rem">{{ s.title }}</h3>
-              <p style="margin:0;font-size:.88rem;color:var(--ink-soft)">{{ s.desc }}</p>
-            </div>
-            <button onClick="{{ s.go }}" style="{{ s.btnStyle }}">{{ s.btnLabel }}</button>
+
+        <!-- START -->
+        <sc-if value="{{ showStart }}" hint-placeholder-val="{{ true }}">
+          <div style="text-align:center;border:2px solid var(--brick);border-radius:10px;padding:24px 18px;margin:16px 0;background:var(--paper)">
+            <div style="font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:6px">Start here</div>
+            <div style="font-family:'Fraunces',serif;font-size:1.3rem;margin-bottom:4px">{{ dayHeading }}</div>
+            <div class="muted" style="margin-bottom:14px">{{ startSummary }}</div>
+            <button onClick="{{ startDay }}" style="{{ startBtnStyle }}">START TODAY</button>
           </div>
-        </sc-for>
-        <sc-if value="{{ allDone }}" hint-placeholder-val="{{ false }}">
+        </sc-if>
+
+        <!-- CHECKLIST -->
+        <sc-if value="{{ showChecklist }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin:16px 0 8px">
+            <div style="font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft)">{{ progressLabel }}</div>
+            <div style="font-size:.86rem;color:var(--forest);font-weight:600">{{ progressCount }}</div>
+          </div>
+          <sc-for list="{{ daySteps }}" as="s" hint-placeholder-count="4">
+            <div style="{{ s.rowStyle }}">
+              <div style="{{ s.markStyle }}">{{ s.mark }}</div>
+              <div style="flex:1;min-width:0">
+                <h3 style="margin:0 0 2px;font-size:1rem">{{ s.label }}</h3>
+                <p style="margin:0;font-size:.87rem;color:var(--ink-soft)">{{ s.detail }}</p>
+                <p style="{{ s.doneNoteStyle }}">{{ s.doneNote }}</p>
+              </div>
+              <button onClick="{{ s.onClick }}" style="{{ s.btnStyle }}">{{ s.btnLabel }}</button>
+            </div>
+          </sc-for>
+        </sc-if>
+
+        <!-- END -->
+        <sc-if value="{{ showDayComplete }}" hint-placeholder-val="{{ false }}">
           <div class="done-banner">
-            <div style="font-family:'Fraunces',serif;font-size:1.25rem;margin-bottom:5px">Week {{ weekNum }} finished!</div>
-            <div class="muted">Press the arrow at the top to start the next week.</div>
+            <div style="font-size:11px;letter-spacing:.18em;text-transform:uppercase;margin-bottom:4px">End of day</div>
+            <div style="font-family:'Fraunces',serif;font-size:1.3rem;margin-bottom:5px">{{ endHeading }}</div>
+            <div class="muted" style="margin-bottom:12px">{{ endSummary }}</div>
+            <button onClick="{{ goNextDay }}" style="{{ btnPrimary }}">{{ nextDayLabel }}</button>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ showNeedsLook }}" hint-placeholder-val="{{ false }}">
+          <div style="background:var(--gold-light);border-radius:8px;padding:16px 18px;margin-top:14px">
+            <div style="font-family:'Fraunces',serif;font-size:1.02rem;margin-bottom:5px">Get a grown-up for this one</div>
+            <div style="font-size:.93rem">{{ needsLookText }}</div>
           </div>
         </sc-if>
       </div>
@@ -164,11 +198,17 @@
           </div>
         </sc-if>
         <sc-if value="{{ rqDone }}" hint-placeholder-val="{{ false }}">
-          <div style="text-align:center;padding:24px 10px">
-            <div class="muted">All done</div>
+          <div style="text-align:center;padding:22px 10px">
             <div style="font-family:'Fraunces',serif;font-size:2.2rem;color:var(--forest);font-weight:700">{{ rqFinal }}</div>
             <div class="muted">{{ rqPct }}</div>
-            <button onClick="{{ rqStart }}" style="{{ btnPrimary }}">Try again</button>
+            <sc-if value="{{ rqPassed }}" hint-placeholder-val="{{ true }}">
+              <div style="background:var(--forest-light);color:#2E4E38;border-radius:8px;padding:13px;margin-top:12px">Passed. This step is ticked off on today's checklist.</div>
+              <button onClick="{{ goHome }}" style="{{ btnPrimary }}margin-top:12px">Back to today's checklist</button>
+            </sc-if>
+            <sc-if value="{{ rqFailed }}" hint-placeholder-val="{{ false }}">
+              <div style="background:var(--gold-light);color:#7A5A0C;border-radius:8px;padding:13px;margin-top:12px;text-align:left">{{ rqRemNote }}</div>
+              <button onClick="{{ rqRemStart }}" style="{{ btnPrimary }}margin-top:12px">{{ rqRemLabel }}</button>
+            </sc-if>
           </div>
         </sc-if>
       </div>
@@ -196,11 +236,17 @@
           </div>
         </sc-if>
         <sc-if value="{{ gzDone }}" hint-placeholder-val="{{ false }}">
-          <div style="text-align:center;padding:24px 10px">
-            <div class="muted">All done</div>
+          <div style="text-align:center;padding:22px 10px">
             <div style="font-family:'Fraunces',serif;font-size:2.2rem;color:var(--forest);font-weight:700">{{ gzFinal }}</div>
             <div class="muted">{{ gzPct }}</div>
-            <button onClick="{{ gzStart }}" style="{{ btnPrimary }}">Try again</button>
+            <sc-if value="{{ gzPassed }}" hint-placeholder-val="{{ true }}">
+              <div style="background:var(--forest-light);color:#2E4E38;border-radius:8px;padding:13px;margin-top:12px">Passed. This step is ticked off on today's checklist.</div>
+              <button onClick="{{ goHome }}" style="{{ btnPrimary }}margin-top:12px">Back to today's checklist</button>
+            </sc-if>
+            <sc-if value="{{ gzFailed }}" hint-placeholder-val="{{ false }}">
+              <div style="background:var(--gold-light);color:#7A5A0C;border-radius:8px;padding:13px;margin-top:12px;text-align:left">{{ gzRemNote }}</div>
+              <button onClick="{{ gzRemStart }}" style="{{ btnPrimary }}margin-top:12px">{{ gzRemLabel }}</button>
+            </sc-if>
           </div>
         </sc-if>
       </div>
@@ -237,11 +283,17 @@
           </div>
         </sc-if>
         <sc-if value="{{ sqDone }}" hint-placeholder-val="{{ false }}">
-          <div style="text-align:center;padding:24px 10px">
-            <div class="muted">All done</div>
+          <div style="text-align:center;padding:22px 10px">
             <div style="font-family:'Fraunces',serif;font-size:2.2rem;color:var(--forest);font-weight:700">{{ sqFinal }}</div>
             <div class="muted">{{ sqPct }}</div>
-            <button onClick="{{ sqStart }}" style="{{ btnPrimary }}">Try again</button>
+            <sc-if value="{{ sqPassed }}" hint-placeholder-val="{{ true }}">
+              <div style="background:var(--forest-light);color:#2E4E38;border-radius:8px;padding:13px;margin-top:12px">Passed. This step is ticked off on today's checklist.</div>
+              <button onClick="{{ goHome }}" style="{{ btnPrimary }}margin-top:12px">Back to today's checklist</button>
+            </sc-if>
+            <sc-if value="{{ sqFailed }}" hint-placeholder-val="{{ false }}">
+              <div style="background:var(--gold-light);color:#7A5A0C;border-radius:8px;padding:13px;margin-top:12px;text-align:left">{{ sqRemNote }}</div>
+              <button onClick="{{ sqRemStart }}" style="{{ btnPrimary }}margin-top:12px">{{ sqRemLabel }}</button>
+            </sc-if>
           </div>
         </sc-if>
       </div>
@@ -314,9 +366,17 @@
           </div>
         </sc-if>
         <sc-if value="{{ rvDone }}" hint-placeholder-val="{{ false }}">
-          <div style="text-align:center;padding:24px 10px">
+          <div style="text-align:center;padding:22px 10px">
             <div style="font-family:'Fraunces',serif;font-size:2.2rem;color:var(--forest);font-weight:700">{{ rvFinal }}</div>
             <div class="muted">{{ rvPct }}</div>
+            <sc-if value="{{ rvPassed }}" hint-placeholder-val="{{ true }}">
+              <div style="background:var(--forest-light);color:#2E4E38;border-radius:8px;padding:13px;margin-top:12px">Passed. This step is ticked off on today's checklist.</div>
+              <button onClick="{{ goHome }}" style="{{ btnPrimary }}margin-top:12px">Back to today's checklist</button>
+            </sc-if>
+            <sc-if value="{{ rvFailed }}" hint-placeholder-val="{{ false }}">
+              <div style="background:var(--gold-light);color:#7A5A0C;border-radius:8px;padding:13px;margin-top:12px;text-align:left">{{ rvRemNote }}</div>
+              <button onClick="{{ rvRemStart }}" style="{{ btnPrimary }}margin-top:12px">{{ rvRemLabel }}</button>
+            </sc-if>
           </div>
         </sc-if>
       </div>
@@ -366,6 +426,22 @@
         <p class="muted">Grammar, spelling and reading questions grade themselves instantly with an explanation. Thursday's handwritten page is photographed and read by the model. Friday's speaking task is deliberately NOT machine-graded: there is no honest way to score a child reporting aloud or building on someone's idea in a discussion, so the page gives the task and the rubric and your child marks it done with whoever they did it with. That is the one place in the week that genuinely needs another person.</p>
       </div>
       <div class="card">
+        <h2>Things flagged for you</h2>
+        <p class="muted">A drill that could not be cleared in three tries stops looping and gets flagged here instead of trapping your child. This is the list of those moments.</p>
+        <sc-if value="{{ hasFlags }}" hint-placeholder-val="{{ false }}">
+          <sc-for list="{{ flagList }}" as="f" hint-placeholder-count="3">
+            <div style="background:var(--paper);border-left:4px solid var(--brick);border-radius:6px;padding:11px 14px;margin-bottom:8px">
+              <div style="font-family:'Fraunces',serif;font-size:.95rem;color:var(--brick-dark)">{{ f.where }}</div>
+              <div class="muted" style="font-size:.88rem">{{ f.what }}</div>
+            </div>
+          </sc-for>
+        </sc-if>
+        <sc-if value="{{ noFlags }}" hint-placeholder-val="{{ true }}">
+          <div style="background:var(--forest-light);color:#2E4E38;border-radius:6px;padding:12px 15px">Nothing flagged. Every drill so far has been cleared without help.</div>
+        </sc-if>
+      </div>
+
+      <div class="card">
         <h2>{{ standardsHeading }}</h2>
         <sc-for list="{{ standards }}" as="s" hint-placeholder-count="10">
           <div style="display:grid;grid-template-columns:92px 1fr;gap:12px;padding:8px 0;border-bottom:1px solid var(--rule)">
@@ -386,7 +462,15 @@ class Component extends DCLogic {
     year:(()=>{ try{ return localStorage.getItem("la.year")==="y2" ? "y2" : "y1"; }catch(e){ return "y1"; } })(),
     week:(()=>{ try{ return Math.min(36,Math.max(1,parseInt(localStorage.getItem("la.week")||"1",10)||1)); }catch(e){ return 1; } })(),
     done:(()=>{ try{ return JSON.parse(localStorage.getItem("la.done")||"{}"); }catch(e){ return {}; } })(),
-    qDay:(function(){ const d=["Mon","Mon","Tue","Wed","Thu","Fri","Fri"][new Date().getDay()]; return d; })(),
+    qDay:(function(){ return ["Mon","Mon","Tue","Wed","Thu","Fri","Fri"][new Date().getDay()]; })(),
+    day:(function(){ try{ const d=localStorage.getItem("la.day"); if(d) return d; }catch(e){}
+      return ["Mon","Mon","Tue","Wed","Thu","Fri","Fri"][new Date().getDay()]; })(),
+    started:false,          // has START TODAY been pressed
+    stepDone:(function(){ try{ return JSON.parse(localStorage.getItem("la.stepDone")||"{}"); }catch(e){ return {}; } })(),
+    round:1,                // which attempt of the current scored step
+    lastResult:null,        // {kind, score, total, passed, missed:[], seen:[]}
+    remediation:null,       // {items, note, round, isFinalRound}
+    stuck:(function(){ try{ return JSON.parse(localStorage.getItem("la.stuck")||"{}"); }catch(e){ return {}; } })(),
     gz:null, sq:null, rq:null, rv:null,
     asKind:"handwriting", asImage:null, asStatus:"idle", asResult:null, asError:""
   };
@@ -459,11 +543,19 @@ class Component extends DCLogic {
     return "display:inline-block;font-family:'Fraunces',serif;font-weight:600;font-size:.85rem;padding:5px 13px;border-radius:20px;background:"+bg+";color:"+c;
   }
 
-  quizStart(slot, items){ const p={}; p[slot]={items, idx:0, score:0, answered:false, chosen:null, ok:null}; this.setState(p); }
+  quizStart(slot, items, seenBefore){
+    const p={}; p[slot]={items:items, idx:0, score:0, answered:false, chosen:null, ok:null,
+      missed:[], seenBefore:seenBefore||[]};
+    this.setState(p);
+  }
   quizAnswer(slot, text){
     const q=this.state[slot]; if(!q||q.answered) return;
-    const ok=window.QTypes.grade(q.items[q.idx], text);
-    const p={}; p[slot]={...q, answered:true, chosen:text, ok:ok, score:q.score+(ok?1:0)};
+    const it=q.items[q.idx];
+    const ok=window.QTypes.grade(it, text);
+    const missed=(q.missed||[]).slice();
+    if(!ok) missed.push(it);
+    const p={}; p[slot]={...q, answered:true, chosen:text, ok:ok,
+      score:q.score+(ok?1:0), missed:missed};
     this.setState(p);
   }
   quizNext(slot, doneKey){
@@ -471,7 +563,19 @@ class Component extends DCLogic {
     const idx=q.idx+1;
     const p={}; p[slot]={...q, idx:idx, answered:false, chosen:null, ok:null};
     this.setState(p);
-    if(idx>=q.items.length && doneKey) this.markDone(doneKey);
+    if(idx>=q.items.length){
+      if(doneKey) this.markDone(doneKey);
+      // Report to the mastery gate. missedIds was accumulated as we went.
+      const M=window.__CURR.LA_MASTERY;
+      const plan=M.dayPlan(this.state.year, this.state.week, this.state.day);
+      const step=plan.steps.filter(function(x){ return x.key===slot; })[0];
+      if(step){
+        const missed=(q.missed||[]);
+        const seen=q.items.map(function(i){ return i.id; }).concat(q.seenBefore||[]);
+        const kind = slot==="sq" ? "spelling" : slot==="rq" ? "reading" : "grammar";
+        this.finishScored(step, kind, q.score, q.items.length, missed, seen);
+      }
+    }
   }
   quizVals(slot, prefix, doneKey, starter){
     const q=this.state[slot];
@@ -481,11 +585,27 @@ class Component extends DCLogic {
     off[prefix+"Prompt"]=""; off[prefix+"Choices"]=[]; off[prefix+"FbShow"]=false;
     off[prefix+"Fb"]=""; off[prefix+"FbStyle"]=""; off[prefix+"Next"]=function(){};
     off[prefix+"NextStyle"]=this.btn("primary",false); off[prefix+"Final"]=""; off[prefix+"Pct"]="";
+    off[prefix+"Passed"]=false; off[prefix+"Failed"]=false; off[prefix+"RemNote"]="";
+    off[prefix+"RemLabel"]=""; off[prefix+"RemStart"]=function(){};
     if(!q) return off;
     if(q.idx>=q.items.length){
+      const M=window.__CURR.LA_MASTERY;
       const pct=Math.round((q.score/q.items.length)*100);
+      const ok=M.passed(q.score,q.items.length);
+      const rem=this.state.remediation;
+      const self2=this;
       off[prefix+"NotStarted"]=false; off[prefix+"Done"]=true;
-      off[prefix+"Final"]=q.score+" / "+q.items.length; off[prefix+"Pct"]=pct+"% correct";
+      off[prefix+"Final"]=q.score+" / "+q.items.length;
+      off[prefix+"Pct"]=pct+"% correct \u00b7 "+(ok
+        ? "passed"
+        : "you need "+M.neededFor(q.items.length)+" of "+q.items.length+" to pass");
+      off[prefix+"Passed"]=ok;
+      off[prefix+"Failed"]=!ok && !!rem;
+      off[prefix+"RemNote"]=rem?rem.note:"";
+      off[prefix+"RemLabel"]=rem?("Try again \u00b7 round "+rem.round+" of "+M.MAX_ROUNDS):"";
+      off[prefix+"RemStart"]=rem?function(){
+        self2.quizStart(slot, self2.prepMC(rem.items), (q.seenBefore||[]).concat(q.items.map(function(i){return i.id;})));
+      }:function(){};
       return off;
     }
     const it=q.items[q.idx];
@@ -507,23 +627,36 @@ class Component extends DCLogic {
     return off;
   }
 
-  sqStart=()=>{
-    const set=this.Y.spellingSetFor(this.state.week);
-    const items=this.shuffle(set.items).slice(0,8);
-    this.setState({sq:{items, idx:0, score:0, value:"", answered:false, ok:null}});
+  sqStart=(overrideItems, seenBefore)=>{
+    const items = overrideItems && overrideItems.length
+      ? overrideItems
+      : this.shuffle(this.Y.spellingSetFor(this.state.week).items).slice(0,8);
+    this.setState({sq:{items:items, idx:0, score:0, value:"", answered:false, ok:null,
+      missed:[], seenBefore:seenBefore||[]}});
     this.speak(items[0].a[0]);
   };
   sqSet=(e)=>{ const s=this.state.sq; if(!s||s.answered) return; this.setState({sq:{...s, value:e.target.value}}); };
   sqCheck=()=>{
     const s=this.state.sq; if(!s||s.answered) return;
-    const ok=window.QTypes.grade(s.items[s.idx], s.value);
-    this.setState({sq:{...s, answered:true, ok:ok, score:s.score+(ok?1:0)}});
+    const it=s.items[s.idx];
+    const ok=window.QTypes.grade(it, s.value);
+    const missed=(s.missed||[]).slice();
+    if(!ok) missed.push(it);
+    this.setState({sq:{...s, answered:true, ok:ok, score:s.score+(ok?1:0), missed:missed}});
   };
   sqNext=()=>{
     const s=this.state.sq; if(!s||!s.answered) return;
     const idx=s.idx+1;
     this.setState({sq:{...s, idx:idx, value:"", answered:false, ok:null}});
-    if(idx<s.items.length) this.speak(s.items[idx].a[0]); else this.markDone("spelling");
+    if(idx<s.items.length){ this.speak(s.items[idx].a[0]); return; }
+    this.markDone("spelling");
+    const M=window.__CURR.LA_MASTERY;
+    const plan=M.dayPlan(this.state.year, this.state.week, this.state.day);
+    const step=plan.steps.filter(function(x){ return x.key==="sq"; })[0];
+    if(step){
+      const seen=s.items.map(function(i){ return i.id; }).concat(s.seenBefore||[]);
+      this.finishScored(step, "spelling", s.score, s.items.length, s.missed||[], seen);
+    }
   };
 
   asPickKind=(k)=>this.setState({asKind:k, asImage:null, asStatus:"idle", asResult:null, asError:""});
@@ -545,6 +678,66 @@ class Component extends DCLogic {
       this.setState({asStatus:"done", asResult:r});
       this.markDone(st.asKind==="handwriting"?"handwriting":"writing");
     }catch(err){ this.setState({asStatus:"error", asError:String(err&&err.message||err)}); }
+  };
+
+  /* ---- daily gating ---------------------------------------------------
+   * A step is available only when every step before it is done. A scored step
+   * is done only when it clears the mastery bar, or when attempts run out and
+   * the stuck valve opens it deliberately. */
+  stepKey(step){ return this.state.day+":"+step.key; }
+
+  isStepDone(step){
+    const k=this.state.year+":"+this.state.week+":"+this.stepKey(step);
+    return !!this.state.stepDone[k];
+  }
+  isStepStuck(step){
+    const k=this.state.year+":"+this.state.week+":"+this.stepKey(step);
+    return !!this.state.stuck[k];
+  }
+  completeStep=(step)=>{
+    const k=this.state.year+":"+this.state.week+":"+this.stepKey(step);
+    const stepDone={...this.state.stepDone, [k]:true};
+    try{ localStorage.setItem("la.stepDone", JSON.stringify(stepDone)); }catch(e){}
+    this.setState({stepDone});
+  };
+  markStuck=(step)=>{
+    const k=this.state.year+":"+this.state.week+":"+this.stepKey(step);
+    const stuck={...this.state.stuck, [k]:true};
+    try{ localStorage.setItem("la.stuck", JSON.stringify(stuck)); }catch(e){}
+    this.setState({stuck});
+    this.completeStep(step);   // the valve: do not trap the child
+  };
+
+  startDay=()=>{ this.setState({started:true, round:1, lastResult:null, remediation:null}); window.scrollTo(0,0); };
+
+  setDay=(d)=>{
+    try{ localStorage.setItem("la.day", d); }catch(e){}
+    this.setState({day:d, started:false, round:1, lastResult:null, remediation:null,
+      gz:null, sq:null, rq:null, rv:null, asImage:null, asStatus:"idle", asResult:null, asError:""});
+    window.scrollTo(0,0);
+  };
+
+  goNextDay=()=>{
+    const M=window.__CURR.LA_MASTERY;
+    const i=M.DAYS.indexOf(this.state.day);
+    if(i < M.DAYS.length-1){ this.setDay(M.DAYS[i+1]); }
+    else { this.setWeek(this.state.week+1); this.setDay("Mon"); }
+  };
+
+  /* Called by every scored drill when it finishes. Decides pass/fail, and
+   * either completes the step or builds the next round. */
+  finishScored=(step, kind, score, total, missedItems, seenIds)=>{
+    const M=window.__CURR.LA_MASTERY;
+    const ok=M.passed(score,total);
+    this.setState({lastResult:{kind, score, total, passed:ok,
+      missed:missedItems||[], seen:seenIds||[]}});
+    if(ok){ this.completeStep(step); this.setState({remediation:null, round:1}); return true; }
+    const round=this.state.round+1;
+    if(round > M.MAX_ROUNDS){ this.markStuck(step); this.setState({remediation:null}); return false; }
+    const rem=M.remediationRound(this.state.year, this.state.week, kind,
+      missedItems||[], seenIds||[], round);
+    this.setState({round, remediation:rem});
+    return false;
   };
 
   renderVals(){
@@ -588,6 +781,86 @@ class Component extends DCLogic {
     const skTask=Y.taskFor(st.week,"speaking");
     const asTask=st.asKind==="handwriting"?hwTask:wrTask;
 
+    /* ---- daily plan, gating and progress -------------------------------- */
+    /* If la-mastery.js has not loaded — stale cache, blocked script, bad
+     * deploy — the whole day view would otherwise throw and the child would
+     * get a blank page. Degrade to an ungated single-step day instead: less
+     * useful, still usable, and it says so. */
+    const MS=window.__CURR.LA_MASTERY || {
+      MASTERY:0.8, MAX_ROUNDS:3, DAYS:["Mon","Tue","Wed","Thu","Fri"],
+      DAY_NAME:{Mon:"Monday",Tue:"Tuesday",Wed:"Wednesday",Thu:"Thursday",Fri:"Friday"},
+      passed:function(sc,t){ return t>0 && sc/t>=0.8; },
+      neededFor:function(t){ return Math.ceil(t*0.8); },
+      remediationRound:function(){ return null; },
+      stuckMessage:function(){ return "Ask a grown-up for help with this one."; },
+      dayPlan:function(g,w,d){
+        const names={Mon:"Monday",Tue:"Tuesday",Wed:"Wednesday",Thu:"Thursday",Fri:"Friday"};
+        return {day:d, dayName:names[d]||d, dayNumber:["Mon","Tue","Wed","Thu","Fri"].indexOf(d)+1,
+          totalDays:5, week:w, weekTitle:"", totalSteps:1,
+          steps:[{n:1, key:"end", label:"Today's work", gate:"end",
+                  detail:"Checklist unavailable — use the tabs above.", done:"Done."}]};
+      }
+    };
+    const plan=MS.dayPlan(st.year, st.week, st.day);
+    const stepStates=plan.steps.map(function(step){
+      return {step:step, done:self.isStepDone(step), stuck:self.isStepStuck(step)};
+    });
+    // first not-done index is the only actionable step
+    let currentIdx=stepStates.findIndex(function(x){ return !x.done; });
+    if(currentIdx===-1) currentIdx=stepStates.length;
+    const doneCount=stepStates.filter(function(x){ return x.done; }).length;
+    const dayComplete=doneCount===plan.steps.length;
+
+    const stepPanel={read:"reading", rq:"reading", skill:"grammar", gz:"grammar",
+                     study:"spelling", sq:"spelling", prompt:"writing", write:"writing",
+                     photo:"writing", speak:"speaking", rv:"speaking"};
+
+    const daySteps=stepStates.map(function(x,i){
+      const done=x.done, current=(i===currentIdx), locked=(i>currentIdx);
+      const border = done?"var(--forest)" : current?"var(--brick)" : "var(--rule)";
+      const bg = done?"var(--forest-light)" : current?"var(--paper)" : "#EFEAD9";
+      let btnLabel, onClick, btnStyle;
+      if(done){
+        btnLabel = x.stuck ? "Needs a look" : "Done";
+        btnStyle = self.btn("secondary", false);
+        onClick = function(){};
+      } else if(locked){
+        btnLabel = "Locked";
+        btnStyle = self.btn("primary", false);
+        onClick = function(){};
+      } else if(x.step.gate==="ack"){
+        btnLabel = "I did this";
+        btnStyle = self.btn("primary", true);
+        onClick = function(){ self.completeStep(x.step); };
+      } else if(x.step.gate==="end"){
+        btnLabel = "Finish the day";
+        btnStyle = self.btn("primary", true);
+        onClick = function(){ self.completeStep(x.step); window.scrollTo(0,0); };
+      } else {
+        btnLabel = "Go";
+        btnStyle = self.btn("primary", true);
+        onClick = function(){ self.goto(stepPanel[x.step.key]||"home"); };
+      }
+      return {
+        label:x.step.n+". "+x.step.label,
+        detail: locked ? "Unlocks when the step above is done." : x.step.detail,
+        doneNote: done ? (x.stuck ? "Marked for a grown-up to look at." : x.step.done) : "",
+        doneNoteStyle: done
+          ? "margin:4px 0 0;font-size:.84rem;color:"+(x.stuck?"var(--brick-dark)":"var(--forest)")+";font-weight:600"
+          : "display:none",
+        mark: done ? (x.stuck?"!":"\u2713") : current ? String(x.step.n) : "\u25cb",
+        markStyle:"flex:none;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;"+
+          "justify-content:center;font-size:.9rem;font-weight:700;border:2px solid "+border+";"+
+          "background:"+(done?border:"#fff")+";color:"+(done?"#fff":(current?"var(--brick)":"var(--ink-soft)")),
+        rowStyle:"display:flex;align-items:center;gap:12px;background:"+bg+";border:1px solid "+border+";"+
+          "border-radius:8px;padding:13px 15px;margin-bottom:9px"+(locked?";opacity:.55":""),
+        btnLabel:btnLabel, btnStyle:btnStyle, onClick:onClick
+      };
+    });
+
+    const anyStuck=stepStates.some(function(x){ return x.stuck; });
+    const lastFailKind = st.lastResult && !st.lastResult.passed ? st.lastResult.kind : "";
+
     const QT=window.__CURR.LA_QUOTES;
     const q=QT ? QT.quoteFor(st.year, st.week, st.qDay)
                : {text:"",source:"",think:"",kindLabel:""};
@@ -607,6 +880,16 @@ class Component extends DCLogic {
       weekTitle:wk.title,
       weekFocusLine:"Spelling pattern: "+wk.spelling+" \u00b7 Standard "+wk.standard,
       unitLine:"Unit "+unit.n+" \u00b7 "+unit.name+" \u00b7 "+unit.virtue,
+      dayPicker: MS.DAYS.map(function(d){
+        const k=st.year+":"+st.week+":"+d+":end";
+        const dayDone=!!st.stepDone[k];
+        return {label:d, onClick:function(){ self.setDay(d); },
+          style:"font-family:'Public Sans',sans-serif;font-weight:600;font-size:.74rem;padding:5px 9px;"+
+            "border-radius:6px;cursor:pointer;border:1px solid "+
+            (st.day===d?"var(--gold)":"rgba(250,246,236,.25)")+";background:"+
+            (st.day===d?"var(--gold)":(dayDone?"rgba(62,107,79,.55)":"transparent"))+";color:"+
+            (st.day===d?"#2C3B4A":"rgba(250,246,236,.85)")};
+      }),
       goPrevWeek:function(){ self.setWeek(st.week-1); },
       goNextWeek:function(){ self.setWeek(st.week+1); },
       weekNavStyle:"background:rgba(250,246,236,.1);color:var(--paper);border:1px solid rgba(250,246,236,.25);border-radius:6px;width:30px;height:30px;font-size:15px;cursor:pointer",
@@ -644,7 +927,16 @@ class Component extends DCLogic {
       sqFbStyle:(st.sq&&st.sq.answered)?this.fbStyle(st.sq.ok):"",
       sqNextStyle:this.btn("primary", !!(st.sq&&st.sq.answered)),
       sqFinal:st.sq?(st.sq.score+" / "+st.sq.items.length):"",
-      sqPct:st.sq?(Math.round((st.sq.score/st.sq.items.length)*100)+"% correct"):"",
+      sqPct:st.sq?(Math.round((st.sq.score/st.sq.items.length)*100)+"% correct \u00b7 "+
+        (MS.passed(st.sq.score,st.sq.items.length)?"passed":"you need "+MS.neededFor(st.sq.items.length)+" of "+st.sq.items.length+" to pass")):"",
+      sqPassed: !!(st.sq && st.sq.idx>=st.sq.items.length && MS.passed(st.sq.score,st.sq.items.length)),
+      sqFailed: !!(st.sq && st.sq.idx>=st.sq.items.length && !MS.passed(st.sq.score,st.sq.items.length) && st.remediation),
+      sqRemNote: st.remediation?st.remediation.note:"",
+      sqRemLabel: st.remediation?("Try again \u00b7 round "+st.remediation.round+" of "+MS.MAX_ROUNDS):"",
+      sqRemStart: st.remediation?function(){
+        self.sqStart(st.remediation.items, ((st.sq&&st.sq.seenBefore)||[]).concat((st.sq?st.sq.items:[]).map(function(i){return i.id;})));
+      }:function(){},
+      goHome:function(){ self.goto("home"); },
 
       asKinds:[["handwriting","Handwriting"],["writing","Writing"]].map(function(k){
         return {label:k[1], onClick:function(){ self.asPickKind(k[0]); }, style:self.pill(st.asKind===k[0])};
@@ -680,6 +972,37 @@ class Component extends DCLogic {
       standardsHeading:(Y.GRADE?Y.GRADE.label:"")+" skills and standards covered",
       benchmarks:(Y.BENCHMARKS||[]).map(function(b){ return {text:b}; }),
       standards:Y.STANDARDS,
+
+      // --- daily checklist: clear start, gated steps, clear end ---
+      dayHeading: plan.dayName+" \u00b7 Day "+plan.dayNumber+" of "+plan.totalDays,
+      startSummary: plan.steps.length+" steps today. Each one unlocks the next, and the "+
+        "drills need "+Math.round(MS.MASTERY*100)+"% to count as done.",
+      startDay: this.startDay,
+      startBtnStyle:"font-family:'Fraunces',serif;font-weight:700;font-size:1.05rem;letter-spacing:.06em;"+
+        "background:var(--brick);color:#fff;border:none;border-radius:8px;padding:13px 34px;cursor:pointer",
+      showStart: !st.started && !dayComplete,
+      showChecklist: st.started && !dayComplete,
+      showDayComplete: dayComplete,
+      daySteps: daySteps,
+      progressLabel:"Today's checklist",
+      progressCount: doneCount+" of "+plan.steps.length+" done",
+      endHeading: plan.day==="Fri" ? ("Week "+st.week+" complete") : (plan.dayName+" complete"),
+      endSummary: plan.day==="Fri"
+        ? "Every step this week is finished. Next week is waiting."
+        : "All "+plan.steps.length+" steps done. Stop here, or start the next day.",
+      nextDayLabel: plan.day==="Fri" ? "Start Week "+(st.week+1) : "Start "+
+        (MS.DAY_NAME[MS.DAYS[MS.DAYS.indexOf(plan.day)+1]]||"the next day"),
+      goNextDay: this.goNextDay,
+      flagList: Object.keys(st.stuck).filter(function(k){ return st.stuck[k]; }).map(function(k){
+        const parts=k.split(":");   // year:week:day:stepkey
+        const NAMES={rq:"Reading comprehension", gz:"Grammar drill", sq:"Spelling drill", rv:"Week review"};
+        return {where:(parts[0]==="y2"?"5th Grade":"3rd Grade")+" \u00b7 Week "+parts[1]+" \u00b7 "+(MS.DAY_NAME[parts[2]]||parts[2]),
+                what:(NAMES[parts[3]]||parts[3])+" \u2014 three attempts did not clear 80%. Worth sitting down with."};
+      }),
+      hasFlags: Object.keys(st.stuck).filter(function(k){ return st.stuck[k]; }).length>0,
+      noFlags: Object.keys(st.stuck).filter(function(k){ return st.stuck[k]; }).length===0,
+      showNeedsLook: anyStuck,
+      needsLookText: anyStuck ? MS.stuckMessage(lastFailKind||"reading") : "",
 
       // Quote of the day. Defaults to the real weekday so a child opening this
       // on Wednesday reads Wednesday's, but every day of the week stays

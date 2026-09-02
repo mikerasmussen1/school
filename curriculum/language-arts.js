@@ -16,8 +16,10 @@
  *   - Two tracks, g3 and g5, exactly like math's y3/y5 — a child picks one on
  *     the landing card (slice.subjects.la.level) independent of their math
  *     level.
- *   - status stays "soon" / open stays "stub" until word-voyagers.dc.html is
- *     built and reads this data. Flip both once that page is real.
+ *   - status is "live" and open points at word-voyagers.dc.html, its own page
+ *     (see CONTRIBUTING.md — same pattern as the Japan unit). LAGrader in
+ *     curriculum/la-grader.js grades a photographed handwritten assignment,
+ *     modeled on PaperReader in index.html.
  *
  * DATA SHAPES USED HERE
  *
@@ -284,21 +286,13 @@
     glyph: "A",
     gradient: "linear-gradient(150deg,#A78BFA,#60A5FA)",
     blurb: "Grammar and spelling drills, reading comprehension with real passages, and a daily handwritten assignment graded from a photo — mostly self-led.",
-    status: "soon",
+    status: "live",
     order: 20,
     levels: [
       {id:"g3", label:"3rd Grade", sub:"Year One"},
       {id:"g5", label:"5th Grade", sub:"Year Two"}
     ],
-    open: "stub",
-    stub: {
-      heading: "Word Voyagers is being built.",
-      lines: [
-        "Unit 1's content is written — grammar, spelling, two reading passages, handwritten assignments and a book list, for both grade tracks.",
-        "The page that puts it in front of a child (word-voyagers.dc.html) isn't wired up yet."
-      ],
-      footer: "Pick Math or the Japan unit for today."
-    }
+    open: {href:"word-voyagers.dc.html"}
   });
 
   window.__CURR = window.__CURR || {};

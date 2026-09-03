@@ -140,10 +140,26 @@
   const DAYS = ["Mon","Tue","Wed","Thu","Fri"];
   const DAY_NAME = {Mon:"Monday",Tue:"Tuesday",Wed:"Wednesday",Thu:"Thursday",Fri:"Friday"};
 
+  /* Steps that do not apply to a particular grade.
+   *
+   * Third grade drops the photo-and-feedback step. A machine reading a
+   * photograph of a third grader's handwriting is the least reliable version
+   * of the least reliable thing it does, and Thursday already ends with a
+   * grown-up marking the actual page — which is better evidence, and was
+   * always going to be the real judgement. Fifth grade keeps it: the writing
+   * is more legible and the feedback more useful there.
+   *
+   * The steps are renumbered after filtering, so the checklist reads 1..n with
+   * no gap where the removed step was. */
+  const SKIP = { y1: ["photo"] };
+
   function dayPlan(grade, week, day){
     const Y = curr(grade);
     const wk = Y.WEEKS.find(w=>w.n===week);
-    const steps = (PLANS[day]||PLANS.Mon).map((s,i)=>({...s, n:i+1}));
+    const skip = SKIP[grade] || [];
+    const steps = (PLANS[day]||PLANS.Mon)
+      .filter(s => skip.indexOf(s.key) < 0)
+      .map((s,i)=>({...s, n:i+1}));
     return {
       day, dayName: DAY_NAME[day]||day,
       dayNumber: DAYS.indexOf(day)+1,

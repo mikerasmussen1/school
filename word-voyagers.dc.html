@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=2026-09-03-1749"></script>
-  <script data-build>window.__BUILD__="2026-09-03-1749";</script>
-  <script src="./curriculum/freshness.js?v=2026-09-03-1749"></script>
+<script src="./support.js?v=2026-09-03-1754"></script>
+  <script data-build>window.__BUILD__="2026-09-03-1754";</script>
+  <script src="./curriculum/freshness.js?v=2026-09-03-1754"></script>
 </head>
 <body>
 <x-dc>
@@ -38,26 +38,26 @@
   .book-title{font-family:'Fraunces',serif;font-size:1rem;color:var(--brick-dark);margin:0 0 3px}
   .done-banner{text-align:center;padding:22px;margin-top:6px;background:var(--forest-light);border-radius:8px;color:#2E4E38}
 </style>
-<script src="./curriculum/sync.js?v=2026-09-03-1749"></script>
-<script src="./curriculum/students.js?v=2026-09-03-1749"></script>
-<script src="./curriculum/subjects.js?v=2026-09-03-1749"></script>
-<script src="./curriculum/question-types.js?v=2026-09-03-1749"></script>
-<script src="./curriculum/la-y1-spine.js?v=2026-09-03-1749"></script>
-<script src="./curriculum/la-y1-words.js?v=2026-09-03-1749"></script>
-<script src="./curriculum/la-y1-grammar.js?v=2026-09-03-1749"></script>
-<script src="./curriculum/la-y1-reading.js?v=2026-09-03-1749"></script>
-<script src="./curriculum/la-y1-tasks.js?v=2026-09-03-1749"></script>
-<script src="./curriculum/la-books.js?v=2026-09-03-1749"></script>
-<script src="./curriculum/la-y2-spine.js?v=2026-09-03-1749"></script>
-<script src="./curriculum/la-y2-words.js?v=2026-09-03-1749"></script>
-<script src="./curriculum/la-y2-grammar.js?v=2026-09-03-1749"></script>
-<script src="./curriculum/la-y2-reading.js?v=2026-09-03-1749"></script>
-<script src="./curriculum/la-y2-tasks.js?v=2026-09-03-1749"></script>
-<script src="./curriculum/la-books-y2.js?v=2026-09-03-1749"></script>
-<script src="./curriculum/la-quotes.js?v=2026-09-03-1749"></script>
-<script src="./curriculum/la-mastery.js?v=2026-09-03-1749"></script>
-<script src="./curriculum/la-calendar.js?v=2026-09-03-1749"></script>
-<script src="./curriculum/la-grader.js?v=2026-09-03-1749"></script>
+<script src="./curriculum/sync.js?v=2026-09-03-1754"></script>
+<script src="./curriculum/students.js?v=2026-09-03-1754"></script>
+<script src="./curriculum/subjects.js?v=2026-09-03-1754"></script>
+<script src="./curriculum/question-types.js?v=2026-09-03-1754"></script>
+<script src="./curriculum/la-y1-spine.js?v=2026-09-03-1754"></script>
+<script src="./curriculum/la-y1-words.js?v=2026-09-03-1754"></script>
+<script src="./curriculum/la-y1-grammar.js?v=2026-09-03-1754"></script>
+<script src="./curriculum/la-y1-reading.js?v=2026-09-03-1754"></script>
+<script src="./curriculum/la-y1-tasks.js?v=2026-09-03-1754"></script>
+<script src="./curriculum/la-books.js?v=2026-09-03-1754"></script>
+<script src="./curriculum/la-y2-spine.js?v=2026-09-03-1754"></script>
+<script src="./curriculum/la-y2-words.js?v=2026-09-03-1754"></script>
+<script src="./curriculum/la-y2-grammar.js?v=2026-09-03-1754"></script>
+<script src="./curriculum/la-y2-reading.js?v=2026-09-03-1754"></script>
+<script src="./curriculum/la-y2-tasks.js?v=2026-09-03-1754"></script>
+<script src="./curriculum/la-books-y2.js?v=2026-09-03-1754"></script>
+<script src="./curriculum/la-quotes.js?v=2026-09-03-1754"></script>
+<script src="./curriculum/la-mastery.js?v=2026-09-03-1754"></script>
+<script src="./curriculum/la-calendar.js?v=2026-09-03-1754"></script>
+<script src="./curriculum/la-grader.js?v=2026-09-03-1754"></script>
 </helmet>
 
 <div style="min-height:100vh;display:flex;flex-direction:column">
@@ -561,14 +561,19 @@
         <p class="muted">{{ asInstructions }}</p>
         <div class="q-box" style="border-left:4px solid var(--brick)">{{ asPrompt }}</div>
         <div style="margin:13px 0"><button onClick="{{ asListen }}" style="{{ btnSecondary }}">Read this to me</button></div>
-        <div class="upload-box">
-          <input ref="{{ asFileRef }}" onChange="{{ asFilePicked }}" type="file" accept="image/*" capture="environment" style="display:none">
-          <button onClick="{{ asPick }}" style="{{ btnPrimary }}">Photograph your page</button>
-          <sc-if value="{{ asHasImage }}" hint-placeholder-val="{{ false }}">
-            <div><img src="{{ asPreview }}" class="preview-img" alt="Photo of the handwritten page"></div>
-          </sc-if>
-        </div>
-        <div style="margin-top:13px"><button onClick="{{ asGrade }}" style="{{ asGradeStyle }}">Grade this work</button></div>
+        <sc-if value="{{ photoGrading }}" hint-placeholder-val="{{ true }}">
+          <div class="upload-box">
+            <input ref="{{ asFileRef }}" onChange="{{ asFilePicked }}" type="file" accept="image/*" capture="environment" style="display:none">
+            <button onClick="{{ asPick }}" style="{{ btnPrimary }}">Photograph your page</button>
+            <sc-if value="{{ asHasImage }}" hint-placeholder-val="{{ false }}">
+              <div><img src="{{ asPreview }}" class="preview-img" alt="Photo of the handwritten page"></div>
+            </sc-if>
+          </div>
+          <div style="margin-top:13px"><button onClick="{{ asGrade }}" style="{{ asGradeStyle }}">Grade this work</button></div>
+        </sc-if>
+        <sc-if value="{{ noPhotoGrading }}" hint-placeholder-val="{{ false }}">
+          <div class="box" style="margin-top:13px">{{ noPhotoNote }}</div>
+        </sc-if>
         <sc-if value="{{ asGrading }}" hint-placeholder-val="{{ false }}">
           <div style="margin-top:13px;color:var(--ink-soft)">Reading your page...</div>
         </sc-if>
@@ -1533,6 +1538,12 @@ class Component extends DCLogic {
       btnPrimary:this.btn("primary",true), btnSecondary:this.btn("secondary",true),
 
       rdTitle:passage.title, rdTypeLine:passage.type+" \u00b7 Week "+st.week,
+      /* Photo grading is fifth grade only. Removing it from the checklist but
+       * leaving the buttons on the Writing tab would have left the very
+       * control that was asked to be removed still sitting on screen. */
+      photoGrading: st.year!=="y1",
+      noPhotoGrading: st.year==="y1",
+      noPhotoNote: "No photo needed for this one. Write the page by hand, then take the paper to a grown-up on Thursday \u2014 they mark the page itself, which is better than a photograph of it.",
       rdText:passage.text, rdReadAloud:passage.readAloud,
       /* Paragraphs as real elements rather than one string relying on a CSS
        * white-space rule. The Today tab was using a class that does not exist

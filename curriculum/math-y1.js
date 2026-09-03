@@ -42,7 +42,7 @@ const UNITS = [
    project:"Map a Planet — invent a world on the coordinate plane and give sailing directions by coordinates.",
    game:"Angle Guess — estimate an angle, then measure. Closest guess scores.",
    badgeName:"The Compass Badge",badgeReq:"Earned by scoring 85% or higher on the Mission 06 test and explaining the Big Question out loud."},
-  {n:7,name:"Data Detective",short:"Data Detective",color:"#FB7185",weeks:"30–32",badge:"▮▮",size:66,glyph:"18px",
+  {n:7,name:"Data Detective",short:"Data Detective",color:"#FB7185",weeks:"30-34",badge:"▮▮",size:66,glyph:"18px",
    bigQ:"Can a true average tell a false story?",
    skills:["Graphs","Mean, median, mode, range","Running your own survey","Intro probability"],
    project:"Ask 20 People — write a real survey question, collect real answers, publish the findings.",
@@ -368,6 +368,24 @@ const WEEKS_U7 = [
      {day:"Wed · 3.3",title:"50 trials",detail:"Predict, roll fifty times, tally, and explain the gap between the two.",tiers:[1,2]},
      {day:"Thu · Review",title:"Error journal sweep",detail:"Re-read every entry from the mission. Fix only what repeats.",tiers:[0,1]},
      {day:"Fri · Test",title:"Mission 07 test",detail:"12 items + one explanation. Trophy band awarded.",tiers:[1,2]}
+   ]},
+  {n:4,title:"Measure It Properly",gate:"Full worksheets",gateColor:"#4ADE80",isFull:true,
+   summary:"The half of 3.MDR.5 this course never taught: a ruler read to the quarter inch, and litres and grams handled as real amounts rather than words in a problem. None of it can be learned from a flashcard, which is exactly why it needs a week rather than a sprint.",
+   days:[
+     {day:"Mon · 4.1",title:"The ruler, honestly",detail:"Whole, half and quarter inches. Read the marks; do not estimate between them.",tiers:[0,1,2]},
+     {day:"Tue · 4.2",title:"Litres and millilitres",detail:"Pour it. A jug, a cup and a bottle beat any diagram.",tiers:[0,1,2]},
+     {day:"Wed · 4.3",title:"Grams and kilograms",detail:"Balance scales and a bag of flour. What a kilogram actually feels like.",tiers:[0,1,2]},
+     {day:"Thu · Review",title:"Mixed measures",detail:"Length, volume and mass in one sitting, so the units stop blurring.",tiers:[0,1]},
+     {day:"Fri · Check",title:"Measurement check",detail:"Six questions across all three measures.",tiers:[0,1,2]}
+   ]},
+  {n:5,title:"Telling the Time",gate:"Unit test",gateColor:"#F472B6",isFull:false,
+   summary:"Time to the nearest minute, then how long something took. Georgia asks for elapsed time to the hour, half hour and quarter hour, and this is the week that earns the Mission 07 test.",
+   days:[
+     {day:"Mon · 5.1",title:"Time to the minute",detail:"Every minute on the face, not just o'clock and half past.",tiers:[0,1,2]},
+     {day:"Tue · 5.2",title:"Elapsed time",detail:"Start, finish, and the gap between — hours, halves and quarters.",tiers:[0,1,2]},
+     {day:"Wed · Review",title:"Clocks and calendars",detail:"Read the day's real timetable off a real clock.",tiers:[0,1]},
+     {day:"Thu · Journal",title:"Error journal",detail:"Fix only what repeats.",tiers:[0,1]},
+     {day:"Fri · Test",title:"Mission 07 test",detail:"Graphs, measures and time together.",tiers:[0,1,2]}
    ]}
 ];
 
@@ -1645,6 +1663,32 @@ const PRACTICE_U7_W3 = [
    ]}
 ];
 
+const PRACTICE_U7_W4 = [
+  {id:"u7w4p1",w:4,label:"4.1",title:"The Ruler, Honestly",note:"Whole, half and quarter inches — read off a real ruler, not guessed.",
+   items:[
+     {t: 0, q: "Inches in 3 whole inches, counted on a ruler", a: "3"},{t: 0, q: "Inches in 5 whole inches, counted on a ruler", a: "5"},{t: 0, q: "Inches in 7 whole inches, counted on a ruler", a: "7"},{t: 0, q: "Inches in 9 whole inches, counted on a ruler", a: "9"},{t: 0, q: "Inches in 11 whole inches, counted on a ruler", a: "11"},{t: 0, q: "Half inches in 1 whole inches", a: "2"},{t: 0, q: "Half inches in 3 whole inches", a: "6"},{t: 0, q: "Half inches in 5 whole inches", a: "10"},{t: 0, q: "Half inches in 7 whole inches", a: "14"},{t: 0, q: "Quarter inches in 1 whole inches", a: "4"},{t: 0, q: "Quarter inches in 2 whole inches", a: "8"},{t: 0, q: "Quarter inches in 3 whole inches", a: "12"},{t: 0, q: "Quarter inches in 4 whole inches", a: "16"},{t: 0, q: "A pencil reaches the mark halfway between 4 and 5 inches. Write it as quarter inches", a: "18"},{t: 1, q: "A ribbon 12 inches long, cut off 7 inches. Left", a: "5"},{t: 1, q: "A ribbon 24 inches long, cut off 9 inches. Left", a: "15"},{t: 1, q: "A ribbon 36 inches long, cut off 15 inches. Left", a: "21"},{t: 1, q: "A ribbon 18 inches long, cut off 6 inches. Left", a: "12"},{t: 1, q: "9 inches shared into 3 equal pieces. Each piece", a: "3"},{t: 1, q: "12 inches shared into 4 equal pieces. Each piece", a: "3"},{t: 1, q: "15 inches shared into 5 equal pieces. Each piece", a: "3"},{t: 1, q: "Three quarter inches — how many quarters", a: "3"},{t: 1, q: "A line is 2 and a half inches. In half inches", a: "5"},{t: 1, q: "A line is 3 and a quarter inches. In quarter inches", a: "13"},{t: 2, q: "Two ribbons, 7 and a half and 4 and a half inches. Total in half inches", a: "24"},{t: 2, q: "A 24 inch strip cut into quarter inch pieces. How many pieces", a: "96"}
+   ]},
+  {id:"u7w4p2",w:4,label:"4.2",title:"Litres and Millilitres",note:"Liquid volume with real containers: jugs, cups and bottles.",
+   items:[
+     {t: 0, q: "250 ml plus 300 ml", a: "550"},{t: 0, q: "400 ml plus 150 ml", a: "550"},{t: 0, q: "600 ml plus 250 ml", a: "850"},{t: 0, q: "750 ml plus 200 ml", a: "950"},{t: 0, q: "Millilitres in 1 litre", a: "1000"},{t: 0, q: "Millilitres in 2 litres", a: "2000"},{t: 0, q: "Millilitres in 3 litres", a: "3000"},{t: 0, q: "Millilitres in 5 litres", a: "5000"},{t: 0, q: "2000 ml — how many whole litres", a: "2"},{t: 0, q: "3500 ml — how many whole litres", a: "3"},{t: 0, q: "4000 ml — how many whole litres", a: "4"},{t: 1, q: "A jug holds 500 ml, 200 ml is poured out. Left", a: "300"},{t: 1, q: "A jug holds 900 ml, 350 ml is poured out. Left", a: "550"},{t: 1, q: "A jug holds 1000 ml, 450 ml is poured out. Left", a: "550"},{t: 1, q: "How many 250 ml cups fill a 1 litre jug", a: "4"},{t: 1, q: "How many 500 ml cups fill a 1 litre jug", a: "2"},{t: 1, q: "Three 250 ml cups — total ml", a: "750"},{t: 2, q: "A 2 litre bottle fills 250 ml cups. How many", a: "8"},{t: 2, q: "1500 ml — litres and millilitres, give the millilitres part", a: "500"}
+   ]},
+  {id:"u7w4p3",w:4,label:"4.3",title:"Grams and Kilograms",note:"Mass on a balance: what a kilogram actually feels like.",
+   items:[
+     {t: 0, q: "Grams in 1 kilogram", a: "1000"},{t: 0, q: "Grams in 2 kilograms", a: "2000"},{t: 0, q: "Grams in 3 kilograms", a: "3000"},{t: 0, q: "Grams in 5 kilograms", a: "5000"},{t: 0, q: "2000 g — how many whole kilograms", a: "2"},{t: 0, q: "4500 g — how many whole kilograms", a: "4"},{t: 0, q: "6000 g — how many whole kilograms", a: "6"},{t: 0, q: "350 g plus 200 g", a: "550"},{t: 0, q: "480 g plus 150 g", a: "630"},{t: 0, q: "700 g plus 250 g", a: "950"},{t: 1, q: "A bag of 900 g, 400 g used. Left", a: "500"},{t: 1, q: "A bag of 1000 g, 650 g used. Left", a: "350"},{t: 1, q: "A bag of 750 g, 300 g used. Left", a: "450"},{t: 1, q: "How many 100 g weights balance 1 kilogram", a: "10"},{t: 1, q: "How many 200 g weights balance 1 kilogram", a: "5"},{t: 1, q: "How many 250 g weights balance 1 kilogram", a: "4"},{t: 1, q: "Four 250 g packets — total grams", a: "1000"},{t: 2, q: "A 3 kg bag split into 500 g bags. How many bags", a: "6"},{t: 2, q: "2 kg 400 g — total in grams", a: "2400"}
+   ]},
+];
+
+const PRACTICE_U7_W5 = [
+  {id:"u7w5p1",w:5,label:"5.1",title:"Time to the Minute",note:"Reading a clock face properly — every minute, not just o'clock and half past.",
+   items:[
+     {t: 0, q: "Minutes past the hour when the minute hand is on 1, counting by fives", a: "5"},{t: 0, q: "Minutes past the hour when the minute hand is on 2, counting by fives", a: "10"},{t: 0, q: "Minutes past the hour when the minute hand is on 3, counting by fives", a: "15"},{t: 0, q: "Minutes past the hour when the minute hand is on 4, counting by fives", a: "20"},{t: 0, q: "Minutes past the hour when the minute hand is on 5, counting by fives", a: "25"},{t: 0, q: "Minutes past the hour when the minute hand is on 6, counting by fives", a: "30"},{t: 0, q: "Minutes past the hour when the minute hand is on 8, counting by fives", a: "40"},{t: 0, q: "Minutes past the hour when the minute hand is on 9, counting by fives", a: "45"},{t: 0, q: "Minutes past the hour when the minute hand is on 10, counting by fives", a: "50"},{t: 0, q: "Minutes in 1 hour", a: "60"},{t: 0, q: "Minutes in 2 hours", a: "120"},{t: 0, q: "Minutes in 3 hours", a: "180"},{t: 0, q: "Minutes in 4 hours", a: "240"},{t: 0, q: "Minutes in half an hour", a: "30"},{t: 0, q: "Minutes in a quarter of an hour", a: "15"},{t: 0, q: "Minutes in three quarters of an hour", a: "45"},{t: 1, q: "20 minutes past, plus 15 more", a: "35"},{t: 1, q: "35 minutes past, plus 25 more minutes. Minutes past the next hour", a: "0"},{t: 1, q: "50 minutes past, plus 20 more minutes. Minutes past the next hour", a: "10"},{t: 1, q: "Quarter past plus half an hour — minutes past", a: "45"},{t: 1, q: "Twenty to the hour — minutes past", a: "40"},{t: 2, q: "90 minutes — hours and minutes, give the minutes part", a: "30"},{t: 2, q: "150 minutes in hours and minutes, give the hours part", a: "2"}
+   ]},
+  {id:"u7w5p2",w:5,label:"5.2",title:"Elapsed Time",note:"How long something took: hours, half hours and quarter hours.",
+   items:[
+     {t: 0, q: "From 9 o'clock to 11 o'clock — hours", a: "2"},{t: 0, q: "From 10 o'clock to 13 o'clock — hours", a: "3"},{t: 0, q: "From 14 o'clock to 17 o'clock — hours", a: "3"},{t: 0, q: "From 8 o'clock to 12 o'clock — hours", a: "4"},{t: 0, q: "From 30 minutes past to 45 minutes past — minutes", a: "15"},{t: 0, q: "From 15 minutes past to 45 minutes past — minutes", a: "30"},{t: 0, q: "From 10 minutes past to 40 minutes past — minutes", a: "30"},{t: 0, q: "Half past 2 to 3 o'clock — minutes", a: "30"},{t: 0, q: "Quarter past 4 to half past 4 — minutes", a: "15"},{t: 1, q: "45 minutes then 30 minutes — total minutes", a: "75"},{t: 1, q: "50 minutes then 40 minutes — total minutes", a: "90"},{t: 1, q: "35 minutes then 50 minutes — total minutes", a: "85"},{t: 1, q: "A lesson starts at 9 o'clock and runs 90 minutes. The finishing hour", a: "10"},{t: 1, q: "Quarter to 3 until 3 o'clock — minutes", a: "15"},{t: 1, q: "From half past 1 to half past 4 — hours", a: "3"},{t: 2, q: "A film starts quarter past 6 and lasts 105 minutes. Minutes past the hour at the end", a: "0"},{t: 2, q: "School 8:45 to 15:15 — total hours, rounded down", a: "6"}
+   ]},
+];
+
 const PRACTICE_U8_W2 = [
   {id:"u8w2p1",w:2,label:"2.1",title:"What a Letter Is",note:"n is a seat a number sits in. 3n is three of them.",
    items:[
@@ -1750,7 +1794,7 @@ const ALL_SETS = PRACTICE.concat(PRACTICE_U1_W2, PRACTICE_U1_W3, PRACTICE_U1_W4,
   PRACTICE_U4_W2, PRACTICE_U4_W3, PRACTICE_U4_W4, PRACTICE_U4_W5, PRACTICE_U4_W6,
   PRACTICE_U5_W2, PRACTICE_U5_W3, PRACTICE_U5_W4,
   PRACTICE_U6_W2, PRACTICE_U6_W3, PRACTICE_U6_W4, PRACTICE_U6_W5,
-  PRACTICE_U7_W2, PRACTICE_U7_W3,
+  PRACTICE_U7_W2, PRACTICE_U7_W3, PRACTICE_U7_W4, PRACTICE_U7_W5,
   PRACTICE_U8_W2, PRACTICE_U8_W3, PRACTICE_U8_W4,PRACTICE_U2, PRACTICE_U3, PRACTICE_U4, PRACTICE_U5, PRACTICE_U6, PRACTICE_U7, PRACTICE_U8);
 
 const U = 13; // px per unit — every rectangle on the teaching stage is drawn to true area
@@ -2184,5 +2228,5 @@ const LESSONS_WEEKLY = {
   {cap:"Thursday sweeps all eight error journals: name the one habit that fixed itself this year. Friday's test closes Year One.",cols:[{l:"8 journals",s:16}],rows:[{l:"",s:4}],cells:[{v:"1 habit"}],sum:"The year, in evidence"}]}
 };
 
-Object.assign(window.__CURR, {UNITS, WEEKS, PUZZLES, WEEKS_U2, WEEKS_U3, WEEKS_U4, WEEKS_U5, WEEKS_U6, WEEKS_U7, WEEKS_U8, PUZZLES_U6, STANDARDS_U6, PUZZLES_U7, STANDARDS_U7, PUZZLES_U8, STANDARDS_U8, PUZZLES_U5, STANDARDS_U5, PUZZLES_U4, STANDARDS_U4, PUZZLES_U3, STANDARDS_U3, PUZZLES_U2, STANDARDS_U2, STANDARDS, PRACTICE, PRACTICE_U2, PRACTICE_U3, PRACTICE_U4, PRACTICE_U5, PRACTICE_U6, PRACTICE_U7, PRACTICE_U8, PRACTICE_U1_W2, PRACTICE_U1_W3, PRACTICE_U1_W4, PRACTICE_U1_W5, PRACTICE_U2_W2, PRACTICE_U2_W3, PRACTICE_U2_W4, PRACTICE_U2_W5, PRACTICE_U3_W2, PRACTICE_U3_W3, PRACTICE_U3_W4, PRACTICE_U4_W2, PRACTICE_U4_W3, PRACTICE_U4_W4, PRACTICE_U4_W5, PRACTICE_U4_W6, PRACTICE_U5_W2, PRACTICE_U5_W3, PRACTICE_U5_W4, PRACTICE_U6_W2, PRACTICE_U6_W3, PRACTICE_U6_W4, PRACTICE_U6_W5, PRACTICE_U7_W2, PRACTICE_U7_W3, PRACTICE_U8_W2, PRACTICE_U8_W3, PRACTICE_U8_W4, ALL_SETS, U, LESSONS, LESSONS_U2, LESSONS_U3, LESSONS_U4, LESSONS_U5, LESSONS_U6, LESSONS_U7, LESSONS_U8, LESSONS_WEEKLY});
+Object.assign(window.__CURR, {UNITS, WEEKS, PUZZLES, WEEKS_U2, WEEKS_U3, WEEKS_U4, WEEKS_U5, WEEKS_U6, WEEKS_U7, WEEKS_U8, PUZZLES_U6, STANDARDS_U6, PUZZLES_U7, STANDARDS_U7, PUZZLES_U8, STANDARDS_U8, PUZZLES_U5, STANDARDS_U5, PUZZLES_U4, STANDARDS_U4, PUZZLES_U3, STANDARDS_U3, PUZZLES_U2, STANDARDS_U2, STANDARDS, PRACTICE, PRACTICE_U2, PRACTICE_U3, PRACTICE_U4, PRACTICE_U5, PRACTICE_U6, PRACTICE_U7, PRACTICE_U8, PRACTICE_U1_W2, PRACTICE_U1_W3, PRACTICE_U1_W4, PRACTICE_U1_W5, PRACTICE_U2_W2, PRACTICE_U2_W3, PRACTICE_U2_W4, PRACTICE_U2_W5, PRACTICE_U3_W2, PRACTICE_U3_W3, PRACTICE_U3_W4, PRACTICE_U4_W2, PRACTICE_U4_W3, PRACTICE_U4_W4, PRACTICE_U4_W5, PRACTICE_U4_W6, PRACTICE_U5_W2, PRACTICE_U5_W3, PRACTICE_U5_W4, PRACTICE_U6_W2, PRACTICE_U6_W3, PRACTICE_U6_W4, PRACTICE_U6_W5, PRACTICE_U7_W2, PRACTICE_U7_W3, PRACTICE_U7_W4, PRACTICE_U7_W5, PRACTICE_U8_W2, PRACTICE_U8_W3, PRACTICE_U8_W4, ALL_SETS, U, LESSONS, LESSONS_U2, LESSONS_U3, LESSONS_U4, LESSONS_U5, LESSONS_U6, LESSONS_U7, LESSONS_U8, LESSONS_WEEKLY});
 })();

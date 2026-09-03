@@ -3503,7 +3503,7 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;studentName&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Brock&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;mascotName&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;AXIOM&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;unitsCompleted&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:0,&quot;min&quot;:0,&quot;max&quot;:8,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Progress&quot;},&quot;showStandards&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Teacher HQ&quot;}}">
 // Curriculum content lives in curriculum/*.js — see CONTRIBUTING.md.
-const {TIERS, GATES, GATES_SHORT, GATES_LONG, GATES_TINY, BANDS, RHYTHM, ASSESS, COMPACT, WATCHOUTS, PRAISE, mkWeek, GATE_FULL, q, GATE_OUT, GATE_QUIZ, GATE_TEST, UNITS, WEEKS, PUZZLES, WEEKS_U2, WEEKS_U3, WEEKS_U4, WEEKS_U5, WEEKS_U6, WEEKS_U7, WEEKS_U8, PUZZLES_U6, STANDARDS_U6, PUZZLES_U7, STANDARDS_U7, PUZZLES_U8, STANDARDS_U8, PUZZLES_U5, STANDARDS_U5, PUZZLES_U4, STANDARDS_U4, PUZZLES_U3, STANDARDS_U3, PUZZLES_U2, STANDARDS_U2, STANDARDS, PRACTICE, PRACTICE_U2, PRACTICE_U3, PRACTICE_U4, PRACTICE_U5, PRACTICE_U6, PRACTICE_U7, PRACTICE_U8, PRACTICE_U1_W2, PRACTICE_U1_W3, PRACTICE_U1_W4, PRACTICE_U1_W5, PRACTICE_U2_W2, PRACTICE_U2_W3, PRACTICE_U2_W4, PRACTICE_U2_W5, PRACTICE_U3_W2, PRACTICE_U3_W3, PRACTICE_U3_W4, PRACTICE_U4_W2, PRACTICE_U4_W3, PRACTICE_U4_W4, PRACTICE_U4_W5, PRACTICE_U4_W6, PRACTICE_U5_W2, PRACTICE_U5_W3, PRACTICE_U5_W4, PRACTICE_U6_W2, PRACTICE_U6_W3, PRACTICE_U6_W4, PRACTICE_U6_W5, PRACTICE_U7_W2, PRACTICE_U7_W3, PRACTICE_U8_W2, PRACTICE_U8_W3, PRACTICE_U8_W4, ALL_SETS, U, LESSONS, LESSONS_U2, LESSONS_U3, LESSONS_U4, LESSONS_U5, LESSONS_U6, LESSONS_U7, LESSONS_U8, LESSONS_WEEKLY, UNITS_Y5, WEEKS_Y5, STANDARDS_Y5, PUZZLES_Y5, PRACTICE_Y5, PRACTICE_Y5_W, PRACTICE_Y5_W2, PRACTICE_Y5_W3, PRACTICE_Y5_W4, PRACTICE_Y5_W5, PRACTICE_Y5_W6, ALL_SETS_Y5, Y5_BRIEFINGS, LESSONS_Y5_U1, LESSONS_Y5_U2, LESSONS_Y5_U3, LESSONS_Y5_U4, LESSONS_Y5_U5, LESSONS_Y5_U6, LESSONS_Y5_U7, LESSONS_Y5_U8, LESSONS_WEEKLY_Y5, EXTRA, CURRICULA, lessonFor, ALL_LESSONS} = window.__CURR;
+const {TIERS, GATES, GATES_SHORT, GATES_LONG, GATES_TINY, BANDS, RHYTHM, ASSESS, COMPACT, WATCHOUTS, PRAISE, mkWeek, GATE_FULL, q, GATE_OUT, GATE_QUIZ, GATE_TEST, UNITS, WEEKS, PUZZLES, WEEKS_U2, WEEKS_U3, WEEKS_U4, WEEKS_U5, WEEKS_U6, WEEKS_U7, WEEKS_U8, PUZZLES_U6, STANDARDS_U6, PUZZLES_U7, STANDARDS_U7, PUZZLES_U8, STANDARDS_U8, PUZZLES_U5, STANDARDS_U5, PUZZLES_U4, STANDARDS_U4, PUZZLES_U3, STANDARDS_U3, PUZZLES_U2, STANDARDS_U2, STANDARDS, PRACTICE, PRACTICE_U2, PRACTICE_U3, PRACTICE_U4, PRACTICE_U5, PRACTICE_U6, PRACTICE_U7, PRACTICE_U8, PRACTICE_U1_W2, PRACTICE_U1_W3, PRACTICE_U1_W4, PRACTICE_U1_W5, PRACTICE_U2_W2, PRACTICE_U2_W3, PRACTICE_U2_W4, PRACTICE_U2_W5, PRACTICE_U3_W2, PRACTICE_U3_W3, PRACTICE_U3_W4, PRACTICE_U4_W2, PRACTICE_U4_W3, PRACTICE_U4_W4, PRACTICE_U4_W5, PRACTICE_U4_W6, PRACTICE_U5_W2, PRACTICE_U5_W3, PRACTICE_U5_W4, PRACTICE_U6_W2, PRACTICE_U6_W3, PRACTICE_U6_W4, PRACTICE_U6_W5, PRACTICE_U7_W2, PRACTICE_U7_W3, PRACTICE_U7_W4, PRACTICE_U7_W5, PRACTICE_U8_W2, PRACTICE_U8_W3, PRACTICE_U8_W4, ALL_SETS, U, LESSONS, LESSONS_U2, LESSONS_U3, LESSONS_U4, LESSONS_U5, LESSONS_U6, LESSONS_U7, LESSONS_U8, LESSONS_WEEKLY, UNITS_Y5, WEEKS_Y5, STANDARDS_Y5, PUZZLES_Y5, PRACTICE_Y5, PRACTICE_Y5_W, PRACTICE_Y5_W2, PRACTICE_Y5_W3, PRACTICE_Y5_W4, PRACTICE_Y5_W5, PRACTICE_Y5_W6, ALL_SETS_Y5, Y5_BRIEFINGS, LESSONS_Y5_U1, LESSONS_Y5_U2, LESSONS_Y5_U3, LESSONS_Y5_U4, LESSONS_Y5_U5, LESSONS_Y5_U6, LESSONS_Y5_U7, LESSONS_Y5_U8, LESSONS_WEEKLY_Y5, EXTRA, CURRICULA, lessonFor, ALL_LESSONS} = window.__CURR;
 
 const STORE_KEY = "abm.profiles.v1";
 const AVATAR_COLORS = ["#FF9F1C","#2DD4BF","#A78BFA","#F472B6","#A3E635","#60A5FA","#FB7185","#FCD34D"];
@@ -4150,7 +4150,7 @@ class Component extends DCLogic {
     : u===8?STANDARDS_U8:u===7?STANDARDS_U7:u===6?STANDARDS_U6:u===5?STANDARDS_U5:u===4?STANDARDS_U4:u===3?STANDARDS_U3:u===2?STANDARDS_U2:STANDARDS; }
   fileSetsFor(u){ return this.isY5() ? (PRACTICE_Y5[u]||PRACTICE_Y5[1])
     : u===8 ? PRACTICE_U8.concat(PRACTICE_U8_W2, PRACTICE_U8_W3, PRACTICE_U8_W4)
-    : u===7 ? PRACTICE_U7.concat(PRACTICE_U7_W2, PRACTICE_U7_W3)
+    : u===7 ? PRACTICE_U7.concat(PRACTICE_U7_W2, PRACTICE_U7_W3, PRACTICE_U7_W4, PRACTICE_U7_W5)
     : u===6 ? PRACTICE_U6.concat(PRACTICE_U6_W2, PRACTICE_U6_W3, PRACTICE_U6_W4, PRACTICE_U6_W5)
     : u===5 ? PRACTICE_U5.concat(PRACTICE_U5_W2, PRACTICE_U5_W3, PRACTICE_U5_W4)
     : u===4 ? PRACTICE_U4.concat(PRACTICE_U4_W2, PRACTICE_U4_W3, PRACTICE_U4_W4, PRACTICE_U4_W5, PRACTICE_U4_W6)
@@ -5915,9 +5915,44 @@ class Component extends DCLogic {
   // current work: the sprint exists to get a child answering quickly and
   // confidently before the lesson, so it never introduces new difficulty.
   sprintFacts(curric){
-    const out=[], push=(q,a)=>out.push({q:q,a:String(a),label:"Number facts"});
+    const out=[], push=(q,a,label)=>out.push({q:q,a:String(a),label:label||"Number facts"});
     const top=curric==="y5"?12:10;
     for(let a=2;a<=top;a++) for(let b=2;b<=top;b++){ push(a+" × "+b,a*b); push((a*b)+" ÷ "+a,b); }
+
+    /* ADDITION AND SUBTRACTION FLUENCY — 3.PAR.2.
+     *
+     * Georgia asks for fluency within 1,000 by the end of third grade, and the
+     * bank had not one addition fact in it: 190 facts, all multiplication,
+     * division, halving and doubling. A fluency standard with no fluency
+     * practice behind it is the gap most likely to be felt daily, because
+     * every word problem downstream leans on it.
+     *
+     * It is built as a ladder rather than a pile — bonds, then within 100
+     * without regrouping, then with it, then the round hundreds — so the
+     * sprint keeps its own rule of sitting BELOW the current lesson. A child
+     * meets nothing here he has not already been taught. */
+    for(let a=2;a<=18;a++){ const b=20-a; push(a+" + "+b,20); push("20 − "+a,b); }
+    for(let a=11;a<=49;a+=2){ for(const b of [3,5,7]){ push(a+" + "+b,a+b); push((a+b)+" − "+b,a); } }
+    [23,35,42,54,61,76,84].forEach(a=>[12,15,21,24,33].forEach(b=>{
+      push(a+" + "+b,a+b); push((a+b)+" − "+b,a);
+    }));
+    // Kept inside 1,000: that is where Georgia sets the fluency bar, and a
+    // sprint that quietly crosses it is teaching past the standard again.
+    [120,250,340,480,510,660,750,830].forEach(a=>[100,200,50,150].forEach(b=>{
+      if(a+b>1000) return;
+      push(a+" + "+b,a+b); push((a+b)+" − "+b,a);
+    }));
+
+    /* ROUNDING — 3.NR.1, to the nearest 10 and 100, and only up to 1,000.
+     * The curriculum rounds too, but around numbers in the millions, which is
+     * fifth-grade place value wearing a third-grade label. */
+    [12,27,34,48,55,63,79,86,91,108,143,167,182].forEach(n=>{
+      push("Round "+n+" to the nearest 10", Math.round(n/10)*10, "Rounding");
+    });
+    [140,260,318,437,552,681,749,860,925].forEach(n=>{
+      push("Round "+n+" to the nearest 100", Math.round(n/100)*100, "Rounding");
+    });
+
     if(curric==="y5"){
       [3,7,12,25,40,60,150,800].forEach(n=>{ push(n+" × 10",n*10); push((n*10)+" ÷ 10",n); });
       [4,6,8,12,20,50,120].forEach(n=>{ push("Half of "+n,n/2); push("Double "+n,n*2); });

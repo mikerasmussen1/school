@@ -8,38 +8,38 @@
   "https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js":"./vendor/react-dom.production.min.js",
   "https://unpkg.com/@babel/standalone@7.29.0/babel.min.js":"./vendor/babel.min.js"
 };</script>
-<script src="./support.js?v=8cfb11f"></script>
-<script src="./curriculum/students.js?v=8cfb11f"></script>
-<script src="./curriculum/subjects.js?v=8cfb11f"></script>
-<script src="./curriculum/question-types.js?v=8cfb11f"></script>
-<script src="./curriculum/qbank.js?v=8cfb11f"></script>
-<script src="./curriculum/lessons.js?v=8cfb11f"></script>
-<script src="./curriculum/tutor.js?v=8cfb11f"></script>
-<script src="./curriculum/shared.js?v=8cfb11f"></script>
-<script src="./curriculum/math-y1.js?v=8cfb11f"></script>
-<script src="./curriculum/math-y2.js?v=8cfb11f"></script>
-<script src="./curriculum/extra-banks.js?v=8cfb11f"></script>
-<script src="./curriculum/math-sequence.js?v=8cfb11f"></script>
-<script src="./curriculum/registry.js?v=8cfb11f"></script>
-<script src="./curriculum/la-y1-spine.js?v=8cfb11f"></script>
-<script src="./curriculum/la-y1-words.js?v=8cfb11f"></script>
-<script src="./curriculum/la-y1-grammar.js?v=8cfb11f"></script>
-<script src="./curriculum/la-y1-reading.js?v=8cfb11f"></script>
-<script src="./curriculum/la-y1-tasks.js?v=8cfb11f"></script>
-<script src="./curriculum/la-books.js?v=8cfb11f"></script>
-<script src="./curriculum/la-y2-spine.js?v=8cfb11f"></script>
-<script src="./curriculum/la-y2-words.js?v=8cfb11f"></script>
-<script src="./curriculum/la-y2-grammar.js?v=8cfb11f"></script>
-<script src="./curriculum/la-y2-reading.js?v=8cfb11f"></script>
-<script src="./curriculum/la-y2-tasks.js?v=8cfb11f"></script>
-<script src="./curriculum/la-books-y2.js?v=8cfb11f"></script>
-<script src="./curriculum/science-y3-spine.js?v=8cfb11f"></script>
-<script src="./curriculum/science-y5-spine.js?v=8cfb11f"></script>
-<script src="./curriculum/science-lessons.js?v=8cfb11f"></script>
-<script src="./curriculum/science-quiz.js?v=8cfb11f"></script>
-<script src="./curriculum/science.js?v=8cfb11f"></script>
-<script src="./curriculum/language-arts.js?v=8cfb11f"></script>
-<script src="./curriculum/japan-unit.js?v=8cfb11f"></script>
+<script src="./support.js?v=0dca528"></script>
+<script src="./curriculum/students.js?v=0dca528"></script>
+<script src="./curriculum/subjects.js?v=0dca528"></script>
+<script src="./curriculum/question-types.js?v=0dca528"></script>
+<script src="./curriculum/qbank.js?v=0dca528"></script>
+<script src="./curriculum/lessons.js?v=0dca528"></script>
+<script src="./curriculum/tutor.js?v=0dca528"></script>
+<script src="./curriculum/shared.js?v=0dca528"></script>
+<script src="./curriculum/math-y1.js?v=0dca528"></script>
+<script src="./curriculum/math-y2.js?v=0dca528"></script>
+<script src="./curriculum/extra-banks.js?v=0dca528"></script>
+<script src="./curriculum/math-sequence.js?v=0dca528"></script>
+<script src="./curriculum/registry.js?v=0dca528"></script>
+<script src="./curriculum/la-y1-spine.js?v=0dca528"></script>
+<script src="./curriculum/la-y1-words.js?v=0dca528"></script>
+<script src="./curriculum/la-y1-grammar.js?v=0dca528"></script>
+<script src="./curriculum/la-y1-reading.js?v=0dca528"></script>
+<script src="./curriculum/la-y1-tasks.js?v=0dca528"></script>
+<script src="./curriculum/la-books.js?v=0dca528"></script>
+<script src="./curriculum/la-y2-spine.js?v=0dca528"></script>
+<script src="./curriculum/la-y2-words.js?v=0dca528"></script>
+<script src="./curriculum/la-y2-grammar.js?v=0dca528"></script>
+<script src="./curriculum/la-y2-reading.js?v=0dca528"></script>
+<script src="./curriculum/la-y2-tasks.js?v=0dca528"></script>
+<script src="./curriculum/la-books-y2.js?v=0dca528"></script>
+<script src="./curriculum/science-y3-spine.js?v=0dca528"></script>
+<script src="./curriculum/science-y5-spine.js?v=0dca528"></script>
+<script src="./curriculum/science-lessons.js?v=0dca528"></script>
+<script src="./curriculum/science-quiz.js?v=0dca528"></script>
+<script src="./curriculum/science.js?v=0dca528"></script>
+<script src="./curriculum/language-arts.js?v=0dca528"></script>
+<script src="./curriculum/japan-unit.js?v=0dca528"></script>
 <!-- The Japan card opens japan.dc.html, a separate committed page rather than an
      app screen. It and image-slot.js must stay committed alongside this script
      tag or the card 404s on GitHub Pages. Note openSubject follows open.href
@@ -4613,7 +4613,28 @@ class Component extends DCLogic {
         const map={y1:"y3", y2:"y5", y3:"y3", y5:"y5"};
         whose=ST.nameOf(map[lvl]||lvl)||"";
       }
-      const deep=(s.id==="math");
+      // Every subject now writes its own working record into the same place,
+      // so "deep" is no longer a maths privilege — it is simply whether this
+      // subject has stored anything yet.
+      const data=r.data||{};
+      let detail="";
+      if(s.id==="math"){
+        detail = r.opened ? "Full working record below \u2014 every set, every attempt." : "";
+      } else if(s.id==="la"){
+        const steps=Object.keys(data.stepDone||{}).length;
+        const flagged=Object.keys(data.stuck||{}).filter(k=>data.stuck[k]).length;
+        detail = steps
+          ? (steps+" steps completed"+(flagged?", "+flagged+" flagged for a look":"")+
+             (data.week?" \u00b7 currently on week "+data.week:""))
+          : "";
+      } else if(s.id==="sci"){
+        const done=Object.keys(data.completed||{}).length;
+        detail = done
+          ? (done+" week"+(done===1?"":"s")+" finished"+(data.week?" \u00b7 currently on week "+data.week:""))
+          : "";
+      }
+      const synced=!!data.__at;
+      const deep=(s.id==="math")||synced;
       return {
         id:s.id, name:s.name, colour:s.color,
         opened:r.opened||0,
@@ -4623,7 +4644,7 @@ class Component extends DCLogic {
                  : (today-last)+" days ago",
         recent:recent,
         level:lvl, whose:whose,
-        deep:deep
+        deep:deep, detail:detail, synced:synced
       };
     });
   }
@@ -4766,12 +4787,13 @@ class Component extends DCLogic {
               recent: r.recent+" of the last 28 days",
               // A never-opened subject has no progress to be anywhere, so the
               // device-only caveat would read as a warning about nothing.
+              // Progress now syncs for every subject, so the old device-only
+              // caveat is gone. What remains is the honest case: a subject
+              // whose last work predates syncing, or was done signed-out.
               detail: r.opened===0
                 ? "Not opened yet."
-                : r.deep
-                ? "Full working record below — every set, every attempt."
-                : "Week-by-week progress for this subject is saved on the device it was done on, so it is not visible from another device. Visits and last-opened are.",
-              detailStyle: (r.opened===0 || r.deep)
+                : (r.detail || "Opened, but no work recorded yet \u2014 either nothing has been finished, or it was done before this device signed in."),
+              detailStyle: (r.opened===0 || r.detail)
                 ? "font-size:12.5px;color:rgba(238,242,255,.55);margin-top:6px"
                 : "font-size:12.5px;color:#FBBF24;margin-top:6px",
               style:"background:rgba(255,255,255,.04);border:1px solid "+r.colour+"44;"+
@@ -4780,7 +4802,7 @@ class Component extends DCLogic {
             };
           });
       }).call(this),
-      tSubjNote:"Every subject records when it was opened and by which boy, and that travels between devices. Only maths keeps its full working record in the same place, which is why its detail runs deeper.",
+      tSubjNote:"Every subject now writes its progress to the same record, so this view is the same on any device \u2014 your laptop, the tablet, a phone. A subject that shows no work either has none finished yet, or was used while signed out, in which case that progress is still on that device and will upload the next time the child signs in there.",
       tBusy:st.tBusy, tErr:st.tErr, tHasErr:!!st.tErr,
       tSignOut:()=>this.setState({tRoster:null,tKey:null,tSel:"",tData:null,tErr:""}),
 

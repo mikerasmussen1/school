@@ -34,6 +34,20 @@ for f in ["index.html"] + sorted(glob.glob("*.dc.html")):
         n += 1
         return m.group(1) + path + "?v=" + ver + m.group(3)
     out = re.sub(r'(<script src=")([^"]+\.js(?:\?v=[^"]*)?)(")', bust, s)
+
+    # A build stamp the page can display. index.html holds the whole app, so a
+    # cached copy of it serves old logic however well the scripts are
+    # versioned — and there is then no way to tell by looking. Printing the
+    # build in the header makes "is this the new version?" answerable in a
+    # second instead of a debugging session.
+    # Marker must be distinct from the app's own reference to window.__BUILD__,
+    # or this "already stamped?" check matches the reader and never writes.
+    stamp = '<script data-build>window.__BUILD__="%s";</script>' % ver
+    if '<script data-build>' in out:
+        out = re.sub(r'<script data-build>.*?</script>', stamp, out, flags=re.S)
+    else:
+        out = out.replace('</head>', '  ' + stamp + '\n</head>', 1)
+
     if out != s:
         open(f, "w").write(out)
         print("  stamped", f)

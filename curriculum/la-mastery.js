@@ -50,12 +50,18 @@
   /* ---- Day plans -------------------------------------------------------
    * Each weekday becomes 3–4 visible steps. `gate` says what completes it:
    *   "ack"    the child confirms they did it (reading aloud, studying a list)
+   *            — including the quote of the day, which is a real part of the
+   *            day's work and so belongs in the checklist rather than floating
+   *            above it with no way to tick it off
    *   "score"  a drill that must clear MASTERY
    *   "photo"  a handwritten page graded from a photo
    *   "end"    the explicit close of the day
    */
   const PLANS = {
     Mon: [
+      {key:"quote", label:"Quote of the day",                gate:"ack",
+       detail:"Read today's quote and the line under it.",
+       done:"You read it."},
       {key:"read",  label:"Read the passage out loud",      gate:"ack",
        detail:"Read the whole passage aloud, once, at a pace where every word is clear.",
        done:"You have read it aloud all the way through."},
@@ -66,6 +72,9 @@
        detail:"Reading day complete.", done:"Day closed."}
     ],
     Tue: [
+      {key:"quote", label:"Quote of the day",                gate:"ack",
+       detail:"Read today's quote and the line under it.",
+       done:"You read it."},
       {key:"skill", label:"Read this week's grammar focus",  gate:"ack",
        detail:"Read the skill name and the note under it before you start.",
        done:"You know what today's drill is about."},
@@ -76,6 +85,9 @@
        detail:"Grammar day complete.", done:"Day closed."}
     ],
     Wed: [
+      {key:"quote", label:"Quote of the day",                gate:"ack",
+       detail:"Read today's quote and the line under it.",
+       done:"You read it."},
       {key:"study", label:"Study the word list",             gate:"ack",
        detail:"Say each of the twelve words out loud before you start the drill.",
        done:"You have said every word aloud."},
@@ -86,6 +98,9 @@
        detail:"Spelling day complete.", done:"Day closed."}
     ],
     Thu: [
+      {key:"quote", label:"Quote of the day",                gate:"ack",
+       detail:"Read today's quote and the line under it.",
+       done:"You read it."},
       {key:"prompt",label:"Read today's assignment",         gate:"ack",
        detail:"Read the assignment, or press the listen button.",
        done:"You know what to write."},
@@ -99,6 +114,9 @@
        detail:"Handwriting day complete.", done:"Day closed."}
     ],
     Fri: [
+      {key:"quote", label:"Quote of the day",                gate:"ack",
+       detail:"Read today's quote and the line under it.",
+       done:"You read it."},
       {key:"speak", label:"Speak & Show task",               gate:"ack",
        detail:"Do this out loud with another person, then mark it done.",
        done:"You did it with someone."},

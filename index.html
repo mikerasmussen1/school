@@ -2654,7 +2654,10 @@
         <sc-for list="{{ standards }}" as="st" hint-placeholder-count="5">
           <div style="display:grid;grid-template-columns:110px 130px 1fr;gap:16px;padding:13px 0;border-bottom:1px dashed rgba(255,255,255,.11);align-items:baseline">
             <div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;color:{{ stdY5Color }}">{{ st.code }}</div>
-            <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(238,242,255,.45)">{{ st.where }}</div>
+            <div style="display:flex;flex-direction:column;gap:6px;align-items:flex-start">
+              <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(238,242,255,.45)">{{ st.where }}</span>
+              <span style="{{ st.levelStyle }}">{{ st.levelLabel }}</span>
+            </div>
             <div style="font-size:13.5px;line-height:1.5;color:rgba(238,242,255,.85)">{{ st.text }}</div>
           </div>
         </sc-for>
@@ -2873,7 +2876,10 @@
         <sc-for list="{{ standards }}" as="st" hint-placeholder-count="5">
           <div style="display:grid;grid-template-columns:96px 130px 1fr;gap:16px;padding:13px 0;border-bottom:1px dashed rgba(255,255,255,.11);align-items:baseline">
             <div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;color:#FF9F1C">{{ st.code }}</div>
-            <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(238,242,255,.45)">{{ st.where }}</div>
+            <div style="display:flex;flex-direction:column;gap:6px;align-items:flex-start">
+              <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(238,242,255,.45)">{{ st.where }}</span>
+              <span style="{{ st.levelStyle }}">{{ st.levelLabel }}</span>
+            </div>
             <div style="font-size:13.5px;line-height:1.5;color:rgba(238,242,255,.85)">{{ st.text }}</div>
           </div>
         </sc-for>
@@ -2888,7 +2894,10 @@
         <sc-for list="{{ standards }}" as="st" hint-placeholder-count="5">
           <div style="display:grid;grid-template-columns:96px 130px 1fr;gap:16px;padding:13px 0;border-bottom:1px dashed rgba(255,255,255,.11);align-items:baseline">
             <div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;color:#2DD4BF">{{ st.code }}</div>
-            <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(238,242,255,.45)">{{ st.where }}</div>
+            <div style="display:flex;flex-direction:column;gap:6px;align-items:flex-start">
+              <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(238,242,255,.45)">{{ st.where }}</span>
+              <span style="{{ st.levelStyle }}">{{ st.levelLabel }}</span>
+            </div>
             <div style="font-size:13.5px;line-height:1.5;color:rgba(238,242,255,.85)">{{ st.text }}</div>
           </div>
         </sc-for>
@@ -2903,7 +2912,10 @@
         <sc-for list="{{ standards }}" as="st" hint-placeholder-count="5">
           <div style="display:grid;grid-template-columns:96px 130px 1fr;gap:16px;padding:13px 0;border-bottom:1px dashed rgba(255,255,255,.11);align-items:baseline">
             <div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;color:#A78BFA">{{ st.code }}</div>
-            <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(238,242,255,.45)">{{ st.where }}</div>
+            <div style="display:flex;flex-direction:column;gap:6px;align-items:flex-start">
+              <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(238,242,255,.45)">{{ st.where }}</span>
+              <span style="{{ st.levelStyle }}">{{ st.levelLabel }}</span>
+            </div>
             <div style="font-size:13.5px;line-height:1.5;color:rgba(238,242,255,.85)">{{ st.text }}</div>
           </div>
         </sc-for>
@@ -2918,7 +2930,10 @@
         <sc-for list="{{ standards }}" as="st" hint-placeholder-count="5">
           <div style="display:grid;grid-template-columns:96px 130px 1fr;gap:16px;padding:13px 0;border-bottom:1px dashed rgba(255,255,255,.11);align-items:baseline">
             <div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;color:#F472B6">{{ st.code }}</div>
-            <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(238,242,255,.45)">{{ st.where }}</div>
+            <div style="display:flex;flex-direction:column;gap:6px;align-items:flex-start">
+              <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(238,242,255,.45)">{{ st.where }}</span>
+              <span style="{{ st.levelStyle }}">{{ st.levelLabel }}</span>
+            </div>
             <div style="font-size:13.5px;line-height:1.5;color:rgba(238,242,255,.85)">{{ st.text }}</div>
           </div>
         </sc-for>
@@ -2933,7 +2948,10 @@
         <sc-for list="{{ standards }}" as="st" hint-placeholder-count="5">
           <div style="display:grid;grid-template-columns:96px 130px 1fr;gap:16px;padding:13px 0;border-bottom:1px dashed rgba(255,255,255,.11);align-items:baseline">
             <div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;color:#A3E635">{{ st.code }}</div>
-            <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(238,242,255,.45)">{{ st.where }}</div>
+            <div style="display:flex;flex-direction:column;gap:6px;align-items:flex-start">
+              <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(238,242,255,.45)">{{ st.where }}</span>
+              <span style="{{ st.levelStyle }}">{{ st.levelLabel }}</span>
+            </div>
             <div style="font-size:13.5px;line-height:1.5;color:rgba(238,242,255,.85)">{{ st.text }}</div>
           </div>
         </sc-for>
@@ -2948,7 +2966,10 @@
         <sc-for list="{{ standards }}" as="st" hint-placeholder-count="5">
           <div style="display:grid;grid-template-columns:96px 130px 1fr;gap:16px;padding:13px 0;border-bottom:1px dashed rgba(255,255,255,.11);align-items:baseline">
             <div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;color:#60A5FA">{{ st.code }}</div>
-            <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(238,242,255,.45)">{{ st.where }}</div>
+            <div style="display:flex;flex-direction:column;gap:6px;align-items:flex-start">
+              <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(238,242,255,.45)">{{ st.where }}</span>
+              <span style="{{ st.levelStyle }}">{{ st.levelLabel }}</span>
+            </div>
             <div style="font-size:13.5px;line-height:1.5;color:rgba(238,242,255,.85)">{{ st.text }}</div>
           </div>
         </sc-for>
@@ -2963,7 +2984,10 @@
         <sc-for list="{{ standards }}" as="st" hint-placeholder-count="5">
           <div style="display:grid;grid-template-columns:96px 130px 1fr;gap:16px;padding:13px 0;border-bottom:1px dashed rgba(255,255,255,.11);align-items:baseline">
             <div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;color:#FB7185">{{ st.code }}</div>
-            <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(238,242,255,.45)">{{ st.where }}</div>
+            <div style="display:flex;flex-direction:column;gap:6px;align-items:flex-start">
+              <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(238,242,255,.45)">{{ st.where }}</span>
+              <span style="{{ st.levelStyle }}">{{ st.levelLabel }}</span>
+            </div>
             <div style="font-size:13.5px;line-height:1.5;color:rgba(238,242,255,.85)">{{ st.text }}</div>
           </div>
         </sc-for>
@@ -2978,7 +3002,10 @@
         <sc-for list="{{ standards }}" as="st" hint-placeholder-count="5">
           <div style="display:grid;grid-template-columns:96px 130px 1fr;gap:16px;padding:13px 0;border-bottom:1px dashed rgba(255,255,255,.11);align-items:baseline">
             <div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;color:#FCD34D">{{ st.code }}</div>
-            <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(238,242,255,.45)">{{ st.where }}</div>
+            <div style="display:flex;flex-direction:column;gap:6px;align-items:flex-start">
+              <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(238,242,255,.45)">{{ st.where }}</span>
+              <span style="{{ st.levelStyle }}">{{ st.levelLabel }}</span>
+            </div>
             <div style="font-size:13.5px;line-height:1.5;color:rgba(238,242,255,.85)">{{ st.text }}</div>
           </div>
         </sc-for>
@@ -7049,7 +7076,18 @@ class Component extends DCLogic {
       gates:WKS.length===3?GATES_TINY:WKS.length===4?GATES_SHORT:WKS.length===6?GATES_LONG:GATES,
       bands:BANDS.map(b=>({...b,style:`background:${b.bg};border:1px solid ${b.bd};border-radius:18px;padding:22px 24px`})),
       rhythm:RHYTHM, assessRows:ASSESS, compactRows:COMPACT, praise:PRAISE,
-      standards:this.standardsFor(st.uview),
+      /* The level tag is the whole point of tagging: it says whether a
+       * standard is what the child is HELD to or what they are stretched on.
+       * It was carried in the data and rendered nowhere, which is how Mission
+       * 01 came to grade a grade-4 standard without that being visible. */
+      standards:this.standardsFor(st.uview).map(s=>{
+        const lv=s.level||"on-grade";
+        const c=lv==="acceleration"?"#FBBF24":lv==="review"?"#38BDF8":"#4ADE80";
+        return {...s, levelLabel:lv,
+          levelStyle:`font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:.12em;`+
+            `text-transform:uppercase;padding:3px 8px;border-radius:999px;white-space:nowrap;`+
+            `background:${c}1f;color:${c};border:1px solid ${c}44`};
+      }),
       watchouts:WATCHOUTS.map(w=>({...w,
         style:`background:linear-gradient(150deg,${w.color}12,rgba(255,255,255,.03));border:1px solid ${w.color}33;border-radius:22px;padding:26px 28px`,
         iconStyle:`width:34px;height:34px;border-radius:11px;background:${w.color};color:#0B0F24;display:grid;place-items:center;font-size:16px;flex:none`}))

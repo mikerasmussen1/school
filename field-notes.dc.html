@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=0dca528"></script>
+<script src="./support.js?v=a3a5307"></script>
 </head>
 <body>
 <x-dc>
@@ -29,15 +29,16 @@
   ol.steps{margin:8px 0 0;padding-left:22px} ol.steps li{margin-bottom:7px}
   ul.mats{margin:6px 0 0;padding-left:20px} ul.mats li{margin-bottom:3px;font-size:.93rem}
 </style>
-<script src="./curriculum/students.js?v=0dca528"></script>
-<script src="./curriculum/subjects.js?v=0dca528"></script>
-<script src="./curriculum/question-types.js?v=0dca528"></script>
-<script src="./curriculum/science-y3-spine.js?v=0dca528"></script>
-<script src="./curriculum/science-y5-spine.js?v=0dca528"></script>
-<script src="./curriculum/science-lessons.js?v=0dca528"></script>
-<script src="./curriculum/science-quiz.js?v=0dca528"></script>
-<script src="./curriculum/la-calendar.js?v=0dca528"></script>
-<script src="./curriculum/science-shopping.js?v=0dca528"></script>
+<script src="./curriculum/students.js?v=a3a5307"></script>
+<script src="./curriculum/sync.js?v=a3a5307"></script>
+<script src="./curriculum/subjects.js?v=a3a5307"></script>
+<script src="./curriculum/question-types.js?v=a3a5307"></script>
+<script src="./curriculum/science-y3-spine.js?v=a3a5307"></script>
+<script src="./curriculum/science-y5-spine.js?v=a3a5307"></script>
+<script src="./curriculum/science-lessons.js?v=a3a5307"></script>
+<script src="./curriculum/science-quiz.js?v=a3a5307"></script>
+<script src="./curriculum/la-calendar.js?v=a3a5307"></script>
+<script src="./curriculum/science-shopping.js?v=a3a5307"></script>
 </helmet>
 
 <div style="min-height:100vh;display:flex;flex-direction:column">
@@ -47,9 +48,14 @@
         <div style="font-family:'Fraunces',serif;font-weight:700;font-size:21px">Field Notes</div>
         <div style="font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(244,247,243,.55);margin-top:2px">{{ headerLine }}</div>
       </div>
-      <sc-for list="{{ gradeItems }}" as="g" hint-placeholder-count="2">
-        <button onClick="{{ g.onClick }}" style="{{ g.style }}">{{ g.label }}</button>
-      </sc-for>
+      <sc-if value="{{ canSwitchGrade }}" hint-placeholder-val="{{ false }}">
+        <sc-for list="{{ gradeItems }}" as="g" hint-placeholder-count="2">
+          <button onClick="{{ g.onClick }}" style="{{ g.style }}">{{ g.label }}</button>
+        </sc-for>
+      </sc-if>
+      <sc-if value="{{ lockedGrade }}" hint-placeholder-val="{{ true }}">
+        <div style="font-family:'Public Sans',sans-serif;font-weight:600;font-size:.78rem;padding:6px 12px;border-radius:999px;border:1px solid rgba(250,246,236,.25);color:rgba(250,246,236,.8)">{{ gradeLabel }}</div>
+      </sc-if>
       <button onClick="{{ goPrevWeek }}" style="{{ navStyle }}">&lsaquo;</button>
       <div style="font-family:'Fraunces',serif;font-size:13px;color:var(--gold-l);min-width:88px;text-align:center">{{ weekLabel }}</div>
       <button onClick="{{ goNextWeek }}" style="{{ navStyle }}">&rsaquo;</button>
@@ -473,13 +479,24 @@ class Component extends DCLogic {
       headerLine:(S.GRADE?S.GRADE.label:"")+" \u00b7 "+(S.GRADE?S.GRADE.set:"")+" \u00b7 one lesson a week",
       weekLabel:"Week "+st.week+" of 36",
       // Labelled by boy, from curriculum/students.js.
-      gradeItems:["y3","y5"].map(function(id){
-        // shortTab here, not tab: this switcher sits in the header beside the
-        // week arrows, and the full "BROCK - 3rd Grade" crowds it on a phone.
-        // The home-page cards, where the choice is actually made, use the
-        // full grade name.
+      /* A child who is signed in is locked to their own course. Switching is
+       * only offered when nobody is signed in — a shared device being set up,
+       * or a grown-up previewing. Otherwise this control would be a doorway
+       * into a sibling's work, which is exactly what must not exist. */
+      canSwitchGrade: !(window.__CURR.SYNC && window.__CURR.SYNC.signedIn()),
+      lockedGrade:  !!(window.__CURR.SYNC && window.__CURR.SYNC.signedIn()),
+      gradeLabel:(function(){
         const ST=window.__CURR.STUDENTS;
-        return {label: ST ? ST.shortTab(id) : id,
+        const cur=st.grade;
+        return ST ? ST.levelLabel(cur) : "";
+      })(),
+      gradeItems:["y3","y5"].map(function(id){
+        // The grade alone, never a name. A signed-in child must not learn that
+        // another child exists, let alone which course is theirs. The switcher
+        // itself is hidden entirely once somebody is signed in (see
+        // canSwitchGrade) so it cannot be used to wander into another track.
+        const ST=window.__CURR.STUDENTS;
+        return {label: ST ? ST.levelLabel(id) : id,
           onClick:function(){ self.setGrade(id); },
           style:self.pillDark(st.grade===id)}; }),
       navItems:navDefs.map(function(d){ return {label:d[1], onClick:function(){ self.goto(d[0]); }, style:self.navBtn(st.view===d[0])}; }),

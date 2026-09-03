@@ -8,38 +8,39 @@
   "https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js":"./vendor/react-dom.production.min.js",
   "https://unpkg.com/@babel/standalone@7.29.0/babel.min.js":"./vendor/babel.min.js"
 };</script>
-<script src="./support.js?v=0dca528"></script>
-<script src="./curriculum/students.js?v=0dca528"></script>
-<script src="./curriculum/subjects.js?v=0dca528"></script>
-<script src="./curriculum/question-types.js?v=0dca528"></script>
-<script src="./curriculum/qbank.js?v=0dca528"></script>
-<script src="./curriculum/lessons.js?v=0dca528"></script>
-<script src="./curriculum/tutor.js?v=0dca528"></script>
-<script src="./curriculum/shared.js?v=0dca528"></script>
-<script src="./curriculum/math-y1.js?v=0dca528"></script>
-<script src="./curriculum/math-y2.js?v=0dca528"></script>
-<script src="./curriculum/extra-banks.js?v=0dca528"></script>
-<script src="./curriculum/math-sequence.js?v=0dca528"></script>
-<script src="./curriculum/registry.js?v=0dca528"></script>
-<script src="./curriculum/la-y1-spine.js?v=0dca528"></script>
-<script src="./curriculum/la-y1-words.js?v=0dca528"></script>
-<script src="./curriculum/la-y1-grammar.js?v=0dca528"></script>
-<script src="./curriculum/la-y1-reading.js?v=0dca528"></script>
-<script src="./curriculum/la-y1-tasks.js?v=0dca528"></script>
-<script src="./curriculum/la-books.js?v=0dca528"></script>
-<script src="./curriculum/la-y2-spine.js?v=0dca528"></script>
-<script src="./curriculum/la-y2-words.js?v=0dca528"></script>
-<script src="./curriculum/la-y2-grammar.js?v=0dca528"></script>
-<script src="./curriculum/la-y2-reading.js?v=0dca528"></script>
-<script src="./curriculum/la-y2-tasks.js?v=0dca528"></script>
-<script src="./curriculum/la-books-y2.js?v=0dca528"></script>
-<script src="./curriculum/science-y3-spine.js?v=0dca528"></script>
-<script src="./curriculum/science-y5-spine.js?v=0dca528"></script>
-<script src="./curriculum/science-lessons.js?v=0dca528"></script>
-<script src="./curriculum/science-quiz.js?v=0dca528"></script>
-<script src="./curriculum/science.js?v=0dca528"></script>
-<script src="./curriculum/language-arts.js?v=0dca528"></script>
-<script src="./curriculum/japan-unit.js?v=0dca528"></script>
+<script src="./support.js?v=a3a5307"></script>
+<script src="./curriculum/sync.js?v=a3a5307"></script>
+<script src="./curriculum/students.js?v=a3a5307"></script>
+<script src="./curriculum/subjects.js?v=a3a5307"></script>
+<script src="./curriculum/question-types.js?v=a3a5307"></script>
+<script src="./curriculum/qbank.js?v=a3a5307"></script>
+<script src="./curriculum/lessons.js?v=a3a5307"></script>
+<script src="./curriculum/tutor.js?v=a3a5307"></script>
+<script src="./curriculum/shared.js?v=a3a5307"></script>
+<script src="./curriculum/math-y1.js?v=a3a5307"></script>
+<script src="./curriculum/math-y2.js?v=a3a5307"></script>
+<script src="./curriculum/extra-banks.js?v=a3a5307"></script>
+<script src="./curriculum/math-sequence.js?v=a3a5307"></script>
+<script src="./curriculum/registry.js?v=a3a5307"></script>
+<script src="./curriculum/la-y1-spine.js?v=a3a5307"></script>
+<script src="./curriculum/la-y1-words.js?v=a3a5307"></script>
+<script src="./curriculum/la-y1-grammar.js?v=a3a5307"></script>
+<script src="./curriculum/la-y1-reading.js?v=a3a5307"></script>
+<script src="./curriculum/la-y1-tasks.js?v=a3a5307"></script>
+<script src="./curriculum/la-books.js?v=a3a5307"></script>
+<script src="./curriculum/la-y2-spine.js?v=a3a5307"></script>
+<script src="./curriculum/la-y2-words.js?v=a3a5307"></script>
+<script src="./curriculum/la-y2-grammar.js?v=a3a5307"></script>
+<script src="./curriculum/la-y2-reading.js?v=a3a5307"></script>
+<script src="./curriculum/la-y2-tasks.js?v=a3a5307"></script>
+<script src="./curriculum/la-books-y2.js?v=a3a5307"></script>
+<script src="./curriculum/science-y3-spine.js?v=a3a5307"></script>
+<script src="./curriculum/science-y5-spine.js?v=a3a5307"></script>
+<script src="./curriculum/science-lessons.js?v=a3a5307"></script>
+<script src="./curriculum/science-quiz.js?v=a3a5307"></script>
+<script src="./curriculum/science.js?v=a3a5307"></script>
+<script src="./curriculum/language-arts.js?v=a3a5307"></script>
+<script src="./curriculum/japan-unit.js?v=a3a5307"></script>
 <!-- The Japan card opens japan.dc.html, a separate committed page rather than an
      app screen. It and image-slot.js must stay committed alongside this script
      tag or the card 404s on GitHub Pages. Note openSubject follows open.href
@@ -112,7 +113,7 @@
             <div style="{{ q.gradeStyle }}">{{ q.grade }}</div>
           </div>
           <sc-for list="{{ q.tabs }}" as="t" hint-placeholder-count="3">
-            <button onClick="{{ t.go }}" style="{{ t.style }}" style-hover="filter:brightness(1.3)">{{ t.label }}</button>
+            <button onClick="{{ t.go }}" style="{{ t.style }}" style-hover="filter:brightness(1.3)">{{ t.label }} <span style="opacity:.6;font-size:12px">{{ t.sub }}</span></button>
           </sc-for>
         </div>
       </sc-for>
@@ -6149,30 +6150,49 @@ class Component extends DCLogic {
       todayNote:doneToday.length
         ? "Done today: "+andList(doneToday.map(s=>s.name))+". Pick another one, or go back to what you were doing."
         : "Pick what you're doing today. Whatever you choose, your place in it is saved.",
-      // Canvas-style direct links: one row per boy, colour-coded, three
-      // courses each, straight into his own curriculum.
+      /* THE SIGNED-IN CHILD'S OWN SUBJECTS, and only those.
+       *
+       * This used to be two rows, one per boy, which meant Brock could see
+       * Hank's courses listed and tap straight into them. That was wrong: a
+       * child who is signed in should have no knowledge of another child's
+       * work, let alone a link to it. One row now, for whoever is signed in,
+       * using the level they have already chosen.
+       *
+       * A subject with no level chosen yet is not hidden — it appears with a
+       * "Choose your level" prompt, because a new pupil needs a way in. What
+       * it never does is name anybody. */
       quickRows:(function(){
-        const ST=window.__CURR&&window.__CURR.STUDENTS;
-        if(!ST||!ST.tabsFor) return [];
-        return ["y3","y5"].map(function(id){
-          const who=ST.STUDENTS[id];
-          return {
-            name:who.name,
-            grade:who.grade,
-            nameStyle:"font-family:Fredoka,sans-serif;font-size:17px;color:"+who.colour+";min-width:74px",
-            gradeStyle:"font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.13em;"+
-              "text-transform:uppercase;color:rgba(238,242,255,.38)",
-            tabs:ST.tabsFor(id)
-              .filter(function(t){ return window.Subjects && window.Subjects.get(t.subject); })
-              .map(function(t){
-                return {label:t.label,
-                  go:()=>this.openFor(t.subject, t.level),
-                  style:"font-family:Fredoka,sans-serif;font-size:15px;padding:11px 20px;"+
-                    "border-radius:13px;cursor:pointer;white-space:nowrap;transition:.15s;"+
-                    "background:"+t.tint+";border:1px solid "+t.edge+";color:"+t.colour};
-              }, this)
-          };
-        }, this);
+        const active=st.profiles.find(function(p){ return p.id===st.activeId; })||null;
+        if(!active) return [];
+        const S=(window.Subjects&&window.Subjects.all())||[];
+        const self2=this;
+        const tabs=S.filter(function(x){ return x.status!=="soon" && x.levels && x.levels.length; })
+          .map(function(x){
+            const lv=self2.levelOf(x.id);
+            const chosen=!!lv;
+            const grade=(lv&&window.__CURR&&window.__CURR.STUDENTS)
+              ? window.__CURR.STUDENTS.levelLabel({y1:"y3",y2:"y5",y3:"y3",y5:"y5"}[lv]||lv) : "";
+            return {
+              label: chosen ? x.name : (x.name+" \u2014 choose your level"),
+              sub: grade,
+              go: chosen ? function(){ self2.openSubject(x.id); }
+                         : function(){ self2.goSubjects(); },
+              style:"font-family:Fredoka,sans-serif;font-size:15px;padding:11px 20px;"+
+                "border-radius:13px;cursor:pointer;white-space:nowrap;transition:.15s;background:"+
+                (chosen ? x.color+"1F" : "rgba(255,255,255,.05)")+";border:1px solid "+
+                (chosen ? x.color+"66" : "rgba(255,255,255,.16)")+";color:"+
+                (chosen ? x.color : "rgba(238,242,255,.6)")
+            };
+          });
+        if(!tabs.length) return [];
+        return [{
+          name: active.name,
+          grade: "your courses",
+          nameStyle:"font-family:Fredoka,sans-serif;font-size:17px;color:"+(active.color||"#4ADE80")+";min-width:74px",
+          gradeStyle:"font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.13em;"+
+            "text-transform:uppercase;color:rgba(238,242,255,.38)",
+          tabs: tabs
+        }];
       }).call(this),
       todayCards:cards,
       todayWeek:week,

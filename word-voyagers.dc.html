@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=0dca528"></script>
+<script src="./support.js?v=a3a5307"></script>
 </head>
 <body>
 <x-dc>
@@ -35,25 +35,26 @@
   .book-title{font-family:'Fraunces',serif;font-size:1rem;color:var(--brick-dark);margin:0 0 3px}
   .done-banner{text-align:center;padding:22px;margin-top:6px;background:var(--forest-light);border-radius:8px;color:#2E4E38}
 </style>
-<script src="./curriculum/students.js?v=0dca528"></script>
-<script src="./curriculum/subjects.js?v=0dca528"></script>
-<script src="./curriculum/question-types.js?v=0dca528"></script>
-<script src="./curriculum/la-y1-spine.js?v=0dca528"></script>
-<script src="./curriculum/la-y1-words.js?v=0dca528"></script>
-<script src="./curriculum/la-y1-grammar.js?v=0dca528"></script>
-<script src="./curriculum/la-y1-reading.js?v=0dca528"></script>
-<script src="./curriculum/la-y1-tasks.js?v=0dca528"></script>
-<script src="./curriculum/la-books.js?v=0dca528"></script>
-<script src="./curriculum/la-y2-spine.js?v=0dca528"></script>
-<script src="./curriculum/la-y2-words.js?v=0dca528"></script>
-<script src="./curriculum/la-y2-grammar.js?v=0dca528"></script>
-<script src="./curriculum/la-y2-reading.js?v=0dca528"></script>
-<script src="./curriculum/la-y2-tasks.js?v=0dca528"></script>
-<script src="./curriculum/la-books-y2.js?v=0dca528"></script>
-<script src="./curriculum/la-quotes.js?v=0dca528"></script>
-<script src="./curriculum/la-mastery.js?v=0dca528"></script>
-<script src="./curriculum/la-calendar.js?v=0dca528"></script>
-<script src="./curriculum/la-grader.js?v=0dca528"></script>
+<script src="./curriculum/sync.js?v=a3a5307"></script>
+<script src="./curriculum/students.js?v=a3a5307"></script>
+<script src="./curriculum/subjects.js?v=a3a5307"></script>
+<script src="./curriculum/question-types.js?v=a3a5307"></script>
+<script src="./curriculum/la-y1-spine.js?v=a3a5307"></script>
+<script src="./curriculum/la-y1-words.js?v=a3a5307"></script>
+<script src="./curriculum/la-y1-grammar.js?v=a3a5307"></script>
+<script src="./curriculum/la-y1-reading.js?v=a3a5307"></script>
+<script src="./curriculum/la-y1-tasks.js?v=a3a5307"></script>
+<script src="./curriculum/la-books.js?v=a3a5307"></script>
+<script src="./curriculum/la-y2-spine.js?v=a3a5307"></script>
+<script src="./curriculum/la-y2-words.js?v=a3a5307"></script>
+<script src="./curriculum/la-y2-grammar.js?v=a3a5307"></script>
+<script src="./curriculum/la-y2-reading.js?v=a3a5307"></script>
+<script src="./curriculum/la-y2-tasks.js?v=a3a5307"></script>
+<script src="./curriculum/la-books-y2.js?v=a3a5307"></script>
+<script src="./curriculum/la-quotes.js?v=a3a5307"></script>
+<script src="./curriculum/la-mastery.js?v=a3a5307"></script>
+<script src="./curriculum/la-calendar.js?v=a3a5307"></script>
+<script src="./curriculum/la-grader.js?v=a3a5307"></script>
 </helmet>
 
 <div style="min-height:100vh;display:flex;flex-direction:column">
@@ -1029,13 +1030,24 @@ class Component extends DCLogic {
       navItems:navItems, steps:steps, unitCards:unitCards,
       // Labelled by boy so each knows which switch is his. Word Voyagers uses
       // y1/y2 internally where the other subjects use y3/y5, so map across.
-      yearItems:[["y1","y3"],["y2","y5"]].map(function(pair){
-        // shortTab here, not tab: this switcher sits in the header beside the
-        // week arrows, and the full "BROCK - 3rd Grade" crowds it on a phone.
-        // The home-page cards, where the choice is actually made, use the
-        // full grade name.
+      /* A child who is signed in is locked to their own course. Switching is
+       * only offered when nobody is signed in — a shared device being set up,
+       * or a grown-up previewing. Otherwise this control would be a doorway
+       * into a sibling's work, which is exactly what must not exist. */
+      canSwitchGrade: !(window.__CURR.SYNC && window.__CURR.SYNC.signedIn()),
+      lockedGrade:  !!(window.__CURR.SYNC && window.__CURR.SYNC.signedIn()),
+      gradeLabel:(function(){
         const ST=window.__CURR.STUDENTS;
-        const y=[pair[0], ST ? ST.shortTab(pair[1])
+        const cur=({y1:"y3",y2:"y5"})[st.year]||st.year;
+        return ST ? ST.levelLabel(cur) : "";
+      })(),
+      yearItems:[["y1","y3"],["y2","y5"]].map(function(pair){
+        // The grade alone, never a name. A signed-in child must not learn that
+        // another child exists, let alone which course is theirs. The switcher
+        // itself is hidden entirely once somebody is signed in (see
+        // canSwitchGrade) so it cannot be used to wander into another track.
+        const ST=window.__CURR.STUDENTS;
+        const y=[pair[0], ST ? ST.levelLabel(pair[1])
                              : ((pair[0]==="y1"?window.__CURR.LA_Y1:window.__CURR.LA_Y2).GRADE||{}).label];
         return y; }).map(function(y){
         return {label:y[1], onClick:function(){ self.setYear(y[0]); },

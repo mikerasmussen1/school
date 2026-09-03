@@ -25,10 +25,11 @@
     blurb: "Science once a week: a hands-on investigation, a short reading, and a claim to defend with evidence. Nine units a year, weighted to the Georgia standards.",
     status: "live",
     order: 25,
-    // Chips on the landing card so each boy picks his own track first.
+    // A signed-in child picks their own level here. The label is the grade
+    // alone — no child sees another child's name or track.
     levels: [
-      {id:"y3", label:(window.__CURR&&window.__CURR.STUDENTS)?window.__CURR.STUDENTS.tab("y3"):"3rd", sub:"3rd Grade"},
-      {id:"y5", label:(window.__CURR&&window.__CURR.STUDENTS)?window.__CURR.STUDENTS.tab("y5"):"5th", sub:"5th Grade"}
+      {id:"y3", label:(window.__CURR&&window.__CURR.STUDENTS)?window.__CURR.STUDENTS.levelLabel("y3"):"3rd", sub:"3rd Grade"},
+      {id:"y5", label:(window.__CURR&&window.__CURR.STUDENTS)?window.__CURR.STUDENTS.levelLabel("y5"):"5th", sub:"5th Grade"}
     ],
     open: {href:"field-notes.dc.html"}
   });

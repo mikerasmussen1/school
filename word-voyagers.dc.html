@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=4461df4"></script>
+<script src="./support.js?v=65765a6"></script>
   <script>window.__BUILD__="d159824";</script>
-  <script data-build>window.__BUILD__="4461df4";</script>
+  <script data-build>window.__BUILD__="65765a6";</script>
 </head>
 <body>
 <x-dc>
@@ -37,26 +37,26 @@
   .book-title{font-family:'Fraunces',serif;font-size:1rem;color:var(--brick-dark);margin:0 0 3px}
   .done-banner{text-align:center;padding:22px;margin-top:6px;background:var(--forest-light);border-radius:8px;color:#2E4E38}
 </style>
-<script src="./curriculum/sync.js?v=4461df4"></script>
-<script src="./curriculum/students.js?v=4461df4"></script>
-<script src="./curriculum/subjects.js?v=4461df4"></script>
-<script src="./curriculum/question-types.js?v=4461df4"></script>
-<script src="./curriculum/la-y1-spine.js?v=4461df4"></script>
-<script src="./curriculum/la-y1-words.js?v=4461df4"></script>
-<script src="./curriculum/la-y1-grammar.js?v=4461df4"></script>
-<script src="./curriculum/la-y1-reading.js?v=4461df4"></script>
-<script src="./curriculum/la-y1-tasks.js?v=4461df4"></script>
-<script src="./curriculum/la-books.js?v=4461df4"></script>
-<script src="./curriculum/la-y2-spine.js?v=4461df4"></script>
-<script src="./curriculum/la-y2-words.js?v=4461df4"></script>
-<script src="./curriculum/la-y2-grammar.js?v=4461df4"></script>
-<script src="./curriculum/la-y2-reading.js?v=4461df4"></script>
-<script src="./curriculum/la-y2-tasks.js?v=4461df4"></script>
-<script src="./curriculum/la-books-y2.js?v=4461df4"></script>
-<script src="./curriculum/la-quotes.js?v=4461df4"></script>
-<script src="./curriculum/la-mastery.js?v=4461df4"></script>
-<script src="./curriculum/la-calendar.js?v=4461df4"></script>
-<script src="./curriculum/la-grader.js?v=4461df4"></script>
+<script src="./curriculum/sync.js?v=65765a6"></script>
+<script src="./curriculum/students.js?v=65765a6"></script>
+<script src="./curriculum/subjects.js?v=65765a6"></script>
+<script src="./curriculum/question-types.js?v=65765a6"></script>
+<script src="./curriculum/la-y1-spine.js?v=65765a6"></script>
+<script src="./curriculum/la-y1-words.js?v=65765a6"></script>
+<script src="./curriculum/la-y1-grammar.js?v=65765a6"></script>
+<script src="./curriculum/la-y1-reading.js?v=65765a6"></script>
+<script src="./curriculum/la-y1-tasks.js?v=65765a6"></script>
+<script src="./curriculum/la-books.js?v=65765a6"></script>
+<script src="./curriculum/la-y2-spine.js?v=65765a6"></script>
+<script src="./curriculum/la-y2-words.js?v=65765a6"></script>
+<script src="./curriculum/la-y2-grammar.js?v=65765a6"></script>
+<script src="./curriculum/la-y2-reading.js?v=65765a6"></script>
+<script src="./curriculum/la-y2-tasks.js?v=65765a6"></script>
+<script src="./curriculum/la-books-y2.js?v=65765a6"></script>
+<script src="./curriculum/la-quotes.js?v=65765a6"></script>
+<script src="./curriculum/la-mastery.js?v=65765a6"></script>
+<script src="./curriculum/la-calendar.js?v=65765a6"></script>
+<script src="./curriculum/la-grader.js?v=65765a6"></script>
 </helmet>
 
 <div style="min-height:100vh;display:flex;flex-direction:column">
@@ -636,6 +636,23 @@
       </div>
 
       <div class="card">
+        <h2>Start the year again</h2>
+        <p class="muted">Marks every day in both grades as not started: step ticks, drill scores, flagged items and excused days. Useful for testing a change, or for genuinely restarting. It cannot be undone.</p>
+        <sc-if value="{{ resetIdle }}" hint-placeholder-val="{{ true }}">
+          <div style="margin-top:10px"><button onClick="{{ armReset }}" style="{{ btnSecondary }}">Reset all progress</button></div>
+        </sc-if>
+        <sc-if value="{{ resetArmed }}" hint-placeholder-val="{{ false }}">
+          <div style="background:#F3DCD5;color:var(--brick-dark);border-radius:8px;padding:14px 16px;margin-top:10px">
+            <div style="font-weight:600;margin-bottom:8px">This erases every tick and score for both 3rd and 5th grade, on every device. Sure?</div>
+            <div style="display:flex;gap:9px;flex-wrap:wrap">
+              <button onClick="{{ doReset }}" style="{{ btnPrimary }}">Yes, erase it all</button>
+              <button onClick="{{ cancelReset }}" style="{{ btnSecondary }}">Keep my progress</button>
+            </div>
+          </div>
+        </sc-if>
+      </div>
+
+      <div class="card">
         <h2>Things flagged for you</h2>
         <p class="muted">A drill that could not be cleared in three tries stops looping and gets flagged here instead of trapping your child. This is the list of those moments.</p>
         <sc-if value="{{ hasFlags }}" hint-placeholder-val="{{ false }}">
@@ -686,6 +703,7 @@ class Component extends DCLogic {
     day:(function(){ try{ const d=localStorage.getItem("la.day"); if(d) return d; }catch(e){}
       return ["Mon","Mon","Tue","Wed","Thu","Fri","Fri"][new Date().getDay()]; })(),
     landed:false,           // has the opening jump-to-frontier happened yet
+    resetArmed:false,       // reset needs two presses
     openStep:null,          // which assignment is open inline on Today
     started:false,          // has START TODAY been pressed
     stepDone:(function(){ try{ return JSON.parse(localStorage.getItem("la.stepDone")||"{}"); }catch(e){ return {}; } })(),
@@ -716,12 +734,19 @@ class Component extends DCLogic {
    * shows immediately and is replaced only if the record is newer — nothing
    * waits on the network. */
   pulled=false;
+  pullEpoch=0;
   pullOnce(){
     if(this.pulled) return;
     this.pulled=true;
     const SY=window.__CURR&&window.__CURR.SYNC;
     if(!SY||!SY.signedIn()) return;
+    /* A pull started before a reset must not land after it. Without this the
+     * reset appears to work and then the old ticks reappear a moment later,
+     * which is worse than the reset failing outright because it looks like
+     * the erase did not take. */
+    const epoch=this.pullEpoch;
     SY.pull("la").then((d)=>{
+      if(epoch!==this.pullEpoch) return;   // a reset happened; this is stale
       if(!d) return;
       const patch={};
       if(d.stepDone) patch.stepDone=d.stepDone;
@@ -981,6 +1006,37 @@ class Component extends DCLogic {
   jumpTo=(week, day)=>{
     this.setWeek(week);
     this.setDay(day);
+  };
+
+  /* Wipe every day back to not-started.
+   *
+   * Progress lives in two places now, and clearing one is worse than clearing
+   * neither: wipe localStorage alone and the next pull quietly restores it
+   * from the database, so it looks like the reset failed. This clears the
+   * device AND pushes the emptied state up, then reloads so nothing stale is
+   * held in memory.
+   *
+   * Two presses, because it cannot be undone. The first arms it, the second
+   * does it, and it disarms itself if the tab is left. */
+  resetArmed=false;
+  armReset=()=>{ this.setState({resetArmed:true}); };
+  cancelReset=()=>{ this.setState({resetArmed:false}); };
+  doReset=()=>{
+    this.pullEpoch=(this.pullEpoch||0)+1;   // invalidate any pull in flight
+    const KEYS=["la.stepDone","la.stuck","la.stepResult","la.done","la.excused","la.week","la.day"];
+    KEYS.forEach(function(k){ try{ localStorage.removeItem(k); }catch(e){} });
+    const empty={stepDone:{}, stuck:{}, stepResult:{}, done:{}, excused:{}, week:1, day:"Mon"};
+    this.setState({...empty, resetArmed:false, started:false, openStep:null,
+                   gz:null, sq:null, rq:null, rv:null, remediation:null, round:1, lastResult:null});
+    const SY=window.__CURR&&window.__CURR.SYNC;
+    if(SY){
+      // Push the cleared state up, and only reload once it has landed, so the
+      // next pull cannot bring the old progress back.
+      SY.save("la", {year:this.state.year, ...empty});
+      Promise.resolve(SY.pushNow("la")).then(function(){ try{ window.location.reload(); }catch(e){} });
+    } else {
+      try{ window.location.reload(); }catch(e){}
+    }
   };
 
   openAssignment=(key)=>{
@@ -1461,6 +1517,11 @@ class Component extends DCLogic {
       nextDayLabel: plan.day==="Fri" ? "Start Week "+(st.week+1) : "Start "+
         (MS.DAY_NAME[MS.DAYS[MS.DAYS.indexOf(plan.day)+1]]||"the next day"),
       goNextDay: this.goNextDay,
+      resetIdle: !st.resetArmed,
+      resetArmed: !!st.resetArmed,
+      armReset: this.armReset,
+      cancelReset: this.cancelReset,
+      doReset: this.doReset,
       flagList: Object.keys(st.stuck).filter(function(k){ return st.stuck[k]; }).map(function(k){
         const parts=k.split(":");   // year:week:day:stepkey
         const NAMES={rq:"Reading comprehension", gz:"Grammar drill", sq:"Spelling drill", rv:"Week review"};

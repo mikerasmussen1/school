@@ -66,5 +66,9 @@ for f in ["index.html"] + sorted(glob.glob("*.dc.html")):
     if out != s:
         open(f, "w").write(out)
         print("  stamped", f)
+# The file the page fetches to find out whether it is stale. It must be
+# written on every deploy, or the check silently compares against nothing.
+open("build.json", "w").write('{"build":"%s"}\n' % ver)
+print("  wrote build.json =", ver)
 print("  %d script tags now at version %s" % (n, ver))
 PY

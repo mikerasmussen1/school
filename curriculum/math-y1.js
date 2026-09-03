@@ -7,53 +7,53 @@ const {TIERS, GATES, GATES_SHORT, GATES_LONG, GATES_TINY, BANDS, RHYTHM, ASSESS,
 
 const UNITS = [
   {n:1,name:"Multiplication Masters",short:"Multiplication Masters",color:"#FF9F1C",weeks:"1–5",badge:"×",size:96,glyph:"42px",
-   bigQ:"Why does the area model give the same answer as the standard algorithm?",
-   skills:["Area models","2-digit × 2-digit","Distributive property as mental math","Factors & factor pairs","Multiples","Primes & composites"],
+   bigQ:"Why does 6 rows of 7 give the same answer as 7 rows of 6?",
+   skills:["Equal groups and arrays", "Facts within 100", "Properties as strategies", "Fact automaticity", "2-digit x 1-digit (extension)"],
    project:"Launch Bay Blueprint — design a rocket hangar on graph paper, then find its area two different ways and prove they match.",
    game:"Product Blockout — two dice, multiply, shade that rectangle on a 10×10 grid. First to block the board wins.",
-   badgeName:"The Rectangle Badge",badgeReq:"Earned by scoring 85% or higher on the Mission 01 test and explaining the Big Question out loud."},
+   badgeName:"The Array Badge",badgeReq:"Earned by scoring 85% or higher on the Mission 01 test and explaining the Big Question out loud."},
   {n:2,name:"Division Decoded",short:"Division Decoded",color:"#2DD4BF",weeks:"6–10",badge:"÷",size:78,glyph:"36px",
-   bigQ:"When you have a remainder, what do you do with it — and who decides?",
-   skills:["Sharing vs grouping","Remainders in context","Long division","Divisibility rules"],
+   bigQ:"If you know 6 x 7, why do you already know 42 divided by 6?",
+   skills:["Sharing vs grouping", "Division within 100", "Division as an unknown factor", "The inverse of multiplication", "Remainders (extension)"],
    project:"Snack Run — split real quantities among real people and defend every remainder decision.",
    game:"Remainder Race — deal cards, divide, score the remainder.",
-   badgeName:"The Leftover Badge",badgeReq:"Earned by scoring 85% or higher on the Mission 02 test and explaining the Big Question out loud."},
-  {n:3,name:"Number Power",short:"Number Power",color:"#A78BFA",weeks:"11–14",badge:"10⁶",size:70,glyph:"22px",
-   bigQ:"Why do we need rules about which operation goes first?",
-   skills:["Place value to millions","Estimation","Order of operations","Intro exponents"],
+   badgeName:"The Sharing Badge",badgeReq:"Earned by scoring 85% or higher on the Mission 02 test and explaining the Big Question out loud."},
+  {n:3,name:"Number Power",short:"Number Power",color:"#A78BFA",weeks:"11–14",badge:"10\u00b3",size:70,glyph:"22px",
+   bigQ:"Why is the 4 in 4,271 worth more than the 7?",
+   skills:["Place value to 10,000", "Rounding to 10 and 100", "Comparing numbers", "Estimating to check", "Past 10,000 (extension)"],
    project:"A Million Dots — estimate, then prove how much space a million of something takes.",
    game:"Expression Duel — build the biggest value from four cards and any operations.",
-   badgeName:"The Powers Badge",badgeReq:"Earned by scoring 85% or higher on the Mission 03 test and explaining the Big Question out loud."},
+   badgeName:"The Place Value Badge",badgeReq:"Earned by scoring 85% or higher on the Mission 03 test and explaining the Big Question out loud."},
   {n:4,name:"Fraction Universe",short:"Fraction Universe",color:"#F472B6",weeks:"15–20",badge:"¾",size:88,glyph:"34px",
-   bigQ:"How can two different-looking fractions be exactly the same number?",
-   skills:["Fractions on a number line","Equivalence","Comparing","Add & subtract","Fraction of a set"],
+   bigQ:"Why is 1/4 smaller than 1/3 when 4 is bigger than 3?",
+   skills:["Unit fractions", "Fractions on a number line", "Comparing fractions", "Simple equivalents", "Equal-area partitions"],
    project:"Fold the Universe — build a paper number line to 1 and land every fraction you meet on it.",
    game:"Closest to One — draw cards, build a fraction, get nearest without going over.",
-   badgeName:"The Equivalence Badge",badgeReq:"Earned by scoring 85% or higher on the Mission 04 test and explaining the Big Question out loud."},
-  {n:5,name:"Adding & Subtracting",short:"Add & Subtract",color:"#A3E635",weeks:"21–24",badge:"$",size:72,glyph:"32px",
-   bigQ:"A decimal and a fraction can be the same amount — so why do we have both?",
-   skills:["Decimal place value","Money math","Rounding","Budget planning"],
-   project:"The $40 Grocery Mission — plan three real dinners on a real $40 budget, then shop it and reconcile the receipt.",
-   game:"Change Sprint — make an exact amount with the fewest coins.",
-   badgeName:"The Budget Badge",badgeReq:"Earned by scoring 85% or higher on the Mission 05 test and explaining the Big Question out loud."},
-  {n:6,name:"Geometry Quest",short:"Geometry Quest",color:"#60A5FA",weeks:"25–29",badge:"∠",size:84,glyph:"38px",
+   badgeName:"The Fraction Badge",badgeReq:"Earned by scoring 85% or higher on the Mission 04 test and explaining the Big Question out loud."},
+  {n:5,name:"Adding & Subtracting",short:"Add & Subtract",color:"#A3E635",weeks:"21–24",badge:"+\u2212",size:72,glyph:"32px",
+   bigQ:"Why does lining up the columns matter more than the digits themselves?",
+   skills:["Adding within 1,000", "Subtracting within 1,000", "Two-step problems", "Estimating to check", "Money and decimals (extension)"],
+   project:"The Thousand Club - reach exactly 1,000 from a pile of three-digit numbers.",
+   game:"Carry Race - who spots the regrouping first.",
+   badgeName:"The Column Badge",badgeReq:"Earned by scoring 85% or higher on the Mission 05 test and explaining the Big Question out loud."},
+  {n:6,name:"Geometry Quest",short:"Geometry Quest",color:"#60A5FA",weeks:"25–29",badge:"\u25b1",size:84,glyph:"38px",
    bigQ:"Two shapes can have the same perimeter and different areas. How?",
-   skills:["Angles","Classifying shapes","Perimeter vs area","Coordinate plane","Symmetry"],
+   skills:["Quadrilaterals and polygons", "Lines of symmetry", "Area by tiling", "Area as length x width", "Perimeter"],
    project:"Map a Planet — invent a world on the coordinate plane and give sailing directions by coordinates.",
    game:"Angle Guess — estimate an angle, then measure. Closest guess scores.",
-   badgeName:"The Compass Badge",badgeReq:"Earned by scoring 85% or higher on the Mission 06 test and explaining the Big Question out loud."},
+   badgeName:"The Shape Badge",badgeReq:"Earned by scoring 85% or higher on the Mission 06 test and explaining the Big Question out loud."},
   {n:7,name:"Data Detective",short:"Data Detective",color:"#FB7185",weeks:"30-34",badge:"▮▮",size:66,glyph:"18px",
-   bigQ:"Can a true average tell a false story?",
-   skills:["Graphs","Mean, median, mode, range","Running your own survey","Intro probability"],
+   bigQ:"What can a graph hide as easily as it shows?",
+   skills:["Picture and bar graphs", "Length and the ruler", "Volume and mass", "Time and elapsed time", "Line plots"],
    project:"Ask 20 People — write a real survey question, collect real answers, publish the findings.",
    game:"Predict the Roll — call the outcome, tally 50 trials, compare to your prediction.",
-   badgeName:"The Evidence Badge",badgeReq:"Earned by scoring 85% or higher on the Mission 07 test and explaining the Big Question out loud."},
+   badgeName:"The Measure Badge",badgeReq:"Earned by scoring 85% or higher on the Mission 07 test and explaining the Big Question out loud."},
   {n:8,name:"Algebra Sparks",short:"Algebra Sparks",color:"#FCD34D",weeks:"33–36",badge:"x",size:80,glyph:"38px",
-   bigQ:"What does a letter in a math problem actually stand for?",
-   skills:["Patterns","Function machines","Variables","One-step equations","Capstone Math Trail"],
+   bigQ:"What does the equals sign actually promise?",
+   skills:["Patterns in the tables", "Numeric patterns", "The meaning of the equal sign", "A letter for the unknown", "Function machines (extension)"],
    project:"The Math Trail — build a numbered trail through your own house where every stop is a problem you wrote. Mom walks it.",
    game:"Guess My Rule — one person runs the machine, the other cracks it in five inputs.",
-   badgeName:"The Unknown Badge",badgeReq:"Earned by scoring 85% or higher on the Mission 08 test, plus a completed Math Trail."}
+   badgeName:"The Pattern Badge",badgeReq:"Earned by scoring 85% or higher on the Mission 08 test, plus a completed Math Trail."}
 ];
 
 const WEEKS = [
@@ -159,8 +159,8 @@ const WEEKS_U2 = [
 ];
 
 const WEEKS_U3 = [
-  {n:1,title:"Place Value to Millions",gate:"Full worksheets",gateColor:"#4ADE80",isFull:true,
-   summary:"Every place is ten times the one to its right, all the way up to millions. By Friday he can read, write, compare and round any seven-digit number and say what each digit is worth.",
+  {n:1,title:"Place Value to 10,000",gate:"Full worksheets",gateColor:"#4ADE80",isFull:true,
+   summary:"Four digits, and what each one is worth. Georgia asks for numbers up to 10,000 in third grade \u2014 the millions come back as the Challenge tier, where they belong.",
    days:[
      {day:"Mon · 1.1",title:"How big is a million",detail:"Build the place-value chart out to millions. Read and write numbers off it.",tiers:[0,1,2]},
      {day:"Tue · 1.2",title:"Ten times bigger",detail:"Each place is ten of the place on its right. That single rule runs the whole system.",tiers:[0,1,2]},
@@ -168,8 +168,8 @@ const WEEKS_U3 = [
      {day:"Thu · 1.4",title:"Order of operations",detail:"First look at why 5 + 3 × 4 has one legal answer. Week 3 goes deeper.",tiers:[0,1,2]},
      {day:"Fri · Enrichment",title:"A Million Dots begins",detail:"Estimate how much space a million dots takes. Write the guess down before measuring anything.",tiers:[2]}
    ]},
-  {n:2,title:"Estimation",gate:"Outlined",gateColor:"#38BDF8",isFull:false,
-   summary:"Rounding stops being a worksheet skill and becomes the thing you do before every calculation, to know roughly what the answer should be.",
+  {n:2,title:"Rounding & Estimating",gate:"Outlined",gateColor:"#38BDF8",isFull:false,
+   summary:"Rounding to the nearest 10 and 100, and using it before a calculation rather than after: an estimate is how you catch a wrong answer without redoing it.",
    days:[
      {day:"Mon · 2.1",title:"Estimate first, always",detail:"Round both numbers, compute the rough answer, then do the real one.",tiers:[0,1,2]},
      {day:"Tue · 2.2",title:"How wrong is your estimate?",detail:"Compare estimate to exact. Was it high or low, and why?",tiers:[0,1]},
@@ -177,8 +177,8 @@ const WEEKS_U3 = [
      {day:"Thu · 2.4",title:"Is that answer sensible?",detail:"Given four answers, pick the only possible one without computing.",tiers:[0,1,2]},
      {day:"Fri · Enrichment",title:"A Million Dots, measured",detail:"Prove the estimate. Count one square, scale it up, defend the number.",tiers:[2]}
    ]},
-  {n:3,title:"Order of Operations",gate:"Quiz Friday",gateColor:"#FBBF24",isFull:false,
-   summary:"Why the rules exist at all: without an agreed order, one expression has several answers. Mid-unit quiz on Friday.",
+  {n:3,title:"Comparing & Ordering",gate:"Quiz Friday",gateColor:"#FBBF24",isFull:false,
+   summary:"Which is bigger, and how you know without counting. Place value does the work once the digits line up.",
    days:[
      {day:"Mon · 3.1",title:"Two answers, one expression",detail:"5 + 3 × 4 gives 17 or 32 depending on who's reading. That's the problem.",tiers:[0,1,2]},
      {day:"Tue · 3.2",title:"Groups go first",detail:"Multiplication builds a group; addition sets loose things beside it.",tiers:[0,1,2]},
@@ -186,8 +186,8 @@ const WEEKS_U3 = [
      {day:"Thu · 3.4",title:"Write your own",detail:"Build an expression that equals 24 in three different ways.",tiers:[1,2]},
      {day:"Fri · Quiz",title:"Mid-unit quiz",detail:"8 items across Weeks 1–3. 85% to keep flying.",tiers:[1]}
    ]},
-  {n:4,title:"Exponents & Capstone",gate:"Unit test",gateColor:"#F472B6",isFull:false,
-   summary:"The little raised number, powers of ten, and the finished Million Dots display. Mission 03 test on Friday.",
+  {n:4,title:"Beyond Ten Thousand",gate:"Unit test",gateColor:"#F472B6",isFull:false,
+   summary:"The extension week: past 10,000, powers of ten and exponent notation. Fourth and fifth grade content, offered on top of a finished grade-three foundation rather than instead of it.",
    days:[
      {day:"Mon · 4.1",title:"The little raised number",detail:"2³ means three 2s multiplied — not 2 × 3. This trips up everybody once.",tiers:[0,1,2]},
      {day:"Tue · 4.2",title:"Powers of ten",detail:"10⁶ is a 1 with six zeros. Now place value and exponents are the same idea.",tiers:[0,1,2]},
@@ -255,8 +255,8 @@ const WEEKS_U4 = [
 ];
 
 const WEEKS_U5 = [
-  {n:1,title:"Decimals Are Fractions",gate:"Full worksheets",gateColor:"#4ADE80",isFull:true,
-   summary:"The domain Year One never taught. Georgia asks for fluency in addition and subtraction within 1,000 by the end of third grade, and this mission is where it is built \u2014 columns, regrouping, estimating to check, then two-step problems. Money and decimals stay as the Challenge tier, which is where grade 4 content belongs.",
+  {n:1,title:"Adding to 1,000",gate:"Full worksheets",gateColor:"#4ADE80",isFull:true,
+   summary:"The domain Year One never taught. Georgia and Common Core both ask for fluency in addition and subtraction within 1,000 by the end of third grade, and this is where it is built.",
    days:[
      {day:"Mon · 1.1",title:"Tenths and hundredths",detail:"0.3 is 3/10. 0.07 is 7/100. The places carry on to the right of the point.",tiers:[0,1,2]},
      {day:"Tue · 1.2",title:"Decimals on the line",detail:"Where does 0.7 sit? Between which two tenths is 0.65?",tiers:[0,1,2]},
@@ -264,8 +264,8 @@ const WEEKS_U5 = [
      {day:"Thu · 1.4",title:"Money is decimals",detail:"$3.45 is three whole dollars and 45 hundredths of one.",tiers:[0,1,2]},
      {day:"Fri · Enrichment",title:"The $40 Mission begins",detail:"Plan three dinners on paper for a real $40 budget. No shopping yet.",tiers:[2]}
    ]},
-  {n:2,title:"Adding & Subtracting",gate:"Outlined",gateColor:"#38BDF8",isFull:false,
-   summary:"Line up the decimal points and everything else takes care of itself — including the change from a twenty.",
+  {n:2,title:"Subtracting to 1,000",gate:"Outlined",gateColor:"#38BDF8",isFull:false,
+   summary:"Regrouping across zeros, and estimating first so a wrong answer announces itself before the working does.",
    days:[
      {day:"Mon · 2.1",title:"Line up the points",detail:"Not the right-hand ends. The points.",tiers:[0,1,2]},
      {day:"Tue · 2.2",title:"Holding places with zeros",detail:"3.4 + 0.75 works once you write 3.40.",tiers:[0,1,2]},
@@ -273,8 +273,8 @@ const WEEKS_U5 = [
      {day:"Thu · 2.4",title:"Estimate first",detail:"Round to the nearest dollar before you add anything.",tiers:[0,1,2]},
      {day:"Fri · Enrichment",title:"Change Sprint",detail:"Make an exact amount with the fewest coins. Beat your own record.",tiers:[2]}
    ]},
-  {n:3,title:"Rounding & Money Math",gate:"Quiz Friday",gateColor:"#FBBF24",isFull:false,
-   summary:"Rounding money, unit prices, and deciding whether a deal is actually a deal. Mid-unit quiz on Friday.",
+  {n:3,title:"Two-Step Problems",gate:"Quiz Friday",gateColor:"#FBBF24",isFull:false,
+   summary:"Two operations, one story, and a letter standing in for the unknown. The step most word problems actually turn on.",
    days:[
      {day:"Mon · 3.1",title:"Rounding to the nearest cent",detail:"And to the nearest dollar. Two different questions.",tiers:[0,1,2]},
      {day:"Tue · 3.2",title:"Unit price",detail:"Which is cheaper per item? Divide, then compare.",tiers:[0,1,2]},
@@ -282,8 +282,8 @@ const WEEKS_U5 = [
      {day:"Thu · 3.4",title:"Multi-step money",detail:"Buy three things, pay with a twenty, count the change.",tiers:[1,2]},
      {day:"Fri · Quiz",title:"Mid-unit quiz",detail:"8 items across Weeks 1–3. 85% to keep flying.",tiers:[1]}
    ]},
-  {n:4,title:"Budget & Project",gate:"Unit test",gateColor:"#F472B6",isFull:false,
-   summary:"The $40 grocery mission — planned, shopped, and reconciled against the real receipt. Mission 05 test on Friday.",
+  {n:4,title:"Money & Decimals",gate:"Unit test",gateColor:"#F472B6",isFull:false,
+   summary:"The extension week: money in decimal notation and the grocery project. Both frameworks place decimals in grade four, so this sits on top rather than in the middle.",
    days:[
      {day:"Mon · 4.1",title:"Build the budget",detail:"Three dinners, one $40 ceiling, every price estimated first.",tiers:[0,1,2]},
      {day:"Tue · 4.2",title:"Shop it",detail:"Real store, real prices, running total kept by hand.",tiers:[1,2]},
@@ -294,8 +294,8 @@ const WEEKS_U5 = [
 ];
 
 const WEEKS_U6 = [
-  {n:1,title:"Angles & Shapes",gate:"Full worksheets",gateColor:"#4ADE80",isFull:true,
-   summary:"Angles get measured instead of guessed, and shapes get sorted by what's true about them rather than what they look like. By Friday he can name any triangle two different ways.",
+  {n:1,title:"Quadrilaterals & Polygons",gate:"Full worksheets",gateColor:"#4ADE80",isFull:true,
+   summary:"Shapes sorted by what is true about them rather than what they look like \u2014 parallel sides, right angles, and why a square is also a rectangle.",
    days:[
      {day:"Mon · 1.1",title:"What an angle is",detail:"Not a corner — an amount of turn. A right angle is a quarter of the way round.",tiers:[0,1,2]},
      {day:"Tue · 1.2",title:"Measure and draw",detail:"Protractor in hand. Estimate first, then measure, then check the gap.",tiers:[0,1,2]},
@@ -303,8 +303,8 @@ const WEEKS_U6 = [
      {day:"Thu · 1.4",title:"Sorting shapes",detail:"A square is also a rectangle. Sort by properties, not by looks.",tiers:[0,1,2]},
      {day:"Fri · Enrichment",title:"Angle Guess",detail:"Estimate an angle, then measure it. Closest guess scores.",tiers:[2]}
    ]},
-  {n:2,title:"Perimeter & Area",gate:"Outlined",gateColor:"#38BDF8",isFull:false,
-   summary:"The same perimeter can hold wildly different areas — which is the Big Question, and it surprises everyone the first time.",
+  {n:2,title:"Symmetry & Perimeter",gate:"Outlined",gateColor:"#38BDF8",isFull:false,
+   summary:"Lines of symmetry, then perimeter: the distance round the outside, and finding a missing side when you know the rest.",
    days:[
      {day:"Mon · 2.1",title:"Perimeter is the fence",detail:"Add the sides. Area is the grass. Two different measurements.",tiers:[0,1,2]},
      {day:"Tue · 2.2",title:"Area of rectangles",detail:"Back to Mission 01's rectangle, now with units attached.",tiers:[0,1,2]},
@@ -312,8 +312,8 @@ const WEEKS_U6 = [
      {day:"Thu · 2.4",title:"Compound shapes",detail:"Cut an L-shape into two rectangles and add.",tiers:[1,2]},
      {day:"Fri · Enrichment",title:"The biggest pen",detail:"24 metres of fence and a wall to build against. Now what?",tiers:[2]}
    ]},
-  {n:3,title:"The Coordinate Plane",gate:"Quiz Friday",gateColor:"#FBBF24",isFull:false,
-   summary:"Points get addresses. Across first, then up — and the order matters more than anything else this week. Mid-unit quiz on Friday.",
+  {n:3,title:"Area by Tiling",gate:"Quiz Friday",gateColor:"#FBBF24",isFull:false,
+   summary:"Cover it in unit squares and count them. Then notice you were multiplying the whole time \u2014 which is the discovery the standard actually asks for, not the formula.",
    days:[
      {day:"Mon · 3.1",title:"Across, then up",detail:"(3, 5) is not (5, 3). Plot both and see why.",tiers:[0,1,2]},
      {day:"Tue · 3.2",title:"Plot a shape",detail:"Four points, one rectangle. Read its side lengths off the grid.",tiers:[0,1,2]},
@@ -321,8 +321,8 @@ const WEEKS_U6 = [
      {day:"Thu · 3.4",title:"Sailing directions",detail:"Give a route as a list of coordinates and have someone follow it.",tiers:[1,2]},
      {day:"Fri · Quiz",title:"Mid-unit quiz",detail:"8 items across Weeks 1–3. 85% to keep flying.",tiers:[1]}
    ]},
-  {n:4,title:"Symmetry & Transformation",gate:"Outlined",gateColor:"#38BDF8",isFull:false,
-   summary:"Lines of symmetry, flips and turns — and the discovery that some shapes look the same after being moved.",
+  {n:4,title:"Angles (extension)",gate:"Outlined",gateColor:"#38BDF8",isFull:false,
+   summary:"Degrees, protractors and angle sums. Fourth-grade content: grade three classifies shapes without measuring angles, so this is the acceleration tier.",
    days:[
      {day:"Mon · 4.1",title:"Lines of symmetry",detail:"Fold it. If the halves match, that fold is a line of symmetry.",tiers:[0,1,2]},
      {day:"Tue · 4.2",title:"How many lines?",detail:"A square has four. A rectangle has two. Why the difference?",tiers:[0,1,2]},
@@ -330,8 +330,8 @@ const WEEKS_U6 = [
      {day:"Thu · 4.4",title:"Symmetry in the room",detail:"Photograph or sketch five symmetric things you actually own.",tiers:[0,1]},
      {day:"Fri · Enrichment",title:"Tessellation",detail:"Which shapes tile a floor with no gaps? Test three and explain.",tiers:[2]}
    ]},
-  {n:5,title:"Proof & Project",gate:"Unit test",gateColor:"#F472B6",isFull:false,
-   summary:"Map a Planet — an invented world on the coordinate plane, with sailing directions — and the Mission 06 test.",
+  {n:5,title:"Coordinates & Project",gate:"Unit test",gateColor:"#F472B6",isFull:false,
+   summary:"The extension project: Map a Planet on the coordinate plane. Fifth-grade content, and a good use of a week once the grade-three geometry is secure.",
    days:[
      {day:"Mon · 5.1",title:"Design the planet",detail:"Coastline, three landmarks, all plotted on labelled axes.",tiers:[0,2]},
      {day:"Tue · 5.2",title:"Write the directions",detail:"A route by coordinates only. No landmarks named.",tiers:[1,2]},
@@ -435,11 +435,12 @@ const PUZZLES_U6 = [
 ];
 
 const STANDARDS_U6 = [
-  {code:"4.MD.C.5",where:"Week 1",text:"Recognise angles as geometric shapes formed by two rays, and understand angle measurement in degrees."},
-  {code:"4.MD.C.6",where:"Week 1",text:"Measure angles in whole-number degrees using a protractor; sketch angles of a specified measure."},
-  {code:"4.G.A.2",where:"Week 1",text:"Classify two-dimensional figures based on the presence of parallel or perpendicular lines and angle size."},
-  {code:"4.MD.A.3",where:"Week 2",text:"Apply the area and perimeter formulas for rectangles in real-world and mathematical problems."},
-  {code:"5.G.A.1",where:"Week 3 ceiling",text:"Use a pair of perpendicular number lines to define a coordinate system; interpret coordinate values — the grade+1 stretch target."}
+  {code:"3.GSR.6",level:"on-grade",where:"Weeks 1–2",text:"Describe attributes of polygons \u2014 parallel and perpendicular segments, right angles and lines of symmetry \u2014 with a focus on classifying quadrilaterals."},
+  {code:"3.GSR.7",level:"on-grade",where:"Week 3",text:"Find the area of rectangles, first by tiling and counting, then by discovering that area comes from multiplying the dimensions."},
+  {code:"3.GSR.8",level:"on-grade",where:"Week 3",text:"Find the perimeter of polygons, including rectangles with the same perimeter but different areas and the reverse."},
+  {code:"3.MD.7",level:"on-grade",where:"Week 3",text:"Relate area to multiplication and addition \u2014 tiling, the distributive property, and the additive area of composite rectangles. (Common Core.)"},
+  {code:"4.MD.C.5",level:"acceleration",where:"Weeks 4–5",text:"Angle measurement in degrees. Fourth grade: grade 3 classifies shapes without measuring angles."},
+  {code:"5.G.A.1",level:"acceleration",where:"Week 5",text:"The coordinate plane. Fifth grade."},
 ];
 
 const PUZZLES_U7 = [
@@ -449,11 +450,9 @@ const PUZZLES_U7 = [
 ];
 
 const STANDARDS_U7 = [
-  {code:"3.MD.B.3",where:"Week 1",text:"Draw a scaled bar graph and solve one- and two-step problems using information in the graph."},
-  {code:"6.SP.B.5.C",where:"Week 1 ceiling",text:"Give quantitative measures of centre (median, mean) and variability (range) — the grade+1 stretch target."},
-  {code:"6.SP.A.2",where:"Week 2",text:"Understand that a set of data has a distribution which can be described by centre, spread and shape."},
-  {code:"7.SP.C.5",where:"Week 2 ceiling",text:"Understand the probability of a chance event as a number between 0 and 1 expressing likelihood."},
-  {code:"6.SP.B.5.D",where:"Week 3",text:"Relate the choice of measure of centre to the shape of the data — why the median survives an outlier."}
+  {code:"3.MDR.5",level:"on-grade",where:"Weeks 1–2",text:"Measure length, liquid volume, mass and time, and answer statistical questions using picture and bar graphs."},
+  {code:"3.MD.4",level:"on-grade",where:"Week 4",text:"Measure lengths to the nearest half and quarter inch and show them on a line plot. (Common Core.)"},
+  {code:"6.SP.A.2",level:"acceleration",where:"Week 3",text:"Centre and spread of a data set. Sixth-grade statistics."},
 ];
 
 const PUZZLES_U8 = [
@@ -463,11 +462,10 @@ const PUZZLES_U8 = [
 ];
 
 const STANDARDS_U8 = [
-  {code:"4.OA.C.5",where:"Week 1",text:"Generate a number or shape pattern that follows a given rule; identify features of the pattern not in the rule itself."},
-  {code:"5.OA.B.3",where:"Week 1",text:"Generate two numerical patterns from two rules and identify the relationship between corresponding terms."},
-  {code:"6.EE.A.2",where:"Week 2",text:"Write, read and evaluate expressions in which letters stand for numbers."},
-  {code:"6.EE.B.7",where:"Week 3 ceiling",text:"Solve real-world problems by writing and solving equations of the form x + p = q and px = q — the grade+2 stretch."},
-  {code:"6.EE.C.9",where:"Week 4",text:"Use variables to represent two quantities that change in relationship to one another."}
+  {code:"3.PAR.3",level:"on-grade",where:"Weeks 1–2",text:"Multiply and divide within 100, including numeric patterns, the inverse relationship, the properties of operations, one-digit numbers by multiples of 10, the meaning of the equal sign, and equations using a letter for the unknown."},
+  {code:"3.OA.9",level:"on-grade",where:"Weeks 1–3",text:"Identify and explain arithmetic patterns, including patterns in the addition and multiplication tables. (Common Core.)"},
+  {code:"4.OA.C.5",level:"acceleration",where:"Week 3",text:"Generate and analyse a pattern from a rule."},
+  {code:"5.OA.B.3",level:"acceleration",where:"Week 4",text:"Two patterns compared. Fifth grade."},
 ];
 
 const PUZZLES_U5 = [
@@ -477,10 +475,10 @@ const PUZZLES_U5 = [
 ];
 
 const STANDARDS_U5 = [
-  {code:"3.PAR.2",level:"on-grade",where:"Weeks 1-3",text:"Add and subtract within 10,000, with fluency required within 1,000 by the end of the year."},
-  {code:"3.PAR.3",level:"on-grade",where:"Week 3",text:"Two-step word problems using the four operations, with a letter standing for the unknown."},
-  {code:"4.NF.C.6",level:"acceleration",where:"Week 4",text:"Decimal notation for fractions with denominators 10 or 100. Georgia introduces decimals in grade 4; kept here as the Challenge tier rather than as the mission's core work."},
-  {code:"4.MD.A.2",level:"acceleration",where:"Week 4",text:"Money problems in decimal notation."}
+  {code:"3.PAR.2",level:"on-grade",where:"Weeks 1–3",text:"Add and subtract within 10,000, with fluency required within 1,000 by the end of the year."},
+  {code:"3.PAR.3",level:"on-grade",where:"Week 3",text:"Multiply and divide within 100, including numeric patterns, the inverse relationship, the properties of operations, one-digit numbers by multiples of 10, the meaning of the equal sign, and equations using a letter for the unknown."},
+  {code:"4.NF.C.6",level:"acceleration",where:"Week 4",text:"Decimal notation. Georgia and Common Core both place decimals in grade 4."},
+  {code:"4.MD.A.2",level:"acceleration",where:"Week 4",text:"Money problems in decimal notation."},
 ];
 
 const PUZZLES_U4 = [
@@ -490,11 +488,10 @@ const PUZZLES_U4 = [
 ];
 
 const STANDARDS_U4 = [
-  {code:"3.NF.A.2",where:"Week 1",text:"Understand a fraction as a number on the number line; represent fractions on a number line diagram."},
-  {code:"4.NF.A.1",where:"Week 2",text:"Explain why a/b is equivalent to (n×a)/(n×b) using visual fraction models, and use the principle to recognise equivalent fractions."},
-  {code:"4.NF.A.2",where:"Week 3",text:"Compare two fractions with different numerators and denominators by creating common denominators, or by comparing to a benchmark."},
-  {code:"4.NF.B.3",where:"Week 4",text:"Add and subtract fractions with like denominators; decompose a fraction into a sum of fractions in more than one way."},
-  {code:"5.NF.A.1",where:"Week 4 ceiling",text:"Add and subtract fractions with unlike denominators by replacing them with equivalent fractions — the grade+1 stretch target."}
+  {code:"3.NR.4",level:"on-grade",where:"Weeks 1–4",text:"Represent fractions with denominators of 2, 3, 4, 6 and 8: unit fractions, fractions on a number line, fractions greater than one, comparing two unit fractions, and simple equivalents."},
+  {code:"3.G.2",level:"on-grade",where:"Week 4",text:"Partition shapes into parts with equal areas and name each part as a unit fraction of the whole. (Common Core.)"},
+  {code:"4.NF.A.1",level:"acceleration",where:"Week 5",text:"Equivalence by multiplying numerator and denominator."},
+  {code:"4.NF.B.3",level:"acceleration",where:"Weeks 5–6",text:"Adding and subtracting fractions. Grade 3 is representation and comparison only \u2014 the right place to compact for a child who is ahead."},
 ];
 
 const PUZZLES_U3 = [
@@ -504,11 +501,9 @@ const PUZZLES_U3 = [
 ];
 
 const STANDARDS_U3 = [
-  {code:"4.NBT.A.1",where:"Weeks 1–2",text:"Recognise that a digit in one place represents ten times what it represents in the place to its right."},
-  {code:"4.NBT.A.2",where:"Week 1",text:"Read and write multi-digit whole numbers in numerals, names and expanded form; compare two numbers using >, = and <."},
-  {code:"4.NBT.A.3",where:"Weeks 1–2",text:"Use place-value understanding to round multi-digit whole numbers to any place."},
-  {code:"5.OA.A.1",where:"Week 3",text:"Use parentheses in numerical expressions and evaluate expressions containing them — the grade+1 stretch on order of operations."},
-  {code:"5.NBT.A.2",where:"Week 4 ceiling",text:"Explain patterns in the number of zeros when multiplying by powers of 10, and denote powers of 10 with whole-number exponents."}
+  {code:"3.NR.1",level:"on-grade",where:"Weeks 1–3",text:"Use place value to read, write and compare numbers up to 10,000, and round whole numbers up to 1,000 to the nearest 10 or 100."},
+  {code:"4.NBT.A.2",level:"acceleration",where:"Week 4",text:"Numbers past 10,000. Fourth-grade place value."},
+  {code:"5.NBT.A.2",level:"acceleration",where:"Week 4",text:"Powers of ten in exponent form. Fifth grade."},
 ];
 
 const PUZZLES_U2 = [
@@ -518,19 +513,16 @@ const PUZZLES_U2 = [
 ];
 
 const STANDARDS_U2 = [
-  {code:"3.OA.B.6",where:"Week 1",text:"Understand division as an unknown-factor problem — the rectangle with one side missing."},
-  {code:"4.NBT.B.6",where:"Weeks 1–3",text:"Find whole-number quotients and remainders with up to four-digit dividends and one-digit divisors, using place value, area models and the relationship between multiplication and division."},
-  {code:"4.OA.A.3",where:"Week 2",text:"Solve multistep word problems, including those in which remainders must be interpreted."},
-  {code:"4.OA.B.4",where:"Week 4",text:"Recognise that a whole number is a multiple of each of its factors; use divisibility to decide whether a division comes out clean."},
-  {code:"5.NBT.B.6",where:"Week 4 ceiling",text:"Find whole-number quotients with up to four-digit dividends and two-digit divisors — the grade+1 stretch target."}
+  {code:"3.PAR.3",level:"on-grade",where:"Weeks 1–3",text:"Multiply and divide within 100, including numeric patterns, the inverse relationship, the properties of operations, one-digit numbers by multiples of 10, the meaning of the equal sign, and equations using a letter for the unknown."},
+  {code:"3.OA.7",level:"on-grade",where:"Weeks 1–5",text:"Fluently multiply and divide within 100, knowing all products of two one-digit numbers from memory by the end of grade 3. (Common Core; Georgia has no explicit automaticity standard.)"},
+  {code:"4.NBT.B.6",level:"acceleration",where:"Weeks 4–5",text:"Long division and remainders. Grade 3 avoids remainders entirely."},
 ];
 
 const STANDARDS = [
-  {code:"3.OA.B.5",where:"Week 1",text:"Apply properties of operations as strategies to multiply — the distributive property as a tool, not a definition."},
-  {code:"4.NBT.B.5",where:"Weeks 1–2",text:"Multiply a whole number of up to four digits by a one-digit number, and two two-digit numbers, using area models and equations."},
-  {code:"4.OA.B.4",where:"Weeks 3–4",text:"Find all factor pairs for a whole number 1–100; recognise multiples; determine whether a number is prime or composite."},
-  {code:"4.OA.A.3",where:"Weeks 2, 5",text:"Solve multistep word problems, assess reasonableness of answers using estimation and mental strategies."},
-  {code:"5.NBT.B.5",where:"Week 2 ceiling",text:"Fluently multiply multi-digit whole numbers using the standard algorithm — the grade+1 stretch target."}
+  {code:"3.PAR.3",level:"on-grade",where:"Weeks 1–3",text:"Multiply and divide within 100, including numeric patterns, the inverse relationship, the properties of operations, one-digit numbers by multiples of 10, the meaning of the equal sign, and equations using a letter for the unknown."},
+  {code:"3.OA.7",level:"on-grade",where:"Weeks 1–5",text:"Fluently multiply and divide within 100, knowing all products of two one-digit numbers from memory by the end of grade 3. (Common Core; Georgia has no explicit automaticity standard.)"},
+  {code:"4.NBT.B.5",level:"acceleration",where:"Weeks 4–5",text:"Multi-digit multiplication. Fourth grade: grade 3 stops at facts within 100."},
+  {code:"4.OA.B.4",level:"acceleration",where:"Week 5",text:"Factor pairs, primes and composites. Number-theory extension."},
 ];
 
 const PRACTICE = [

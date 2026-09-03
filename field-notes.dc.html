@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=d159824"></script>
+<script src="./support.js?v=9238340"></script>
   <script>window.__BUILD__="d159824";</script>
-  <script data-build>window.__BUILD__="d159824";</script>
+  <script data-build>window.__BUILD__="9238340";</script>
 </head>
 <body>
 <x-dc>
@@ -31,16 +31,16 @@
   ol.steps{margin:8px 0 0;padding-left:22px} ol.steps li{margin-bottom:7px}
   ul.mats{margin:6px 0 0;padding-left:20px} ul.mats li{margin-bottom:3px;font-size:.93rem}
 </style>
-<script src="./curriculum/students.js?v=d159824"></script>
-<script src="./curriculum/sync.js?v=d159824"></script>
-<script src="./curriculum/subjects.js?v=d159824"></script>
-<script src="./curriculum/question-types.js?v=d159824"></script>
-<script src="./curriculum/science-y3-spine.js?v=d159824"></script>
-<script src="./curriculum/science-y5-spine.js?v=d159824"></script>
-<script src="./curriculum/science-lessons.js?v=d159824"></script>
-<script src="./curriculum/science-quiz.js?v=d159824"></script>
-<script src="./curriculum/la-calendar.js?v=d159824"></script>
-<script src="./curriculum/science-shopping.js?v=d159824"></script>
+<script src="./curriculum/students.js?v=9238340"></script>
+<script src="./curriculum/sync.js?v=9238340"></script>
+<script src="./curriculum/subjects.js?v=9238340"></script>
+<script src="./curriculum/question-types.js?v=9238340"></script>
+<script src="./curriculum/science-y3-spine.js?v=9238340"></script>
+<script src="./curriculum/science-y5-spine.js?v=9238340"></script>
+<script src="./curriculum/science-lessons.js?v=9238340"></script>
+<script src="./curriculum/science-quiz.js?v=9238340"></script>
+<script src="./curriculum/la-calendar.js?v=9238340"></script>
+<script src="./curriculum/science-shopping.js?v=9238340"></script>
 </helmet>
 
 <div style="min-height:100vh;display:flex;flex-direction:column">
@@ -50,14 +50,7 @@
         <div style="font-family:'Fraunces',serif;font-weight:700;font-size:21px">Field Notes</div>
         <div style="font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(244,247,243,.55);margin-top:2px">{{ headerLine }}</div>
       </div>
-      <sc-if value="{{ canSwitchGrade }}" hint-placeholder-val="{{ false }}">
-        <sc-for list="{{ gradeItems }}" as="g" hint-placeholder-count="2">
-          <button onClick="{{ g.onClick }}" style="{{ g.style }}">{{ g.label }}</button>
-        </sc-for>
-      </sc-if>
-      <sc-if value="{{ lockedGrade }}" hint-placeholder-val="{{ true }}">
-        <div style="font-family:'Public Sans',sans-serif;font-weight:600;font-size:.78rem;padding:6px 12px;border-radius:999px;border:1px solid rgba(250,246,236,.25);color:rgba(250,246,236,.8)">{{ gradeLabel }}</div>
-      </sc-if>
+      <div style="font-family:'Public Sans',sans-serif;font-weight:600;font-size:.78rem;padding:6px 12px;border-radius:999px;border:1px solid rgba(250,246,236,.25);color:rgba(250,246,236,.8)">{{ gradeLabel }}</div>
       <button onClick="{{ goPrevWeek }}" style="{{ navStyle }}">&lsaquo;</button>
       <div style="font-family:'Fraunces',serif;font-size:13px;color:var(--gold-l);min-width:88px;text-align:center">{{ weekLabel }}</div>
       <button onClick="{{ goNextWeek }}" style="{{ navStyle }}">&rsaquo;</button>
@@ -481,26 +474,15 @@ class Component extends DCLogic {
       headerLine:(S.GRADE?S.GRADE.label:"")+" \u00b7 "+(S.GRADE?S.GRADE.set:"")+" \u00b7 one lesson a week",
       weekLabel:"Week "+st.week+" of 36",
       // Labelled by boy, from curriculum/students.js.
-      /* A child who is signed in is locked to their own course. Switching is
-       * only offered when nobody is signed in — a shared device being set up,
-       * or a grown-up previewing. Otherwise this control would be a doorway
-       * into a sibling's work, which is exactly what must not exist. */
-      canSwitchGrade: !(window.__CURR.SYNC && window.__CURR.SYNC.signedIn()),
-      lockedGrade:  !!(window.__CURR.SYNC && window.__CURR.SYNC.signedIn()),
+      /* No grade switch on this page at all. The curriculum is chosen once,
+       * at the top of the main page, and applies to every subject — a second
+       * control here could only ever disagree with it. What is left is a
+       * read-only label so a child can see which course he is in. */
       gradeLabel:(function(){
         const ST=window.__CURR.STUDENTS;
         const cur=st.grade;
         return ST ? ST.levelLabel(cur) : "";
       })(),
-      gradeItems:["y3","y5"].map(function(id){
-        // The grade alone, never a name. A signed-in child must not learn that
-        // another child exists, let alone which course is theirs. The switcher
-        // itself is hidden entirely once somebody is signed in (see
-        // canSwitchGrade) so it cannot be used to wander into another track.
-        const ST=window.__CURR.STUDENTS;
-        return {label: ST ? ST.levelLabel(id) : id,
-          onClick:function(){ self.setGrade(id); },
-          style:self.pillDark(st.grade===id)}; }),
       navItems:navDefs.map(function(d){ return {label:d[1], onClick:function(){ self.goto(d[0]); }, style:self.navBtn(st.view===d[0])}; }),
       navStyle:"background:rgba(244,247,243,.1);color:var(--paper);border:1px solid rgba(244,247,243,.25);border-radius:6px;width:29px;height:29px;font-size:15px;cursor:pointer",
       goPrevWeek:function(){ self.setWeek(st.week-1); },

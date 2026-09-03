@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=d159824"></script>
+<script src="./support.js?v=9238340"></script>
   <script>window.__BUILD__="d159824";</script>
-  <script data-build>window.__BUILD__="d159824";</script>
+  <script data-build>window.__BUILD__="9238340";</script>
 </head>
 <body>
 <x-dc>
@@ -37,26 +37,26 @@
   .book-title{font-family:'Fraunces',serif;font-size:1rem;color:var(--brick-dark);margin:0 0 3px}
   .done-banner{text-align:center;padding:22px;margin-top:6px;background:var(--forest-light);border-radius:8px;color:#2E4E38}
 </style>
-<script src="./curriculum/sync.js?v=d159824"></script>
-<script src="./curriculum/students.js?v=d159824"></script>
-<script src="./curriculum/subjects.js?v=d159824"></script>
-<script src="./curriculum/question-types.js?v=d159824"></script>
-<script src="./curriculum/la-y1-spine.js?v=d159824"></script>
-<script src="./curriculum/la-y1-words.js?v=d159824"></script>
-<script src="./curriculum/la-y1-grammar.js?v=d159824"></script>
-<script src="./curriculum/la-y1-reading.js?v=d159824"></script>
-<script src="./curriculum/la-y1-tasks.js?v=d159824"></script>
-<script src="./curriculum/la-books.js?v=d159824"></script>
-<script src="./curriculum/la-y2-spine.js?v=d159824"></script>
-<script src="./curriculum/la-y2-words.js?v=d159824"></script>
-<script src="./curriculum/la-y2-grammar.js?v=d159824"></script>
-<script src="./curriculum/la-y2-reading.js?v=d159824"></script>
-<script src="./curriculum/la-y2-tasks.js?v=d159824"></script>
-<script src="./curriculum/la-books-y2.js?v=d159824"></script>
-<script src="./curriculum/la-quotes.js?v=d159824"></script>
-<script src="./curriculum/la-mastery.js?v=d159824"></script>
-<script src="./curriculum/la-calendar.js?v=d159824"></script>
-<script src="./curriculum/la-grader.js?v=d159824"></script>
+<script src="./curriculum/sync.js?v=9238340"></script>
+<script src="./curriculum/students.js?v=9238340"></script>
+<script src="./curriculum/subjects.js?v=9238340"></script>
+<script src="./curriculum/question-types.js?v=9238340"></script>
+<script src="./curriculum/la-y1-spine.js?v=9238340"></script>
+<script src="./curriculum/la-y1-words.js?v=9238340"></script>
+<script src="./curriculum/la-y1-grammar.js?v=9238340"></script>
+<script src="./curriculum/la-y1-reading.js?v=9238340"></script>
+<script src="./curriculum/la-y1-tasks.js?v=9238340"></script>
+<script src="./curriculum/la-books.js?v=9238340"></script>
+<script src="./curriculum/la-y2-spine.js?v=9238340"></script>
+<script src="./curriculum/la-y2-words.js?v=9238340"></script>
+<script src="./curriculum/la-y2-grammar.js?v=9238340"></script>
+<script src="./curriculum/la-y2-reading.js?v=9238340"></script>
+<script src="./curriculum/la-y2-tasks.js?v=9238340"></script>
+<script src="./curriculum/la-books-y2.js?v=9238340"></script>
+<script src="./curriculum/la-quotes.js?v=9238340"></script>
+<script src="./curriculum/la-mastery.js?v=9238340"></script>
+<script src="./curriculum/la-calendar.js?v=9238340"></script>
+<script src="./curriculum/la-grader.js?v=9238340"></script>
 </helmet>
 
 <div style="min-height:100vh;display:flex;flex-direction:column">
@@ -67,9 +67,7 @@
         <div style="font-family:'Fraunces',serif;font-weight:700;font-size:21px">Word Voyagers</div>
         <div style="font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(250,246,236,.55);margin-top:2px">{{ headerLine }}</div>
       </div>
-      <sc-for list="{{ yearItems }}" as="y" hint-placeholder-count="2">
-        <button onClick="{{ y.onClick }}" style="{{ y.style }}">{{ y.label }}</button>
-      </sc-for>
+      <div style="font-family:'Public Sans',sans-serif;font-weight:600;font-size:.78rem;padding:6px 12px;border-radius:999px;border:1px solid rgba(250,246,236,.25);color:rgba(250,246,236,.8)">{{ gradeLabel }}</div>
       <sc-for list="{{ dayPicker }}" as="d" hint-placeholder-count="5">
         <button onClick="{{ d.onClick }}" style="{{ d.style }}">{{ d.label }}</button>
       </sc-for>
@@ -1032,29 +1030,15 @@ class Component extends DCLogic {
       navItems:navItems, steps:steps, unitCards:unitCards,
       // Labelled by boy so each knows which switch is his. Word Voyagers uses
       // y1/y2 internally where the other subjects use y3/y5, so map across.
-      /* A child who is signed in is locked to their own course. Switching is
-       * only offered when nobody is signed in — a shared device being set up,
-       * or a grown-up previewing. Otherwise this control would be a doorway
-       * into a sibling's work, which is exactly what must not exist. */
-      canSwitchGrade: !(window.__CURR.SYNC && window.__CURR.SYNC.signedIn()),
-      lockedGrade:  !!(window.__CURR.SYNC && window.__CURR.SYNC.signedIn()),
+      /* No grade switch on this page at all. The curriculum is chosen once,
+       * at the top of the main page, and applies to every subject — a second
+       * control here could only ever disagree with it. What is left is a
+       * read-only label so a child can see which course he is in. */
       gradeLabel:(function(){
         const ST=window.__CURR.STUDENTS;
         const cur=({y1:"y3",y2:"y5"})[st.year]||st.year;
         return ST ? ST.levelLabel(cur) : "";
       })(),
-      yearItems:[["y1","y3"],["y2","y5"]].map(function(pair){
-        // The grade alone, never a name. A signed-in child must not learn that
-        // another child exists, let alone which course is theirs. The switcher
-        // itself is hidden entirely once somebody is signed in (see
-        // canSwitchGrade) so it cannot be used to wander into another track.
-        const ST=window.__CURR.STUDENTS;
-        const y=[pair[0], ST ? ST.levelLabel(pair[1])
-                             : ((pair[0]==="y1"?window.__CURR.LA_Y1:window.__CURR.LA_Y2).GRADE||{}).label];
-        return y; }).map(function(y){
-        return {label:y[1], onClick:function(){ self.setYear(y[0]); },
-                style:self.pillDark(st.year===y[0])};
-      }),
       headerLine:(Y.GRADE?Y.GRADE.label:"")+" \u00b7 36 weeks \u00b7 180 days \u00b7 Lexile "+(Y.GRADE?Y.GRADE.lexile:""),
       weekLabel:"Week "+st.week+" of 36",
       weekNum:st.week,

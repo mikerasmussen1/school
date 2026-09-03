@@ -541,13 +541,13 @@ const PRACTICE = [
   {id:"p3",label:"1.3",title:"Mental Math Moves",note:"Go past the number, then take back the extra. No pencil.",
    items:[
      {t:2,q:"25 × 4",a:"100"},{t:2,q:"25 × 8",a:"200"},{t:2,q:"50 × 6",a:"300"},{t:2,q:"20 × 7",a:"140"},{t:2,q:"15 × 4",a:"60"},{t:2,q:"30 × 9",a:"270"},
-     {t:2,q:"19 × 6",a:"114",hint:"20 × 6 − 6"},{t:2,q:"99 × 7",a:"693",hint:"700 − 7"},{t:2,q:"48 × 5",a:"240",hint:"Half of 480"},{t:1,q:"25 × 12",a:"300",hint:"100 × 3"},{t:2,q:"102 × 4",a:"408",hint:"400 + 8"},{t:2,q:"35 × 6",a:"210",hint:"180 + 30"},
+     {t:2,q:"19 × 6",a:"114",hint:"20 × 6 − 6"},{t:2,q:"99 × 7",a:"693",hint:"700 − 7"},{t:2,q:"48 × 5",a:"240",hint:"Half of 480"},{t:2,q:"25 × 12",a:"300",hint:"100 × 3"},{t:2,q:"102 × 4",a:"408",hint:"400 + 8"},{t:2,q:"35 × 6",a:"210",hint:"180 + 30"},
      {t:2,q:"998 × 5",a:"4990",hint:"5000 − 10"},{t:2,q:"16 × 25",a:"400",hint:"Double–halve twice → 4 × 100"}
    ]},
   {id:"p4",label:"1.4",title:"The Four Rooms",note:"Two 2-digit numbers make four rooms. Count them before you add.",
    items:[
      {t:0,q:"10 × 10",a:"100"},{t:0,q:"20 × 30",a:"600"},{t:0,q:"40 × 50",a:"2000"},{t:0,q:"12 × 10",a:"120"},{t:0,q:"60 × 70",a:"4200"},{t:0,q:"90 × 80",a:"7200"},
-     {t:1,q:"23 × 14",a:"322",hint:"200 + 80 + 30 + 12"},{t:1,q:"36 × 25",a:"900",hint:"600 + 150 + 120 + 30"},{t:1,q:"47 × 32",a:"1504",hint:"1200 + 210 + 80 + 14"},{t:1,q:"58 × 46",a:"2668",hint:"2000 + 320 + 300 + 48"},{t:1,q:"64 × 27",a:"1728",hint:"1200 + 420 + 80 + 28"},
+     {t:2,q:"23 × 14",a:"322",hint:"200 + 80 + 30 + 12"},{t:2,q:"36 × 25",a:"900",hint:"600 + 150 + 120 + 30"},{t:2,q:"47 × 32",a:"1504",hint:"1200 + 210 + 80 + 14"},{t:2,q:"58 × 46",a:"2668",hint:"2000 + 320 + 300 + 48"},{t:2,q:"64 × 27",a:"1728",hint:"1200 + 420 + 80 + 28"},
      {t:2,q:"In 23 × 14, which two rooms make 92? Type their sum.",a:"92",hint:"80 + 12"},{t:2,q:"25 × 25 = 625. What is 26 × 26?",a:"676",hint:"625 + 25 + 25 + 1"}
    ]},
   {id:"p5",label:"Fri",title:"Rectangle Hunt & Puzzles",note:"Enrichment day. Reason it out — no guessing.",
@@ -833,13 +833,13 @@ const PRACTICE_U1_W2 = [
   {id:"u1w2p1",w:2,label:"2.1",title:"Where the Rooms Hide",note:"Every line of the algorithm is one of the four rooms. Find it before you trust it.",
    items:[
      {t:0,q:"20 × 10",a:"200"},{t:2,q:"3 × 10",a:"30"},{t:2,q:"20 × 4",a:"80"},{t:0,q:"3 × 4",a:"12"},{t:0,q:"Add 200, 30, 80 and 12",a:"322"},{t:0,q:"So 23 × 14 is",a:"322"},
-     {t:1,q:"31 × 22 — the tens×tens room",a:"600",hint:"30 × 20"},{t:1,q:"31 × 22 — the ones×ones room",a:"2"},{t:1,q:"31 × 22 altogether",a:"682"},{t:1,q:"45 × 23",a:"1035"},{t:1,q:"18 × 26",a:"468"},
+     {t:1,q:"31 × 22 — the tens×tens room",a:"600",hint:"30 × 20"},{t:1,q:"31 × 22 — the ones×ones room",a:"2"},{t:1,q:"31 × 22 altogether",a:"682"},{t:2,q:"45 × 23",a:"1035"},{t:2,q:"18 × 26",a:"468"},
      {t:2,q:"In 47 × 35, which room is biggest — type its value",a:"1200",hint:"40 × 30"},{t:2,q:"47 × 35",a:"1645"}
    ]},
   {id:"u1w2p2",w:2,label:"2.2",title:"Fluency with Carrying",note:"Algorithm only. Use the area model to check, not to solve.",
    items:[
      {t:0,q:"14 × 12",a:"168"},{t:0,q:"21 × 13",a:"273"},{t:0,q:"32 × 11",a:"352"},{t:0,q:"15 × 15",a:"225"},{t:0,q:"24 × 12",a:"288"},{t:0,q:"13 × 13",a:"169"},
-     {t:1,q:"38 × 24",a:"912"},{t:1,q:"56 × 27",a:"1512"},{t:1,q:"49 × 36",a:"1764"},{t:1,q:"63 × 48",a:"3024"},{t:1,q:"75 × 29",a:"2175"},
+     {t:2,q:"38 × 24",a:"912"},{t:2,q:"56 × 27",a:"1512"},{t:2,q:"49 × 36",a:"1764"},{t:2,q:"63 × 48",a:"3024"},{t:2,q:"75 × 29",a:"2175"},
      {t:2,q:"87 × 64",a:"5568"},{t:2,q:"99 × 99",a:"9801",hint:"100 × 99 take one 99"}
    ]},
   {id:"u1w2p3",w:2,label:"2.3",title:"Three Digits by One",note:"A longer rectangle, split into three rooms instead of two.",
@@ -884,13 +884,13 @@ const PRACTICE_U1_W3 = [
   {id:"u1w3p4",w:3,label:"3.4",title:"Square Numbers",note:"Why do squares have an odd number of factors? Build the rectangles and see.",
    items:[
      {t:0,q:"3 × 3",a:"9"},{t:0,q:"5 × 5",a:"25"},{t:0,q:"7 × 7",a:"49"},{t:0,q:"10 × 10",a:"100"},{t:0,q:"4 × 4",a:"16"},{t:0,q:"8 × 8",a:"64"},
-     {t:1,q:"12 × 12",a:"144"},{t:1,q:"Factors of 25 — how many",a:"3"},{t:1,q:"Factors of 36 — how many",a:"9"},{t:1,q:"The square number between 60 and 70",a:"64"},{t:1,q:"15 × 15",a:"225"},
+     {t:2,q:"12 × 12",a:"144"},{t:1,q:"Factors of 25 — how many",a:"3"},{t:1,q:"Factors of 36 — how many",a:"9"},{t:1,q:"The square number between 60 and 70",a:"64"},{t:2,q:"15 × 15",a:"225"},
      {t:2,q:"Square numbers between 1 and 100 — how many",a:"10"},{t:2,q:"A square's factor count is always odd or even — type one",a:"odd"}
    ]},
   {id:"u1w3p5",w:3,label:"Fri",title:"Mid-Unit Quiz",note:"Eight items across Weeks 1–3. 85% to keep flying.",
    items:[
      {t:0,q:"7 × 8",a:"56"},{t:2,q:"6 × 40",a:"240"},
-     {t:2,q:"8 × 34",a:"272"},{t:1,q:"23 × 14",a:"322"},{t:1,q:"Factor pairs of 24 — how many",a:"4"},{t:1,q:"GCF of 12 and 18",a:"6"},{t:1,q:"Estimate 39 × 21",a:"800"},
+     {t:2,q:"8 × 34",a:"272"},{t:2,q:"23 × 14",a:"322"},{t:1,q:"Factor pairs of 24 — how many",a:"4"},{t:1,q:"GCF of 12 and 18",a:"6"},{t:1,q:"Estimate 39 × 21",a:"800"},
      {t:2,q:"Area 84, one side 6 — the other",a:"14"}
    ]}
 ];

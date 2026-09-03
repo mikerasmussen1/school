@@ -37,6 +37,27 @@ const ROOT = path.resolve(__dirname, "..");
 process.chdir(ROOT);
 const WRITE = process.argv.includes("--write");
 
+/* SUPERSEDED by scripts/rebuild-worksheets.js — do not run this to write.
+ *
+ * This script replaces the question TEXT at each printed position and leaves
+ * the sections themselves alone, which is the whole reason 400 Challenge
+ * problems ended up printing under a GRADED heading: when a set's tier
+ * composition changed, the text slid across section boundaries that never
+ * moved. rebuild-worksheets.js re-emits the sections from the bank instead.
+ *
+ * It is disarmed rather than deleted because its comments record how the
+ * paper-to-app numbering contract works and what has gone wrong under it
+ * before. Left runnable it would actively undo the fix: its answer-key pass
+ * rebuilds every range from a tier's FULL item list, so it would restore keys
+ * listing 26 Challenge answers against a sheet that prints 12.
+ */
+if (process.argv.includes("--write")) {
+  console.error("regen-worksheets.js is superseded by rebuild-worksheets.js and will not write.");
+  console.error("Run: node scripts/rebuild-worksheets.js --write");
+  process.exit(2);
+}
+
+
 // ── the app's ordering, mirrored from index.html pOnPaper ────────────────
 function sheetFor(set) {
   const seen = new Set(), uniq = [];

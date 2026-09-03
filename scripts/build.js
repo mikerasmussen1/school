@@ -57,11 +57,11 @@ function run(cmd, args, label) {
 // ── 1. sheets follow the bank ───────────────────────────────────────────
 step("1. Worksheets from the curriculum");
 if (CHECK_ONLY) {
-  const { out } = run("node", ["scripts/regen-worksheets.js"], "regen-worksheets");
-  const m = out.match(/(\d+) problems to rewrite/);
-  if (m && +m[1] > 0) die(`${m[1]} printed problems no longer match the bank — run without --check`);
+  const { out } = run("node", ["scripts/rebuild-worksheets.js"], "rebuild-worksheets");
+  const m = out.match(/(\d+) pages across/);
+  if (m && +m[1] > 0) die(`${m[1]} printed pages no longer match the bank — run without --check`);
 } else {
-  run("node", ["scripts/regen-worksheets.js", "--write"], "regen-worksheets");
+  run("node", ["scripts/rebuild-worksheets.js", "--write"], "rebuild-worksheets");
 }
 
 // ── 2. PDFs follow the sheets ───────────────────────────────────────────

@@ -41,15 +41,13 @@ const vm = require("vm");
 const ROOT = path.resolve(__dirname, "..");
 process.chdir(ROOT);
 
-/* A ratchet, not a gate. origin/main already prints 669 problems under the
- * wrong heading across 89 pages, 400 of them Challenge work under a GRADED
- * banner — this predates any one change and is a property of the sheets having
- * been authored once against a tier composition that has since moved. Failing
- * the build on the whole backlog would make every run red, and a check that is
- * always red is one nobody reads. So the build fails only if the number GROWS.
- * Lower it as the sheets get fixed; the fix is for regen-worksheets.js to
- * rebuild page structure rather than only replacing text inside fixed boxes. */
-const BASELINE = 674;
+/* Now a gate, not a ratchet. This started at 674 — 400 of them Challenge work
+ * printed under a GRADED banner — because the sheets were authored once against
+ * a tier composition that had since moved, and the generator only ever replaced
+ * text inside boxes that never resized. rebuild-worksheets.js re-emits the
+ * sections themselves, which took it to zero, so zero is now the standard: any
+ * problem printed under the wrong heading fails the build. */
+const BASELINE = 0;
 const STRICT = process.argv.includes("--strict");
 const SIZE_TIER = { "9.5": 0, "10": 1, "10.5": 2 };
 const NAME = ["Warm-Up", "Core", "Challenge"];

@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=4461df4"></script>
+<script src="./support.js?v=65765a6"></script>
   <script>window.__BUILD__="d159824";</script>
-  <script data-build>window.__BUILD__="4461df4";</script>
+  <script data-build>window.__BUILD__="65765a6";</script>
 </head>
 <body>
 <x-dc>
@@ -31,16 +31,16 @@
   ol.steps{margin:8px 0 0;padding-left:22px} ol.steps li{margin-bottom:7px}
   ul.mats{margin:6px 0 0;padding-left:20px} ul.mats li{margin-bottom:3px;font-size:.93rem}
 </style>
-<script src="./curriculum/students.js?v=4461df4"></script>
-<script src="./curriculum/sync.js?v=4461df4"></script>
-<script src="./curriculum/subjects.js?v=4461df4"></script>
-<script src="./curriculum/question-types.js?v=4461df4"></script>
-<script src="./curriculum/science-y3-spine.js?v=4461df4"></script>
-<script src="./curriculum/science-y5-spine.js?v=4461df4"></script>
-<script src="./curriculum/science-lessons.js?v=4461df4"></script>
-<script src="./curriculum/science-quiz.js?v=4461df4"></script>
-<script src="./curriculum/la-calendar.js?v=4461df4"></script>
-<script src="./curriculum/science-shopping.js?v=4461df4"></script>
+<script src="./curriculum/students.js?v=65765a6"></script>
+<script src="./curriculum/sync.js?v=65765a6"></script>
+<script src="./curriculum/subjects.js?v=65765a6"></script>
+<script src="./curriculum/question-types.js?v=65765a6"></script>
+<script src="./curriculum/science-y3-spine.js?v=65765a6"></script>
+<script src="./curriculum/science-y5-spine.js?v=65765a6"></script>
+<script src="./curriculum/science-lessons.js?v=65765a6"></script>
+<script src="./curriculum/science-quiz.js?v=65765a6"></script>
+<script src="./curriculum/la-calendar.js?v=65765a6"></script>
+<script src="./curriculum/science-shopping.js?v=65765a6"></script>
 </helmet>
 
 <div style="min-height:100vh;display:flex;flex-direction:column">
@@ -307,6 +307,23 @@
         <p class="muted" style="margin-top:10px">The written claim runs every week regardless. It is the thing the Georgia practices standards actually ask for, and no multiple-choice item can stand in for it.</p>
       </div>
       <div class="card">
+        <h2>Start the year again</h2>
+        <p class="muted">Marks every week in both grades as not finished, and clears the check scores. Useful for testing, or for genuinely restarting. It cannot be undone.</p>
+        <sc-if value="{{ resetIdle }}" hint-placeholder-val="{{ true }}">
+          <div style="margin-top:10px"><button onClick="{{ armReset }}" style="{{ btnSecondary }}">Reset all progress</button></div>
+        </sc-if>
+        <sc-if value="{{ resetArmed }}" hint-placeholder-val="{{ false }}">
+          <div style="background:#F3DCD5;color:var(--brick-dark);border-radius:8px;padding:14px 16px;margin-top:10px">
+            <div style="font-weight:600;margin-bottom:8px">This erases every finished week for both grades, on every device. Sure?</div>
+            <div style="display:flex;gap:9px;flex-wrap:wrap">
+              <button onClick="{{ doReset }}" style="{{ btnPrimary }}">Yes, erase it all</button>
+              <button onClick="{{ cancelReset }}" style="{{ btnSecondary }}">Keep my progress</button>
+            </div>
+          </div>
+        </sc-if>
+      </div>
+
+      <div class="card">
         <h2>Standards covered</h2>
         <sc-for list="{{ standards }}" as="s" hint-placeholder-count="10">
           <div style="display:grid;grid-template-columns:92px 1fr;gap:12px;padding:8px 0;border-bottom:1px solid var(--rule)">
@@ -348,6 +365,7 @@ class Component extends DCLogic {
     })(),
     week:(function(){ try{ return Math.min(36,Math.max(1,parseInt(localStorage.getItem("sci.week")||"1",10)||1)); }catch(e){ return 1; } })(),
     kitMode:"all",     // one printable list is what a parent wants first
+    resetArmed:false,
     completed:(function(){ try{ return JSON.parse(localStorage.getItem("sci.completed")||"{}"); }catch(e){ return {}; } })(),
     q:null
   };
@@ -387,13 +405,36 @@ class Component extends DCLogic {
     this.syncSave({completed});
   };
 
+  /* Same reset as Word Voyagers, and for the same reason: science progress
+   * lives on the device AND in the database, so clearing one alone lets the
+   * next pull restore it and the reset looks broken. */
+  armReset=()=>{ this.setState({resetArmed:true}); };
+  cancelReset=()=>{ this.setState({resetArmed:false}); };
+  doReset=()=>{
+    this.pullEpoch=(this.pullEpoch||0)+1;   // invalidate any pull in flight
+    ["sci.completed","sci.week"].forEach(function(k){ try{ localStorage.removeItem(k); }catch(e){} });
+    this.setState({completed:{}, week:1, q:null, resetArmed:false});
+    const SY=window.__CURR&&window.__CURR.SYNC;
+    if(SY){
+      SY.save("sci", {grade:this.state.grade, week:1, completed:{}});
+      Promise.resolve(SY.pushNow("sci")).then(function(){ try{ window.location.reload(); }catch(e){} });
+    } else {
+      try{ window.location.reload(); }catch(e){}
+    }
+  };
+
   pulled=false;
+  pullEpoch=0;
   pullOnce(){
     if(this.pulled) return;
     this.pulled=true;
     const SY=window.__CURR&&window.__CURR.SYNC;
     if(!SY||!SY.signedIn()) return;
+    // A pull started before a reset must not land after it and restore what
+    // was just erased.
+    const epoch=this.pullEpoch;
     SY.pull("sci").then((d)=>{
+      if(epoch!==this.pullEpoch) return;
       if(d && d.completed) this.setState({completed:d.completed});
     }).catch(()=>{});
   }
@@ -637,6 +678,11 @@ class Component extends DCLogic {
         if(!AUT) return "";
         return "Every one of those weeks offers a swap on the page — an alternative version of the same investigation with the hazard removed, hitting the same standard. Take all of them and all 36 weeks run without you. Refuse them and he keeps the richer lab and you sit with him for twenty minutes. Both are reasonable; the point is being told which is which.";
       })(),
+      resetIdle: !st.resetArmed,
+      resetArmed: !!st.resetArmed,
+      armReset: this.armReset,
+      cancelReset: this.cancelReset,
+      doReset: this.doReset,
       standards:S.STANDARDS,
       hasNotYet:!!(S.NOT_YET && S.NOT_YET.length),
       notYet:(S.NOT_YET||[]).map(function(t){ return {text:t}; })

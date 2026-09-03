@@ -22,12 +22,32 @@
 (function(){
 
   const REMOTE_PROJECT_ID = "big-math-adventures";
+  // Same default as Tutor: this reads a child's handwriting and writes them
+  // feedback, so quality matters more than the per-call saving. config/app's
+  // `model` overrides it.
+  const CLAUDE_MODEL = "claude-sonnet-5";
   const _doc = (col,id) => "https://firestore.googleapis.com/v1/projects/"+REMOTE_PROJECT_ID+"/databases/(default)/documents/"+col+"/"+id;
 
   const LAGrader = {
     enabled: false,
 
-    _tutor(){ return window.Tutor || {}; },
+    /* The credential this page is using.
+     *
+     * This used to be `window.Tutor || {}`, and word-voyagers.dc.html never
+     * loads curriculum/tutor.js — so window.Tutor was always undefined here.
+     * loadConfig() fetched the key from config/app, handed it to a Tutor that
+     * did not exist, set enabled = true, and every grading call then went out
+     * with no credential at all. The button appeared and could only fail.
+     *
+     * It holds its own config now. window.Tutor still wins when this script IS
+     * loaded inside index.html, so the two pages cannot end up disagreeing
+     * about which key is live — but nothing here depends on the maths tutor
+     * being present to grade a handwriting photo. */
+    cfg: { apiKey:"", model:"", proxyUrl:"", workspaceId:"" },
+    _tutor(){
+      const T = window.Tutor;
+      return (T && (T.proxyUrl || T.apiKey)) ? T : this.cfg;
+    },
 
     /* Fetch the same public config/app doc index.html reads. If window.Tutor
      * already has a proxyUrl or key (another script configured it first),
@@ -43,7 +63,8 @@
         const key = proxy ? "" : ((f.apiKey && f.apiKey.stringValue) || (f.gemini && f.gemini.stringValue) || "");
         const model = (f.model && f.model.stringValue) || "";
         const ws = (f.workspaceId && f.workspaceId.stringValue) || "";
-        if(window.Tutor) window.Tutor.configure(key, model, proxy, ws);
+        this.cfg = { apiKey:key, model:model, proxyUrl:proxy, workspaceId:ws };
+        if(window.Tutor && window.Tutor.configure) window.Tutor.configure(key, model, proxy, ws);
         this.enabled = !!(proxy || key);
       }catch(e){ /* offline or blocked — stays disabled, page still works without grading */ }
     },
@@ -108,20 +129,26 @@
       let r;
       if(viaProxy){
         r = await fetch(T.proxyUrl, {method:"POST", headers:{"Content-Type":"application/json"},
-          body: JSON.stringify({prompt, image:{mime:img.mime, b64:img.b64}})});
+          body: JSON.stringify({prompt, image:{mime:img.mime, b64:img.b64},
+            model:T.model||undefined})});
       } else if(anthropic){
         r = await fetch("https://api.anthropic.com/v1/messages", {method:"POST",
           headers: Object.assign({"Content-Type":"application/json", "x-api-key":T.apiKey,
             "anthropic-version":"2023-06-01", "anthropic-dangerous-direct-browser-access":"true"},
             T.workspaceId ? {"anthropic-workspace-id":T.workspaceId} : {}),
-          body: JSON.stringify({model:"claude-sonnet-5", max_tokens:1024,
+          // Follow the configured model the way Tutor does, so switching to
+          // Haiku in config/app moves both pages rather than only the maths.
+          body: JSON.stringify({model:(/^claude/.test(T.model||"") ? T.model : CLAUDE_MODEL),
+            max_tokens:1024,
             messages:[{role:"user", content:[
               {type:"image", source:{type:"base64", media_type:img.mime, data:img.b64}},
               {type:"text", text:prompt}]},
               {role:"assistant", content:"{"}]})});
       } else {
         r = await fetch(
-          "https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent?key="+T.apiKey,
+          "https://generativelanguage.googleapis.com/v1beta/models/"+
+            ((T.model && !/^claude/.test(T.model)) ? T.model : "gemini-flash-latest")+
+            ":generateContent?key="+T.apiKey,
           {method:"POST", headers:{"Content-Type":"application/json"},
            body: JSON.stringify({contents:[{parts:[{text:prompt},{inline_data:{mime_type:img.mime, data:img.b64}}]}],
              generationConfig:{response_mime_type:"application/json"}})});

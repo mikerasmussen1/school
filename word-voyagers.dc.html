@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=2026-09-03-1626"></script>
-  <script data-build>window.__BUILD__="2026-09-03-1626";</script>
+<script src="./support.js?v=2026-09-03-1629"></script>
+  <script data-build>window.__BUILD__="2026-09-03-1629";</script>
 </head>
 <body>
 <x-dc>
@@ -36,26 +36,26 @@
   .book-title{font-family:'Fraunces',serif;font-size:1rem;color:var(--brick-dark);margin:0 0 3px}
   .done-banner{text-align:center;padding:22px;margin-top:6px;background:var(--forest-light);border-radius:8px;color:#2E4E38}
 </style>
-<script src="./curriculum/sync.js?v=2026-09-03-1626"></script>
-<script src="./curriculum/students.js?v=2026-09-03-1626"></script>
-<script src="./curriculum/subjects.js?v=2026-09-03-1626"></script>
-<script src="./curriculum/question-types.js?v=2026-09-03-1626"></script>
-<script src="./curriculum/la-y1-spine.js?v=2026-09-03-1626"></script>
-<script src="./curriculum/la-y1-words.js?v=2026-09-03-1626"></script>
-<script src="./curriculum/la-y1-grammar.js?v=2026-09-03-1626"></script>
-<script src="./curriculum/la-y1-reading.js?v=2026-09-03-1626"></script>
-<script src="./curriculum/la-y1-tasks.js?v=2026-09-03-1626"></script>
-<script src="./curriculum/la-books.js?v=2026-09-03-1626"></script>
-<script src="./curriculum/la-y2-spine.js?v=2026-09-03-1626"></script>
-<script src="./curriculum/la-y2-words.js?v=2026-09-03-1626"></script>
-<script src="./curriculum/la-y2-grammar.js?v=2026-09-03-1626"></script>
-<script src="./curriculum/la-y2-reading.js?v=2026-09-03-1626"></script>
-<script src="./curriculum/la-y2-tasks.js?v=2026-09-03-1626"></script>
-<script src="./curriculum/la-books-y2.js?v=2026-09-03-1626"></script>
-<script src="./curriculum/la-quotes.js?v=2026-09-03-1626"></script>
-<script src="./curriculum/la-mastery.js?v=2026-09-03-1626"></script>
-<script src="./curriculum/la-calendar.js?v=2026-09-03-1626"></script>
-<script src="./curriculum/la-grader.js?v=2026-09-03-1626"></script>
+<script src="./curriculum/sync.js?v=2026-09-03-1629"></script>
+<script src="./curriculum/students.js?v=2026-09-03-1629"></script>
+<script src="./curriculum/subjects.js?v=2026-09-03-1629"></script>
+<script src="./curriculum/question-types.js?v=2026-09-03-1629"></script>
+<script src="./curriculum/la-y1-spine.js?v=2026-09-03-1629"></script>
+<script src="./curriculum/la-y1-words.js?v=2026-09-03-1629"></script>
+<script src="./curriculum/la-y1-grammar.js?v=2026-09-03-1629"></script>
+<script src="./curriculum/la-y1-reading.js?v=2026-09-03-1629"></script>
+<script src="./curriculum/la-y1-tasks.js?v=2026-09-03-1629"></script>
+<script src="./curriculum/la-books.js?v=2026-09-03-1629"></script>
+<script src="./curriculum/la-y2-spine.js?v=2026-09-03-1629"></script>
+<script src="./curriculum/la-y2-words.js?v=2026-09-03-1629"></script>
+<script src="./curriculum/la-y2-grammar.js?v=2026-09-03-1629"></script>
+<script src="./curriculum/la-y2-reading.js?v=2026-09-03-1629"></script>
+<script src="./curriculum/la-y2-tasks.js?v=2026-09-03-1629"></script>
+<script src="./curriculum/la-books-y2.js?v=2026-09-03-1629"></script>
+<script src="./curriculum/la-quotes.js?v=2026-09-03-1629"></script>
+<script src="./curriculum/la-mastery.js?v=2026-09-03-1629"></script>
+<script src="./curriculum/la-calendar.js?v=2026-09-03-1629"></script>
+<script src="./curriculum/la-grader.js?v=2026-09-03-1629"></script>
 </helmet>
 
 <div style="min-height:100vh;display:flex;flex-direction:column">
@@ -64,7 +64,7 @@
     <div style="max-width:880px;margin:0 auto;display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding-bottom:14px">
       <div style="flex:1;min-width:190px">
         <div style="font-family:'Fraunces',serif;font-weight:700;font-size:21px">Word Voyagers</div>
-        <div style="font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(250,246,236,.55);margin-top:2px">{{ headerLine }}</div>
+        <div style="font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(250,246,236,.55);margin-top:2px">{{ headerLine }} <span style="opacity:.5" title="Which build this page is. If it does not match the newest change, the page is cached.">&middot; {{ buildStamp }}</span></div>
       </div>
       <div style="font-family:'Public Sans',sans-serif;font-weight:600;font-size:.78rem;padding:6px 12px;border-radius:999px;border:1px solid rgba(250,246,236,.25);color:rgba(250,246,236,.8)">{{ gradeLabel }}</div>
       <sc-for list="{{ dayPicker }}" as="d" hint-placeholder-count="5">
@@ -1288,6 +1288,10 @@ class Component extends DCLogic {
         const cur=({y1:"y3",y2:"y5"})[st.year]||st.year;
         return ST ? ST.levelLabel(cur) : "";
       })(),
+      /* Shown in the header so "am I on a cached copy?" is answerable on
+       * THIS page. It was only on the main page, which meant a stale subject
+       * page could not be spotted at all. */
+      buildStamp:(window.__BUILD__||"dev"),
       headerLine:(Y.GRADE?Y.GRADE.label:"")+" \u00b7 36 weeks \u00b7 180 days \u00b7 Lexile "+(Y.GRADE?Y.GRADE.lexile:""),
       weekLabel:"Week "+st.week+" of 36",
       weekNum:st.week,

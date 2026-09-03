@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=2026-09-03-1658"></script>
-  <script data-build>window.__BUILD__="2026-09-03-1658";</script>
+<script src="./support.js?v=2026-09-03-1708"></script>
+  <script data-build>window.__BUILD__="2026-09-03-1708";</script>
 </head>
 <body>
 <x-dc>
@@ -36,26 +36,26 @@
   .book-title{font-family:'Fraunces',serif;font-size:1rem;color:var(--brick-dark);margin:0 0 3px}
   .done-banner{text-align:center;padding:22px;margin-top:6px;background:var(--forest-light);border-radius:8px;color:#2E4E38}
 </style>
-<script src="./curriculum/sync.js?v=2026-09-03-1658"></script>
-<script src="./curriculum/students.js?v=2026-09-03-1658"></script>
-<script src="./curriculum/subjects.js?v=2026-09-03-1658"></script>
-<script src="./curriculum/question-types.js?v=2026-09-03-1658"></script>
-<script src="./curriculum/la-y1-spine.js?v=2026-09-03-1658"></script>
-<script src="./curriculum/la-y1-words.js?v=2026-09-03-1658"></script>
-<script src="./curriculum/la-y1-grammar.js?v=2026-09-03-1658"></script>
-<script src="./curriculum/la-y1-reading.js?v=2026-09-03-1658"></script>
-<script src="./curriculum/la-y1-tasks.js?v=2026-09-03-1658"></script>
-<script src="./curriculum/la-books.js?v=2026-09-03-1658"></script>
-<script src="./curriculum/la-y2-spine.js?v=2026-09-03-1658"></script>
-<script src="./curriculum/la-y2-words.js?v=2026-09-03-1658"></script>
-<script src="./curriculum/la-y2-grammar.js?v=2026-09-03-1658"></script>
-<script src="./curriculum/la-y2-reading.js?v=2026-09-03-1658"></script>
-<script src="./curriculum/la-y2-tasks.js?v=2026-09-03-1658"></script>
-<script src="./curriculum/la-books-y2.js?v=2026-09-03-1658"></script>
-<script src="./curriculum/la-quotes.js?v=2026-09-03-1658"></script>
-<script src="./curriculum/la-mastery.js?v=2026-09-03-1658"></script>
-<script src="./curriculum/la-calendar.js?v=2026-09-03-1658"></script>
-<script src="./curriculum/la-grader.js?v=2026-09-03-1658"></script>
+<script src="./curriculum/sync.js?v=2026-09-03-1708"></script>
+<script src="./curriculum/students.js?v=2026-09-03-1708"></script>
+<script src="./curriculum/subjects.js?v=2026-09-03-1708"></script>
+<script src="./curriculum/question-types.js?v=2026-09-03-1708"></script>
+<script src="./curriculum/la-y1-spine.js?v=2026-09-03-1708"></script>
+<script src="./curriculum/la-y1-words.js?v=2026-09-03-1708"></script>
+<script src="./curriculum/la-y1-grammar.js?v=2026-09-03-1708"></script>
+<script src="./curriculum/la-y1-reading.js?v=2026-09-03-1708"></script>
+<script src="./curriculum/la-y1-tasks.js?v=2026-09-03-1708"></script>
+<script src="./curriculum/la-books.js?v=2026-09-03-1708"></script>
+<script src="./curriculum/la-y2-spine.js?v=2026-09-03-1708"></script>
+<script src="./curriculum/la-y2-words.js?v=2026-09-03-1708"></script>
+<script src="./curriculum/la-y2-grammar.js?v=2026-09-03-1708"></script>
+<script src="./curriculum/la-y2-reading.js?v=2026-09-03-1708"></script>
+<script src="./curriculum/la-y2-tasks.js?v=2026-09-03-1708"></script>
+<script src="./curriculum/la-books-y2.js?v=2026-09-03-1708"></script>
+<script src="./curriculum/la-quotes.js?v=2026-09-03-1708"></script>
+<script src="./curriculum/la-mastery.js?v=2026-09-03-1708"></script>
+<script src="./curriculum/la-calendar.js?v=2026-09-03-1708"></script>
+<script src="./curriculum/la-grader.js?v=2026-09-03-1708"></script>
 </helmet>
 
 <div style="min-height:100vh;display:flex;flex-direction:column">
@@ -641,6 +641,27 @@
 
     <sc-if value="{{ isParent }}" hint-placeholder-val="{{ false }}">
       <div class="card">
+        <h2>Redo one day</h2>
+        <p class="muted">Clears just the day you are looking at — its ticks, its drill scores, and the mark you gave it. Everything else stays. Use the day buttons at the top to pick a different one.</p>
+        <div class="box" style="margin-top:10px">
+          <div style="font-family:'Fraunces',serif;font-size:1.02rem">{{ dayResetTarget }}</div>
+          <div class="muted" style="font-size:.88rem">{{ dayResetState }}</div>
+        </div>
+        <sc-if value="{{ dayResetIdle }}" hint-placeholder-val="{{ true }}">
+          <div style="margin-top:10px"><button onClick="{{ armDayReset }}" style="{{ btnSecondary }}">{{ dayResetLabel }}</button></div>
+        </sc-if>
+        <sc-if value="{{ dayResetArmed }}" hint-placeholder-val="{{ false }}">
+          <div style="background:#F3DCD5;color:var(--brick-dark);border-radius:8px;padding:14px 16px;margin-top:10px">
+            <div style="font-weight:600;margin-bottom:8px">{{ dayResetConfirm }}</div>
+            <div style="display:flex;gap:9px;flex-wrap:wrap">
+              <button onClick="{{ resetOneDay }}" style="{{ btnPrimary }}">Yes, redo that day</button>
+              <button onClick="{{ cancelDayReset }}" style="{{ btnSecondary }}">Leave it</button>
+            </div>
+          </div>
+        </sc-if>
+      </div>
+
+      <div class="card">
         <h2>Start the year again</h2>
         <p class="muted">Marks every day in both grades as not started: step ticks, drill scores, flagged items and excused days. Useful for testing a change, or for genuinely restarting. It cannot be undone.</p>
         <sc-if value="{{ resetIdle }}" hint-placeholder-val="{{ true }}">
@@ -790,6 +811,7 @@ class Component extends DCLogic {
       return ["Mon","Mon","Tue","Wed","Thu","Fri","Fri"][new Date().getDay()]; })(),
     landed:false,           // has the opening jump-to-frontier happened yet
     resetArmed:false,       // reset needs two presses
+    dayResetArmed:false,    // and so does the single-day one
     openStep:null,          // which assignment is open inline on Today
     started:false,          // has START TODAY been pressed
     stepDone:(function(){ try{ return JSON.parse(localStorage.getItem("la.stepDone")||"{}"); }catch(e){ return {}; } })(),
@@ -1110,6 +1132,40 @@ class Component extends DCLogic {
    * Two presses, because it cannot be undone. The first arms it, the second
    * does it, and it disarms itself if the tab is left. */
   resetArmed=false;
+  /* Redo a single day, rather than the whole year.
+   *
+   * The only reset was all-or-nothing, so wanting Friday back meant erasing
+   * September to June. This clears one day for the grade being viewed: its
+   * step ticks, its drill scores, and the grown-up's mark if there was one.
+   * Nothing else is touched, and it syncs like every other write so it holds
+   * on the other devices too. */
+  resetOneDay=()=>{
+    const st=this.state;
+    const M=window.__CURR.LA_MASTERY;
+    const plan=M.dayPlan(st.year, st.week, st.day);
+    const prefix=st.year+":"+st.week+":"+st.day+":";
+    const strip=(bag)=>{
+      const out={};
+      Object.keys(bag||{}).forEach(function(k){ if(k.indexOf(prefix)!==0) out[k]=bag[k]; });
+      return out;
+    };
+    const stepDone=strip(st.stepDone), stuck=strip(st.stuck),
+          stepResult=strip(st.stepResult), approvals=strip(st.approvals);
+    try{
+      localStorage.setItem("la.stepDone", JSON.stringify(stepDone));
+      localStorage.setItem("la.stuck", JSON.stringify(stuck));
+      localStorage.setItem("la.stepResult", JSON.stringify(stepResult));
+      localStorage.setItem("la.approvals", JSON.stringify(approvals));
+    }catch(e){}
+    this.setState({stepDone, stuck, stepResult, approvals,
+      started:false, openStep:null, dayResetArmed:false,
+      gz:null, sq:null, rq:null, rv:null, remediation:null, round:1, lastResult:null});
+    this.syncSave({stepDone, stuck, stepResult, approvals});
+    window.scrollTo(0,0);
+  };
+  armDayReset=()=>{ this.setState({dayResetArmed:true}); };
+  cancelDayReset=()=>{ this.setState({dayResetArmed:false}); };
+
   armReset=()=>{ this.setState({resetArmed:true}); };
   cancelReset=()=>{ this.setState({resetArmed:false}); };
   doReset=()=>{
@@ -1685,6 +1741,39 @@ class Component extends DCLogic {
       nextDayLabel: plan.day==="Fri" ? "Start Week "+(st.week+1) : "Start "+
         (MS.DAY_NAME[MS.DAYS[MS.DAYS.indexOf(plan.day)+1]]||"the next day"),
       goNextDay: this.goNextDay,
+      /* The single-day reset, named by its real date so there is no counting
+       * of weeks to work out which day is about to be cleared. */
+      dayResetTarget:(function(){
+        const CAL=window.__CURR.LA_CALENDAR;
+        const idx=(st.week-1)*5+["Mon","Tue","Wed","Thu","Fri"].indexOf(st.day);
+        const dt=CAL?CAL.dateForIndex(idx):null;
+        const name={Mon:"Monday",Tue:"Tuesday",Wed:"Wednesday",Thu:"Thursday",Fri:"Friday"}[st.day]||st.day;
+        return (dt?CAL.longDate(dt):name)+" \u00b7 week "+st.week+" \u00b7 "+
+               ((window.__CURR.STUDENTS&&window.__CURR.STUDENTS.levelLabel(st.year==="y2"?"y5":"y3"))||"");
+      })(),
+      dayResetState:(function(){
+        const M=window.__CURR.LA_MASTERY;
+        const plan=M.dayPlan(st.year, st.week, st.day);
+        const pre=st.year+":"+st.week+":"+st.day+":";
+        const ticks=Object.keys(st.stepDone||{}).filter(function(k){ return k.indexOf(pre)===0; }).length;
+        const scores=Object.keys(st.stepResult||{}).filter(function(k){ return k.indexOf(pre)===0; }).length;
+        const marks=Object.keys(st.approvals||{}).filter(function(k){ return k.indexOf(pre)===0; }).length;
+        if(!ticks && !scores && !marks) return "Nothing recorded for this day yet.";
+        return ticks+" of "+plan.steps.length+" steps ticked"+
+               (scores?", "+scores+" drill score"+(scores===1?"":"s"):"")+
+               (marks?", marked by a grown-up":"")+".";
+      })(),
+      dayResetLabel:"Redo this day",
+      dayResetConfirm:(function(){
+        const name={Mon:"Monday",Tue:"Tuesday",Wed:"Wednesday",Thu:"Thursday",Fri:"Friday"}[st.day]||st.day;
+        return "Clear "+name+" of week "+st.week+" and start it again?";
+      })(),
+      dayResetIdle: !st.dayResetArmed,
+      dayResetArmed: !!st.dayResetArmed,
+      armDayReset: this.armDayReset,
+      cancelDayReset: this.cancelDayReset,
+      resetOneDay: this.resetOneDay,
+
       resetIdle: !st.resetArmed,
       resetArmed: !!st.resetArmed,
       armReset: this.armReset,

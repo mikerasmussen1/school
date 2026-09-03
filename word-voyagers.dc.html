@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=2026-09-03-1901"></script>
-  <script data-build>window.__BUILD__="2026-09-03-1901";</script>
-  <script src="./curriculum/freshness.js?v=2026-09-03-1901"></script>
+<script src="./support.js?v=2026-09-03-1922"></script>
+  <script data-build>window.__BUILD__="2026-09-03-1922";</script>
+  <script src="./curriculum/freshness.js?v=2026-09-03-1922"></script>
 </head>
 <body>
 <x-dc>
@@ -38,27 +38,27 @@
   .book-title{font-family:'Fraunces',serif;font-size:1rem;color:var(--brick-dark);margin:0 0 3px}
   .done-banner{text-align:center;padding:22px;margin-top:6px;background:var(--forest-light);border-radius:8px;color:#2E4E38}
 </style>
-<script src="./curriculum/sync.js?v=2026-09-03-1901"></script>
-<script src="./curriculum/students.js?v=2026-09-03-1901"></script>
-<script src="./curriculum/subjects.js?v=2026-09-03-1901"></script>
-<script src="./curriculum/question-types.js?v=2026-09-03-1901"></script>
-<script src="./curriculum/la-y1-spine.js?v=2026-09-03-1901"></script>
-<script src="./curriculum/la-y1-words.js?v=2026-09-03-1901"></script>
-<script src="./curriculum/la-y1-grammar.js?v=2026-09-03-1901"></script>
-<script src="./curriculum/la-y1-reading.js?v=2026-09-03-1901"></script>
-<script src="./curriculum/la-y1-tasks.js?v=2026-09-03-1901"></script>
-<script src="./curriculum/la-books.js?v=2026-09-03-1901"></script>
-<script src="./curriculum/la-y2-spine.js?v=2026-09-03-1901"></script>
-<script src="./curriculum/la-y2-words.js?v=2026-09-03-1901"></script>
-<script src="./curriculum/la-y2-grammar.js?v=2026-09-03-1901"></script>
-<script src="./curriculum/la-y2-reading.js?v=2026-09-03-1901"></script>
-<script src="./curriculum/la-y2-tasks.js?v=2026-09-03-1901"></script>
-<script src="./curriculum/la-books-y2.js?v=2026-09-03-1901"></script>
-<script src="./curriculum/la-quotes.js?v=2026-09-03-1901"></script>
-<script src="./curriculum/la-daily-fix.js?v=2026-09-03-1901"></script>
-<script src="./curriculum/la-mastery.js?v=2026-09-03-1901"></script>
-<script src="./curriculum/la-calendar.js?v=2026-09-03-1901"></script>
-<script src="./curriculum/la-grader.js?v=2026-09-03-1901"></script>
+<script src="./curriculum/sync.js?v=2026-09-03-1922"></script>
+<script src="./curriculum/students.js?v=2026-09-03-1922"></script>
+<script src="./curriculum/subjects.js?v=2026-09-03-1922"></script>
+<script src="./curriculum/question-types.js?v=2026-09-03-1922"></script>
+<script src="./curriculum/la-y1-spine.js?v=2026-09-03-1922"></script>
+<script src="./curriculum/la-y1-words.js?v=2026-09-03-1922"></script>
+<script src="./curriculum/la-y1-grammar.js?v=2026-09-03-1922"></script>
+<script src="./curriculum/la-y1-reading.js?v=2026-09-03-1922"></script>
+<script src="./curriculum/la-y1-tasks.js?v=2026-09-03-1922"></script>
+<script src="./curriculum/la-books.js?v=2026-09-03-1922"></script>
+<script src="./curriculum/la-y2-spine.js?v=2026-09-03-1922"></script>
+<script src="./curriculum/la-y2-words.js?v=2026-09-03-1922"></script>
+<script src="./curriculum/la-y2-grammar.js?v=2026-09-03-1922"></script>
+<script src="./curriculum/la-y2-reading.js?v=2026-09-03-1922"></script>
+<script src="./curriculum/la-y2-tasks.js?v=2026-09-03-1922"></script>
+<script src="./curriculum/la-books-y2.js?v=2026-09-03-1922"></script>
+<script src="./curriculum/la-quotes.js?v=2026-09-03-1922"></script>
+<script src="./curriculum/la-daily-fix.js?v=2026-09-03-1922"></script>
+<script src="./curriculum/la-mastery.js?v=2026-09-03-1922"></script>
+<script src="./curriculum/la-calendar.js?v=2026-09-03-1922"></script>
+<script src="./curriculum/la-grader.js?v=2026-09-03-1922"></script>
 </helmet>
 
 <div style="min-height:100vh;display:flex;flex-direction:column">
@@ -701,6 +701,48 @@
 
     <sc-if value="{{ isParent }}" hint-placeholder-val="{{ false }}">
       <div class="card">
+        <h2>Let him past a broken step</h2>
+        <p class="muted">If something on this page will not work, tick the step past so he is not stuck waiting for a fix. Say briefly what went wrong — that note is how you will know what still needs mending.</p>
+        <div class="box" style="margin-top:10px">
+          <div style="font-family:'Fraunces',serif;font-size:1.02rem;margin-bottom:8px">{{ ovDayLabel }}</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px">
+            <sc-for list="{{ ovSteps }}" as="o" hint-placeholder-count="5">
+              <button onClick="{{ o.onClick }}" style="{{ o.style }}">{{ o.label }}</button>
+            </sc-for>
+          </div>
+          <sc-if value="{{ ovPicked }}" hint-placeholder-val="{{ false }}">
+            <div style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:5px">What went wrong?</div>
+            <input value="{{ ovReason }}" onChange="{{ ovSetReason }}" placeholder="e.g. the Next button does nothing" style="width:100%;padding:10px 12px;font-size:.95rem;border:1px solid var(--rule);border-radius:6px;font-family:'Public Sans',sans-serif">
+            <div style="margin-top:12px"><button onClick="{{ ovSubmit }}" style="{{ ovSubmitStyle }}">{{ ovSubmitLabel }}</button></div>
+            <p class="muted" style="margin-top:8px;font-size:.85rem">{{ ovHint }}</p>
+          </sc-if>
+          <sc-if value="{{ ovNotPicked }}" hint-placeholder-val="{{ true }}">
+            <p class="muted" style="margin:0;font-size:.88rem">Choose the step that is not working.</p>
+          </sc-if>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Steps you have had to override</h2>
+        <p class="muted">This is the list of things that need fixing. Clear one once it works again.</p>
+        <sc-if value="{{ hasOverrides }}" hint-placeholder-val="{{ false }}">
+          <sc-for list="{{ overrideList }}" as="o" hint-placeholder-count="3">
+            <div style="display:flex;gap:12px;align-items:baseline;padding:9px 0;border-bottom:1px solid var(--rule)">
+              <div style="flex:1;min-width:0">
+                <div style="font-size:.94rem;font-weight:600">{{ o.where }}</div>
+                <div class="muted" style="font-size:.86rem">{{ o.reason }}</div>
+              </div>
+              <div class="muted" style="font-size:.82rem;white-space:nowrap">{{ o.when }}</div>
+              <button onClick="{{ o.onClear }}" style="{{ btnSecondary }}">Fixed</button>
+            </div>
+          </sc-for>
+        </sc-if>
+        <sc-if value="{{ noOverrides }}" hint-placeholder-val="{{ true }}">
+          <div class="muted">Nothing has needed an override. If that changes, whatever you tick past will be listed here.</div>
+        </sc-if>
+      </div>
+
+      <div class="card">
         <h2>Redo one day</h2>
         <p class="muted">Clears just the day you are looking at — its ticks, its drill scores, and the mark you gave it. Everything else stays. Use the day buttons at the top to pick a different one.</p>
         <div class="box" style="margin-top:10px">
@@ -881,6 +923,8 @@ class Component extends DCLogic {
     stuck:(function(){ try{ return JSON.parse(localStorage.getItem("la.stuck")||"{}"); }catch(e){ return {}; } })(),
     stepResult:(function(){ try{ return JSON.parse(localStorage.getItem("la.stepResult")||"{}"); }catch(e){ return {}; } })(),
     approvals:(function(){ try{ return JSON.parse(localStorage.getItem("la.approvals")||"{}"); }catch(e){ return {}; } })(),
+    overrides:(function(){ try{ return JSON.parse(localStorage.getItem("la.overrides")||"{}"); }catch(e){ return {}; } })(),
+    ovStep:null, ovReason:"",
     approveGrade:null, approveNote:"",
     excused:(function(){ try{ return JSON.parse(localStorage.getItem("la.excused")||"{}"); }catch(e){ return {}; } })(),
     fx:null, gz:null, sq:null, rq:null, rv:null,
@@ -925,6 +969,7 @@ class Component extends DCLogic {
       if(d.done)      patch.done=d.done;
       if(d.stepResult) patch.stepResult=d.stepResult;
       if(d.approvals)  patch.approvals=d.approvals;
+      if(d.overrides)  patch.overrides=d.overrides;
       if(Object.keys(patch).length) this.setState(patch);
     }).catch(()=>{});
   }
@@ -1154,7 +1199,7 @@ class Component extends DCLogic {
     if(SY) SY.save("la", {
       year:st.year, week:st.week, day:st.day,
       stepDone:st.stepDone, stuck:st.stuck, excused:st.excused, done:st.done,
-      stepResult:st.stepResult, approvals:st.approvals
+      stepResult:st.stepResult, approvals:st.approvals, overrides:st.overrides
     });
     this.setState(patch);
   };
@@ -1236,9 +1281,9 @@ class Component extends DCLogic {
   cancelReset=()=>{ this.setState({resetArmed:false}); };
   doReset=()=>{
     this.pullEpoch=(this.pullEpoch||0)+1;   // invalidate any pull in flight
-    const KEYS=["la.stepDone","la.stuck","la.stepResult","la.approvals","la.done","la.excused","la.week","la.day"];
+    const KEYS=["la.stepDone","la.stuck","la.stepResult","la.approvals","la.overrides","la.done","la.excused","la.week","la.day"];
     KEYS.forEach(function(k){ try{ localStorage.removeItem(k); }catch(e){} });
-    const empty={stepDone:{}, stuck:{}, stepResult:{}, approvals:{}, done:{}, excused:{}, week:1, day:"Mon"};
+    const empty={stepDone:{}, stuck:{}, stepResult:{}, approvals:{}, overrides:{}, done:{}, excused:{}, week:1, day:"Mon"};
     this.setState({...empty, resetArmed:false, started:false, openStep:null,
                    fx:null, gz:null, sq:null, rq:null, rv:null, remediation:null, round:1, lastResult:null});
     const SY=window.__CURR&&window.__CURR.SYNC;
@@ -1318,6 +1363,52 @@ class Component extends DCLogic {
     if(!step) return null;
     return (st.approvals||{})[st.year+":"+st.week+":"+this.stepKey(step)]||null;
   }
+
+  /* PARENT OVERRIDE — a way past a step that is broken.
+   *
+   * If something on this page stops working, a child should not be stuck on
+   * Tuesday until it is fixed. A grown-up can tick a step past, with a short
+   * note saying what was wrong.
+   *
+   * TWO THINGS THIS DELIBERATELY DOES NOT DO.
+   *
+   * It does not record the step as work done. An overridden step reads
+   * "Passed by a grown-up" and keeps its own colour, and it is listed
+   * separately on the parent tab. A parent looking back at the year should be
+   * able to tell the difference between a drill their child completed and one
+   * the software would not let him attempt, and if an override looked
+   * identical to a pass that distinction would be lost the moment it was made.
+   *
+   * It does not require the reason to be long, but it does require one. The
+   * list of overrides is the bug list: without a note it is a list of dates
+   * with no way to know what needs fixing. */
+  overrideStep=(step, reason)=>{
+    const st=this.state;
+    const k=st.year+":"+st.week+":"+this.stepKey(step);
+    const overrides={...(st.overrides||{}),
+      [k]:{reason:String(reason||"").slice(0,200), at:Date.now(),
+           label:step.label, day:st.day, week:st.week, year:st.year}};
+    const stepDone={...(st.stepDone||{}), [k]:true};
+    try{
+      localStorage.setItem("la.overrides", JSON.stringify(overrides));
+      localStorage.setItem("la.stepDone", JSON.stringify(stepDone));
+    }catch(e){}
+    this.setState({overrides, stepDone, ovReason:"", ovStep:null});
+    this.syncSave({overrides, stepDone});
+  };
+  clearOverride=(key)=>{
+    const overrides={...(this.state.overrides||{})};
+    delete overrides[key];
+    try{ localStorage.setItem("la.overrides", JSON.stringify(overrides)); }catch(e){}
+    this.setState({overrides});
+    this.syncSave({overrides});
+  };
+  isOverridden(step){
+    const k=this.state.year+":"+this.state.week+":"+this.stepKey(step);
+    return !!(this.state.overrides||{})[k];
+  }
+  setOvStep=(k)=>this.setState({ovStep:k});
+  setOvReason=(e)=>this.setState({ovReason:(e&&e.target)?e.target.value:""});
 
   recordResult=(step, score, total)=>{
     const k=this.state.year+":"+this.state.week+":"+this.stepKey(step);
@@ -1455,10 +1546,12 @@ class Component extends DCLogic {
        * deliberate press and stay as they were. */
       const res=self.resultFor(step);
       const flagged=self.isStepDone(step);
+      const overridden=self.isOverridden(step);
       const done=(step.gate==="score")   ? (!!res || self.isStepStuck(step))
                : (step.gate==="approve") ? !!(self.state.approvals||{})[self.state.year+":"+self.state.week+":"+self.stepKey(step)]
                : flagged;
-      return {step:step, done:done, stuck:self.isStepStuck(step), result:res};
+      return {step:step, done:done||overridden, stuck:self.isStepStuck(step),
+              result:res, overridden:overridden};
     });
     // first not-done index is the only actionable step
     let currentIdx=stepStates.findIndex(function(x){ return !x.done; });
@@ -1480,7 +1573,7 @@ class Component extends DCLogic {
       const bg = done?"var(--forest-light)" : current?"var(--paper)" : "#EFEAD9";
       let btnLabel, onClick, btnStyle;
       if(done){
-        btnLabel = x.stuck ? "Needs a look" : "Done";
+        btnLabel = x.overridden ? "Passed" : x.stuck ? "Needs a look" : "Done";
         btnStyle = self.btn("secondary", false);
         onClick = function(){};
       } else if(locked){
@@ -1509,15 +1602,17 @@ class Component extends DCLogic {
       return {
         label:x.step.n+". "+x.step.label,
         detail: locked ? (x.step.detail+" (Step "+(currentIdx+1)+" comes first, but you can do this now if you need to.)") : x.step.detail,
-        doneNote: done
-          ? (x.stuck ? "Marked for a grown-up to look at."
+        doneNote: (done||x.overridden)
+          ? (x.overridden ? "Passed by a grown-up because something was not working."
+             : x.stuck ? "Marked for a grown-up to look at."
              : x.result ? ("Scored "+x.result.score+" out of "+x.result.total+".")
              : x.step.done)
           : "",
-        doneNoteStyle: done
-          ? "margin:4px 0 0;font-size:.84rem;color:"+(x.stuck?"var(--brick-dark)":"var(--forest)")+";font-weight:600"
+        doneNoteStyle: (done||x.overridden)
+          ? "margin:4px 0 0;font-size:.84rem;color:"+
+            (x.overridden?"#7A5A0C":x.stuck?"var(--brick-dark)":"var(--forest)")+";font-weight:600"
           : "display:none",
-        mark: done ? (x.stuck?"!":"\u2713") : current ? String(x.step.n) : "\u25cb",
+        mark: (done||x.overridden) ? (x.overridden?"\u21b7":x.stuck?"!":"\u2713") : current ? String(x.step.n) : "\u25cb",
         markStyle:"flex:none;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;"+
           "justify-content:center;font-size:.9rem;font-weight:700;border:2px solid "+border+";"+
           "background:"+(done?border:"#fff")+";color:"+(done?"#fff":(current?"var(--brick)":"var(--ink-soft)")),
@@ -1870,6 +1965,50 @@ class Component extends DCLogic {
       goNextDay: this.goNextDay,
       /* The single-day reset, named by its real date so there is no counting
        * of weeks to work out which day is about to be cleared. */
+      /* Parent override, for the day currently being viewed. */
+      ovDayLabel:(function(){
+        const name={Mon:"Monday",Tue:"Tuesday",Wed:"Wednesday",Thu:"Thursday",Fri:"Friday"}[st.day]||st.day;
+        return name+" \u00b7 week "+st.week+" \u00b7 "+
+               ((window.__CURR.STUDENTS&&window.__CURR.STUDENTS.levelLabel(st.year==="y2"?"y5":"y3"))||"");
+      })(),
+      ovSteps: plan.steps.map(function(stp){
+        const on = st.ovStep===stp.key;
+        const already = self.isOverridden(stp);
+        return {label: stp.n+". "+stp.label + (already?" \u2014 already passed":""),
+          onClick: function(){ self.setOvStep(on?null:stp.key); },
+          style:"font-family:'Public Sans',sans-serif;font-weight:600;font-size:.85rem;padding:8px 13px;"+
+            "border-radius:999px;cursor:pointer;border:1px solid "+(on?"var(--brick)":"var(--rule)")+
+            ";background:"+(on?"var(--brick)":"transparent")+";color:"+(on?"#fff":already?"var(--ink-soft)":"var(--ink)")};
+      }),
+      ovPicked: !!st.ovStep,
+      ovNotPicked: !st.ovStep,
+      ovReason: st.ovReason||"",
+      ovSetReason: this.setOvReason,
+      ovSubmitLabel: "Pass this step and note the problem",
+      ovSubmitStyle: this.btn("primary", !!(st.ovReason||"").trim()),
+      ovHint: (st.ovReason||"").trim()
+        ? "It will show on his checklist as passed by a grown-up, not as work he did."
+        : "Write a short note first \u2014 without it this becomes a list of dates with no way to know what to fix.",
+      ovSubmit: function(){
+        if(!(st.ovReason||"").trim()) return;
+        const stp=plan.steps.filter(function(x){ return x.key===st.ovStep; })[0];
+        if(stp) self.overrideStep(stp, st.ovReason);
+      },
+      overrideList:(function(){
+        const O=st.overrides||{};
+        return Object.keys(O).map(function(k){
+          const o=O[k];
+          const day={Mon:"Monday",Tue:"Tuesday",Wed:"Wednesday",Thu:"Thursday",Fri:"Friday"}[o.day]||o.day;
+          return {where:(o.year==="y2"?"5th Grade":"3rd Grade")+" \u00b7 week "+o.week+" \u00b7 "+day+" \u00b7 "+(o.label||""),
+                  reason:o.reason||"No note left.",
+                  when:new Date(o.at).toLocaleDateString(),
+                  at:o.at,
+                  onClear:function(){ self.clearOverride(k); }};
+        }).sort(function(a,b){ return b.at-a.at; });
+      })(),
+      hasOverrides: Object.keys(st.overrides||{}).length>0,
+      noOverrides: Object.keys(st.overrides||{}).length===0,
+
       dayResetTarget:(function(){
         const CAL=window.__CURR.LA_CALENDAR;
         const idx=(st.week-1)*5+["Mon","Tue","Wed","Thu","Fri"].indexOf(st.day);

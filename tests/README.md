@@ -9,6 +9,7 @@ exits non-zero on failure and prints what it checked.
 | `find-the-mistake.js` | The daily correction drill: present on every day as step 2, two stages in order, the sentence shown once and never repeated inside the question, options that are real words from the sentence, the prompt matching the kind of fault, four distinct repair options, the step ticking with a score, and a finished drill not surviving a change of day, week or grade. |
 | `handwriting.js` | All 72 handwriting assignments carry a title, instructions, a labelled sentence and a working listen button; no week in either grade still tells the child to photograph the page; and no prompt says "this sentence" without supplying one. |
 | `no-photo.js` | Neither grade has a photo step or capture buttons, the grown-up marking step survives, steps renumber with no gap, and a child can still finish Thursday. |
+| `parent-override.js` | A parent can pass a broken step in either grade on any day; a note is required; the row reads "Passed by a grown-up" rather than "Done" and never claims a score; the day can still be finished; the override is listed on the parent tab with grade, week, day and note, can be cleared with "Fixed", syncs, and is wiped by a reset. |
 | `quote.js` | The quote ticks from the card it is printed on, on all five days, and opening an assignment does not scroll the page away from it. |
 
 ## Why these live here now

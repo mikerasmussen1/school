@@ -287,20 +287,21 @@
   <!-- ============ UNIT 1 ============ -->
   <sc-if value="{{ isUnit1 }}" hint-placeholder-val="{{ false }}">
   <main style="position:relative;padding:34px 44px 72px;max-width:1280px">
-
+    <!-- Hero, rendered from the curriculum rather than typed per mission.
+         Every value here had drifted at least once: Mission 05 still read
+         "Decimals & Money" after it was renamed, Mission 07 still claimed
+         3 weeks and 12 lessons after it grew to 5 and 20, and Mission 08's
+         week range was never renumbered when 07 grew underneath it. -->
     <div style="display:flex;align-items:center;gap:10px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.5);margin-bottom:14px">
-      <span style="color:#FF9F1C">Mission 01</span><span>·</span><span>Weeks 1–5</span><span>·</span><span>20 lessons + 5 enrichment days</span>
+      <span style="color:{{ uColor }}">{{ uNo }}</span><span>&middot;</span><span>{{ uWeeks }}</span><span>&middot;</span><span>{{ uDayBreakdown }}</span>
     </div>
-    <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:56px;line-height:1;margin:0 0 18px;color:#FF9F1C;letter-spacing:-.5px">Multiplication Masters</h1>
-    <p style="max-width:720px;margin:0 0 30px;font-size:16.5px;line-height:1.55;color:rgba(238,242,255,.72);text-wrap:pretty">Multiplication stops being a fact table and becomes a shape. Rectangles, arrays, factor rainbows — every answer in this mission is something you can see, break apart, and rebuild a different way.</p>
-
-    <div style="background:linear-gradient(150deg,rgba(255,159,28,.16),rgba(244,114,182,.1));border:1px solid rgba(255,159,28,.35);border-radius:22px;padding:26px 30px;margin-bottom:38px">
-      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#FBBF24;margin-bottom:10px">Mission 01 · The Big Question</div>
-      <div style="font-family:Fredoka,sans-serif;font-size:29px;line-height:1.2;max-width:900px">Why does the area model give the same answer as the standard algorithm?</div>
-      <div style="font-size:14px;line-height:1.5;margin-top:12px;color:rgba(238,242,255,.7);max-width:820px">Answer it out loud on Day 20, in your own words, with a drawing. That's the real test — the unit test is just the paperwork.</div>
+    <h1 style="{{ uTitleStyle }}">{{ uName }}</h1>
+    <p style="max-width:720px;margin:0 0 30px;font-size:16.5px;line-height:1.55;color:rgba(238,242,255,.72);text-wrap:pretty">{{ uBlurb }}</p>
+    <div style="{{ uHeroStyle }}">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:{{ uColor }};margin-bottom:10px">{{ uNo }} &middot; The Big Question</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:29px;line-height:1.2;max-width:900px">{{ uBigQ }}</div>
+      <div style="font-size:14px;line-height:1.5;margin-top:12px;color:rgba(238,242,255,.7);max-width:820px">Answer it out loud on the last day of the mission, in your own words, with a drawing. That's the real test &mdash; the unit test is just the paperwork.</div>
     </div>
-
-    <!-- tier legend -->
     <div style="font-family:Fredoka,sans-serif;font-weight:600;font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.45);margin:0 0 16px">Every worksheet has three tiers</div>
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:16px">
       <sc-for list="{{ tiers }}" as="t" hint-placeholder-count="3">
@@ -491,19 +492,21 @@
   <!-- ============ UNIT 2 ============ -->
   <sc-if value="{{ isUnit2 }}" hint-placeholder-val="{{ false }}">
   <main style="position:relative;padding:34px 44px 72px;max-width:1280px">
-
+    <!-- Hero, rendered from the curriculum rather than typed per mission.
+         Every value here had drifted at least once: Mission 05 still read
+         "Decimals & Money" after it was renamed, Mission 07 still claimed
+         3 weeks and 12 lessons after it grew to 5 and 20, and Mission 08's
+         week range was never renumbered when 07 grew underneath it. -->
     <div style="display:flex;align-items:center;gap:10px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.5);margin-bottom:14px">
-      <span style="color:#2DD4BF">Mission 02</span><span>·</span><span>Weeks 6–10</span><span>·</span><span>20 lessons + 5 enrichment days</span>
+      <span style="color:{{ uColor }}">{{ uNo }}</span><span>&middot;</span><span>{{ uWeeks }}</span><span>&middot;</span><span>{{ uDayBreakdown }}</span>
     </div>
-    <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:56px;line-height:1;margin:0 0 18px;color:#2DD4BF;letter-spacing:-.5px">Division Decoded</h1>
-    <p style="max-width:720px;margin:0 0 30px;font-size:16.5px;line-height:1.55;color:rgba(238,242,255,.72);text-wrap:pretty">Division is the rectangle from Mission 01 with one side rubbed out. You know the area, you know one side, and the job is to find the other. Then something new happens: sometimes the pieces don't fit, and the leftover needs a decision.</p>
-
-    <div style="background:linear-gradient(150deg,rgba(45,212,191,.16),rgba(56,189,248,.1));border:1px solid rgba(45,212,191,.35);border-radius:22px;padding:26px 30px;margin-bottom:38px">
-      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#5EEAD4;margin-bottom:10px">Mission 02 · The Big Question</div>
-      <div style="font-family:Fredoka,sans-serif;font-size:29px;line-height:1.2;max-width:900px">When you have a remainder, what do you do with it — and who decides?</div>
-      <div style="font-size:14px;line-height:1.5;margin-top:12px;color:rgba(238,242,255,.7);max-width:820px">Answer it out loud on Day 20, in your own words, with an example where two people divide the same numbers and get two different right answers.</div>
+    <h1 style="{{ uTitleStyle }}">{{ uName }}</h1>
+    <p style="max-width:720px;margin:0 0 30px;font-size:16.5px;line-height:1.55;color:rgba(238,242,255,.72);text-wrap:pretty">{{ uBlurb }}</p>
+    <div style="{{ uHeroStyle }}">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:{{ uColor }};margin-bottom:10px">{{ uNo }} &middot; The Big Question</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:29px;line-height:1.2;max-width:900px">{{ uBigQ }}</div>
+      <div style="font-size:14px;line-height:1.5;margin-top:12px;color:rgba(238,242,255,.7);max-width:820px">Answer it out loud on the last day of the mission, in your own words, with a drawing. That's the real test &mdash; the unit test is just the paperwork.</div>
     </div>
-
     <div style="font-family:Fredoka,sans-serif;font-weight:600;font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.45);margin:0 0 16px">Every worksheet has three tiers</div>
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:16px">
       <sc-for list="{{ tiers }}" as="t" hint-placeholder-count="3">
@@ -707,19 +710,21 @@
   <!-- ============ UNIT 3 ============ -->
   <sc-if value="{{ isUnit3 }}" hint-placeholder-val="{{ false }}">
   <main style="position:relative;padding:34px 44px 72px;max-width:1280px">
-
+    <!-- Hero, rendered from the curriculum rather than typed per mission.
+         Every value here had drifted at least once: Mission 05 still read
+         "Decimals & Money" after it was renamed, Mission 07 still claimed
+         3 weeks and 12 lessons after it grew to 5 and 20, and Mission 08's
+         week range was never renumbered when 07 grew underneath it. -->
     <div style="display:flex;align-items:center;gap:10px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.5);margin-bottom:14px">
-      <span style="color:#A78BFA">Mission 03</span><span>·</span><span>Weeks 11–14</span><span>·</span><span>16 lessons + 4 enrichment days</span>
+      <span style="color:{{ uColor }}">{{ uNo }}</span><span>&middot;</span><span>{{ uWeeks }}</span><span>&middot;</span><span>{{ uDayBreakdown }}</span>
     </div>
-    <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:56px;line-height:1;margin:0 0 18px;color:#A78BFA;letter-spacing:-.5px">Number Power</h1>
-    <p style="max-width:720px;margin:0 0 30px;font-size:16.5px;line-height:1.55;color:rgba(238,242,255,.72);text-wrap:pretty">A shorter mission with a big idea in it. Numbers get large enough that you need a system to hold them, and expressions get long enough that the order you read them in changes the answer. Both problems have the same fix: agreed rules.</p>
-
-    <div style="background:linear-gradient(150deg,rgba(167,139,250,.16),rgba(244,114,182,.1));border:1px solid rgba(167,139,250,.35);border-radius:22px;padding:26px 30px;margin-bottom:38px">
-      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#C4B5FD;margin-bottom:10px">Mission 03 · The Big Question</div>
-      <div style="font-family:Fredoka,sans-serif;font-size:29px;line-height:1.2;max-width:900px">Why do we need rules about which operation goes first?</div>
-      <div style="font-size:14px;line-height:1.5;margin-top:12px;color:rgba(238,242,255,.7);max-width:820px">Answer it on Day 16 by writing one expression that two people could read two ways, then showing which reading the rule picks and why that reading matches the picture.</div>
+    <h1 style="{{ uTitleStyle }}">{{ uName }}</h1>
+    <p style="max-width:720px;margin:0 0 30px;font-size:16.5px;line-height:1.55;color:rgba(238,242,255,.72);text-wrap:pretty">{{ uBlurb }}</p>
+    <div style="{{ uHeroStyle }}">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:{{ uColor }};margin-bottom:10px">{{ uNo }} &middot; The Big Question</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:29px;line-height:1.2;max-width:900px">{{ uBigQ }}</div>
+      <div style="font-size:14px;line-height:1.5;margin-top:12px;color:rgba(238,242,255,.7);max-width:820px">Answer it out loud on the last day of the mission, in your own words, with a drawing. That's the real test &mdash; the unit test is just the paperwork.</div>
     </div>
-
     <div style="font-family:Fredoka,sans-serif;font-weight:600;font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.45);margin:0 0 16px">Every worksheet has three tiers</div>
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:16px">
       <sc-for list="{{ tiers }}" as="t" hint-placeholder-count="3">
@@ -904,19 +909,21 @@
   <!-- ============ UNIT 4 ============ -->
   <sc-if value="{{ isUnit4 }}" hint-placeholder-val="{{ false }}">
   <main style="position:relative;padding:34px 44px 72px;max-width:1280px">
-
+    <!-- Hero, rendered from the curriculum rather than typed per mission.
+         Every value here had drifted at least once: Mission 05 still read
+         "Decimals & Money" after it was renamed, Mission 07 still claimed
+         3 weeks and 12 lessons after it grew to 5 and 20, and Mission 08's
+         week range was never renumbered when 07 grew underneath it. -->
     <div style="display:flex;align-items:center;gap:10px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.5);margin-bottom:14px">
-      <span style="color:#F472B6">Mission 04</span><span>·</span><span>Weeks 15–20</span><span>·</span><span>24 lessons + 6 enrichment days</span>
+      <span style="color:{{ uColor }}">{{ uNo }}</span><span>&middot;</span><span>{{ uWeeks }}</span><span>&middot;</span><span>{{ uDayBreakdown }}</span>
     </div>
-    <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:56px;line-height:1;margin:0 0 18px;color:#F472B6;letter-spacing:-.5px">Fraction Universe</h1>
-    <p style="max-width:720px;margin:0 0 30px;font-size:16.5px;line-height:1.55;color:rgba(238,242,255,.72);text-wrap:pretty">The longest mission of the year, and the one most people never really finish. A fraction is one number, not two — it has a place on the number line, it can be renamed without changing, and every hard fraction question turns out to be the same question: are the pieces the same size yet?</p>
-
-    <div style="background:linear-gradient(150deg,rgba(244,114,182,.16),rgba(251,191,36,.1));border:1px solid rgba(244,114,182,.35);border-radius:22px;padding:26px 30px;margin-bottom:38px">
-      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#F9A8D4;margin-bottom:10px">Mission 04 · The Big Question</div>
-      <div style="font-family:Fredoka,sans-serif;font-size:29px;line-height:1.2;max-width:900px">How can two different-looking fractions be exactly the same number?</div>
-      <div style="font-size:14px;line-height:1.5;margin-top:12px;color:rgba(238,242,255,.7);max-width:820px">Answer it on Day 24 with the folded paper line in your hand: show two fractions landing on exactly the same point, and explain why cutting the pieces smaller never changed the amount.</div>
+    <h1 style="{{ uTitleStyle }}">{{ uName }}</h1>
+    <p style="max-width:720px;margin:0 0 30px;font-size:16.5px;line-height:1.55;color:rgba(238,242,255,.72);text-wrap:pretty">{{ uBlurb }}</p>
+    <div style="{{ uHeroStyle }}">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:{{ uColor }};margin-bottom:10px">{{ uNo }} &middot; The Big Question</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:29px;line-height:1.2;max-width:900px">{{ uBigQ }}</div>
+      <div style="font-size:14px;line-height:1.5;margin-top:12px;color:rgba(238,242,255,.7);max-width:820px">Answer it out loud on the last day of the mission, in your own words, with a drawing. That's the real test &mdash; the unit test is just the paperwork.</div>
     </div>
-
     <div style="font-family:Fredoka,sans-serif;font-weight:600;font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.45);margin:0 0 16px">Every worksheet has three tiers</div>
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:16px">
       <sc-for list="{{ tiers }}" as="t" hint-placeholder-count="3">
@@ -1105,19 +1112,21 @@
   <!-- ============ UNIT 5 ============ -->
   <sc-if value="{{ isUnit5 }}" hint-placeholder-val="{{ false }}">
   <main style="position:relative;padding:34px 44px 72px;max-width:1280px">
-
+    <!-- Hero, rendered from the curriculum rather than typed per mission.
+         Every value here had drifted at least once: Mission 05 still read
+         "Decimals & Money" after it was renamed, Mission 07 still claimed
+         3 weeks and 12 lessons after it grew to 5 and 20, and Mission 08's
+         week range was never renumbered when 07 grew underneath it. -->
     <div style="display:flex;align-items:center;gap:10px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.5);margin-bottom:14px">
-      <span style="color:#A3E635">Mission 05</span><span>·</span><span>Weeks 21–24</span><span>·</span><span>16 lessons + 4 enrichment days</span>
+      <span style="color:{{ uColor }}">{{ uNo }}</span><span>&middot;</span><span>{{ uWeeks }}</span><span>&middot;</span><span>{{ uDayBreakdown }}</span>
     </div>
-    <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:56px;line-height:1;margin:0 0 18px;color:#A3E635;letter-spacing:-.5px">Decimals &amp; Money</h1>
-    <p style="max-width:720px;margin:0 0 30px;font-size:16.5px;line-height:1.55;color:rgba(238,242,255,.72);text-wrap:pretty">Everything from Mission 04 comes back wearing a decimal point. A decimal is just a fraction whose bottom number is always ten or a hundred — and once you see that, money stops being a special case and becomes ordinary arithmetic you can check in a shop.</p>
-
-    <div style="background:linear-gradient(150deg,rgba(163,230,53,.16),rgba(74,222,128,.1));border:1px solid rgba(163,230,53,.35);border-radius:22px;padding:26px 30px;margin-bottom:38px">
-      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#BEF264;margin-bottom:10px">Mission 05 · The Big Question</div>
-      <div style="font-family:Fredoka,sans-serif;font-size:29px;line-height:1.2;max-width:900px">A decimal and a fraction can be the same amount — so why do we have both?</div>
-      <div style="font-size:14px;line-height:1.5;margin-top:12px;color:rgba(238,242,255,.7);max-width:820px">Answer it on Day 16 with the grocery receipt in your hand: name one job decimals do better, one job fractions do better, and show an amount where you'd genuinely choose each.</div>
+    <h1 style="{{ uTitleStyle }}">{{ uName }}</h1>
+    <p style="max-width:720px;margin:0 0 30px;font-size:16.5px;line-height:1.55;color:rgba(238,242,255,.72);text-wrap:pretty">{{ uBlurb }}</p>
+    <div style="{{ uHeroStyle }}">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:{{ uColor }};margin-bottom:10px">{{ uNo }} &middot; The Big Question</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:29px;line-height:1.2;max-width:900px">{{ uBigQ }}</div>
+      <div style="font-size:14px;line-height:1.5;margin-top:12px;color:rgba(238,242,255,.7);max-width:820px">Answer it out loud on the last day of the mission, in your own words, with a drawing. That's the real test &mdash; the unit test is just the paperwork.</div>
     </div>
-
     <div style="font-family:Fredoka,sans-serif;font-weight:600;font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.45);margin:0 0 16px">Every worksheet has three tiers</div>
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:16px">
       <sc-for list="{{ tiers }}" as="t" hint-placeholder-count="3">
@@ -1333,19 +1342,21 @@
   <!-- ============ UNIT 6 ============ -->
   <sc-if value="{{ isUnit6 }}" hint-placeholder-val="{{ false }}">
   <main style="position:relative;padding:34px 44px 72px;max-width:1280px">
-
+    <!-- Hero, rendered from the curriculum rather than typed per mission.
+         Every value here had drifted at least once: Mission 05 still read
+         "Decimals & Money" after it was renamed, Mission 07 still claimed
+         3 weeks and 12 lessons after it grew to 5 and 20, and Mission 08's
+         week range was never renumbered when 07 grew underneath it. -->
     <div style="display:flex;align-items:center;gap:10px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.5);margin-bottom:14px">
-      <span style="color:#60A5FA">Mission 06</span><span>·</span><span>Weeks 25–29</span><span>·</span><span>20 lessons + 5 enrichment days</span>
+      <span style="color:{{ uColor }}">{{ uNo }}</span><span>&middot;</span><span>{{ uWeeks }}</span><span>&middot;</span><span>{{ uDayBreakdown }}</span>
     </div>
-    <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:56px;line-height:1;margin:0 0 18px;color:#60A5FA;letter-spacing:-.5px">Geometry Quest</h1>
-    <p style="max-width:720px;margin:0 0 30px;font-size:16.5px;line-height:1.55;color:rgba(238,242,255,.72);text-wrap:pretty">Shapes stop being pictures and start being claims you can check. An angle is an amount of turn, a square is a rectangle that got strict, and the fence around a field tells you almost nothing about how much grass is inside it.</p>
-
-    <div style="background:linear-gradient(150deg,rgba(96,165,250,.16),rgba(167,139,250,.1));border:1px solid rgba(96,165,250,.35);border-radius:22px;padding:26px 30px;margin-bottom:38px">
-      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#93C5FD;margin-bottom:10px">Mission 06 · The Big Question</div>
-      <div style="font-family:Fredoka,sans-serif;font-size:29px;line-height:1.2;max-width:900px">Two shapes can have the same perimeter and different areas. How?</div>
-      <div style="font-size:14px;line-height:1.5;margin-top:12px;color:rgba(238,242,255,.7);max-width:820px">Answer it on Day 20 with two drawings: same fence, wildly different grass. Then say which shape wins and why the square always does.</div>
+    <h1 style="{{ uTitleStyle }}">{{ uName }}</h1>
+    <p style="max-width:720px;margin:0 0 30px;font-size:16.5px;line-height:1.55;color:rgba(238,242,255,.72);text-wrap:pretty">{{ uBlurb }}</p>
+    <div style="{{ uHeroStyle }}">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:{{ uColor }};margin-bottom:10px">{{ uNo }} &middot; The Big Question</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:29px;line-height:1.2;max-width:900px">{{ uBigQ }}</div>
+      <div style="font-size:14px;line-height:1.5;margin-top:12px;color:rgba(238,242,255,.7);max-width:820px">Answer it out loud on the last day of the mission, in your own words, with a drawing. That's the real test &mdash; the unit test is just the paperwork.</div>
     </div>
-
     <div style="font-family:Fredoka,sans-serif;font-weight:600;font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.45);margin:0 0 16px">Every worksheet has three tiers</div>
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:16px">
       <sc-for list="{{ tiers }}" as="t" hint-placeholder-count="3">
@@ -1566,19 +1577,21 @@
   <!-- ============ UNIT 7 ============ -->
   <sc-if value="{{ isUnit7 }}" hint-placeholder-val="{{ false }}">
   <main style="position:relative;padding:34px 44px 72px;max-width:1280px">
-
+    <!-- Hero, rendered from the curriculum rather than typed per mission.
+         Every value here had drifted at least once: Mission 05 still read
+         "Decimals & Money" after it was renamed, Mission 07 still claimed
+         3 weeks and 12 lessons after it grew to 5 and 20, and Mission 08's
+         week range was never renumbered when 07 grew underneath it. -->
     <div style="display:flex;align-items:center;gap:10px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.5);margin-bottom:14px">
-      <span style="color:#FB7185">Mission 07</span><span>·</span><span>Weeks 30–32</span><span>·</span><span>12 lessons + 3 enrichment days</span>
+      <span style="color:{{ uColor }}">{{ uNo }}</span><span>&middot;</span><span>{{ uWeeks }}</span><span>&middot;</span><span>{{ uDayBreakdown }}</span>
     </div>
-    <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:56px;line-height:1;margin:0 0 18px;color:#FB7185;letter-spacing:-.5px">Data Detective</h1>
-    <p style="max-width:720px;margin:0 0 30px;font-size:16.5px;line-height:1.55;color:rgba(238,242,255,.72);text-wrap:pretty">Every graph is somebody making a claim. This mission is about checking the claim: what got counted, what got left out, and which number actually describes a typical one of the things being measured.</p>
-
-    <div style="background:linear-gradient(150deg,rgba(251,113,133,.16),rgba(251,191,36,.1));border:1px solid rgba(251,113,133,.35);border-radius:22px;padding:26px 30px;margin-bottom:38px">
-      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#FDA4AF;margin-bottom:10px">Mission 07 · The Big Question</div>
-      <div style="font-family:Fredoka,sans-serif;font-size:29px;line-height:1.2;max-width:900px">Can a true average tell a false story?</div>
-      <div style="font-size:14px;line-height:1.5;margin-top:12px;color:rgba(238,242,255,.7);max-width:820px">Answer it on Day 12 with one set of numbers, two measures, and a sentence about which one you would print in a newspaper.</div>
+    <h1 style="{{ uTitleStyle }}">{{ uName }}</h1>
+    <p style="max-width:720px;margin:0 0 30px;font-size:16.5px;line-height:1.55;color:rgba(238,242,255,.72);text-wrap:pretty">{{ uBlurb }}</p>
+    <div style="{{ uHeroStyle }}">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:{{ uColor }};margin-bottom:10px">{{ uNo }} &middot; The Big Question</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:29px;line-height:1.2;max-width:900px">{{ uBigQ }}</div>
+      <div style="font-size:14px;line-height:1.5;margin-top:12px;color:rgba(238,242,255,.7);max-width:820px">Answer it out loud on the last day of the mission, in your own words, with a drawing. That's the real test &mdash; the unit test is just the paperwork.</div>
     </div>
-
     <div style="font-family:Fredoka,sans-serif;font-weight:600;font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.45);margin:0 0 16px">Every worksheet has three tiers</div>
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:16px">
       <sc-for list="{{ tiers }}" as="t" hint-placeholder-count="3">
@@ -1811,19 +1824,21 @@
   <!-- ============ UNIT 8 ============ -->
   <sc-if value="{{ isUnit8 }}" hint-placeholder-val="{{ false }}">
   <main style="position:relative;padding:34px 44px 72px;max-width:1280px">
-
+    <!-- Hero, rendered from the curriculum rather than typed per mission.
+         Every value here had drifted at least once: Mission 05 still read
+         "Decimals & Money" after it was renamed, Mission 07 still claimed
+         3 weeks and 12 lessons after it grew to 5 and 20, and Mission 08's
+         week range was never renumbered when 07 grew underneath it. -->
     <div style="display:flex;align-items:center;gap:10px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.5);margin-bottom:14px">
-      <span style="color:#FCD34D">Mission 08</span><span>·</span><span>Weeks 33–36</span><span>·</span><span>16 lessons + the capstone</span>
+      <span style="color:{{ uColor }}">{{ uNo }}</span><span>&middot;</span><span>{{ uWeeks }}</span><span>&middot;</span><span>{{ uDayBreakdown }}</span>
     </div>
-    <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:56px;line-height:1;margin:0 0 18px;color:#FCD34D;letter-spacing:-.5px">Algebra Sparks</h1>
-    <p style="max-width:720px;margin:0 0 30px;font-size:16.5px;line-height:1.55;color:rgba(238,242,255,.72);text-wrap:pretty">The last mission of the year, and the one that names what he has been doing since Mission 01. A pattern becomes a rule, a rule becomes a machine, and the letter in the middle is just a number waiting to be found.</p>
-
-    <div style="background:linear-gradient(150deg,rgba(252,211,77,.16),rgba(163,230,53,.1));border:1px solid rgba(252,211,77,.35);border-radius:22px;padding:26px 30px;margin-bottom:38px">
-      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#FDE68A;margin-bottom:10px">Mission 08 · The Big Question</div>
-      <div style="font-family:Fredoka,sans-serif;font-size:29px;line-height:1.2;max-width:900px">What does a letter in a math problem actually stand for?</div>
-      <div style="font-size:14px;line-height:1.5;margin-top:12px;color:rgba(238,242,255,.7);max-width:820px">Answer it on Day 20, standing at his own Math Trail, in a sentence that does not use the word “mystery.”</div>
+    <h1 style="{{ uTitleStyle }}">{{ uName }}</h1>
+    <p style="max-width:720px;margin:0 0 30px;font-size:16.5px;line-height:1.55;color:rgba(238,242,255,.72);text-wrap:pretty">{{ uBlurb }}</p>
+    <div style="{{ uHeroStyle }}">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:{{ uColor }};margin-bottom:10px">{{ uNo }} &middot; The Big Question</div>
+      <div style="font-family:Fredoka,sans-serif;font-size:29px;line-height:1.2;max-width:900px">{{ uBigQ }}</div>
+      <div style="font-size:14px;line-height:1.5;margin-top:12px;color:rgba(238,242,255,.7);max-width:820px">Answer it out loud on the last day of the mission, in your own words, with a drawing. That's the real test &mdash; the unit test is just the paperwork.</div>
     </div>
-
     <div style="font-family:Fredoka,sans-serif;font-weight:600;font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.45);margin:0 0 16px">Every worksheet has three tiers</div>
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:16px">
       <sc-for list="{{ tiers }}" as="t" hint-placeholder-count="3">
@@ -4118,6 +4133,19 @@ class Component extends DCLogic {
   };
   isY5(){ return this.curricId()==="y5"; }
   unitsList(){ return this.isY5()?UNITS_Y5:UNITS; }
+
+  /* Which weeks of the school year a mission occupies, counted from the sets
+   * that actually exist rather than from a number someone typed. UNITS.weeks
+   * was the typed version and it had already drifted: Mission 08 read "33–36"
+   * while its sets run 35–38, because Mission 07 gained two weeks and the
+   * ranges after it were never renumbered. Missions are contiguous, so each
+   * one starts where the previous ended. */
+  unitWeekRange(n){
+    let start=1;
+    for(let u=1;u<n;u++) start+=this.weeksWithSets(u).length;
+    const len=this.weeksWithSets(n).length;
+    return len ? (len===1 ? String(start) : start+"–"+(start+len-1)) : "—";
+  }
   weeksFor(u){ return this.isY5() ? (WEEKS_Y5[u]||WEEKS_Y5[1])
     : u===8?WEEKS_U8:u===7?WEEKS_U7:u===6?WEEKS_U6:u===5?WEEKS_U5:u===4?WEEKS_U4:u===3?WEEKS_U3:u===2?WEEKS_U2:WEEKS; }
   puzzlesFor(u){ return this.isY5() ? (PUZZLES_Y5[u]||PUZZLES_Y5[1])
@@ -6793,9 +6821,32 @@ class Component extends DCLogic {
       isUnit5:st.view==="unit"&&st.uview===5&&!y5, isUnit6:st.view==="unit"&&st.uview===6&&!y5,
       isUnit7:st.view==="unit"&&st.uview===7&&!y5, isUnit8:st.view==="unit"&&st.uview===8&&!y5,
       isUnitY5:st.view==="unit"&&y5,
-      uColor:sel.color, uName:sel.name, uNo:"Mission 0"+sel.n, uWeeks:"Weeks "+sel.weeks,
+      // One template per year now, so the mission being shown decides which
+      // manipulative appears rather than which whole page does.
+      isUnitY3:st.view==="unit"&&!y5,
+      isManip1:st.uview===1&&!y5, isManip2:st.uview===2&&!y5,
+      isManip3:st.uview===3&&!y5, isManip4:st.uview===4&&!y5,
+      isManip5:st.uview===5&&!y5, isManip6:st.uview===6&&!y5,
+      isManip7:st.uview===7&&!y5, isManip8:st.uview===8&&!y5,
+      uColor:sel.color, uName:sel.name, uNo:"Mission 0"+sel.n,
+      /* Derived, not stored. UNITS carried a hand-written `weeks` range that
+       * had already gone stale: Mission 08 said "33–36" when its own sets run
+       * 35–38, because Mission 07 grew by two weeks and nothing followed. A
+       * range computed from the bank cannot drift. */
+      uWeeks:"Weeks "+this.unitWeekRange(sel.n),
+      uBlurb:sel.blurb||"", uQuote:sel.quote||"",
       uBigQ:sel.bigQ, uProject:sel.project, uGame:sel.game,
       uLessonCount:(this.weeksFor(st.uview).length*5)+" days planned",
+      /* "20 lessons + 5 enrichment days", counted off the bank. Each week ends
+       * in a Friday enrichment day, so the enrichment count is the week count
+       * and the rest are lessons. This was typed into each mission page by
+       * hand and three of the eight had gone stale — Mission 07 still claimed
+       * 12 lessons across 3 weeks after it grew to 25 sets across 5. */
+      uDayBreakdown:(()=>{
+        const weeks=this.weeksWithSets(st.uview).length;
+        const sets=this.setsFor(st.uview).length;
+        return (sets-weeks)+" lessons + "+weeks+" enrichment day"+(weeks===1?"":"s");
+      })(),
       uPackHref:(y5?"Y2 Unit ":"Unit ")+sel.n+" Print Pack.pdf",
       uWsHref:(y5?"Y2 Unit ":"Unit ")+sel.n+" Worksheets.pdf",
       uPackStyle:`font-family:Fredoka,sans-serif;font-size:15px;padding:11px 20px;border-radius:13px;border:1px solid ${sel.color}73;background:${sel.color}24;color:${sel.color}`,

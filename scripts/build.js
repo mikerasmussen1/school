@@ -134,6 +134,9 @@ run("node", ["scripts/check-paper-mapping.js"], "check-paper-mapping");
  * since they share its ordering code. It is a ratchet against a known backlog,
  * so it fails only when a change makes the misplacement worse. */
 run("node", ["scripts/check-tier-sections.js"], "check-tier-sections");
+/* Measures what the other three cannot see: whether a page had to be shrunk to
+ * fit, and how far. All three were green on a worksheet scaled to about 5pt. */
+run("node", ["scripts/check-print-fit.js"], "check-print-fit");
 run("node", ["scripts/qa-verify.js"], "qa-verify");
 
 console.log();

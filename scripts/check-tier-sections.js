@@ -101,10 +101,10 @@ Object.entries(C.EXTRA || {}).forEach(([id, items]) => {
  * in how it reads the TIER (off the printed styling, not off a rebuilt array).
  * Re-deriving set resolution as well would only add a way to be wrong. */
 function resolve(file, label) {
-  const m = label.match(/^(\d+)\.(\d+)/);
   const u = (file.match(/Unit (\d+)/) || [])[1];
   if (!u) return null;
   const unit = +u, y2 = /^Y2 /.test(file);
+  const m = label.match(/^(\d+)\.(\d+)/);
   if (m) {
     const week = +m[1], page = +m[2];
     const cands = y2
@@ -113,11 +113,58 @@ function resolve(file, label) {
          week === 1 ? `u${unit}p${page}` : null, `u${unit}w${week}p${page}`];
     for (const c of cands) if (c && byId[c]) return byId[c];
   }
-  // Tests, quizzes and duels carry a title instead of "N.N".
-  const t = dec(label).replace(/\s*·\s*back$/i, "").replace(/^[\d.]+\s*[·-]?\s*/, "").trim();
-  const hit = byTitle[t];
-  return hit || null;                                    // null also covers ambiguous
+  /* Pages labelled by DAY rather than "N.N" — the Friday enrichment days and
+   * the Thursday error-journal sweeps — are 172 of these files' pages, and a
+   * resolver that only strips a leading number walked past every one of them.
+   * They were neither rebuilt nor checked, which is the same shape of hole as
+   * the tier regex that once matched only Warm-Up: a whole class of page
+   * quietly outside the tooling.
+   *
+   * Scope by unit, and note that Year One's Mission 01 uses bare ids — p1..p5,
+   * not u1p1 — so a plain "starts with u<unit>" prefix test misses it. An
+   * ambiguous title still resolves to nothing: "Mission 07 Test" is two
+   * different sets, and rewriting one page with the other's questions is the
+   * exact failure this tooling exists to prevent. */
+  const want = dec(label)
+    .replace(/^(Mon|Tue|Wed|Thu|Fri)\s+/i, "")
+    .replace(/^[\d.]+\s*[·-]?\s*/, "")
+    .replace(/\s*·\s*back\s*$/i, "")
+    .toLowerCase();
+  if (!want) return null;
+  const inUnit = id => y2
+    ? id.startsWith(`y5u${unit}p`) || id.startsWith(`y5u${unit}w`)
+    : !id.startsWith("y5") &&
+      (id.startsWith(`u${unit}p`) || id.startsWith(`u${unit}w`) ||
+       (unit === 1 && /^p\d+$/.test(id)));
+  const hits = Object.values(byId).filter(s =>
+    inUnit(String(s.id)) && dec(s.title || "").toLowerCase() === want);
+  return hits.length === 1 ? hits[0] : null;
 }
+
+/* Last resort: the page's own header.
+ *
+ * A page prints "3rd Grade · Mission 07 · Week 3 · Set Fri", which names the
+ * week and the day directly. That matters for the Friday pages whose TITLE is
+ * ambiguous — "Mission 07 Test" is both u7w3p5 and u7w5p5, so the title guard
+ * correctly refuses to guess, and 23 real problems on those two pages went
+ * unrebuilt and unchecked as a result. The header resolves them without
+ * guessing, because it states the week the title omits. */
+function resolveByHeader(file, page) {
+  const u = (file.match(/Unit (\d+)/) || [])[1];
+  if (!u) return null;
+  const y2 = /^Y2 /.test(file);
+  const m = page.match(/·\s*Week\s*(\d+)\s*·\s*Set\s*([^<·]+)/);
+  if (!m) return null;
+  const week = +m[1], tag = m[2].trim();
+  const day = /^fri$/i.test(tag) ? 5 : (tag.match(/^\d+\.(\d+)/) || [])[1];
+  if (!day) return null;
+  const pre = y2 ? `y5u${u}` : `u${u}`;
+  const cands = [`${pre}w${week}p${day}`, week === 1 ? `${pre}p${day}` : null,
+                 (!y2 && +u === 1 && week === 1) ? `p${day}` : null];
+  for (const c of cands) if (c && byId[c]) return byId[c];
+  return null;
+}
+
 
 /* The printed order: dedupe by question text in bank order, then group
  * Warm-Up, Core, Challenge. Stated in CONTRIBUTING.md. Written out here rather
@@ -143,7 +190,7 @@ for (const file of fs.readdirSync(".").filter(f => /Worksheets\.dc\.html$/.test(
     const label = (sec.match(/data-screen-label="([^"]*)"/) || [])[1];
     if (!label) continue;
     // "1.4 The Four Rooms" -> try the title half, then the whole label
-    const set = resolve(file, label);
+    const set = resolve(file, label) || resolveByHeader(file, sec);
     if (!set) { unresolved++; continue; }
     pages++;
     const order = printedOrder(set);

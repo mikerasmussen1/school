@@ -15,45 +15,45 @@
   "https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js":"./vendor/react-dom.production.min.js",
   "https://unpkg.com/@babel/standalone@7.29.0/babel.min.js":"./vendor/babel.min.js"
 };</script>
-<script src="./support.js?v=d159824"></script>
-<script src="./curriculum/sync.js?v=d159824"></script>
-<script src="./curriculum/students.js?v=d159824"></script>
-<script src="./curriculum/subjects.js?v=d159824"></script>
-<script src="./curriculum/question-types.js?v=d159824"></script>
-<script src="./curriculum/qbank.js?v=d159824"></script>
-<script src="./curriculum/lessons.js?v=d159824"></script>
-<script src="./curriculum/tutor.js?v=d159824"></script>
-<script src="./curriculum/shared.js?v=d159824"></script>
-<script src="./curriculum/math-y1.js?v=d159824"></script>
-<script src="./curriculum/math-y2.js?v=d159824"></script>
-<script src="./curriculum/extra-banks.js?v=d159824"></script>
-<script src="./curriculum/math-sequence.js?v=d159824"></script>
-<script src="./curriculum/registry.js?v=d159824"></script>
-<script src="./curriculum/la-y1-spine.js?v=d159824"></script>
-<script src="./curriculum/la-y1-words.js?v=d159824"></script>
-<script src="./curriculum/la-y1-grammar.js?v=d159824"></script>
-<script src="./curriculum/la-y1-reading.js?v=d159824"></script>
-<script src="./curriculum/la-y1-tasks.js?v=d159824"></script>
-<script src="./curriculum/la-books.js?v=d159824"></script>
-<script src="./curriculum/la-y2-spine.js?v=d159824"></script>
-<script src="./curriculum/la-y2-words.js?v=d159824"></script>
-<script src="./curriculum/la-y2-grammar.js?v=d159824"></script>
-<script src="./curriculum/la-y2-reading.js?v=d159824"></script>
-<script src="./curriculum/la-y2-tasks.js?v=d159824"></script>
-<script src="./curriculum/la-books-y2.js?v=d159824"></script>
-<script src="./curriculum/science-y3-spine.js?v=d159824"></script>
-<script src="./curriculum/science-y5-spine.js?v=d159824"></script>
-<script src="./curriculum/science-lessons.js?v=d159824"></script>
-<script src="./curriculum/science-quiz.js?v=d159824"></script>
-<script src="./curriculum/science.js?v=d159824"></script>
-<script src="./curriculum/language-arts.js?v=d159824"></script>
-<script src="./curriculum/japan-unit.js?v=d159824"></script>
+<script src="./support.js?v=9238340"></script>
+<script src="./curriculum/sync.js?v=9238340"></script>
+<script src="./curriculum/students.js?v=9238340"></script>
+<script src="./curriculum/subjects.js?v=9238340"></script>
+<script src="./curriculum/question-types.js?v=9238340"></script>
+<script src="./curriculum/qbank.js?v=9238340"></script>
+<script src="./curriculum/lessons.js?v=9238340"></script>
+<script src="./curriculum/tutor.js?v=9238340"></script>
+<script src="./curriculum/shared.js?v=9238340"></script>
+<script src="./curriculum/math-y1.js?v=9238340"></script>
+<script src="./curriculum/math-y2.js?v=9238340"></script>
+<script src="./curriculum/extra-banks.js?v=9238340"></script>
+<script src="./curriculum/math-sequence.js?v=9238340"></script>
+<script src="./curriculum/registry.js?v=9238340"></script>
+<script src="./curriculum/la-y1-spine.js?v=9238340"></script>
+<script src="./curriculum/la-y1-words.js?v=9238340"></script>
+<script src="./curriculum/la-y1-grammar.js?v=9238340"></script>
+<script src="./curriculum/la-y1-reading.js?v=9238340"></script>
+<script src="./curriculum/la-y1-tasks.js?v=9238340"></script>
+<script src="./curriculum/la-books.js?v=9238340"></script>
+<script src="./curriculum/la-y2-spine.js?v=9238340"></script>
+<script src="./curriculum/la-y2-words.js?v=9238340"></script>
+<script src="./curriculum/la-y2-grammar.js?v=9238340"></script>
+<script src="./curriculum/la-y2-reading.js?v=9238340"></script>
+<script src="./curriculum/la-y2-tasks.js?v=9238340"></script>
+<script src="./curriculum/la-books-y2.js?v=9238340"></script>
+<script src="./curriculum/science-y3-spine.js?v=9238340"></script>
+<script src="./curriculum/science-y5-spine.js?v=9238340"></script>
+<script src="./curriculum/science-lessons.js?v=9238340"></script>
+<script src="./curriculum/science-quiz.js?v=9238340"></script>
+<script src="./curriculum/science.js?v=9238340"></script>
+<script src="./curriculum/language-arts.js?v=9238340"></script>
+<script src="./curriculum/japan-unit.js?v=9238340"></script>
 <!-- The Japan card opens japan.dc.html, a separate committed page rather than an
      app screen. It and image-slot.js must stay committed alongside this script
      tag or the card 404s on GitHub Pages. Note openSubject follows open.href
      regardless of a subject's status, so marking it "soon" does NOT take it
      offline - remove this script tag instead. -->
-  <script data-build>window.__BUILD__="d159824";</script>
+  <script data-build>window.__BUILD__="9238340";</script>
 </head>
 <body>
 <x-dc>
@@ -112,6 +112,30 @@
     <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#FBBF24">{{ todayDate }}</div>
     <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:52px;line-height:1.02;margin:10px 0 12px;letter-spacing:-.5px">{{ todayGreeting }}</h1>
     <p style="margin:0 0 34px;max-width:640px;font-size:16.5px;line-height:1.55;color:rgba(238,242,255,.72);text-wrap:pretty">{{ todayNote }}</p>
+
+    <!-- one grade, chosen once, applied to every subject -->
+    <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:22px">
+      <sc-if value="{{ gradeChosen }}" hint-placeholder-val="{{ true }}">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.45)">Your curriculum</div>
+        <div style="font-family:Fredoka,sans-serif;font-size:18px;color:#4ADE80">{{ gradeName }}</div>
+        <button onClick="{{ openGradePicker }}" style="font-family:Fredoka,sans-serif;font-size:13px;padding:8px 16px;border-radius:12px;cursor:pointer;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.16);color:rgba(238,242,255,.72)" style-hover="filter:brightness(1.3)">Change curriculum</button>
+      </sc-if>
+    </div>
+
+    <sc-if value="{{ showGradePicker }}" hint-placeholder-val="{{ false }}">
+      <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:24px 28px;margin-bottom:26px;max-width:640px">
+        <div style="font-family:Fredoka,sans-serif;font-size:20px;margin-bottom:4px">Which grade are you in?</div>
+        <div style="font-size:13.5px;line-height:1.5;color:rgba(238,242,255,.6);margin-bottom:16px">{{ gradeHint }}</div>
+        <div style="display:flex;gap:12px;flex-wrap:wrap">
+          <sc-for list="{{ gradeOptions }}" as="g" hint-placeholder-count="2">
+            <button onClick="{{ g.onClick }}" style="{{ g.style }}" style-hover="filter:brightness(1.25)">{{ g.label }}</button>
+          </sc-for>
+        </div>
+        <sc-if value="{{ canCloseGradePicker }}" hint-placeholder-val="{{ false }}">
+          <button onClick="{{ closeGradePicker }}" style="margin-top:16px;font-family:Fredoka,sans-serif;font-size:13px;padding:8px 16px;border-radius:12px;cursor:pointer;background:transparent;border:1px solid rgba(255,255,255,.16);color:rgba(238,242,255,.6)">Cancel</button>
+        </sc-if>
+      </div>
+    </sc-if>
 
     <div style="margin-bottom:30px">
       <sc-for list="{{ quickRows }}" as="q" hint-placeholder-count="2">
@@ -3953,7 +3977,7 @@ class Component extends DCLogic {
            pHist:{}, skills:{}, snooze:{}, pFull:{}, pweek:1, pStreak:{}, sprintHist:{}, stream:null, sprint:null,
            tCode:"", tRoster:null, tKey:null, tSel:"", tData:null, tBusy:false, tErr:"",
            tAddName:"", tAddPin:"", tFront:false, tView:null, tFromGate:false,
-           tSubject:"all",
+           tSubject:"all", pickGrade:false,
            newCurric:"y3",
            profiles:[], activeId:null, gate:true, newName:"", loaded:false,
            newPin:"", pinFor:null, pinEntry:"", gateErr:"", syncing:false,
@@ -3994,6 +4018,50 @@ class Component extends DCLogic {
     this.setLevel(subjectId, levelId);
     setTimeout(()=>{ this.openSubject(subjectId); }, 0);
   };
+
+  /* Set the child's grade across every subject in one go.
+   *
+   * Levels used to be picked per subject, which meant three separate choices
+   * that could disagree — 3rd grade maths and 5th grade reading, with nothing
+   * to notice. A child is in ONE grade. This writes that grade to every
+   * registered subject and to the profile, so the three can no longer drift. */
+  setGradeAll=(gradeId)=>{
+    const ST=window.__CURR&&window.__CURR.STUDENTS;
+    const g=ST&&ST.GRADES.find(x=>x.id===gradeId);
+    if(!g) return;
+    this.saveState(st=>{
+      const subs={...(st.subjects||{})};
+      Object.keys(g.levels).forEach(sid=>{
+        if(!window.Subjects||!window.Subjects.get(sid)) return;
+        subs[sid]={opened:0,days:[],data:{},...(subs[sid]||{}),level:g.levels[sid]};
+      });
+      return {
+        subjects:subs,
+        profiles:st.profiles.map(p=>p.id===st.activeId?{...p,curriculum:g.levels.math,grade:gradeId}:p),
+        unit:1, uview:1, week:1, pset:null, pweek:1, pTier:null,
+        pickGrade:false
+      };
+    });
+  };
+
+  openGradePicker=()=>this.setState({pickGrade:true});
+  closeGradePicker=()=>this.setState({pickGrade:false});
+
+  /* The child's current grade, inferred from any subject that has a level so
+   * that records predating this still resolve. */
+  currentGrade(){
+    const ST=window.__CURR&&window.__CURR.STUDENTS;
+    if(!ST) return null;
+    const p=this.state.profiles.find(x=>x.id===this.state.activeId);
+    if(p&&p.grade) return p.grade;
+    const subs=this.state.subjects||{};
+    for(const sid of Object.keys(subs)){
+      const g=ST.gradeOfLevel(sid, (subs[sid]||{}).level);
+      if(g) return g;
+    }
+    if(p&&p.curriculum) return ST.gradeOfLevel("math", p.curriculum);
+    return null;
+  }
 
   setLevel=(subjectId,levelId)=>{
     this.saveState(st=>{
@@ -6105,7 +6173,10 @@ class Component extends DCLogic {
         color:soon?"rgba(238,242,255,.45)":s.color,
         go:()=>this.openSubject(s.id),
         record,
-        hasLevels:levels.length>0,
+        // The level chooser has moved to a single control at the top of the
+        // page, because a child is in one grade rather than one per subject.
+        // Leaving a second chooser here would let the three drift apart again.
+        hasLevels:false,
         // Always "Choose a level", including after one is picked. Two boys
         // share this page, so the prompt is not a one-time question — the
         // other brother needs it there every time he sits down.
@@ -6169,6 +6240,40 @@ class Component extends DCLogic {
        * A subject with no level chosen yet is not hidden — it appears with a
        * "Choose your level" prompt, because a new pupil needs a way in. What
        * it never does is name anybody. */
+      /* One grade choice, at the top, for every subject at once. */
+      gradeChosen: !!this.currentGrade(),
+      gradeNeeded: !this.currentGrade(),
+      gradeName:(function(){
+        const ST=window.__CURR&&window.__CURR.STUDENTS;
+        const g=this.currentGrade();
+        const found=ST&&ST.GRADES.find(x=>x.id===g);
+        return found?found.label:"";
+      }).call(this),
+      showGradePicker: !!st.pickGrade || !this.currentGrade(),
+      openGradePicker: this.openGradePicker,
+      closeGradePicker: this.closeGradePicker,
+      canCloseGradePicker: !!this.currentGrade(),
+      gradeOptions:(function(){
+        const ST=window.__CURR&&window.__CURR.STUDENTS;
+        if(!ST) return [];
+        const cur=this.currentGrade();
+        const self2=this;
+        return ST.GRADES.map(function(g){
+          const on=cur===g.id;
+          return {label:g.label, onClick:function(){ self2.setGradeAll(g.id); },
+            style:"font-family:Fredoka,sans-serif;font-size:16px;padding:13px 26px;border-radius:14px;"+
+              "cursor:pointer;white-space:nowrap;transition:.15s;background:"+
+              (on?"rgba(74,222,128,.2)":"rgba(255,255,255,.05)")+";border:1px solid "+
+              (on?"rgba(74,222,128,.55)":"rgba(255,255,255,.16)")+";color:"+
+              (on?"#4ADE80":"rgba(238,242,255,.75)")};
+        });
+      }).call(this),
+      gradeHint:(function(){
+        return this.currentGrade()
+          ? "This sets every subject at once, so your work always stays in one grade."
+          : "Pick your grade to begin. It sets every subject at once.";
+      }).call(this),
+
       quickRows:(function(){
         const active=st.profiles.find(function(p){ return p.id===st.activeId; })||null;
         if(!active) return [];

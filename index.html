@@ -88,7 +88,7 @@
         <div style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.5);margin-top:3px">{{ courseLine }} <span style="opacity:.45" title="Which build you are looking at. If this does not match the latest change, the page is cached — pull to refresh.">&middot; {{ buildStamp }}</span></div>
       </div>
       <sc-if value="{{ showSubjBack }}" hint-placeholder-val="{{ true }}">
-        <button onClick="{{ goSubjects }}" style="display:flex;align-items:center;gap:8px;font-family:Fredoka,sans-serif;font-size:12.5px;color:rgba(238,242,255,.72);background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);border-radius:999px;padding:7px 14px;white-space:nowrap;cursor:pointer" style-hover="filter:brightness(1.4)">← All subjects</button>
+        <button onClick="{{ goBack }}" style="display:flex;align-items:center;gap:8px;font-family:Fredoka,sans-serif;font-size:12.5px;color:rgba(238,242,255,.72);background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);border-radius:999px;padding:7px 14px;white-space:nowrap;cursor:pointer" style-hover="filter:brightness(1.4)">← {{ backLabel }}</button>
       </sc-if>
     </div>
     <div style="display:flex;align-items:center;gap:12px">
@@ -4127,7 +4127,7 @@ class Component extends DCLogic {
   // Sets authored before weeks existed carry no `w` and belong to Week 1.
   setsForWeek(u,w){ const all=this.setsFor(u); const got=all.filter(s=>(s.w||1)===w); return got.length?got:all.filter(s=>(s.w||1)===1); }
   weeksWithSets(u){ return [...new Set(this.setsFor(u).map(s=>s.w||1))].sort((a,b)=>a-b); }
-  openUnit=n=>this.setState({view:"unit",uview:n,unit:n,week:1,pweek:1,pset:this.setsForWeek(n,1)[0].id,pTier:null});
+  openUnit=n=>this.nav({view:"unit",uview:n,unit:n,week:1,pweek:1,pset:this.setsForWeek(n,1)[0].id,pTier:null});
 
   // ---- subjects -----------------------------------------------------------
   // Every child's record carries one namespace per subject (see subjects.js).
@@ -4159,10 +4159,34 @@ class Component extends DCLogic {
       const href=s.open.href+(lv?((s.open.href.indexOf("?")<0?"?":"&")+"level="+encodeURIComponent(lv)):"");
       setTimeout(()=>{ window.location.href=href; },80); return;
     }
-    if(s.open==="builtin"){ this.setState({view:"map",subjectView:null}); return; }
-    this.setState({view:"stub",subjectView:id});
+    if(s.open==="builtin"){ this.nav({view:"map",subjectView:null}); return; }
+    this.nav({view:"stub",subjectView:id});
   };
-  goSubjects=()=>this.setState({view:"today",subjectView:null});
+  /* BACK MEANS THE SCREEN YOU CAME FROM, not the top of the app.
+   *
+   * The header carried one "All subjects" button, so from the Practice Bay
+   * the only way out was home — three levels of context thrown away to move
+   * one step back. Every navigation now records where it left; back returns
+   * there. Going home clears the trail, because home is the bottom of it.
+   *
+   * The standalone subject pages (Word Voyagers, Field Notes, Japan) each
+   * already carry their own link back to index.html, so they need nothing
+   * here — this is only for the screens that live inside this page. */
+  nav=(patch)=>this.setState(st=>({
+    navStack:[...(st.navStack||[]),
+              {view:st.view, uview:st.uview, subjectView:st.subjectView}].slice(-12),
+    ...patch
+  }));
+
+  goBack=()=>this.setState(st=>{
+    const stack=[...(st.navStack||[])];
+    const prev=stack.pop();
+    // Nothing recorded (deep link, or a reset cleared it) — home is a safe floor.
+    if(!prev) return {view:"today", subjectView:null, navStack:[]};
+    return {...prev, navStack:stack};
+  });
+
+  goSubjects=()=>this.setState({view:"today",subjectView:null,navStack:[]});
 
   store = {profiles:[], activeId:null, data:{}};
 
@@ -4210,7 +4234,12 @@ class Component extends DCLogic {
   };
   _enterProfile(id){
     const d=this.store.data[id]||{};
-    this.setState({activeId:id,gate:false,pinFor:null,pinEntry:"",gateErr:"",view:"today",subjectView:null,...this.blank(),...d},()=>this.persist());
+    this.setState({activeId:id,gate:false,pinFor:null,pinEntry:"",gateErr:"",view:"today",subjectView:null,
+      // The other boy's trail is not this boy's. Two children share this page,
+      // so a profile switch has to clear where the last one had been, exactly
+      // as goSubjects does.
+      navStack:[],
+      ...this.blank(),...d},()=>this.persist());
   }
   // Pull the pilot's cloud copy, keep whichever side is newer, then enter.
   _signInRemote=async prof=>{
@@ -5491,7 +5520,7 @@ class Component extends DCLogic {
     const rec=this.dynFor(setId);
     const r=rec.rounds.find(x=>x.n===roundN)||rec.rounds[rec.rounds.length-1];
     if(!r||!r.lesson) return;
-    this.setState({view:"coach", coach:{setId, round:r.n, slide:0, ans:{}, checked:false}});
+    this.nav({view:"coach", coach:{setId, round:r.n, slide:0, ans:{}, checked:false}});
   };
   closeCoach=()=>this.setState({view:"practice", coach:null});
 
@@ -6188,14 +6217,20 @@ class Component extends DCLogic {
         color:soon?"rgba(238,242,255,.45)":s.color,
         go:()=>this.openSubject(s.id),
         record,
-        // The level chooser has moved to a single control at the top of the
-        // page, because a child is in one grade rather than one per subject.
-        // Leaving a second chooser here would let the three drift apart again.
-        hasLevels:false,
-        // Always "Choose a level", including after one is picked. Two boys
-        // share this page, so the prompt is not a one-time question — the
-        // other brother needs it there every time he sits down.
-        levelLabel:"Choose a level",
+        /* The grade control at the top still sets every subject at once, and
+         * is still how a child normally chooses — that part was right, and it
+         * keeps the common case to one tap with nothing to get out of step.
+         *
+         * But a child can genuinely be ahead in one subject and not another,
+         * which the single control could not express. So this per-subject
+         * chooser is an OVERRIDE on top of it, not a competing first choice:
+         * pick a grade once, then move one subject if the child is actually
+         * placed differently there. */
+        hasLevels:levels.length>1 && !soon,
+        // Before anything is chosen this is a prompt; afterwards it is an
+        // override, and saying so is what stops it reading as a second,
+        // conflicting first choice.
+        levelLabel: picked ? "Just this subject" : "Choose a level",
         levels:levels.map(l=>{
           const on=l.id===picked;
           return {id:l.id, label:l.label,
@@ -6233,6 +6268,27 @@ class Component extends DCLogic {
     const out={
       isToday:st.view==="today", isStub:st.view==="stub",
       goSubjects:this.goSubjects,
+      goBack:this.goBack,
+      // Shown next to "Your curriculum". Falls back to the plain grade name
+      // whenever the subjects still agree, which is the normal case.
+      gradeName:(()=>{
+        const ST=window.__CURR&&window.__CURR.STUDENTS;
+        const subs=st.subjects||{};
+        const seen=ST?Object.keys(subs).map(sid=>ST.gradeOfLevel(sid,(subs[sid]||{}).level)).filter(Boolean):[];
+        if(new Set(seen).size>1) return "Mixed by subject";
+        const g=this.currentGrade();
+        const found=ST&&ST.GRADES.find(x=>x.id===g);
+        return found?found.label:"";
+      })(),
+
+      // Name the destination so the button says where it goes, not just "back".
+      backLabel:(()=>{
+        const prev=(st.navStack||[])[(st.navStack||[]).length-1];
+        const NAMES={today:"All subjects", map:"Mission Map", unit:"Mission 0"+st.uview,
+                     practice:"Practice Bay", coach:"Coach", hq:"Teacher HQ", stub:"Subject"};
+        if(!prev) return "All subjects";
+        return NAMES[prev.view] || "Back";
+      })(),
       showMathTabs:st.view!=="today"&&st.view!=="stub",
       showSubjBack:st.view!=="today",
       subjGlyph:(cur&&st.view==="stub"?cur.glyph:(st.view==="today"?"B":"×")),
@@ -6258,12 +6314,7 @@ class Component extends DCLogic {
       /* One grade choice, at the top, for every subject at once. */
       gradeChosen: !!this.currentGrade(),
       gradeNeeded: !this.currentGrade(),
-      gradeName:(function(){
-        const ST=window.__CURR&&window.__CURR.STUDENTS;
-        const g=this.currentGrade();
-        const found=ST&&ST.GRADES.find(x=>x.id===g);
-        return found?found.label:"";
-      }).call(this),
+      
       showGradePicker: !!st.pickGrade || !this.currentGrade(),
       openGradePicker: this.openGradePicker,
       closeGradePicker: this.closeGradePicker,
@@ -6686,7 +6737,7 @@ class Component extends DCLogic {
       goUnit6:()=>this.openUnit(6),
       goUnit7:()=>this.openUnit(7),
       goUnit8:()=>this.openUnit(8),
-      goPractice:()=>this.setState({view:"practice"}),
+      goPractice:()=>this.nav({view:"practice"}),
 
       tabs:[["map","Mission Map"],["unit","Mission 0"+st.uview],["practice","Practice Bay"],["hq","Teacher HQ"]].map(([v,label])=>({
         label, style:this.tabStyle(st.view===v), go:()=>this.setState({view:v})
@@ -6719,7 +6770,7 @@ class Component extends DCLogic {
       },
 
       tiers:TIERS.map((t,ti)=>({...t,
-        open:()=>this.setState({view:"practice",pTier:ti}),
+        open:()=>this.nav({view:"practice",pTier:ti}),
         cta:"Practise the "+t.name+" tier →",
         ctaStyle:`margin-top:auto;padding-top:14px;font-family:Fredoka,sans-serif;font-size:13.5px;color:${t.color};opacity:.9`,
         cardStyle:`background:linear-gradient(150deg,${t.color}14,rgba(255,255,255,.03));border:1px solid ${t.color}3A;border-radius:20px;padding:22px 24px;cursor:pointer;text-align:left;transition:.18s;color:inherit;display:flex;flex-direction:column`,

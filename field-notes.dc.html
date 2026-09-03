@@ -3,9 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=65765a6"></script>
-  <script>window.__BUILD__="d159824";</script>
-  <script data-build>window.__BUILD__="65765a6";</script>
+<script src="./support.js?v=2026-09-03-1626"></script>
+  <script data-build>window.__BUILD__="2026-09-03-1626";</script>
 </head>
 <body>
 <x-dc>
@@ -31,16 +30,16 @@
   ol.steps{margin:8px 0 0;padding-left:22px} ol.steps li{margin-bottom:7px}
   ul.mats{margin:6px 0 0;padding-left:20px} ul.mats li{margin-bottom:3px;font-size:.93rem}
 </style>
-<script src="./curriculum/students.js?v=65765a6"></script>
-<script src="./curriculum/sync.js?v=65765a6"></script>
-<script src="./curriculum/subjects.js?v=65765a6"></script>
-<script src="./curriculum/question-types.js?v=65765a6"></script>
-<script src="./curriculum/science-y3-spine.js?v=65765a6"></script>
-<script src="./curriculum/science-y5-spine.js?v=65765a6"></script>
-<script src="./curriculum/science-lessons.js?v=65765a6"></script>
-<script src="./curriculum/science-quiz.js?v=65765a6"></script>
-<script src="./curriculum/la-calendar.js?v=65765a6"></script>
-<script src="./curriculum/science-shopping.js?v=65765a6"></script>
+<script src="./curriculum/students.js?v=2026-09-03-1626"></script>
+<script src="./curriculum/sync.js?v=2026-09-03-1626"></script>
+<script src="./curriculum/subjects.js?v=2026-09-03-1626"></script>
+<script src="./curriculum/question-types.js?v=2026-09-03-1626"></script>
+<script src="./curriculum/science-y3-spine.js?v=2026-09-03-1626"></script>
+<script src="./curriculum/science-y5-spine.js?v=2026-09-03-1626"></script>
+<script src="./curriculum/science-lessons.js?v=2026-09-03-1626"></script>
+<script src="./curriculum/science-quiz.js?v=2026-09-03-1626"></script>
+<script src="./curriculum/la-calendar.js?v=2026-09-03-1626"></script>
+<script src="./curriculum/science-shopping.js?v=2026-09-03-1626"></script>
 </helmet>
 
 <div style="min-height:100vh;display:flex;flex-direction:column">
@@ -281,6 +280,23 @@
 
     <sc-if value="{{ isParent }}" hint-placeholder-val="{{ false }}">
       <div class="card">
+        <h2>Start the year again</h2>
+        <p class="muted">Marks every week in both grades as not finished, and clears the check scores. Useful for testing, or for genuinely restarting. It cannot be undone.</p>
+        <sc-if value="{{ resetIdle }}" hint-placeholder-val="{{ true }}">
+          <div style="margin-top:10px"><button onClick="{{ armReset }}" style="{{ btnSecondary }}">Reset all progress</button></div>
+        </sc-if>
+        <sc-if value="{{ resetArmed }}" hint-placeholder-val="{{ false }}">
+          <div style="background:#F3DCD5;color:var(--brick-dark);border-radius:8px;padding:14px 16px;margin-top:10px">
+            <div style="font-weight:600;margin-bottom:8px">This erases every finished week for both grades, on every device. Sure?</div>
+            <div style="display:flex;gap:9px;flex-wrap:wrap">
+              <button onClick="{{ doReset }}" style="{{ btnPrimary }}">Yes, erase it all</button>
+              <button onClick="{{ cancelReset }}" style="{{ btnSecondary }}">Keep my progress</button>
+            </div>
+          </div>
+        </sc-if>
+      </div>
+
+      <div class="card">
         <h2>{{ parentHeading }}</h2>
         <p>One lesson a week, 36 weeks, 36 lessons. Each is a single sitting in three parts: a hands-on investigation (not graded), a short reading with a claim written by hand, and where available a multiple-choice check.</p>
         <p class="muted">This course ran twice a week until recently. Going to once a week merged the two days rather than deleting one — every lab, reading, claim and standard is still here, so the weekly session is roughly twice as long as either old day. If that proves too long, say so and units can be shortened deliberately rather than quietly overrunning.</p>
@@ -306,23 +322,6 @@
         <div style="background:var(--gold-l);color:#7A5A0C;border-radius:8px;padding:13px 16px;font-size:.93rem">{{ coverageNote }}</div>
         <p class="muted" style="margin-top:10px">The written claim runs every week regardless. It is the thing the Georgia practices standards actually ask for, and no multiple-choice item can stand in for it.</p>
       </div>
-      <div class="card">
-        <h2>Start the year again</h2>
-        <p class="muted">Marks every week in both grades as not finished, and clears the check scores. Useful for testing, or for genuinely restarting. It cannot be undone.</p>
-        <sc-if value="{{ resetIdle }}" hint-placeholder-val="{{ true }}">
-          <div style="margin-top:10px"><button onClick="{{ armReset }}" style="{{ btnSecondary }}">Reset all progress</button></div>
-        </sc-if>
-        <sc-if value="{{ resetArmed }}" hint-placeholder-val="{{ false }}">
-          <div style="background:#F3DCD5;color:var(--brick-dark);border-radius:8px;padding:14px 16px;margin-top:10px">
-            <div style="font-weight:600;margin-bottom:8px">This erases every finished week for both grades, on every device. Sure?</div>
-            <div style="display:flex;gap:9px;flex-wrap:wrap">
-              <button onClick="{{ doReset }}" style="{{ btnPrimary }}">Yes, erase it all</button>
-              <button onClick="{{ cancelReset }}" style="{{ btnSecondary }}">Keep my progress</button>
-            </div>
-          </div>
-        </sc-if>
-      </div>
-
       <div class="card">
         <h2>Standards covered</h2>
         <sc-for list="{{ standards }}" as="s" hint-placeholder-count="10">

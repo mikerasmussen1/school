@@ -300,7 +300,42 @@
     <div style="{{ uHeroStyle }}">
       <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:{{ uColor }};margin-bottom:10px">{{ uNo }} &middot; The Big Question</div>
       <div style="font-family:Fredoka,sans-serif;font-size:29px;line-height:1.2;max-width:900px">{{ uBigQ }}</div>
-      <div style="font-size:14px;line-height:1.5;margin-top:12px;color:rgba(238,242,255,.7);max-width:820px">Answer it out loud on the last day of the mission, in your own words, with a drawing. That's the real test &mdash; the unit test is just the paperwork.</div>
+      <div style="font-size:14px;line-height:1.5;margin-top:12px;color:rgba(238,242,255,.7);max-width:820px">{{ uClosing }}</div>
+    </div>
+
+    <!-- Skills, project, game and badge. These were on the mission map's detail
+         panel, which f933cc1 removed when the planets started navigating. That
+         commit claimed the mission page already showed them; it did not — only
+         the Y5 template did, so for Brock's year they became unreachable, and
+         the badge name and requirement were unreachable anywhere in the app. -->
+    <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:22px;margin-bottom:22px">
+      <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:22px;padding:24px 26px">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.45);margin-bottom:9px">Hands-on project</div>
+        <div style="font-size:14.5px;line-height:1.55;color:rgba(238,242,255,.85)">{{ uProject }}</div>
+      </div>
+      <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:22px;padding:24px 26px">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.45);margin-bottom:9px">Fluency game</div>
+        <div style="font-size:14.5px;line-height:1.55;color:rgba(238,242,255,.85)">{{ uGame }}</div>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:22px;margin-bottom:38px">
+      <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:22px;padding:26px 28px">
+        <div style="font-family:Fredoka,sans-serif;font-size:22px">What this mission builds</div>
+        <div style="font-size:13px;color:rgba(238,242,255,.6);margin-top:4px;margin-bottom:18px">Each one is a strand on the pre-assessment and a row on the skip chart.</div>
+        <div style="display:flex;flex-direction:column;gap:9px">
+          <sc-for list="{{ uSkills }}" as="s" hint-placeholder-count="5">
+            <div style="display:flex;align-items:center;gap:14px;background:rgba(0,0,0,.22);border:1px solid rgba(255,255,255,.09);border-radius:12px;padding:12px 16px">
+              <span style="{{ s.dotStyle }}"></span>
+              <span style="font-size:14px;color:rgba(238,242,255,.86)">{{ s.name }}</span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+      <div style="{{ uBadgeWellStyle }}">
+        <div style="{{ uBigBadgeStyle }}"><span style="font-family:Fredoka,sans-serif;font-weight:600;color:#0B0F24;font-size:{{ uBadgeGlyphSize }}">{{ uBadge }}</span></div>
+        <div style="font-family:Fredoka,sans-serif;font-size:17px;margin-top:22px;text-align:center;color:{{ uColor }}">{{ uBadgeName }}</div>
+        <div style="font-size:13px;line-height:1.5;margin-top:8px;text-align:center;max-width:250px;color:rgba(238,242,255,.6)">{{ uBadgeReq }}</div>
+      </div>
     </div>
     <div style="font-family:Fredoka,sans-serif;font-weight:600;font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.45);margin:0 0 16px">Every worksheet has three tiers</div>
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:16px">
@@ -505,7 +540,42 @@
     <div style="{{ uHeroStyle }}">
       <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:{{ uColor }};margin-bottom:10px">{{ uNo }} &middot; The Big Question</div>
       <div style="font-family:Fredoka,sans-serif;font-size:29px;line-height:1.2;max-width:900px">{{ uBigQ }}</div>
-      <div style="font-size:14px;line-height:1.5;margin-top:12px;color:rgba(238,242,255,.7);max-width:820px">Answer it out loud on the last day of the mission, in your own words, with a drawing. That's the real test &mdash; the unit test is just the paperwork.</div>
+      <div style="font-size:14px;line-height:1.5;margin-top:12px;color:rgba(238,242,255,.7);max-width:820px">{{ uClosing }}</div>
+    </div>
+
+    <!-- Skills, project, game and badge. These were on the mission map's detail
+         panel, which f933cc1 removed when the planets started navigating. That
+         commit claimed the mission page already showed them; it did not — only
+         the Y5 template did, so for Brock's year they became unreachable, and
+         the badge name and requirement were unreachable anywhere in the app. -->
+    <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:22px;margin-bottom:22px">
+      <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:22px;padding:24px 26px">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.45);margin-bottom:9px">Hands-on project</div>
+        <div style="font-size:14.5px;line-height:1.55;color:rgba(238,242,255,.85)">{{ uProject }}</div>
+      </div>
+      <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:22px;padding:24px 26px">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.45);margin-bottom:9px">Fluency game</div>
+        <div style="font-size:14.5px;line-height:1.55;color:rgba(238,242,255,.85)">{{ uGame }}</div>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:22px;margin-bottom:38px">
+      <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:22px;padding:26px 28px">
+        <div style="font-family:Fredoka,sans-serif;font-size:22px">What this mission builds</div>
+        <div style="font-size:13px;color:rgba(238,242,255,.6);margin-top:4px;margin-bottom:18px">Each one is a strand on the pre-assessment and a row on the skip chart.</div>
+        <div style="display:flex;flex-direction:column;gap:9px">
+          <sc-for list="{{ uSkills }}" as="s" hint-placeholder-count="5">
+            <div style="display:flex;align-items:center;gap:14px;background:rgba(0,0,0,.22);border:1px solid rgba(255,255,255,.09);border-radius:12px;padding:12px 16px">
+              <span style="{{ s.dotStyle }}"></span>
+              <span style="font-size:14px;color:rgba(238,242,255,.86)">{{ s.name }}</span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+      <div style="{{ uBadgeWellStyle }}">
+        <div style="{{ uBigBadgeStyle }}"><span style="font-family:Fredoka,sans-serif;font-weight:600;color:#0B0F24;font-size:{{ uBadgeGlyphSize }}">{{ uBadge }}</span></div>
+        <div style="font-family:Fredoka,sans-serif;font-size:17px;margin-top:22px;text-align:center;color:{{ uColor }}">{{ uBadgeName }}</div>
+        <div style="font-size:13px;line-height:1.5;margin-top:8px;text-align:center;max-width:250px;color:rgba(238,242,255,.6)">{{ uBadgeReq }}</div>
+      </div>
     </div>
     <div style="font-family:Fredoka,sans-serif;font-weight:600;font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.45);margin:0 0 16px">Every worksheet has three tiers</div>
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:16px">
@@ -723,7 +793,42 @@
     <div style="{{ uHeroStyle }}">
       <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:{{ uColor }};margin-bottom:10px">{{ uNo }} &middot; The Big Question</div>
       <div style="font-family:Fredoka,sans-serif;font-size:29px;line-height:1.2;max-width:900px">{{ uBigQ }}</div>
-      <div style="font-size:14px;line-height:1.5;margin-top:12px;color:rgba(238,242,255,.7);max-width:820px">Answer it out loud on the last day of the mission, in your own words, with a drawing. That's the real test &mdash; the unit test is just the paperwork.</div>
+      <div style="font-size:14px;line-height:1.5;margin-top:12px;color:rgba(238,242,255,.7);max-width:820px">{{ uClosing }}</div>
+    </div>
+
+    <!-- Skills, project, game and badge. These were on the mission map's detail
+         panel, which f933cc1 removed when the planets started navigating. That
+         commit claimed the mission page already showed them; it did not — only
+         the Y5 template did, so for Brock's year they became unreachable, and
+         the badge name and requirement were unreachable anywhere in the app. -->
+    <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:22px;margin-bottom:22px">
+      <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:22px;padding:24px 26px">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.45);margin-bottom:9px">Hands-on project</div>
+        <div style="font-size:14.5px;line-height:1.55;color:rgba(238,242,255,.85)">{{ uProject }}</div>
+      </div>
+      <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:22px;padding:24px 26px">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.45);margin-bottom:9px">Fluency game</div>
+        <div style="font-size:14.5px;line-height:1.55;color:rgba(238,242,255,.85)">{{ uGame }}</div>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:22px;margin-bottom:38px">
+      <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:22px;padding:26px 28px">
+        <div style="font-family:Fredoka,sans-serif;font-size:22px">What this mission builds</div>
+        <div style="font-size:13px;color:rgba(238,242,255,.6);margin-top:4px;margin-bottom:18px">Each one is a strand on the pre-assessment and a row on the skip chart.</div>
+        <div style="display:flex;flex-direction:column;gap:9px">
+          <sc-for list="{{ uSkills }}" as="s" hint-placeholder-count="5">
+            <div style="display:flex;align-items:center;gap:14px;background:rgba(0,0,0,.22);border:1px solid rgba(255,255,255,.09);border-radius:12px;padding:12px 16px">
+              <span style="{{ s.dotStyle }}"></span>
+              <span style="font-size:14px;color:rgba(238,242,255,.86)">{{ s.name }}</span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+      <div style="{{ uBadgeWellStyle }}">
+        <div style="{{ uBigBadgeStyle }}"><span style="font-family:Fredoka,sans-serif;font-weight:600;color:#0B0F24;font-size:{{ uBadgeGlyphSize }}">{{ uBadge }}</span></div>
+        <div style="font-family:Fredoka,sans-serif;font-size:17px;margin-top:22px;text-align:center;color:{{ uColor }}">{{ uBadgeName }}</div>
+        <div style="font-size:13px;line-height:1.5;margin-top:8px;text-align:center;max-width:250px;color:rgba(238,242,255,.6)">{{ uBadgeReq }}</div>
+      </div>
     </div>
     <div style="font-family:Fredoka,sans-serif;font-weight:600;font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.45);margin:0 0 16px">Every worksheet has three tiers</div>
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:16px">
@@ -922,7 +1027,42 @@
     <div style="{{ uHeroStyle }}">
       <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:{{ uColor }};margin-bottom:10px">{{ uNo }} &middot; The Big Question</div>
       <div style="font-family:Fredoka,sans-serif;font-size:29px;line-height:1.2;max-width:900px">{{ uBigQ }}</div>
-      <div style="font-size:14px;line-height:1.5;margin-top:12px;color:rgba(238,242,255,.7);max-width:820px">Answer it out loud on the last day of the mission, in your own words, with a drawing. That's the real test &mdash; the unit test is just the paperwork.</div>
+      <div style="font-size:14px;line-height:1.5;margin-top:12px;color:rgba(238,242,255,.7);max-width:820px">{{ uClosing }}</div>
+    </div>
+
+    <!-- Skills, project, game and badge. These were on the mission map's detail
+         panel, which f933cc1 removed when the planets started navigating. That
+         commit claimed the mission page already showed them; it did not — only
+         the Y5 template did, so for Brock's year they became unreachable, and
+         the badge name and requirement were unreachable anywhere in the app. -->
+    <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:22px;margin-bottom:22px">
+      <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:22px;padding:24px 26px">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.45);margin-bottom:9px">Hands-on project</div>
+        <div style="font-size:14.5px;line-height:1.55;color:rgba(238,242,255,.85)">{{ uProject }}</div>
+      </div>
+      <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:22px;padding:24px 26px">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.45);margin-bottom:9px">Fluency game</div>
+        <div style="font-size:14.5px;line-height:1.55;color:rgba(238,242,255,.85)">{{ uGame }}</div>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:22px;margin-bottom:38px">
+      <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:22px;padding:26px 28px">
+        <div style="font-family:Fredoka,sans-serif;font-size:22px">What this mission builds</div>
+        <div style="font-size:13px;color:rgba(238,242,255,.6);margin-top:4px;margin-bottom:18px">Each one is a strand on the pre-assessment and a row on the skip chart.</div>
+        <div style="display:flex;flex-direction:column;gap:9px">
+          <sc-for list="{{ uSkills }}" as="s" hint-placeholder-count="5">
+            <div style="display:flex;align-items:center;gap:14px;background:rgba(0,0,0,.22);border:1px solid rgba(255,255,255,.09);border-radius:12px;padding:12px 16px">
+              <span style="{{ s.dotStyle }}"></span>
+              <span style="font-size:14px;color:rgba(238,242,255,.86)">{{ s.name }}</span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+      <div style="{{ uBadgeWellStyle }}">
+        <div style="{{ uBigBadgeStyle }}"><span style="font-family:Fredoka,sans-serif;font-weight:600;color:#0B0F24;font-size:{{ uBadgeGlyphSize }}">{{ uBadge }}</span></div>
+        <div style="font-family:Fredoka,sans-serif;font-size:17px;margin-top:22px;text-align:center;color:{{ uColor }}">{{ uBadgeName }}</div>
+        <div style="font-size:13px;line-height:1.5;margin-top:8px;text-align:center;max-width:250px;color:rgba(238,242,255,.6)">{{ uBadgeReq }}</div>
+      </div>
     </div>
     <div style="font-family:Fredoka,sans-serif;font-weight:600;font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.45);margin:0 0 16px">Every worksheet has three tiers</div>
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:16px">
@@ -1125,7 +1265,42 @@
     <div style="{{ uHeroStyle }}">
       <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:{{ uColor }};margin-bottom:10px">{{ uNo }} &middot; The Big Question</div>
       <div style="font-family:Fredoka,sans-serif;font-size:29px;line-height:1.2;max-width:900px">{{ uBigQ }}</div>
-      <div style="font-size:14px;line-height:1.5;margin-top:12px;color:rgba(238,242,255,.7);max-width:820px">Answer it out loud on the last day of the mission, in your own words, with a drawing. That's the real test &mdash; the unit test is just the paperwork.</div>
+      <div style="font-size:14px;line-height:1.5;margin-top:12px;color:rgba(238,242,255,.7);max-width:820px">{{ uClosing }}</div>
+    </div>
+
+    <!-- Skills, project, game and badge. These were on the mission map's detail
+         panel, which f933cc1 removed when the planets started navigating. That
+         commit claimed the mission page already showed them; it did not — only
+         the Y5 template did, so for Brock's year they became unreachable, and
+         the badge name and requirement were unreachable anywhere in the app. -->
+    <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:22px;margin-bottom:22px">
+      <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:22px;padding:24px 26px">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.45);margin-bottom:9px">Hands-on project</div>
+        <div style="font-size:14.5px;line-height:1.55;color:rgba(238,242,255,.85)">{{ uProject }}</div>
+      </div>
+      <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:22px;padding:24px 26px">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.45);margin-bottom:9px">Fluency game</div>
+        <div style="font-size:14.5px;line-height:1.55;color:rgba(238,242,255,.85)">{{ uGame }}</div>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:22px;margin-bottom:38px">
+      <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:22px;padding:26px 28px">
+        <div style="font-family:Fredoka,sans-serif;font-size:22px">What this mission builds</div>
+        <div style="font-size:13px;color:rgba(238,242,255,.6);margin-top:4px;margin-bottom:18px">Each one is a strand on the pre-assessment and a row on the skip chart.</div>
+        <div style="display:flex;flex-direction:column;gap:9px">
+          <sc-for list="{{ uSkills }}" as="s" hint-placeholder-count="5">
+            <div style="display:flex;align-items:center;gap:14px;background:rgba(0,0,0,.22);border:1px solid rgba(255,255,255,.09);border-radius:12px;padding:12px 16px">
+              <span style="{{ s.dotStyle }}"></span>
+              <span style="font-size:14px;color:rgba(238,242,255,.86)">{{ s.name }}</span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+      <div style="{{ uBadgeWellStyle }}">
+        <div style="{{ uBigBadgeStyle }}"><span style="font-family:Fredoka,sans-serif;font-weight:600;color:#0B0F24;font-size:{{ uBadgeGlyphSize }}">{{ uBadge }}</span></div>
+        <div style="font-family:Fredoka,sans-serif;font-size:17px;margin-top:22px;text-align:center;color:{{ uColor }}">{{ uBadgeName }}</div>
+        <div style="font-size:13px;line-height:1.5;margin-top:8px;text-align:center;max-width:250px;color:rgba(238,242,255,.6)">{{ uBadgeReq }}</div>
+      </div>
     </div>
     <div style="font-family:Fredoka,sans-serif;font-weight:600;font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.45);margin:0 0 16px">Every worksheet has three tiers</div>
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:16px">
@@ -1355,7 +1530,42 @@
     <div style="{{ uHeroStyle }}">
       <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:{{ uColor }};margin-bottom:10px">{{ uNo }} &middot; The Big Question</div>
       <div style="font-family:Fredoka,sans-serif;font-size:29px;line-height:1.2;max-width:900px">{{ uBigQ }}</div>
-      <div style="font-size:14px;line-height:1.5;margin-top:12px;color:rgba(238,242,255,.7);max-width:820px">Answer it out loud on the last day of the mission, in your own words, with a drawing. That's the real test &mdash; the unit test is just the paperwork.</div>
+      <div style="font-size:14px;line-height:1.5;margin-top:12px;color:rgba(238,242,255,.7);max-width:820px">{{ uClosing }}</div>
+    </div>
+
+    <!-- Skills, project, game and badge. These were on the mission map's detail
+         panel, which f933cc1 removed when the planets started navigating. That
+         commit claimed the mission page already showed them; it did not — only
+         the Y5 template did, so for Brock's year they became unreachable, and
+         the badge name and requirement were unreachable anywhere in the app. -->
+    <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:22px;margin-bottom:22px">
+      <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:22px;padding:24px 26px">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.45);margin-bottom:9px">Hands-on project</div>
+        <div style="font-size:14.5px;line-height:1.55;color:rgba(238,242,255,.85)">{{ uProject }}</div>
+      </div>
+      <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:22px;padding:24px 26px">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.45);margin-bottom:9px">Fluency game</div>
+        <div style="font-size:14.5px;line-height:1.55;color:rgba(238,242,255,.85)">{{ uGame }}</div>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:22px;margin-bottom:38px">
+      <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:22px;padding:26px 28px">
+        <div style="font-family:Fredoka,sans-serif;font-size:22px">What this mission builds</div>
+        <div style="font-size:13px;color:rgba(238,242,255,.6);margin-top:4px;margin-bottom:18px">Each one is a strand on the pre-assessment and a row on the skip chart.</div>
+        <div style="display:flex;flex-direction:column;gap:9px">
+          <sc-for list="{{ uSkills }}" as="s" hint-placeholder-count="5">
+            <div style="display:flex;align-items:center;gap:14px;background:rgba(0,0,0,.22);border:1px solid rgba(255,255,255,.09);border-radius:12px;padding:12px 16px">
+              <span style="{{ s.dotStyle }}"></span>
+              <span style="font-size:14px;color:rgba(238,242,255,.86)">{{ s.name }}</span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+      <div style="{{ uBadgeWellStyle }}">
+        <div style="{{ uBigBadgeStyle }}"><span style="font-family:Fredoka,sans-serif;font-weight:600;color:#0B0F24;font-size:{{ uBadgeGlyphSize }}">{{ uBadge }}</span></div>
+        <div style="font-family:Fredoka,sans-serif;font-size:17px;margin-top:22px;text-align:center;color:{{ uColor }}">{{ uBadgeName }}</div>
+        <div style="font-size:13px;line-height:1.5;margin-top:8px;text-align:center;max-width:250px;color:rgba(238,242,255,.6)">{{ uBadgeReq }}</div>
+      </div>
     </div>
     <div style="font-family:Fredoka,sans-serif;font-weight:600;font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.45);margin:0 0 16px">Every worksheet has three tiers</div>
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:16px">
@@ -1590,7 +1800,42 @@
     <div style="{{ uHeroStyle }}">
       <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:{{ uColor }};margin-bottom:10px">{{ uNo }} &middot; The Big Question</div>
       <div style="font-family:Fredoka,sans-serif;font-size:29px;line-height:1.2;max-width:900px">{{ uBigQ }}</div>
-      <div style="font-size:14px;line-height:1.5;margin-top:12px;color:rgba(238,242,255,.7);max-width:820px">Answer it out loud on the last day of the mission, in your own words, with a drawing. That's the real test &mdash; the unit test is just the paperwork.</div>
+      <div style="font-size:14px;line-height:1.5;margin-top:12px;color:rgba(238,242,255,.7);max-width:820px">{{ uClosing }}</div>
+    </div>
+
+    <!-- Skills, project, game and badge. These were on the mission map's detail
+         panel, which f933cc1 removed when the planets started navigating. That
+         commit claimed the mission page already showed them; it did not — only
+         the Y5 template did, so for Brock's year they became unreachable, and
+         the badge name and requirement were unreachable anywhere in the app. -->
+    <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:22px;margin-bottom:22px">
+      <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:22px;padding:24px 26px">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.45);margin-bottom:9px">Hands-on project</div>
+        <div style="font-size:14.5px;line-height:1.55;color:rgba(238,242,255,.85)">{{ uProject }}</div>
+      </div>
+      <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:22px;padding:24px 26px">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.45);margin-bottom:9px">Fluency game</div>
+        <div style="font-size:14.5px;line-height:1.55;color:rgba(238,242,255,.85)">{{ uGame }}</div>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:22px;margin-bottom:38px">
+      <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:22px;padding:26px 28px">
+        <div style="font-family:Fredoka,sans-serif;font-size:22px">What this mission builds</div>
+        <div style="font-size:13px;color:rgba(238,242,255,.6);margin-top:4px;margin-bottom:18px">Each one is a strand on the pre-assessment and a row on the skip chart.</div>
+        <div style="display:flex;flex-direction:column;gap:9px">
+          <sc-for list="{{ uSkills }}" as="s" hint-placeholder-count="5">
+            <div style="display:flex;align-items:center;gap:14px;background:rgba(0,0,0,.22);border:1px solid rgba(255,255,255,.09);border-radius:12px;padding:12px 16px">
+              <span style="{{ s.dotStyle }}"></span>
+              <span style="font-size:14px;color:rgba(238,242,255,.86)">{{ s.name }}</span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+      <div style="{{ uBadgeWellStyle }}">
+        <div style="{{ uBigBadgeStyle }}"><span style="font-family:Fredoka,sans-serif;font-weight:600;color:#0B0F24;font-size:{{ uBadgeGlyphSize }}">{{ uBadge }}</span></div>
+        <div style="font-family:Fredoka,sans-serif;font-size:17px;margin-top:22px;text-align:center;color:{{ uColor }}">{{ uBadgeName }}</div>
+        <div style="font-size:13px;line-height:1.5;margin-top:8px;text-align:center;max-width:250px;color:rgba(238,242,255,.6)">{{ uBadgeReq }}</div>
+      </div>
     </div>
     <div style="font-family:Fredoka,sans-serif;font-weight:600;font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.45);margin:0 0 16px">Every worksheet has three tiers</div>
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:16px">
@@ -1837,7 +2082,42 @@
     <div style="{{ uHeroStyle }}">
       <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:{{ uColor }};margin-bottom:10px">{{ uNo }} &middot; The Big Question</div>
       <div style="font-family:Fredoka,sans-serif;font-size:29px;line-height:1.2;max-width:900px">{{ uBigQ }}</div>
-      <div style="font-size:14px;line-height:1.5;margin-top:12px;color:rgba(238,242,255,.7);max-width:820px">Answer it out loud on the last day of the mission, in your own words, with a drawing. That's the real test &mdash; the unit test is just the paperwork.</div>
+      <div style="font-size:14px;line-height:1.5;margin-top:12px;color:rgba(238,242,255,.7);max-width:820px">{{ uClosing }}</div>
+    </div>
+
+    <!-- Skills, project, game and badge. These were on the mission map's detail
+         panel, which f933cc1 removed when the planets started navigating. That
+         commit claimed the mission page already showed them; it did not — only
+         the Y5 template did, so for Brock's year they became unreachable, and
+         the badge name and requirement were unreachable anywhere in the app. -->
+    <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:22px;margin-bottom:22px">
+      <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:22px;padding:24px 26px">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.45);margin-bottom:9px">Hands-on project</div>
+        <div style="font-size:14.5px;line-height:1.55;color:rgba(238,242,255,.85)">{{ uProject }}</div>
+      </div>
+      <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:22px;padding:24px 26px">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.45);margin-bottom:9px">Fluency game</div>
+        <div style="font-size:14.5px;line-height:1.55;color:rgba(238,242,255,.85)">{{ uGame }}</div>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:22px;margin-bottom:38px">
+      <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:22px;padding:26px 28px">
+        <div style="font-family:Fredoka,sans-serif;font-size:22px">What this mission builds</div>
+        <div style="font-size:13px;color:rgba(238,242,255,.6);margin-top:4px;margin-bottom:18px">Each one is a strand on the pre-assessment and a row on the skip chart.</div>
+        <div style="display:flex;flex-direction:column;gap:9px">
+          <sc-for list="{{ uSkills }}" as="s" hint-placeholder-count="5">
+            <div style="display:flex;align-items:center;gap:14px;background:rgba(0,0,0,.22);border:1px solid rgba(255,255,255,.09);border-radius:12px;padding:12px 16px">
+              <span style="{{ s.dotStyle }}"></span>
+              <span style="font-size:14px;color:rgba(238,242,255,.86)">{{ s.name }}</span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+      <div style="{{ uBadgeWellStyle }}">
+        <div style="{{ uBigBadgeStyle }}"><span style="font-family:Fredoka,sans-serif;font-weight:600;color:#0B0F24;font-size:{{ uBadgeGlyphSize }}">{{ uBadge }}</span></div>
+        <div style="font-family:Fredoka,sans-serif;font-size:17px;margin-top:22px;text-align:center;color:{{ uColor }}">{{ uBadgeName }}</div>
+        <div style="font-size:13px;line-height:1.5;margin-top:8px;text-align:center;max-width:250px;color:rgba(238,242,255,.6)">{{ uBadgeReq }}</div>
+      </div>
     </div>
     <div style="font-family:Fredoka,sans-serif;font-weight:600;font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.45);margin:0 0 16px">Every worksheet has three tiers</div>
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:16px">
@@ -6821,20 +7101,21 @@ class Component extends DCLogic {
       isUnit5:st.view==="unit"&&st.uview===5&&!y5, isUnit6:st.view==="unit"&&st.uview===6&&!y5,
       isUnit7:st.view==="unit"&&st.uview===7&&!y5, isUnit8:st.view==="unit"&&st.uview===8&&!y5,
       isUnitY5:st.view==="unit"&&y5,
-      // One template per year now, so the mission being shown decides which
-      // manipulative appears rather than which whole page does.
-      isUnitY3:st.view==="unit"&&!y5,
-      isManip1:st.uview===1&&!y5, isManip2:st.uview===2&&!y5,
-      isManip3:st.uview===3&&!y5, isManip4:st.uview===4&&!y5,
-      isManip5:st.uview===5&&!y5, isManip6:st.uview===6&&!y5,
-      isManip7:st.uview===7&&!y5, isManip8:st.uview===8&&!y5,
       uColor:sel.color, uName:sel.name, uNo:"Mission 0"+sel.n,
       /* Derived, not stored. UNITS carried a hand-written `weeks` range that
        * had already gone stale: Mission 08 said "33–36" when its own sets run
        * 35–38, because Mission 07 grew by two weeks and nothing followed. A
        * range computed from the bank cannot drift. */
       uWeeks:"Weeks "+this.unitWeekRange(sel.n),
-      uBlurb:sel.blurb||"", uQuote:sel.quote||"",
+      uBlurb:sel.blurb||"", uQuote:sel.quote||"", uClosing:sel.closing||"",
+      /* The badge was only ever rendered by the mission map's detail panel.
+       * When the planets started navigating and that panel went, badgeName and
+       * badgeReq stopped being rendered anywhere at all — the data sat in UNITS
+       * with no reader. They belong on the mission page. */
+      uBadge:sel.badge, uBadgeName:sel.badgeName, uBadgeReq:sel.badgeReq,
+      uBadgeGlyphSize:sel.n===3?"36px":sel.n===7?"30px":"66px",
+      uBadgeWellStyle:`background:radial-gradient(circle at 50% 32%, ${sel.color}1F, rgba(255,255,255,.03));border:1px solid ${sel.color}33;border-radius:22px;padding:26px 28px;display:flex;flex-direction:column;align-items:center;justify-content:center`,
+      uBigBadgeStyle:`width:112px;height:112px;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle at 34% 28%, ${sel.color}, ${sel.color}AA);box-shadow:0 0 34px ${sel.color}66`,
       uBigQ:sel.bigQ, uProject:sel.project, uGame:sel.game,
       uLessonCount:(this.weeksFor(st.uview).length*5)+" days planned",
       /* "20 lessons + 5 enrichment days", counted off the bank. Each week ends

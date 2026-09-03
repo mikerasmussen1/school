@@ -2159,6 +2159,7 @@
               <div style="font-family:Fredoka,sans-serif;font-size:20px">{{ p.name }}</div>
               <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(238,242,255,.45)">{{ p.curric }}</div>
             </button>
+            <button onClick="{{ p.restart }}" title="Start the year over" style="{{ p.restartStyle }}" style-hover="filter:brightness(1.4)">↻</button>
             <button onClick="{{ p.drop }}" title="Remove from roster" style="{{ p.dropStyle }}" style-hover="filter:brightness(1.4)">×</button>
           </div>
         </sc-for>
@@ -4273,6 +4274,31 @@ class Component extends DCLogic {
     else{ this.setState({profiles,gate:true,loaded:true}); }
   }
   blank(){ return {pAns:{},pChecked:{},pRuns:{},pPaper:{},lstep:{},pHist:{},pLog:{},dyn:{},coach:null,skills:{},snooze:{},pStreak:{},sprintHist:{},subjects:{},lastSubject:null,stream:null,sprint:null,pTier:null,pset:"p1"}; }
+
+  /* Start the year over for one pilot, keeping WHO they are and WHERE they were
+   * placed. blank() is not enough on its own: it drops `subjects` wholesale, and
+   * subjects[sid].level is the child's grade placement, not their progress.
+   * Restarting the year is not re-deciding whether Brock is a third grader, so
+   * level, curriculum and grade all survive; opened/days/data — the record of
+   * what they have actually worked — do not.
+   *
+   * Pure on purpose. The same reset has to be applied to a local slice and to a
+   * remote one, and a function that only knew how to write this.state could do
+   * neither of those from Teacher HQ. */
+  static resetSlice(slice){
+    const old=slice||{};
+    const keep={};
+    Object.keys(old.subjects||{}).forEach(sid=>{
+      // Nothing but the placement crosses the line.
+      keep[sid]={opened:0,days:[],data:{},level:(old.subjects[sid]||{}).level};
+    });
+    // `this` is the class inside a static, so this tracks blank() by reference
+    // rather than restating its key list — one place to add a new progress bag.
+    return {...this.prototype.blank(),
+      subjects:keep,
+      curriculum:old.curriculum, grade:old.grade,
+      updated:Date.now()};
+  }
   // setState + write-through. Used by every handler that touches saved progress.
   saveState(updater){ this.setState(updater); setTimeout(()=>this.persist(),0); }
   persist(){
@@ -4906,6 +4932,62 @@ class Component extends DCLogic {
       pick(key,false);
     };
 
+    /* Start the year over. Destructive and irreversible, so it asks first and
+     * names the child in the question — a misfire here costs a year of work.
+     *
+     * Writes the cleared slice remotely with a fresh `updated`. Sign-in keeps
+     * whichever side is newer (_signInRemote), so the child's own device adopts
+     * the reset the next time they sign in there. The one case that loses is a
+     * device left signed in and mid-lesson while this runs: its next persist()
+     * carries a newer stamp and wins. Restarting while nobody is playing is the
+     * whole story there, and that is when a teacher does this anyway. */
+    const restartPilot=async(k,name)=>{
+      if(!window.confirm(
+        "Start the year over for "+name+"?\n\n"
+        +"Clears every answer, worksheet, streak and sprint record. "
+        +"Keeps their name, code and grade.\n\nThis cannot be undone."
+      )) return;
+      this.setState({tBusy:true,tErr:""});
+      try{
+        /* fetchStudent returns null for EVERY failure — non-2xx, network blip,
+         * bad JSON — and never throws, so the catch below cannot see one. That
+         * matters more here than anywhere else in this file: falling through
+         * with null would reset an empty object, and resetSlice({}) is not
+         * "their record, cleared" — it is a blank record with no subjects and
+         * no curriculum. Pushing that would destroy the placement this action
+         * promises to keep, and the teacher would see a success. Bail instead;
+         * the same null-check-and-bail guards pick() and addPilot(). */
+        const fresh=await Remote.fetchStudent(k);
+        if(!fresh){
+          this.setState({tBusy:false,
+            tErr:"Could not load "+name+"'s record, so nothing was changed. Check the connection and try again."});
+          return;
+        }
+        const next=Component.resetSlice(fresh.slice||{});
+        const prof={name:fresh.name||name, color:fresh.color||"#38BDF8"};
+        await Remote.pushStudent(k,prof,next);
+        /* pushStudent swallows its own errors too, and does not check r.ok, so
+         * a failed write is indistinguishable from a successful one. For an
+         * irreversible action that is not good enough: read it back and confirm
+         * the stamp we just wrote is the one that landed. Verifying here rather
+         * than fixing pushStudent keeps every other caller's behaviour alone. */
+        const back=await Remote.fetchStudent(k);
+        if(!back||!back.slice||back.slice.updated!==next.updated){
+          this.setState({tBusy:false,
+            tErr:"The reset may not have saved for "+name+". Check the connection, then reopen the roster to see whether it applied."});
+          return;
+        }
+        // If this pilot is the one on screen, the open panels are showing the
+        // record we just cleared; swap them to the cleared one.
+        const viewing=st.tView&&st.tView.key===k;
+        this.setState({tBusy:false,
+          ...(st.tSel===k?{tData:next}:{}),
+          ...(viewing?{tView:{...st.tView,slice:next}}:{})});
+      }catch(e){
+        this.setState({tBusy:false,tErr:"Could not start the year over: "+(e&&e.message||e)});
+      }
+    };
+
     const dropPilot=async k=>{
       const list=(st.tRoster||[]).filter(x=>x.key!==k);
       await Remote.saveRoster(st.tKey,list);
@@ -4932,6 +5014,8 @@ class Component extends DCLogic {
       initial:(x.name||"?").trim().charAt(0).toUpperCase(),
       go:()=>pick(x.key),
       drop:()=>dropPilot(x.key),
+      restart:()=>restartPilot(x.key,x.name),
+      restartStyle:"position:absolute;top:9px;left:9px;width:25px;height:25px;border-radius:50%;border:1px solid rgba(255,255,255,.18);background:rgba(11,15,36,.75);color:rgba(238,242,255,.62);font-family:Fredoka,sans-serif;font-size:13px;line-height:1;cursor:pointer;display:grid;place-items:center;padding:0",
       dropStyle:"position:absolute;top:9px;right:9px;width:25px;height:25px;border-radius:50%;border:1px solid rgba(255,255,255,.18);background:rgba(11,15,36,.75);color:rgba(238,242,255,.62);font-family:Fredoka,sans-serif;font-size:15px;line-height:1;cursor:pointer;display:grid;place-items:center;padding:0",
       cardStyle:"position:relative;background:"+(st.tSel===x.key?"rgba(56,189,248,.14)":"rgba(255,255,255,.05)")+";border:1px solid "+(st.tSel===x.key?"rgba(56,189,248,.55)":"rgba(255,255,255,.12)")+";border-radius:22px;padding:24px 22px;display:flex;flex-direction:column;align-items:center;gap:11px;min-width:186px;cursor:pointer;transition:.15s",
       avatarStyle:"width:72px;height:72px;border-radius:50%;background:radial-gradient(circle at 34% 28%, "+(x.color||"#38BDF8")+", "+(x.color||"#38BDF8")+"AA);color:#0B0F24;display:grid;place-items:center;font-family:Fredoka,sans-serif;font-size:29px"

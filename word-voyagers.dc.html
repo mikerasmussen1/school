@@ -3,9 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=65765a6"></script>
-  <script>window.__BUILD__="d159824";</script>
-  <script data-build>window.__BUILD__="65765a6";</script>
+<script src="./support.js?v=2026-09-03-1626"></script>
+  <script data-build>window.__BUILD__="2026-09-03-1626";</script>
 </head>
 <body>
 <x-dc>
@@ -37,26 +36,26 @@
   .book-title{font-family:'Fraunces',serif;font-size:1rem;color:var(--brick-dark);margin:0 0 3px}
   .done-banner{text-align:center;padding:22px;margin-top:6px;background:var(--forest-light);border-radius:8px;color:#2E4E38}
 </style>
-<script src="./curriculum/sync.js?v=65765a6"></script>
-<script src="./curriculum/students.js?v=65765a6"></script>
-<script src="./curriculum/subjects.js?v=65765a6"></script>
-<script src="./curriculum/question-types.js?v=65765a6"></script>
-<script src="./curriculum/la-y1-spine.js?v=65765a6"></script>
-<script src="./curriculum/la-y1-words.js?v=65765a6"></script>
-<script src="./curriculum/la-y1-grammar.js?v=65765a6"></script>
-<script src="./curriculum/la-y1-reading.js?v=65765a6"></script>
-<script src="./curriculum/la-y1-tasks.js?v=65765a6"></script>
-<script src="./curriculum/la-books.js?v=65765a6"></script>
-<script src="./curriculum/la-y2-spine.js?v=65765a6"></script>
-<script src="./curriculum/la-y2-words.js?v=65765a6"></script>
-<script src="./curriculum/la-y2-grammar.js?v=65765a6"></script>
-<script src="./curriculum/la-y2-reading.js?v=65765a6"></script>
-<script src="./curriculum/la-y2-tasks.js?v=65765a6"></script>
-<script src="./curriculum/la-books-y2.js?v=65765a6"></script>
-<script src="./curriculum/la-quotes.js?v=65765a6"></script>
-<script src="./curriculum/la-mastery.js?v=65765a6"></script>
-<script src="./curriculum/la-calendar.js?v=65765a6"></script>
-<script src="./curriculum/la-grader.js?v=65765a6"></script>
+<script src="./curriculum/sync.js?v=2026-09-03-1626"></script>
+<script src="./curriculum/students.js?v=2026-09-03-1626"></script>
+<script src="./curriculum/subjects.js?v=2026-09-03-1626"></script>
+<script src="./curriculum/question-types.js?v=2026-09-03-1626"></script>
+<script src="./curriculum/la-y1-spine.js?v=2026-09-03-1626"></script>
+<script src="./curriculum/la-y1-words.js?v=2026-09-03-1626"></script>
+<script src="./curriculum/la-y1-grammar.js?v=2026-09-03-1626"></script>
+<script src="./curriculum/la-y1-reading.js?v=2026-09-03-1626"></script>
+<script src="./curriculum/la-y1-tasks.js?v=2026-09-03-1626"></script>
+<script src="./curriculum/la-books.js?v=2026-09-03-1626"></script>
+<script src="./curriculum/la-y2-spine.js?v=2026-09-03-1626"></script>
+<script src="./curriculum/la-y2-words.js?v=2026-09-03-1626"></script>
+<script src="./curriculum/la-y2-grammar.js?v=2026-09-03-1626"></script>
+<script src="./curriculum/la-y2-reading.js?v=2026-09-03-1626"></script>
+<script src="./curriculum/la-y2-tasks.js?v=2026-09-03-1626"></script>
+<script src="./curriculum/la-books-y2.js?v=2026-09-03-1626"></script>
+<script src="./curriculum/la-quotes.js?v=2026-09-03-1626"></script>
+<script src="./curriculum/la-mastery.js?v=2026-09-03-1626"></script>
+<script src="./curriculum/la-calendar.js?v=2026-09-03-1626"></script>
+<script src="./curriculum/la-grader.js?v=2026-09-03-1626"></script>
 </helmet>
 
 <div style="min-height:100vh;display:flex;flex-direction:column">
@@ -575,6 +574,23 @@
 
     <sc-if value="{{ isParent }}" hint-placeholder-val="{{ false }}">
       <div class="card">
+        <h2>Start the year again</h2>
+        <p class="muted">Marks every day in both grades as not started: step ticks, drill scores, flagged items and excused days. Useful for testing a change, or for genuinely restarting. It cannot be undone.</p>
+        <sc-if value="{{ resetIdle }}" hint-placeholder-val="{{ true }}">
+          <div style="margin-top:10px"><button onClick="{{ armReset }}" style="{{ btnSecondary }}">Reset all progress</button></div>
+        </sc-if>
+        <sc-if value="{{ resetArmed }}" hint-placeholder-val="{{ false }}">
+          <div style="background:#F3DCD5;color:var(--brick-dark);border-radius:8px;padding:14px 16px;margin-top:10px">
+            <div style="font-weight:600;margin-bottom:8px">This erases every tick and score for both 3rd and 5th grade, on every device. Sure?</div>
+            <div style="display:flex;gap:9px;flex-wrap:wrap">
+              <button onClick="{{ doReset }}" style="{{ btnPrimary }}">Yes, erase it all</button>
+              <button onClick="{{ cancelReset }}" style="{{ btnSecondary }}">Keep my progress</button>
+            </div>
+          </div>
+        </sc-if>
+      </div>
+
+      <div class="card">
         <h2>{{ parentGradeHeading }}</h2>
         <h3 style="font-size:1rem;margin:12px 0 6px">Where your child should be by the end of the year</h3>
         <sc-for list="{{ benchmarks }}" as="b" hint-placeholder-count="3">
@@ -633,23 +649,6 @@
           </sc-for>
         </div>
         <p class="muted" style="margin-top:7px;font-size:.85rem">{{ excuseHint }}</p>
-      </div>
-
-      <div class="card">
-        <h2>Start the year again</h2>
-        <p class="muted">Marks every day in both grades as not started: step ticks, drill scores, flagged items and excused days. Useful for testing a change, or for genuinely restarting. It cannot be undone.</p>
-        <sc-if value="{{ resetIdle }}" hint-placeholder-val="{{ true }}">
-          <div style="margin-top:10px"><button onClick="{{ armReset }}" style="{{ btnSecondary }}">Reset all progress</button></div>
-        </sc-if>
-        <sc-if value="{{ resetArmed }}" hint-placeholder-val="{{ false }}">
-          <div style="background:#F3DCD5;color:var(--brick-dark);border-radius:8px;padding:14px 16px;margin-top:10px">
-            <div style="font-weight:600;margin-bottom:8px">This erases every tick and score for both 3rd and 5th grade, on every device. Sure?</div>
-            <div style="display:flex;gap:9px;flex-wrap:wrap">
-              <button onClick="{{ doReset }}" style="{{ btnPrimary }}">Yes, erase it all</button>
-              <button onClick="{{ cancelReset }}" style="{{ btnSecondary }}">Keep my progress</button>
-            </div>
-          </div>
-        </sc-if>
       </div>
 
       <div class="card">

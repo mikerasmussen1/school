@@ -18,7 +18,17 @@
 # ============================================================================
 set -euo pipefail
 cd "$(dirname "$0")"
-VER="${1:-$(git rev-parse --short HEAD)}"
+# A UTC timestamp, not a commit hash.
+#
+# The hash came from `git rev-parse HEAD`, which runs BEFORE the commit that
+# ships it — so every deployed page was stamped with the PREVIOUS commit and
+# could never match the change it contained. That made the stamp worse than
+# useless: it was the thing being used to decide "am I looking at the new
+# version?", and it always said no.
+#
+# A timestamp cannot lag. It always moves forward, it is readable, and it says
+# when the build was made, which is what anyone actually wants to know.
+VER="${1:-$(date -u +%Y-%m-%d-%H%M)}"
 
 python3 - "$VER" <<'PY'
 import re, sys, glob, os
@@ -42,6 +52,11 @@ for f in ["index.html"] + sorted(glob.glob("*.dc.html")):
     # second instead of a debugging session.
     # Marker must be distinct from the app's own reference to window.__BUILD__,
     # or this "already stamped?" check matches the reader and never writes.
+    # An earlier version of this script wrote an UNMARKED stamp. Those were
+    # left behind when the marker was introduced, and because they sat above
+    # the marked one they overwrote it — every page reported a stale build.
+    # Strip any unmarked stamp before writing the marked one.
+    out = re.sub(r'\s*<script>window\.__BUILD__="[^"]*";</script>', '', out)
     stamp = '<script data-build>window.__BUILD__="%s";</script>' % ver
     if '<script data-build>' in out:
         out = re.sub(r'<script data-build>.*?</script>', stamp, out, flags=re.S)

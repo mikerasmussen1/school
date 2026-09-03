@@ -108,7 +108,9 @@
         body:JSON.stringify({
           model:this.model||CLAUDE_MODEL,
           max_tokens:4096,
-          temperature:0.4,
+          // No temperature: newer Claude models reject it with a 400,
+          // "'temperature' is deprecated for this model". Same reason as the
+          // worker proxy — see worker/tutor-proxy.js.
           // Prefill an opening brace so the reply starts as JSON rather than
           // "Here is the lesson:" — Claude has no response_mime_type.
           messages:[{role:"user",content:prompt},

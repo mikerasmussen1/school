@@ -186,7 +186,13 @@ export default {
       body: JSON.stringify({
         model,
         max_tokens: MAX_TOKENS,
-        temperature: 0.4,
+        // No temperature. The newer models reject it outright — the request
+        // comes back 400 "'temperature' is deprecated for this model" and the
+        // child sees a broken tutor. It was set to 0.4 for steadier JSON, but
+        // the prefilled brace below and the prompt already constrain the shape,
+        // so nothing is lost by leaving it off. Do not add it back per-model:
+        // an allowlist of which models still accept it would rot the next time
+        // a model is swapped, and fail in exactly this way again.
         // Prefill an opening brace so the reply starts as JSON. The client
         // re-attaches it; keep the two in step if either changes.
         messages: [

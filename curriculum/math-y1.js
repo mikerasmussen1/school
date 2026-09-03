@@ -1669,18 +1669,22 @@ const PRACTICE_U7_W4 = [
    ]},
   {id:"u7w4p5",w:4,label:"Fri",title:"Measurement Check",note:"Six questions across all three measures.",
    items:[
+     {t:0,q:"250 ml doubled",a:"500"},{t:0,q:"500 ml doubled",a:"1000"},{t:0,q:"750 ml doubled",a:"1500"},{t:0,q:"300 ml doubled",a:"600"},{t:0,q:"400 ml doubled",a:"800"},{t:0,q:"Half inches in 3 whole inches",a:"6"},{t:0,q:"Half inches in 5 whole inches",a:"10"},{t:0,q:"Half inches in 7 whole inches",a:"14"},{t:0,q:"Half inches in 9 whole inches",a:"18"},{t:1,q:"450 g minus 250 g",a:"200"},{t:1,q:"680 g minus 320 g",a:"360"},{t:1,q:"900 g minus 450 g",a:"450"},{t:1,q:"16 quarter inches in whole inches",a:"4"},{t:1,q:"24 quarter inches in whole inches",a:"6"},{t:1,q:"32 quarter inches in whole inches",a:"8"},{t:1,q:"A 2 litre bottle in millilitres",a:"2000"},{t:2,q:"3 kg 750 g in grams",a:"3750"},
      {t:0,q:"Millilitres in 1 litre",a:"1000"},{t:0,q:"Grams in 1 kilogram",a:"1000"},{t:0,q:"Quarter inches in 2 whole inches",a:"8"},{t:1,q:"1500 ml — the millilitres part after 1 litre",a:"500"},{t:1,q:"A 750 g bag and a 400 g bag — total grams",a:"1150"},{t:2,q:"3 kg 250 g in grams",a:"3250"}
    ]},
   {id:"u7w5p3",w:5,label:"5.3",title:"Clocks and Calendars",note:"Read the day's real timetable off a real clock.",
    items:[
+     {t:0,q:"Minute hand on 1 — minutes past",a:"5"},{t:0,q:"Minute hand on 2 — minutes past",a:"10"},{t:0,q:"Minute hand on 4 — minutes past",a:"20"},{t:0,q:"Minute hand on 5 — minutes past",a:"25"},{t:0,q:"Minute hand on 7 — minutes past",a:"35"},{t:0,q:"Minute hand on 8 — minutes past",a:"40"},{t:0,q:"Minute hand on 10 — minutes past",a:"50"},{t:1,q:"15 minutes past plus 20 more",a:"35"},{t:1,q:"25 minutes past plus 15 more",a:"40"},{t:1,q:"40 minutes past plus 10 more",a:"50"},{t:1,q:"Minutes from quarter past to quarter to",a:"30"},{t:1,q:"Hours from half past 9 to half past 2",a:"5"},{t:2,q:"A 100 minute film starting at 6 — the finishing hour",a:"7"},
      {t:0,q:"Minutes in a quarter of an hour",a:"15"},{t:0,q:"Minutes in half an hour",a:"30"},{t:0,q:"Minutes in three quarters of an hour",a:"45"},{t:1,q:"Quarter past 2 to quarter to 3 — minutes",a:"30"},{t:1,q:"10 past 9 to 25 past 9 — minutes",a:"15"},{t:2,q:"A lesson 8:50 to 9:35 — minutes",a:"45"}
    ]},
   {id:"u7w5p4",w:5,label:"5.4",title:"Error Journal",note:"Fix only what repeats.",
    items:[
+     {t:0,q:"320 + 180",a:"500"},{t:0,q:"540 + 260",a:"800"},{t:0,q:"710 + 390",a:"1100"},{t:0,q:"800 − 350",a:"450"},{t:0,q:"650 − 280",a:"370"},{t:1,q:"1500 ml — whole litres",a:"1"},{t:1,q:"2400 ml — whole litres",a:"2"},{t:1,q:"3600 ml — whole litres",a:"3"},{t:1,q:"Minutes in 2 and a half hours",a:"150"},{t:1,q:"Minutes in 3 and a half hours",a:"210"},{t:1,q:"Minutes in 5 and a half hours",a:"330"},{t:1,q:"A ribbon 36 inches cut into 4 — inches each",a:"9"},{t:2,q:"2 kg minus 450 g, in grams",a:"1550"},
      {t:0,q:"Minutes in 2 hours",a:"120"},{t:0,q:"Grams in 2 kilograms",a:"2000"},{t:1,q:"A jug of 900 ml, 350 ml poured out — left",a:"550"},{t:1,q:"Half past 3 to half past 6 — hours",a:"3"},{t:2,q:"A 1 litre jug fills 4 equal cups — millilitres in each",a:"250"}
    ]},
   {id:"u7w5p5",w:5,label:"Fri",title:"Mission 07 Test",note:"Graphs, measures and time together.",
    items:[
+     {t:0,q:"Millilitres in half a litre",a:"500"},{t:0,q:"Grams in half a kilogram",a:"500"},{t:0,q:"Quarter inches in 3 whole inches",a:"12"},{t:0,q:"Minutes in a quarter of an hour",a:"15"},{t:1,q:"A jug of 1 litre, 350 ml poured out — ml left",a:"650"},{t:1,q:"From 10 past 2 to 10 to 3 — minutes",a:"40"},{t:1,q:"A bar chart where each block is 4 — blocks for 28",a:"7"},{t:1,q:"A 20 inch ribbon shared by 5 — inches each",a:"4"},{t:2,q:"A 3 litre jug fills 250 ml cups — cups",a:"12"},{t:2,q:"Half past 8 to quarter past 11 — minutes",a:"165"},
      {t:0,q:"Minutes in 1 hour",a:"60"},{t:0,q:"Millilitres in 2 litres",a:"2000"},{t:1,q:"A bar chart where each block is 5 — blocks for 35",a:"7"},{t:1,q:"A ribbon 18 inches cut into 6 equal pieces — inches each",a:"3"},{t:1,q:"Quarter to 4 until 4 o'clock — minutes",a:"15"},{t:2,q:"A 2 kg bag split into 250 g packets — packets",a:"8"}
    ]},
   {id:"u7w4p1",w:4,label:"4.1",title:"The Ruler, Honestly",note:"Whole, half and quarter inches — read off a real ruler, not guessed.",
@@ -2119,6 +2123,18 @@ const LESSONS_U8 = {
  * Same step grammar as Year One: an area/rectangle stage drawn to true
  * size, one caption per step. Keyed by Year Two set id (y5uNpN).           */
 const LESSONS_WEEKLY = {
+ u7w4:{title:"Measure it, do not guess it",sub:"Week 4 · length, volume and mass",steps:[
+  {cap:"A ruler is a number line you can hold. The long marks are whole inches; the mark halfway between two of them is a half inch."},
+  {cap:"Between those, the shorter marks cut each half in two again — quarter inches. Four quarters in every whole inch, which is why 3 and a quarter inches is 13 quarter inches."},
+  {cap:"Volume is the same idea in a jug. A litre is 1000 millilitres, so a 250 ml cup fills it four times. Pour it once and you will not forget it."},
+  {cap:"Mass works the same way on a balance: 1000 grams in a kilogram. Four 250 g packets balance one bag of flour."},
+  {cap:"The unit is part of the answer. 500 on its own means nothing — 500 ml is half a litre, 500 g is half a kilogram."}]},
+ u7w5:{title:"Time is a number line that wraps",sub:"Week 5 · clocks and elapsed time",steps:[
+  {cap:"The minute hand moves 5 minutes for every number on the face. Pointing at 4 means 20 minutes past, not 4 minutes past."},
+  {cap:"Quarter past is 15, half past is 30, quarter to is 45. Those three come up more than any others, so they are worth knowing without counting."},
+  {cap:"Elapsed time is a subtraction with a wrap in it. From half past 1 to half past 4 is 3 whole hours — count the hours, then the minutes."},
+  {cap:"When the minutes cross 60 the hour changes: 50 minutes past plus 20 more is 10 past the NEXT hour, not 70 past this one."},
+  {cap:"Estimate first. A lesson does not last 5 minutes and it does not last 5 hours, so an answer outside that is wrong before you check it."}]},
  u1w2:{title:"The algorithm is the rooms",sub:"Week 2 · written multiplication",steps:[
   {cap:"23 × 14 as four rooms. You built this picture last week.",cols:[{l:"20",s:20},{l:"3",s:3}],rows:[{l:"10",s:10},{l:"4",s:4}],cells:[{v:"200"},{v:"30"},{v:"80"},{v:"12"}],sum:"200+30+80+12 = 322"},
   {cap:"The written algorithm adds the same rooms in a different order. The row '92' is the two rooms beside the 4: 80 + 12.",cols:[{l:"20",s:20},{l:"3",s:3}],rows:[{l:"4",s:4}],cells:[{v:"80"},{v:"12"}],sum:"45 × 4 row → 92"},

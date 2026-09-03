@@ -352,7 +352,7 @@ const PRACTICE_Y5 = {
   {id:"y5u1p3",label:"1.3",title:"Powers of Ten",note:"The digits move. The point stays put.",items:[
     q(0,"3.5 × 10","35"),q(0,"3.5 × 100","350"),q(0,"42 ÷ 10","4.2"),q(0,"42 ÷ 100","0.42"),q(0,"10² as a number","100"),q(0,"10³ as a number","1000"),
     q(1,"0.06 × 100","6"),q(1,"7 ÷ 1000","0.007"),q(1,"2.4 × 10³","2400"),q(1,"850 ÷ 10²","8.5"),q(1,"10⁴ as a number","10000"),
-    q(1,"0.035 × 10⁴","350"),q(2,"Which power of ten takes 0.7 to 700","1000","Three places")]},
+    q(2,"0.035 × 10⁴","350"),q(2,"Which power of ten takes 0.7 to 700","1000","Three places")]},
   {id:"y5u1p4",label:"1.4",title:"Compare & Round",note:"Line up the points. Trailing zeros cost nothing.",items:[
     q(0,"Larger: 0.5 or 0.35 — type it","0.5"),q(0,"Larger: 0.7 or 0.70","equal"),q(0,"Round 4.7 to the nearest whole","5"),q(0,"Round 0.34 to the nearest tenth","0.3"),q(0,"Round 128 to the nearest ten","130"),q(0,"Round 0.86 to the nearest tenth","0.9"),
     q(1,"Round 2.451 to the nearest hundredth","2.45"),q(1,"Round 9.96 to the nearest tenth","10"),q(1,"Larger: 0.406 or 0.41","0.41"),q(1,"Round 0.0475 to the nearest thousandth","0.048"),q(1,"Round 4,829 to the nearest hundred","4800"),
@@ -418,8 +418,8 @@ const PRACTICE_Y5 = {
     q(2,"0.125 × 8","1"),q(2,"1.25 × 0.8","1")]},
   {id:"y5u4p4",label:"1.4",title:"Dividing Decimals",note:"Shift both numbers the same number of places, then divide as usual.",items:[
     q(0,"4.8 ÷ 2","2.4"),q(0,"0.9 ÷ 3","0.3"),q(0,"6.4 ÷ 4","1.6"),q(0,"2.5 ÷ 5","0.5"),q(0,"0.36 ÷ 6","0.06"),q(0,"7.2 ÷ 8","0.9"),
-    q(1,"6 ÷ 0.5","12","How many halves in six"),q(1,"4 ÷ 0.25","16"),q(0,"1.5 ÷ 0.5","3"),q(1,"9.6 ÷ 1.2","8"),q(1,"$7.50 shared by 3 — type the number","2.5"),
-    q(1,"0.144 ÷ 0.12","1.2"),q(2,"A 4.5 m rope cut into 0.75 m pieces — how many","6")]},
+    q(1,"6 ÷ 0.5","12","How many halves in six"),q(1,"4 ÷ 0.25","16"),q(1,"1.5 ÷ 0.5","3"),q(1,"9.6 ÷ 1.2","8"),q(1,"$7.50 shared by 3 — type the number","2.5"),
+    q(2,"0.144 ÷ 0.12","1.2"),q(2,"A 4.5 m rope cut into 0.75 m pieces — how many","6")]},
   {id:"y5u4p5",label:"Fri",title:"Unit Price Investigation",note:"Enrichment. Price per unit is the only fair comparison.",items:[
     q(0,"$6 for 2 kg — price per kg","3"),q(0,"$10 for 5 L — price per litre","2"),
     q(1,"$4.50 for 3 kg — price per kg","1.5"),q(1,"$7.20 for 0.8 kg — price per kg","9"),
@@ -452,7 +452,7 @@ const PRACTICE_Y5 = {
     q(2,"2/3 of 45","30"),q(2,"7/10 of 250","175")]},
   {id:"y5u6p2",label:"1.2",title:"Fraction × Fraction",note:"Multiply across. Type answers like 1/6.",items:[
     q(0,"1/2 × 1/2 — type as a/b","1/4"),q(0,"1/2 × 1/3","1/6"),q(0,"1/3 × 1/3","1/9"),q(0,"1/2 × 1/4","1/8"),q(0,"1/5 × 1/2","1/10"),q(0,"1/4 × 1/4","1/16"),
-    q(0,"2/3 × 1/2","1/3"),q(1,"3/4 × 2/3","1/2"),q(1,"2/5 × 3/4","3/10"),q(1,"5/6 × 3/5","1/2"),q(1,"3/8 × 4/9","1/6"),
+    q(1,"2/3 × 1/2","1/3"),q(1,"3/4 × 2/3","1/2"),q(1,"2/5 × 3/4","3/10"),q(1,"5/6 × 3/5","1/2"),q(1,"3/8 × 4/9","1/6"),
     q(2,"2/3 × 3/4 × 1/2","1/4"),q(2,"Area of a rectangle 2/3 by 3/5 — type as a/b","2/5")]},
   {id:"y5u6p3",label:"1.3",title:"Scaling",note:"Predict bigger or smaller before you calculate.",items:[
     q(0,"6 × 2 — bigger or smaller than 6","bigger"),q(0,"6 × 1/2 — bigger or smaller","smaller"),q(0,"6 × 1 — bigger, smaller or same","same"),q(0,"6 × 1/2","3"),q(0,"8 × 1/4","2"),q(0,"10 × 3/5","6"),
@@ -481,7 +481,7 @@ const PRACTICE_Y5 = {
     q(2,"Two boxes: 4×3×2 and 5×2×2 — total volume","44"),q(2,"A cube of volume 125 — its edge","5")]},
   {id:"y5u7p4",label:"1.4",title:"Line Plots",note:"Fractional measurements, plotted and then reasoned about.",items:[
     q(0,"Four items at 1/2 each — total","2"),q(0,"Eight items at 1/4 each — total","2"),q(0,"Two items at 3/4 each — total, as a/b","3/2"),q(0,"Three items at 1/3 each","1"),q(0,"Six items at 1/2 each","3"),q(0,"Longest of 1/4, 1/2, 3/8 — type it","1/2"),
-    q(1,"1/2 + 1/4 + 1/4 — total","1"),q(1,"Range of 1/8 and 7/8 — type as a/b","3/4"),q(2,"Five items totalling 5/2 — the mean, as a/b","1/2"),q(1,"Difference between 7/8 and 3/8 — as a/b","1/2"),q(1,"Four measurements of 3/4 — total","3"),
+    q(1,"1/2 + 1/4 + 1/4 — total","1"),q(1,"Range of 1/8 and 7/8 — type as a/b","3/4"),q(1,"Five items totalling 5/2 — the mean, as a/b","1/2"),q(1,"Difference between 7/8 and 3/8 — as a/b","1/2"),q(1,"Four measurements of 3/4 — total","3"),
     q(2,"Six pencils totalling 9/2 inches, shared equally — each, as a/b","3/4"),q(2,"Two at 1/8, three at 1/4, one at 1/2 — total, as a/b","3/2")]},
   {id:"y5u7p5",label:"Fri",title:"Box It",note:"Enrichment. Same volume, different shapes.",items:[
     q(0,"A box of volume 24: 2 by 3 by ?","4"),q(0,"A box of volume 24: 1 by 4 by ?","6"),
@@ -525,7 +525,7 @@ const PRACTICE_Y5_W = {
   {id:"y5u1w2p3",w:2,label:"2.3",title:"Exponent Shorthand",note:"10³ means three tens multiplied, which is three places.",items:[
     q(0,"10¹","10"),q(0,"10²","100"),q(0,"10³","1000"),q(0,"10⁴","10000"),q(0,"Zeros in 10⁵","5"),q(0,"10⁶","1000000"),
     q(1,"3 × 10²","300"),q(1,"4.5 × 10³","4500"),q(1,"7 × 10⁴","70000"),q(1,"0.6 × 10³","600"),q(1,"2.5 × 10²","250"),
-    q(2,"10³ × 10²","100000"),q(1,"0.035 × 10⁴","350")]},
+    q(2,"10³ × 10²","100000"),q(2,"0.035 × 10⁴","350")]},
   {id:"y5u1w2p4",w:2,label:"2.4",title:"Patterns in Zeros",note:"Why 4 × 100 ends in two zeros and 0.4 × 100 does not.",items:[
     q(0,"4 × 100","400"),q(0,"0.4 × 100","40"),q(0,"40 × 100","4000"),q(0,"0.04 × 100","4"),q(0,"Zeros at the end of 4 × 1000","3"),q(0,"0.4 × 1000","400"),
     q(1,"25 × 100","2500"),q(1,"0.25 × 100","25"),q(1,"0.025 × 100","2.5"),q(1,"1.5 × 1000","1500"),q(1,"0.015 × 1000","15"),
@@ -631,7 +631,7 @@ const PRACTICE_Y5_W2 = {
     q(1,"2.5 kg at $4 per kg","10"),q(1,"$12 buys how many at $2.40","5"),q(1,"1.5 m plus 0.85 m — metres","2.35"),q(1,"6 at $3.99 — total","23.94"),q(1,"$50 − $27.45","22.55"),
     q(2,"0.75 kg at $6.40 per kg","4.8"),q(2,"$18 buys how many at $0.75","24")]},
   {id:"y5u4w4p2",w:4,label:"4.2",title:"Two-Step Problems",note:"Multiply then subtract, in that order.",items:[
-    q(0,"3 at $2, change from $10","4"),q(0,"4 at $1.50, change from $10","4"),q(0,"2 at $3.25 — total","6.5"),q(0,"Change from $10","3.5"),q(0,"5 at $2 — total","10"),q(0,"Change from $20","10"),
+    q(0,"3 at $2, change from $10","4"),q(0,"4 at $1.50, change from $10","4"),q(0,"2 at $3.25 — total","6.5"),q(0,"Change from $10","3.5"),q(0,"5 at $2 — total","10"),q(1,"Change from $20","10"),
     q(1,"3 at $4.99, change from $20","5.03"),q(1,"6 at $1.75 — total","10.5"),q(1,"Change from $20","9.5"),q(1,"2.5 kg at $3.20, change from $10","2"),q(1,"4 at $6.25 — total","25"),
     q(2,"$40 less 3 dinners at $11.25","6.25"),q(2,"1.5 kg at $4.80 plus $2.50 delivery","9.7")]},
   {id:"y5u4w4p3",w:4,label:"4.3",title:"Measurement Contexts",note:"Metres, litres and kilograms, all carrying decimals.",items:[
@@ -874,11 +874,11 @@ const PRACTICE_Y5_W5 = {
     q(2,"A 12×8×4 and a 6×4×4","480"),q(2,"Five 6×5×2 boxes","300")]},
   {id:"y5u7w3p3",w:3,label:"3.3",title:"Line Plots",note:"Plot measurements to the nearest eighth, then reason about them.",items:[
     q(0,"Four items at 1/2 — total","2"),q(0,"Eight items at 1/4 — total","2"),q(0,"Three items at 1/3 — total","1"),q(0,"Six items at 1/2 — total","3"),q(0,"Two items at 3/4 — total","3/2"),q(0,"Longest of 1/4, 1/2, 3/8","1/2"),
-    q(1,"1/2 + 1/4 + 1/4","1"),q(1,"Range of 1/8 and 7/8","3/4"),q(2,"Five items totalling 5/2 — the mean","1/2"),q(1,"Difference between 7/8 and 3/8","1/2"),q(1,"Four measurements of 3/4 — total","3"),
+    q(1,"1/2 + 1/4 + 1/4","1"),q(1,"Range of 1/8 and 7/8","3/4"),q(1,"Five items totalling 5/2 — the mean","1/2"),q(1,"Difference between 7/8 and 3/8","1/2"),q(1,"Four measurements of 3/4 — total","3"),
     q(2,"Six pencils totalling 9/2 inches shared equally — each","3/4"),q(2,"Two at 1/8, three at 1/4, one at 1/2 — total","3/2")]},
   {id:"y5u7w3p4",w:3,label:"3.4",title:"Read the Plot",note:"Total, difference, and redistribution.",items:[
-    q(0,"Five values of 1/2 — total","5/2"),q(2,"Their mean","1/2"),q(0,"Four values of 1/4 — total","1"),q(2,"Their mean","1/4"),q(0,"Range of 1/4 and 3/4","1/2"),q(0,"Range of 1/8 and 5/8","1/2"),
-    q(1,"Values 1/4, 1/2, 3/4 — total","3/2"),q(2,"Their mean","1/2"),q(1,"Values 1/8, 3/8, 1/2 — total","1"),q(2,"Four values totalling 3 — the mean","3/4"),q(1,"Range of 1/8 and 1","7/8"),
+    q(0,"Five values of 1/2 — total","5/2"),q(1,"Their mean","1/2"),q(0,"Four values of 1/4 — total","1"),q(1,"Their mean","1/4"),q(0,"Range of 1/4 and 3/4","1/2"),q(0,"Range of 1/8 and 5/8","1/2"),
+    q(1,"Values 1/4, 1/2, 3/4 — total","3/2"),q(1,"Their mean","1/2"),q(1,"Values 1/8, 3/8, 1/2 — total","1"),q(1,"Four values totalling 3 — the mean","3/4"),q(1,"Range of 1/8 and 1","7/8"),
     q(2,"Eight values totalling 5 — the mean","5/8"),q(2,"Redistribute 9/2 across 6 equally — each","3/4")]},
   {id:"y5u7w3p5",w:3,label:"Fri",title:"Mid-Unit Quiz",note:"Eight items across Weeks 1–3. 85% to keep flying.",items:[
     q(0,"1 m in cm","100"),q(0,"A 2 by 3 by 4 box","24"),
@@ -902,7 +902,7 @@ const PRACTICE_Y5_W5 = {
     q(2,"A cube of volume 216 — its edge","6"),q(2,"Add 1.2 m and 85 cm — answer in cm","205")]},
   {id:"y5u7w4p5",w:4,label:"Fri",title:"Mission 07 Test",note:"Twelve items plus the Big Question, answered out loud.",items:[
     q(0,"1 m in cm","100"),q(0,"A 2 by 3 by 4 box","24"),
-    q(1,"250 cm in m","2.5"),q(1,"3200 mL in L","3.2"),q(1,"A 5 by 4 by 3 box","60"),q(1,"A cube of edge 4","64"),q(1,"Volume 120, base area 20 — the height","6"),q(1,"Volume 96, edges 8 and 4 — the third","3"),q(1,"A 6×5×2 and a 4×3×2 — total","84"),q(2,"Five items totalling 5/2 — the mean","1/2"),
+    q(1,"250 cm in m","2.5"),q(1,"3200 mL in L","3.2"),q(1,"A 5 by 4 by 3 box","60"),q(1,"A cube of edge 4","64"),q(1,"Volume 120, base area 20 — the height","6"),q(1,"Volume 96, edges 8 and 4 — the third","3"),q(1,"A 6×5×2 and a 4×3×2 — total","84"),q(1,"Five items totalling 5/2 — the mean","1/2"),
     q(2,"A cube of volume 125 — its edge","5"),q(2,"Double every edge of a 2×3×4 box — volume multiplies by","8")]}
  ],
  8:[
@@ -956,7 +956,7 @@ const PRACTICE_Y5_W5 = {
     q(2,"A patrol (1,1),(7,1),(7,5),(1,5) and back — total distance","20"),q(2,"The area enclosed by that patrol","24")]},
   {id:"y5u8w4p3",w:4,label:"4.3",title:"Walk Somebody Through It",note:"Fix any pair that misleads them. Mark it honestly.",items:[
     q(0,"10 stops, 8 followed correctly — the percent","80"),q(0,"10 stops, 9 correct — the percent","90"),q(0,"10 minus 7","3"),q(0,"Half of 10 stops","5"),q(0,"10 stops, 5 correct — the percent","50"),q(0,"10 stops, 10 correct — the percent","100"),
-    q(1,"4 minutes a stop, 10 stops — minutes","40"),q(1,"Two pairs rewritten out of 10 — the percent","20"),q(1,"85% of 10 stops","8.5"),q(1,"If 9 of 10 are followable, the percent that are not","10"),q(2,"A 40-minute walk over 10 stops — mean minutes each","4"),
+    q(1,"4 minutes a stop, 10 stops — minutes","40"),q(1,"Two pairs rewritten out of 10 — the percent","20"),q(1,"85% of 10 stops","8.5"),q(1,"If 9 of 10 are followable, the percent that are not","10"),q(1,"A 40-minute walk over 10 stops — mean minutes each","4"),
     q(2,"12 points a stop, 10 stops, scored 96 — the percent","80"),q(2,"To score 85% of 120 points, she needs","102")]},
   {id:"y5u8w4p4",w:4,label:"Thu",title:"Year-End Sweep",note:"All eight error journals. Name the habit that fixed itself.",items:[
     q(0,"4.2 × 10","42"),q(0,"23 × 14","322"),q(0,"84 ÷ 12","7"),q(0,"0.3 + 0.4","0.7"),q(0,"1/4 + 1/4","1/2"),q(0,"A 2 by 3 by 4 box","24"),
@@ -1070,7 +1070,7 @@ const PRACTICE_Y5_W6 = {
     q(1,"$50 split 4 ways, to the cent","12.5"),q(1,"$100 split 30 ways, to the cent","3.33"),q(1,"$40 split 3 ways, to the cent","13.33"),q(1,"7 pizzas split 4 ways, as a decimal","1.75"),q(1,"$15 split 4 ways","3.75"),
     q(2,"100 ÷ 7 as a decimal to two places","14.29"),q(2,"$100 split 30 ways — cents left over","10")]},
   {id:"y5u3w3p4",w:3,label:"3.4",title:"Four Questions, One Division",note:"100 ÷ 30 answered four ways, all correct.",items:[
-    q(0,"100 ÷ 30 — the whole part","3"),q(0,"100 ÷ 30 — the remainder","10"),q(0,"100 ÷ 30 rounded up","4"),q(0,"100 ÷ 30 rounded down","3"),q(0,"30 × 3","90"),q(0,"100 − 90","10"),
+    q(0,"100 ÷ 30 — the whole part","3"),q(1,"100 ÷ 30 — the remainder","10"),q(0,"100 ÷ 30 rounded up","4"),q(0,"100 ÷ 30 rounded down","3"),q(0,"30 × 3","90"),q(0,"100 − 90","10"),
     q(1,"100 people, buses of 30 — buses","4"),q(1,"100 pencils, full boxes of 30","3"),q(1,"$100 split 30 ways, to the cent","3.33"),q(1,"100 ÷ 30 — the remainder","10"),q(1,"30 × 3 + 10","100"),
     q(2,"For money, which answer suits — type decimal or remainder","decimal"),q(2,"For buses, which suits — type up or down","up")]},
   {id:"y5u3w3p5",w:3,label:"Fri",title:"Budget the Miles",note:"Miles per day, tanks per trip, dollars per person.",items:[

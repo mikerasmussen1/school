@@ -4220,6 +4220,27 @@ class Component extends DCLogic {
   weeksWithSets(u){ return [...new Set(this.setsFor(u).map(s=>s.w||1))].sort((a,b)=>a-b); }
   openUnit=n=>this.nav({view:"unit",uview:n,unit:n,week:1,pweek:1,pset:this.setsForWeek(n,1)[0].id,pTier:null});
 
+  /* Practice Bay for the mission currently on screen.
+   *
+   * This used to be goToday, which opens the child's FRONTIER day. From
+   * Mission 06's page that silently landed them in Mission 01, because the
+   * frontier is wherever they have got to, not what they were looking at. The
+   * tier links on the same page already open the mission being viewed, so the
+   * one button that did not was the odd one out.
+   *
+   * If their frontier happens to fall inside the mission on screen, open there
+   * — that is the day they would want. Otherwise open that mission from its
+   * first day, the way openUnit does. */
+  goPracticeHere=()=>{
+    const u=this.state.uview||1;
+    const t=this.mathToday();
+    const inThisMission=t&&t.next&&t.unit===u;
+    const week=inThisMission?(t.week||1):1;
+    const first=this.setsForWeek(u,week)[0];
+    this.nav({view:"practice", uview:u, unit:u, pweek:week,
+      pset:inThisMission?t.next.id:(first&&first.id)||null, pTier:null});
+  };
+
   // ---- subjects -----------------------------------------------------------
   // Every child's record carries one namespace per subject (see subjects.js).
   // Opening a subject stamps the visit there, so Teacher HQ can show what was
@@ -6987,7 +7008,7 @@ class Component extends DCLogic {
       goUnit6:()=>this.openUnit(6),
       goUnit7:()=>this.openUnit(7),
       goUnit8:()=>this.openUnit(8),
-      goPractice:this.goToday,
+      goPractice:this.goPracticeHere,
 
       tabs:[["map","Mission Map"],["unit","Mission 0"+st.uview],["practice","Practice Bay"],["hq","Teacher HQ"]].map(([v,label])=>({
         label, style:this.tabStyle(st.view===v), go:()=>this.setState({view:v})

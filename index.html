@@ -257,69 +257,13 @@
       </div>
     </div>
 
-    <!-- selected unit detail -->
-    <div style="{{ detailStyle }}">
-      <div style="display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:0">
-        <div style="padding:34px 36px">
-          <div style="display:flex;align-items:center;gap:12px;margin-bottom:6px">
-            <span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:{{ sel.color }}">Mission 0{{ sel.n }} · Weeks {{ sel.weeks }}</span>
-            <span style="{{ sel.statusChip }}">{{ sel.statusLabel }}</span>
-          </div>
-          <h2 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:38px;line-height:1.05;margin:0 0 16px;color:{{ sel.color }}">{{ sel.name }}</h2>
-          <div style="background:rgba(255,255,255,.05);border-left:0;border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:16px 18px;margin-bottom:20px">
-            <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.5);margin-bottom:7px">The Big Question</div>
-            <div style="font-family:Fredoka,sans-serif;font-size:19px;line-height:1.3">{{ sel.bigQ }}</div>
-          </div>
-          <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.5);margin-bottom:10px">Skills on this planet</div>
-          <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px">
-            <sc-for list="{{ sel.skills }}" as="s" hint-placeholder-count="5">
-              <span style="font-size:13px;padding:6px 12px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);color:rgba(238,242,255,.85)">{{ s }}</span>
-            </sc-for>
-          </div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
-            <div>
-              <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.5);margin-bottom:6px">Hands-on project</div>
-              <div style="font-size:14.5px;line-height:1.45;color:rgba(238,242,255,.88)">{{ sel.project }}</div>
-            </div>
-            <div>
-              <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.5);margin-bottom:6px">Fluency game</div>
-              <div style="font-size:14.5px;line-height:1.45;color:rgba(238,242,255,.88)">{{ sel.game }}</div>
-            </div>
-          </div>
-          <sc-if value="{{ sel.isUnitOne }}" hint-placeholder-val="{{ true }}">
-            <button onClick="{{ goUnit1 }}" style="margin-top:26px;font-family:Fredoka,sans-serif;font-size:15.5px;padding:13px 24px;border-radius:14px;border:0;cursor:pointer;background:linear-gradient(150deg,#FF9F1C,#F472B6);color:#180A1E;box-shadow:0 10px 30px rgba(255,159,28,.3)" style-hover="filter:brightness(1.08)">Open Mission 01 →</button>
-          </sc-if>
-          <sc-if value="{{ sel.isUnitTwo }}" hint-placeholder-val="{{ false }}">
-            <button onClick="{{ goUnit2 }}" style="margin-top:26px;font-family:Fredoka,sans-serif;font-size:15.5px;padding:13px 24px;border-radius:14px;border:0;cursor:pointer;background:linear-gradient(150deg,#2DD4BF,#38BDF8);color:#04231F;box-shadow:0 10px 30px rgba(45,212,191,.3)" style-hover="filter:brightness(1.08)">Open Mission 02 →</button>
-          </sc-if>
-          <sc-if value="{{ sel.isUnitThree }}" hint-placeholder-val="{{ false }}">
-            <button onClick="{{ goUnit3 }}" style="margin-top:26px;font-family:Fredoka,sans-serif;font-size:15.5px;padding:13px 24px;border-radius:14px;border:0;cursor:pointer;background:linear-gradient(150deg,#A78BFA,#F472B6);color:#170B2E;box-shadow:0 10px 30px rgba(167,139,250,.3)" style-hover="filter:brightness(1.08)">Open Mission 03 →</button>
-          </sc-if>
-          <sc-if value="{{ sel.isUnitFour }}" hint-placeholder-val="{{ false }}">
-            <button onClick="{{ goUnit4 }}" style="margin-top:26px;font-family:Fredoka,sans-serif;font-size:15.5px;padding:13px 24px;border-radius:14px;border:0;cursor:pointer;background:linear-gradient(150deg,#F472B6,#FBBF24);color:#2A0A1B;box-shadow:0 10px 30px rgba(244,114,182,.3)" style-hover="filter:brightness(1.08)">Open Mission 04 →</button>
-          </sc-if>
-          <sc-if value="{{ sel.isUnitFive }}" hint-placeholder-val="{{ false }}">
-            <button onClick="{{ goUnit5 }}" style="margin-top:26px;font-family:Fredoka,sans-serif;font-size:15.5px;padding:13px 24px;border-radius:14px;border:0;cursor:pointer;background:linear-gradient(150deg,#A3E635,#4ADE80);color:#14210A;box-shadow:0 10px 30px rgba(163,230,53,.3)" style-hover="filter:brightness(1.08)">Open Mission 05 →</button>
-          </sc-if>
-          <sc-if value="{{ sel.isUnitSix }}" hint-placeholder-val="{{ false }}">
-            <button onClick="{{ goUnit6 }}" style="margin-top:26px;font-family:Fredoka,sans-serif;font-size:15.5px;padding:13px 24px;border-radius:14px;border:0;cursor:pointer;background:linear-gradient(150deg,#60A5FA,#A78BFA);color:#08172E;box-shadow:0 10px 30px rgba(96,165,250,.3)" style-hover="filter:brightness(1.08)">Open Mission 06 →</button>
-          </sc-if>
-          <sc-if value="{{ sel.isUnitSeven }}" hint-placeholder-val="{{ false }}">
-            <button onClick="{{ goUnit7 }}" style="margin-top:26px;font-family:Fredoka,sans-serif;font-size:15.5px;padding:13px 24px;border-radius:14px;border:0;cursor:pointer;background:linear-gradient(150deg,#FB7185,#FBBF24);color:#2C0812;box-shadow:0 10px 30px rgba(251,113,133,.3)" style-hover="filter:brightness(1.08)">Open Mission 07 →</button>
-          </sc-if>
-          <sc-if value="{{ sel.isUnitEight }}" hint-placeholder-val="{{ false }}">
-            <button onClick="{{ goUnit8 }}" style="margin-top:26px;font-family:Fredoka,sans-serif;font-size:15.5px;padding:13px 24px;border-radius:14px;border:0;cursor:pointer;background:linear-gradient(150deg,#FCD34D,#A3E635);color:#241A03;box-shadow:0 10px 30px rgba(252,211,77,.3)" style-hover="filter:brightness(1.08)">Open Mission 08 →</button>
-          </sc-if>
-        </div>
-        <div style="{{ sel.badgeWellStyle }}">
-          <div style="{{ sel.bigBadgeStyle }}">
-            <span style="font-family:Fredoka,sans-serif;font-weight:600;color:#0B0F24;font-size:{{ sel.bigGlyphSize }}">{{ sel.badge }}</span>
-          </div>
-          <div style="font-family:Fredoka,sans-serif;font-size:17px;margin-top:22px;text-align:center;color:{{ sel.color }}">{{ sel.badgeName }}</div>
-          <div style="font-size:13px;line-height:1.5;margin-top:8px;text-align:center;max-width:250px;color:rgba(238,242,255,.6)">{{ sel.badgeReq }}</div>
-        </div>
-      </div>
-    </div>
+        <!-- The per-mission detail panel used to live here. The map's planets only
+         SELECTED a mission and expanded this; entering it needed a second
+         button, so reaching a question was three clicks where Word Voyagers
+         and Field Notes take one ("tap any unit to jump to its first week").
+         The planets now navigate. Everything this panel showed - big question,
+         skills, project - is on the mission page it opens. -->
+
 
     <!-- mascot -->
     <div style="display:flex;align-items:flex-start;gap:20px;margin-top:38px;max-width:900px">
@@ -7000,14 +6944,6 @@ class Component extends DCLogic {
       ...this.profileVals(),
       ...this.subjectVals(),
       showStandards:this.props.showStandards ?? true,
-      goUnit1:()=>this.openUnit(1),
-      goUnit2:()=>this.openUnit(2),
-      goUnit3:()=>this.openUnit(3),
-      goUnit4:()=>this.openUnit(4),
-      goUnit5:()=>this.openUnit(5),
-      goUnit6:()=>this.openUnit(6),
-      goUnit7:()=>this.openUnit(7),
-      goUnit8:()=>this.openUnit(8),
       goPractice:this.goPracticeHere,
 
       tabs:[["map","Mission Map"],["unit","Mission 0"+st.uview],["practice","Practice Bay"],["hq","Teacher HQ"]].map(([v,label])=>({
@@ -7017,7 +6953,7 @@ class Component extends DCLogic {
       units:this.unitsList().map(u=>{
         const cur=u.n===done+1, earned=u.n<=done;
         return {...u, n:u.n, glyphSize:u.glyph, labelColor:cur?"#EEF2FF":"rgba(238,242,255,.55)",
-          select:()=>this.setState({unit:u.n}),
+          select:()=>this.openUnit(u.n),
           nodeStyle:"flex:1;background:transparent;border:0;cursor:pointer;display:flex;flex-direction:column;align-items:center;padding:0;transition:.2s;color:inherit;"+(st.unit===u.n?"":"opacity:.9"),
           planetStyle:`position:relative;width:${u.size}px;height:${u.size}px;border-radius:50%;display:grid;place-items:center;`+
             `background:radial-gradient(circle at 32% 28%, ${u.color}, ${u.color}99 62%, ${u.color}55);`+
@@ -7026,19 +6962,6 @@ class Component extends DCLogic {
           ringStyle:u.n%3===1?`position:absolute;inset:-14% -30%;border:2.5px solid ${u.color}66;border-radius:50%;transform:rotate(-18deg) scaleY(.28)`:"display:none"
         };
       }),
-
-      detailStyle:`background:linear-gradient(150deg,${sel.color}1A,rgba(255,255,255,.03));border:1px solid ${sel.color}45;border-radius:26px;overflow:hidden`,
-
-      sel:{...sel, bigGlyphSize:sel.n===3?"36px":sel.n===7?"30px":"66px", isUnitOne:sel.n===1, isUnitTwo:sel.n===2, isUnitThree:sel.n===3, isUnitFour:sel.n===4, isUnitFive:sel.n===5, isUnitSix:sel.n===6, isUnitSeven:sel.n===7, isUnitEight:sel.n===8,
-        statusLabel: sel.n<=done?"Badge earned":sel.n===done+1?"Current mission":"Locked ahead",
-        statusChip:`font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;padding:4px 10px;border-radius:999px;`+
-          (sel.n<=done?`background:${sel.color}2A;color:${sel.color}`:sel.n===done+1?"background:rgba(74,222,128,.18);color:#4ADE80":"background:rgba(255,255,255,.07);color:rgba(238,242,255,.45)"),
-        badgeWellStyle:`background:radial-gradient(circle at 50% 38%, ${sel.color}26, transparent 68%);border-left:1px solid rgba(255,255,255,.1);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:38px 30px`,
-        bigBadgeStyle:`width:168px;height:168px;border-radius:44px;display:grid;place-items:center;`+
-          `background:radial-gradient(circle at 34% 28%, ${sel.color}, ${sel.color}AA);`+
-          `box-shadow:0 0 0 8px ${sel.color}22, 0 20px 60px ${sel.color}55;`+
-          (sel.n<=done?"":"opacity:.9")
-      },
 
       tiers:TIERS.map((t,ti)=>({...t,
         open:()=>this.nav({view:"practice",pTier:ti}),

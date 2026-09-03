@@ -537,20 +537,20 @@ const STANDARDS = [
 const PRACTICE = [
   {id:"p1",label:"1.1",title:"Arrays Become Area",note:"Warm-Up facts, then break each big number into tens and ones.",
    items:[
-     {t:0,q:"6 × 7",a:"42"},{t:0,q:"8 × 4",a:"32"},{t:0,q:"9 × 6",a:"54"},{t:0,q:"7 × 7",a:"49"},{t:0,q:"12 × 3",a:"36"},{t:0,q:"11 × 5",a:"55"},
-     {t:1,q:"4 × 13",a:"52",hint:"40 + 12"},{t:1,q:"6 × 14",a:"84",hint:"60 + 24"},{t:1,q:"3 × 27",a:"81",hint:"60 + 21"},{t:1,q:"5 × 18",a:"90",hint:"50 + 40"},{t:1,q:"7 × 16",a:"112",hint:"70 + 42"},
+     {t:0,q:"6 × 7",a:"42"},{t:0,q:"8 × 4",a:"32"},{t:0,q:"9 × 6",a:"54"},{t:0,q:"7 × 7",a:"49"},{t:2,q:"12 × 3",a:"36"},{t:2,q:"11 × 5",a:"55"},
+     {t:2,q:"4 × 13",a:"52",hint:"40 + 12"},{t:2,q:"6 × 14",a:"84",hint:"60 + 24"},{t:2,q:"3 × 27",a:"81",hint:"60 + 21"},{t:2,q:"5 × 18",a:"90",hint:"50 + 40"},{t:2,q:"7 × 16",a:"112",hint:"70 + 42"},
      {t:2,q:"Area 84, one side 6. Other side?",a:"14",hint:"84 ÷ 6"},{t:2,q:"How many rectangles have area 36?",a:"5",hint:"1×36, 2×18, 3×12, 4×9, 6×6"}
    ]},
   {id:"p2",label:"1.2",title:"Breaking Apart",note:"One-digit times two-digit. Two rooms every time.",
    items:[
-     {t:0,q:"5 × 9",a:"45"},{t:0,q:"8 × 8",a:"64"},{t:0,q:"7 × 8",a:"56"},{t:0,q:"6 × 9",a:"54"},{t:0,q:"4 × 12",a:"48"},{t:0,q:"3 × 11",a:"33"},
-     {t:1,q:"8 × 34",a:"272",hint:"240 + 32"},{t:1,q:"6 × 47",a:"282",hint:"240 + 42"},{t:1,q:"9 × 26",a:"234",hint:"180 + 54"},{t:1,q:"7 × 58",a:"406",hint:"350 + 56"},{t:1,q:"4 × 96",a:"384",hint:"360 + 24"},
+     {t:0,q:"5 × 9",a:"45"},{t:0,q:"8 × 8",a:"64"},{t:0,q:"7 × 8",a:"56"},{t:0,q:"6 × 9",a:"54"},{t:2,q:"4 × 12",a:"48"},{t:2,q:"3 × 11",a:"33"},
+     {t:2,q:"8 × 34",a:"272",hint:"240 + 32"},{t:2,q:"6 × 47",a:"282",hint:"240 + 42"},{t:2,q:"9 × 26",a:"234",hint:"180 + 54"},{t:2,q:"7 × 58",a:"406",hint:"350 + 56"},{t:2,q:"4 × 96",a:"384",hint:"360 + 24"},
      {t:2,q:"6 × 4▢ = 2▲6 — what is ▢?",a:"6",hint:"6 × 46 = 276"},{t:2,q:"4 × 68 = ?",a:"272",hint:"Same as 8 × 34"}
    ]},
   {id:"p3",label:"1.3",title:"Mental Math Moves",note:"Go past the number, then take back the extra. No pencil.",
    items:[
-     {t:0,q:"25 × 4",a:"100"},{t:0,q:"25 × 8",a:"200"},{t:0,q:"50 × 6",a:"300"},{t:0,q:"20 × 7",a:"140"},{t:0,q:"15 × 4",a:"60"},{t:0,q:"30 × 9",a:"270"},
-     {t:1,q:"19 × 6",a:"114",hint:"20 × 6 − 6"},{t:1,q:"99 × 7",a:"693",hint:"700 − 7"},{t:1,q:"48 × 5",a:"240",hint:"Half of 480"},{t:1,q:"25 × 12",a:"300",hint:"100 × 3"},{t:1,q:"102 × 4",a:"408",hint:"400 + 8"},{t:1,q:"35 × 6",a:"210",hint:"180 + 30"},
+     {t:2,q:"25 × 4",a:"100"},{t:2,q:"25 × 8",a:"200"},{t:2,q:"50 × 6",a:"300"},{t:2,q:"20 × 7",a:"140"},{t:2,q:"15 × 4",a:"60"},{t:2,q:"30 × 9",a:"270"},
+     {t:2,q:"19 × 6",a:"114",hint:"20 × 6 − 6"},{t:2,q:"99 × 7",a:"693",hint:"700 − 7"},{t:2,q:"48 × 5",a:"240",hint:"Half of 480"},{t:1,q:"25 × 12",a:"300",hint:"100 × 3"},{t:2,q:"102 × 4",a:"408",hint:"400 + 8"},{t:2,q:"35 × 6",a:"210",hint:"180 + 30"},
      {t:2,q:"998 × 5",a:"4990",hint:"5000 − 10"},{t:2,q:"16 × 25",a:"400",hint:"Double–halve twice → 4 × 100"}
    ]},
   {id:"p4",label:"1.4",title:"The Four Rooms",note:"Two 2-digit numbers make four rooms. Count them before you add.",
@@ -587,8 +587,8 @@ const PRACTICE_U2 = [
    ]},
   {id:"u2p3",label:"1.3",title:"When It Doesn't Fit",note:"Quotient and remainder are two different answers. Read which one is being asked for.",
    items:[
-     {t:0,q:"17 ÷ 5 → remainder",a:"2"},{t:0,q:"23 ÷ 4 → remainder",a:"3"},{t:0,q:"38 ÷ 6 → remainder",a:"2"},{t:0,q:"50 ÷ 7 → remainder",a:"1"},{t:0,q:"29 ÷ 3 → remainder",a:"2"},{t:0,q:"45 ÷ 8 → remainder",a:"5"},
-     {t:1,q:"17 ÷ 5 → quotient",a:"3",hint:"3 fives is 15, and 2 are left"},{t:1,q:"94 ÷ 4 → quotient",a:"23",hint:"80 ÷ 4 = 20, then 12 ÷ 4 = 3"},{t:1,q:"94 ÷ 4 → remainder",a:"2",hint:"4 × 23 = 92"},{t:1,q:"137 ÷ 6 → quotient",a:"22",hint:"120 ÷ 6 = 20, then 12 ÷ 6 = 2"},{t:1,q:"137 ÷ 6 → remainder",a:"5",hint:"6 × 22 = 132"},
+     {t:2,q:"17 ÷ 5 → remainder",a:"2"},{t:2,q:"23 ÷ 4 → remainder",a:"3"},{t:2,q:"38 ÷ 6 → remainder",a:"2"},{t:2,q:"50 ÷ 7 → remainder",a:"1"},{t:2,q:"29 ÷ 3 → remainder",a:"2"},{t:2,q:"45 ÷ 8 → remainder",a:"5"},
+     {t:1,q:"17 ÷ 5 → quotient",a:"3",hint:"3 fives is 15, and 2 are left"},{t:1,q:"94 ÷ 4 → quotient",a:"23",hint:"80 ÷ 4 = 20, then 12 ÷ 4 = 3"},{t:2,q:"94 ÷ 4 → remainder",a:"2",hint:"4 × 23 = 92"},{t:1,q:"137 ÷ 6 → quotient",a:"22",hint:"120 ÷ 6 = 20, then 12 ÷ 6 = 2"},{t:2,q:"137 ÷ 6 → remainder",a:"5",hint:"6 × 22 = 132"},
      {t:2,q:"26 kids, vans hold 6. Vans needed?",a:"5",hint:"Four vans carry 24 — two kids still need a seat"},{t:2,q:"26 cookies for 6 friends. Whole cookies each?",a:"4",hint:"This time the leftover stays on the plate"}
    ]},
   {id:"u2p4",label:"1.4",title:"Chunks Get Tidy",note:"Bigger dividends. Pull out the biggest easy chunk first, then finish.",
@@ -613,20 +613,20 @@ const PRACTICE_U2 = [
 const PRACTICE_U3 = [
   {id:"u3p1",label:"1.1",title:"How Big Is a Million",note:"Read the place, then say what the digit is worth. Type digits only — no commas needed.",
    items:[
-     {t:0,q:"How many tens in 100?",a:"10"},{t:0,q:"How many hundreds in 1,000?",a:"10"},{t:0,q:"How many thousands in 10,000?",a:"10"},{t:0,q:"10 × 100",a:"1000"},{t:0,q:"100 × 100",a:"10000"},{t:0,q:"1,000 × 10",a:"10000"},
-     {t:1,q:"In 3,472,861 — what is the 4 worth?",a:"400000",hint:"It sits in the hundred-thousands place"},{t:1,q:"In 3,472,861 — what is the 7 worth?",a:"70000",hint:"Ten-thousands place"},{t:1,q:"In 5,208,043 — what is the 2 worth?",a:"200000",hint:"Count the places from the right"},{t:1,q:"How many thousands make 4,000,000?",a:"4000",hint:"4,000 × 1,000 = 4,000,000"},{t:1,q:"Write six million forty thousand five",a:"6040005",hint:"6,040,005 — hold the empty places with zeros"},
+     {t:0,q:"How many tens in 100?",a:"10"},{t:0,q:"How many hundreds in 1,000?",a:"10"},{t:2,q:"How many thousands in 10,000?",a:"10"},{t:0,q:"10 × 100",a:"1000"},{t:0,q:"100 × 100",a:"10000"},{t:0,q:"1,000 × 10",a:"10000"},
+     {t:2,q:"In 3,472,861 — what is the 4 worth?",a:"400000",hint:"It sits in the hundred-thousands place"},{t:2,q:"In 3,472,861 — what is the 7 worth?",a:"70000",hint:"Ten-thousands place"},{t:2,q:"In 5,208,043 — what is the 2 worth?",a:"200000",hint:"Count the places from the right"},{t:2,q:"How many thousands make 4,000,000?",a:"4000",hint:"4,000 × 1,000 = 4,000,000"},{t:1,q:"Write six million forty thousand five",a:"6040005",hint:"6,040,005 — hold the empty places with zeros"},
      {t:2,q:"How many zeros in one million?",a:"6",hint:"1,000,000"},{t:2,q:"1,000 × 1,000",a:"1000000",hint:"A thousand thousands"}
    ]},
   {id:"u3p2",label:"1.2",title:"Ten Times Bigger",note:"Multiplying by ten shifts every digit one place left. Watch the zeros.",
    items:[
-     {t:0,q:"40 × 10",a:"400"},{t:0,q:"700 × 10",a:"7000"},{t:0,q:"60 × 100",a:"6000"},{t:0,q:"8 × 1,000",a:"8000"},{t:0,q:"3,200 ÷ 10",a:"320"},{t:0,q:"45,000 ÷ 1,000",a:"45"},
-     {t:1,q:"230 × 100",a:"23000",hint:"Two more zeros"},{t:1,q:"9,000 ÷ 100",a:"90",hint:"Take two zeros away"},{t:1,q:"56 × 1,000",a:"56000",hint:"Three more zeros"},{t:1,q:"740,000 ÷ 10,000",a:"74",hint:"Four zeros off"},{t:1,q:"How many times bigger is 800,000 than 800?",a:"1000",hint:"Three places left"},
+     {t:0,q:"40 × 10",a:"400"},{t:0,q:"700 × 10",a:"7000"},{t:0,q:"60 × 100",a:"6000"},{t:0,q:"8 × 1,000",a:"8000"},{t:0,q:"3,200 ÷ 10",a:"320"},{t:2,q:"45,000 ÷ 1,000",a:"45"},
+     {t:1,q:"230 × 100",a:"23000",hint:"Two more zeros"},{t:1,q:"9,000 ÷ 100",a:"90",hint:"Take two zeros away"},{t:2,q:"56 × 1,000",a:"56000",hint:"Three more zeros"},{t:2,q:"740,000 ÷ 10,000",a:"74",hint:"Four zeros off"},{t:2,q:"How many times bigger is 800,000 than 800?",a:"1000",hint:"Three places left"},
      {t:2,q:"The 6 in 6,000 is worth how many times the 6 in 60?",a:"100",hint:"Two places apart"},{t:2,q:"How many 10,000s make one million?",a:"100",hint:"1,000,000 ÷ 10,000"}
    ]},
   {id:"u3p3",label:"1.3",title:"Compare, Order, Round",note:"Rounding depends on which place you were asked for. Read the question twice.",
    items:[
      {t:0,q:"Round 47 to the nearest ten",a:"50"},{t:0,q:"Round 83 to the nearest ten",a:"80"},{t:0,q:"Round 65 to the nearest ten",a:"70"},{t:0,q:"Round 128 to the nearest ten",a:"130"},{t:0,q:"Round 254 to the nearest ten",a:"250"},{t:0,q:"Round 999 to the nearest ten",a:"1000"},
-     {t:1,q:"Round 47,382 to the nearest thousand",a:"47000",hint:"382 down beats 618 up"},{t:1,q:"Round 47,382 to the nearest ten thousand",a:"50000",hint:"Now the ends are 40,000 and 50,000"},{t:1,q:"Round 863,209 to the nearest hundred thousand",a:"900000",hint:"63,209 up to 900,000 is the shorter trip"},{t:1,q:"Larger number: 408,916 or 480,169? Type it.",a:"480169",hint:"Compare the ten-thousands place"},{t:1,q:"Round 2,499 to the nearest hundred",a:"2500",hint:"Look at the tens digit only"},
+     {t:2,q:"Round 47,382 to the nearest thousand",a:"47000",hint:"382 down beats 618 up"},{t:2,q:"Round 47,382 to the nearest ten thousand",a:"50000",hint:"Now the ends are 40,000 and 50,000"},{t:2,q:"Round 863,209 to the nearest hundred thousand",a:"900000",hint:"63,209 up to 900,000 is the shorter trip"},{t:2,q:"Larger number: 408,916 or 480,169? Type it.",a:"480169",hint:"Compare the ten-thousands place"},{t:1,q:"Round 2,499 to the nearest hundred",a:"2500",hint:"Look at the tens digit only"},
      {t:2,q:"Largest number that rounds to 5,000 at the nearest thousand",a:"5499",hint:"One less than the halfway point up"},{t:2,q:"Smallest number that rounds to 5,000 at the nearest thousand",a:"4500",hint:"Exactly halfway rounds up"}
    ]},
   {id:"u3p4",label:"1.4",title:"Order of Operations",note:"Build the groups first, then add and subtract what's left loose.",
@@ -652,7 +652,7 @@ const PRACTICE_U4 = [
   {id:"u4p1",label:"1.1",title:"One Whole, Cut Up",note:"Answers are whole numbers — when a question asks for a numerator, type just that number.",
    items:[
      {t:0,q:"Halves in one whole",a:"2"},{t:0,q:"Quarters in one whole",a:"4"},{t:0,q:"Eighths in one whole",a:"8"},{t:0,q:"1/2 = ?/4 → numerator",a:"2"},{t:0,q:"1/2 = ?/8 → numerator",a:"4"},{t:0,q:"3/3 = how many wholes?",a:"1"},
-     {t:1,q:"1/4 + 1/4 + 1/4 = ?/4 → numerator",a:"3",hint:"Count the quarters"},{t:1,q:"How many thirds in 2 wholes?",a:"6",hint:"Three in each whole"},{t:1,q:"5/5 = how many wholes?",a:"1",hint:"All five pieces"},{t:1,q:"7/4 — how many whole ones?",a:"1",hint:"4/4 makes one whole"},{t:1,q:"7/4 — how many quarters left over?",a:"3",hint:"7 − 4"},
+     {t:2,q:"1/4 + 1/4 + 1/4 = ?/4 → numerator",a:"3",hint:"Count the quarters"},{t:1,q:"How many thirds in 2 wholes?",a:"6",hint:"Three in each whole"},{t:1,q:"5/5 = how many wholes?",a:"1",hint:"All five pieces"},{t:1,q:"7/4 — how many whole ones?",a:"1",hint:"4/4 makes one whole"},{t:1,q:"7/4 — how many quarters left over?",a:"3",hint:"7 − 4"},
      {t:2,q:"Marks between 0 and 1 when you cut into fifths (not counting 0 and 1)",a:"4",hint:"Five pieces need four cuts"},{t:2,q:"3/8 and 5/8 — how many eighths apart?",a:"2",hint:"5 − 3"}
    ]},
   {id:"u4p2",label:"1.2",title:"Same Number, New Name",note:"Multiply top and bottom by the same thing and nothing about the amount changes.",
@@ -669,8 +669,8 @@ const PRACTICE_U4 = [
    ]},
   {id:"u4p4",label:"1.4",title:"Adding Needs Matching Pieces",note:"Change one fraction, or both, until the bottoms agree. Then count.",
    items:[
-     {t:0,q:"1/4 + 1/4 = ?/4 → numerator",a:"2"},{t:0,q:"2/5 + 1/5 = ?/5 → numerator",a:"3"},{t:0,q:"3/8 + 2/8 = ?/8 → numerator",a:"5"},{t:0,q:"5/6 − 2/6 = ?/6 → numerator",a:"3"},{t:0,q:"7/10 − 4/10 = ?/10 → numerator",a:"3"},{t:0,q:"3/4 + 1/4 = how many wholes?",a:"1"},
-     {t:1,q:"1/2 + 1/4 = ?/4 → numerator",a:"3",hint:"2/4 + 1/4"},{t:1,q:"2/3 + 1/6 = ?/6 → numerator",a:"5",hint:"4/6 + 1/6"},{t:1,q:"3/4 − 1/8 = ?/8 → numerator",a:"5",hint:"6/8 − 1/8"},{t:1,q:"5/6 − 1/3 = ?/6 → numerator",a:"3",hint:"5/6 − 2/6"},{t:1,q:"1/2 + 1/3 = ?/6 → numerator",a:"5",hint:"3/6 + 2/6"},
+     {t:2,q:"1/4 + 1/4 = ?/4 → numerator",a:"2"},{t:2,q:"2/5 + 1/5 = ?/5 → numerator",a:"3"},{t:2,q:"3/8 + 2/8 = ?/8 → numerator",a:"5"},{t:2,q:"5/6 − 2/6 = ?/6 → numerator",a:"3"},{t:0,q:"7/10 − 4/10 = ?/10 → numerator",a:"3"},{t:2,q:"3/4 + 1/4 = how many wholes?",a:"1"},
+     {t:2,q:"1/2 + 1/4 = ?/4 → numerator",a:"3",hint:"2/4 + 1/4"},{t:2,q:"2/3 + 1/6 = ?/6 → numerator",a:"5",hint:"4/6 + 1/6"},{t:2,q:"3/4 − 1/8 = ?/8 → numerator",a:"5",hint:"6/8 − 1/8"},{t:2,q:"5/6 − 1/3 = ?/6 → numerator",a:"3",hint:"5/6 − 2/6"},{t:2,q:"1/2 + 1/3 = ?/6 → numerator",a:"5",hint:"3/6 + 2/6"},
      {t:2,q:"3/4 + 2/3 = ?/12 → numerator",a:"17",hint:"9/12 + 8/12"},{t:2,q:"2 − 3/5 = ?/5 → numerator",a:"7",hint:"10/5 − 3/5"}
    ]},
   {id:"u4p5",label:"Fri",title:"Fraction of a Set & Closest to One",note:"Enrichment day. Divide by the bottom, multiply by the top — always that order.",
@@ -689,26 +689,26 @@ const PRACTICE_U4 = [
 const PRACTICE_U5 = [
   {id:"u5p1",label:"1.1",title:"Tenths and Hundredths",note:"Answers are whole numbers. When a question says “in hundredths” or “in cents”, type just that count.",
    items:[
-     {t:0,q:"0.3 = ?/10 → numerator",a:"3"},{t:0,q:"0.7 = ?/10 → numerator",a:"7"},{t:0,q:"0.09 = ?/100 → numerator",a:"9"},{t:0,q:"0.5 in hundredths",a:"50"},{t:0,q:"1/2 in hundredths",a:"50"},{t:0,q:"1/4 in hundredths",a:"25"},
-     {t:1,q:"0.6 in hundredths",a:"60",hint:"6/10 is the same as 60/100"},{t:1,q:"$2.35 in cents",a:"235",hint:"Two dollars is 200 cents"},{t:1,q:"$0.08 in cents",a:"8",hint:"Eight hundredths of a dollar"},{t:1,q:"3/10 + 4/10 = ?/10 → numerator",a:"7",hint:"Count the tenths"},{t:1,q:"0.25 + 0.25 in hundredths",a:"50",hint:"25 + 25"},
+     {t:2,q:"0.3 = ?/10 → numerator",a:"3"},{t:2,q:"0.7 = ?/10 → numerator",a:"7"},{t:2,q:"0.09 = ?/100 → numerator",a:"9"},{t:2,q:"0.5 in hundredths",a:"50"},{t:2,q:"1/2 in hundredths",a:"50"},{t:2,q:"1/4 in hundredths",a:"25"},
+     {t:2,q:"0.6 in hundredths",a:"60",hint:"6/10 is the same as 60/100"},{t:2,q:"$2.35 in cents",a:"235",hint:"Two dollars is 200 cents"},{t:2,q:"$0.08 in cents",a:"8",hint:"Eight hundredths of a dollar"},{t:1,q:"3/10 + 4/10 = ?/10 → numerator",a:"7",hint:"Count the tenths"},{t:2,q:"0.25 + 0.25 in hundredths",a:"50",hint:"25 + 25"},
      {t:2,q:"Bigger: 0.7 or 0.65 → in hundredths",a:"70",hint:"Write 0.7 as 0.70 first"},{t:2,q:"Hundredths in one whole",a:"100",hint:"Ten tenths, each cut into ten"}
    ]},
   {id:"u5p2",label:"1.2",title:"Decimals on the Line",note:"Every decimal has a place between 0 and 1. More digits does not mean bigger.",
    items:[
-     {t:0,q:"0.4 in hundredths",a:"40"},{t:0,q:"0.9 in hundredths",a:"90"},{t:0,q:"0.05 in hundredths",a:"5"},{t:0,q:"0.75 in hundredths",a:"75"},{t:0,q:"0.1 in hundredths",a:"10"},{t:0,q:"1.0 in hundredths",a:"100"},
-     {t:1,q:"0.65 sits below which tenth? In hundredths",a:"70",hint:"Between 0.60 and 0.70"},{t:1,q:"Halfway between 0.2 and 0.3, in hundredths",a:"25",hint:"20 and 30 hundredths"},{t:1,q:"0.8 in tenths",a:"8",hint:"Eight tenths"},{t:1,q:"Bigger: 0.4 or 0.35 → in hundredths",a:"40",hint:"0.40 against 0.35"},{t:1,q:"0.3 + 0.45 in hundredths",a:"75",hint:"30 + 45"},
+     {t:2,q:"0.4 in hundredths",a:"40"},{t:2,q:"0.9 in hundredths",a:"90"},{t:2,q:"0.05 in hundredths",a:"5"},{t:2,q:"0.75 in hundredths",a:"75"},{t:2,q:"0.1 in hundredths",a:"10"},{t:2,q:"1.0 in hundredths",a:"100"},
+     {t:2,q:"0.65 sits below which tenth? In hundredths",a:"70",hint:"Between 0.60 and 0.70"},{t:2,q:"Halfway between 0.2 and 0.3, in hundredths",a:"25",hint:"20 and 30 hundredths"},{t:2,q:"0.8 in tenths",a:"8",hint:"Eight tenths"},{t:2,q:"Bigger: 0.4 or 0.35 → in hundredths",a:"40",hint:"0.40 against 0.35"},{t:2,q:"0.3 + 0.45 in hundredths",a:"75",hint:"30 + 45"},
      {t:2,q:"Largest of 0.5, 0.45, 0.055 → in thousandths",a:"500",hint:"500, 450 and 55 thousandths"},{t:2,q:"0.9 − 0.35 in hundredths",a:"55",hint:"90 − 35"}
    ]},
   {id:"u5p3",label:"1.3",title:"Money Math",note:"Money is just hundredths with a dollar sign. Answer everything in cents.",
    items:[
-     {t:0,q:"$1.50 in cents",a:"150"},{t:0,q:"$0.75 in cents",a:"75"},{t:0,q:"$3.05 in cents",a:"305"},{t:0,q:"$10.00 in cents",a:"1000"},{t:0,q:"$0.99 in cents",a:"99"},{t:0,q:"$2.20 in cents",a:"220"},
-     {t:1,q:"$3.45 + $2.30 in cents",a:"575",hint:"345 + 230"},{t:1,q:"$20.00 − $13.75 in cents",a:"625",hint:"Count up: 25 cents to $14, then $6"},{t:1,q:"$4.99 + $3.99 in cents",a:"898",hint:"$5 + $4 is 900, then take 2 off"},{t:1,q:"Three items at $2.50 — total in cents",a:"750",hint:"250 × 3"},{t:1,q:"$10 − ($2.50 + $3.75) in cents",a:"375",hint:"1000 − 625"},
+     {t:2,q:"$1.50 in cents",a:"150"},{t:2,q:"$0.75 in cents",a:"75"},{t:2,q:"$3.05 in cents",a:"305"},{t:2,q:"$10.00 in cents",a:"1000"},{t:2,q:"$0.99 in cents",a:"99"},{t:2,q:"$2.20 in cents",a:"220"},
+     {t:2,q:"$3.45 + $2.30 in cents",a:"575",hint:"345 + 230"},{t:2,q:"$20.00 − $13.75 in cents",a:"625",hint:"Count up: 25 cents to $14, then $6"},{t:2,q:"$4.99 + $3.99 in cents",a:"898",hint:"$5 + $4 is 900, then take 2 off"},{t:2,q:"Three items at $2.50 — total in cents",a:"750",hint:"250 × 3"},{t:2,q:"$10 − ($2.50 + $3.75) in cents",a:"375",hint:"1000 − 625"},
      {t:2,q:"Cheaper per item: 4 for $6.00 or $1.60 each? In cents",a:"150",hint:"600 ÷ 4 against 160"},{t:2,q:"$20 shared 8 ways, in cents",a:"250",hint:"2000 ÷ 8"}
    ]},
   {id:"u5p4",label:"1.4",title:"Rounding & Estimating",note:"Round before you compute, then check the exact answer against the estimate.",
    items:[
-     {t:0,q:"$3.45 to the nearest dollar, in dollars",a:"3"},{t:0,q:"$7.80 to the nearest dollar",a:"8"},{t:0,q:"$12.50 to the nearest dollar",a:"13"},{t:0,q:"$0.60 to the nearest dollar",a:"1"},{t:0,q:"$9.49 to the nearest dollar",a:"9"},{t:0,q:"$5.55 to the nearest dollar",a:"6"},
-     {t:1,q:"Round $4.678 to the nearest cent, in cents",a:"468",hint:"The thousandths digit decides"},{t:1,q:"Round $23.49 to the nearest dollar, in dollars",a:"23",hint:"49 cents is under half"},{t:1,q:"Estimate $3.95 + $6.10 to the nearest dollar, in dollars",a:"10",hint:"$4 + $6"},{t:1,q:"Exact $3.95 + $6.10 in cents",a:"1005",hint:"395 + 610"},{t:1,q:"Round 0.482 to the nearest hundredth, in hundredths",a:"48",hint:"The 2 rounds down"},
+     {t:2,q:"$3.45 to the nearest dollar, in dollars",a:"3"},{t:2,q:"$7.80 to the nearest dollar",a:"8"},{t:2,q:"$12.50 to the nearest dollar",a:"13"},{t:2,q:"$0.60 to the nearest dollar",a:"1"},{t:2,q:"$9.49 to the nearest dollar",a:"9"},{t:2,q:"$5.55 to the nearest dollar",a:"6"},
+     {t:2,q:"Round $4.678 to the nearest cent, in cents",a:"468",hint:"The thousandths digit decides"},{t:2,q:"Round $23.49 to the nearest dollar, in dollars",a:"23",hint:"49 cents is under half"},{t:2,q:"Estimate $3.95 + $6.10 to the nearest dollar, in dollars",a:"10",hint:"$4 + $6"},{t:2,q:"Exact $3.95 + $6.10 in cents",a:"1005",hint:"395 + 610"},{t:2,q:"Round 0.482 to the nearest hundredth, in hundredths",a:"48",hint:"The 2 rounds down"},
      {t:2,q:"$19.99 × 3 in cents",a:"5997",hint:"$20 × 3 is 6000, then take 3 off"},{t:2,q:"Change from $50 after $19.99 × 2, in cents",a:"1002",hint:"5000 − 3998"}
    ]},
   {id:"u5p5",label:"Fri",title:"The $40 Mission & Change Sprint",note:"Enrichment day. Real prices, real change, everything in cents.",
@@ -727,8 +727,8 @@ const PRACTICE_U5 = [
 const PRACTICE_U6 = [
   {id:"u6p1",label:"1.1",title:"What an Angle Is",note:"Every answer is a number of degrees, or a count. Type digits only.",
    items:[
-     {t:0,q:"Degrees in a right angle",a:"90"},{t:0,q:"Degrees in a straight line",a:"180"},{t:0,q:"Degrees all the way round",a:"360"},{t:0,q:"Right angles in a full turn",a:"4"},{t:0,q:"Degrees in half a right angle",a:"45"},{t:0,q:"Right angles in a straight line",a:"2"},
-     {t:1,q:"On a straight line: 130° and ?°",a:"50",hint:"180 − 130"},{t:1,q:"Round a point: 90°, 120° and ?°",a:"150",hint:"360 − 210"},{t:1,q:"Three angles of a triangle: 60°, 70° and ?°",a:"50",hint:"They add to 180"},{t:1,q:"An angle of 200° — how far past a straight line?",a:"20",hint:"200 − 180"},{t:1,q:"Two equal angles on a straight line — each is ?°",a:"90",hint:"180 shared evenly"},
+     {t:2,q:"Degrees in a right angle",a:"90"},{t:2,q:"Degrees in a straight line",a:"180"},{t:2,q:"Degrees all the way round",a:"360"},{t:0,q:"Right angles in a full turn",a:"4"},{t:2,q:"Degrees in half a right angle",a:"45"},{t:0,q:"Right angles in a straight line",a:"2"},
+     {t:2,q:"On a straight line: 130° and ?°",a:"50",hint:"180 − 130"},{t:2,q:"Round a point: 90°, 120° and ?°",a:"150",hint:"360 − 210"},{t:2,q:"Three angles of a triangle: 60°, 70° and ?°",a:"50",hint:"They add to 180"},{t:2,q:"An angle of 200° — how far past a straight line?",a:"20",hint:"200 − 180"},{t:2,q:"Two equal angles on a straight line — each is ?°",a:"90",hint:"180 shared evenly"},
      {t:2,q:"Angles in a square, added up",a:"360",hint:"Four right angles"},{t:2,q:"Turn 90° four times — total degrees",a:"360",hint:"All the way round"}
    ]},
   {id:"u6p2",label:"1.2",title:"Perimeter & Area",note:"Perimeter is the fence. Area is the grass. Read which one is being asked for.",
@@ -746,7 +746,7 @@ const PRACTICE_U6 = [
   {id:"u6p4",label:"1.4",title:"Sorting Shapes & Symmetry",note:"Sort by what is true about a shape, not by what it looks like.",
    items:[
      {t:0,q:"Sides on a hexagon",a:"6"},{t:0,q:"Sides on a pentagon",a:"5"},{t:0,q:"Right angles in a rectangle",a:"4"},{t:0,q:"Equal sides on an equilateral triangle",a:"3"},{t:0,q:"Sides on an octagon",a:"8"},{t:0,q:"Pairs of parallel sides in a rectangle",a:"2"},
-     {t:1,q:"Lines of symmetry in a square",a:"4",hint:"Two through the middle, two through the corners"},{t:1,q:"Lines of symmetry in a rectangle (not a square)",a:"2",hint:"The corner folds don't match"},{t:1,q:"Lines of symmetry in an equilateral triangle",a:"3",hint:"One from each corner"},{t:1,q:"Lines of symmetry in a circle — type 0 if too many to count",a:"0",hint:"Infinitely many, so type 0"},{t:1,q:"Degrees in a quarter turn",a:"90",hint:"A right angle"},
+     {t:1,q:"Lines of symmetry in a square",a:"4",hint:"Two through the middle, two through the corners"},{t:1,q:"Lines of symmetry in a rectangle (not a square)",a:"2",hint:"The corner folds don't match"},{t:1,q:"Lines of symmetry in an equilateral triangle",a:"3",hint:"One from each corner"},{t:1,q:"Lines of symmetry in a circle — type 0 if too many to count",a:"0",hint:"Infinitely many, so type 0"},{t:2,q:"Degrees in a quarter turn",a:"90",hint:"A right angle"},
      {t:2,q:"Lines of symmetry in a regular hexagon",a:"6",hint:"One per pair of opposite corners and sides"},{t:2,q:"Sides of a shape whose angles add to 360",a:"4",hint:"Any quadrilateral"}
    ]},
   {id:"u6p5",label:"Fri",title:"Angle Guess & Map a Planet",note:"Enrichment day. Estimate before you measure, every single time.",
@@ -771,14 +771,14 @@ const PRACTICE_U7 = [
    ]},
   {id:"u7p2",label:"1.2",title:"Mean, Median, Mode, Range",note:"Every set here is chosen so the answer comes out whole. Put the numbers in order before you look for a middle.",
    items:[
-     {t:0,q:"Mean of 4, 6, 8",a:"6"},{t:0,q:"Mean of 10 and 20",a:"15"},{t:0,q:"Range of 3, 9, 12",a:"9"},{t:0,q:"Mode of 5, 7, 7, 9",a:"7"},{t:0,q:"Median of 2, 5, 9",a:"5"},{t:0,q:"Total of 6, 7, 8, 9",a:"30"},
-     {t:1,q:"Mean of 4, 7, 7, 9, 13",a:"8",hint:"They total 40"},{t:1,q:"Median of 4, 7, 7, 9, 13",a:"7"},{t:1,q:"Range of 4, 7, 7, 9, 13",a:"9",hint:"13 − 4"},{t:1,q:"Median of 2, 4, 6, 8",a:"5",hint:"Halfway between the two middles"},{t:1,q:"Mean of 12, 14, 16, 18",a:"15"},
+     {t:2,q:"Mean of 4, 6, 8",a:"6"},{t:2,q:"Mean of 10 and 20",a:"15"},{t:0,q:"Range of 3, 9, 12",a:"9"},{t:0,q:"Mode of 5, 7, 7, 9",a:"7"},{t:0,q:"Median of 2, 5, 9",a:"5"},{t:0,q:"Total of 6, 7, 8, 9",a:"30"},
+     {t:2,q:"Mean of 4, 7, 7, 9, 13",a:"8",hint:"They total 40"},{t:1,q:"Median of 4, 7, 7, 9, 13",a:"7"},{t:1,q:"Range of 4, 7, 7, 9, 13",a:"9",hint:"13 − 4"},{t:1,q:"Median of 2, 4, 6, 8",a:"5",hint:"Halfway between the two middles"},{t:2,q:"Mean of 12, 14, 16, 18",a:"15"},
      {t:2,q:"Five numbers have mean 10 — their total",a:"50",hint:"Mean × how many"},{t:2,q:"Four scores total 32. Add a fifth score of 8 — new mean",a:"8",hint:"40 ÷ 5"}
    ]},
   {id:"u7p3",label:"1.3",title:"When the Average Lies",note:"One extreme value. Watch carefully which measures move and which do not.",
    items:[
-     {t:0,q:"Mean of 5, 5, 5, 5",a:"5"},{t:0,q:"Median of 5, 5, 5, 5",a:"5"},{t:0,q:"Mean of 5, 5, 5, 25",a:"10"},{t:0,q:"Median of 5, 5, 5, 25",a:"5"},{t:0,q:"Range of 5, 5, 5, 25",a:"20"},{t:0,q:"Mode of 5, 5, 5, 25",a:"5"},
-     {t:1,q:"Four people earn 10 each, a fifth earns 60 — mean",a:"20",hint:"100 ÷ 5"},{t:1,q:"Those same five people — median",a:"10"},{t:1,q:"Those same five people — range",a:"50"},{t:1,q:"Remove the 60. Mean of the four left",a:"10"},{t:1,q:"Type the value of the measure that best describes a typical one of those five people",a:"10",hint:"The median, 10 — the mean of 20 describes nobody"},
+     {t:2,q:"Mean of 5, 5, 5, 5",a:"5"},{t:0,q:"Median of 5, 5, 5, 5",a:"5"},{t:2,q:"Mean of 5, 5, 5, 25",a:"10"},{t:0,q:"Median of 5, 5, 5, 25",a:"5"},{t:0,q:"Range of 5, 5, 5, 25",a:"20"},{t:0,q:"Mode of 5, 5, 5, 25",a:"5"},
+     {t:2,q:"Four people earn 10 each, a fifth earns 60 — mean",a:"20",hint:"100 ÷ 5"},{t:1,q:"Those same five people — median",a:"10"},{t:1,q:"Those same five people — range",a:"50"},{t:2,q:"Remove the 60. Mean of the four left",a:"10"},{t:1,q:"Type the value of the measure that best describes a typical one of those five people",a:"10",hint:"The median, 10 — the mean of 20 describes nobody"},
      {t:2,q:"Six houses cost 200 each and one costs 900 — mean",a:"300",hint:"2100 ÷ 7"},{t:2,q:"Those same seven houses — median",a:"200"}
    ]},
   {id:"u7p4",label:"1.4",title:"Chance as a Number",note:"Chance is a count out of a total. Type the count that is asked for.",
@@ -799,7 +799,7 @@ const PRACTICE_U8 = [
   {id:"u8p1",label:"1.1",title:"Find the Rule",note:"Say the rule out loud in one sentence before you write the next number.",
    items:[
      {t:0,q:"3, 6, 9, 12 — next",a:"15"},{t:0,q:"5, 10, 15, 20 — next",a:"25"},{t:0,q:"2, 4, 8, 16 — next",a:"32"},{t:0,q:"20, 17, 14, 11 — next",a:"8"},{t:0,q:"1, 4, 7, 10 — next",a:"13"},{t:0,q:"100, 90, 80 — next",a:"70"},
-     {t:1,q:"Rule × 3, starting at 2 — the fourth number",a:"54",hint:"2, 6, 18, 54"},{t:1,q:"1, 3, 7, 15 — next",a:"31",hint:"Double it and add one"},{t:1,q:"Rule × 2 + 1. Put in 5",a:"11"},{t:1,q:"4, 9, 14, 19 — the tenth number",a:"49",hint:"Start at 4 and add 5 nine times"},{t:1,q:"2, 5, 10, 17 — next",a:"26",hint:"The gaps go 3, 5, 7, 9"},
+     {t:1,q:"Rule × 3, starting at 2 — the fourth number",a:"54",hint:"2, 6, 18, 54"},{t:1,q:"1, 3, 7, 15 — next",a:"31",hint:"Double it and add one"},{t:1,q:"Rule × 2 + 1. Put in 5",a:"11"},{t:2,q:"4, 9, 14, 19 — the tenth number",a:"49",hint:"Start at 4 and add 5 nine times"},{t:1,q:"2, 5, 10, 17 — next",a:"26",hint:"The gaps go 3, 5, 7, 9"},
      {t:2,q:"Rule × 4 − 3. Put in 7",a:"25"},{t:2,q:"6, 11, 16, 21 — the twentieth number",a:"101",hint:"6 + 5 × 19"}
    ]},
   {id:"u8p2",label:"1.2",title:"Function Machines",note:"In goes a number, out comes a number. The machine never changes its mind halfway.",
@@ -841,7 +841,7 @@ const PRACTICE_U8 = [
 const PRACTICE_U1_W2 = [
   {id:"u1w2p1",w:2,label:"2.1",title:"Where the Rooms Hide",note:"Every line of the algorithm is one of the four rooms. Find it before you trust it.",
    items:[
-     {t:0,q:"20 × 10",a:"200"},{t:0,q:"3 × 10",a:"30"},{t:0,q:"20 × 4",a:"80"},{t:0,q:"3 × 4",a:"12"},{t:0,q:"Add 200, 30, 80 and 12",a:"322"},{t:0,q:"So 23 × 14 is",a:"322"},
+     {t:0,q:"20 × 10",a:"200"},{t:2,q:"3 × 10",a:"30"},{t:2,q:"20 × 4",a:"80"},{t:0,q:"3 × 4",a:"12"},{t:0,q:"Add 200, 30, 80 and 12",a:"322"},{t:0,q:"So 23 × 14 is",a:"322"},
      {t:1,q:"31 × 22 — the tens×tens room",a:"600",hint:"30 × 20"},{t:1,q:"31 × 22 — the ones×ones room",a:"2"},{t:1,q:"31 × 22 altogether",a:"682"},{t:1,q:"45 × 23",a:"1035"},{t:1,q:"18 × 26",a:"468"},
      {t:2,q:"In 47 × 35, which room is biggest — type its value",a:"1200",hint:"40 × 30"},{t:2,q:"47 × 35",a:"1645"}
    ]},
@@ -853,14 +853,14 @@ const PRACTICE_U1_W2 = [
    ]},
   {id:"u1w2p3",w:2,label:"2.3",title:"Three Digits by One",note:"A longer rectangle, split into three rooms instead of two.",
    items:[
-     {t:0,q:"100 × 4",a:"400"},{t:0,q:"200 × 3",a:"600"},{t:0,q:"30 × 7",a:"210"},{t:0,q:"400 × 2",a:"800"},{t:0,q:"50 × 6",a:"300"},{t:0,q:"9 × 8",a:"72"},
-     {t:1,q:"234 × 3",a:"702",hint:"600 + 90 + 12"},{t:1,q:"417 × 5",a:"2085"},{t:1,q:"326 × 4",a:"1304"},{t:1,q:"508 × 7",a:"3556"},{t:1,q:"739 × 6",a:"4434"},
+     {t:2,q:"100 × 4",a:"400"},{t:2,q:"200 × 3",a:"600"},{t:2,q:"30 × 7",a:"210"},{t:2,q:"400 × 2",a:"800"},{t:2,q:"50 × 6",a:"300"},{t:0,q:"9 × 8",a:"72"},
+     {t:2,q:"234 × 3",a:"702",hint:"600 + 90 + 12"},{t:2,q:"417 × 5",a:"2085"},{t:2,q:"326 × 4",a:"1304"},{t:2,q:"508 × 7",a:"3556"},{t:2,q:"739 × 6",a:"4434"},
      {t:2,q:"1,245 × 8",a:"9960"},{t:2,q:"A number × 6 is 2,742. The number",a:"457"}
    ]},
   {id:"u1w2p4",w:2,label:"2.4",title:"Estimate First",note:"Round, predict, compute, compare. A wrong answer should look wrong.",
    items:[
-     {t:0,q:"Estimate 19 × 21 by rounding both",a:"400"},{t:0,q:"Estimate 29 × 31",a:"900"},{t:0,q:"Estimate 48 × 12",a:"500"},{t:0,q:"Estimate 39 × 41",a:"1600"},{t:0,q:"Estimate 22 × 18",a:"400"},{t:0,q:"Estimate 51 × 9",a:"500"},
-     {t:1,q:"Estimate 187 × 4",a:"800"},{t:1,q:"True value of 187 × 4",a:"748"},{t:1,q:"Estimate 62 × 38",a:"2400"},{t:1,q:"True value of 62 × 38",a:"2356"},{t:1,q:"Estimate 296 × 5",a:"1500"},
+     {t:0,q:"Estimate 19 × 21 by rounding both",a:"400"},{t:0,q:"Estimate 29 × 31",a:"900"},{t:0,q:"Estimate 48 × 12",a:"500"},{t:0,q:"Estimate 39 × 41",a:"1600"},{t:0,q:"Estimate 22 × 18",a:"400"},{t:2,q:"Estimate 51 × 9",a:"500"},
+     {t:2,q:"Estimate 187 × 4",a:"800"},{t:2,q:"True value of 187 × 4",a:"748"},{t:1,q:"Estimate 62 × 38",a:"2400"},{t:1,q:"True value of 62 × 38",a:"2356"},{t:2,q:"Estimate 296 × 5",a:"1500"},
      {t:2,q:"Someone says 43 × 27 = 301. Type the real answer",a:"1161",hint:"They only multiplied by the 7"},{t:2,q:"Estimate 412 × 19",a:"8000"}
    ]},
   {id:"u1w2p5",w:2,label:"Fri",title:"Lattice Detour",note:"Enrichment. A 500-year-old method — then decide whether it beats yours.",
@@ -898,8 +898,8 @@ const PRACTICE_U1_W3 = [
    ]},
   {id:"u1w3p5",w:3,label:"Fri",title:"Mid-Unit Quiz",note:"Eight items across Weeks 1–3. 85% to keep flying.",
    items:[
-     {t:0,q:"7 × 8",a:"56"},{t:0,q:"6 × 40",a:"240"},
-     {t:1,q:"8 × 34",a:"272"},{t:1,q:"23 × 14",a:"322"},{t:1,q:"Factor pairs of 24 — how many",a:"4"},{t:1,q:"GCF of 12 and 18",a:"6"},{t:1,q:"Estimate 39 × 21",a:"800"},
+     {t:0,q:"7 × 8",a:"56"},{t:2,q:"6 × 40",a:"240"},
+     {t:2,q:"8 × 34",a:"272"},{t:1,q:"23 × 14",a:"322"},{t:1,q:"Factor pairs of 24 — how many",a:"4"},{t:1,q:"GCF of 12 and 18",a:"6"},{t:1,q:"Estimate 39 × 21",a:"800"},
      {t:2,q:"Area 84, one side 6 — the other",a:"14"}
    ]}
 ];
@@ -907,7 +907,7 @@ const PRACTICE_U1_W3 = [
 const PRACTICE_U1_W4 = [
   {id:"u1w4p1",w:4,label:"4.1",title:"Multiples",note:"Skip-count on the 100-grid and watch where the patterns cross.",
    items:[
-     {t:0,q:"Third multiple of 4",a:"12"},{t:0,q:"Fifth multiple of 3",a:"15"},{t:0,q:"Fourth multiple of 6",a:"24"},{t:0,q:"Is 21 a multiple of 3 — yes or no",a:"yes"},{t:0,q:"Is 22 a multiple of 3",a:"no"},{t:0,q:"Tenth multiple of 5",a:"50"},
+     {t:0,q:"Third multiple of 4",a:"12"},{t:0,q:"Fifth multiple of 3",a:"15"},{t:0,q:"Fourth multiple of 6",a:"24"},{t:0,q:"Is 21 a multiple of 3 — yes or no",a:"yes"},{t:0,q:"Is 22 a multiple of 3",a:"no"},{t:2,q:"Tenth multiple of 5",a:"50"},
      {t:1,q:"First number that is a multiple of both 4 and 6",a:"12"},{t:1,q:"First multiple of both 3 and 5",a:"15"},{t:1,q:"First multiple of both 6 and 8",a:"24"},{t:1,q:"Multiples of 7 below 50 — how many",a:"7"},{t:1,q:"First multiple of both 4 and 10",a:"20"},
      {t:2,q:"Lowest common multiple of 9 and 12",a:"36"},{t:2,q:"Numbers below 100 that are multiples of both 3 and 4",a:"8"}
    ]},
@@ -952,20 +952,20 @@ const PRACTICE_U1_W5 = [
    ]},
   {id:"u1w5p3",w:5,label:"5.3",title:"Blueprint Defence",note:"Both methods must agree, and you have to say why they do.",
    items:[
-     {t:0,q:"20 × 10",a:"200"},{t:0,q:"20 × 4",a:"80"},{t:0,q:"3 × 10",a:"30"},{t:0,q:"3 × 4",a:"12"},{t:0,q:"Sum of those four rooms",a:"322"},{t:0,q:"23 × 14 by algorithm",a:"322"},
+     {t:0,q:"20 × 10",a:"200"},{t:2,q:"20 × 4",a:"80"},{t:2,q:"3 × 10",a:"30"},{t:0,q:"3 × 4",a:"12"},{t:0,q:"Sum of those four rooms",a:"322"},{t:0,q:"23 × 14 by algorithm",a:"322"},
      {t:1,q:"36 × 25 by area model — the total",a:"900"},{t:1,q:"36 × 25 by algorithm",a:"900"},{t:1,q:"The tens×tens room of 36 × 25",a:"600"},{t:1,q:"The ones×ones room of 36 × 25",a:"30"},{t:1,q:"47 × 18",a:"846"},
      {t:2,q:"Rooms in a 3-digit by 2-digit model",a:"6"},{t:2,q:"124 × 23",a:"2852"}
    ]},
   {id:"u1w5p4",w:5,label:"Thu",title:"Error Journal Sweep",note:"Mixed review of the whole mission. Fix only what repeats.",
    items:[
-     {t:0,q:"8 × 7",a:"56"},{t:0,q:"6 × 40",a:"240"},{t:0,q:"Is 9 prime — yes or no",a:"no"},{t:0,q:"Factors of 16 — how many",a:"5"},{t:0,q:"5 × 18",a:"90"},{t:0,q:"Third multiple of 7",a:"21"},
-     {t:1,q:"9 × 26",a:"234"},{t:1,q:"38 × 24",a:"912"},{t:1,q:"GCF of 24 and 36",a:"12"},{t:1,q:"Largest prime factor of 84",a:"7"},{t:1,q:"Estimate 296 × 5",a:"1500"},
+     {t:0,q:"8 × 7",a:"56"},{t:2,q:"6 × 40",a:"240"},{t:0,q:"Is 9 prime — yes or no",a:"no"},{t:0,q:"Factors of 16 — how many",a:"5"},{t:2,q:"5 × 18",a:"90"},{t:0,q:"Third multiple of 7",a:"21"},
+     {t:2,q:"9 × 26",a:"234"},{t:1,q:"38 × 24",a:"912"},{t:1,q:"GCF of 24 and 36",a:"12"},{t:1,q:"Largest prime factor of 84",a:"7"},{t:2,q:"Estimate 296 × 5",a:"1500"},
      {t:2,q:"Primes below 100 — how many",a:"25"},{t:2,q:"87 × 64",a:"5568"}
    ]},
   {id:"u1w5p5",w:5,label:"Fri",title:"Mission 01 Test",note:"Twelve items plus the Big Question, answered out loud.",
    items:[
-     {t:0,q:"7 × 9",a:"63"},{t:0,q:"8 × 30",a:"240"},
-     {t:1,q:"6 × 47",a:"282"},{t:1,q:"23 × 14",a:"322"},{t:1,q:"45 × 23",a:"1035"},{t:1,q:"326 × 4",a:"1304"},{t:1,q:"Factor pairs of 36 — how many",a:"5"},{t:1,q:"GCF of 16 and 40",a:"8"},{t:1,q:"Is 51 prime — yes or no",a:"no"},{t:1,q:"Largest prime factor of 60",a:"5"},
+     {t:0,q:"7 × 9",a:"63"},{t:2,q:"8 × 30",a:"240"},
+     {t:2,q:"6 × 47",a:"282"},{t:1,q:"23 × 14",a:"322"},{t:1,q:"45 × 23",a:"1035"},{t:2,q:"326 × 4",a:"1304"},{t:1,q:"Factor pairs of 36 — how many",a:"5"},{t:1,q:"GCF of 16 and 40",a:"8"},{t:1,q:"Is 51 prime — yes or no",a:"no"},{t:1,q:"Largest prime factor of 60",a:"5"},
      {t:2,q:"Area 84, one side 6 — the other",a:"14"},{t:2,q:"Estimate 62 × 38, then give the true value",a:"2356"}
    ]}
 ];
@@ -973,7 +973,7 @@ const PRACTICE_U1_W5 = [
 const PRACTICE_U2_W2 = [
   {id:"u2w2p1",w:2,label:"2.1",title:"Round It Up",note:"Vans, boats and buses. Two leftovers still force one more of everything.",
    items:[
-     {t:0,q:"20 ÷ 5",a:"4"},{t:0,q:"21 ÷ 5 — the remainder",a:"1"},{t:0,q:"9 people, vans of 4 — vans needed",a:"3"},{t:0,q:"12 people, vans of 4",a:"3"},{t:0,q:"13 people, vans of 4",a:"4"},{t:0,q:"7 people, boats of 3",a:"3"},
+     {t:0,q:"20 ÷ 5",a:"4"},{t:2,q:"21 ÷ 5 — the remainder",a:"1"},{t:0,q:"9 people, vans of 4 — vans needed",a:"3"},{t:0,q:"12 people, vans of 4",a:"3"},{t:0,q:"13 people, vans of 4",a:"4"},{t:0,q:"7 people, boats of 3",a:"3"},
      {t:1,q:"127 children, buses of 30 — buses needed",a:"5"},{t:1,q:"98 books, boxes of 12 — boxes needed",a:"9"},{t:1,q:"53 eggs, cartons of 6 — cartons needed",a:"9"},{t:1,q:"200 seats, rows of 18 — rows needed",a:"12"},{t:1,q:"75 guests, tables of 8 — tables needed",a:"10"},
      {t:2,q:"A bus holds 44. How many for 500 children",a:"12"},{t:2,q:"If 127 ÷ 30 needs 5 buses, how many seats sit empty",a:"23"}
    ]},
@@ -985,14 +985,14 @@ const PRACTICE_U2_W2 = [
    ]},
   {id:"u2w2p3",w:2,label:"2.3",title:"Share It Out",note:"Cut the leftovers up and the remainder becomes a fraction.",
    items:[
-     {t:0,q:"1 ÷ 2 as a decimal",a:"0.5"},{t:0,q:"1 ÷ 4 as a decimal",a:"0.25"},{t:0,q:"9 ÷ 2 — whole part",a:"4"},{t:0,q:"9 ÷ 2 as a decimal",a:"4.5"},{t:0,q:"7 ÷ 2 as a decimal",a:"3.5"},{t:0,q:"3 ÷ 4 as a decimal",a:"0.75"},
-     {t:1,q:"26 ÷ 4 as a decimal",a:"6.5"},{t:1,q:"17 ÷ 4 — type the fraction part as a/b",a:"1/4"},{t:1,q:"13 ÷ 4 as a decimal",a:"3.25"},{t:1,q:"$45 shared by 4 — dollars each",a:"11.25"},{t:1,q:"22 ÷ 5 as a decimal",a:"4.4"},
+     {t:2,q:"1 ÷ 2 as a decimal",a:"0.5"},{t:2,q:"1 ÷ 4 as a decimal",a:"0.25"},{t:0,q:"9 ÷ 2 — whole part",a:"4"},{t:2,q:"9 ÷ 2 as a decimal",a:"4.5"},{t:2,q:"7 ÷ 2 as a decimal",a:"3.5"},{t:2,q:"3 ÷ 4 as a decimal",a:"0.75"},
+     {t:2,q:"26 ÷ 4 as a decimal",a:"6.5"},{t:1,q:"17 ÷ 4 — type the fraction part as a/b",a:"1/4"},{t:2,q:"13 ÷ 4 as a decimal",a:"3.25"},{t:1,q:"$45 shared by 4 — dollars each",a:"11.25"},{t:2,q:"22 ÷ 5 as a decimal",a:"4.4"},
      {t:2,q:"3 pizzas between 4 people — each gets, as a/b",a:"3/4"},{t:2,q:"$100 shared by 8 — dollars each",a:"12.5"}
    ]},
   {id:"u2w2p4",w:2,label:"2.4",title:"The Remainder Is the Answer",note:"Clocks and repeating patterns. Sometimes the leftover is the whole point.",
    items:[
-     {t:0,q:"10 ÷ 3 — the remainder",a:"1"},{t:0,q:"14 ÷ 7 — the remainder",a:"0"},{t:0,q:"25 ÷ 4 — the remainder",a:"1"},{t:0,q:"Days in a week",a:"7"},{t:0,q:"9 ÷ 7 — the remainder",a:"2"},{t:0,q:"20 ÷ 6 — the remainder",a:"2"},
-     {t:1,q:"Pattern red, blue, green repeating. The 10th bead — type 1, 2 or 3 for its place in the group",a:"1"},{t:1,q:"100 ÷ 7 — the remainder",a:"2"},{t:1,q:"It is 9 o'clock. 25 hours later, the hour shown",a:"10"},{t:1,q:"50 ÷ 12 — the remainder",a:"2"},{t:1,q:"365 ÷ 7 — the remainder",a:"1"},
+     {t:2,q:"10 ÷ 3 — the remainder",a:"1"},{t:2,q:"14 ÷ 7 — the remainder",a:"0"},{t:2,q:"25 ÷ 4 — the remainder",a:"1"},{t:0,q:"Days in a week",a:"7"},{t:2,q:"9 ÷ 7 — the remainder",a:"2"},{t:2,q:"20 ÷ 6 — the remainder",a:"2"},
+     {t:1,q:"Pattern red, blue, green repeating. The 10th bead — type 1, 2 or 3 for its place in the group",a:"1"},{t:2,q:"100 ÷ 7 — the remainder",a:"2"},{t:1,q:"It is 9 o'clock. 25 hours later, the hour shown",a:"10"},{t:2,q:"50 ÷ 12 — the remainder",a:"2"},{t:2,q:"365 ÷ 7 — the remainder",a:"1"},
      {t:2,q:"A 4-colour pattern. The 63rd item — its place in the group of 4",a:"3"},{t:2,q:"1,000 ÷ 7 — the remainder",a:"6"}
    ]},
   {id:"u2w2p5",w:2,label:"Fri",title:"Snack Run Planning",note:"Real quantities, real people. Every leftover decision written down.",
@@ -1024,14 +1024,14 @@ const PRACTICE_U2_W3 = [
    ]},
   {id:"u2w3p4",w:3,label:"3.4",title:"Check by Multiplying",note:"Quotient × divisor + remainder = dividend. Self-marking from here on.",
    items:[
-     {t:0,q:"7 × 8",a:"56"},{t:0,q:"56 ÷ 8",a:"7"},{t:0,q:"9 × 6 + 2",a:"56"},{t:0,q:"12 × 4",a:"48"},{t:0,q:"48 ÷ 4",a:"12"},{t:0,q:"11 × 5 + 3",a:"58"},
-     {t:1,q:"124 × 3 — the check for 372 ÷ 3",a:"372"},{t:1,q:"17 × 6 + 4",a:"106"},{t:1,q:"106 ÷ 6 — the quotient",a:"17"},{t:1,q:"106 ÷ 6 — the remainder",a:"4"},{t:1,q:"91 × 8",a:"728"},
+     {t:0,q:"7 × 8",a:"56"},{t:0,q:"56 ÷ 8",a:"7"},{t:0,q:"9 × 6 + 2",a:"56"},{t:2,q:"12 × 4",a:"48"},{t:0,q:"48 ÷ 4",a:"12"},{t:2,q:"11 × 5 + 3",a:"58"},
+     {t:2,q:"124 × 3 — the check for 372 ÷ 3",a:"372"},{t:2,q:"17 × 6 + 4",a:"106"},{t:1,q:"106 ÷ 6 — the quotient",a:"17"},{t:2,q:"106 ÷ 6 — the remainder",a:"4"},{t:2,q:"91 × 8",a:"728"},
      {t:2,q:"A quotient of 23 remainder 5 with divisor 9 — the dividend",a:"212"},{t:2,q:"A quotient of 47 remainder 3 with divisor 12 — the dividend",a:"567"}
    ]},
   {id:"u2w3p5",w:3,label:"Fri",title:"Mid-Unit Quiz",note:"Eight items across Weeks 1–3. 85% to keep flying.",
    items:[
      {t:0,q:"42 ÷ 6",a:"7"},{t:0,q:"90 ÷ 3",a:"30"},
-     {t:1,q:"372 ÷ 3",a:"124"},{t:1,q:"618 ÷ 6",a:"103"},{t:1,q:"127 children, buses of 30 — buses needed",a:"5"},{t:1,q:"26 ÷ 4 as a decimal",a:"6.5"},{t:1,q:"100 ÷ 7 — the remainder",a:"2"},
+     {t:1,q:"372 ÷ 3",a:"124"},{t:1,q:"618 ÷ 6",a:"103"},{t:1,q:"127 children, buses of 30 — buses needed",a:"5"},{t:2,q:"26 ÷ 4 as a decimal",a:"6.5"},{t:2,q:"100 ÷ 7 — the remainder",a:"2"},
      {t:2,q:"A quotient of 23 remainder 5 with divisor 9 — the dividend",a:"212"}
    ]}
 ];
@@ -1084,20 +1084,20 @@ const PRACTICE_U2_W5 = [
    ]},
   {id:"u2w5p3",w:5,label:"5.3",title:"Remainder Defence",note:"One division, four right answers. Say which one the question wanted.",
    items:[
-     {t:0,q:"27 ÷ 4 — the whole part",a:"6"},{t:0,q:"27 ÷ 4 — the remainder",a:"3"},{t:0,q:"27 ÷ 4 as a decimal",a:"6.75"},{t:0,q:"27 children in cars of 4 — cars needed",a:"7"},{t:0,q:"27 cookies between 4 — whole each",a:"6"},{t:0,q:"27 ÷ 4 rounded down",a:"6"},
-     {t:1,q:"53 ÷ 8 — the whole part",a:"6"},{t:1,q:"53 people in vans of 8 — vans needed",a:"7"},{t:1,q:"53 ÷ 8 as a decimal",a:"6.625"},{t:1,q:"53 ÷ 8 — the remainder",a:"5"},{t:1,q:"$53 shared by 8 — whole dollars each",a:"6"},
+     {t:0,q:"27 ÷ 4 — the whole part",a:"6"},{t:2,q:"27 ÷ 4 — the remainder",a:"3"},{t:2,q:"27 ÷ 4 as a decimal",a:"6.75"},{t:0,q:"27 children in cars of 4 — cars needed",a:"7"},{t:0,q:"27 cookies between 4 — whole each",a:"6"},{t:0,q:"27 ÷ 4 rounded down",a:"6"},
+     {t:1,q:"53 ÷ 8 — the whole part",a:"6"},{t:1,q:"53 people in vans of 8 — vans needed",a:"7"},{t:2,q:"53 ÷ 8 as a decimal",a:"6.625"},{t:2,q:"53 ÷ 8 — the remainder",a:"5"},{t:1,q:"$53 shared by 8 — whole dollars each",a:"6"},
      {t:2,q:"A 100-cm ribbon into 15-cm pieces — whole pieces",a:"6"},{t:2,q:"That ribbon — cm left",a:"10"}
    ]},
   {id:"u2w5p4",w:5,label:"Thu",title:"Error Journal Sweep",note:"Mixed review of the whole mission. Fix only what repeats.",
    items:[
-     {t:0,q:"63 ÷ 9",a:"7"},{t:0,q:"120 ÷ 4",a:"30"},{t:0,q:"Is 45 divisible by 9 — yes or no",a:"yes"},{t:0,q:"26 ÷ 6 — the remainder",a:"2"},{t:0,q:"81 ÷ 9",a:"9"},{t:0,q:"200 ÷ 5",a:"40"},
-     {t:1,q:"456 ÷ 4",a:"114"},{t:1,q:"618 ÷ 6",a:"103"},{t:1,q:"3,472 ÷ 8",a:"434"},{t:1,q:"84 ÷ 12",a:"7"},{t:1,q:"100 ÷ 7 — the remainder",a:"2"},
+     {t:0,q:"63 ÷ 9",a:"7"},{t:0,q:"120 ÷ 4",a:"30"},{t:0,q:"Is 45 divisible by 9 — yes or no",a:"yes"},{t:2,q:"26 ÷ 6 — the remainder",a:"2"},{t:0,q:"81 ÷ 9",a:"9"},{t:0,q:"200 ÷ 5",a:"40"},
+     {t:1,q:"456 ÷ 4",a:"114"},{t:1,q:"618 ÷ 6",a:"103"},{t:1,q:"3,472 ÷ 8",a:"434"},{t:1,q:"84 ÷ 12",a:"7"},{t:2,q:"100 ÷ 7 — the remainder",a:"2"},
      {t:2,q:"552 ÷ 24",a:"23"},{t:2,q:"? ÷ 9 = 47 remainder 3",a:"426"}
    ]},
   {id:"u2w5p5",w:5,label:"Fri",title:"Mission 02 Test",note:"Twelve items plus the Big Question, answered out loud.",
    items:[
      {t:0,q:"48 ÷ 6",a:"8"},{t:0,q:"150 ÷ 5",a:"30"},
-     {t:1,q:"372 ÷ 3",a:"124"},{t:1,q:"728 ÷ 8",a:"91"},{t:1,q:"915 ÷ 3",a:"305"},{t:1,q:"3,472 ÷ 8",a:"434"},{t:1,q:"96 ÷ 16",a:"6"},{t:1,q:"Is 5,346 divisible by 9 — yes or no",a:"yes"},{t:1,q:"127 children, buses of 30 — buses needed",a:"5"},{t:1,q:"26 ÷ 4 as a decimal",a:"6.5"},
+     {t:1,q:"372 ÷ 3",a:"124"},{t:1,q:"728 ÷ 8",a:"91"},{t:1,q:"915 ÷ 3",a:"305"},{t:1,q:"3,472 ÷ 8",a:"434"},{t:1,q:"96 ÷ 16",a:"6"},{t:1,q:"Is 5,346 divisible by 9 — yes or no",a:"yes"},{t:1,q:"127 children, buses of 30 — buses needed",a:"5"},{t:2,q:"26 ÷ 4 as a decimal",a:"6.5"},
      {t:2,q:"945 ÷ 35",a:"27"},{t:2,q:"A quotient of 23 remainder 5 with divisor 9 — the dividend",a:"212"}
    ]}
 ];
@@ -1106,13 +1106,13 @@ const PRACTICE_U3_W2 = [
   {id:"u3w2p1",w:2,label:"2.1",title:"Rounding to Any Place",note:"Find the place, look one to its right, decide.",
    items:[
      {t:0,q:"Round 48 to the nearest ten",a:"50"},{t:0,q:"Round 43 to the nearest ten",a:"40"},{t:0,q:"Round 250 to the nearest hundred",a:"300"},{t:0,q:"Round 149 to the nearest hundred",a:"100"},{t:0,q:"Round 75 to the nearest ten",a:"80"},{t:0,q:"Round 612 to the nearest ten",a:"610"},
-     {t:1,q:"Round 4,829 to the nearest hundred",a:"4800"},{t:1,q:"Round 4,829 to the nearest thousand",a:"5000"},{t:1,q:"Round 27,500 to the nearest thousand",a:"28000"},{t:1,q:"Round 96,412 to the nearest ten thousand",a:"100000"},{t:1,q:"Round 8,950 to the nearest hundred",a:"9000"},
+     {t:1,q:"Round 4,829 to the nearest hundred",a:"4800"},{t:1,q:"Round 4,829 to the nearest thousand",a:"5000"},{t:2,q:"Round 27,500 to the nearest thousand",a:"28000"},{t:2,q:"Round 96,412 to the nearest ten thousand",a:"100000"},{t:1,q:"Round 8,950 to the nearest hundred",a:"9000"},
      {t:2,q:"A number rounds to 300 to the nearest hundred. Its smallest possible value",a:"250"},{t:2,q:"And its largest possible whole value",a:"349"}
    ]},
   {id:"u3w2p2",w:2,label:"2.2",title:"Estimate Before You Compute",note:"Round first. Then the real answer has something to be checked against.",
    items:[
      {t:0,q:"Estimate 48 + 31 by rounding both to tens",a:"80"},{t:0,q:"Estimate 62 − 19",a:"40"},{t:0,q:"Estimate 19 × 21",a:"400"},{t:0,q:"Estimate 81 ÷ 9",a:"9"},{t:0,q:"Estimate 297 + 104",a:"400"},{t:0,q:"Estimate 52 + 48",a:"100"},
-     {t:1,q:"Estimate 4,812 + 3,190 to the nearest thousand",a:"8000"},{t:1,q:"Estimate 612 − 388 to the nearest hundred",a:"200"},{t:1,q:"Estimate 187 × 4",a:"800"},{t:1,q:"True value of 187 × 4",a:"748"},{t:1,q:"Estimate 3,964 ÷ 4",a:"1000"},
+     {t:1,q:"Estimate 4,812 + 3,190 to the nearest thousand",a:"8000"},{t:1,q:"Estimate 612 − 388 to the nearest hundred",a:"200"},{t:2,q:"Estimate 187 × 4",a:"800"},{t:2,q:"True value of 187 × 4",a:"748"},{t:1,q:"Estimate 3,964 ÷ 4",a:"1000"},
      {t:2,q:"Estimate the cost of 19 items at $4.95 each",a:"100"},{t:2,q:"Someone estimates 512 × 6 as 300. Type the real answer",a:"3072"}
    ]},
   {id:"u3w2p3",w:2,label:"2.3",title:"How Wrong Is the Estimate",note:"An estimate you never compare to anything teaches you nothing.",
@@ -1145,13 +1145,13 @@ const PRACTICE_U3_W3 = [
   {id:"u3w3p2",w:3,label:"3.2",title:"Brackets First",note:"Whatever is inside the brackets happens before anything else.",
    items:[
      {t:0,q:"(4 + 5) × 2",a:"18"},{t:0,q:"(9 − 3) ÷ 2",a:"3"},{t:0,q:"3 × (2 + 2)",a:"12"},{t:0,q:"(7 + 3) × 10",a:"100"},{t:0,q:"(12 − 4) ÷ 4",a:"2"},{t:0,q:"5 × (10 − 6)",a:"20"},
-     {t:1,q:"(15 + 5) ÷ (2 + 2)",a:"5"},{t:1,q:"4 × (6 + 3) − 10",a:"26"},{t:1,q:"100 − (25 × 3)",a:"25"},{t:1,q:"(8 × 3) − (4 × 2)",a:"16"},{t:1,q:"2 × (50 − 15)",a:"70"},
+     {t:1,q:"(15 + 5) ÷ (2 + 2)",a:"5"},{t:1,q:"4 × (6 + 3) − 10",a:"26"},{t:2,q:"100 − (25 × 3)",a:"25"},{t:1,q:"(8 × 3) − (4 × 2)",a:"16"},{t:1,q:"2 × (50 − 15)",a:"70"},
      {t:2,q:"((4 + 2) × 3) − 8",a:"10"},{t:2,q:"120 ÷ (2 × (3 + 3))",a:"10"}
    ]},
   {id:"u3w3p3",w:3,label:"3.3",title:"Multi-Step Expressions",note:"Multiply and divide before you add and subtract. Left to right within each.",
    items:[
      {t:0,q:"12 ÷ 3 + 2",a:"6"},{t:0,q:"12 + 3 × 2",a:"18"},{t:0,q:"20 ÷ 4 × 2",a:"10"},{t:0,q:"18 − 6 ÷ 3",a:"16"},{t:0,q:"7 × 2 + 6",a:"20"},{t:0,q:"30 ÷ 5 − 2",a:"4"},
-     {t:1,q:"48 ÷ 6 + 3 × 4",a:"20"},{t:1,q:"100 − 4 × 12",a:"52"},{t:1,q:"7 × 8 − 6 × 5",a:"26"},{t:1,q:"64 ÷ 8 ÷ 2",a:"4"},{t:1,q:"9 + 36 ÷ 4 − 3",a:"15"},
+     {t:1,q:"48 ÷ 6 + 3 × 4",a:"20"},{t:2,q:"100 − 4 × 12",a:"52"},{t:1,q:"7 × 8 − 6 × 5",a:"26"},{t:1,q:"64 ÷ 8 ÷ 2",a:"4"},{t:1,q:"9 + 36 ÷ 4 − 3",a:"15"},
      {t:2,q:"144 ÷ 12 + 8 × 3 − 5",a:"31"},{t:2,q:"2 × 3 + 4 × 5 + 6 × 7",a:"68"}
    ]},
   {id:"u3w3p4",w:3,label:"3.4",title:"Write the Expression",note:"Turn the sentence into symbols, then work it out.",
@@ -1163,7 +1163,7 @@ const PRACTICE_U3_W3 = [
   {id:"u3w3p5",w:3,label:"Fri",title:"Mid-Unit Quiz",note:"Eight items across Weeks 1–3. 85% to keep flying.",
    items:[
      {t:0,q:"Round 4,829 to the nearest hundred",a:"4800"},{t:0,q:"2 + 3 × 4",a:"14"},
-     {t:1,q:"(5 + 4) × (3 − 2)",a:"9"},{t:1,q:"48 ÷ 6 + 3 × 4",a:"20"},{t:1,q:"Estimate 187 × 4",a:"800"},{t:1,q:"Zeros in one million",a:"6"},{t:1,q:"The sum of 8 and 4, multiplied by 3",a:"36"},
+     {t:1,q:"(5 + 4) × (3 − 2)",a:"9"},{t:1,q:"48 ÷ 6 + 3 × 4",a:"20"},{t:2,q:"Estimate 187 × 4",a:"800"},{t:1,q:"Zeros in one million",a:"6"},{t:1,q:"The sum of 8 and 4, multiplied by 3",a:"36"},
      {t:2,q:"144 ÷ 12 + 8 × 3 − 5",a:"31"}
    ]}
 ];
@@ -1171,32 +1171,32 @@ const PRACTICE_U3_W3 = [
 const PRACTICE_U3_W4 = [
   {id:"u3w4p1",w:4,label:"4.1",title:"The Little Raised Number",note:"An exponent counts how many times the base is multiplied by itself.",
    items:[
-     {t:0,q:"2²",a:"4"},{t:0,q:"3²",a:"9"},{t:0,q:"5²",a:"25"},{t:0,q:"2³",a:"8"},{t:0,q:"10²",a:"100"},{t:0,q:"4²",a:"16"},
-     {t:1,q:"3³",a:"27"},{t:1,q:"2⁴",a:"16"},{t:1,q:"5³",a:"125"},{t:1,q:"10³",a:"1000"},{t:1,q:"2⁵",a:"32"},
+     {t:0,q:"2²",a:"4"},{t:0,q:"3²",a:"9"},{t:0,q:"5²",a:"25"},{t:0,q:"2³",a:"8"},{t:2,q:"10²",a:"100"},{t:0,q:"4²",a:"16"},
+     {t:1,q:"3³",a:"27"},{t:1,q:"2⁴",a:"16"},{t:1,q:"5³",a:"125"},{t:2,q:"10³",a:"1000"},{t:1,q:"2⁵",a:"32"},
      {t:2,q:"2⁸",a:"256"},{t:2,q:"Which is bigger, 3⁴ or 4³ — type the value of the bigger",a:"81"}
    ]},
   {id:"u3w4p2",w:4,label:"4.2",title:"Powers of Ten",note:"The exponent is the number of zeros. That is the whole shortcut.",
    items:[
-     {t:0,q:"10¹",a:"10"},{t:0,q:"10²",a:"100"},{t:0,q:"10³",a:"1000"},{t:0,q:"10⁴",a:"10000"},{t:0,q:"Zeros in 10⁵",a:"5"},{t:0,q:"10⁶",a:"1000000"},
-     {t:1,q:"3 × 10²",a:"300"},{t:1,q:"7 × 10³",a:"7000"},{t:1,q:"4 × 10⁴",a:"40000"},{t:1,q:"Write 5,000 as a digit times a power of ten — type the exponent",a:"3"},{t:1,q:"25 × 10²",a:"2500"},
+     {t:0,q:"10¹",a:"10"},{t:2,q:"10²",a:"100"},{t:2,q:"10³",a:"1000"},{t:2,q:"10⁴",a:"10000"},{t:2,q:"Zeros in 10⁵",a:"5"},{t:2,q:"10⁶",a:"1000000"},
+     {t:2,q:"3 × 10²",a:"300"},{t:2,q:"7 × 10³",a:"7000"},{t:2,q:"4 × 10⁴",a:"40000"},{t:1,q:"Write 5,000 as a digit times a power of ten — type the exponent",a:"3"},{t:2,q:"25 × 10²",a:"2500"},
      {t:2,q:"10³ × 10²",a:"100000"},{t:2,q:"A million written as a power of ten — type the exponent",a:"6"}
    ]},
   {id:"u3w4p3",w:4,label:"4.3",title:"Expanded Form with Powers",note:"Every place value is a power of ten in disguise.",
    items:[
      {t:0,q:"The value of the 4 in 400",a:"400"},{t:0,q:"The value of the 7 in 70",a:"70"},{t:0,q:"The value of the 3 in 3,000",a:"3000"},{t:0,q:"200 + 30 + 5",a:"235"},{t:0,q:"4,000 + 200 + 10",a:"4210"},{t:0,q:"The value of the 9 in 900",a:"900"},
-     {t:1,q:"6 × 10³ + 4 × 10² + 2",a:"6402"},{t:1,q:"3 × 10⁴ + 5 × 10²",a:"30500"},{t:1,q:"The value of the 8 in 84,000",a:"80000"},{t:1,q:"9 × 10² + 9 × 10¹ + 9",a:"999"},{t:1,q:"7 × 10⁵",a:"700000"},
+     {t:2,q:"6 × 10³ + 4 × 10² + 2",a:"6402"},{t:2,q:"3 × 10⁴ + 5 × 10²",a:"30500"},{t:2,q:"The value of the 8 in 84,000",a:"80000"},{t:2,q:"9 × 10² + 9 × 10¹ + 9",a:"999"},{t:2,q:"7 × 10⁵",a:"700000"},
      {t:2,q:"2 × 10⁵ + 6 × 10³ + 4 × 10¹",a:"206040"},{t:2,q:"The largest power of ten inside 47,300 — type its exponent",a:"4"}
    ]},
   {id:"u3w4p4",w:4,label:"Thu",title:"Error Journal Sweep",note:"Mixed review of the whole mission. Fix only what repeats.",
    items:[
-     {t:0,q:"Round 149 to the nearest hundred",a:"100"},{t:0,q:"2 + 3 × 4",a:"14"},{t:0,q:"10³",a:"1000"},{t:0,q:"Zeros in one million",a:"6"},{t:0,q:"5²",a:"25"},{t:0,q:"(2 + 3) × 4",a:"20"},
-     {t:1,q:"Round 96,412 to the nearest ten thousand",a:"100000"},{t:1,q:"48 ÷ 6 + 3 × 4",a:"20"},{t:1,q:"4 × 10⁴",a:"40000"},{t:1,q:"Estimate 3,964 ÷ 4",a:"1000"},{t:1,q:"6 × 10³ + 4 × 10² + 2",a:"6402"},
+     {t:0,q:"Round 149 to the nearest hundred",a:"100"},{t:0,q:"2 + 3 × 4",a:"14"},{t:2,q:"10³",a:"1000"},{t:0,q:"Zeros in one million",a:"6"},{t:0,q:"5²",a:"25"},{t:0,q:"(2 + 3) × 4",a:"20"},
+     {t:2,q:"Round 96,412 to the nearest ten thousand",a:"100000"},{t:1,q:"48 ÷ 6 + 3 × 4",a:"20"},{t:2,q:"4 × 10⁴",a:"40000"},{t:1,q:"Estimate 3,964 ÷ 4",a:"1000"},{t:2,q:"6 × 10³ + 4 × 10² + 2",a:"6402"},
      {t:2,q:"144 ÷ 12 + 8 × 3 − 5",a:"31"},{t:2,q:"2⁸",a:"256"}
    ]},
   {id:"u3w4p5",w:4,label:"Fri",title:"Mission 03 Test",note:"Twelve items plus the Big Question, answered out loud.",
    items:[
      {t:0,q:"Round 612 to the nearest ten",a:"610"},{t:0,q:"3²",a:"9"},
-     {t:1,q:"Round 4,829 to the nearest thousand",a:"5000"},{t:1,q:"10 − 2 × 3",a:"4"},{t:1,q:"(15 + 5) ÷ (2 + 2)",a:"5"},{t:1,q:"100 − 4 × 12",a:"52"},{t:1,q:"7 × 10³",a:"7000"},{t:1,q:"2⁵",a:"32"},{t:1,q:"Estimate 4,812 + 3,190 to the nearest thousand",a:"8000"},{t:1,q:"The sum of 12 and 8, divided by the difference of 9 and 4",a:"4"},
+     {t:1,q:"Round 4,829 to the nearest thousand",a:"5000"},{t:1,q:"10 − 2 × 3",a:"4"},{t:1,q:"(15 + 5) ÷ (2 + 2)",a:"5"},{t:2,q:"100 − 4 × 12",a:"52"},{t:2,q:"7 × 10³",a:"7000"},{t:1,q:"2⁵",a:"32"},{t:1,q:"Estimate 4,812 + 3,190 to the nearest thousand",a:"8000"},{t:1,q:"The sum of 12 and 8, divided by the difference of 9 and 4",a:"4"},
      {t:2,q:"2 × 10⁵ + 6 × 10³ + 4 × 10¹",a:"206040"},{t:2,q:"2 × 3 + 4 × 5 + 6 × 7",a:"68"}
    ]}
 ];
@@ -1255,14 +1255,14 @@ const PRACTICE_U4_W3 = [
    ]},
   {id:"u4w3p4",w:3,label:"3.4",title:"On the Number Line",note:"Every fraction has one address between 0 and 1. Find it.",
    items:[
-     {t:0,q:"Halfway between 0 and 1 — type as a/b",a:"1/2"},{t:0,q:"Halfway between 0 and 1/2",a:"1/4"},{t:0,q:"Halfway between 1/2 and 1",a:"3/4"},{t:0,q:"Marks between 0 and 1 if split into quarters",a:"3"},{t:0,q:"Marks if split into fifths",a:"4"},{t:0,q:"1/2 as a decimal",a:"0.5"},
-     {t:1,q:"3/4 as a decimal",a:"0.75"},{t:1,q:"1/4 as a decimal",a:"0.25"},{t:1,q:"1/5 as a decimal",a:"0.2"},{t:1,q:"3/5 as a decimal",a:"0.6"},{t:1,q:"Halfway between 1/4 and 1/2 — type as a/b",a:"3/8"},
+     {t:0,q:"Halfway between 0 and 1 — type as a/b",a:"1/2"},{t:0,q:"Halfway between 0 and 1/2",a:"1/4"},{t:0,q:"Halfway between 1/2 and 1",a:"3/4"},{t:0,q:"Marks between 0 and 1 if split into quarters",a:"3"},{t:0,q:"Marks if split into fifths",a:"4"},{t:2,q:"1/2 as a decimal",a:"0.5"},
+     {t:2,q:"3/4 as a decimal",a:"0.75"},{t:2,q:"1/4 as a decimal",a:"0.25"},{t:2,q:"1/5 as a decimal",a:"0.2"},{t:2,q:"3/5 as a decimal",a:"0.6"},{t:1,q:"Halfway between 1/4 and 1/2 — type as a/b",a:"3/8"},
      {t:2,q:"7/8 as a decimal",a:"0.875"},{t:2,q:"A fraction exactly between 1/3 and 2/3 — type as a/b",a:"1/2"}
    ]},
   {id:"u4w3p5",w:3,label:"Fri",title:"Mid-Unit Quiz",note:"Eight items across Weeks 1–3. 85% to keep flying.",
    items:[
      {t:0,q:"1/2 = ?/8 — the numerator",a:"4"},{t:0,q:"4/8 simplified — type as a/b",a:"1/2"},
-     {t:1,q:"6/8 simplified",a:"3/4"},{t:1,q:"Common denominator of 2/3 and 3/4",a:"12"},{t:1,q:"Larger: 3/5 or 5/8 — type it",a:"5/8"},{t:1,q:"Is 5/9 more or less than 1/2",a:"more"},{t:1,q:"3/4 as a decimal",a:"0.75"},
+     {t:1,q:"6/8 simplified",a:"3/4"},{t:1,q:"Common denominator of 2/3 and 3/4",a:"12"},{t:1,q:"Larger: 3/5 or 5/8 — type it",a:"5/8"},{t:1,q:"Is 5/9 more or less than 1/2",a:"more"},{t:2,q:"3/4 as a decimal",a:"0.75"},
      {t:2,q:"Order 3/4, 5/6, 7/8 — type the largest",a:"7/8"}
    ]}
 ];
@@ -1270,25 +1270,25 @@ const PRACTICE_U4_W3 = [
 const PRACTICE_U4_W4 = [
   {id:"u4w4p1",w:4,label:"4.1",title:"Adding Like Denominators",note:"Same size pieces already. Add the counts, leave the bottom alone.",
    items:[
-     {t:0,q:"1/4 + 1/4 — type as a/b",a:"1/2"},{t:0,q:"1/5 + 2/5",a:"3/5"},{t:0,q:"1/8 + 3/8",a:"1/2"},{t:0,q:"2/6 + 1/6",a:"1/2"},{t:0,q:"1/3 + 1/3",a:"2/3"},{t:0,q:"3/10 + 2/10",a:"1/2"},
-     {t:1,q:"3/8 + 3/8",a:"3/4"},{t:1,q:"5/12 + 3/12",a:"2/3"},{t:1,q:"7/10 + 1/10",a:"4/5"},{t:1,q:"2/9 + 4/9",a:"2/3"},{t:1,q:"5/6 + 1/6",a:"1"},
+     {t:2,q:"1/4 + 1/4 — type as a/b",a:"1/2"},{t:2,q:"1/5 + 2/5",a:"3/5"},{t:2,q:"1/8 + 3/8",a:"1/2"},{t:2,q:"2/6 + 1/6",a:"1/2"},{t:2,q:"1/3 + 1/3",a:"2/3"},{t:0,q:"3/10 + 2/10",a:"1/2"},
+     {t:2,q:"3/8 + 3/8",a:"3/4"},{t:1,q:"5/12 + 3/12",a:"2/3"},{t:1,q:"7/10 + 1/10",a:"4/5"},{t:2,q:"2/9 + 4/9",a:"2/3"},{t:2,q:"5/6 + 1/6",a:"1"},
      {t:2,q:"7/8 + 5/8 — type as a/b",a:"3/2"},{t:2,q:"3/5 + 4/5",a:"7/5"}
    ]},
   {id:"u4w4p2",w:4,label:"4.2",title:"Subtracting Like Denominators",note:"Same move, other direction.",
    items:[
-     {t:0,q:"3/4 − 1/4 — type as a/b",a:"1/2"},{t:0,q:"4/5 − 1/5",a:"3/5"},{t:0,q:"7/8 − 3/8",a:"1/2"},{t:0,q:"5/6 − 1/6",a:"2/3"},{t:0,q:"2/3 − 1/3",a:"1/3"},{t:0,q:"9/10 − 4/10",a:"1/2"},
-     {t:1,q:"1 − 1/4",a:"3/4"},{t:1,q:"1 − 3/8",a:"5/8"},{t:1,q:"11/12 − 5/12",a:"1/2"},{t:1,q:"1 − 2/5",a:"3/5"},{t:1,q:"7/9 − 1/9",a:"2/3"},
+     {t:2,q:"3/4 − 1/4 — type as a/b",a:"1/2"},{t:2,q:"4/5 − 1/5",a:"3/5"},{t:2,q:"7/8 − 3/8",a:"1/2"},{t:2,q:"5/6 − 1/6",a:"2/3"},{t:2,q:"2/3 − 1/3",a:"1/3"},{t:0,q:"9/10 − 4/10",a:"1/2"},
+     {t:1,q:"1 − 1/4",a:"3/4"},{t:1,q:"1 − 3/8",a:"5/8"},{t:1,q:"11/12 − 5/12",a:"1/2"},{t:1,q:"1 − 2/5",a:"3/5"},{t:2,q:"7/9 − 1/9",a:"2/3"},
      {t:2,q:"2 − 3/4 — type as a/b",a:"5/4"},{t:2,q:"1 1/2 − 3/4 — type as a/b",a:"3/4"}
    ]},
   {id:"u4w4p3",w:4,label:"4.3",title:"Unlike Denominators",note:"The grade-five ceiling. Convert first, then add.",
    items:[
-     {t:0,q:"1/2 + 1/4 — type as a/b",a:"3/4"},{t:0,q:"1/3 + 1/6",a:"1/2"},{t:0,q:"1/2 + 1/8",a:"5/8"},{t:0,q:"1/4 + 1/8",a:"3/8"},{t:0,q:"1/2 − 1/4",a:"1/4"},{t:0,q:"2/3 − 1/6",a:"1/2"},
-     {t:1,q:"1/2 + 1/3",a:"5/6"},{t:1,q:"3/4 + 1/8",a:"7/8"},{t:1,q:"2/3 + 1/4",a:"11/12"},{t:1,q:"3/4 − 1/3",a:"5/12"},{t:1,q:"5/6 − 1/2",a:"1/3"},
+     {t:2,q:"1/2 + 1/4 — type as a/b",a:"3/4"},{t:2,q:"1/3 + 1/6",a:"1/2"},{t:2,q:"1/2 + 1/8",a:"5/8"},{t:2,q:"1/4 + 1/8",a:"3/8"},{t:2,q:"1/2 − 1/4",a:"1/4"},{t:2,q:"2/3 − 1/6",a:"1/2"},
+     {t:2,q:"1/2 + 1/3",a:"5/6"},{t:2,q:"3/4 + 1/8",a:"7/8"},{t:2,q:"2/3 + 1/4",a:"11/12"},{t:2,q:"3/4 − 1/3",a:"5/12"},{t:2,q:"5/6 − 1/2",a:"1/3"},
      {t:2,q:"2/3 + 3/4 — type as a/b",a:"17/12"},{t:2,q:"1/2 + 1/3 + 1/6",a:"1"}
    ]},
   {id:"u4w4p4",w:4,label:"4.4",title:"Fractions in Words",note:"Read it twice, then decide whether it is an add or a subtract.",
    items:[
-     {t:0,q:"Ate 1/4 of a pizza, then 1/4 more — total, as a/b",a:"1/2"},{t:0,q:"Had 3/4, ate 1/4 — left",a:"1/2"},{t:0,q:"1/2 hour plus 1/2 hour — hours",a:"1"},{t:0,q:"2/5 of a jug plus 1/5 — as a/b",a:"3/5"},{t:0,q:"1 whole minus 1/3 — as a/b",a:"2/3"},{t:0,q:"1/8 + 1/8 — as a/b",a:"1/4"},
+     {t:0,q:"Ate 1/4 of a pizza, then 1/4 more — total, as a/b",a:"1/2"},{t:0,q:"Had 3/4, ate 1/4 — left",a:"1/2"},{t:0,q:"1/2 hour plus 1/2 hour — hours",a:"1"},{t:0,q:"2/5 of a jug plus 1/5 — as a/b",a:"3/5"},{t:0,q:"1 whole minus 1/3 — as a/b",a:"2/3"},{t:2,q:"1/8 + 1/8 — as a/b",a:"1/4"},
      {t:1,q:"Walked 1/2 mile then 1/4 mile — total, as a/b",a:"3/4"},{t:1,q:"A 3/4 cup recipe, you have 1/2 — how much more, as a/b",a:"1/4"},{t:1,q:"Read 2/3 of a book, then 1/6 more — total, as a/b",a:"5/6"},{t:1,q:"Ran 5/6 km and walked 1/3 km — total, as a/b",a:"7/6"},{t:1,q:"1 hour minus 1/4 hour — minutes",a:"45"},
      {t:2,q:"Three pieces of 3/8 — total, as a/b",a:"9/8"},{t:2,q:"2/3 of an hour in minutes",a:"40"}
    ]},
@@ -1321,8 +1321,8 @@ const PRACTICE_U4_W5 = [
    ]},
   {id:"u4w5p4",w:5,label:"5.4",title:"Mixed Fraction Problems",note:"No signposting. Read, decide, then compute.",
    items:[
-     {t:0,q:"1/2 of 16",a:"8"},{t:0,q:"1/4 + 1/4 — type as a/b",a:"1/2"},{t:0,q:"1 − 1/2 — as a/b",a:"1/2"},{t:0,q:"2/6 simplified — as a/b",a:"1/3"},{t:0,q:"1/3 of 15",a:"5"},{t:0,q:"3/4 − 1/4 — as a/b",a:"1/2"},
-     {t:1,q:"2/3 + 1/6 — as a/b",a:"5/6"},{t:1,q:"3/4 of 24",a:"18"},{t:1,q:"5/8 − 1/4 — as a/b",a:"3/8"},{t:1,q:"2/5 of a number is 8. The number",a:"20"},{t:1,q:"Larger: 5/8 or 2/3 — type it",a:"2/3"},
+     {t:0,q:"1/2 of 16",a:"8"},{t:2,q:"1/4 + 1/4 — type as a/b",a:"1/2"},{t:0,q:"1 − 1/2 — as a/b",a:"1/2"},{t:0,q:"2/6 simplified — as a/b",a:"1/3"},{t:0,q:"1/3 of 15",a:"5"},{t:2,q:"3/4 − 1/4 — as a/b",a:"1/2"},
+     {t:2,q:"2/3 + 1/6 — as a/b",a:"5/6"},{t:1,q:"3/4 of 24",a:"18"},{t:2,q:"5/8 − 1/4 — as a/b",a:"3/8"},{t:1,q:"2/5 of a number is 8. The number",a:"20"},{t:1,q:"Larger: 5/8 or 2/3 — type it",a:"2/3"},
      {t:2,q:"2/3 + 3/4 — as a/b",a:"17/12"},{t:2,q:"7/12 of 60",a:"35"}
    ]},
   {id:"u4w5p5",w:5,label:"Fri",title:"Fold the Universe, Built",note:"Finish the paper number line with every fraction landed on it.",
@@ -1342,26 +1342,26 @@ const PRACTICE_U4_W6 = [
    ]},
   {id:"u4w6p2",w:6,label:"6.2",title:"Number Line Defence",note:"Every fraction has one place. Put it there and argue for it.",
    items:[
-     {t:0,q:"1/2 as a decimal",a:"0.5"},{t:0,q:"1/4 as a decimal",a:"0.25"},{t:0,q:"3/4 as a decimal",a:"0.75"},{t:0,q:"1/5 as a decimal",a:"0.2"},{t:0,q:"2/5 as a decimal",a:"0.4"},{t:0,q:"1/10 as a decimal",a:"0.1"},
-     {t:1,q:"3/8 as a decimal",a:"0.375"},{t:1,q:"5/8 as a decimal",a:"0.625"},{t:1,q:"7/10 as a decimal",a:"0.7"},{t:1,q:"Which sits further right: 2/3 or 0.6 — type it",a:"2/3"},{t:1,q:"3/5 as a decimal",a:"0.6"},
+     {t:2,q:"1/2 as a decimal",a:"0.5"},{t:2,q:"1/4 as a decimal",a:"0.25"},{t:2,q:"3/4 as a decimal",a:"0.75"},{t:2,q:"1/5 as a decimal",a:"0.2"},{t:2,q:"2/5 as a decimal",a:"0.4"},{t:2,q:"1/10 as a decimal",a:"0.1"},
+     {t:2,q:"3/8 as a decimal",a:"0.375"},{t:2,q:"5/8 as a decimal",a:"0.625"},{t:2,q:"7/10 as a decimal",a:"0.7"},{t:2,q:"Which sits further right: 2/3 or 0.6 — type it",a:"2/3"},{t:2,q:"3/5 as a decimal",a:"0.6"},
      {t:2,q:"7/8 as a decimal",a:"0.875"},{t:2,q:"Between 0.3 and 0.4 — type 1/3 or 2/5, whichever fits",a:"1/3"}
    ]},
   {id:"u4w6p3",w:6,label:"6.3",title:"Mission Review",note:"Everything from six weeks, mixed together.",
    items:[
-     {t:0,q:"6/8 simplified — type as a/b",a:"3/4"},{t:0,q:"1/4 + 1/4 — as a/b",a:"1/2"},{t:0,q:"1/2 of 14",a:"7"},{t:0,q:"1 − 1/3 — as a/b",a:"2/3"},{t:0,q:"Larger: 1/2 or 1/3 — type it",a:"1/2"},{t:0,q:"1/2 as a decimal",a:"0.5"},
-     {t:1,q:"2/3 + 1/4 — as a/b",a:"11/12"},{t:1,q:"3/4 of 32",a:"24"},{t:1,q:"Common denominator of 5/6 and 3/8",a:"24"},{t:1,q:"3/4 − 1/3 — as a/b",a:"5/12"},{t:1,q:"2/5 of a number is 10. The number",a:"25"},
+     {t:0,q:"6/8 simplified — type as a/b",a:"3/4"},{t:2,q:"1/4 + 1/4 — as a/b",a:"1/2"},{t:0,q:"1/2 of 14",a:"7"},{t:0,q:"1 − 1/3 — as a/b",a:"2/3"},{t:0,q:"Larger: 1/2 or 1/3 — type it",a:"1/2"},{t:2,q:"1/2 as a decimal",a:"0.5"},
+     {t:2,q:"2/3 + 1/4 — as a/b",a:"11/12"},{t:1,q:"3/4 of 32",a:"24"},{t:1,q:"Common denominator of 5/6 and 3/8",a:"24"},{t:2,q:"3/4 − 1/3 — as a/b",a:"5/12"},{t:1,q:"2/5 of a number is 10. The number",a:"25"},
      {t:2,q:"1/2 + 1/3 + 1/6 — as a/b",a:"1"},{t:2,q:"7/12 of 60",a:"35"}
    ]},
   {id:"u4w6p4",w:6,label:"Thu",title:"Error Journal Sweep",note:"Re-read every entry from the mission. Fix only what repeats.",
    items:[
-     {t:0,q:"2/4 simplified — type as a/b",a:"1/2"},{t:0,q:"1/3 + 1/3 — as a/b",a:"2/3"},{t:0,q:"1/4 of 16",a:"4"},{t:0,q:"Is 3/6 the same as 1/2 — yes or no",a:"yes"},{t:0,q:"1/5 as a decimal",a:"0.2"},{t:0,q:"5/6 − 1/6 — as a/b",a:"2/3"},
-     {t:1,q:"1/2 + 1/3 — as a/b",a:"5/6"},{t:1,q:"12/16 simplified",a:"3/4"},{t:1,q:"5/6 of 24",a:"20"},{t:1,q:"Larger: 2/3 or 3/4 — type it",a:"3/4"},{t:1,q:"3/8 as a decimal",a:"0.375"},
+     {t:0,q:"2/4 simplified — type as a/b",a:"1/2"},{t:2,q:"1/3 + 1/3 — as a/b",a:"2/3"},{t:0,q:"1/4 of 16",a:"4"},{t:0,q:"Is 3/6 the same as 1/2 — yes or no",a:"yes"},{t:2,q:"1/5 as a decimal",a:"0.2"},{t:2,q:"5/6 − 1/6 — as a/b",a:"2/3"},
+     {t:2,q:"1/2 + 1/3 — as a/b",a:"5/6"},{t:1,q:"12/16 simplified",a:"3/4"},{t:1,q:"5/6 of 24",a:"20"},{t:1,q:"Larger: 2/3 or 3/4 — type it",a:"3/4"},{t:2,q:"3/8 as a decimal",a:"0.375"},
      {t:2,q:"2/3 + 3/4 — as a/b",a:"17/12"},{t:2,q:"After spending 3/5, $20 is left. The starting amount",a:"50"}
    ]},
   {id:"u4w6p5",w:6,label:"Fri",title:"Mission 04 Test",note:"Twelve items plus the Big Question, answered out loud.",
    items:[
-     {t:0,q:"4/8 simplified — type as a/b",a:"1/2"},{t:0,q:"1/4 + 1/4 — as a/b",a:"1/2"},
-     {t:1,q:"1/2 = ?/10 — the numerator",a:"5"},{t:1,q:"10/15 simplified",a:"2/3"},{t:1,q:"1/2 + 1/4 — as a/b",a:"3/4"},{t:1,q:"3/4 − 1/3 — as a/b",a:"5/12"},{t:1,q:"Larger: 3/5 or 5/8 — type it",a:"5/8"},{t:1,q:"2/3 of 18",a:"12"},{t:1,q:"3/4 as a decimal",a:"0.75"},{t:1,q:"Common denominator of 2/3 and 3/4",a:"12"},
+     {t:0,q:"4/8 simplified — type as a/b",a:"1/2"},{t:2,q:"1/4 + 1/4 — as a/b",a:"1/2"},
+     {t:1,q:"1/2 = ?/10 — the numerator",a:"5"},{t:1,q:"10/15 simplified",a:"2/3"},{t:2,q:"1/2 + 1/4 — as a/b",a:"3/4"},{t:2,q:"3/4 − 1/3 — as a/b",a:"5/12"},{t:1,q:"Larger: 3/5 or 5/8 — type it",a:"5/8"},{t:1,q:"2/3 of 18",a:"12"},{t:2,q:"3/4 as a decimal",a:"0.75"},{t:1,q:"Common denominator of 2/3 and 3/4",a:"12"},
      {t:2,q:"2/3 + 3/4 — as a/b",a:"17/12"},{t:2,q:"3/8 of a number is 9. The number",a:"24"}
    ]}
 ];
@@ -1369,26 +1369,26 @@ const PRACTICE_U4_W6 = [
 const PRACTICE_U5_W2 = [
   {id:"u5w2p1",w:2,label:"2.1",title:"Line Up the Point",note:"Not the last digit — the point. Fill the gaps with zeros.",
    items:[
-     {t:0,q:"0.3 + 0.4",a:"0.7"},{t:0,q:"1.2 + 2.5",a:"3.7"},{t:0,q:"0.25 + 0.25",a:"0.5"},{t:0,q:"2.5 + 1.5",a:"4"},{t:0,q:"0.6 + 0.9",a:"1.5"},{t:0,q:"3.4 + 1.2",a:"4.6"},
-     {t:1,q:"3.5 + 0.47",a:"3.97"},{t:1,q:"12.6 + 4.85",a:"17.45"},{t:1,q:"9.4 + 0.68",a:"10.08"},{t:1,q:"0.125 + 0.875",a:"1"},{t:1,q:"7.05 + 2.9",a:"9.95"},
+     {t:2,q:"0.3 + 0.4",a:"0.7"},{t:0,q:"1.2 + 2.5",a:"3.7"},{t:2,q:"0.25 + 0.25",a:"0.5"},{t:0,q:"2.5 + 1.5",a:"4"},{t:2,q:"0.6 + 0.9",a:"1.5"},{t:0,q:"3.4 + 1.2",a:"4.6"},
+     {t:2,q:"3.5 + 0.47",a:"3.97"},{t:1,q:"12.6 + 4.85",a:"17.45"},{t:2,q:"9.4 + 0.68",a:"10.08"},{t:2,q:"0.125 + 0.875",a:"1"},{t:1,q:"7.05 + 2.9",a:"9.95"},
      {t:2,q:"2.5 + 3.75 + 0.125",a:"6.375"},{t:2,q:"What adds to 4.6 to make 10",a:"5.4"}
    ]},
   {id:"u5w2p2",w:2,label:"2.2",title:"Subtracting Decimals",note:"Same alignment. Borrow across the point when you must.",
    items:[
-     {t:0,q:"0.9 − 0.4",a:"0.5"},{t:0,q:"3.7 − 1.2",a:"2.5"},{t:0,q:"1 − 0.5",a:"0.5"},{t:0,q:"2.5 − 0.5",a:"2"},{t:0,q:"0.75 − 0.25",a:"0.5"},{t:0,q:"5.8 − 2.3",a:"3.5"},
-     {t:1,q:"4 − 1.35",a:"2.65"},{t:1,q:"10 − 0.07",a:"9.93"},{t:1,q:"8.2 − 3.45",a:"4.75"},{t:1,q:"6.05 − 2.5",a:"3.55"},{t:1,q:"12.3 − 4.75",a:"7.55"},
+     {t:2,q:"0.9 − 0.4",a:"0.5"},{t:0,q:"3.7 − 1.2",a:"2.5"},{t:2,q:"1 − 0.5",a:"0.5"},{t:2,q:"2.5 − 0.5",a:"2"},{t:2,q:"0.75 − 0.25",a:"0.5"},{t:0,q:"5.8 − 2.3",a:"3.5"},
+     {t:1,q:"4 − 1.35",a:"2.65"},{t:2,q:"10 − 0.07",a:"9.93"},{t:1,q:"8.2 − 3.45",a:"4.75"},{t:1,q:"6.05 − 2.5",a:"3.55"},{t:1,q:"12.3 − 4.75",a:"7.55"},
      {t:2,q:"12.4 − 7.856",a:"4.544"},{t:2,q:"A 2.5 m board with 0.85 m cut off — metres left",a:"1.65"}
    ]},
   {id:"u5w2p3",w:2,label:"2.3",title:"Change from a Twenty",note:"Money is decimals wearing a dollar sign. Type numbers only.",
    items:[
-     {t:0,q:"$20 − $5",a:"15"},{t:0,q:"$20 − $10.50",a:"9.5"},{t:0,q:"$10 − $2.50",a:"7.5"},{t:0,q:"$5 − $1.25",a:"3.75"},{t:0,q:"$20 − $15",a:"5"},{t:0,q:"$1 − $0.35",a:"0.65"},
-     {t:1,q:"$20 − $13.68",a:"6.32"},{t:1,q:"$50 − $27.45",a:"22.55"},{t:1,q:"$20 − $4.99",a:"15.01"},{t:1,q:"$100 − $63.20",a:"36.8"},{t:1,q:"$20 − ($6.50 + $4.25)",a:"9.25"},
+     {t:0,q:"$20 − $5",a:"15"},{t:2,q:"$20 − $10.50",a:"9.5"},{t:2,q:"$10 − $2.50",a:"7.5"},{t:2,q:"$5 − $1.25",a:"3.75"},{t:0,q:"$20 − $15",a:"5"},{t:2,q:"$1 − $0.35",a:"0.65"},
+     {t:2,q:"$20 − $13.68",a:"6.32"},{t:2,q:"$50 − $27.45",a:"22.55"},{t:2,q:"$20 − $4.99",a:"15.01"},{t:2,q:"$100 − $63.20",a:"36.8"},{t:2,q:"$20 − ($6.50 + $4.25)",a:"9.25"},
      {t:2,q:"Three items at $4.95 — change from $20",a:"5.15"},{t:2,q:"$20 buys items at $2.40 — how many whole ones",a:"8"}
    ]},
   {id:"u5w2p4",w:2,label:"2.4",title:"Adding Money Columns",note:"A receipt is just a column of decimals.",
    items:[
-     {t:0,q:"$2.50 + $1.50",a:"4"},{t:0,q:"$3.25 + $1.75",a:"5"},{t:0,q:"$0.99 + $0.01",a:"1"},{t:0,q:"$4.20 + $3.80",a:"8"},{t:0,q:"$1.10 + $2.40",a:"3.5"},{t:0,q:"$6.75 + $0.25",a:"7"},
-     {t:1,q:"$4.99 + $3.49",a:"8.48"},{t:1,q:"$12.75 + $8.60",a:"21.35"},{t:1,q:"$1.99 + $2.99 + $3.99",a:"8.97"},{t:1,q:"$15.40 + $9.85",a:"25.25"},{t:1,q:"$7.30 + $0.95 + $1.25",a:"9.5"},
+     {t:2,q:"$2.50 + $1.50",a:"4"},{t:2,q:"$3.25 + $1.75",a:"5"},{t:2,q:"$0.99 + $0.01",a:"1"},{t:2,q:"$4.20 + $3.80",a:"8"},{t:2,q:"$1.10 + $2.40",a:"3.5"},{t:2,q:"$6.75 + $0.25",a:"7"},
+     {t:2,q:"$4.99 + $3.49",a:"8.48"},{t:2,q:"$12.75 + $8.60",a:"21.35"},{t:2,q:"$1.99 + $2.99 + $3.99",a:"8.97"},{t:2,q:"$15.40 + $9.85",a:"25.25"},{t:2,q:"$7.30 + $0.95 + $1.25",a:"9.5"},
      {t:2,q:"Four items at $6.25 — the total",a:"25"},{t:2,q:"$18.99 + $11.01 + $5.50",a:"35.5"}
    ]},
   {id:"u5w2p5",w:2,label:"Fri",title:"Change Sprint",note:"Make the amount with the fewest coins. Beat your own record.",
@@ -1402,14 +1402,14 @@ const PRACTICE_U5_W2 = [
 const PRACTICE_U5_W3 = [
   {id:"u5w3p1",w:3,label:"3.1",title:"Rounding Money",note:"To the nearest dollar, dime or cent — say which before you round.",
    items:[
-     {t:0,q:"Round $4.60 to the nearest dollar",a:"5"},{t:0,q:"Round $4.30 to the nearest dollar",a:"4"},{t:0,q:"Round $0.48 to the nearest dime",a:"0.5"},{t:0,q:"Round $9.99 to the nearest dollar",a:"10"},{t:0,q:"Round $12.50 to the nearest dollar",a:"13"},{t:0,q:"Round $0.94 to the nearest dime",a:"0.9"},
-     {t:1,q:"Round $27.45 to the nearest dollar",a:"27"},{t:1,q:"Round $3.456 to the nearest cent",a:"3.46"},{t:1,q:"Round $149.50 to the nearest ten dollars",a:"150"},{t:1,q:"Round $0.075 to the nearest cent",a:"0.08"},{t:1,q:"Round $64.49 to the nearest dollar",a:"64"},
+     {t:2,q:"Round $4.60 to the nearest dollar",a:"5"},{t:2,q:"Round $4.30 to the nearest dollar",a:"4"},{t:2,q:"Round $0.48 to the nearest dime",a:"0.5"},{t:2,q:"Round $9.99 to the nearest dollar",a:"10"},{t:2,q:"Round $12.50 to the nearest dollar",a:"13"},{t:2,q:"Round $0.94 to the nearest dime",a:"0.9"},
+     {t:2,q:"Round $27.45 to the nearest dollar",a:"27"},{t:2,q:"Round $3.456 to the nearest cent",a:"3.46"},{t:2,q:"Round $149.50 to the nearest ten dollars",a:"150"},{t:2,q:"Round $0.075 to the nearest cent",a:"0.08"},{t:2,q:"Round $64.49 to the nearest dollar",a:"64"},
      {t:2,q:"An item is $7.99. Estimate the cost of 6 to the nearest dollar",a:"48"},{t:2,q:"True cost of 6 at $7.99",a:"47.94"}
    ]},
   {id:"u5w3p2",w:3,label:"3.2",title:"Unit Price",note:"Price per one is the only fair comparison.",
    items:[
      {t:0,q:"$6 for 2 — price each",a:"3"},{t:0,q:"$10 for 5 — price each",a:"2"},{t:0,q:"$12 for 4 — price each",a:"3"},{t:0,q:"$8 for 8 — price each",a:"1"},{t:0,q:"$20 for 10 — price each",a:"2"},{t:0,q:"$9 for 3 — price each",a:"3"},
-     {t:1,q:"$4.50 for 3 — price each",a:"1.5"},{t:1,q:"$7.20 for 8 — price each",a:"0.9"},{t:1,q:"$11.25 for 5 — price each",a:"2.25"},{t:1,q:"$2.40 for 6 — price each",a:"0.4"},{t:1,q:"$15 for 12 — price each",a:"1.25"},
+     {t:2,q:"$4.50 for 3 — price each",a:"1.5"},{t:2,q:"$7.20 for 8 — price each",a:"0.9"},{t:2,q:"$11.25 for 5 — price each",a:"2.25"},{t:2,q:"$2.40 for 6 — price each",a:"0.4"},{t:1,q:"$15 for 12 — price each",a:"1.25"},
      {t:2,q:"Pack A: $5 for 4. Pack B: $9 for 8. Price each for B",a:"1.125"},{t:2,q:"Same packs — price each for A",a:"1.25"}
    ]},
   {id:"u5w3p3",w:3,label:"3.3",title:"Is It Actually a Deal",note:"Bigger box, better price? Only sometimes. Prove it.",
@@ -1420,14 +1420,14 @@ const PRACTICE_U5_W3 = [
    ]},
   {id:"u5w3p4",w:3,label:"3.4",title:"Multi-Step Money",note:"Two operations, in the right order, with an estimate first.",
    items:[
-     {t:0,q:"3 items at $2 — total",a:"6"},{t:0,q:"Change from $10",a:"4"},{t:0,q:"4 items at $1.50 — total",a:"6"},{t:0,q:"Change from $20",a:"14"},{t:0,q:"2 items at $3.25 — total",a:"6.5"},{t:0,q:"Change from $10",a:"3.5"},
-     {t:1,q:"3 at $4.99 — total",a:"14.97"},{t:1,q:"Change from $20",a:"5.03"},{t:1,q:"5 at $2.40 plus one at $3.10 — total",a:"15.1"},{t:1,q:"$50 split between 4 people — each",a:"12.5"},{t:1,q:"6 at $1.75 — total",a:"10.5"},
+     {t:0,q:"3 items at $2 — total",a:"6"},{t:0,q:"Change from $10",a:"4"},{t:2,q:"4 items at $1.50 — total",a:"6"},{t:0,q:"Change from $20",a:"14"},{t:2,q:"2 items at $3.25 — total",a:"6.5"},{t:0,q:"Change from $10",a:"3.5"},
+     {t:2,q:"3 at $4.99 — total",a:"14.97"},{t:1,q:"Change from $20",a:"5.03"},{t:2,q:"5 at $2.40 plus one at $3.10 — total",a:"15.1"},{t:1,q:"$50 split between 4 people — each",a:"12.5"},{t:2,q:"6 at $1.75 — total",a:"10.5"},
      {t:2,q:"$40 budget, 3 dinners at $11.25 — dollars left",a:"6.25"},{t:2,q:"$100 for items at $12.50 — how many whole ones",a:"8"}
    ]},
   {id:"u5w3p5",w:3,label:"Fri",title:"Mid-Unit Quiz",note:"Eight items across Weeks 1–3. 85% to keep flying.",
    items:[
-     {t:0,q:"0.3 + 0.4",a:"0.7"},{t:0,q:"Round $4.60 to the nearest dollar",a:"5"},
-     {t:1,q:"3.5 + 0.47",a:"3.97"},{t:1,q:"$20 − $13.68",a:"6.32"},{t:1,q:"$4.50 for 3 — price each",a:"1.5"},{t:1,q:"8.2 − 3.45",a:"4.75"},{t:1,q:"3 at $4.99 — total",a:"14.97"},
+     {t:2,q:"0.3 + 0.4",a:"0.7"},{t:2,q:"Round $4.60 to the nearest dollar",a:"5"},
+     {t:2,q:"3.5 + 0.47",a:"3.97"},{t:2,q:"$20 − $13.68",a:"6.32"},{t:2,q:"$4.50 for 3 — price each",a:"1.5"},{t:1,q:"8.2 − 3.45",a:"4.75"},{t:2,q:"3 at $4.99 — total",a:"14.97"},
      {t:2,q:"$40 budget, 3 dinners at $11.25 — dollars left",a:"6.25"}
    ]}
 ];
@@ -1436,31 +1436,31 @@ const PRACTICE_U5_W4 = [
   {id:"u5w4p1",w:4,label:"4.1",title:"Build the Budget",note:"Three dinners, $40, and no going over.",
    items:[
      {t:0,q:"$40 split 4 ways",a:"10"},{t:0,q:"$40 split 5 ways",a:"8"},{t:0,q:"$12 + $15",a:"27"},{t:0,q:"$40 − $27",a:"13"},{t:0,q:"$40 split 8 ways",a:"5"},{t:0,q:"3 items at $5",a:"15"},
-     {t:1,q:"Three dinners at $11.25 — total",a:"33.75"},{t:1,q:"Left from $40",a:"6.25"},{t:1,q:"$40 ÷ 3, rounded down to the cent",a:"13.33"},{t:1,q:"Two dinners at $14.50 — total",a:"29"},{t:1,q:"Left from $40",a:"11"},
+     {t:2,q:"Three dinners at $11.25 — total",a:"33.75"},{t:1,q:"Left from $40",a:"6.25"},{t:1,q:"$40 ÷ 3, rounded down to the cent",a:"13.33"},{t:2,q:"Two dinners at $14.50 — total",a:"29"},{t:1,q:"Left from $40",a:"11"},
      {t:2,q:"Feeding 4 people three dinners on $40 — dollars per person per dinner",a:"3.33",hint:"$40 ÷ 12, to the cent"},{t:2,q:"$40 with 15% left as buffer — dollars to spend",a:"34"}
    ]},
   {id:"u5w4p2",w:4,label:"4.2",title:"Shop It",note:"Real prices, real quantities, running total in your head.",
    items:[
-     {t:0,q:"$3.50 + $2.50",a:"6"},{t:0,q:"$6 + $4.25",a:"10.25"},{t:0,q:"2 at $1.99",a:"3.98"},{t:0,q:"3 at $2",a:"6"},{t:0,q:"$5.75 + $4.25",a:"10"},{t:0,q:"$8.40 + $1.60",a:"10"},
-     {t:1,q:"2 at $3.49 plus 1 at $5.99 — total",a:"12.97"},{t:1,q:"$12.97 rounded to the nearest dollar",a:"13"},{t:1,q:"4 at $2.25 plus 2 at $1.10 — total",a:"11.2"},{t:1,q:"Left from $40 after spending $28.65",a:"11.35"},{t:1,q:"3 at $6.99 — total",a:"20.97"},
+     {t:2,q:"$3.50 + $2.50",a:"6"},{t:2,q:"$6 + $4.25",a:"10.25"},{t:2,q:"2 at $1.99",a:"3.98"},{t:0,q:"3 at $2",a:"6"},{t:2,q:"$5.75 + $4.25",a:"10"},{t:2,q:"$8.40 + $1.60",a:"10"},
+     {t:2,q:"2 at $3.49 plus 1 at $5.99 — total",a:"12.97"},{t:2,q:"$12.97 rounded to the nearest dollar",a:"13"},{t:2,q:"4 at $2.25 plus 2 at $1.10 — total",a:"11.2"},{t:2,q:"Left from $40 after spending $28.65",a:"11.35"},{t:2,q:"3 at $6.99 — total",a:"20.97"},
      {t:2,q:"A cart of $33.75 with $2.70 tax — total",a:"36.45"},{t:2,q:"Change from $40 on that cart",a:"3.55"}
    ]},
   {id:"u5w4p3",w:4,label:"4.3",title:"Reconcile the Receipt",note:"Your total against theirs. Find the gap and name it.",
    items:[
-     {t:0,q:"Estimated $30, actual $32 — the difference",a:"2"},{t:0,q:"Estimated $25, actual $22 — the difference",a:"3"},{t:0,q:"$40 − $36.45",a:"3.55"},{t:0,q:"$20 − $18.50",a:"1.5"},{t:0,q:"$15 + $15",a:"30"},{t:0,q:"$50 − $30",a:"20"},
-     {t:1,q:"Planned $33.75, paid $36.45 — over by",a:"2.7"},{t:1,q:"Planned $40, paid $37.20 — under by",a:"2.8"},{t:1,q:"A $2.70 gap on $33.75 — roughly what percent, to the nearest whole",a:"8"},{t:1,q:"Receipt says $24.99, you counted $24.89 — the gap",a:"0.1"},{t:1,q:"Three receipts of $12.50 — total",a:"37.5"},
+     {t:0,q:"Estimated $30, actual $32 — the difference",a:"2"},{t:0,q:"Estimated $25, actual $22 — the difference",a:"3"},{t:2,q:"$40 − $36.45",a:"3.55"},{t:2,q:"$20 − $18.50",a:"1.5"},{t:0,q:"$15 + $15",a:"30"},{t:0,q:"$50 − $30",a:"20"},
+     {t:2,q:"Planned $33.75, paid $36.45 — over by",a:"2.7"},{t:2,q:"Planned $40, paid $37.20 — under by",a:"2.8"},{t:2,q:"A $2.70 gap on $33.75 — roughly what percent, to the nearest whole",a:"8"},{t:2,q:"Receipt says $24.99, you counted $24.89 — the gap",a:"0.1"},{t:2,q:"Three receipts of $12.50 — total",a:"37.5"},
      {t:2,q:"You budgeted $13.33 a dinner and spent $12.15 — saved across 3 dinners",a:"3.54"},{t:2,q:"$40 budget, spent $36.45, three dinners — average per dinner",a:"12.15"}
    ]},
   {id:"u5w4p4",w:4,label:"Thu",title:"Error Journal Sweep",note:"Mixed review of the whole mission. Fix only what repeats.",
    items:[
-     {t:0,q:"0.25 + 0.25",a:"0.5"},{t:0,q:"1 − 0.5",a:"0.5"},{t:0,q:"Round $9.99 to the nearest dollar",a:"10"},{t:0,q:"$10 for 5 — price each",a:"2"},{t:0,q:"$20 − $15",a:"5"},{t:0,q:"$3.25 + $1.75",a:"5"},
-     {t:1,q:"12.6 + 4.85",a:"17.45"},{t:1,q:"10 − 0.07",a:"9.93"},{t:1,q:"$7.20 for 8 — price each",a:"0.9"},{t:1,q:"3 at $4.99 — total",a:"14.97"},{t:1,q:"Round $3.456 to the nearest cent",a:"3.46"},
+     {t:2,q:"0.25 + 0.25",a:"0.5"},{t:2,q:"1 − 0.5",a:"0.5"},{t:2,q:"Round $9.99 to the nearest dollar",a:"10"},{t:0,q:"$10 for 5 — price each",a:"2"},{t:0,q:"$20 − $15",a:"5"},{t:2,q:"$3.25 + $1.75",a:"5"},
+     {t:1,q:"12.6 + 4.85",a:"17.45"},{t:2,q:"10 − 0.07",a:"9.93"},{t:2,q:"$7.20 for 8 — price each",a:"0.9"},{t:2,q:"3 at $4.99 — total",a:"14.97"},{t:2,q:"Round $3.456 to the nearest cent",a:"3.46"},
      {t:2,q:"12.4 − 7.856",a:"4.544"},{t:2,q:"$40 budget, 3 dinners at $11.25 — dollars left",a:"6.25"}
    ]},
   {id:"u5w4p5",w:4,label:"Fri",title:"Mission 05 Test",note:"Twelve items plus the Big Question, answered out loud.",
    items:[
-     {t:0,q:"0.6 + 0.9",a:"1.5"},{t:0,q:"$20 − $10.50",a:"9.5"},
-     {t:1,q:"3.5 + 0.47",a:"3.97"},{t:1,q:"8.2 − 3.45",a:"4.75"},{t:1,q:"$50 − $27.45",a:"22.55"},{t:1,q:"$11.25 for 5 — price each",a:"2.25"},{t:1,q:"Round $27.45 to the nearest dollar",a:"27"},{t:1,q:"3 at $4.99 — change from $20",a:"5.03"},{t:1,q:"$15 for 12 — price each",a:"1.25"},{t:1,q:"$12.75 + $8.60",a:"21.35"},
+     {t:2,q:"0.6 + 0.9",a:"1.5"},{t:2,q:"$20 − $10.50",a:"9.5"},
+     {t:2,q:"3.5 + 0.47",a:"3.97"},{t:1,q:"8.2 − 3.45",a:"4.75"},{t:2,q:"$50 − $27.45",a:"22.55"},{t:2,q:"$11.25 for 5 — price each",a:"2.25"},{t:2,q:"Round $27.45 to the nearest dollar",a:"27"},{t:2,q:"3 at $4.99 — change from $20",a:"5.03"},{t:1,q:"$15 for 12 — price each",a:"1.25"},{t:2,q:"$12.75 + $8.60",a:"21.35"},
      {t:2,q:"12.4 − 7.856",a:"4.544"},{t:2,q:"$40 budget, spent $36.45, three dinners — average per dinner",a:"12.15"}
    ]}
 ];
@@ -1540,20 +1540,20 @@ const PRACTICE_U6_W4 = [
    ]},
   {id:"u6w4p2",w:4,label:"4.2",title:"Flips and Turns",note:"Slide, flip, turn. The shape keeps its size and its angles.",
    items:[
-     {t:0,q:"Degrees in a quarter turn",a:"90"},{t:0,q:"Degrees in a half turn",a:"180"},{t:0,q:"Degrees in a full turn",a:"360"},{t:0,q:"Quarter turns in a full turn",a:"4"},{t:0,q:"Degrees in three quarter turns",a:"270"},{t:0,q:"Half turns in a full turn",a:"2"},
-     {t:1,q:"A square turned 90° looks the same — yes or no",a:"yes"},{t:1,q:"Turns of 90° before a square returns to start",a:"4"},{t:1,q:"A rectangle looks the same after how many degrees",a:"180"},{t:1,q:"(2,3) flipped over the vertical line through 0 — the across value becomes",a:"-2"},{t:1,q:"Slide (2,3) four right — type as a,b",a:"6,3"},
+     {t:2,q:"Degrees in a quarter turn",a:"90"},{t:2,q:"Degrees in a half turn",a:"180"},{t:2,q:"Degrees in a full turn",a:"360"},{t:0,q:"Quarter turns in a full turn",a:"4"},{t:2,q:"Degrees in three quarter turns",a:"270"},{t:0,q:"Half turns in a full turn",a:"2"},
+     {t:2,q:"A square turned 90° looks the same — yes or no",a:"yes"},{t:2,q:"Turns of 90° before a square returns to start",a:"4"},{t:2,q:"A rectangle looks the same after how many degrees",a:"180"},{t:1,q:"(2,3) flipped over the vertical line through 0 — the across value becomes",a:"-2"},{t:1,q:"Slide (2,3) four right — type as a,b",a:"6,3"},
      {t:2,q:"An equilateral triangle looks the same after how many degrees",a:"120"},{t:2,q:"A regular hexagon — the smallest turn that leaves it unchanged, in degrees",a:"60"}
    ]},
   {id:"u6w4p3",w:4,label:"4.3",title:"Angles",note:"Right, acute, obtuse — and what they add to.",
    items:[
-     {t:0,q:"Degrees in a right angle",a:"90"},{t:0,q:"Degrees on a straight line",a:"180"},{t:0,q:"Degrees round a point",a:"360"},{t:0,q:"An angle of 45° — type acute or obtuse",a:"acute"},{t:0,q:"An angle of 120° — acute or obtuse",a:"obtuse"},{t:0,q:"Angles in a triangle add to",a:"180"},
-     {t:1,q:"Two angles on a line, one is 60° — the other",a:"120"},{t:1,q:"A triangle with 90° and 30° — the third angle",a:"60"},{t:1,q:"Angles in a quadrilateral add to",a:"360"},{t:1,q:"A quadrilateral with three 90° angles — the fourth",a:"90"},{t:1,q:"Three angles round a point, two are 100° — the third",a:"160"},
+     {t:2,q:"Degrees in a right angle",a:"90"},{t:2,q:"Degrees on a straight line",a:"180"},{t:2,q:"Degrees round a point",a:"360"},{t:2,q:"An angle of 45° — type acute or obtuse",a:"acute"},{t:2,q:"An angle of 120° — acute or obtuse",a:"obtuse"},{t:0,q:"Angles in a triangle add to",a:"180"},
+     {t:2,q:"Two angles on a line, one is 60° — the other",a:"120"},{t:2,q:"A triangle with 90° and 30° — the third angle",a:"60"},{t:1,q:"Angles in a quadrilateral add to",a:"360"},{t:2,q:"A quadrilateral with three 90° angles — the fourth",a:"90"},{t:2,q:"Three angles round a point, two are 100° — the third",a:"160"},
      {t:2,q:"Each angle of an equilateral triangle",a:"60"},{t:2,q:"Each angle of a regular hexagon",a:"120"}
    ]},
   {id:"u6w4p4",w:4,label:"4.4",title:"Classifying Shapes",note:"Sides, angles, parallels. Name it from its properties.",
    items:[
      {t:0,q:"Sides on a pentagon",a:"5"},{t:0,q:"Sides on a hexagon",a:"6"},{t:0,q:"Sides on an octagon",a:"8"},{t:0,q:"Sides on a quadrilateral",a:"4"},{t:0,q:"Equal sides on an equilateral triangle",a:"3"},{t:0,q:"Sides on a triangle",a:"3"},
-     {t:1,q:"Is every square a rectangle — yes or no",a:"yes"},{t:1,q:"Is every rectangle a square",a:"no"},{t:1,q:"Pairs of parallel sides in a parallelogram",a:"2"},{t:1,q:"Pairs of parallel sides in a trapezoid",a:"1"},{t:1,q:"A triangle with one 90° angle — type its name",a:"right"},
+     {t:1,q:"Is every square a rectangle — yes or no",a:"yes"},{t:1,q:"Is every rectangle a square",a:"no"},{t:1,q:"Pairs of parallel sides in a parallelogram",a:"2"},{t:1,q:"Pairs of parallel sides in a trapezoid",a:"1"},{t:2,q:"A triangle with one 90° angle — type its name",a:"right"},
      {t:2,q:"A rhombus with right angles is also called a",a:"square"},{t:2,q:"A triangle with all sides different — type its name",a:"scalene"}
    ]},
   {id:"u6w4p5",w:4,label:"Fri",title:"Tessellation",note:"Which shapes tile a floor with no gaps? Test three and explain.",
@@ -1579,20 +1579,20 @@ const PRACTICE_U6_W5 = [
    ]},
   {id:"u6w5p3",w:5,label:"5.3",title:"Mission Review",note:"Everything from five weeks, mixed together.",
    items:[
-     {t:0,q:"Perimeter of a 5 by 5 square",a:"20"},{t:0,q:"Area of a 5 by 5 square",a:"25"},{t:0,q:"Degrees in a right angle",a:"90"},{t:0,q:"Lines of symmetry in a square",a:"4"},{t:0,q:"In (3,5), the up value",a:"5"},{t:0,q:"Angles in a triangle add to",a:"180"},
-     {t:1,q:"Area 96 with one side 12 — the other",a:"8"},{t:1,q:"A triangle with 90° and 30° — the third angle",a:"60"},{t:1,q:"With 24 m of fence, the biggest area",a:"36"},{t:1,q:"(2,2), (2,7), (5,7), (5,2) — the area",a:"15"},{t:1,q:"Lines of symmetry in a regular hexagon",a:"6"},
+     {t:0,q:"Perimeter of a 5 by 5 square",a:"20"},{t:0,q:"Area of a 5 by 5 square",a:"25"},{t:2,q:"Degrees in a right angle",a:"90"},{t:0,q:"Lines of symmetry in a square",a:"4"},{t:0,q:"In (3,5), the up value",a:"5"},{t:0,q:"Angles in a triangle add to",a:"180"},
+     {t:1,q:"Area 96 with one side 12 — the other",a:"8"},{t:2,q:"A triangle with 90° and 30° — the third angle",a:"60"},{t:1,q:"With 24 m of fence, the biggest area",a:"36"},{t:1,q:"(2,2), (2,7), (5,7), (5,2) — the area",a:"15"},{t:1,q:"Lines of symmetry in a regular hexagon",a:"6"},
      {t:2,q:"A 10 by 10 with a 4 by 4 removed — area",a:"84"},{t:2,q:"Each angle of a regular hexagon",a:"120"}
    ]},
   {id:"u6w5p4",w:5,label:"Thu",title:"Error Journal Sweep",note:"Re-read every entry from the mission. Fix only what repeats.",
    items:[
-     {t:0,q:"Perimeter of a 6 by 6 square",a:"24"},{t:0,q:"Area of a 8 by 3 rectangle",a:"24"},{t:0,q:"Degrees round a point",a:"360"},{t:0,q:"Sides on a hexagon",a:"6"},{t:0,q:"Distance from (2,3) to (7,3)",a:"5"},{t:0,q:"Lines of symmetry in a rectangle",a:"2"},
-     {t:1,q:"An 8 by 6 with a 2 by 3 removed — area",a:"42"},{t:1,q:"A square of perimeter 36 — one side",a:"9"},{t:1,q:"Two angles on a line, one is 60° — the other",a:"120"},{t:1,q:"(1,1), (1,5), (6,5), (6,1) — the perimeter",a:"18"},{t:1,q:"Is every square a rectangle — yes or no",a:"yes"},
+     {t:0,q:"Perimeter of a 6 by 6 square",a:"24"},{t:0,q:"Area of a 8 by 3 rectangle",a:"24"},{t:2,q:"Degrees round a point",a:"360"},{t:0,q:"Sides on a hexagon",a:"6"},{t:0,q:"Distance from (2,3) to (7,3)",a:"5"},{t:0,q:"Lines of symmetry in a rectangle",a:"2"},
+     {t:1,q:"An 8 by 6 with a 2 by 3 removed — area",a:"42"},{t:1,q:"A square of perimeter 36 — one side",a:"9"},{t:2,q:"Two angles on a line, one is 60° — the other",a:"120"},{t:1,q:"(1,1), (1,5), (6,5), (6,1) — the perimeter",a:"18"},{t:1,q:"Is every square a rectangle — yes or no",a:"yes"},
      {t:2,q:"Among rectangles with perimeter 40, the biggest area",a:"100"},{t:2,q:"A regular hexagon — smallest turn leaving it unchanged, in degrees",a:"60"}
    ]},
   {id:"u6w5p5",w:5,label:"Fri",title:"Mission 06 Test",note:"Twelve items plus the Big Question, answered out loud.",
    items:[
      {t:0,q:"Perimeter of a 10 by 2 rectangle",a:"24"},{t:0,q:"Area of a 10 by 2 rectangle",a:"20"},
-     {t:1,q:"Area of a 12 by 8 rectangle",a:"96"},{t:1,q:"A rectangle of perimeter 20, one side 6 — the other",a:"4"},{t:1,q:"With 20 m of fence, the biggest area",a:"25"},{t:1,q:"A 12 by 5 with a 3 by 5 removed — area",a:"45"},{t:1,q:"Distance from (4,1) to (4,8)",a:"7"},{t:1,q:"(1,1), (1,5), (6,5), (6,1) — the area",a:"20"},{t:1,q:"Lines of symmetry in a regular pentagon",a:"5"},{t:1,q:"A triangle with 90° and 30° — the third angle",a:"60"},
+     {t:1,q:"Area of a 12 by 8 rectangle",a:"96"},{t:1,q:"A rectangle of perimeter 20, one side 6 — the other",a:"4"},{t:1,q:"With 20 m of fence, the biggest area",a:"25"},{t:1,q:"A 12 by 5 with a 3 by 5 removed — area",a:"45"},{t:1,q:"Distance from (4,1) to (4,8)",a:"7"},{t:1,q:"(1,1), (1,5), (6,5), (6,1) — the area",a:"20"},{t:1,q:"Lines of symmetry in a regular pentagon",a:"5"},{t:2,q:"A triangle with 90° and 30° — the third angle",a:"60"},
      {t:2,q:"A 20 by 15 room with a 4 by 5 alcove added — total area",a:"320"},{t:2,q:"A patrol (1,1),(7,1),(7,5),(1,5) — the area enclosed",a:"24"}
    ]}
 ];
@@ -1612,8 +1612,8 @@ const PRACTICE_U7_W2 = [
    ]},
   {id:"u7w2p3",w:2,label:"2.3",title:"Graph What You Got",note:"Bar graph of your own data, plus all four measures.",
    items:[
-     {t:0,q:"Counts 8, 6, 4, 2 — the total",a:"20"},{t:0,q:"Their mean",a:"5"},{t:0,q:"Their range",a:"6"},{t:0,q:"The mode of 5, 7, 7, 9",a:"7"},{t:0,q:"The median of 2, 5, 9",a:"5"},{t:0,q:"A scale marked every 2 — the value 3 marks up",a:"6"},
-     {t:1,q:"Counts 12, 8, 6, 4 — the mean",a:"7.5"},{t:1,q:"Those counts — the median",a:"7"},{t:1,q:"Those counts — the range",a:"8"},{t:1,q:"Water 8, juice 6, milk 4, tea 2 — the mode",a:"water"},{t:1,q:"Out of 100 people, expect how many water",a:"40"},
+     {t:0,q:"Counts 8, 6, 4, 2 — the total",a:"20"},{t:2,q:"Their mean",a:"5"},{t:0,q:"Their range",a:"6"},{t:0,q:"The mode of 5, 7, 7, 9",a:"7"},{t:0,q:"The median of 2, 5, 9",a:"5"},{t:0,q:"A scale marked every 2 — the value 3 marks up",a:"6"},
+     {t:2,q:"Counts 12, 8, 6, 4 — the mean",a:"7.5"},{t:1,q:"Those counts — the median",a:"7"},{t:1,q:"Those counts — the range",a:"8"},{t:1,q:"Water 8, juice 6, milk 4, tea 2 — the mode",a:"water"},{t:1,q:"Out of 100 people, expect how many water",a:"40"},
      {t:2,q:"Counts 9, 5, 3, 2, 1 — the mean",a:"4"},{t:2,q:"Those counts — the median",a:"3"}
    ]},
   {id:"u7w2p4",w:2,label:"2.4",title:"Chance as a Number",note:"Chance is a count out of a total. Nothing more mysterious.",
@@ -1624,8 +1624,8 @@ const PRACTICE_U7_W2 = [
    ]},
   {id:"u7w2p5",w:2,label:"Fri",title:"Mid-Unit Quiz",note:"Eight items across Weeks 1–2. 85% to keep flying.",
    items:[
-     {t:0,q:"Each ★ = 5 books. 7 ★ — books",a:"35"},{t:0,q:"Mean of 6, 8, 10, 12",a:"9"},
-     {t:1,q:"Median of 11, 4, 7, 20, 9",a:"9"},{t:1,q:"Mode and range of 3, 8, 8, 8, 15 — type the range",a:"12"},{t:1,q:"Six numbers with mean 9 — their total",a:"54"},{t:1,q:"A bag of 4 red and 6 blue — reds in 10 draws",a:"4"},{t:1,q:"60 rolls — expected 5s",a:"10"},
+     {t:0,q:"Each ★ = 5 books. 7 ★ — books",a:"35"},{t:2,q:"Mean of 6, 8, 10, 12",a:"9"},
+     {t:1,q:"Median of 11, 4, 7, 20, 9",a:"9"},{t:1,q:"Mode and range of 3, 8, 8, 8, 15 — type the range",a:"12"},{t:2,q:"Six numbers with mean 9 — their total",a:"54"},{t:1,q:"A bag of 4 red and 6 blue — reds in 10 draws",a:"4"},{t:1,q:"60 rolls — expected 5s",a:"10"},
      {t:2,q:"2, 2, 2, 2, 22 — the mean",a:"6"}
    ]}
 ];
@@ -1640,25 +1640,25 @@ const PRACTICE_U7_W3 = [
   {id:"u7w3p2",w:3,label:"3.2",title:"The Misleading Graph",note:"Start the axis at 90 and watch a tiny gap look enormous.",
    items:[
      {t:0,q:"Bars at 95 and 98 — the true difference",a:"3"},{t:0,q:"Bars at 50 and 60 — the difference",a:"10"},{t:0,q:"An axis starting at 0 shows a bar of 95 as how tall, in units",a:"95"},{t:0,q:"An axis starting at 90 shows that bar as",a:"5"},{t:0,q:"Bars at 20 and 40 — the difference",a:"20"},{t:0,q:"40 is how many times 20",a:"2"},
-     {t:1,q:"Bars at 95 and 98 on an axis from 90 — the drawn heights differ by",a:"3"},{t:1,q:"Drawn from 90, 98 appears how many times taller than 95",a:"1.6"},{t:1,q:"The true ratio of 98 to 95, to one decimal",a:"1"},{t:1,q:"An axis starting at 0 is honest — yes or no",a:"yes"},{t:1,q:"Bars at 102 and 104 from an axis at 100 — apparent times taller",a:"2"},
+     {t:1,q:"Bars at 95 and 98 on an axis from 90 — the drawn heights differ by",a:"3"},{t:1,q:"Drawn from 90, 98 appears how many times taller than 95",a:"1.6"},{t:2,q:"The true ratio of 98 to 95, to one decimal",a:"1"},{t:1,q:"An axis starting at 0 is honest — yes or no",a:"yes"},{t:1,q:"Bars at 102 and 104 from an axis at 100 — apparent times taller",a:"2"},
      {t:2,q:"Sales of 1,020 and 1,040 drawn from 1,000 — apparent times taller",a:"2"},{t:2,q:"Their true percent difference, to the nearest whole",a:"2"}
    ]},
   {id:"u7w3p3",w:3,label:"3.3",title:"Fifty Trials",note:"Predict, roll, tally, and explain the gap in writing.",
    items:[
-     {t:0,q:"Trials",a:"50"},{t:0,q:"Faces on a die",a:"6"},{t:0,q:"50 ÷ 6 — the whole part",a:"8"},{t:0,q:"50 ÷ 6 — the remainder",a:"2"},{t:0,q:"A coin, 50 flips — expected heads",a:"25"},{t:0,q:"Six faces, expected each in 60 rolls",a:"10"},
+     {t:0,q:"Trials",a:"50"},{t:0,q:"Faces on a die",a:"6"},{t:0,q:"50 ÷ 6 — the whole part",a:"8"},{t:2,q:"50 ÷ 6 — the remainder",a:"2"},{t:0,q:"A coin, 50 flips — expected heads",a:"25"},{t:0,q:"Six faces, expected each in 60 rolls",a:"10"},
      {t:1,q:"Predicted 8, rolled 14 — the difference",a:"6"},{t:1,q:"Predicted 8, rolled 3 — the difference",a:"5"},{t:1,q:"600 rolls — expected 6s",a:"100"},{t:1,q:"Is a spread of a few either way normal in 50 rolls — yes or no",a:"yes"},{t:1,q:"Six tallies totalling 50, five are 8 — the sixth",a:"10"},
      {t:2,q:"Two dice, 36 rolls — expected 7s",a:"6"},{t:2,q:"Two dice — ways to total 2",a:"1"}
    ]},
   {id:"u7w3p4",w:3,label:"Thu",title:"Error Journal Sweep",note:"Re-read every entry from the mission. Fix only what repeats.",
    items:[
-     {t:0,q:"Mean of 4, 6, 8",a:"6"},{t:0,q:"Median of 2, 5, 9",a:"5"},{t:0,q:"Mode of 5, 7, 7, 9",a:"7"},{t:0,q:"Range of 3, 9, 12",a:"9"},{t:0,q:"Each ★ = 5. 6 ★ — books",a:"30"},{t:0,q:"Even numbers on a die",a:"3"},
-     {t:1,q:"Mean of 4, 7, 7, 9, 13",a:"8"},{t:1,q:"Median of that set",a:"7"},{t:1,q:"Five numbers with mean 10 — their total",a:"50"},{t:1,q:"60 rolls — expected 3s",a:"10"},{t:1,q:"15 of 20 — the percent",a:"75"},
+     {t:2,q:"Mean of 4, 6, 8",a:"6"},{t:0,q:"Median of 2, 5, 9",a:"5"},{t:0,q:"Mode of 5, 7, 7, 9",a:"7"},{t:0,q:"Range of 3, 9, 12",a:"9"},{t:0,q:"Each ★ = 5. 6 ★ — books",a:"30"},{t:0,q:"Even numbers on a die",a:"3"},
+     {t:2,q:"Mean of 4, 7, 7, 9, 13",a:"8"},{t:1,q:"Median of that set",a:"7"},{t:2,q:"Five numbers with mean 10 — their total",a:"50"},{t:1,q:"60 rolls — expected 3s",a:"10"},{t:1,q:"15 of 20 — the percent",a:"75"},
      {t:2,q:"Six houses at 200 and one at 900 — the mean",a:"300"},{t:2,q:"Those same houses — the median",a:"200"}
    ]},
   {id:"u7w3p5",w:3,label:"Fri",title:"Mission 07 Test",note:"Twelve items plus the Big Question, answered out loud.",
    items:[
      {t:0,q:"A bar chart marked every 4, a bar at the third mark — its value",a:"12"},{t:0,q:"Each ▮ = 2 goals. 9 ▮ — goals",a:"18"},
-     {t:1,q:"Mean of 14, 16, 18, 20",a:"17"},{t:1,q:"Median of 5, 12, 3, 8, 21, 9",a:"8.5"},{t:1,q:"Range of 7, 7, 19, 4, 11",a:"15"},{t:1,q:"Five scores total 45, a sixth of 9 added — new mean",a:"9"},{t:1,q:"A spinner of 8 parts, 2 gold, 40 spins — expected golds",a:"10"},{t:1,q:"20 people, 8 pick water — out of 100",a:"40"},{t:1,q:"Water 8, juice 6, milk 4, tea 2 — the mean",a:"5"},{t:1,q:"Those four — the mode",a:"water"},
+     {t:2,q:"Mean of 14, 16, 18, 20",a:"17"},{t:1,q:"Median of 5, 12, 3, 8, 21, 9",a:"8.5"},{t:1,q:"Range of 7, 7, 19, 4, 11",a:"15"},{t:2,q:"Five scores total 45, a sixth of 9 added — new mean",a:"9"},{t:1,q:"A spinner of 8 parts, 2 gold, 40 spins — expected golds",a:"10"},{t:1,q:"20 people, 8 pick water — out of 100",a:"40"},{t:2,q:"Water 8, juice 6, milk 4, tea 2 — the mean",a:"5"},{t:1,q:"Those four — the mode",a:"water"},
      {t:2,q:"Two dice — ways to total 7",a:"6"},{t:2,q:"2, 2, 2, 2, 22 — mean and median; type the median",a:"2"}
    ]}
 ];
@@ -1764,20 +1764,20 @@ const PRACTICE_U8_W4 = [
    ]},
   {id:"u8w4p2",w:4,label:"4.2",title:"Write the Problems",note:"Every stop gets a problem and a hidden answer key in your handwriting.",
    items:[
-     {t:0,q:"23 × 14",a:"322"},{t:0,q:"372 ÷ 3",a:"124"},{t:0,q:"2 + 3 × 4",a:"14"},{t:0,q:"1/2 + 1/4 — type as a/b",a:"3/4"},{t:0,q:"$20 − $13.68",a:"6.32"},{t:0,q:"Perimeter of a 4 by 3 rectangle",a:"14"},
-     {t:1,q:"Mean of 4, 7, 7, 9, 13",a:"8"},{t:1,q:"x + 17 = 42",a:"25"},{t:1,q:"Area 48, one side 6 — the other",a:"8"},{t:1,q:"GCF of 24 and 36",a:"12"},{t:1,q:"Round 4,829 to the nearest thousand",a:"5000"},
+     {t:0,q:"23 × 14",a:"322"},{t:0,q:"372 ÷ 3",a:"124"},{t:0,q:"2 + 3 × 4",a:"14"},{t:2,q:"1/2 + 1/4 — type as a/b",a:"3/4"},{t:2,q:"$20 − $13.68",a:"6.32"},{t:0,q:"Perimeter of a 4 by 3 rectangle",a:"14"},
+     {t:2,q:"Mean of 4, 7, 7, 9, 13",a:"8"},{t:1,q:"x + 17 = 42",a:"25"},{t:1,q:"Area 48, one side 6 — the other",a:"8"},{t:1,q:"GCF of 24 and 36",a:"12"},{t:1,q:"Round 4,829 to the nearest thousand",a:"5000"},
      {t:2,q:"2/3 + 3/4 — type as a/b",a:"17/12"},{t:2,q:"A machine × 4 + 3 — in 10 gives",a:"43"}
    ]},
   {id:"u8w4p3",w:4,label:"4.3",title:"Mom Walks It",note:"You mark her work. Any ambiguous question gets rewritten on the spot.",
    items:[
      {t:0,q:"10 stops, 8 correct — the percent",a:"80"},{t:0,q:"10 stops, 9 correct — the percent",a:"90"},{t:0,q:"10 stops, 10 correct — the percent",a:"100"},{t:0,q:"10 minus 7",a:"3"},{t:0,q:"Half of 10 stops",a:"5"},{t:0,q:"10 stops, 5 correct — the percent",a:"50"},
-     {t:1,q:"She takes 4 minutes a stop — total minutes",a:"40"},{t:1,q:"Two stops rewritten out of 10 — the percent",a:"20"},{t:1,q:"85% of 10 stops — how many",a:"8.5"},{t:1,q:"If 9 of 10 are solvable, the percent that are not",a:"10"},{t:1,q:"A 40-minute walk over 10 stops — mean minutes per stop",a:"4"},
+     {t:1,q:"She takes 4 minutes a stop — total minutes",a:"40"},{t:1,q:"Two stops rewritten out of 10 — the percent",a:"20"},{t:1,q:"85% of 10 stops — how many",a:"8.5"},{t:1,q:"If 9 of 10 are solvable, the percent that are not",a:"10"},{t:2,q:"A 40-minute walk over 10 stops — mean minutes per stop",a:"4"},
      {t:2,q:"12 points per stop, 10 stops, she scores 96 — the percent",a:"80"},{t:2,q:"To score 85% of 120 points, she needs",a:"102"}
    ]},
   {id:"u8w4p4",w:4,label:"Thu",title:"Year-End Sweep",note:"All eight error journals. Name the one habit that fixed itself.",
    items:[
-     {t:0,q:"7 × 8",a:"56"},{t:0,q:"84 ÷ 12",a:"7"},{t:0,q:"2 + 3 × 4",a:"14"},{t:0,q:"1/2 of 20",a:"10"},{t:0,q:"0.25 + 0.25",a:"0.5"},{t:0,q:"Degrees in a right angle",a:"90"},
-     {t:1,q:"38 × 24",a:"912"},{t:1,q:"618 ÷ 6",a:"103"},{t:1,q:"2/3 + 1/4 — type as a/b",a:"11/12"},{t:1,q:"Mean of 6, 8, 10, 12",a:"9"},{t:1,q:"3x = 21",a:"7"},
+     {t:0,q:"7 × 8",a:"56"},{t:0,q:"84 ÷ 12",a:"7"},{t:0,q:"2 + 3 × 4",a:"14"},{t:0,q:"1/2 of 20",a:"10"},{t:2,q:"0.25 + 0.25",a:"0.5"},{t:2,q:"Degrees in a right angle",a:"90"},
+     {t:1,q:"38 × 24",a:"912"},{t:1,q:"618 ÷ 6",a:"103"},{t:2,q:"2/3 + 1/4 — type as a/b",a:"11/12"},{t:2,q:"Mean of 6, 8, 10, 12",a:"9"},{t:1,q:"3x = 21",a:"7"},
      {t:2,q:"Primes below 100 — how many",a:"25"},{t:2,q:"2x + 5 = 19",a:"7"}
    ]},
   {id:"u8w4p5",w:4,label:"Fri",title:"Mission 08 Test",note:"Twelve items plus the completed trail. Final trophy band awarded.",

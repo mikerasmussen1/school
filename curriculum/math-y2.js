@@ -408,11 +408,11 @@ const PRACTICE_Y5 = {
     q(2,"12.4 − 7.856","4.544"),q(2,"A 2.5 m board with 0.85 m cut off — metres left","1.65")]},
   {id:"y5u4p3",label:"1.3",title:"Multiplying Decimals",note:"Multiply the digits, then count the decimal places.",items:[
     q(0,"0.5 × 4","2"),q(0,"0.2 × 6","1.2"),q(0,"1.5 × 2","3"),q(0,"0.25 × 4","1"),q(0,"3 × 0.1","0.3"),q(0,"0.5 × 10","5"),
-    q(1,"0.4 × 0.2","0.08","Two decimal digits in, two out"),q(1,"1.2 × 0.5","0.6"),q(1,"2.5 × 1.4","3.5"),q(1,"0.06 × 40","2.4"),q(1,"3.2 × 2.5","8"),
+    q(2,"0.4 × 0.2","0.08","Two decimal digits in, two out"),q(2,"1.2 × 0.5","0.6"),q(2,"2.5 × 1.4","3.5"),q(1,"0.06 × 40","2.4"),q(2,"3.2 × 2.5","8"),
     q(2,"0.125 × 8","1"),q(2,"1.25 × 0.8","1")]},
   {id:"y5u4p4",label:"1.4",title:"Dividing Decimals",note:"Shift both numbers the same number of places, then divide as usual.",items:[
     q(0,"4.8 ÷ 2","2.4"),q(0,"0.9 ÷ 3","0.3"),q(0,"6.4 ÷ 4","1.6"),q(0,"2.5 ÷ 5","0.5"),q(0,"0.36 ÷ 6","0.06"),q(0,"7.2 ÷ 8","0.9"),
-    q(1,"6 ÷ 0.5","12","How many halves in six"),q(1,"4 ÷ 0.25","16"),q(1,"1.5 ÷ 0.5","3"),q(1,"9.6 ÷ 1.2","8"),q(1,"$7.50 shared by 3 — type the number","2.5"),
+    q(1,"6 ÷ 0.5","12","How many halves in six"),q(1,"4 ÷ 0.25","16"),q(2,"1.5 ÷ 0.5","3"),q(2,"9.6 ÷ 1.2","8"),q(1,"$7.50 shared by 3 — type the number","2.5"),
     q(2,"0.144 ÷ 0.12","1.2"),q(2,"A 4.5 m rope cut into 0.75 m pieces — how many","6")]},
   {id:"y5u4p5",label:"Fri",title:"Unit Price Investigation",note:"Enrichment. Price per unit is the only fair comparison.",items:[
     q(0,"$6 for 2 kg — price per kg","3"),q(0,"$10 for 5 L — price per litre","2"),
@@ -445,8 +445,8 @@ const PRACTICE_Y5 = {
     q(1,"2/3 of 12","8"),q(1,"3/4 of 20","15"),q(1,"2/5 of 35","14"),q(1,"5/6 of 24","20"),q(1,"3/8 of 40","15"),
     q(2,"2/3 of 45","30"),q(2,"7/10 of 250","175")]},
   {id:"y5u6p2",label:"1.2",title:"Fraction × Fraction",note:"Multiply across. Type answers like 1/6.",items:[
-    q(0,"1/2 × 1/2 — type as a/b","1/4"),q(0,"1/2 × 1/3","1/6"),q(0,"1/3 × 1/3","1/9"),q(0,"1/2 × 1/4","1/8"),q(0,"1/5 × 1/2","1/10"),q(0,"1/4 × 1/4","1/16"),
-    q(1,"2/3 × 1/2","1/3"),q(1,"3/4 × 2/3","1/2"),q(1,"2/5 × 3/4","3/10"),q(1,"5/6 × 3/5","1/2"),q(1,"3/8 × 4/9","1/6"),
+    q(2,"1/2 × 1/2 — type as a/b","1/4"),q(2,"1/2 × 1/3","1/6"),q(2,"1/3 × 1/3","1/9"),q(2,"1/2 × 1/4","1/8"),q(2,"1/5 × 1/2","1/10"),q(2,"1/4 × 1/4","1/16"),
+    q(2,"2/3 × 1/2","1/3"),q(2,"3/4 × 2/3","1/2"),q(2,"2/5 × 3/4","3/10"),q(2,"5/6 × 3/5","1/2"),q(2,"3/8 × 4/9","1/6"),
     q(2,"2/3 × 3/4 × 1/2","1/4"),q(2,"Area of a rectangle 2/3 by 3/5 — type as a/b","2/5")]},
   {id:"y5u6p3",label:"1.3",title:"Scaling",note:"Predict bigger or smaller before you calculate.",items:[
     q(0,"6 × 2 — bigger or smaller than 6","bigger"),q(0,"6 × 1/2 — bigger or smaller","smaller"),q(0,"6 × 1 — bigger, smaller or same","same"),q(0,"6 × 1/2","3"),q(0,"8 × 1/4","2"),q(0,"10 × 3/5","6"),
@@ -475,7 +475,7 @@ const PRACTICE_Y5 = {
     q(2,"Two boxes: 4×3×2 and 5×2×2 — total volume","44"),q(2,"A cube of volume 125 — its edge","5")]},
   {id:"y5u7p4",label:"1.4",title:"Line Plots",note:"Fractional measurements, plotted and then reasoned about.",items:[
     q(0,"Four items at 1/2 each — total","2"),q(0,"Eight items at 1/4 each — total","2"),q(0,"Two items at 3/4 each — total, as a/b","3/2"),q(0,"Three items at 1/3 each","1"),q(0,"Six items at 1/2 each","3"),q(0,"Longest of 1/4, 1/2, 3/8 — type it","1/2"),
-    q(1,"1/2 + 1/4 + 1/4 — total","1"),q(1,"Range of 1/8 and 7/8 — type as a/b","3/4"),q(1,"Five items totalling 5/2 — the mean, as a/b","1/2"),q(1,"Difference between 7/8 and 3/8 — as a/b","1/2"),q(1,"Four measurements of 3/4 — total","3"),
+    q(1,"1/2 + 1/4 + 1/4 — total","1"),q(1,"Range of 1/8 and 7/8 — type as a/b","3/4"),q(2,"Five items totalling 5/2 — the mean, as a/b","1/2"),q(1,"Difference between 7/8 and 3/8 — as a/b","1/2"),q(1,"Four measurements of 3/4 — total","3"),
     q(2,"Six pencils totalling 9/2 inches, shared equally — each, as a/b","3/4"),q(2,"Two at 1/8, three at 1/4, one at 1/2 — total, as a/b","3/2")]},
   {id:"y5u7p5",label:"Fri",title:"Box It",note:"Enrichment. Same volume, different shapes.",items:[
     q(0,"A box of volume 24: 2 by 3 by ?","4"),q(0,"A box of volume 24: 1 by 4 by ?","6"),
@@ -576,11 +576,11 @@ const PRACTICE_Y5_W = {
  4:[
   {id:"y5u4w2p1",w:2,label:"2.1",title:"Ignore the Point",note:"Multiply the digits first, then count the places.",items:[
     q(0,"5 × 4","20"),q(0,"0.5 × 4","2"),q(0,"12 × 5","60"),q(0,"1.2 × 5","6"),q(0,"25 × 4","100"),q(0,"0.25 × 4","1"),
-    q(1,"0.4 × 0.2","0.08"),q(1,"1.2 × 0.5","0.6"),q(1,"2.5 × 1.4","3.5"),q(1,"0.06 × 40","2.4"),q(1,"3.2 × 2.5","8"),
+    q(2,"0.4 × 0.2","0.08"),q(2,"1.2 × 0.5","0.6"),q(2,"2.5 × 1.4","3.5"),q(1,"0.06 × 40","2.4"),q(2,"3.2 × 2.5","8"),
     q(2,"0.125 × 8","1"),q(2,"1.25 × 0.8","1")]},
   {id:"y5u4w2p2",w:2,label:"2.2",title:"Count the Places",note:"Two decimal digits in, two decimal digits out.",items:[
-    q(0,"Decimal digits in 0.4","1"),q(0,"In 0.25","2"),q(0,"In 1.234","3"),q(0,"0.2 × 0.3","0.06"),q(0,"0.5 × 0.2","0.1"),q(0,"0.1 × 0.1","0.01"),
-    q(1,"0.25 × 0.4","0.1"),q(1,"1.5 × 0.02","0.03"),q(1,"0.12 × 0.5","0.06"),q(1,"2.4 × 0.25","0.6"),q(1,"0.75 × 0.8","0.6"),
+    q(0,"Decimal digits in 0.4","1"),q(0,"In 0.25","2"),q(0,"In 1.234","3"),q(2,"0.2 × 0.3","0.06"),q(2,"0.5 × 0.2","0.1"),q(2,"0.1 × 0.1","0.01"),
+    q(2,"0.25 × 0.4","0.1"),q(2,"1.5 × 0.02","0.03"),q(2,"0.12 × 0.5","0.06"),q(2,"2.4 × 0.25","0.6"),q(2,"0.75 × 0.8","0.6"),
     q(2,"0.125 × 0.4","0.05"),q(2,"1.25 × 1.6","2")]},
   {id:"y5u4w2p3",w:2,label:"2.3",title:"Place It by Estimating",note:"0.4 × 60 is about 24, so the point can only go one place.",items:[
     q(0,"Estimate 0.5 × 40","20"),q(0,"0.5 × 40","20"),q(0,"Estimate 2 × 30","60"),q(0,"1.9 × 30","57"),q(0,"Estimate 0.25 × 80","20"),q(0,"0.25 × 80","20"),
@@ -592,7 +592,7 @@ const PRACTICE_Y5_W = {
     q(2,"Multiplying by a number under 1 makes it — type bigger or smaller","smaller"),q(2,"60 × 0.05","3")]},
   {id:"y5u4w2p5",w:2,label:"Fri",title:"Point Placement",note:"Given the digits, race to place the decimal point.",items:[
     q(0,"Digits 24, one decimal place — the number","2.4"),q(0,"Digits 24, two places","0.24"),
-    q(1,"0.6 × 0.4 — digits 24, so the answer","0.24"),q(1,"6 × 0.4 — the answer","2.4"),
+    q(2,"0.6 × 0.4 — digits 24, so the answer","0.24"),q(1,"6 × 0.4 — the answer","2.4"),
     q(2,"1.5 × 0.16 — digits 240, so the answer","0.24"),q(2,"0.15 × 1.6","0.24"),q(2,"15 × 0.016","0.24")]}
  ]
 };
@@ -609,8 +609,8 @@ const PRACTICE_Y5_W2 = {
     q(1,"9 ÷ 0.3","30"),q(1,"12 ÷ 0.4","30"),q(1,"5 ÷ 0.125","40"),q(1,"7 ÷ 0.7","10"),q(1,"20 ÷ 0.8","25"),
     q(2,"15 ÷ 0.06","250"),q(2,"1 ÷ 0.004","250")]},
   {id:"y5u4w3p3",w:3,label:"3.3",title:"Decimal ÷ Decimal",note:"Same shift, applied to both numbers.",items:[
-    q(0,"0.6 ÷ 0.2","3"),q(0,"0.8 ÷ 0.4","2"),q(0,"1.5 ÷ 0.5","3"),q(0,"0.9 ÷ 0.3","3"),q(0,"2.4 ÷ 0.6","4"),q(0,"1.2 ÷ 0.4","3"),
-    q(1,"9.6 ÷ 1.2","8"),q(1,"0.144 ÷ 0.12","1.2"),q(1,"4.5 ÷ 1.5","3"),q(1,"6.25 ÷ 2.5","2.5"),q(1,"0.81 ÷ 0.09","9"),
+    q(2,"0.6 ÷ 0.2","3"),q(2,"0.8 ÷ 0.4","2"),q(2,"1.5 ÷ 0.5","3"),q(2,"0.9 ÷ 0.3","3"),q(2,"2.4 ÷ 0.6","4"),q(2,"1.2 ÷ 0.4","3"),
+    q(2,"9.6 ÷ 1.2","8"),q(2,"0.144 ÷ 0.12","1.2"),q(2,"4.5 ÷ 1.5","3"),q(2,"6.25 ÷ 2.5","2.5"),q(2,"0.81 ÷ 0.09","9"),
     q(2,"7.5 ÷ 0.25","30"),q(2,"0.0144 ÷ 0.012","1.2")]},
   {id:"y5u4w3p4",w:3,label:"3.4",title:"Money Problems",note:"Unit prices and change, to the cent.",items:[
     q(0,"$6 for 2 — each","3"),q(0,"$10 for 4 — each","2.5"),q(0,"$9 for 3 — each","3"),q(0,"$20 − $12.50","7.5"),q(0,"$5 ÷ 4","1.25"),q(0,"3 at $2.50","7.5"),
@@ -638,7 +638,7 @@ const PRACTICE_Y5_W2 = {
     q(2,"Estimate 6 items at $4.95","30"),q(2,"True cost of 6 at $4.95","29.7")]},
   {id:"y5u4w4p5",w:4,label:"Fri",title:"Mid-Unit Quiz",note:"Eight items across Weeks 1–4. 85% to keep flying.",items:[
     q(0,"0.3 + 0.4","0.7"),q(0,"0.5 × 4","2"),
-    q(1,"3.5 + 0.47","3.97"),q(1,"8.2 − 3.45","4.75"),q(1,"0.4 × 0.2","0.08"),q(1,"6 ÷ 0.5","12"),q(1,"$7.20 for 0.8 kg — per kg","9"),
+    q(1,"3.5 + 0.47","3.97"),q(1,"8.2 − 3.45","4.75"),q(2,"0.4 × 0.2","0.08"),q(1,"6 ÷ 0.5","12"),q(1,"$7.20 for 0.8 kg — per kg","9"),
     q(2,"12.4 − 7.856","4.544")]},
   {id:"y5u4w5p1",w:5,label:"5.1",title:"Compute Unit Prices",note:"Divide price by size for every item on the list.",items:[
     q(0,"$6 for 2 kg — per kg","3"),q(0,"$10 for 5 L — per L","2"),q(0,"$8 for 4 — each","2"),q(0,"$12 for 3 — each","4"),q(0,"$15 for 5 — each","3"),q(0,"$9 for 3 — each","3"),
@@ -654,11 +654,11 @@ const PRACTICE_Y5_W2 = {
     q(2,"A $0.10 per 100 g saving on 2 kg weekly, over 52 weeks","104"),q(2,"Which matters more for a weekly buy — type per-unit or total","per-unit")]},
   {id:"y5u4w5p4",w:5,label:"Thu",title:"Error Journal Sweep",note:"Re-read every entry from the mission. Fix only what repeats.",items:[
     q(0,"0.25 + 0.25","0.5"),q(0,"1 − 0.5","0.5"),q(0,"0.5 × 4","2"),q(0,"4.8 ÷ 2","2.4"),q(0,"0.6 + 0.9","1.5"),q(0,"$10 for 5 — each","2"),
-    q(1,"12.6 + 4.85","17.45"),q(1,"10 − 0.07","9.93"),q(1,"0.4 × 0.2","0.08"),q(1,"9.6 ÷ 1.2","8"),q(1,"2.5 × 1.4","3.5"),
+    q(1,"12.6 + 4.85","17.45"),q(1,"10 − 0.07","9.93"),q(2,"0.4 × 0.2","0.08"),q(2,"9.6 ÷ 1.2","8"),q(2,"2.5 × 1.4","3.5"),
     q(2,"12.4 − 7.856","4.544"),q(2,"1.25 × 0.8","1")]},
   {id:"y5u4w5p5",w:5,label:"Fri",title:"Mission 04 Test",note:"Twelve items plus the Big Question, answered out loud.",items:[
     q(0,"1.2 + 2.5","3.7"),q(0,"0.9 − 0.4","0.5"),
-    q(1,"3.5 + 0.47","3.97"),q(1,"4 − 1.35","2.65"),q(1,"1.2 × 0.5","0.6"),q(1,"3.2 × 2.5","8"),q(1,"6 ÷ 0.5","12"),q(1,"9.6 ÷ 1.2","8"),q(1,"$4.50 for 3 kg — per kg","1.5"),q(1,"3 at $4.99 — change from $20","5.03"),
+    q(1,"3.5 + 0.47","3.97"),q(1,"4 − 1.35","2.65"),q(2,"1.2 × 0.5","0.6"),q(2,"3.2 × 2.5","8"),q(1,"6 ÷ 0.5","12"),q(2,"9.6 ÷ 1.2","8"),q(1,"$4.50 for 3 kg — per kg","1.5"),q(1,"3 at $4.99 — change from $20","5.03"),
     q(2,"12.4 − 7.856","4.544"),q(2,"A 4.5 m rope into 0.75 m pieces — how many","6")]}
  ]
 };
@@ -753,20 +753,20 @@ Object.keys(PRACTICE_Y5_W3).forEach(k=>{ PRACTICE_Y5[k]=PRACTICE_Y5[k].concat(PR
 const PRACTICE_Y5_W4 = {
  6:[
   {id:"y5u6w2p1",w:2,label:"2.1",title:"Fold It Twice",note:"Half of a third is a sixth. Do it on paper before you do it on paper.",items:[
-    q(0,"1/2 × 1/2","1/4"),q(0,"1/2 × 1/3","1/6"),q(0,"1/3 × 1/3","1/9"),q(0,"1/2 × 1/4","1/8"),q(0,"1/5 × 1/2","1/10"),q(0,"1/4 × 1/4","1/16"),
-    q(1,"1/2 × 1/5","1/10"),q(1,"1/3 × 1/4","1/12"),q(1,"1/6 × 1/2","1/12"),q(1,"1/3 × 1/5","1/15"),q(1,"1/4 × 1/5","1/20"),
+    q(2,"1/2 × 1/2","1/4"),q(2,"1/2 × 1/3","1/6"),q(2,"1/3 × 1/3","1/9"),q(2,"1/2 × 1/4","1/8"),q(2,"1/5 × 1/2","1/10"),q(2,"1/4 × 1/4","1/16"),
+    q(2,"1/2 × 1/5","1/10"),q(2,"1/3 × 1/4","1/12"),q(2,"1/6 × 1/2","1/12"),q(2,"1/3 × 1/5","1/15"),q(2,"1/4 × 1/5","1/20"),
     q(2,"1/2 × 1/3 × 1/4","1/24"),q(2,"1/8 × 1/8","1/64")]},
   {id:"y5u6w2p2",w:2,label:"2.2",title:"The Area Model",note:"A rectangle cut both ways. The overlap is the answer.",items:[
     q(0,"A 1/2 by 1/2 square — its area","1/4"),q(0,"A 1/2 by 1/3 rectangle","1/6"),q(0,"A 1/3 by 1/4 rectangle","1/12"),q(0,"Pieces when a square is cut in halves both ways","4"),q(0,"Cut in thirds both ways","9"),q(0,"Cut in halves and thirds","6"),
     q(1,"A 2/3 by 1/2 rectangle","1/3"),q(1,"A 3/4 by 2/3 rectangle","1/2"),q(1,"A 2/5 by 3/4 rectangle","3/10"),q(1,"A 2/3 by 3/5 rectangle","2/5"),q(1,"A 5/6 by 3/5 rectangle","1/2"),
     q(2,"A 3/8 by 4/9 rectangle","1/6"),q(2,"A 2/3 by 3/4 by 1/2 box — its volume","1/4")]},
   {id:"y5u6w2p3",w:2,label:"2.3",title:"Multiply Across",note:"Numerators, then denominators. Then simplify.",items:[
-    q(0,"1/2 × 2/3","1/3"),q(0,"2/3 × 1/2","1/3"),q(0,"1/4 × 2/3","1/6"),q(0,"3/4 × 1/3","1/4"),q(0,"2/5 × 1/2","1/5"),q(0,"1/3 × 3/4","1/4"),
-    q(1,"3/4 × 2/3","1/2"),q(1,"2/5 × 3/4","3/10"),q(1,"5/6 × 3/5","1/2"),q(1,"3/8 × 4/9","1/6"),q(1,"4/5 × 5/8","1/2"),
+    q(2,"1/2 × 2/3","1/3"),q(2,"2/3 × 1/2","1/3"),q(2,"1/4 × 2/3","1/6"),q(2,"3/4 × 1/3","1/4"),q(2,"2/5 × 1/2","1/5"),q(2,"1/3 × 3/4","1/4"),
+    q(2,"3/4 × 2/3","1/2"),q(2,"2/5 × 3/4","3/10"),q(2,"5/6 × 3/5","1/2"),q(2,"3/8 × 4/9","1/6"),q(2,"4/5 × 5/8","1/2"),
     q(2,"2/3 × 3/4 × 1/2","1/4"),q(2,"6/7 × 7/12","1/2")]},
   {id:"y5u6w2p4",w:2,label:"2.4",title:"Simplify as You Go",note:"Cancel before multiplying and the numbers stay small.",items:[
     q(0,"2/4 simplified","1/2"),q(0,"3/6","1/2"),q(0,"4/8","1/2"),q(0,"6/9","2/3"),q(0,"5/10","1/2"),q(0,"8/12","2/3"),
-    q(1,"2/3 × 3/8 — simplified","1/4"),q(1,"4/9 × 3/8","1/6"),q(1,"5/12 × 6/10","1/4"),q(1,"9/10 × 5/6","3/4"),q(1,"7/8 × 4/7","1/2"),
+    q(2,"2/3 × 3/8 — simplified","1/4"),q(2,"4/9 × 3/8","1/6"),q(1,"5/12 × 6/10","1/4"),q(1,"9/10 × 5/6","3/4"),q(2,"7/8 × 4/7","1/2"),
     q(2,"12/25 × 5/6","2/5"),q(2,"15/16 × 8/45","1/6")]},
   {id:"y5u6w2p5",w:2,label:"Fri",title:"Scaling Showdown",note:"Bigger, smaller or the same — predict before you calculate.",items:[
     q(0,"6 × 2 — bigger or smaller than 6","bigger"),q(0,"6 × 1/2 — bigger or smaller","smaller"),
@@ -778,7 +778,7 @@ const PRACTICE_Y5_W4 = {
     q(2,"Multiplying by a fraction under 1 makes it — type bigger or smaller","smaller"),q(2,"45 × 4/5","36")]},
   {id:"y5u6w3p2",w:3,label:"3.2",title:"Why × 1 Changes Nothing",note:"3/3 is one wearing a costume.",items:[
     q(0,"3/3 as a whole number","1"),q(0,"5/5","1"),q(0,"8/8","1"),q(0,"12 × 1","12"),q(0,"12 × 3/3","12"),q(0,"7 × 4/4","7"),
-    q(1,"20 × 5/5","20"),q(1,"2/3 × 4/4 — type as a/b","8/12"),q(1,"8/12 simplified","2/3"),q(1,"15 × 6/6","15"),q(1,"3/4 × 5/5 — type as a/b","15/20"),
+    q(1,"20 × 5/5","20"),q(2,"2/3 × 4/4 — type as a/b","8/12"),q(1,"8/12 simplified","2/3"),q(1,"15 × 6/6","15"),q(2,"3/4 × 5/5 — type as a/b","15/20"),
     q(2,"Any number × n/n equals — type same or zero","same"),q(2,"9 × 11/11","9")]},
   {id:"y5u6w3p3",w:3,label:"3.3",title:"Compare Products",note:"Which is larger, without working either one out.",items:[
     q(0,"Larger: 10 × 2 or 10 × 3 — type the multiplier","3"),q(0,"Larger: 10 × 1/2 or 10 × 1/3","1/2"),q(0,"Larger: 8 × 1 or 8 × 2","2"),q(0,"Larger: 6 × 1/4 or 6 × 1/2","1/2"),q(0,"10 × 1/2","5"),q(0,"10 × 1/3 — bigger or smaller than 5","smaller"),
@@ -809,8 +809,8 @@ const PRACTICE_Y5_W4 = {
     q(1,"A 4.5 m rope into 1/2 m pieces","9"),q(1,"1/3 of a cake between 2","1/6"),q(1,"2 hours in 1/4 hours","8"),q(1,"A 5 m ribbon into 1/4 m bows","20"),q(1,"1/2 of a pie between 3","1/6"),
     q(2,"A 3 m ribbon into 1/8 m pieces","24"),q(2,"3 hours in 1/6 hours","18")]},
   {id:"y5u6w4p5",w:4,label:"Fri",title:"Mid-Unit Quiz",note:"Eight items across Weeks 1–4. 85% to keep flying.",items:[
-    q(0,"1/2 × 1/3","1/6"),q(0,"2/3 of 9","6"),
-    q(1,"3/4 × 2/3","1/2"),q(1,"24 × 2/3","16"),q(1,"5 ÷ 1/4","20"),q(1,"1/3 ÷ 4","1/12"),q(1,"20 × 3/4 — bigger or smaller than 20","smaller"),
+    q(2,"1/2 × 1/3","1/6"),q(0,"2/3 of 9","6"),
+    q(2,"3/4 × 2/3","1/2"),q(1,"24 × 2/3","16"),q(1,"5 ÷ 1/4","20"),q(1,"1/3 ÷ 4","1/12"),q(1,"20 × 3/4 — bigger or smaller than 20","smaller"),
     q(2,"2/3 × 3/4 × 1/2","1/4")]},
   {id:"y5u6w5p1",w:5,label:"5.1",title:"Finish the Garden Plan",note:"Every bed with its fraction and its area.",items:[
     q(0,"1/2 of 20 m²","10"),q(0,"1/4 of 24 m²","6"),q(0,"1/3 of 27 m²","9"),q(0,"2/3 of 12 m²","8"),q(0,"3/4 of 16 m²","12"),q(0,"1/5 of 30 m²","6"),
@@ -821,16 +821,16 @@ const PRACTICE_Y5_W4 = {
     q(1,"Which shrinks 12: × 3/4 or × 5/4 — type the fraction","3/4"),q(1,"30 × 2/5","12"),q(1,"30 × 5/2","75"),q(1,"Which grows 30 — type 2/5 or 5/2","5/2"),q(1,"40 × 7/8","35"),
     q(2,"A fraction shrinks a number when its top is — type smaller or larger than its bottom","smaller"),q(2,"60 × 5/6","50")]},
   {id:"y5u6w5p3",w:5,label:"5.3",title:"Multiply and Divide Together",note:"Mixed set. Read before you reach for a method.",items:[
-    q(0,"1/2 × 1/2","1/4"),q(0,"2 ÷ 1/2","4"),q(0,"1/2 of 8","4"),q(0,"1/3 ÷ 2","1/6"),q(0,"1/4 × 1/2","1/8"),q(0,"3 ÷ 1/3","9"),
-    q(1,"3/4 × 2/3","1/2"),q(1,"5 ÷ 1/4","20"),q(1,"2/5 of 35","14"),q(1,"1/4 ÷ 3","1/12"),q(1,"24 × 5/6","20"),
+    q(2,"1/2 × 1/2","1/4"),q(0,"2 ÷ 1/2","4"),q(0,"1/2 of 8","4"),q(0,"1/3 ÷ 2","1/6"),q(2,"1/4 × 1/2","1/8"),q(0,"3 ÷ 1/3","9"),
+    q(2,"3/4 × 2/3","1/2"),q(1,"5 ÷ 1/4","20"),q(1,"2/5 of 35","14"),q(1,"1/4 ÷ 3","1/12"),q(1,"24 × 5/6","20"),
     q(2,"2/3 × 3/4 × 1/2","1/4"),q(2,"A 3 m ribbon into 1/4 m pieces","12")]},
   {id:"y5u6w5p4",w:5,label:"Thu",title:"Error Journal Sweep",note:"Re-read every entry from the mission. Fix only what repeats.",items:[
-    q(0,"1/2 × 1/4","1/8"),q(0,"1/3 of 12","4"),q(0,"4 ÷ 1/2","8"),q(0,"1/2 ÷ 2","1/4"),q(0,"3/4 of 20","15"),q(0,"1/5 × 1/2","1/10"),
-    q(1,"2/5 × 3/4","3/10"),q(1,"7 ÷ 1/3","21"),q(1,"5/6 of 24","20"),q(1,"1/5 ÷ 4","1/20"),q(1,"24 × 3/2","36"),
+    q(2,"1/2 × 1/4","1/8"),q(0,"1/3 of 12","4"),q(0,"4 ÷ 1/2","8"),q(0,"1/2 ÷ 2","1/4"),q(0,"3/4 of 20","15"),q(2,"1/5 × 1/2","1/10"),
+    q(2,"2/5 × 3/4","3/10"),q(1,"7 ÷ 1/3","21"),q(1,"5/6 of 24","20"),q(1,"1/5 ÷ 4","1/20"),q(1,"24 × 3/2","36"),
     q(2,"15/16 × 8/45","1/6"),q(2,"3 ÷ 1/8","24")]},
   {id:"y5u6w5p5",w:5,label:"Fri",title:"Mission 06 Test",note:"Twelve items plus the Big Question, answered out loud.",items:[
-    q(0,"1/2 × 1/3","1/6"),q(0,"1/4 of 20","5"),
-    q(1,"2/3 of 12","8"),q(1,"3/4 × 2/3","1/2"),q(1,"2/5 × 3/4","3/10"),q(1,"24 × 2/3","16"),q(1,"20 × 5/4","25"),q(1,"5 ÷ 1/4","20"),q(1,"1/3 ÷ 4","1/12"),q(1,"3 ÷ 4 as a decimal","0.75"),
+    q(2,"1/2 × 1/3","1/6"),q(0,"1/4 of 20","5"),
+    q(1,"2/3 of 12","8"),q(2,"3/4 × 2/3","1/2"),q(2,"2/5 × 3/4","3/10"),q(1,"24 × 2/3","16"),q(1,"20 × 5/4","25"),q(1,"5 ÷ 1/4","20"),q(1,"1/3 ÷ 4","1/12"),q(1,"3 ÷ 4 as a decimal","0.75"),
     q(2,"2/3 × 3/4 × 1/2","1/4"),q(2,"A 2/3 m by 3/4 m bed — area","1/2")]}
  ]
 };
@@ -868,11 +868,11 @@ const PRACTICE_Y5_W5 = {
     q(2,"A 12×8×4 and a 6×4×4","480"),q(2,"Five 6×5×2 boxes","300")]},
   {id:"y5u7w3p3",w:3,label:"3.3",title:"Line Plots",note:"Plot measurements to the nearest eighth, then reason about them.",items:[
     q(0,"Four items at 1/2 — total","2"),q(0,"Eight items at 1/4 — total","2"),q(0,"Three items at 1/3 — total","1"),q(0,"Six items at 1/2 — total","3"),q(0,"Two items at 3/4 — total","3/2"),q(0,"Longest of 1/4, 1/2, 3/8","1/2"),
-    q(1,"1/2 + 1/4 + 1/4","1"),q(1,"Range of 1/8 and 7/8","3/4"),q(1,"Five items totalling 5/2 — the mean","1/2"),q(1,"Difference between 7/8 and 3/8","1/2"),q(1,"Four measurements of 3/4 — total","3"),
+    q(1,"1/2 + 1/4 + 1/4","1"),q(1,"Range of 1/8 and 7/8","3/4"),q(2,"Five items totalling 5/2 — the mean","1/2"),q(1,"Difference between 7/8 and 3/8","1/2"),q(1,"Four measurements of 3/4 — total","3"),
     q(2,"Six pencils totalling 9/2 inches shared equally — each","3/4"),q(2,"Two at 1/8, three at 1/4, one at 1/2 — total","3/2")]},
   {id:"y5u7w3p4",w:3,label:"3.4",title:"Read the Plot",note:"Total, difference, and redistribution.",items:[
-    q(0,"Five values of 1/2 — total","5/2"),q(0,"Their mean","1/2"),q(0,"Four values of 1/4 — total","1"),q(0,"Their mean","1/4"),q(0,"Range of 1/4 and 3/4","1/2"),q(0,"Range of 1/8 and 5/8","1/2"),
-    q(1,"Values 1/4, 1/2, 3/4 — total","3/2"),q(1,"Their mean","1/2"),q(1,"Values 1/8, 3/8, 1/2 — total","1"),q(1,"Four values totalling 3 — the mean","3/4"),q(1,"Range of 1/8 and 1","7/8"),
+    q(0,"Five values of 1/2 — total","5/2"),q(2,"Their mean","1/2"),q(0,"Four values of 1/4 — total","1"),q(2,"Their mean","1/4"),q(0,"Range of 1/4 and 3/4","1/2"),q(0,"Range of 1/8 and 5/8","1/2"),
+    q(1,"Values 1/4, 1/2, 3/4 — total","3/2"),q(2,"Their mean","1/2"),q(1,"Values 1/8, 3/8, 1/2 — total","1"),q(2,"Four values totalling 3 — the mean","3/4"),q(1,"Range of 1/8 and 1","7/8"),
     q(2,"Eight values totalling 5 — the mean","5/8"),q(2,"Redistribute 9/2 across 6 equally — each","3/4")]},
   {id:"y5u7w3p5",w:3,label:"Fri",title:"Mid-Unit Quiz",note:"Eight items across Weeks 1–3. 85% to keep flying.",items:[
     q(0,"1 m in cm","100"),q(0,"A 2 by 3 by 4 box","24"),
@@ -896,7 +896,7 @@ const PRACTICE_Y5_W5 = {
     q(2,"A cube of volume 216 — its edge","6"),q(2,"Add 1.2 m and 85 cm — answer in cm","205")]},
   {id:"y5u7w4p5",w:4,label:"Fri",title:"Mission 07 Test",note:"Twelve items plus the Big Question, answered out loud.",items:[
     q(0,"1 m in cm","100"),q(0,"A 2 by 3 by 4 box","24"),
-    q(1,"250 cm in m","2.5"),q(1,"3200 mL in L","3.2"),q(1,"A 5 by 4 by 3 box","60"),q(1,"A cube of edge 4","64"),q(1,"Volume 120, base area 20 — the height","6"),q(1,"Volume 96, edges 8 and 4 — the third","3"),q(1,"A 6×5×2 and a 4×3×2 — total","84"),q(1,"Five items totalling 5/2 — the mean","1/2"),
+    q(1,"250 cm in m","2.5"),q(1,"3200 mL in L","3.2"),q(1,"A 5 by 4 by 3 box","60"),q(1,"A cube of edge 4","64"),q(1,"Volume 120, base area 20 — the height","6"),q(1,"Volume 96, edges 8 and 4 — the third","3"),q(1,"A 6×5×2 and a 4×3×2 — total","84"),q(2,"Five items totalling 5/2 — the mean","1/2"),
     q(2,"A cube of volume 125 — its edge","5"),q(2,"Double every edge of a 2×3×4 box — volume multiplies by","8")]}
  ],
  8:[
@@ -950,11 +950,11 @@ const PRACTICE_Y5_W5 = {
     q(2,"A patrol (1,1),(7,1),(7,5),(1,5) and back — total distance","20"),q(2,"The area enclosed by that patrol","24")]},
   {id:"y5u8w4p3",w:4,label:"4.3",title:"Walk Somebody Through It",note:"Fix any pair that misleads them. Mark it honestly.",items:[
     q(0,"10 stops, 8 followed correctly — the percent","80"),q(0,"10 stops, 9 correct — the percent","90"),q(0,"10 minus 7","3"),q(0,"Half of 10 stops","5"),q(0,"10 stops, 5 correct — the percent","50"),q(0,"10 stops, 10 correct — the percent","100"),
-    q(1,"4 minutes a stop, 10 stops — minutes","40"),q(1,"Two pairs rewritten out of 10 — the percent","20"),q(1,"85% of 10 stops","8.5"),q(1,"If 9 of 10 are followable, the percent that are not","10"),q(1,"A 40-minute walk over 10 stops — mean minutes each","4"),
+    q(1,"4 minutes a stop, 10 stops — minutes","40"),q(1,"Two pairs rewritten out of 10 — the percent","20"),q(1,"85% of 10 stops","8.5"),q(1,"If 9 of 10 are followable, the percent that are not","10"),q(2,"A 40-minute walk over 10 stops — mean minutes each","4"),
     q(2,"12 points a stop, 10 stops, scored 96 — the percent","80"),q(2,"To score 85% of 120 points, she needs","102")]},
   {id:"y5u8w4p4",w:4,label:"Thu",title:"Year-End Sweep",note:"All eight error journals. Name the habit that fixed itself.",items:[
     q(0,"4.2 × 10","42"),q(0,"23 × 14","322"),q(0,"84 ÷ 12","7"),q(0,"0.3 + 0.4","0.7"),q(0,"1/4 + 1/4","1/2"),q(0,"A 2 by 3 by 4 box","24"),
-    q(1,"0.035 × 100","3.5"),q(1,"237 × 45","10665"),q(1,"4536 ÷ 21","216"),q(1,"1/2 + 1/3","5/6"),q(1,"3/4 × 2/3","1/2"),
+    q(1,"0.035 × 100","3.5"),q(1,"237 × 45","10665"),q(1,"4536 ÷ 21","216"),q(1,"1/2 + 1/3","5/6"),q(2,"3/4 × 2/3","1/2"),
     q(2,"12.4 − 7.856","4.544"),q(2,"5 ÷ 1/4","20")]},
   {id:"y5u8w4p5",w:4,label:"Fri",title:"Mission 08 Test",note:"Twelve items plus the completed map. Final trophy band awarded.",items:[
     q(0,"In (3, 5), the up value","5"),q(0,"Sides on a quadrilateral","4"),

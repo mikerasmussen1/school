@@ -268,7 +268,11 @@
         id: f.id,
         type: "multiple-choice",
         t: 1,
-        q: f.prompt + " \u201c" + f.sentence + "\u201d",
+        /* The sentence is NOT repeated here. The page prints it once, in its
+         * own box above the question, and printing it again inside the prompt
+         * put the same sentence on screen twice — which reads as though two
+         * different sentences are being shown. */
+        q: f.prompt,
         options: f.options,
         /* An INDEX, not the word. prepMC resolves it with options[a] before
          * shuffling, so handing it the string made the answer undefined and

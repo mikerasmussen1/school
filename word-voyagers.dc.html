@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=2026-09-03-1839"></script>
-  <script data-build>window.__BUILD__="2026-09-03-1839";</script>
-  <script src="./curriculum/freshness.js?v=2026-09-03-1839"></script>
+<script src="./support.js?v=2026-09-03-1850"></script>
+  <script data-build>window.__BUILD__="2026-09-03-1850";</script>
+  <script src="./curriculum/freshness.js?v=2026-09-03-1850"></script>
 </head>
 <body>
 <x-dc>
@@ -38,27 +38,27 @@
   .book-title{font-family:'Fraunces',serif;font-size:1rem;color:var(--brick-dark);margin:0 0 3px}
   .done-banner{text-align:center;padding:22px;margin-top:6px;background:var(--forest-light);border-radius:8px;color:#2E4E38}
 </style>
-<script src="./curriculum/sync.js?v=2026-09-03-1839"></script>
-<script src="./curriculum/students.js?v=2026-09-03-1839"></script>
-<script src="./curriculum/subjects.js?v=2026-09-03-1839"></script>
-<script src="./curriculum/question-types.js?v=2026-09-03-1839"></script>
-<script src="./curriculum/la-y1-spine.js?v=2026-09-03-1839"></script>
-<script src="./curriculum/la-y1-words.js?v=2026-09-03-1839"></script>
-<script src="./curriculum/la-y1-grammar.js?v=2026-09-03-1839"></script>
-<script src="./curriculum/la-y1-reading.js?v=2026-09-03-1839"></script>
-<script src="./curriculum/la-y1-tasks.js?v=2026-09-03-1839"></script>
-<script src="./curriculum/la-books.js?v=2026-09-03-1839"></script>
-<script src="./curriculum/la-y2-spine.js?v=2026-09-03-1839"></script>
-<script src="./curriculum/la-y2-words.js?v=2026-09-03-1839"></script>
-<script src="./curriculum/la-y2-grammar.js?v=2026-09-03-1839"></script>
-<script src="./curriculum/la-y2-reading.js?v=2026-09-03-1839"></script>
-<script src="./curriculum/la-y2-tasks.js?v=2026-09-03-1839"></script>
-<script src="./curriculum/la-books-y2.js?v=2026-09-03-1839"></script>
-<script src="./curriculum/la-quotes.js?v=2026-09-03-1839"></script>
-<script src="./curriculum/la-daily-fix.js?v=2026-09-03-1839"></script>
-<script src="./curriculum/la-mastery.js?v=2026-09-03-1839"></script>
-<script src="./curriculum/la-calendar.js?v=2026-09-03-1839"></script>
-<script src="./curriculum/la-grader.js?v=2026-09-03-1839"></script>
+<script src="./curriculum/sync.js?v=2026-09-03-1850"></script>
+<script src="./curriculum/students.js?v=2026-09-03-1850"></script>
+<script src="./curriculum/subjects.js?v=2026-09-03-1850"></script>
+<script src="./curriculum/question-types.js?v=2026-09-03-1850"></script>
+<script src="./curriculum/la-y1-spine.js?v=2026-09-03-1850"></script>
+<script src="./curriculum/la-y1-words.js?v=2026-09-03-1850"></script>
+<script src="./curriculum/la-y1-grammar.js?v=2026-09-03-1850"></script>
+<script src="./curriculum/la-y1-reading.js?v=2026-09-03-1850"></script>
+<script src="./curriculum/la-y1-tasks.js?v=2026-09-03-1850"></script>
+<script src="./curriculum/la-books.js?v=2026-09-03-1850"></script>
+<script src="./curriculum/la-y2-spine.js?v=2026-09-03-1850"></script>
+<script src="./curriculum/la-y2-words.js?v=2026-09-03-1850"></script>
+<script src="./curriculum/la-y2-grammar.js?v=2026-09-03-1850"></script>
+<script src="./curriculum/la-y2-reading.js?v=2026-09-03-1850"></script>
+<script src="./curriculum/la-y2-tasks.js?v=2026-09-03-1850"></script>
+<script src="./curriculum/la-books-y2.js?v=2026-09-03-1850"></script>
+<script src="./curriculum/la-quotes.js?v=2026-09-03-1850"></script>
+<script src="./curriculum/la-daily-fix.js?v=2026-09-03-1850"></script>
+<script src="./curriculum/la-mastery.js?v=2026-09-03-1850"></script>
+<script src="./curriculum/la-calendar.js?v=2026-09-03-1850"></script>
+<script src="./curriculum/la-grader.js?v=2026-09-03-1850"></script>
 </helmet>
 
 <div style="min-height:100vh;display:flex;flex-direction:column">
@@ -180,7 +180,7 @@
             <sc-if value="{{ aFix }}" hint-placeholder-val="{{ false }}">
               <!-- the faulty sentence stays on screen for the whole drill -->
               <div class="box" style="border-left:4px solid var(--brick)">
-                <div style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--brick-dark);margin-bottom:5px">This sentence has a mistake</div>
+                <div style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--brick-dark);margin-bottom:5px">{{ fixBoxLabel }}</div>
                 <div style="font-size:1.08rem;line-height:1.6">“{{ fixSentence }}”</div>
               </div>
               <sc-if value="{{ fxNotStarted }}" hint-placeholder-val="{{ true }}">
@@ -1924,6 +1924,10 @@ class Component extends DCLogic {
     const rv=this.quizVals("rv","rv",null,function(){ self.quizStart("rv", self.prepMC(grammarSet.items,4)); });
 
     base.fixSentence  = fixItem?fixItem.sentence:"";
+    /* Which stage the child is on, so the box above the question says what he
+     * is looking at rather than the same words at both stages. */
+    base.fixBoxLabel  = (st.fx && st.fx.idx===1) ? "The sentence you are repairing"
+                                                 : "This sentence has a mistake";
     base.fixCorrected = fixItem?fixItem.corrected:"";
     return Object.assign(base, rq, gz, rv, fx);
   }

@@ -23,7 +23,13 @@
    [1,'How many nouns are in this sentence? "The boy fed the horse."',["one","two","three","four"],1,"Count the words that name people, places or things."],
    [1,'Which word names a PLACE?',["happy","kitchen","quickly","jumped"],1,"A place is somewhere you can go or be."],
    [1,'Which sentence has a noun naming an idea, not an object?',["The rock is heavy.","Her kindness surprised me.","The dog barked.","We ate lunch."],1,"Some nouns name things you cannot touch."],
-   [2,'In "The shepherd led his flock to the river," how many nouns are there?',["two","three","four","five"],2,"shepherd, flock, river — count carefully."]],
+   /* The answer index said "four" while the hint enumerated three. A third
+    * grader counting shepherd, flock and river is right; "his" is a possessive
+    * determiner, not a naming word, and at this age nouns means people, places
+    * and things. The hint now says so rather than just "count carefully",
+    * because the word that trips a child here is exactly the one the hint was
+    * silent about. */
+   [2,'In "The shepherd led his flock to the river," how many nouns are there?',["two","three","four","five"],1,"shepherd, flock, river. \"His\" tells you whose flock it is \u2014 it does not name a thing."]],
 
   2:[ // verbs
    [0,'Which word is the verb? "The bird sings."',["The","bird","sings","."],2,"A verb shows the action."],

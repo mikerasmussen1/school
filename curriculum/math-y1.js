@@ -375,17 +375,17 @@ const WEEKS_U7 = [
      {day:"Mon · 4.1",title:"The ruler, honestly",detail:"Whole, half and quarter inches. Read the marks; do not estimate between them.",tiers:[0,1,2]},
      {day:"Tue · 4.2",title:"Litres and millilitres",detail:"Pour it. A jug, a cup and a bottle beat any diagram.",tiers:[0,1,2]},
      {day:"Wed · 4.3",title:"Grams and kilograms",detail:"Balance scales and a bag of flour. What a kilogram actually feels like.",tiers:[0,1,2]},
-     {day:"Thu · Review",title:"Mixed measures",detail:"Length, volume and mass in one sitting, so the units stop blurring.",tiers:[0,1]},
-     {day:"Fri · Check",title:"Measurement check",detail:"Six questions across all three measures.",tiers:[0,1,2]}
+     {day:"Thu · 4.4",title:"Mixed measures",detail:"Length, volume and mass in one sitting, so the units stop blurring.",tiers:[0,1]},
+     {day:"Fri · Fri",title:"Measurement check",detail:"Six questions across all three measures.",tiers:[0,1,2]}
    ]},
   {n:5,title:"Telling the Time",gate:"Unit test",gateColor:"#F472B6",isFull:false,
    summary:"Time to the nearest minute, then how long something took. Georgia asks for elapsed time to the hour, half hour and quarter hour, and this is the week that earns the Mission 07 test.",
    days:[
      {day:"Mon · 5.1",title:"Time to the minute",detail:"Every minute on the face, not just o'clock and half past.",tiers:[0,1,2]},
      {day:"Tue · 5.2",title:"Elapsed time",detail:"Start, finish, and the gap between — hours, halves and quarters.",tiers:[0,1,2]},
-     {day:"Wed · Review",title:"Clocks and calendars",detail:"Read the day's real timetable off a real clock.",tiers:[0,1]},
-     {day:"Thu · Journal",title:"Error journal",detail:"Fix only what repeats.",tiers:[0,1]},
-     {day:"Fri · Test",title:"Mission 07 test",detail:"Graphs, measures and time together.",tiers:[0,1,2]}
+     {day:"Wed · 5.3",title:"Clocks and calendars",detail:"Read the day's real timetable off a real clock.",tiers:[0,1]},
+     {day:"Thu · 5.4",title:"Error journal",detail:"Fix only what repeats.",tiers:[0,1]},
+     {day:"Fri · Fri",title:"Mission 07 test",detail:"Graphs, measures and time together.",tiers:[0,1,2]}
    ]}
 ];
 
@@ -1663,8 +1663,29 @@ const PRACTICE_U7_W3 = [
 ];
 
 const PRACTICE_U7_W4 = [
+  {id:"u7w4p4",w:4,label:"4.4",title:"Mixed Measures",note:"Length, volume and mass in one sitting so the units stop blurring.",
+   items:[
+     {t:0,q:"Inches in 4 and a half inches, in half inches",a:"9"},{t:0,q:"Inches in 3 and a half inches, in half inches",a:"7"},{t:0,q:"Inches in 5 and a half inches, in half inches",a:"11"},{t:0,q:"Inches in 7 and a half inches, in half inches",a:"15"},{t:0,q:"Inches in 2 and a half inches, in half inches",a:"5"},{t:0,q:"Inches in 2 and a half inches, in half inches",a:"5"},{t:0,q:"250 ml plus 250 ml",a:"500"},{t:0,q:"750 ml plus 750 ml",a:"1500"},{t:0,q:"250 ml plus 250 ml",a:"500"},{t:0,q:"500 ml plus 500 ml",a:"1000"},{t:0,q:"250 ml plus 250 ml",a:"500"},{t:0,q:"250 ml plus 250 ml",a:"500"},{t:1,q:"644 g plus 157 g",a:"801"},{t:1,q:"271 g plus 111 g",a:"382"},{t:1,q:"292 g plus 191 g",a:"483"},{t:1,q:"634 g plus 65 g",a:"699"},{t:1,q:"779 g plus 81 g",a:"860"},{t:1,q:"428 g plus 211 g",a:"639"},{t:1,q:"842 g plus 199 g",a:"1041"},{t:1,q:"12 quarter inches — how many whole inches",a:"3"},{t:1,q:"36 quarter inches — how many whole inches",a:"9"},{t:1,q:"12 quarter inches — how many whole inches",a:"3"},{t:1,q:"24 quarter inches — how many whole inches",a:"6"},{t:1,q:"12 quarter inches — how many whole inches",a:"3"},{t:2,q:"A 2 litre bottle poured into 250 ml cups — cups filled",a:"8"}
+   ]},
+  {id:"u7w4p5",w:4,label:"Fri",title:"Measurement Check",note:"Six questions across all three measures.",
+   items:[
+     {t:0,q:"Millilitres in 1 litre",a:"1000"},{t:0,q:"Grams in 1 kilogram",a:"1000"},{t:0,q:"Quarter inches in 2 whole inches",a:"8"},{t:1,q:"1500 ml — the millilitres part after 1 litre",a:"500"},{t:1,q:"A 750 g bag and a 400 g bag — total grams",a:"1150"},{t:2,q:"3 kg 250 g in grams",a:"3250"}
+   ]},
+  {id:"u7w5p3",w:5,label:"5.3",title:"Clocks and Calendars",note:"Read the day's real timetable off a real clock.",
+   items:[
+     {t:0,q:"Minutes in a quarter of an hour",a:"15"},{t:0,q:"Minutes in half an hour",a:"30"},{t:0,q:"Minutes in three quarters of an hour",a:"45"},{t:1,q:"Quarter past 2 to quarter to 3 — minutes",a:"30"},{t:1,q:"10 past 9 to 25 past 9 — minutes",a:"15"},{t:2,q:"A lesson 8:50 to 9:35 — minutes",a:"45"}
+   ]},
+  {id:"u7w5p4",w:5,label:"5.4",title:"Error Journal",note:"Fix only what repeats.",
+   items:[
+     {t:0,q:"Minutes in 2 hours",a:"120"},{t:0,q:"Grams in 2 kilograms",a:"2000"},{t:1,q:"A jug of 900 ml, 350 ml poured out — left",a:"550"},{t:1,q:"Half past 3 to half past 6 — hours",a:"3"},{t:2,q:"A 1 litre jug fills 4 equal cups — millilitres in each",a:"250"}
+   ]},
+  {id:"u7w5p5",w:5,label:"Fri",title:"Mission 07 Test",note:"Graphs, measures and time together.",
+   items:[
+     {t:0,q:"Minutes in 1 hour",a:"60"},{t:0,q:"Millilitres in 2 litres",a:"2000"},{t:1,q:"A bar chart where each block is 5 — blocks for 35",a:"7"},{t:1,q:"A ribbon 18 inches cut into 6 equal pieces — inches each",a:"3"},{t:1,q:"Quarter to 4 until 4 o'clock — minutes",a:"15"},{t:2,q:"A 2 kg bag split into 250 g packets — packets",a:"8"}
+   ]},
   {id:"u7w4p1",w:4,label:"4.1",title:"The Ruler, Honestly",note:"Whole, half and quarter inches — read off a real ruler, not guessed.",
    items:[
+     {t:0,q:"A line plot with 4 crosses above 3 inches — objects measuring 3 inches",a:"4"},{t:0,q:"Marks between 3 and 4 inches on a half-inch plot, not counting the ends",a:"1"},{t:0,q:"Marks between 3 and 4 inches on a quarter-inch plot, not counting the ends",a:"3"},{t:1,q:"A plot shows 3 at 2 inches and 5 at 2 and a half — how many altogether",a:"8"},{t:1,q:"Longest 4 inches, shortest 2 inches — the range in inches",a:"2"},{t:1,q:"Eight pencils measured to the quarter inch — crosses on the plot altogether",a:"8"},{t:2,q:"A plot has 3 at 2in, 5 at two-and-a-half, 2 at 3in — how many more at two-and-a-half than at 3",a:"3"},
      {t: 0, q: "Inches in 3 whole inches, counted on a ruler", a: "3"},{t: 0, q: "Inches in 5 whole inches, counted on a ruler", a: "5"},{t: 0, q: "Inches in 7 whole inches, counted on a ruler", a: "7"},{t: 0, q: "Inches in 9 whole inches, counted on a ruler", a: "9"},{t: 0, q: "Inches in 11 whole inches, counted on a ruler", a: "11"},{t: 0, q: "Half inches in 1 whole inches", a: "2"},{t: 0, q: "Half inches in 3 whole inches", a: "6"},{t: 0, q: "Half inches in 5 whole inches", a: "10"},{t: 0, q: "Half inches in 7 whole inches", a: "14"},{t: 0, q: "Quarter inches in 1 whole inches", a: "4"},{t: 0, q: "Quarter inches in 2 whole inches", a: "8"},{t: 0, q: "Quarter inches in 3 whole inches", a: "12"},{t: 0, q: "Quarter inches in 4 whole inches", a: "16"},{t: 0, q: "A pencil reaches the mark halfway between 4 and 5 inches. Write it as quarter inches", a: "18"},{t: 1, q: "A ribbon 12 inches long, cut off 7 inches. Left", a: "5"},{t: 1, q: "A ribbon 24 inches long, cut off 9 inches. Left", a: "15"},{t: 1, q: "A ribbon 36 inches long, cut off 15 inches. Left", a: "21"},{t: 1, q: "A ribbon 18 inches long, cut off 6 inches. Left", a: "12"},{t: 1, q: "9 inches shared into 3 equal pieces. Each piece", a: "3"},{t: 1, q: "12 inches shared into 4 equal pieces. Each piece", a: "3"},{t: 1, q: "15 inches shared into 5 equal pieces. Each piece", a: "3"},{t: 1, q: "Three quarter inches — how many quarters", a: "3"},{t: 1, q: "A line is 2 and a half inches. In half inches", a: "5"},{t: 1, q: "A line is 3 and a quarter inches. In quarter inches", a: "13"},{t: 2, q: "Two ribbons, 7 and a half and 4 and a half inches. Total in half inches", a: "24"},{t: 2, q: "A 24 inch strip cut into quarter inch pieces. How many pieces", a: "96"}
    ]},
   {id:"u7w4p2",w:4,label:"4.2",title:"Litres and Millilitres",note:"Liquid volume with real containers: jugs, cups and bottles.",

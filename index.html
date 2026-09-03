@@ -7296,9 +7296,16 @@ class Component extends DCLogic {
         const here=t&&t.next&&t.unit===st.uview;
         const w=here?(t.week||1):1;
         const done=st.pChecked||{};
+        /* pChecked is FLAT, keyed "<setId>|<tier>" — never nested under the set
+         * id. The hand-rolled `done[s.id]` lookup that was here could never be
+         * true, so no day would ever have shown a tick, and the fixture that
+         * "proved" it worked was written to the same wrong shape I had assumed.
+         * MATH_SEQ.isDone is the one reader that knows the real shape, legacy
+         * bare-id form included. */
+        const SEQ=window.__CURR&&window.__CURR.MATH_SEQ;
         return this.setsForWeek(st.uview,w).map(s=>{
           const isNext=here&&t.next.id===s.id;
-          const isDone=Object.keys(done[s.id]||{}).length>0;
+          const isDone=SEQ?SEQ.isDone(s.id,done):false;
           const c=isNext?"#38BDF8":isDone?"rgba(74,222,128,.4)":"rgba(255,255,255,.12)";
           return {label:s.label, title:s.title||s.label,
             mark:isDone?"✓":isNext?"▸":"",

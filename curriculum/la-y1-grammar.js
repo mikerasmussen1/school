@@ -14,6 +14,12 @@
  * ==========================================================================*/
 (function(){
 
+  /* SIX AT GRADE LEVEL, THEN TWO STRETCH ITEMS (tier 2). The pair applies the
+   * same skill to a longer sentence, then asks the child to state the rule
+   * back rather than only pick the right word. Spotting the adjective and
+   * being able to say why it is one are different abilities, and the second is
+   * the one that transfers. */
+
   const G = {
 
   /* ---- Unit 1 · Words That Build ------------------------------------- */
@@ -29,7 +35,9 @@
     * and things. The hint now says so rather than just "count carefully",
     * because the word that trips a child here is exactly the one the hint was
     * silent about. */
-   [2,'In "The shepherd led his flock to the river," how many nouns are there?',["two","three","four","five"],1,"shepherd, flock, river. \"His\" tells you whose flock it is \u2014 it does not name a thing."]],
+   [2,'In "The shepherd led his flock to the river," how many nouns are there?',["two","three","four","five"],1,"shepherd, flock, river. \"His\" tells you whose flock it is \u2014 it does not name a thing."],
+ [2,"Which word is an abstract noun \u2014 one you cannot touch?",["fence", "courage", "spoon", "river"],1,"Some nouns name ideas."],
+ [2,"Why is that right?",["It is a guess", "Because some nouns name ideas", "It sounds better", "There is no rule"],1,"Say the rule back in your own words."]],
 
   2:[ // verbs
    [0,'Which word is the verb? "The bird sings."',["The","bird","sings","."],2,"A verb shows the action."],
@@ -37,7 +45,9 @@
    [1,'Which sentence has TWO verbs?',["She ran fast.","He jumped and shouted.","The tall boy.","A quiet room."],1,"Look for two action words joined together."],
    [1,'Which word is a verb that does NOT show action you can see?',["ran","jumped","believe","climbed"],2,"Some verbs happen inside you."],
    [1,'Choose the correct past-tense verb: "Yesterday we ___ to church."',["go","goes","went","going"],2,"Yesterday means it already happened."],
-   [2,'Which sentence uses the verb "to be" correctly?',["They is happy.","They are happy.","They be happy.","They am happy."],1,"Match the verb to a plural subject."]],
+   [2,'Which sentence uses the verb "to be" correctly?',["They is happy.","They are happy.","They be happy.","They am happy."],1,"Match the verb to a plural subject."],
+ [2,"In \"The tall boy quickly fed the noisy chickens\", which word is the verb?",["tall", "quickly", "fed", "noisy"],2,"The verb is the action."],
+ [2,"Why is that right?",["It is a guess", "Because the verb is the action", "It sounds better", "There is no rule"],1,"Say the rule back in your own words."]],
 
   3:[ // complete sentences
    [0,'Which one is a complete sentence?',["Running down the hill.","The dog barked.","After the storm.","A very tall tree."],1,"A sentence needs someone AND something they do."],
@@ -45,7 +55,9 @@
    [1,'What is missing? "Jumped over the fence."',["a verb","a subject","a period","nothing"],1,"Who jumped? Nobody is named."],
    [1,'What is missing? "The three loud puppies."',["a verb","a subject","a capital letter","nothing"],0,"What did the puppies DO?"],
    [1,'Which sentence is punctuated correctly?',["the boy ran home","The boy ran home.","The boy ran home","the boy ran home."],1,"Capital at the start, period at the end."],
-   [2,'Which of these is a complete sentence?',["Because it rained all day.","When we finished the chores.","We finished the chores.","Although the sun came out."],2,"Some word groups sound complete but leave you hanging."]],
+   [2,'Which of these is a complete sentence?',["Because it rained all day.","When we finished the chores.","We finished the chores.","Although the sun came out."],2,"Some word groups sound complete but leave you hanging."],
+ [2,"Which sentence uses a plural noun correctly?",["Three box sat there.", "Three boxes sat there.", "Three boxs sat there.", "Three boxi sat there."],1,"Words ending in x take -es."],
+ [2,"Why is that right?",["It is a guess", "Because words ending in x take -es", "It sounds better", "There is no rule"],1,"Say the rule back in your own words."]],
 
   4:[ // pronouns
    [0,'Which word is a pronoun? "She likes apples."',["She","likes","apples","."],0,"A pronoun stands in for a noun."],
@@ -53,7 +65,9 @@
    [1,'Which pronoun replaces "Maria and Josh"?',["He","She","It","They"],3,"Two people together are plural."],
    [1,'Fill in: "Grandma baked cookies and gave ___ to us."',["they","them","their","theirs"],1,"The cookies receive the action."],
    [1,'Which sentence uses the pronoun correctly?',["Me and him went outside.","Him and me went outside.","He and I went outside.","I and him went outside."],2,"Try each person alone: 'He went' and 'I went'."],
-   [2,'Which pronoun correctly finishes: "Each of the boys brought ___ own Bible."',["their","his","them","they"],1,"'Each' is singular, even with 'boys' nearby."]],
+   [2,'Which pronoun correctly finishes: "Each of the boys brought ___ own Bible."',["their","his","them","they"],1,"'Each' is singular, even with 'boys' nearby."],
+ [2,"Which sentence has the subject and verb agreeing?",["The dogs runs fast.", "The dog run fast.", "The dogs run fast.", "The dogs is fast."],2,"A plural subject takes a plural verb."],
+ [2,"Why is that right?",["It is a guess", "Because a plural subject takes a plural verb", "It sounds better", "There is no rule"],1,"Say the rule back in your own words."]],
 
   /* ---- Unit 2 · Creation and Order ----------------------------------- */
   5:[ // regular plurals
@@ -62,7 +76,9 @@
    [1,'What is the plural of "church"?',["churchs","churches","churchies","church"],1,"Words ending in -ch add -es."],
    [1,'What is the plural of "baby"?',["babys","babyes","babies","babie"],2,"Change the y to i, then add -es."],
    [1,'What is the plural of "leaf"?',["leafs","leaves","leafes","leafies"],1,"Some -f words change to -ves."],
-   [2,'Which plural is spelled correctly?',["potatos","tomatos","heroes","echos"],2,"Some -o words take -es."]],
+   [2,'Which plural is spelled correctly?',["potatos","tomatos","heroes","echos"],2,"Some -o words take -es."],
+ [2,"Which is the plural of \"leaf\"?",["leafs", "leaves", "leafes", "leave"],1,"Some f endings change to v."],
+ [2,"Why is that right?",["It is a guess", "Because some f endings change to v", "It sounds better", "There is no rule"],1,"Say the rule back in your own words."]],
 
   6:[ // irregular plurals
    [0,'What is the plural of "child"?',["childs","children","childes","childrens"],1,"This one does not add -s at all."],
@@ -70,7 +86,9 @@
    [1,'What is the plural of "mouse"?',["mouses","mice","mices","mouse"],1,"Not the computer kind — the animal."],
    [1,'What is the plural of "sheep"?',["sheeps","sheepes","sheep","sheepies"],2,"Some animals do not change at all."],
    [1,'What is the plural of "woman"?',["womans","women","womens","womanes"],1,"The middle vowel changes."],
-   [2,'Which sentence uses an irregular plural correctly?',["The gooses flew south.","The geese flew south.","The geeses flew south.","The goosen flew south."],1,"Goose changes its vowel sound."]],
+   [2,'Which sentence uses an irregular plural correctly?',["The gooses flew south.","The geese flew south.","The geeses flew south.","The goosen flew south."],1,"Goose changes its vowel sound."],
+ [2,"\u201cThe children\u2019s coats\u201d shows the coats belong to",["one child", "more than one child", "the coats", "nobody"],1,"Children is already plural."],
+ [2,"Why is that right?",["It is a guess", "Because children is already plural", "It sounds better", "There is no rule"],1,"Say the rule back in your own words."]],
 
   7:[ // abstract nouns
    [0,'Which word names something you CANNOT touch?',["chair","love","rock","cup"],1,"Abstract nouns name ideas and feelings."],
@@ -78,7 +96,9 @@
    [1,'Which sentence contains an abstract noun?',["The apple fell.","Her honesty impressed us.","The car is red.","We ate dinner."],1,"Look for a word naming a quality."],
    [1,'Which abstract noun comes from the word "kind"?',["kindly","kinder","kindness","kinding"],2,"Add -ness to make a noun."],
    [1,'Which abstract noun comes from "brave"?',["bravely","bravery","braver","braving"],1,"Add -ry to make the idea a thing."],
-   [2,'Which list contains ONLY abstract nouns?',["joy, peace, patience","joy, chair, peace","dog, love, tree","hope, ball, faith"],0,"Every word must name something you cannot touch."]],
+   [2,'Which list contains ONLY abstract nouns?',["joy, peace, patience","joy, chair, peace","dog, love, tree","hope, ball, faith"],0,"Every word must name something you cannot touch."],
+ [2,"Which word is an adjective in \"The ancient stone wall stood firm\"?",["stood", "firm", "ancient", "wall"],2,"An adjective describes a noun."],
+ [2,"Why is that right?",["It is a guess", "Because an adjective describes a noun", "It sounds better", "There is no rule"],1,"Say the rule back in your own words."]],
 
   8:[ // subject-verb agreement
    [0,'Which is correct?',["The dogs barks.","The dogs bark.","The dog bark.","The dogs barking."],1,"A plural subject takes the plural verb."],
@@ -86,7 +106,9 @@
    [1,'Fill in: "The children ___ playing outside."',["is","are","was","am"],1,"Children is plural."],
    [1,'Fill in: "My brother ___ to school every day."',["walk","walks","walking","walken"],1,"One brother is singular."],
    [1,'Which is correct?',["Everyone are here.","Everyone is here.","Everyone were here.","Everyone am here."],1,"'Everyone' is singular, even though it sounds like many."],
-   [2,'Which is correct?',["The box of crayons are open.","The box of crayons is open.","The box of crayons were open.","The box of crayons am open."],1,"The subject is 'box', not 'crayons'."]],
+   [2,'Which is correct?',["The box of crayons are open.","The box of crayons is open.","The box of crayons were open.","The box of crayons am open."],1,"The subject is 'box', not 'crayons'."],
+ [2,"Which sentence compares exactly two things correctly?",["She is the taller of the two.", "She is the tallest of the two.", "She is more taller.", "She is tall of two."],0,"Two things use the -er form."],
+ [2,"Why is that right?",["It is a guess", "Because two things use the -er form", "It sounds better", "There is no rule"],1,"Say the rule back in your own words."]],
 
   /* ---- Unit 3 · Courage in the Crowd --------------------------------- */
   9:[ // adjectives
@@ -95,7 +117,9 @@
    [1,'How many adjectives are in "The small brown dog slept."?',["one","two","three","four"],1,"small and brown both describe dog."],
    [1,'Which adjective tells HOW MANY?',["blue","seven","soft","loud"],1,"Some adjectives count instead of describe."],
    [1,'Which sentence has an adjective after the verb?',["The tall boy ran.","The soup is hot.","She sang loudly.","They left quickly."],1,"Sometimes the describing word comes after 'is'."],
-   [2,'In "Esther showed quiet courage before the angry king," which word is NOT an adjective?',["quiet","courage","angry","none of these"],1,"Courage is the thing itself, not a description."]],
+   [2,'In "Esther showed quiet courage before the angry king," which word is NOT an adjective?',["quiet","courage","angry","none of these"],1,"Courage is the thing itself, not a description."],
+ [2,"In \"A brave but frightened boy spoke\", how many adjectives describe the boy?",["one", "two", "three", "none"],1,"Look for every describing word."],
+ [2,"Why is that right?",["It is a guess", "Because look for every describing word", "It sounds better", "There is no rule"],1,"Say the rule back in your own words."]],
 
   10:[ // adverbs
    [0,'Which word is an adverb? "He ran quickly."',["He","ran","quickly","."],2,"An adverb often tells HOW."],
@@ -103,7 +127,9 @@
    [1,'Which adverb tells WHEN?',["softly","yesterday","loudly","brightly"],1,"Not all adverbs end in -ly."],
    [1,'Which adverb tells WHERE?',["slowly","outside","gladly","quietly"],1,"Some adverbs name a place."],
    [1,'Which sentence contains an adverb?',["The tall tree swayed.","He waited patiently.","A red door opened.","The soup was hot."],1,"Look for a word describing the verb."],
-   [2,'In "The very tired boy walked home slowly," which word is an adverb describing an ADJECTIVE?',["very","tired","walked","slowly"],0,"'Very' tells you how tired."]],
+   [2,'In "The very tired boy walked home slowly," which word is an adverb describing an ADJECTIVE?',["very","tired","walked","slowly"],0,"'Very' tells you how tired."],
+ [2,"Which sentence uses an adverb?",["The slow train stopped.", "The train stopped slowly.", "The train was slow.", "Slow trains are late."],1,"An adverb tells how the action happened."],
+ [2,"Why is that right?",["It is a guess", "Because an adverb tells how the action happened", "It sounds better", "There is no rule"],1,"Say the rule back in your own words."]],
 
   11:[ // comparatives
    [0,'Fill in: "This rock is ___ than that one."',["heavy","heavier","heaviest","most heavy"],1,"Comparing two things uses -er."],
@@ -111,7 +137,9 @@
    [1,'Which is correct?',["more taller","tallerer","taller","most taller"],2,"Short words take -er alone."],
    [1,'Fill in: "This book is ___ than that one."',["interestinger","more interesting","most interesting","interestingest"],1,"Long adjectives use 'more'."],
    [1,'What is the comparative of "good"?',["gooder","more good","better","goodest"],2,"This one is irregular."],
-   [2,'Which sentence is correct?',["She is more kinder than him.","She is kinder than he is.","She is most kind than him.","She is kindest than him."],1,"Never use 'more' and -er together."]],
+   [2,'Which sentence is correct?',["She is more kinder than him.","She is kinder than he is.","She is most kind than him.","She is kindest than him."],1,"Never use 'more' and -er together."],
+ [2,"Which is correct?",["This is the goodest one.", "This is the better one of three.", "This is the best of the three.", "This is more best."],2,"Three or more takes the -est form."],
+ [2,"Why is that right?",["It is a guess", "Because three or more takes the -est form", "It sounds better", "There is no rule"],1,"Say the rule back in your own words."]],
 
   12:[ // superlatives
    [0,'Fill in: "Of all three, this one is the ___."',["big","bigger","biggest","more big"],2,"Three or more things use -est."],
@@ -119,7 +147,9 @@
    [1,'Fill in: "She is the ___ runner on the team."',["fast","faster","fastest","most fast"],2,"Comparing everyone on the team."],
    [1,'Fill in: "This is the ___ story in the book."',["beautifullest","more beautiful","most beautiful","beautifuller"],2,"Long adjectives use 'most'."],
    [1,'What is the superlative of "bad"?',["baddest","worse","worst","most bad"],2,"This one is irregular."],
-   [2,'Which sentence is correct?',["He is the most fastest boy.","He is the fastest boy.","He is the most fast boy.","He is the faster boy of all."],1,"Use one superlative form, not two."]],
+   [2,'Which sentence is correct?',["He is the most fastest boy.","He is the fastest boy.","He is the most fast boy.","He is the faster boy of all."],1,"Use one superlative form, not two."],
+ [2,"Why does \"hop\" become \"hopping\" and not \"hoping\"?",["it sounds better", "the short vowel needs the doubled consonant", "it is longer", "there is no reason"],1,"Doubling keeps the vowel short."],
+ [2,"Why is that right?",["It is a guess", "Because doubling keeps the vowel short", "It sounds better", "There is no rule"],1,"Say the rule back in your own words."]],
 
   /* ---- Unit 4 · The Careful Craftsman -------------------------------- */
   13:[ // coordinating conjunctions
@@ -128,7 +158,9 @@
    [1,'Which word shows a REASON? "It rained, ___ we stayed inside."',["but","or","so","yet"],2,"The rain caused the staying."],
    [1,'Which word offers a CHOICE? "You may read ___ draw."',["and","but","or","so"],2,"Pick one of the two."],
    [1,'Which sentence uses "but" correctly?',["I like apples but oranges.","I like apples, but I prefer oranges.","I like but apples oranges.","But I like apples oranges."],1,"'But' joins two complete ideas."],
-   [2,'Which conjunction best fits? "He had no money, ___ did he have a plan."',["nor","and","so","or"],0,"'Nor' continues a negative idea."]],
+   [2,'Which conjunction best fits? "He had no money, ___ did he have a plan."',["nor","and","so","or"],0,"'Nor' continues a negative idea."],
+ [2,"Which sentence joins two complete ideas correctly?",["He worked hard, he finished.", "He worked hard and he finished.", "He worked hard finished.", "Worked hard and finished."],1,"Two complete ideas need a joining word."],
+ [2,"Why is that right?",["It is a guess", "Because two complete ideas need a joining word", "It sounds better", "There is no rule"],1,"Say the rule back in your own words."]],
 
   14:[ // subordinating conjunctions
    [0,'Which word begins a dependent idea? "___ it rained, we stayed home."',["Because","And","But","So"],0,"It gives the reason."],
@@ -136,7 +168,9 @@
    [1,'Which word shows a condition?',["if","and","but","so"],0,"It sets up a maybe."],
    [1,'Fill in: "___ he was afraid, Daniel prayed anyway."',["Because","Although","So","And"],1,"The two ideas contrast."],
    [1,'Which sentence uses a subordinating conjunction?',["I ran and jumped.","I ran because I was late.","I ran, but I stopped.","I ran or walked."],1,"'Because' makes one idea depend on the other."],
-   [2,'Where does the comma go? "Before we eat we pray."',["Before, we eat we pray.","Before we eat, we pray.","Before we, eat we pray.","No comma needed."],1,"A dependent idea at the front is followed by a comma."]],
+   [2,'Where does the comma go? "Before we eat we pray."',["Before, we eat we pray.","Before we eat, we pray.","Before we, eat we pray.","No comma needed."],1,"A dependent idea at the front is followed by a comma."],
+ [2,"Which is a complete sentence?",["Running through the field.", "Because it rained.", "The boy ran.", "After the long day."],2,"A sentence needs a subject and a verb."],
+ [2,"Why is that right?",["It is a guess", "Because a sentence needs a subject and a verb", "It sounds better", "There is no rule"],1,"Say the rule back in your own words."]],
 
   15:[ // compound sentences
    [0,'Which is a compound sentence?',["The wind blew hard.","The wind blew, and the kite soared.","The strong cold wind.","Blowing very hard."],1,"Two complete ideas joined together."],
@@ -144,7 +178,9 @@
    [1,'Which sentence is compound?',["She sang and danced.","She sang, and he danced.","Singing and dancing.","The girl who sang."],1,"Each half must stand alone as a sentence."],
    [1,'Where does the comma go? "I finished my work and I went outside."',["I finished, my work and I went outside.","I finished my work, and I went outside.","I finished my work and, I went outside.","No comma needed."],1,"The comma goes before the joining word."],
    [1,'Which is NOT a compound sentence?',["He read, and she wrote.","We ate, but they left.","The tall boy ran home.","I called, so she answered."],2,"Only one complete idea here."],
-   [2,'Which correctly joins: "The sun set. The stars appeared."',["The sun set the stars appeared.","The sun set, the stars appeared.","The sun set, and the stars appeared.","The sun set and, the stars appeared."],2,"You need both a comma AND a joining word."]],
+   [2,'Which correctly joins: "The sun set. The stars appeared."',["The sun set the stars appeared.","The sun set, the stars appeared.","The sun set, and the stars appeared.","The sun set and, the stars appeared."],2,"You need both a comma AND a joining word."],
+ [2,"Which sentence is a question?",["Close the gate.", "The gate is closed.", "Did you close the gate?", "What a gate!"],2,"A question asks, and ends with a question mark."],
+ [2,"Why is that right?",["It is a guess", "Because a question asks, and ends with a question mark", "It sounds better", "There is no rule"],1,"Say the rule back in your own words."]],
 
   16:[ // complex sentences
    [0,'Which is a complex sentence?',["I ran and jumped.","When the bell rang, we lined up.","The dog barked loudly.","She sang, and he clapped."],1,"One part cannot stand alone."],
@@ -152,7 +188,9 @@
    [1,'Which sentence is complex?',["We ate dinner.","We ate dinner, and we prayed.","After we ate dinner, we prayed.","We ate and prayed."],2,"'After we ate dinner' depends on the rest."],
    [1,'Fill in to make it complex: "___ she practiced daily, she improved."',["And","Because","But","So"],1,"Show the cause."],
    [1,'Which sentence needs a comma?',["We prayed before we ate.","Before we ate we prayed.","We ate and prayed.","We prayed quietly."],1,"The dependent part comes first here."],
-   [2,'Which is BOTH compound and complex?',["I ran home.","When it rained, I ran home, and I dried off.","I ran home and dried off.","When it rained, I ran home."],1,"It has a dependent part AND two joined complete ideas."]],
+   [2,'Which is BOTH compound and complex?',["I ran home.","When it rained, I ran home, and I dried off.","I ran home and dried off.","When it rained, I ran home."],1,"It has a dependent part AND two joined complete ideas."],
+ [2,"Which sentence shows a command?",["Are you ready?", "Please shut the door.", "The door is shut.", "What a door!"],1,"A command tells someone to do something."],
+ [2,"Why is that right?",["It is a guess", "Because a command tells someone to do something", "It sounds better", "There is no rule"],1,"Say the rule back in your own words."]],
 
   /* ---- Unit 5 · Honest Words ----------------------------------------- */
   17:[ // capitalizing titles
@@ -161,7 +199,9 @@
    [1,'In a title, which kind of word usually stays lowercase?',["nouns","verbs","short words like 'the' and 'of' in the middle","adjectives"],2,"Small joining words stay small unless first."],
    [1,'Which is correct?',["Little house on the Prairie","Little House on the Prairie","little house on the prairie","Little House On The Prairie"],1,"'on' and 'the' stay lowercase in the middle."],
    [1,'Which is correct?',["a wrinkle in time","A Wrinkle in Time","A wrinkle In time","a Wrinkle in Time"],1,"First word always capitalized, even 'a'."],
-   [2,'Which is correct?',["the tale of two cities","The Tale Of Two Cities","The Tale of Two Cities","The tale of Two Cities"],2,"'of' stays lowercase; the rest are main words."]],
+   [2,'Which is correct?',["the tale of two cities","The Tale Of Two Cities","The Tale of Two Cities","The tale of Two Cities"],2,"'of' stays lowercase; the rest are main words."],
+ [2,"Which sentence is punctuated correctly?",["She said \"I will come.\"", "She said, \"I will come.\"", "She said, I will come.", "\"She said I will come.\""],1,"A comma comes before the quoted words."],
+ [2,"Why is that right?",["It is a guess", "Because a comma comes before the quoted words", "It sounds better", "There is no rule"],1,"Say the rule back in your own words."]],
 
   18:[ // commas in addresses
    [0,'Which is correct?',["Savannah Georgia","Savannah, Georgia","Savannah ,Georgia","Savannah Georgia,"],1,"A comma separates city and state."],
@@ -169,7 +209,9 @@
    [1,'Which is correct?',["We moved to Austin Texas last year.","We moved to Austin, Texas, last year.","We moved to Austin ,Texas last year.","We moved to, Austin Texas last year."],1,"Commas go both before and after the state."],
    [1,'Which date is punctuated correctly?',["June 4 2025","June 4, 2025","June, 4 2025","June 4 ,2025"],1,"Comma between day and year."],
    [1,'Which is correct?',["She was born on May 3, 2016, in Ohio.","She was born on May 3 2016 in Ohio.","She was born on May, 3, 2016 in Ohio.","She was born on May 3, 2016 in, Ohio."],0,"Comma after the year too."],
-   [2,'Which address line is correct?',["112 Oak Street Macon, Georgia","112 Oak Street, Macon, Georgia","112, Oak Street, Macon Georgia","112 Oak Street Macon Georgia"],1,"Commas separate street, city and state."]],
+   [2,'Which address line is correct?',["112 Oak Street Macon, Georgia","112 Oak Street, Macon, Georgia","112, Oak Street, Macon Georgia","112 Oak Street Macon Georgia"],1,"Commas separate street, city and state."],
+ [2,"Which needs a capital letter?",["the river", "the mississippi river", "a river", "rivers"],1,"Names of particular places are capitalised."],
+ [2,"Why is that right?",["It is a guess", "Because names of particular places are capitalised", "It sounds better", "There is no rule"],1,"Say the rule back in your own words."]],
 
   19:[ // commas in dialogue
    [0,'Which is correct?',['She said "I am ready."','She said, "I am ready."','She said "I am ready".','She, said "I am ready."'],1,"A comma comes before the quotation."],
@@ -177,7 +219,9 @@
    [1,'Which is correct?',['Mom asked, "Are you finished?"','Mom asked "Are you finished?"','Mom asked, "Are you finished"?','Mom, asked "Are you finished?"'],0,"Comma before, question mark inside."],
    [1,'Which is correct?',['"I will go," said Ruth, "if you come too."','"I will go" said Ruth "if you come too."','"I will go," said Ruth "if you come too."','"I will go" said Ruth, "if you come too."'],0,"A split quotation needs commas on both sides."],
    [1,'Where does the period go?',['"We are home."','"We are home".','"We are home"','We are home."'],0,"Punctuation stays inside the quotation marks."],
-   [2,'Which is correct?',['"Wait!" shouted David.','"Wait!," shouted David.','"Wait," shouted David!','"Wait"! shouted David.'],0,"An exclamation mark replaces the comma."]],
+   [2,'Which is correct?',['"Wait!" shouted David.','"Wait!," shouted David.','"Wait," shouted David!','"Wait"! shouted David.'],0,"An exclamation mark replaces the comma."],
+ [2,"Where does the comma belong? \"On Monday we left early\"",["after On", "after Monday", "after we", "no comma needed"],1,"An introductory phrase is followed by a comma."],
+ [2,"Why is that right?",["It is a guess", "Because an introductory phrase is followed by a comma", "It sounds better", "There is no rule"],1,"Say the rule back in your own words."]],
 
   20:[ // quotation marks
    [0,'What do quotation marks show?',["a question","someone's exact words","a list","a title of a book"],1,"They mark exactly what was said."],
@@ -185,7 +229,9 @@
    [1,'Which is punctuated correctly?',['Peter said, "I will follow you."',"Peter said, I will follow you.",'Peter said "I will follow you.',"Peter said I will follow you."],0,"Open and close the quotation."],
    [1,'Which sentence does NOT need quotation marks?',['He shouted, "Run!"',"He said that he would run.",'She asked, "Why?"','"Stop," he said.'],1,"Reporting what someone said, not quoting it."],
    [1,'Which title uses quotation marks correctly?',['I read the poem "The Road Not Taken."',"I read the poem The Road Not Taken.","I read the poem 'The Road Not Taken.","I read the poem The Road Not Taken\"."],0,"Short works like poems use quotation marks."],
-   [2,'Which is correct?',['"Did you hear," she whispered, "what he said?"','"Did you hear" she whispered "what he said?"','"Did you hear," she whispered "what he said?"','"Did you hear" she whispered, "what he said?"'],0,"Both halves of the split quote are punctuated."]],
+   [2,'Which is correct?',['"Did you hear," she whispered, "what he said?"','"Did you hear" she whispered "what he said?"','"Did you hear," she whispered "what he said?"','"Did you hear" she whispered, "what he said?"'],0,"Both halves of the split quote are punctuated."],
+ [2,"Which is correct?",["Its raining outside.", "It\u2019s raining outside.", "Its\u2019 raining outside.", "It raining outside."],1,"It\u2019s means it is."],
+ [2,"Why is that right?",["It is a guess", "Because it\u2019s means it is", "It sounds better", "There is no rule"],1,"Say the rule back in your own words."]],
 
   /* ---- Unit 6 · Belonging To ----------------------------------------- */
   21:[ // singular possessives
@@ -194,7 +240,9 @@
    [1,'Which is correct? "That is ___ backpack."',["James","James'","James's","Jameses"],2,"Even names ending in s usually add 's."],
    [1,'Which is correct?',["the childs toy","the child's toy","the childs' toy","the childes toy"],1,"One child owns it."],
    [1,"What does \"the teacher's desk\" mean?",["many teachers","the desk belongs to one teacher","the teacher is a desk","teachers and desks"],1,"Apostrophe-s shows ownership."],
-   [2,'Which sentence uses a possessive correctly?',["The birds nest is empty.","The bird's nest is empty.","The birds' nest is empty for one bird.","The birds nest's is empty."],1,"One bird, one nest."]],
+   [2,'Which sentence uses a possessive correctly?',["The birds nest is empty.","The bird's nest is empty.","The birds' nest is empty for one bird.","The birds nest's is empty."],1,"One bird, one nest."],
+ [2,"Which shows possession by more than one boy?",["the boy\u2019s coats", "the boys coats", "the boys\u2019 coats", "the boys\u2019s coats"],2,"Plural nouns take the apostrophe after the s."],
+ [2,"Why is that right?",["It is a guess", "Because plural nouns take the apostrophe after the s", "It sounds better", "There is no rule"],1,"Say the rule back in your own words."]],
 
   22:[ // plural possessives
    [0,'Which shows a bone belonging to MANY dogs?',["the dog's bone","the dogs' bone","the dogs bone","the dogses bone"],1,"Plural first, then just an apostrophe."],
@@ -202,7 +250,9 @@
    [1,'Which is correct? Many children own the toys.',["the childrens' toys","the children's toys","the childrens toys","the childrens's toys"],1,"'Children' is already plural without an s."],
    [1,"What is the difference between \"the boy's books\" and \"the boys' books\"?",["no difference","one boy vs. many boys","one book vs. many books","one is wrong"],1,"Where the apostrophe sits tells you how many owners."],
    [1,'Which is correct? Many men own the coats.',["the mens' coats","the men's coats","the mens coats","the man's coats"],1,"'Men' is already plural."],
-   [2,'Which sentence is correct?',["The three sister's dresses hung there.","The three sisters' dresses hung there.","The three sisters dresses hung there.","The three sisters's dresses hung there."],1,"Three sisters — apostrophe after the s."]],
+   [2,'Which sentence is correct?',["The three sister's dresses hung there.","The three sisters' dresses hung there.","The three sisters dresses hung there.","The three sisters's dresses hung there."],1,"Three sisters — apostrophe after the s."],
+ [2,"Which pronoun replaces \"Maya and I\" as the subject?",["us", "we", "them", "our"],1,"We does the action."],
+ [2,"Why is that right?",["It is a guess", "Because we does the action", "It sounds better", "There is no rule"],1,"Say the rule back in your own words."]],
 
   23:[ // pronoun-antecedent agreement
    [0,'Fill in: "Sarah lost ___ hat."',["his","her","their","its"],1,"Sarah is one girl."],
@@ -210,7 +260,9 @@
    [1,'Fill in: "The dog wagged ___ tail."',["his","her","its","their"],2,"An animal we do not know the name of takes 'its'."],
    [1,'Which sentence agrees correctly?',["Every student brought their book.","Every student brought his book.","Every students brought their book.","Every student brought they book."],1,"'Every student' is singular."],
    [1,'Fill in: "The team celebrated ___ victory."',["their","its","his","her"],1,"A team is one group."],
-   [2,'Which sentence has an agreement error?',["The girls raised their hands.","Each boy raised his hand.","Everyone raised their hand.","The boy raised his hand."],2,"'Everyone' is singular in careful writing."]],
+   [2,'Which sentence has an agreement error?',["The girls raised their hands.","Each boy raised his hand.","Everyone raised their hand.","The boy raised his hand."],2,"'Everyone' is singular in careful writing."],
+ [2,"Which sentence uses the pronoun correctly?",["Her and me went.", "She and I went.", "Her and I went.", "Me and her went."],1,"Use the subject pronouns."],
+ [2,"Why is that right?",["It is a guess", "Because use the subject pronouns", "It sounds better", "There is no rule"],1,"Say the rule back in your own words."]],
 
   24:[ // its vs it's
    [0,'Which means "it is"?',["its","it's","its'","its's"],1,"The apostrophe replaces the missing letter."],
@@ -218,7 +270,9 @@
    [1,'Fill in: "The bird built ___ nest."',["it's","its","its'","it is"],1,"The nest belongs to the bird."],
    [1,'Which sentence is correct?',["Its a beautiful day.","It's a beautiful day.","Its' a beautiful day.","It is'nt a beautiful day."],1,"Try replacing it with 'it is'."],
    [1,'Which sentence is correct?',["The dog lost it's collar.","The dog lost its collar.","The dog lost its' collar.","The dog lost it is collar."],1,"Possessive 'its' has no apostrophe."],
-   [2,'Which sentence uses BOTH correctly?',["Its raining and the cat lost it's toy.","It's raining and the cat lost its toy.","Its' raining and the cat lost its toy.","It's raining and the cat lost it's toy."],1,"One means 'it is', the other shows belonging."]],
+   [2,'Which sentence uses BOTH correctly?',["Its raining and the cat lost it's toy.","It's raining and the cat lost its toy.","Its' raining and the cat lost its toy.","It's raining and the cat lost it's toy."],1,"One means 'it is', the other shows belonging."],
+ [2,"In \"The team lost its game\", what does \"its\" refer to?",["the game", "the team", "the players", "nothing"],1,"Its shows the game belongs to the team."],
+ [2,"Why is that right?",["It is a guess", "Because its shows the game belongs to the team", "It sounds better", "There is no rule"],1,"Say the rule back in your own words."]],
 
   /* ---- Unit 7 · Roots and Branches ----------------------------------- */
   25:[ // prefixes un-, re-, pre-
@@ -227,7 +281,9 @@
    [1,'What does "preview" mean?',["view again","not view","view before","view badly"],2,"'pre-' means before."],
    [1,'Which word means "not kind"?',["rekind","prekind","unkind","kindness"],2,"Add the prefix meaning not."],
    [1,'Which word means "to heat before"?',["reheat","unheat","preheat","heater"],2,"You do it ahead of time."],
-   [2,'In "The unprepared student had to redo the test," what does "unprepared" mean?',["prepared again","not prepared","prepared before","preparing"],1,"'un-' reverses the meaning."]],
+   [2,'In "The unprepared student had to redo the test," what does "unprepared" mean?',["prepared again","not prepared","prepared before","preparing"],1,"'un-' reverses the meaning."],
+ [2,"What does the prefix in \"unbroken\" do?",["makes it plural", "reverses the meaning", "makes it past tense", "adds an action"],1,"Un- means not."],
+ [2,"Why is that right?",["It is a guess", "Because un- means not", "It sounds better", "There is no rule"],1,"Say the rule back in your own words."]],
 
   26:[ // prefixes dis-, mis-, non-
    [0,'What does "disagree" mean?',["agree again","not agree","agree before","agree loudly"],1,"'dis-' means not or the opposite."],
@@ -235,7 +291,9 @@
    [1,'What does "nonfiction" mean?',["fiction again","not fiction","fiction before","bad fiction"],1,"'non-' means not."],
    [1,'Which word means "to behave wrongly"?',["rebehave","misbehave","nonbehave","prebehave"],1,"Add the prefix meaning wrongly."],
    [1,'Which word means "not honest"?',["rehonest","prehonest","dishonest","honestly"],2,"'dis-' reverses it."],
-   [2,'Which prefix would you add to "place" to mean "put in the wrong spot"?',["re-","dis-","non-","mis-"],3,"Wrongly placed."]],
+   [2,'Which prefix would you add to "place" to mean "put in the wrong spot"?',["re-","dis-","non-","mis-"],3,"Wrongly placed."],
+ [2,"What does the suffix in \"helpless\" mean?",["full of help", "without help", "helping again", "more help"],1,"-less means without."],
+ [2,"Why is that right?",["It is a guess", "Because -less means without", "It sounds better", "There is no rule"],1,"Say the rule back in your own words."]],
 
   27:[ // suffixes -ful, -less, -ness
    [0,'What does "hopeful" mean?',["without hope","full of hope","hope again","not hope"],1,"'-ful' means full of."],
@@ -243,7 +301,9 @@
    [1,'What does "-ness" do to a word?',["makes it an action","makes it a quality or state","makes it negative","makes it plural"],1,"Kind becomes kindness — the quality itself."],
    [1,'Which word means "without fear"?',["fearful","fearless","fearness","refear"],1,"'-less' means without."],
    [1,'Which word means "the state of being dark"?',["darkful","darkless","darkness","redark"],2,"'-ness' names the state."],
-   [2,'"Her thankfulness was endless." Which suffix means "without"?',["-ful","-ness","-less","none"],2,"Endless means without end."]],
+   [2,'"Her thankfulness was endless." Which suffix means "without"?',["-ful","-ness","-less","none"],2,"Endless means without end."],
+ [2,"\"Rebuild\" means to",["build badly", "build again", "stop building", "build first"],1,"Re- means again."],
+ [2,"Why is that right?",["It is a guess", "Because re- means again", "It sounds better", "There is no rule"],1,"Say the rule back in your own words."]],
 
   28:[ // context clues
    [0,'"The arid desert had no water for miles." What does "arid" mean?',["wet","very dry","cold","crowded"],1,"The sentence tells you there is no water."],
@@ -251,7 +311,9 @@
    [1,'"The path was treacherous, and two hikers slipped." What does "treacherous" mean?',["safe","dangerous","short","flat"],1,"People slipped on it."],
    [1,'"She spoke in a timid voice, barely above a whisper." What does "timid" mean?',["loud","shy","angry","fast"],1,"Barely a whisper tells you."],
    [1,'"The ancient oak had stood for four hundred years." What does "ancient" mean?',["small","very old","new","dead"],1,"Four hundred years is the clue."],
-   [2,'"Despite the tumult outside, the chapel stayed calm." What does "tumult" mean?',["silence","noisy confusion","darkness","cold"],1,"'Despite' signals the opposite of calm."]],
+   [2,'"Despite the tumult outside, the chapel stayed calm." What does "tumult" mean?',["silence","noisy confusion","darkness","cold"],1,"'Despite' signals the opposite of calm."],
+ [2,"Which word means the opposite of \"careful\"?",["carefully", "careless", "caring", "carefulness"],1,"-less removes the quality."],
+ [2,"Why is that right?",["It is a guess", "Because -less removes the quality", "It sounds better", "There is no rule"],1,"Say the rule back in your own words."]],
 
   /* ---- Unit 8 · More Than It Says ------------------------------------ */
   29:[ // literal vs nonliteral
@@ -260,7 +322,9 @@
    [1,'"The room was an oven." What does this really mean?',["the room had an oven","the room was very hot","the room was for baking","the room was small"],1,"Ovens are hot."],
    [1,'"She was drowning in paperwork." What does this mean?',["she fell in water","she had a great deal of paperwork","she lost her papers","she was swimming"],1,"Too much to handle."],
    [1,'Which sentence is nonliteral?',["The sun rose at six.","My backpack weighs a ton.","We walked two miles.","She read the book."],1,"A backpack cannot really weigh 2,000 pounds."],
-   [2,'"His words cut deeper than any knife." What does this mean?',["he used a knife","his words hurt badly","he was cooking","he was sharp"],1,"Words can wound without touching."]],
+   [2,'"His words cut deeper than any knife." What does this mean?',["he used a knife","his words hurt badly","he was cooking","he was sharp"],1,"Words can wound without touching."],
+ [2,"\"He was over the moon\" most likely means he was",["floating", "very happy", "lost", "cold"],1,"An idiom does not mean its literal words."],
+ [2,"Why is that right?",["It is a guess", "Because an idiom does not mean its literal words", "It sounds better", "There is no rule"],1,"Say the rule back in your own words."]],
 
   30:[ // idioms
    [0,'What does "it\'s raining cats and dogs" mean?',["animals are falling","it is raining hard","the pets are outside","it is not raining"],1,"An idiom does not mean what it says."],
@@ -268,7 +332,9 @@
    [1,'What does "hold your tongue" mean?',["grab your tongue","stay quiet","speak louder","eat something"],1,"It is about not speaking."],
    [1,'What does "a piece of cake" mean?',["dessert","something easy","something sweet","a small amount"],1,"Nothing to do with baking."],
    [1,'What does "let the cat out of the bag" mean?',["free a cat","reveal a secret","go shopping","make a mess"],1,"It is about telling something."],
-   [2,'"Bite off more than you can chew" means:',["eat too fast","take on too much","chew carefully","be hungry"],1,"It is about taking on tasks, not food."]],
+   [2,'"Bite off more than you can chew" means:',["eat too fast","take on too much","chew carefully","be hungry"],1,"It is about taking on tasks, not food."],
+ [2,"\"The wind whispered\" is an example of",["a fact", "giving a thing human action", "a question", "a command"],1,"Writers describe things as if they were people."],
+ [2,"Why is that right?",["It is a guess", "Because writers describe things as if they were people", "It sounds better", "There is no rule"],1,"Say the rule back in your own words."]],
 
   31:[ // similes and metaphors
    [0,'Which sentence is a simile?',["The moon was a silver coin.","She was as quiet as a mouse.","He ran fast.","The dog barked."],1,"A simile uses 'like' or 'as'."],
@@ -276,7 +342,9 @@
    [1,'Which sentence is a metaphor?',["He is as brave as a lion.","He is a lion in battle.","He fought like a lion.","He saw a lion."],1,"A metaphor says one thing IS another."],
    [1,'"Her smile was sunshine." This is a:',["simile","metaphor","idiom","fact"],1,"No 'like' or 'as' — it says it IS."],
    [1,'"The clouds were like cotton balls." This is a:',["simile","metaphor","idiom","literal statement"],0,"'Like' makes it a simile."],
-   [2,'Which is a metaphor, not a simile?',["Life is like a race.","Faith is an anchor.","He runs like the wind.","She sings like a bird."],1,"It states it directly with no 'like' or 'as'."]],
+   [2,'Which is a metaphor, not a simile?',["Life is like a race.","Faith is an anchor.","He runs like the wind.","She sings like a bird."],1,"It states it directly with no 'like' or 'as'."],
+ [2,"\"As quiet as a mouse\" is a comparison using",["is", "as", "and", "but"],1,"A simile compares using like or as."],
+ [2,"Why is that right?",["It is a guess", "Because a simile compares using like or as", "It sounds better", "There is no rule"],1,"Say the rule back in your own words."]],
 
   32:[ // shades of meaning
    [0,'Which word means the MOST happy?',["glad","pleased","overjoyed","content"],2,"Some words are stronger than others."],
@@ -284,7 +352,9 @@
    [1,'Which word is stronger than "big"?',["large","enormous","medium","small"],1,"Enormous is far bigger than big."],
    [1,'Which word shows the most fear?',["nervous","terrified","uneasy","concerned"],1,"Rank them from mild to strong."],
    [1,'Which word is gentler than "shouted"?',["screamed","yelled","said","hollered"],2,"The quietest option."],
-   [2,'Put in order from weakest to strongest: chuckle, laugh, roar.',["roar, laugh, chuckle","chuckle, laugh, roar","laugh, chuckle, roar","chuckle, roar, laugh"],1,"Start with the quietest sound."]],
+   [2,'Put in order from weakest to strongest: chuckle, laugh, roar.',["roar, laugh, chuckle","chuckle, laugh, roar","laugh, chuckle, roar","chuckle, roar, laugh"],1,"Start with the quietest sound."],
+ [2,"Which sentence uses a nonliteral meaning?",["The box was heavy.", "My heart sank.", "The dog barked.", "She ran fast."],1,"Hearts do not literally sink."],
+ [2,"Why is that right?",["It is a guess", "Because hearts do not literally sink", "It sounds better", "There is no rule"],1,"Say the rule back in your own words."]],
 
   /* ---- Unit 9 · Tell It Well ----------------------------------------- */
   33:[ // taking notes
@@ -293,7 +363,9 @@
    [1,'Which is the BEST note from: "Bees pollinate about one-third of the food we eat."',["Bees pollinate about one-third of the food we eat.","Bees — pollinate ~1/3 of our food","Bees are nice insects","Food is important"],1,"Short, in your words, keeps the key fact."],
    [1,'What should you always record along with a note?',["the weather","where the fact came from","your mood","the page color"],1,"You need to credit the source."],
    [1,'Which belongs in notes for a report on eagles?',["My favorite color is blue","Eagles can see four times farther than humans","I like birds","Birds are everywhere"],1,"A specific, relevant fact."],
-   [2,'You find the same fact in two different books. This means the fact is:',["definitely false","more likely reliable","not worth using","too common"],1,"Two independent sources agreeing is a good sign."]],
+   [2,'You find the same fact in two different books. This means the fact is:',["definitely false","more likely reliable","not worth using","too common"],1,"Two independent sources agreeing is a good sign."],
+ [2,"Which is the best source for a report on Georgia rivers?",["a story about a boy fishing", "a state geography book", "a poem about water", "a comic"],1,"Use a source written to inform."],
+ [2,"Why is that right?",["It is a guess", "Because use a source written to inform", "It sounds better", "There is no rule"],1,"Say the rule back in your own words."]],
 
   34:[ // sorting evidence
    [0,'Which is a FACT?',["Dogs are the best pets.","Dogs have four legs.","Dogs are cuter than cats.","Everyone should own a dog."],1,"A fact can be checked."],
@@ -301,7 +373,9 @@
    [1,'Your report says eagles hunt fish. Which note supports it?',["Eagles are beautiful","Eagles catch fish with their talons","I saw an eagle once","Eagles live in trees"],1,"It directly backs the claim."],
    [1,'Which note does NOT belong in a report on the water cycle?',["Water evaporates into vapor","Clouds form when vapor cools","My uncle likes rain","Rain falls as precipitation"],2,"A personal preference is not evidence."],
    [1,'What should you do with a fact that contradicts your point?',["hide it","ignore it","mention it honestly","delete the report"],2,"Honest writing deals with the whole picture."],
-   [2,'Two sources disagree about a date. What is the best next step?',["pick the one you like","check a third reliable source","use neither","guess the middle"],1,"Go find more evidence."]],
+   [2,'Two sources disagree about a date. What is the best next step?',["pick the one you like","check a third reliable source","use neither","guess the middle"],1,"Go find more evidence."],
+ [2,"A note in your own words from a book is called a",["quotation", "paraphrase", "title", "heading"],1,"A paraphrase restates it in your own words."],
+ [2,"Why is that right?",["It is a guess", "Because a paraphrase restates it in your own words", "It sounds better", "There is no rule"],1,"Say the rule back in your own words."]],
 
   35:[ // paragraphs that build
    [0,'What does a topic sentence do?',["ends the paragraph","tells the main idea","adds a detail","asks a question"],1,"It says what the paragraph is about."],
@@ -309,7 +383,9 @@
    [1,'Which sentence would NOT belong in a paragraph about honey bees?',["Bees live in hives.","Bees make honey.","My bike is red.","Bees pollinate flowers."],2,"Stay on topic."],
    [1,'What is the job of a concluding sentence?',["add a new idea","wrap up the main point","ask a question","start the topic"],1,"It closes the paragraph."],
    [1,'Which transition word signals an ADDED point?',["however","although","furthermore","instead"],2,"It adds rather than contrasts."],
-   [2,'In a three-paragraph report, what usually goes in the FIRST paragraph?',["the conclusion","the introduction with your main idea","the strongest evidence","a list of sources"],1,"Tell the reader what you will show."]],
+   [2,'In a three-paragraph report, what usually goes in the FIRST paragraph?',["the conclusion","the introduction with your main idea","the strongest evidence","a list of sources"],1,"Tell the reader what you will show."],
+ [2,"Which sentence gives evidence rather than opinion?",["Rivers are the best.", "The river is 400 miles long.", "Rivers are pretty.", "I like rivers."],1,"Evidence can be checked."],
+ [2,"Why is that right?",["It is a guess", "Because evidence can be checked", "It sounds better", "There is no rule"],1,"Say the rule back in your own words."]],
 
   36:[ // reporting and presenting
    [0,'When reporting aloud, you should speak:',["as fast as possible","clearly at an understandable pace","very quietly","only in a whisper"],1,"Your listener has to follow you."],
@@ -317,7 +393,9 @@
    [1,'What is a good reason to add a visual display?',["to fill time","to help listeners picture the idea","to hide mistakes","to make it longer"],1,"Visuals support understanding."],
    [1,'A listener asks a question you cannot answer. The best response is:',["make something up","say you do not know and offer to find out","ignore them","change the subject"],1,"Honesty is better than a guess."],
    [1,'When listening to someone else report, you should:',["interrupt often","listen for the main idea and supporting details","look away","talk to a neighbor"],1,"Listening well is a skill too."],
-   [2,'Which question best builds on a speaker\'s idea about recycling?',["What is your favorite color?","How much waste does recycling actually save?","Are you finished?","Can I go next?"],1,"It asks for more on the same topic."]]
+   [2,'Which question best builds on a speaker\'s idea about recycling?',["What is your favorite color?","How much waste does recycling actually save?","Are you finished?","Can I go next?"],1,"It asks for more on the same topic."],
+ [2,"Which sentence best closes a paragraph?",["And then I stopped.", "So the wall held because every family built its own part.", "The end.", "That is all I know."],1,"A closing sentence ties the point together."],
+ [2,"Why is that right?",["It is a guess", "Because a closing sentence ties the point together", "It sounds better", "There is no rule"],1,"Say the rule back in your own words."]]
   };
 
   function setFor(week){

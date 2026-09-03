@@ -14,44 +14,54 @@
  * ==========================================================================*/
 (function(){
 
-  /* week: [twelve words] — the pattern for each week is named in the spine. */
+  /* week: [fourteen words] — the pattern for each week is named in the spine.
+   *
+   * TWELVE AT GRADE LEVEL, THEN TWO STRETCH WORDS. The last two of every list
+   * follow the same pattern as the rest but sit a step beyond it: longer, or
+   * with the pattern buried mid-word rather than at the end. Week 9's short-o
+   * list ends on "approach" and "overflow"; week 24's forgiveness list ends on
+   * "forgive" and "forgiven".
+   *
+   * The drill draws eight words at random, so a stretch word appears often
+   * enough to be learned and rarely enough that a hard list never becomes a
+   * wall of hard words. Missing one of them is not a failed week. */
   const LISTS = {
-    1:["cat","hand","stop","desk","jump","grass","clock","stamp","truck","list","past","gift"],
-    2:["black","frog","climb","brave","train","dress","spill","stand","think","blend","crust","plant"],
-    3:["make","name","gate","rain","stay","paint","brave","trail","chase","plate","today","afraid"],
-    4:["tree","seed","clean","dream","field","piece","between","really","people","either","reason","believe"],
-    5:["books","boxes","wishes","glasses","brushes","dishes","foxes","classes","churches","benches","lunches","branches"],
-    6:["children","mice","geese","feet","teeth","women","men","oxen","sheep","deer","leaves","knives"],
-    7:["action","station","nation","motion","fiction","mission","session","caution","portion","question","direction","attention"],
-    8:["find","light","night","might","right","child","mild","sight","bright","tight","flight","kindness"],
-    9:["hope","stone","boat","coach","grow","slow","window","yellow","below","float","toast","alone"],
-    10:["slowly","quickly","gladly","kindly","softly","loudly","bravely","quietly","politely","carefully","suddenly","honestly"],
-    11:["faster","stronger","kinder","brighter","fastest","strongest","kindest","brightest","happier","happiest","earlier","earliest"],
-    12:["running","hopping","sitting","stopped","planned","begged","swimming","shopping","dropped","hugged","winner","bigger"],
-    13:["farm","start","sharp","garden","north","storm","short","corner","market","forest","morning","important"],
-    14:["her","bird","turn","first","third","hurt","perfect","person","circle","purple","further","service"],
-    15:["out","loud","round","found","cloud","house","brown","crown","down","town","mountain","around"],
-    16:["oil","coin","point","join","boy","joy","toy","enjoy","voice","choice","spoil","destroy"],
-    17:["know","write","lamb","thumb","knee","wrong","comb","knife","wrist","climb","listen","castle"],
-    18:["city","circle","cent","pencil","center","cake","corn","cup","because","certain","practice","distance"],
-    19:["giant","gentle","germ","magic","change","garden","goat","guess","large","village","strange","danger"],
-    20:["sunshine","baseball","birthday","something","everyone","outside","daylight","notebook","classroom","afternoon","grandmother","understand"],
-    21:["dog's","girl's","boy's","James's","teacher's","mother's","brother's","friend's","bird's","church's","sister's","neighbor's"],
-    22:["don't","can't","won't","isn't","didn't","haven't","it's","they're","we'll","I'm","you're","shouldn't"],
-    23:["their","there","they're","your","you're","its","it's","to","too","two","hear","here"],
-    24:["knew","new","right","write","some","sum","would","wood","by","buy","know","no"],
-    25:["unhappy","unfair","unkind","undo","rewrite","return","replay","repeat","preview","prepare","pretend","prevent"],
-    26:["disagree","dislike","disappear","dishonest","mistake","misspell","misplace","misbehave","nonsense","nonstop","nonfiction","nonliving"],
-    27:["careful","joyful","thankful","hopeful","helpless","hopeless","fearless","endless","kindness","darkness","sadness","gentleness"],
-    28:["comfortable","valuable","enjoyable","reasonable","movement","payment","moment","argument","agreement","statement","treatment","government"],
-    29:["adventure","important","different","remember","together","beautiful","wonderful","dangerous","exciting","suddenly","several","especially"],
-    30:["decided","surprised","imagine","continue","describe","discover","probably","actually","attention","opinion","favorite","interesting"],
-    31:["through","though","enough","tough","cough","laugh","caught","taught","bought","brought","thought","daughter"],
-    32:["friend","said","again","great","break","been","done","come","some","were","where","every"],
-    33:["evidence","research","source","detail","notes","summary","topic","support","explain","describe","compare","conclude"],
-    34:["reason","example","because","therefore","however","although","finally","meanwhile","instead","besides","include","organize"],
-    35:["before","after","during","beneath","above","below","beside","between","behind","toward","across","beyond"],
-    36:["believe","because","beautiful","friend","enough","different","important","question","separate","tomorrow","weather","favorite"]
+    1:["cat","hand","stop","desk","jump","grass","clock","stamp","truck","list","past","gift","swift","blunt"],
+    2:["black","frog","climb","brave","train","dress","spill","stand","think","blend","crust","plant","strict","sprint"],
+    3:["make","name","gate","rain","stay","paint","brave","trail","chase","plate","today","afraid","escape","remain"],
+    4:["tree","seed","clean","dream","field","piece","between","really","people","either","reason","believe","achieve","receive"],
+    5:["books","boxes","wishes","glasses","brushes","dishes","foxes","classes","churches","benches","lunches","branches","sandwiches","tomatoes"],
+    6:["children","mice","geese","feet","teeth","women","men","oxen","sheep","deer","leaves","knives","loaves","hooves"],
+    7:["action","station","nation","motion","fiction","mission","session","caution","portion","question","direction","attention","decision","invention"],
+    8:["find","light","night","might","right","child","mild","sight","bright","tight","flight","kindness","frightful","delightful"],
+    9:["hope","stone","boat","coach","grow","slow","window","yellow","below","float","toast","alone","approach","overflow"],
+    10:["slowly","quickly","gladly","kindly","softly","loudly","bravely","quietly","politely","carefully","suddenly","honestly","patiently","obviously"],
+    11:["faster","stronger","kinder","brighter","fastest","strongest","kindest","brightest","happier","happiest","earlier","earliest","heavier","heaviest"],
+    12:["running","hopping","sitting","stopped","planned","begged","swimming","shopping","dropped","hugged","winner","bigger","forgetting","preferred"],
+    13:["farm","start","sharp","garden","north","storm","short","corner","market","forest","morning","important","craftsman","workshop"],
+    14:["her","bird","turn","first","third","hurt","perfect","person","circle","purple","further","service","measure","treasure"],
+    15:["out","loud","round","found","cloud","house","brown","crown","down","town","mountain","around","shoulder","neighbour"],
+    16:["oil","coin","point","join","boy","joy","toy","enjoy","voice","choice","spoil","destroy","patient","ancient"],
+    17:["know","write","lamb","thumb","knee","wrong","comb","knife","wrist","climb","listen","castle","honest","honesty"],
+    18:["city","circle","cent","pencil","center","cake","corn","cup","because","certain","practice","distance","promise","promised"],
+    19:["giant","gentle","germ","magic","change","garden","goat","guess","large","village","strange","danger","character","courage"],
+    20:["sunshine","baseball","birthday","something","everyone","outside","daylight","notebook","classroom","afternoon","grandmother","understand","everything","somebody"],
+    21:["dog's","girl's","boy's","James's","teacher's","mother's","brother's","friend's","bird's","church's","sister's","neighbor's","belong","belonging"],
+    22:["don't","can't","won't","isn't","didn't","haven't","it's","they're","we'll","I'm","you're","shouldn't","burden","carried"],
+    23:["their","there","they're","your","you're","its","it's","to","too","two","hear","here","neighbour","neighbourly"],
+    24:["knew","new","right","write","some","sum","would","wood","by","buy","know","no","forgive","forgiven"],
+    25:["unhappy","unfair","unkind","undo","rewrite","return","replay","repeat","preview","prepare","pretend","prevent","prefix","suffix"],
+    26:["disagree","dislike","disappear","dishonest","mistake","misspell","misplace","misbehave","nonsense","nonstop","nonfiction","nonliving","rebuild","unbroken"],
+    27:["careful","joyful","thankful","hopeful","helpless","hopeless","fearless","endless","kindness","darkness","sadness","gentleness","helpful","helpless"],
+    28:["comfortable","valuable","enjoyable","reasonable","movement","payment","moment","argument","agreement","statement","treatment","government","meaning","meaningful"],
+    29:["adventure","important","different","remember","together","beautiful","wonderful","dangerous","exciting","suddenly","several","especially","compare","comparing"],
+    30:["decided","surprised","imagine","continue","describe","discover","probably","actually","attention","opinion","favorite","interesting","signal","signature"],
+    31:["through","though","enough","tough","cough","laugh","caught","taught","bought","brought","thought","daughter","prudent","prudence"],
+    32:["friend","said","again","great","break","been","done","come","some","were","where","every","prepare","prevented"],
+    33:["evidence","research","source","detail","notes","summary","topic","support","explain","describe","compare","conclude","evidence","reference"],
+    34:["reason","example","because","therefore","however","although","finally","meanwhile","instead","besides","include","organize","generous","generously"],
+    35:["before","after","during","beneath","above","below","beside","between","behind","toward","across","beyond","witness","witnessed"],
+    36:["believe","because","beautiful","friend","enough","different","important","question","separate","tomorrow","weather","favorite","faithful","faithfully"]
   };
 
   const PATTERN = {}; // filled from the spine so the drill can name the pattern

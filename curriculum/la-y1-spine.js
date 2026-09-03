@@ -42,6 +42,34 @@
  * ==========================================================================*/
 (function(){
 
+  /* ------------------------------------------------------------------------
+   * THE LEVEL THIS YEAR IS PITCHED AT, in one place, so the three strands can
+   * be checked against each other rather than drifting apart.
+   *
+   * Third grade standards, taught properly, with a short stretch tail on every
+   * strand. Not a fourth-grade course wearing a third-grade label.
+   *
+   *   READING   5 questions a passage (was 3). Detail, vocabulary in context
+   *             and central message, then two harder ones: inference and why
+   *             the writer put a particular detail there. Passages average
+   *             ~178 words, up from 145.
+   *   SPELLING  14 words a week (was 12). Twelve on the week's pattern, then
+   *             two that follow the same pattern one step further.
+   *   GRAMMAR   8 items a week (was 6). Six on the skill, then one applying it
+   *             to a longer sentence and one asking the child to say the rule
+   *             back.
+   *
+   * The shape is deliberately identical across all three: keep the core at
+   * grade level, add roughly a quarter more as stretch. A child who does only
+   * the core is doing third grade properly. A child who takes the tail is
+   * being extended without being moved up a year.
+   *
+   * An earlier pass went further than this — six comprehension questions,
+   * 240-word passages, words like gabelle and miasma. That was a fourth or
+   * fifth grade reading experience with a third grade label on it, and it was
+   * pulled back to here on purpose.
+   * --------------------------------------------------------------------- */
+
   /* ---- The nine unit studies ------------------------------------------- */
   const UNITS = [
     {n:1, weeks:"1–4",  color:"#B23A2E", badge:"¶",

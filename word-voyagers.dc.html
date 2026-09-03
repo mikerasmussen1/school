@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=2026-09-03-1654"></script>
-  <script data-build>window.__BUILD__="2026-09-03-1654";</script>
+<script src="./support.js?v=2026-09-03-1658"></script>
+  <script data-build>window.__BUILD__="2026-09-03-1658";</script>
 </head>
 <body>
 <x-dc>
@@ -36,26 +36,26 @@
   .book-title{font-family:'Fraunces',serif;font-size:1rem;color:var(--brick-dark);margin:0 0 3px}
   .done-banner{text-align:center;padding:22px;margin-top:6px;background:var(--forest-light);border-radius:8px;color:#2E4E38}
 </style>
-<script src="./curriculum/sync.js?v=2026-09-03-1654"></script>
-<script src="./curriculum/students.js?v=2026-09-03-1654"></script>
-<script src="./curriculum/subjects.js?v=2026-09-03-1654"></script>
-<script src="./curriculum/question-types.js?v=2026-09-03-1654"></script>
-<script src="./curriculum/la-y1-spine.js?v=2026-09-03-1654"></script>
-<script src="./curriculum/la-y1-words.js?v=2026-09-03-1654"></script>
-<script src="./curriculum/la-y1-grammar.js?v=2026-09-03-1654"></script>
-<script src="./curriculum/la-y1-reading.js?v=2026-09-03-1654"></script>
-<script src="./curriculum/la-y1-tasks.js?v=2026-09-03-1654"></script>
-<script src="./curriculum/la-books.js?v=2026-09-03-1654"></script>
-<script src="./curriculum/la-y2-spine.js?v=2026-09-03-1654"></script>
-<script src="./curriculum/la-y2-words.js?v=2026-09-03-1654"></script>
-<script src="./curriculum/la-y2-grammar.js?v=2026-09-03-1654"></script>
-<script src="./curriculum/la-y2-reading.js?v=2026-09-03-1654"></script>
-<script src="./curriculum/la-y2-tasks.js?v=2026-09-03-1654"></script>
-<script src="./curriculum/la-books-y2.js?v=2026-09-03-1654"></script>
-<script src="./curriculum/la-quotes.js?v=2026-09-03-1654"></script>
-<script src="./curriculum/la-mastery.js?v=2026-09-03-1654"></script>
-<script src="./curriculum/la-calendar.js?v=2026-09-03-1654"></script>
-<script src="./curriculum/la-grader.js?v=2026-09-03-1654"></script>
+<script src="./curriculum/sync.js?v=2026-09-03-1658"></script>
+<script src="./curriculum/students.js?v=2026-09-03-1658"></script>
+<script src="./curriculum/subjects.js?v=2026-09-03-1658"></script>
+<script src="./curriculum/question-types.js?v=2026-09-03-1658"></script>
+<script src="./curriculum/la-y1-spine.js?v=2026-09-03-1658"></script>
+<script src="./curriculum/la-y1-words.js?v=2026-09-03-1658"></script>
+<script src="./curriculum/la-y1-grammar.js?v=2026-09-03-1658"></script>
+<script src="./curriculum/la-y1-reading.js?v=2026-09-03-1658"></script>
+<script src="./curriculum/la-y1-tasks.js?v=2026-09-03-1658"></script>
+<script src="./curriculum/la-books.js?v=2026-09-03-1658"></script>
+<script src="./curriculum/la-y2-spine.js?v=2026-09-03-1658"></script>
+<script src="./curriculum/la-y2-words.js?v=2026-09-03-1658"></script>
+<script src="./curriculum/la-y2-grammar.js?v=2026-09-03-1658"></script>
+<script src="./curriculum/la-y2-reading.js?v=2026-09-03-1658"></script>
+<script src="./curriculum/la-y2-tasks.js?v=2026-09-03-1658"></script>
+<script src="./curriculum/la-books-y2.js?v=2026-09-03-1658"></script>
+<script src="./curriculum/la-quotes.js?v=2026-09-03-1658"></script>
+<script src="./curriculum/la-mastery.js?v=2026-09-03-1658"></script>
+<script src="./curriculum/la-calendar.js?v=2026-09-03-1658"></script>
+<script src="./curriculum/la-grader.js?v=2026-09-03-1658"></script>
 </helmet>
 
 <div style="min-height:100vh;display:flex;flex-direction:column">
@@ -302,6 +302,31 @@
                 <div style="text-align:center;padding:18px 10px">
                   <div style="font-family:'Fraunces',serif;font-size:2rem;color:var(--forest);font-weight:700">{{ rvFinal }}</div>
                   <div class="muted">{{ rvPct }}</div>
+                </div>
+              </sc-if>
+            </sc-if>
+
+            <sc-if value="{{ aApprove }}" hint-placeholder-val="{{ false }}">
+              <div style="background:var(--gold-light);color:#7A5A0C;border-radius:8px;padding:12px 15px;margin-bottom:14px;font-size:.93rem">
+                Hand the paper and this screen to a grown-up. They mark the page they can hold, not the photograph.
+              </div>
+              <div class="box">
+                <h3 style="font-size:1rem;margin-bottom:3px">What to look for</h3>
+                <p class="muted" style="margin:0 0 10px">{{ approveFocus }}</p>
+                <div style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:6px">Mark it</div>
+                <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px">
+                  <sc-for list="{{ approveGrades }}" as="g" hint-placeholder-count="4">
+                    <button onClick="{{ g.onClick }}" style="{{ g.style }}">{{ g.label }}</button>
+                  </sc-for>
+                </div>
+                <div style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:5px">A note for him (optional)</div>
+                <input value="{{ approveNote }}" onChange="{{ approveSetNote }}" placeholder="e.g. watch your descenders" style="width:100%;padding:10px 12px;font-size:.95rem;border:1px solid var(--rule);border-radius:6px;font-family:'Public Sans',sans-serif">
+                <div style="margin-top:13px"><button onClick="{{ approveSubmit }}" style="{{ approveSubmitStyle }}">{{ approveSubmitLabel }}</button></div>
+                <p class="muted" style="margin-top:9px;font-size:.85rem">{{ approveHint }}</p>
+              </div>
+              <sc-if value="{{ approveHasPrev }}" hint-placeholder-val="{{ false }}">
+                <div class="box" style="margin-top:12px;border-left:4px solid var(--forest)">
+                  <strong>Already marked:</strong> {{ approvePrev }}
                 </div>
               </sc-if>
             </sc-if>
@@ -694,6 +719,26 @@
       </div>
 
       <div class="card">
+        <h2>Handwriting you have marked</h2>
+        <p class="muted">Every page a grown-up looked at, most recent first. "Not yet" is not a failure — it records that the page is worth doing again.</p>
+        <sc-if value="{{ hasApprovals }}" hint-placeholder-val="{{ false }}">
+          <sc-for list="{{ approvalList }}" as="a" hint-placeholder-count="4">
+            <div style="display:flex;gap:12px;align-items:baseline;padding:8px 0;border-bottom:1px solid var(--rule)">
+              <div style="{{ a.gradeStyle }}">{{ a.grade }}</div>
+              <div style="flex:1;min-width:0">
+                <div style="font-size:.93rem">{{ a.where }}</div>
+                <div class="muted" style="font-size:.85rem">{{ a.note }}</div>
+              </div>
+              <div class="muted" style="font-size:.82rem;white-space:nowrap">{{ a.when }}</div>
+            </div>
+          </sc-for>
+        </sc-if>
+        <sc-if value="{{ noApprovals }}" hint-placeholder-val="{{ true }}">
+          <div class="muted">Nothing marked yet. On Thursdays your child brings the page to you as the last step before the day closes.</div>
+        </sc-if>
+      </div>
+
+      <div class="card">
         <h2>Things flagged for you</h2>
         <p class="muted">A drill that could not be cleared in three tries stops looping and gets flagged here instead of trapping your child. This is the list of those moments.</p>
         <sc-if value="{{ hasFlags }}" hint-placeholder-val="{{ false }}">
@@ -753,6 +798,8 @@ class Component extends DCLogic {
     remediation:null,       // {items, note, round, isFinalRound}
     stuck:(function(){ try{ return JSON.parse(localStorage.getItem("la.stuck")||"{}"); }catch(e){ return {}; } })(),
     stepResult:(function(){ try{ return JSON.parse(localStorage.getItem("la.stepResult")||"{}"); }catch(e){ return {}; } })(),
+    approvals:(function(){ try{ return JSON.parse(localStorage.getItem("la.approvals")||"{}"); }catch(e){ return {}; } })(),
+    approveGrade:null, approveNote:"",
     excused:(function(){ try{ return JSON.parse(localStorage.getItem("la.excused")||"{}"); }catch(e){ return {}; } })(),
     gz:null, sq:null, rq:null, rv:null,
     asKind:"handwriting", asImage:null, asStatus:"idle", asResult:null, asError:""
@@ -793,7 +840,9 @@ class Component extends DCLogic {
       if(d.stepDone) patch.stepDone=d.stepDone;
       if(d.stuck)    patch.stuck=d.stuck;
       if(d.excused)  patch.excused=d.excused;
-      if(d.done)     patch.done=d.done;
+      if(d.done)      patch.done=d.done;
+      if(d.stepResult) patch.stepResult=d.stepResult;
+      if(d.approvals)  patch.approvals=d.approvals;
       if(Object.keys(patch).length) this.setState(patch);
     }).catch(()=>{});
   }
@@ -1016,7 +1065,8 @@ class Component extends DCLogic {
     const SY=window.__CURR&&window.__CURR.SYNC;
     if(SY) SY.save("la", {
       year:st.year, week:st.week, day:st.day,
-      stepDone:st.stepDone, stuck:st.stuck, excused:st.excused, done:st.done
+      stepDone:st.stepDone, stuck:st.stuck, excused:st.excused, done:st.done,
+      stepResult:st.stepResult, approvals:st.approvals
     });
     this.setState(patch);
   };
@@ -1064,9 +1114,9 @@ class Component extends DCLogic {
   cancelReset=()=>{ this.setState({resetArmed:false}); };
   doReset=()=>{
     this.pullEpoch=(this.pullEpoch||0)+1;   // invalidate any pull in flight
-    const KEYS=["la.stepDone","la.stuck","la.stepResult","la.done","la.excused","la.week","la.day"];
+    const KEYS=["la.stepDone","la.stuck","la.stepResult","la.approvals","la.done","la.excused","la.week","la.day"];
     KEYS.forEach(function(k){ try{ localStorage.removeItem(k); }catch(e){} });
-    const empty={stepDone:{}, stuck:{}, stepResult:{}, done:{}, excused:{}, week:1, day:"Mon"};
+    const empty={stepDone:{}, stuck:{}, stepResult:{}, approvals:{}, done:{}, excused:{}, week:1, day:"Mon"};
     this.setState({...empty, resetArmed:false, started:false, openStep:null,
                    gz:null, sq:null, rq:null, rv:null, remediation:null, round:1, lastResult:null});
     const SY=window.__CURR&&window.__CURR.SYNC;
@@ -1103,6 +1153,33 @@ class Component extends DCLogic {
    * something, or a previous version had ticked it. The score is now stored
    * with the step and shown next to it, so "Done" always has a number behind
    * it that the child and the parent can both check. */
+  /* A grown-up's mark on the real page. Stored beside the step, synced like
+   * everything else, and surfaced on the For Parents tab so a term's marks can
+   * be read back in one place. */
+  submitApproval=()=>{
+    const st=this.state;
+    if(!st.approveGrade) return;
+    const M=window.__CURR.LA_MASTERY;
+    const plan=M.dayPlan(st.year, st.week, st.day);
+    const step=plan.steps.filter(function(x){ return x.key==="approve"; })[0];
+    if(!step) return;
+    const k=st.year+":"+st.week+":"+this.stepKey(step);
+    const approvals={...(st.approvals||{}),
+      [k]:{grade:st.approveGrade, note:(st.approveNote||"").slice(0,200), at:Date.now()}};
+    try{ localStorage.setItem("la.approvals", JSON.stringify(approvals)); }catch(e){}
+    this.setState({approvals, approveGrade:null, approveNote:"", openStep:null});
+    this.syncSave({approvals});
+    this.completeStep(step);
+  };
+  approvalFor(){
+    const st=this.state;
+    const M=window.__CURR.LA_MASTERY;
+    const plan=M.dayPlan(st.year, st.week, st.day);
+    const step=plan.steps.filter(function(x){ return x.key==="approve"; })[0];
+    if(!step) return null;
+    return (st.approvals||{})[st.year+":"+st.week+":"+this.stepKey(step)]||null;
+  }
+
   recordResult=(step, score, total)=>{
     const k=this.state.year+":"+this.state.week+":"+this.stepKey(step);
     const stepResult={...(this.state.stepResult||{}), [k]:{score:score, total:total, at:Date.now()}};
@@ -1239,7 +1316,9 @@ class Component extends DCLogic {
        * deliberate press and stay as they were. */
       const res=self.resultFor(step);
       const flagged=self.isStepDone(step);
-      const done=(step.gate==="score") ? (!!res || self.isStepStuck(step)) : flagged;
+      const done=(step.gate==="score")   ? (!!res || self.isStepStuck(step))
+               : (step.gate==="approve") ? !!(self.state.approvals||{})[self.state.year+":"+self.state.week+":"+self.stepKey(step)]
+               : flagged;
       return {step:step, done:done, stuck:self.isStepStuck(step), result:res};
     });
     // first not-done index is the only actionable step
@@ -1528,12 +1607,46 @@ class Component extends DCLogic {
       /* Each step shows ITS OWN work. These were lumped together, so Friday's
        * speaking step showed Thursday's handwriting task and the week review
        * showed a task instead of its drill. */
+      aApprove: openStep==="approve",
       aTask:  openStep==="prompt" || openStep==="write",
       aSpeak: openStep==="speak",
       aRv:    openStep==="rv",
       aPhoto: openStep==="photo",
+      /* Parent marking. Four marks rather than a score out of ten, because a
+       * parent glancing at a handwriting page is making a judgement, not a
+       * measurement, and a number would pretend otherwise. "Not yet" is a real
+       * option and does not fail the day — it records that it needs doing
+       * again, which is the honest outcome. */
+      approveFocus: (hwTask && (hwTask.focus || hwTask.rubric))
+                    ? (hwTask.focus || hwTask.rubric)
+                    : "Letter shapes, spacing, and whether it was copied accurately.",
+      approveGrades: ["Not yet","Nearly","Good","Excellent"].map(function(g){
+        const on = st.approveGrade===g;
+        return {label:g, onClick:function(){ self.setState({approveGrade:g}); },
+          style:"font-family:'Public Sans',sans-serif;font-weight:600;font-size:.88rem;padding:9px 15px;"+
+            "border-radius:999px;cursor:pointer;border:1px solid "+(on?"var(--brick)":"var(--rule)")+
+            ";background:"+(on?"var(--brick)":"transparent")+";color:"+(on?"#fff":"var(--ink)")};
+      }),
+      approveNote: st.approveNote||"",
+      approveSetNote: function(e){ self.setState({approveNote:(e&&e.target)?e.target.value:""}); },
+      approveSubmit: this.submitApproval,
+      approveSubmitLabel: "Mark it and tick the day off",
+      approveSubmitStyle: this.btn("primary", !!st.approveGrade),
+      approveHint: st.approveGrade
+        ? "This records who marked it and when, and shows on the For Parents tab."
+        : "Choose a mark first.",
+      approveHasPrev: !!this.approvalFor(),
+      approvePrev: (function(){
+        const a=self.approvalFor();
+        if(!a) return "";
+        return a.grade + (a.note ? (" \u2014 \u201c"+a.note+"\u201d") : "") +
+               " (" + new Date(a.at).toLocaleDateString() + ")";
+      })(),
+
       assignCanTick:(function(){
         const stp=(plan.steps.filter(function(x){ return x.key===openStep; })[0])||null;
+        // Not the approve step: that one is completed by a grown-up choosing a
+        // mark, never by the generic tick, or the child could pass his own work.
         return !!stp && stp.gate==="ack";
       })(),
       assignTickLabel:(function(){
@@ -1577,6 +1690,21 @@ class Component extends DCLogic {
       armReset: this.armReset,
       cancelReset: this.cancelReset,
       doReset: this.doReset,
+      approvalList:(function(){
+        const A=st.approvals||{};
+        const COL={"Not yet":"var(--brick)","Nearly":"var(--gold)","Good":"var(--forest)","Excellent":"var(--forest)"};
+        return Object.keys(A).map(function(k){
+          const a=A[k], p=k.split(":");   // year:week:day:stepkey
+          return {grade:a.grade, at:a.at,
+            where:(p[0]==="y2"?"5th Grade":"3rd Grade")+" \u00b7 Week "+p[1],
+            note:a.note||"No note left.",
+            when:new Date(a.at).toLocaleDateString(),
+            gradeStyle:"flex:none;font-family:'Fraunces',serif;font-size:.9rem;font-weight:600;"+
+              "min-width:74px;color:"+(COL[a.grade]||"var(--ink)")};
+        }).sort(function(x,y){ return y.at-x.at; });
+      })(),
+      hasApprovals: Object.keys(st.approvals||{}).length>0,
+      noApprovals: Object.keys(st.approvals||{}).length===0,
       flagList: Object.keys(st.stuck).filter(function(k){ return st.stuck[k]; }).map(function(k){
         const parts=k.split(":");   // year:week:day:stepkey
         const NAMES={rq:"Reading comprehension", gz:"Grammar drill", sq:"Spelling drill", rv:"Week review"};

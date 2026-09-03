@@ -35,7 +35,7 @@
 
   /* [handwriting prompt, writing task, speaking task] */
   const T = {
-    1:["Copy this sentence exactly, then copy it again from memory and compare the two versions word by word. Mark every difference.",
+    1:["Copy this sentence exactly, including every mark of punctuation: \u201cWhatsoever thy hand findeth to do, do it with thy might.\u201d Then cover it, write it a second time from memory, and set the two versions side by side. Mark every difference you find, however small.",
        "Choose one paragraph from this week's passage. Write three claims about it, each followed by an exact quotation in quotation marks.",
        "Read a paragraph aloud to someone, then have them summarize it back. Correct anything they got wrong by pointing at the actual words."],
     2:["Write out five sentences from this week's passage that state something explicitly. Under each, write one inference you can reasonably draw.",

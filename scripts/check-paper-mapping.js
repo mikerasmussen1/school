@@ -76,6 +76,16 @@ function resolve(file, label) {
   return null;
 }
 
+// Numbered problems appear in THREE styles, one per tier, and matching only
+// the first is how a generator and a checker sharing this regex both went
+// blind to two thirds of every page:
+//   Warm-Up   font-size:9.5px   ">1</span>"    no trailing dot
+//   Core      font-size:10px    ">13.</span>"  trailing dot, hint span after
+//   Challenge font-size:10.5px  ">25.</span>"  trailing dot
+// The question runs from &nbsp; to the next tag, which stops before Core's
+// hint span and before the dotted answer rule.
+const PROBLEM_RX = /font-size:(?:9\.5|10|10\.5)px[^>]*>(\d+)\.?<\/span>(&nbsp;\s*)([^<]*)/g;
+
 const norm = s => String(s)
   .replace(/&nbsp;/g, " ").replace(/&times;/g, "×").replace(/&divide;/g, "÷")
   .replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">")
@@ -95,8 +105,8 @@ for (const file of fs.readdirSync(".").filter(f => /Worksheets\.dc\.html$/.test(
     const set = resolve(file, label);
     if (!set) { skipped.push(`${file}: "${label}"`); continue; }
     // printed problems: <span ...>N</span>&nbsp; QUESTION</div>
-    const printed = [...sec.matchAll(/font-size:9\.5px[^>]*>(\d+)<\/span>([\s\S]{0,220}?)<\/div>/g)]
-      .map(m => ({ n: +m[1], q: norm(m[2]) }));
+    const printed = [...sec.matchAll(PROBLEM_RX)]
+      .map(m => ({ n: +m[1], q: norm(m[3]) }));
     if (!printed.length) continue;
     pages++;
     const expect = sheetFor(set);

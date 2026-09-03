@@ -14,13 +14,19 @@
  * against work they were never asked to do.
  *
  * That is exactly what a grade-alignment pass across the banks did: ~1,300
- * items changed tier and 68 of 268 pages drifted. Rewriting the sheets by hand
+ * items changed tier and 135 of 268 pages drifted. Rewriting the sheets by hand
  * is both enormous and the wrong shape of job — the curriculum is the source
  * of truth and the sheet is the artifact, so the artifact should be generated.
  *
- * The ordering below is deliberately COPIED from check-paper-mapping.js rather
- * than re-derived, and the loader and id-resolver likewise, so a change to the
- * contract cannot leave the generator and the checker disagreeing about it.
+ * ON SHARING CODE WITH THE CHECKER, and its cost. The ordering, loader and
+ * id-resolver are copied from check-paper-mapping.js rather than re-derived,
+ * so the two cannot disagree about the contract. That is worth having, but it
+ * is not free and it bit hard once: both files matched only the Warm-Up number
+ * style, so this script rewrote a third of every page, left Core and Challenge
+ * stale, and the checker reported all 268 pages clean. Agreement is not
+ * correctness — two programs sharing a blind spot agree perfectly. Anything
+ * genuinely load-bearing here deserves an INDEPENDENT reading, not a re-run.
+ *
  * Only the question TEXT of an existing numbered problem is ever replaced; the
  * surrounding markup, the numbering, and the number of problems on a page are
  * left exactly as they are.
@@ -74,10 +80,20 @@ function resolve(file, label) {
 
 // Printed pages carry HTML entities; the checker decodes before comparing, so
 // encode on the way back out or a question containing & or < breaks the page.
+// Numbered problems appear in THREE styles, one per tier, and matching only
+// the first is how a generator and a checker sharing this regex both went
+// blind to two thirds of every page:
+//   Warm-Up   font-size:9.5px   ">1</span>"    no trailing dot
+//   Core      font-size:10px    ">13.</span>"  trailing dot, hint span after
+//   Challenge font-size:10.5px  ">25.</span>"  trailing dot
+// The question runs from &nbsp; to the next tag, which stops before Core's
+// hint span and before the dotted answer rule.
+const PROBLEM_RX = /font-size:(?:9\.5|10|10\.5)px[^>]*>(\d+)\.?<\/span>(&nbsp;\s*)([^<]*)/g;
+
 const enc = s => String(s)
   .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
-let files = 0, pages = 0, changed = 0, unresolved = [];
+let files = 0, pages = 0, changed = 0, unresolved = [], shortfall = [];
 for (const file of fs.readdirSync(".").filter(f => /Worksheets\.dc\.html$/.test(f))) {
   const html = fs.readFileSync(file, "utf8");
   // Walk section by section so a problem is only ever rewritten with the
@@ -91,16 +107,29 @@ for (const file of fs.readdirSync(".").filter(f => /Worksheets\.dc\.html$/.test(
     if (!set) { unresolved.push(`${file}: "${label}"`); return sec; }
     const expect = sheetFor(set);
     pages++;
-    return sec.replace(
-      /(font-size:9\.5px[^>]*>(\d+)<\/span>&nbsp;\s*)([\s\S]{0,220}?)(<\/div>)/g,
-      (whole, head, num, body, tail) => {
-        const want = expect[+num - 1];
-        if (!want) return whole;                 // printed past the bank: leave alone
-        const encoded = enc(want.q);
-        if (body.trim() === encoded.trim()) return whole;
-        touched++;
-        return head + encoded + tail;
-      });
+    let seen = 0;
+    const rewritten = sec.replace(PROBLEM_RX, (whole, num, gap, body) => {
+      seen++;
+      const want = expect[+num - 1];
+      if (!want) return whole;                 // printed past the bank: leave alone
+      const encoded = enc(want.q);
+      if (body.trim() === encoded.trim()) return whole;
+      touched++;
+      return whole.slice(0, whole.length - body.length) + encoded;
+    });
+    /* A styling change must never be able to narrow this silently again: the
+     * previous version of this script matched only the Warm-Up number style,
+     * so it rewrote a third of each page, left Core and Challenge stale, and
+     * the checker — sharing the same regex — reported every page clean.
+     *
+     * Reverse sides carry the tail of a set and legitimately hold only a few
+     * problems, so they are exempt; asserting on them would make this fire on
+     * every run and teach whoever sees it to ignore the warning. */
+    const isBack = /·\s*back\s*$/i.test(label) || /key\s*$/i.test(label);
+    if (!isBack && seen && seen < Math.min(expect.length, 12)) {
+      shortfall.push(`${file} · ${label}: matched ${seen} problems, expected at least ${Math.min(expect.length, 12)}`);
+    }
+    return rewritten;
   }).join("");
   if (touched) {
     changed += touched; files++;
@@ -110,4 +139,6 @@ for (const file of fs.readdirSync(".").filter(f => /Worksheets\.dc\.html$/.test(
 }
 console.log(`\n  ${pages} pages scanned, ${changed} problems ${WRITE ? "rewritten" : "to rewrite"} across ${files} files`);
 if (unresolved.length) console.log(`  unresolved labels (left untouched): ${unresolved.length}`);
+if (shortfall.length) { console.log(`\n  COVERAGE SHORTFALL on ${shortfall.length} page(s):`);
+  shortfall.slice(0,6).forEach(s => console.log("    "+s)); process.exitCode = 1; }
 if (!WRITE) console.log("  re-run with --write to apply");

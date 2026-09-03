@@ -148,9 +148,38 @@ const dcFiles = fs.readdirSync(".").filter(f => f.endsWith(".dc.html"));
 const PRINTABLE = /(Print Pack|Worksheets)\.dc\.html$/;
 const printable = dcFiles.filter(f => PRINTABLE.test(f));
 const screenOnly = dcFiles.filter(f => !PRINTABLE.test(f));
+/* Existing was not enough on its own: it asked only whether a PDF EXISTS.
+ * On 2026-09-03 all sixteen Year One PDFs were three days stale — the sheets
+ * had been regenerated and the PDFs never re-exported — and every check here
+ * stayed green because the files were present. That is the worst version of
+ * this bug, because the numbering is load-bearing: pOnPaper maps a printed
+ * problem NUMBER back through the CURRENT bank, so a child working from a
+ * stale sheet is marked wrong for work they got right.
+ *
+ * Freshness is judged by git, not mtime: a clone or a checkout rewrites mtime
+ * and would make every PDF look stale, while git records when the CONTENT of
+ * each side last changed. A PDF whose last commit predates its sheet's last
+ * commit has not been re-exported since the sheet moved. */
+const lastCommit = p => {
+  const r = require("child_process").spawnSync(
+    "git", ["log", "-1", "--format=%ct", "--", p], {encoding: "utf8"});
+  return r.status === 0 && r.stdout.trim() ? +r.stdout.trim() : null;
+};
 for (const f of printable) {
   const pdf = f.replace(/\.dc\.html$/, ".pdf");
-  fs.existsSync(pdf) ? pass(`${f} has a matching PDF`) : fail(`${f} has no matching ${pdf}`);
+  if (!fs.existsSync(pdf)) { fail(`${f} has no matching ${pdf}`); continue; }
+  const tHtml = lastCommit(f), tPdf = lastCommit(pdf);
+  // Uncommitted work on either side makes the comparison meaningless rather
+  // than wrong, so say so instead of passing or failing on stale information.
+  const dirty = require("child_process")
+    .spawnSync("git", ["status", "--porcelain", "--", f, pdf], {encoding: "utf8"})
+    .stdout.trim();
+  if (dirty) pass(`${f} has a matching PDF (uncommitted changes — freshness unchecked)`);
+  else if (tHtml === null || tPdf === null) pass(`${f} has a matching PDF (not yet committed)`);
+  else if (tPdf < tHtml)
+    fail(`${pdf} is STALE — "${f}" changed more recently. Re-export it: the printed ` +
+         `numbering must match the live bank or paper work is misgraded.`);
+  else pass(`${f} has a matching, up-to-date PDF`);
 }
 if (screenOnly.length) {
   console.log(`  ----  screen-only pages, no PDF expected: ${screenOnly.join(", ")}`);

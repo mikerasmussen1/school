@@ -3197,12 +3197,26 @@
     <sc-if value="{{ pSeqAhead }}" hint-placeholder-val="{{ true }}">
       <div style="font-size:12.5px;color:rgba(238,242,255,.45);margin-bottom:16px">{{ pSeqAheadNote }}</div>
     </sc-if>
+    <sc-if value="{{ pDayOn }}" hint-placeholder-val="{{ true }}">
+      <div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:6px">
+        <div style="font-family:Fredoka,sans-serif;font-size:19px;color:#EEF2FF">{{ pDayLabel }}</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:rgba(238,242,255,.45)">{{ pDayWhere }}</div>
+      </div>
+      <div style="font-size:12.5px;line-height:1.5;color:rgba(238,242,255,.45);margin-bottom:16px">{{ pDayCalendar }}</div>
+    </sc-if>
     <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:24px">
       <sc-for list="{{ pTierChips }}" as="tc" hint-placeholder-count="4">
-        <button onClick="{{ tc.go }}" style="{{ tc.style }}" style-hover="filter:brightness(1.2)">{{ tc.l }}</button>
+        <button onClick="{{ tc.go }}" style="{{ tc.style }}" style-hover="filter:brightness(1.2)">{{ tc.mark }} {{ tc.l }}</button>
       </sc-for>
       <span style="font-size:12.5px;color:rgba(238,242,255,.45);margin-left:6px">{{ pTierNote }}</span>
     </div>
+
+    <sc-if value="{{ pShortOfBar }}" hint-placeholder-val="{{ false }}">
+      <div style="background:rgba(251,191,36,.1);border:1px solid rgba(251,191,36,.35);border-radius:14px;padding:13px 16px;margin-bottom:18px;font-size:13.5px;line-height:1.5;color:rgba(238,242,255,.8)">{{ pBarNote }}</div>
+    </sc-if>
+    <sc-if value="{{ pStuck }}" hint-placeholder-val="{{ false }}">
+      <div style="background:rgba(167,139,250,.12);border:1px solid rgba(167,139,250,.4);border-radius:14px;padding:13px 16px;margin-bottom:18px;font-size:13.5px;line-height:1.5;color:rgba(238,242,255,.85)">{{ pStuckNote }}</div>
+    </sc-if>
 
     <!-- LEARN IT FIRST -->
     <sc-if value="{{ lHasLesson }}" hint-placeholder-val="{{ true }}">
@@ -3987,6 +4001,51 @@ class Component extends DCLogic {
   // The built missions. Everything unit-specific resolves through these.
   sets(){ return this.setsForWeek(this.state.uview, this.state.pweek||1); }
   curSet(){ const S=this.sets(); return S.find(s=>s.id===this.state.pset) || S[0]; }
+
+  /* TODAY'S MATHS, resolved the way Word Voyagers and Field Notes resolve
+   * theirs: the app works out what comes next instead of asking a child to
+   * assemble it from a Mission, a week, a set and a tier.
+   *
+   * math-sequence.js already computed all of this — frontier(), summary(),
+   * next — and it was only being used to TINT out-of-order sets. The number
+   * was right there and nothing opened on it.
+   *
+   * "The sets ARE the days" (math-sequence.js): 180 of them in third grade,
+   * 175 in fifth, five a week. That is the same 180 school days the Word
+   * Voyagers calendar anchors, which is why the day number below is a real
+   * school day and not an invented counter. */
+  mathToday(){
+    const SEQ=window.__CURR&&window.__CURR.MATH_SEQ;
+    const CAL=window.__CURR&&window.__CURR.LA_CALENDAR;
+    if(!SEQ||typeof this.allSetsForCurriculum!=="function") return null;
+    const all=this.allSetsForCurriculum()||[];
+    if(!all.length) return null;
+    const sum=SEQ.summary(all, this.state.pChecked||{});
+    const next=sum.next||null;
+    const at=next&&next.p ? next.p : null;
+    return {
+      total:sum.total, doneCount:sum.done, complete:sum.complete,
+      next:next, unit:at?at.u:null, week:at?at.w:null,
+      // Day n of 180 — the position in the year, not the count finished, so
+      // it still reads correctly for a child who worked one out of order.
+      dayNumber:Math.min(sum.total, sum.frontier+1),
+      /* The calendar says which school day it IS; the frontier says which one
+       * he can work on. Word Voyagers keeps those separate on purpose, and
+       * deliberately stopped turning the gap into a verdict — a child two days
+       * behind should be told the date, not scolded. Same here. */
+      calendarText:(CAL&&CAL.progress)?CAL.progress(sum.frontier).text:""
+    };
+  }
+
+  /* Jump straight to the day that is actually next. Used by the maths card and
+   * by Practice Bay whenever nothing has been chosen this session. */
+  goToday=()=>{
+    const t=this.mathToday();
+    if(!t||!t.next){ this.nav({view:"practice"}); return; }
+    this.nav({view:"practice", pset:t.next.id,
+      uview:t.unit||this.state.uview, unit:t.unit||this.state.unit,
+      pweek:t.week||1, pTier:null});
+  };
   // Which curriculum is on screen: the pilot a teacher is viewing, else the
   // signed-in pilot's own. Everything unit-shaped resolves through this.
   curricId(){
@@ -5986,6 +6045,7 @@ class Component extends DCLogic {
      * enrichment duels are Challenge-only — open on the first tier they DO
      * have rather than on a blank page. A null pTier means "not chosen yet",
      * so it snaps to the first tier instead of needing a migration. */
+    const TODAY=this.mathToday();
     const tiersPresent=[0,1,2].filter(t=>set.items.some(it=>it.t===t));
     const tf=tiersPresent.indexOf(st.pTier)>=0 ? st.pTier
            : (tiersPresent.length?tiersPresent[0]:0);
@@ -6096,14 +6156,48 @@ class Component extends DCLogic {
               : "Look again at the ones marked ✗. ")+
             "Fix them and check again — there's no limit on tries.",
       pStatusColor: onPaper ? "#A78BFA" : !checked ? "rgba(238,242,255,.6)" : allRight ? "#4ADE80" : "#FBBF24",
+      /* THE DAY, named. Field Notes says "1 Investigate, 2 Explain, 3 Check";
+       * Word Voyagers hands over an ordered checklist. Maths had a Mission
+       * number, a week tab and a set chip, and left the child to assemble
+       * "what am I doing today" out of the three. */
+      pDayLabel: TODAY ? ("Day "+TODAY.dayNumber+" of "+TODAY.total) : "",
+      pDayWhere: TODAY&&TODAY.unit ? ("Mission 0"+TODAY.unit+" · Week "+TODAY.week) : "",
+      pDayCalendar: TODAY ? TODAY.calendarText : "",
+      pDayOn: !!TODAY,
+
+      /* Tiers as a checklist with an end, not chips that filter a view. They
+       * already run in a fixed order; a tick on the finished ones is what
+       * turns three buttons into one session with a end to reach. */
       pTierChips:tiersPresent.map(t=>({k:t, l:TIERS[t].name, c:TIERS[t].color})).map(o=>({
-        l:o.l, go:()=>this.setState({pTier:o.k}),
+        l:o.l,
+        mark:(st.pChecked[set.id+"|"+o.k]||st.pChecked[set.id+"|all"])?"✓":(tf===o.k?"▸":"·"),
+        go:()=>this.setState({pTier:o.k}),
         style:`font-family:Fredoka,sans-serif;font-size:13.5px;padding:8px 16px;border-radius:999px;cursor:pointer;transition:.15s;`+
           (tf===o.k?`background:${o.c};border:1px solid ${o.c};color:#0B0F24`:`background:transparent;border:1px solid rgba(255,255,255,.16);color:rgba(238,242,255,.6)`)
       })),
       pTierNote: tiersPresent.length>1
         ? "In order: "+tiersPresent.map(t=>TIERS[t].name).join(" → ")+"."
         : "",
+
+      /* MASTERY, and the valve that stops it becoming a trap.
+       *
+       * Word Voyagers draws the line at 0.80 and says plainly that finishing
+       * a drill with three of six does not complete the step. Maths counted a
+       * set done the moment it was graded at all, which is a progress bar
+       * rather than an assessment. Same bar here, read off the tier the child
+       * is actually on.
+       *
+       * The valve matters more than the bar. After three attempts the gate
+       * opens anyway and the day is flagged for a grown-up, because three
+       * failures in a row is a teaching problem rather than a discipline one,
+       * and re-serving the same items does not fix it. Locking a nine-year-old
+       * out of the rest of his morning over it would be worse than useless. */
+      pShortOfBar: checked && visible.length>0 && (score/Math.max(1,visible.length)) < 0.80 && runs < 3,
+      pBarNote: (checked && visible.length>0)
+        ? ("That is "+score+" of "+visible.length+". Four out of five is the bar — another go at the ones marked ✗ and it counts.")
+        : "",
+      pStuck: runs >= 3 && checked && visible.length>0 && (score/Math.max(1,visible.length)) < 0.80,
+      pStuckNote: "Three goes at this one. That is not you being slow — it means this needs explaining a different way. Go and get a grown-up, then carry on to the next day.",
       pItems:visible.map(({it,i})=>{
         const v=ans[i]==null?"":ans[i], right=isRight(i,it), shown=checked;
         const tier=TIERS[it.t];
@@ -6737,7 +6831,7 @@ class Component extends DCLogic {
       goUnit6:()=>this.openUnit(6),
       goUnit7:()=>this.openUnit(7),
       goUnit8:()=>this.openUnit(8),
-      goPractice:()=>this.nav({view:"practice"}),
+      goPractice:this.goToday,
 
       tabs:[["map","Mission Map"],["unit","Mission 0"+st.uview],["practice","Practice Bay"],["hq","Teacher HQ"]].map(([v,label])=>({
         label, style:this.tabStyle(st.view===v), go:()=>this.setState({view:v})

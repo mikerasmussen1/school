@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=2026-09-03-1626"></script>
-  <script data-build>window.__BUILD__="2026-09-03-1626";</script>
+<script src="./support.js?v=2026-09-03-1629"></script>
+  <script data-build>window.__BUILD__="2026-09-03-1629";</script>
 </head>
 <body>
 <x-dc>
@@ -30,16 +30,16 @@
   ol.steps{margin:8px 0 0;padding-left:22px} ol.steps li{margin-bottom:7px}
   ul.mats{margin:6px 0 0;padding-left:20px} ul.mats li{margin-bottom:3px;font-size:.93rem}
 </style>
-<script src="./curriculum/students.js?v=2026-09-03-1626"></script>
-<script src="./curriculum/sync.js?v=2026-09-03-1626"></script>
-<script src="./curriculum/subjects.js?v=2026-09-03-1626"></script>
-<script src="./curriculum/question-types.js?v=2026-09-03-1626"></script>
-<script src="./curriculum/science-y3-spine.js?v=2026-09-03-1626"></script>
-<script src="./curriculum/science-y5-spine.js?v=2026-09-03-1626"></script>
-<script src="./curriculum/science-lessons.js?v=2026-09-03-1626"></script>
-<script src="./curriculum/science-quiz.js?v=2026-09-03-1626"></script>
-<script src="./curriculum/la-calendar.js?v=2026-09-03-1626"></script>
-<script src="./curriculum/science-shopping.js?v=2026-09-03-1626"></script>
+<script src="./curriculum/students.js?v=2026-09-03-1629"></script>
+<script src="./curriculum/sync.js?v=2026-09-03-1629"></script>
+<script src="./curriculum/subjects.js?v=2026-09-03-1629"></script>
+<script src="./curriculum/question-types.js?v=2026-09-03-1629"></script>
+<script src="./curriculum/science-y3-spine.js?v=2026-09-03-1629"></script>
+<script src="./curriculum/science-y5-spine.js?v=2026-09-03-1629"></script>
+<script src="./curriculum/science-lessons.js?v=2026-09-03-1629"></script>
+<script src="./curriculum/science-quiz.js?v=2026-09-03-1629"></script>
+<script src="./curriculum/la-calendar.js?v=2026-09-03-1629"></script>
+<script src="./curriculum/science-shopping.js?v=2026-09-03-1629"></script>
 </helmet>
 
 <div style="min-height:100vh;display:flex;flex-direction:column">
@@ -47,7 +47,7 @@
     <div style="max-width:900px;margin:0 auto;display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding-bottom:14px">
       <div style="flex:1;min-width:180px">
         <div style="font-family:'Fraunces',serif;font-weight:700;font-size:21px">Field Notes</div>
-        <div style="font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(244,247,243,.55);margin-top:2px">{{ headerLine }}</div>
+        <div style="font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(244,247,243,.55);margin-top:2px">{{ headerLine }} <span style="opacity:.5" title="Which build this page is. If it does not match the newest change, the page is cached.">&middot; {{ buildStamp }}</span></div>
       </div>
       <div style="font-family:'Public Sans',sans-serif;font-weight:600;font-size:.78rem;padding:6px 12px;border-radius:999px;border:1px solid rgba(250,246,236,.25);color:rgba(250,246,236,.8)">{{ gradeLabel }}</div>
       <button onClick="{{ goPrevWeek }}" style="{{ navStyle }}">&lsaquo;</button>
@@ -511,6 +511,10 @@ class Component extends DCLogic {
     }
 
     return Object.assign({
+      /* Shown in the header so "am I on a cached copy?" is answerable on
+       * THIS page. It was only on the main page, which meant a stale subject
+       * page could not be spotted at all. */
+      buildStamp:(window.__BUILD__||"dev"),
       headerLine:(S.GRADE?S.GRADE.label:"")+" \u00b7 "+(S.GRADE?S.GRADE.set:"")+" \u00b7 one lesson a week",
       weekLabel:"Week "+st.week+" of 36",
       // Labelled by boy, from curriculum/students.js.

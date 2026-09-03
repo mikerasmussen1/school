@@ -157,16 +157,18 @@
 
   /* Steps that do not apply to a particular grade.
    *
-   * Third grade drops the photo-and-feedback step. A machine reading a
-   * photograph of a third grader's handwriting is the least reliable version
-   * of the least reliable thing it does, and Thursday already ends with a
-   * grown-up marking the actual page — which is better evidence, and was
-   * always going to be the real judgement. Fifth grade keeps it: the writing
-   * is more legible and the feedback more useful there.
+   * NEITHER GRADE PHOTOGRAPHS ITS HANDWRITING ANY MORE. A model reading a
+   * photograph of a child's page was always the least reliable thing here, and
+   * Thursday already ends with a grown-up marking the actual paper — better
+   * evidence, and the judgement that was going to count anyway. Third grade
+   * lost it first; fifth grade now follows.
+   *
+   * The step is skipped rather than deleted from PLANS, so restoring it for a
+   * grade is one entry in this table rather than an edit to the day.
    *
    * The steps are renumbered after filtering, so the checklist reads 1..n with
    * no gap where the removed step was. */
-  const SKIP = { y1: ["photo"] };
+  const SKIP = { y1: ["photo"], y2: ["photo"] };
 
   function dayPlan(grade, week, day){
     const Y = curr(grade);

@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=2026-09-03-1858"></script>
-  <script data-build>window.__BUILD__="2026-09-03-1858";</script>
-  <script src="./curriculum/freshness.js?v=2026-09-03-1858"></script>
+<script src="./support.js?v=2026-09-03-1859"></script>
+  <script data-build>window.__BUILD__="2026-09-03-1859";</script>
+  <script src="./curriculum/freshness.js?v=2026-09-03-1859"></script>
 </head>
 <body>
 <x-dc>
@@ -38,27 +38,27 @@
   .book-title{font-family:'Fraunces',serif;font-size:1rem;color:var(--brick-dark);margin:0 0 3px}
   .done-banner{text-align:center;padding:22px;margin-top:6px;background:var(--forest-light);border-radius:8px;color:#2E4E38}
 </style>
-<script src="./curriculum/sync.js?v=2026-09-03-1858"></script>
-<script src="./curriculum/students.js?v=2026-09-03-1858"></script>
-<script src="./curriculum/subjects.js?v=2026-09-03-1858"></script>
-<script src="./curriculum/question-types.js?v=2026-09-03-1858"></script>
-<script src="./curriculum/la-y1-spine.js?v=2026-09-03-1858"></script>
-<script src="./curriculum/la-y1-words.js?v=2026-09-03-1858"></script>
-<script src="./curriculum/la-y1-grammar.js?v=2026-09-03-1858"></script>
-<script src="./curriculum/la-y1-reading.js?v=2026-09-03-1858"></script>
-<script src="./curriculum/la-y1-tasks.js?v=2026-09-03-1858"></script>
-<script src="./curriculum/la-books.js?v=2026-09-03-1858"></script>
-<script src="./curriculum/la-y2-spine.js?v=2026-09-03-1858"></script>
-<script src="./curriculum/la-y2-words.js?v=2026-09-03-1858"></script>
-<script src="./curriculum/la-y2-grammar.js?v=2026-09-03-1858"></script>
-<script src="./curriculum/la-y2-reading.js?v=2026-09-03-1858"></script>
-<script src="./curriculum/la-y2-tasks.js?v=2026-09-03-1858"></script>
-<script src="./curriculum/la-books-y2.js?v=2026-09-03-1858"></script>
-<script src="./curriculum/la-quotes.js?v=2026-09-03-1858"></script>
-<script src="./curriculum/la-daily-fix.js?v=2026-09-03-1858"></script>
-<script src="./curriculum/la-mastery.js?v=2026-09-03-1858"></script>
-<script src="./curriculum/la-calendar.js?v=2026-09-03-1858"></script>
-<script src="./curriculum/la-grader.js?v=2026-09-03-1858"></script>
+<script src="./curriculum/sync.js?v=2026-09-03-1859"></script>
+<script src="./curriculum/students.js?v=2026-09-03-1859"></script>
+<script src="./curriculum/subjects.js?v=2026-09-03-1859"></script>
+<script src="./curriculum/question-types.js?v=2026-09-03-1859"></script>
+<script src="./curriculum/la-y1-spine.js?v=2026-09-03-1859"></script>
+<script src="./curriculum/la-y1-words.js?v=2026-09-03-1859"></script>
+<script src="./curriculum/la-y1-grammar.js?v=2026-09-03-1859"></script>
+<script src="./curriculum/la-y1-reading.js?v=2026-09-03-1859"></script>
+<script src="./curriculum/la-y1-tasks.js?v=2026-09-03-1859"></script>
+<script src="./curriculum/la-books.js?v=2026-09-03-1859"></script>
+<script src="./curriculum/la-y2-spine.js?v=2026-09-03-1859"></script>
+<script src="./curriculum/la-y2-words.js?v=2026-09-03-1859"></script>
+<script src="./curriculum/la-y2-grammar.js?v=2026-09-03-1859"></script>
+<script src="./curriculum/la-y2-reading.js?v=2026-09-03-1859"></script>
+<script src="./curriculum/la-y2-tasks.js?v=2026-09-03-1859"></script>
+<script src="./curriculum/la-books-y2.js?v=2026-09-03-1859"></script>
+<script src="./curriculum/la-quotes.js?v=2026-09-03-1859"></script>
+<script src="./curriculum/la-daily-fix.js?v=2026-09-03-1859"></script>
+<script src="./curriculum/la-mastery.js?v=2026-09-03-1859"></script>
+<script src="./curriculum/la-calendar.js?v=2026-09-03-1859"></script>
+<script src="./curriculum/la-grader.js?v=2026-09-03-1859"></script>
 </helmet>
 
 <div style="min-height:100vh;display:flex;flex-direction:column">
@@ -1593,9 +1593,12 @@ class Component extends DCLogic {
       /* Photo grading is fifth grade only. Removing it from the checklist but
        * leaving the buttons on the Writing tab would have left the very
        * control that was asked to be removed still sitting on screen. */
-      photoGrading: st.year!=="y1",
-      noPhotoGrading: st.year==="y1",
-      noPhotoNote: "No photo needed for this one. Write the page by hand, then take the paper to a grown-up on Thursday \u2014 they mark the page itself, which is better than a photograph of it.",
+      /* No grade photographs its handwriting now, so the capture and grade
+       * buttons are off everywhere. Kept as flags rather than deleting the
+       * markup, so turning it back on for a grade is a one-line change. */
+      photoGrading: false,
+      noPhotoGrading: true,
+      noPhotoNote: "No photo needed. Write the page by hand, then take the paper to a grown-up on Thursday \u2014 they mark the page itself, which tells you more than a photograph of it can.",
       rdText:passage.text, rdReadAloud:passage.readAloud,
       /* Paragraphs as real elements rather than one string relying on a CSS
        * white-space rule. The Today tab was using a class that does not exist
@@ -1655,10 +1658,19 @@ class Component extends DCLogic {
        * — pointing the child at a button that was removed. The instruction is
        * rewritten for that grade rather than editing 36 records, because fifth
        * grade still photographs and the task text is shared. */
+      /* Every handwriting task still ends with "take a photo of the page and
+       * press Grade this work". That button is gone in BOTH grades now, so the
+       * instruction is rewritten at the point of display for both rather than
+       * edited into 72 records. */
       asInstructions:(function(){
         const t=String(asTask.instructions||"");
-        if(st.year!=="y1") return t;
-        return t.replace(/\s*Then take a photo of the page and press Grade this work\.?/i,
+        /* The two grades word it differently — third says "Then take a photo
+         * of the page and press Grade this work", fifth says "Then photograph
+         * the page and press Grade this work". Matching only the third grade
+         * phrasing left all 36 fifth grade weeks still pointing at a button
+         * that is gone, which is the bug this replaced in the first place. One
+         * pattern covering both, and the harness checks every week of both. */
+        return t.replace(/\s*Then (take a photo of|photograph) the page and press Grade this work\.?/i,
                          " When you have finished, take the page to a grown-up to mark.");
       })(),
       asPrompt:asTask.prompt,

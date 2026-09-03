@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=8cfb11f"></script>
+<script src="./support.js?v=0dca528"></script>
 </head>
 <body>
 <x-dc>
@@ -29,15 +29,15 @@
   ol.steps{margin:8px 0 0;padding-left:22px} ol.steps li{margin-bottom:7px}
   ul.mats{margin:6px 0 0;padding-left:20px} ul.mats li{margin-bottom:3px;font-size:.93rem}
 </style>
-<script src="./curriculum/students.js?v=8cfb11f"></script>
-<script src="./curriculum/subjects.js?v=8cfb11f"></script>
-<script src="./curriculum/question-types.js?v=8cfb11f"></script>
-<script src="./curriculum/science-y3-spine.js?v=8cfb11f"></script>
-<script src="./curriculum/science-y5-spine.js?v=8cfb11f"></script>
-<script src="./curriculum/science-lessons.js?v=8cfb11f"></script>
-<script src="./curriculum/science-quiz.js?v=8cfb11f"></script>
-<script src="./curriculum/la-calendar.js?v=8cfb11f"></script>
-<script src="./curriculum/science-shopping.js?v=8cfb11f"></script>
+<script src="./curriculum/students.js?v=0dca528"></script>
+<script src="./curriculum/subjects.js?v=0dca528"></script>
+<script src="./curriculum/question-types.js?v=0dca528"></script>
+<script src="./curriculum/science-y3-spine.js?v=0dca528"></script>
+<script src="./curriculum/science-y5-spine.js?v=0dca528"></script>
+<script src="./curriculum/science-lessons.js?v=0dca528"></script>
+<script src="./curriculum/science-quiz.js?v=0dca528"></script>
+<script src="./curriculum/la-calendar.js?v=0dca528"></script>
+<script src="./curriculum/science-shopping.js?v=0dca528"></script>
 </helmet>
 
 <div style="min-height:100vh;display:flex;flex-direction:column">
@@ -347,6 +347,7 @@ class Component extends DCLogic {
     })(),
     week:(function(){ try{ return Math.min(36,Math.max(1,parseInt(localStorage.getItem("sci.week")||"1",10)||1)); }catch(e){ return 1; } })(),
     kitMode:"all",     // one printable list is what a parent wants first
+    completed:(function(){ try{ return JSON.parse(localStorage.getItem("sci.completed")||"{}"); }catch(e){ return {}; } })(),
     q:null
   };
 
@@ -359,7 +360,42 @@ class Component extends DCLogic {
     this.setState({grade:g, week:1, q:null}); window.scrollTo(0,0); };
   setWeek=(w)=>{ const week=Math.min(36,Math.max(1,w));
     try{ localStorage.setItem("sci.week",String(week)); }catch(e){}
-    this.setState({week:week, q:null}); window.scrollTo(0,0); };
+    this.setState({week:week, q:null});
+    this.syncSave({week:week});
+    window.scrollTo(0,0); };
+
+  /* Science had no progress record at all before this — only the current
+   * week and grade in localStorage. It now records which weeks were actually
+   * finished and how each check scored, and syncs that like the other
+   * subjects, so Teacher HQ can show real progress from any device. */
+  syncSave=(patch)=>{
+    const st={...this.state, ...(patch||{})};
+    const SY=window.__CURR&&window.__CURR.SYNC;
+    if(SY) SY.save("sci", {
+      grade:st.grade, week:st.week,
+      completed:st.completed||{},   // "y3:14" -> {at, score, total}
+    });
+  };
+
+  markWeekDone=(score, total)=>{
+    const k=this.state.grade+":"+this.state.week;
+    const completed={...(this.state.completed||{}),
+      [k]:{at:Date.now(), score:(score==null?null:score), total:(total==null?null:total)}};
+    try{ localStorage.setItem("sci.completed", JSON.stringify(completed)); }catch(e){}
+    this.setState({completed});
+    this.syncSave({completed});
+  };
+
+  pulled=false;
+  pullOnce(){
+    if(this.pulled) return;
+    this.pulled=true;
+    const SY=window.__CURR&&window.__CURR.SYNC;
+    if(!SY||!SY.signedIn()) return;
+    SY.pull("sci").then((d)=>{
+      if(d && d.completed) this.setState({completed:d.completed});
+    }).catch(()=>{});
+  }
 
   speak(t){ if(!window.speechSynthesis) return; window.speechSynthesis.cancel();
     const u=new SpeechSynthesisUtterance(t); u.rate=0.95; window.speechSynthesis.speak(u); }
@@ -391,6 +427,7 @@ class Component extends DCLogic {
     this.setState({q:{...q, idx:q.idx+1, answered:false, chosen:null, ok:null}}); };
 
   renderVals(){
+    this.pullOnce();
     const st=this.state, S=this.S, L=this.L, Q=this.Q, self=this;
     const wk=S.WEEKS.find(w=>w.n===st.week) || S.WEEKS[0];
     const unit=S.UNITS[wk.unit-1];
@@ -410,6 +447,7 @@ class Component extends DCLogic {
     if(q){
       if(q.idx>=q.items.length){
         const pct=Math.round((q.score/q.items.length)*100);
+        if(!(st.completed||{})[st.grade+":"+st.week]) this.markWeekDone(q.score, q.items.length);
         qv.qNotStarted=false; qv.qDone=true;
         qv.qFinal=q.score+" / "+q.items.length; qv.qPct=pct+"% correct";
       } else {

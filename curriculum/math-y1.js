@@ -833,7 +833,7 @@ const PRACTICE_U1_W2 = [
   {id:"u1w2p1",w:2,label:"2.1",title:"Where the Rooms Hide",note:"Every line of the algorithm is one of the four rooms. Find it before you trust it.",
    items:[
      {t:0,q:"20 × 10",a:"200"},{t:2,q:"3 × 10",a:"30"},{t:2,q:"20 × 4",a:"80"},{t:0,q:"3 × 4",a:"12"},{t:0,q:"Add 200, 30, 80 and 12",a:"322"},{t:0,q:"So 23 × 14 is",a:"322"},
-     {t:1,q:"31 × 22 — the tens×tens room",a:"600",hint:"30 × 20"},{t:1,q:"31 × 22 — the ones×ones room",a:"2"},{t:1,q:"31 × 22 altogether",a:"682"},{t:2,q:"45 × 23",a:"1035"},{t:2,q:"18 × 26",a:"468"},
+     {t:2,q:"31 × 22 — the tens×tens room",a:"600",hint:"30 × 20"},{t:2,q:"31 × 22 — the ones×ones room",a:"2"},{t:2,q:"31 × 22 altogether",a:"682"},{t:2,q:"45 × 23",a:"1035"},{t:2,q:"18 × 26",a:"468"},
      {t:2,q:"In 47 × 35, which room is biggest — type its value",a:"1200",hint:"40 × 30"},{t:2,q:"47 × 35",a:"1645"}
    ]},
   {id:"u1w2p2",w:2,label:"2.2",title:"Fluency with Carrying",note:"Algorithm only. Use the area model to check, not to solve.",
@@ -851,7 +851,7 @@ const PRACTICE_U1_W2 = [
   {id:"u1w2p4",w:2,label:"2.4",title:"Estimate First",note:"Round, predict, compute, compare. A wrong answer should look wrong.",
    items:[
      {t:0,q:"Estimate 19 × 21 by rounding both",a:"400"},{t:0,q:"Estimate 29 × 31",a:"900"},{t:0,q:"Estimate 48 × 12",a:"500"},{t:0,q:"Estimate 39 × 41",a:"1600"},{t:0,q:"Estimate 22 × 18",a:"400"},{t:2,q:"Estimate 51 × 9",a:"500"},
-     {t:2,q:"Estimate 187 × 4",a:"800"},{t:2,q:"True value of 187 × 4",a:"748"},{t:1,q:"Estimate 62 × 38",a:"2400"},{t:1,q:"True value of 62 × 38",a:"2356"},{t:2,q:"Estimate 296 × 5",a:"1500"},
+     {t:2,q:"Estimate 187 × 4",a:"800"},{t:2,q:"True value of 187 × 4",a:"748"},{t:2,q:"Estimate 62 × 38",a:"2400"},{t:2,q:"True value of 62 × 38",a:"2356"},{t:2,q:"Estimate 296 × 5",a:"1500"},
      {t:2,q:"Someone says 43 × 27 = 301. Type the real answer",a:"1161",hint:"They only multiplied by the 7"},{t:2,q:"Estimate 412 × 19",a:"8000"}
    ]},
   {id:"u1w2p5",w:2,label:"Fri",title:"Lattice Detour",note:"Enrichment. A 500-year-old method — then decide whether it beats yours.",
@@ -890,7 +890,7 @@ const PRACTICE_U1_W3 = [
   {id:"u1w3p5",w:3,label:"Fri",title:"Mid-Unit Quiz",note:"Eight items across Weeks 1–3. 85% to keep flying.",
    items:[
      {t:0,q:"7 × 8",a:"56"},{t:2,q:"6 × 40",a:"240"},
-     {t:2,q:"8 × 34",a:"272"},{t:2,q:"23 × 14",a:"322"},{t:1,q:"Factor pairs of 24 — how many",a:"4"},{t:1,q:"GCF of 12 and 18",a:"6"},{t:1,q:"Estimate 39 × 21",a:"800"},
+     {t:2,q:"8 × 34",a:"272"},{t:2,q:"23 × 14",a:"322"},{t:1,q:"Factor pairs of 24 — how many",a:"4"},{t:1,q:"GCF of 12 and 18",a:"6"},{t:2,q:"Estimate 39 × 21",a:"800"},
      {t:2,q:"Area 84, one side 6 — the other",a:"14"}
    ]}
 ];

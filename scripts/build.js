@@ -129,6 +129,11 @@ function pageCount(pdf) {
 // ── 3. the checkers get the final say ───────────────────────────────────
 step("3. Verify");
 run("node", ["scripts/check-paper-mapping.js"], "check-paper-mapping");
+/* Reads the tier off the printed styling instead of rebuilding the generator's
+ * array, so it can disagree with the generator — which the other two cannot,
+ * since they share its ordering code. It is a ratchet against a known backlog,
+ * so it fails only when a change makes the misplacement worse. */
+run("node", ["scripts/check-tier-sections.js"], "check-tier-sections");
 run("node", ["scripts/qa-verify.js"], "qa-verify");
 
 console.log();

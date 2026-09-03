@@ -25,7 +25,20 @@
  *        long phrase, fewer/less, affect/effect, who/whom, comma splices,
  *        dangling modifiers, "should of", between/among, principal/principle.
  *
- * FORMAT  [sentence, [four words from it], indexOfTheWrongOne, corrected]
+ * THREE KINDS OF FAULT, AND THREE QUESTIONS. "Which word is wrong?" only fits
+ * when a word is actually wrong. For a missing comma, no word is wrong at all
+ * — asking which one is, teaches a child to look for something that is not
+ * there. So an item may carry a kind:
+ *
+ *   (default)  a word is wrong        "Which word is wrong?"
+ *   "add"      punctuation is missing "Which word needs punctuation after it?"
+ *   "remove"   punctuation is wrong   "Which word has a mark that should not
+ *                                      be there?"
+ *
+ * The answer for a punctuation item is the word the mark belongs after, or the
+ * word carrying the mark that has to go.
+ *
+ * FORMAT  [sentence, [four words from it], indexOfTheAnswer, corrected, kind?]
  * ==========================================================================*/
 (function(){
 
@@ -36,7 +49,7 @@
    ["We went to the store and i bought milk.",["went", "store", "i", "milk"],2,"We went to the store and I bought milk."],
    ["The boxs are on the shelf.",["boxs", "are", "on", "shelf"],0,"The boxes are on the shelf."],
    ["He runned all the way home.",["He", "runned", "way", "home"],1,"He ran all the way home."],
-   ["Wheres my coat",["Wheres", "my", "coat", "none"],0,"Where's my coat?"],
+   ["Wheres my coat",["Wheres", "my", "coat", "Where"],0,"Where's my coat?"],
    ["I have alot of homework.",["have", "alot", "of", "homework"],1,"I have a lot of homework."],
    ["The childrens coats are wet.",["The", "childrens", "coats", "wet"],1,"The children's coats are wet."],
    ["My mom said we can go swiming.",["mom", "said", "can", "swiming"],3,"My mom said we can go swimming."],
@@ -46,7 +59,7 @@
    ["The cat licked it's paw.",["cat", "licked", "it's", "paw"],2,"The cat licked its paw."],
    ["I dont know the answer.",["I", "dont", "know", "answer"],1,"I don't know the answer."],
    ["My sister is more taller than me.",["sister", "more", "taller", "me"],1,"My sister is taller than me."],
-   ["Can you pass me the salt please",["Can", "pass", "salt", "please"],3,"Can you pass me the salt, please?"],
+   ["Can you pass me the salt please",["Can", "pass", "salt", "please"],3,"Can you pass me the salt, please?","add"],
    ["He goed to the library.",["He", "goed", "the", "library"],1,"He went to the library."],
    ["Their going to be late.",["Their", "going", "be", "late"],0,"They're going to be late."],
    ["We ate lunch at noon we then went outside.",["ate", "lunch", "noon", "we"],3,"We ate lunch at noon. Then we went outside."],
@@ -67,10 +80,10 @@
    ["Nobody knowed the answer.",["Nobody", "knowed", "the", "answer"],1,"Nobody knew the answer."],
    ["Your going to love this book.",["Your", "going", "love", "book"],0,"You're going to love this book."],
    ["The wind blowed the door shut.",["wind", "blowed", "door", "shut"],1,"The wind blew the door shut."],
-   ["I can't find my shoes anywhere",["can't", "find", "shoes", "anywhere"],3,"I can't find my shoes anywhere."],
+   ["I can't find my shoes anywhere",["can't", "find", "shoes", "anywhere"],3,"I can't find my shoes anywhere.","add"],
    ["We have four sheeps on the farm.",["have", "four", "sheeps", "farm"],2,"We have four sheep on the farm."],
    ["Me and Jake built a fort.",["Me", "and", "built", "fort"],0,"Jake and I built a fort."],
-   ["The soup tasted deliciously.",["soup", "tasted", "deliciously", "none"],2,"The soup tasted delicious."],
+   ["The soup tasted deliciously.",["The", "soup", "tasted", "deliciously"],3,"The soup tasted delicious."],
    ["He layed the book on the table.",["He", "layed", "book", "table"],1,"He laid the book on the table."],
    ["Their are two cats outside.",["Their", "are", "cats", "outside"],0,"There are two cats outside."],
    ["The rabbit hopped quick across the grass.",["rabbit", "hopped", "quick", "grass"],2,"The rabbit hopped quickly across the grass."],
@@ -87,7 +100,7 @@
    ["Wich book do you want?",["Wich", "book", "you", "want"],0,"Which book do you want?"],
    ["The baby sleeped all afternoon.",["baby", "sleeped", "all", "afternoon"],1,"The baby slept all afternoon."],
    ["We didnt have enough chairs.",["We", "didnt", "enough", "chairs"],1,"We didn't have enough chairs."],
-   ["I like apples oranges and pears.",["like", "apples", "oranges", "pears"],1,"I like apples, oranges and pears."],
+   ["I like apples oranges and pears.",["like", "apples", "oranges", "pears"],1,"I like apples, oranges and pears.","add"],
    ["The knifes are in the drawer.",["The", "knifes", "are", "drawer"],1,"The knives are in the drawer."],
    ["He throwed the ball over the fence.",["He", "throwed", "ball", "fence"],1,"He threw the ball over the fence."],
    ["Us kids helped clean the yard.",["Us", "kids", "helped", "yard"],0,"We kids helped clean the yard."],
@@ -117,7 +130,7 @@
    ["The oxes pulled the heavy cart.",["The", "oxes", "pulled", "cart"],1,"The oxen pulled the heavy cart."],
    ["Whos going to help me?",["Whos", "going", "help", "me"],0,"Who's going to help me?"],
    ["He hurted his ankle running.",["He", "hurted", "ankle", "running"],1,"He hurt his ankle running."],
-   ["The recipe calls for flour sugar and eggs.",["recipe", "flour", "sugar", "eggs"],1,"The recipe calls for flour, sugar and eggs."],
+   ["The recipe calls for flour sugar and eggs.",["recipe", "flour", "sugar", "eggs"],1,"The recipe calls for flour, sugar and eggs.","add"],
    ["Me and my sister share a room.",["Me", "my", "sister", "room"],0,"My sister and I share a room."],
    ["We finished the project it took two weeks.",["finished", "project", "it", "weeks"],2,"We finished the project. It took two weeks."]
   ];
@@ -129,7 +142,7 @@
    ["He is one of those people who always arrive early.",["one", "those", "who", "arrive"],3,"He is one of those people who always arrives early."],
    ["Running down the hall, the bell rang.",["Running", "hall", "bell", "rang"],0,"As we ran down the hall, the bell rang."],
    ["Their are fewer options than we thought.",["Their", "fewer", "options", "thought"],0,"There are fewer options than we thought."],
-   ["The data is inconclusive but promising.",["data", "is", "inconclusive", "promising"],3,"The data is inconclusive, but promising."],
+   ["The data is inconclusive but promising.",["data", "is", "inconclusive", "promising"],2,"The data is inconclusive, but promising.","add"],
    ["She had less reasons than he did.",["had", "less", "reasons", "did"],1,"She had fewer reasons than he did."],
    ["The study's conclusion were widely quoted.",["study's", "conclusion", "were", "quoted"],2,"The study's conclusion was widely quoted."],
    ["The principle reason was cost.",["principle", "reason", "was", "cost"],0,"The principal reason was cost."],
@@ -169,7 +182,7 @@
    ["The reason is because the sample was small.",["reason", "is", "because", "sample"],2,"The reason is that the sample was small."],
    ["They divided the work between the four of them.",["divided", "work", "between", "four"],2,"They divided the work among the four of them."],
    ["We seen the results yesterday.",["We", "seen", "results", "yesterday"],1,"We saw the results yesterday."],
-   ["The paper cites sources, however it lacks a conclusion.",["cites", "sources", "however", "conclusion"],2,"The paper cites sources; however, it lacks a conclusion."],
+   ["The paper cites sources, however it lacks a conclusion.",["cites", "sources", "however", "conclusion"],1,"The paper cites sources; however, it lacks a conclusion.","add"],
    ["Their were several errors in the draft.",["Their", "were", "errors", "draft"],0,"There were several errors in the draft."],
    ["She is taller then her sister.",["She", "taller", "then", "sister"],2,"She is taller than her sister."],
    ["The teams captain gave a speech.",["The", "teams", "captain", "speech"],1,"The team's captain gave a speech."],
@@ -182,10 +195,10 @@
    ["Their is little evidence for that claim.",["Their", "little", "evidence", "claim"],0,"There is little evidence for that claim."],
    ["The scientist, who's work we read, spoke today.",["scientist", "who's", "work", "spoke"],1,"The scientist, whose work we read, spoke today."],
    ["Me and the team presented the findings.",["Me", "team", "presented", "findings"],0,"The team and I presented the findings."],
-   ["The passage implies the narrator is unreliable it never says so.",["passage", "implies", "unreliable", "it"],3,"The passage implies the narrator is unreliable; it never says so."],
+   ["The passage implies the narrator is unreliable it never says so.",["passage", "implies", "unreliable", "it"],2,"The passage implies the narrator is unreliable; it never says so.","add"],
    ["He rung the bell twice.",["He", "rung", "bell", "twice"],1,"He rang the bell twice."],
    ["Less people attended than last year.",["Less", "people", "attended", "year"],0,"Fewer people attended than last year."],
-   ["The conclusion, is supported by the data.",["conclusion", "is", "supported", "data"],1,"The conclusion is supported by the data."],
+   ["The conclusion, is supported by the data.",["conclusion", "is", "supported", "data"],0,"The conclusion is supported by the data.","remove"],
    ["We had went there before.",["We", "had", "went", "before"],2,"We had gone there before."],
    ["Its important to check your sources.",["Its", "important", "check", "sources"],0,"It's important to check your sources."],
    ["The author quotes Lincoln, he does not cite the speech.",["author", "quotes", "Lincoln", "he"],3,"The author quotes Lincoln, but he does not cite the speech."],
@@ -199,7 +212,7 @@
    ["The affect of salt on ice is measurable.",["The", "affect", "salt", "measurable"],1,"The effect of salt on ice is measurable."],
    ["Their going to publish the paper.",["Their", "going", "publish", "paper"],0,"They're going to publish the paper."],
    ["Neither of the explanations are complete.",["Neither", "explanations", "are", "complete"],2,"Neither of the explanations is complete."],
-   ["The map, and the diagram disagree.",["map", "and", "diagram", "disagree"],1,"The map and the diagram disagree."],
+   ["The map, and the diagram disagree.",["map", "and", "diagram", "disagree"],0,"The map and the diagram disagree.","remove"],
    ["She could of predicted that outcome.",["She", "could", "of", "outcome"],2,"She could have predicted that outcome."],
    ["The sample was to small to be useful.",["sample", "was", "to", "useful"],2,"The sample was too small to be useful."],
    ["He is the most fastest runner on the team.",["is", "most", "fastest", "team"],1,"He is the fastest runner on the team."],
@@ -235,6 +248,12 @@
       options: row[1].slice(),
       answer: row[1][row[2]],
       corrected: row[3],
+      kind: row[4] || "word",
+      prompt: (row[4]==="add")
+        ? "Which word needs punctuation after it?"
+        : (row[4]==="remove")
+        ? "Which word has a punctuation mark that should not be there?"
+        : "Which word is wrong?",
       secondTime: secondTime
     };
   }
@@ -249,13 +268,15 @@
         id: f.id,
         type: "multiple-choice",
         t: 1,
-        q: "Which word is wrong? \u201c" + f.sentence + "\u201d",
+        q: f.prompt + " \u201c" + f.sentence + "\u201d",
         options: f.options,
         /* An INDEX, not the word. prepMC resolves it with options[a] before
          * shuffling, so handing it the string made the answer undefined and
          * every attempt scored zero while still ticking the step. */
         a: f.options.indexOf(f.answer),
-        hint: "Read it aloud. The wrong word is the one that makes you stumble."
+        hint: (f.kind==="word")
+          ? "Read it aloud. The wrong word is the one that makes you stumble."
+          : "Read it aloud and listen for where you pause. Punctuation goes where your voice does."
       }]
     };
   }

@@ -281,8 +281,80 @@
     };
   }
 
+  /* Stage two: choose the sentence that is written correctly.
+   *
+   * Finding the fault and repairing it are different abilities. A child can
+   * point at "freind" and still not produce "friend". So after he has found
+   * the word, he is shown four whole sentences and has to pick the one that is
+   * right.
+   *
+   * THE THREE WRONG ONES ARE BUILT, NOT WRITTEN, and it is worth being plain
+   * about what that buys and what it does not. They are:
+   *   1. the original, fault intact — always a fair distractor, and the one a
+   *      careless reader picks
+   *   2. the correction with its end punctuation removed
+   *   3. the correction with its first word lowercased
+   * Two and three are mechanical. They do not test the specific rule the
+   * sentence is about; they test whether he checks capitals and end marks
+   * before deciding a sentence is right, which is a real habit and the one
+   * third graders most often skip. Hand-written distractors aimed at the
+   * specific rule would be better and would take 540 authored sentences. */
+  function lower1(t){ return t.charAt(0).toLowerCase() + t.slice(1); }
+  function upper1(t){ return t.charAt(0).toUpperCase() + t.slice(1); }
+  function stripEnd(t){ return t.replace(/[.?!]+$/, ""); }
+
+  function choicesFor(grade, week, day){
+    const f = fixFor(grade, week, day);
+    const right = f.corrected;
+    const out = [right];
+    const add = (t) => {
+      if(t && t!==right && out.indexOf(t)<0) out.push(t);
+    };
+    /* Generators are tried in order until four DISTINCT sentences exist.
+     * They collide more often than you would expect: when the fault is the
+     * missing capital, the lowercased correction IS the original, so a naive
+     * list of three produced only two wrong answers and a three-option
+     * question. The extras below exist to cover exactly that. */
+    add(f.sentence);                      // the fault left in
+    add(stripEnd(right));                 // no end mark
+    add(lower1(right));                   // no opening capital
+    add(stripEnd(lower1(right)));         // neither
+    add(lower1(f.sentence));              // fault left in, no capital either
+    add(stripEnd(f.sentence));            // fault left in, no end mark
+    add(right.replace(/\.$/, "?"));       // wrong end mark
+    add(right.replace(/,/, ""));          // a comma dropped
+    return {answer: right, options: out.slice(0,4)};
+  }
+
+  function repairSetFor(grade, week, day){
+    const f = fixFor(grade, week, day);
+    const c = choicesFor(grade, week, day);
+    return {
+      id: f.id+"-repair",
+      title: "Now put it right",
+      items: [{
+        id: f.id+"-r",
+        type: "multiple-choice",
+        t: 2,
+        q: "Which sentence is written correctly?",
+        options: c.options,
+        a: c.options.indexOf(c.answer),
+        hint: "Check the capital at the start and the mark at the end, not only the word you found."
+      }]
+    };
+  }
+
+  /* Both stages as one drill: find the word, then choose the repair. */
+  function drillFor(grade, week, day){
+    return {
+      id: fixFor(grade, week, day).id+"-drill",
+      title: "Find the mistake",
+      items: setFor(grade, week, day).items.concat(repairSetFor(grade, week, day).items)
+    };
+  }
+
   function count(grade){ return ((grade==="y2")?Y2:Y1).length; }
 
   window.__CURR = window.__CURR || {};
-  window.__CURR.LA_FIX = {Y1, Y2, DAYS, indexFor, fixFor, setFor, count};
+  window.__CURR.LA_FIX = {Y1, Y2, DAYS, indexFor, fixFor, setFor, choicesFor, repairSetFor, drillFor, count};
 })();

@@ -631,7 +631,7 @@ const PRACTICE_Y5_W2 = {
     q(1,"2.5 kg at $4 per kg","10"),q(1,"$12 buys how many at $2.40","5"),q(1,"1.5 m plus 0.85 m — metres","2.35"),q(1,"6 at $3.99 — total","23.94"),q(1,"$50 − $27.45","22.55"),
     q(2,"0.75 kg at $6.40 per kg","4.8"),q(2,"$18 buys how many at $0.75","24")]},
   {id:"y5u4w4p2",w:4,label:"4.2",title:"Two-Step Problems",note:"Multiply then subtract, in that order.",items:[
-    q(0,"3 at $2, change from $10","4"),q(0,"4 at $1.50, change from $10","4"),q(0,"2 at $3.25 — total","6.5"),q(0,"Change from $10","3.5"),q(0,"5 at $2 — total","10"),q(1,"Change from $20","10"),
+    q(0,"3 at $2, change from $10","4"),q(0,"4 at $1.50, change from $10","4"),q(0,"2 at $3.25 — total","6.5"),q(0,"Change from $10","3.5"),q(0,"5 at $2 — total","10"),q(0,"Change from $20","10"),
     q(1,"3 at $4.99, change from $20","5.03"),q(1,"6 at $1.75 — total","10.5"),q(1,"Change from $20","9.5"),q(1,"2.5 kg at $3.20, change from $10","2"),q(1,"4 at $6.25 — total","25"),
     q(2,"$40 less 3 dinners at $11.25","6.25"),q(2,"1.5 kg at $4.80 plus $2.50 delivery","9.7")]},
   {id:"y5u4w4p3",w:4,label:"4.3",title:"Measurement Contexts",note:"Metres, litres and kilograms, all carrying decimals.",items:[
@@ -877,7 +877,7 @@ const PRACTICE_Y5_W5 = {
     q(1,"1/2 + 1/4 + 1/4","1"),q(1,"Range of 1/8 and 7/8","3/4"),q(1,"Five items totalling 5/2 — the mean","1/2"),q(1,"Difference between 7/8 and 3/8","1/2"),q(1,"Four measurements of 3/4 — total","3"),
     q(2,"Six pencils totalling 9/2 inches shared equally — each","3/4"),q(2,"Two at 1/8, three at 1/4, one at 1/2 — total","3/2")]},
   {id:"y5u7w3p4",w:3,label:"3.4",title:"Read the Plot",note:"Total, difference, and redistribution.",items:[
-    q(0,"Five values of 1/2 — total","5/2"),q(1,"Their mean","1/2"),q(0,"Four values of 1/4 — total","1"),q(1,"Their mean","1/4"),q(0,"Range of 1/4 and 3/4","1/2"),q(0,"Range of 1/8 and 5/8","1/2"),
+    q(0,"Five values of 1/2 — total","5/2"),q(0,"Their mean","1/2"),q(0,"Four values of 1/4 — total","1"),q(0,"Their mean","1/4"),q(0,"Range of 1/4 and 3/4","1/2"),q(0,"Range of 1/8 and 5/8","1/2"),
     q(1,"Values 1/4, 1/2, 3/4 — total","3/2"),q(1,"Their mean","1/2"),q(1,"Values 1/8, 3/8, 1/2 — total","1"),q(1,"Four values totalling 3 — the mean","3/4"),q(1,"Range of 1/8 and 1","7/8"),
     q(2,"Eight values totalling 5 — the mean","5/8"),q(2,"Redistribute 9/2 across 6 equally — each","3/4")]},
   {id:"y5u7w3p5",w:3,label:"Fri",title:"Mid-Unit Quiz",note:"Eight items across Weeks 1–3. 85% to keep flying.",items:[
@@ -1070,7 +1070,7 @@ const PRACTICE_Y5_W6 = {
     q(1,"$50 split 4 ways, to the cent","12.5"),q(1,"$100 split 30 ways, to the cent","3.33"),q(1,"$40 split 3 ways, to the cent","13.33"),q(1,"7 pizzas split 4 ways, as a decimal","1.75"),q(1,"$15 split 4 ways","3.75"),
     q(2,"100 ÷ 7 as a decimal to two places","14.29"),q(2,"$100 split 30 ways — cents left over","10")]},
   {id:"y5u3w3p4",w:3,label:"3.4",title:"Four Questions, One Division",note:"100 ÷ 30 answered four ways, all correct.",items:[
-    q(0,"100 ÷ 30 — the whole part","3"),q(1,"100 ÷ 30 — the remainder","10"),q(0,"100 ÷ 30 rounded up","4"),q(0,"100 ÷ 30 rounded down","3"),q(0,"30 × 3","90"),q(0,"100 − 90","10"),
+    q(0,"100 ÷ 30 — the whole part","3"),q(0,"100 ÷ 30 — the remainder","10"),q(0,"100 ÷ 30 rounded up","4"),q(0,"100 ÷ 30 rounded down","3"),q(0,"30 × 3","90"),q(0,"100 − 90","10"),
     q(1,"100 people, buses of 30 — buses","4"),q(1,"100 pencils, full boxes of 30","3"),q(1,"$100 split 30 ways, to the cent","3.33"),q(1,"100 ÷ 30 — the remainder","10"),q(1,"30 × 3 + 10","100"),
     q(2,"For money, which answer suits — type decimal or remainder","decimal"),q(2,"For buses, which suits — type up or down","up")]},
   {id:"y5u3w3p5",w:3,label:"Fri",title:"Budget the Miles",note:"Miles per day, tanks per trip, dollars per person.",items:[

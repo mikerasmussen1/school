@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=f05531e"></script>
+<script src="./support.js?v=4461df4"></script>
   <script>window.__BUILD__="d159824";</script>
-  <script data-build>window.__BUILD__="f05531e";</script>
+  <script data-build>window.__BUILD__="4461df4";</script>
 </head>
 <body>
 <x-dc>
@@ -37,26 +37,26 @@
   .book-title{font-family:'Fraunces',serif;font-size:1rem;color:var(--brick-dark);margin:0 0 3px}
   .done-banner{text-align:center;padding:22px;margin-top:6px;background:var(--forest-light);border-radius:8px;color:#2E4E38}
 </style>
-<script src="./curriculum/sync.js?v=f05531e"></script>
-<script src="./curriculum/students.js?v=f05531e"></script>
-<script src="./curriculum/subjects.js?v=f05531e"></script>
-<script src="./curriculum/question-types.js?v=f05531e"></script>
-<script src="./curriculum/la-y1-spine.js?v=f05531e"></script>
-<script src="./curriculum/la-y1-words.js?v=f05531e"></script>
-<script src="./curriculum/la-y1-grammar.js?v=f05531e"></script>
-<script src="./curriculum/la-y1-reading.js?v=f05531e"></script>
-<script src="./curriculum/la-y1-tasks.js?v=f05531e"></script>
-<script src="./curriculum/la-books.js?v=f05531e"></script>
-<script src="./curriculum/la-y2-spine.js?v=f05531e"></script>
-<script src="./curriculum/la-y2-words.js?v=f05531e"></script>
-<script src="./curriculum/la-y2-grammar.js?v=f05531e"></script>
-<script src="./curriculum/la-y2-reading.js?v=f05531e"></script>
-<script src="./curriculum/la-y2-tasks.js?v=f05531e"></script>
-<script src="./curriculum/la-books-y2.js?v=f05531e"></script>
-<script src="./curriculum/la-quotes.js?v=f05531e"></script>
-<script src="./curriculum/la-mastery.js?v=f05531e"></script>
-<script src="./curriculum/la-calendar.js?v=f05531e"></script>
-<script src="./curriculum/la-grader.js?v=f05531e"></script>
+<script src="./curriculum/sync.js?v=4461df4"></script>
+<script src="./curriculum/students.js?v=4461df4"></script>
+<script src="./curriculum/subjects.js?v=4461df4"></script>
+<script src="./curriculum/question-types.js?v=4461df4"></script>
+<script src="./curriculum/la-y1-spine.js?v=4461df4"></script>
+<script src="./curriculum/la-y1-words.js?v=4461df4"></script>
+<script src="./curriculum/la-y1-grammar.js?v=4461df4"></script>
+<script src="./curriculum/la-y1-reading.js?v=4461df4"></script>
+<script src="./curriculum/la-y1-tasks.js?v=4461df4"></script>
+<script src="./curriculum/la-books.js?v=4461df4"></script>
+<script src="./curriculum/la-y2-spine.js?v=4461df4"></script>
+<script src="./curriculum/la-y2-words.js?v=4461df4"></script>
+<script src="./curriculum/la-y2-grammar.js?v=4461df4"></script>
+<script src="./curriculum/la-y2-reading.js?v=4461df4"></script>
+<script src="./curriculum/la-y2-tasks.js?v=4461df4"></script>
+<script src="./curriculum/la-books-y2.js?v=4461df4"></script>
+<script src="./curriculum/la-quotes.js?v=4461df4"></script>
+<script src="./curriculum/la-mastery.js?v=4461df4"></script>
+<script src="./curriculum/la-calendar.js?v=4461df4"></script>
+<script src="./curriculum/la-grader.js?v=4461df4"></script>
 </helmet>
 
 <div style="min-height:100vh;display:flex;flex-direction:column">
@@ -96,11 +96,6 @@
           <div style="font-size:.85rem;color:var(--ink-soft);font-style:italic">{{ qSource }}</div>
           <div style="margin-top:11px;padding-top:10px;border-top:1px solid var(--rule);font-size:.92rem">
             <span style="color:var(--brick-dark);font-weight:600">Today: </span>{{ qThink }}
-          </div>
-          <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap">
-            <sc-for list="{{ qDayPicker }}" as="d" hint-placeholder-count="5">
-              <button onClick="{{ d.onClick }}" style="{{ d.style }}">{{ d.label }}</button>
-            </sc-for>
           </div>
         </div>
         <div style="{{ pacingStyle }}">{{ pacingText }}</div>
@@ -151,6 +146,146 @@
           </sc-for>
         </sc-if>
 
+
+        <!-- the day's actual work, on this tab -->
+        <sc-if value="{{ showAssignment }}" hint-placeholder-val="{{ false }}">
+          <div class="card" style="border-left:4px solid var(--brick)">
+            <div style="display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:6px">
+              <h2 style="font-size:1.15rem">{{ assignTitle }}</h2>
+              <button onClick="{{ closeAssignment }}" style="{{ btnSecondary }}">Back to the checklist</button>
+            </div>
+            <p class="muted" style="margin-top:0">{{ assignHint }}</p>
+            <sc-if value="{{ assignCanTick }}" hint-placeholder-val="{{ false }}">
+              <div style="margin:12px 0"><button onClick="{{ assignTick }}" style="{{ btnPrimary }}">{{ assignTickLabel }}</button></div>
+            </sc-if>
+
+            <sc-if value="{{ aRead }}" hint-placeholder-val="{{ false }}">
+              <div class="passage">
+                <h3 style="margin-bottom:6px">{{ rdTitle }}</h3>
+                <div>{{ rdText }}</div>
+              </div>
+              <div style="margin-top:12px"><button onClick="{{ rdListen }}" style="{{ btnSecondary }}">Read it to me</button></div>
+            </sc-if>
+
+            <sc-if value="{{ aRq }}" hint-placeholder-val="{{ false }}">
+              <sc-if value="{{ rqNotStarted }}" hint-placeholder-val="{{ true }}">
+                <div style="text-align:center;padding:16px"><button onClick="{{ rqStart }}" style="{{ btnPrimary }}">Start the questions</button></div>
+              </sc-if>
+              <sc-if value="{{ rqActive }}" hint-placeholder-val="{{ false }}">
+                <div style="display:flex;justify-content:space-between;font-size:.88rem;color:var(--ink-soft);margin-bottom:10px">
+                  <span>{{ rqProgress }}</span><span style="color:var(--forest);font-weight:600">{{ rqScore }}</span>
+                </div>
+                <div class="q-box">
+                  <div style="font-size:1.04rem;font-weight:600;margin-bottom:13px">{{ rqPrompt }}</div>
+                  <sc-for list="{{ rqChoices }}" as="c" hint-placeholder-count="4">
+                    <button onClick="{{ c.onClick }}" style="{{ c.style }}">{{ c.text }}</button>
+                  </sc-for>
+                  <sc-if value="{{ rqFbShow }}" hint-placeholder-val="{{ false }}"><div style="{{ rqFbStyle }}">{{ rqFb }}</div></sc-if>
+                  <div style="margin-top:14px"><button onClick="{{ rqNext }}" style="{{ rqNextStyle }}">Next</button></div>
+                </div>
+              </sc-if>
+              <sc-if value="{{ rqDone }}" hint-placeholder-val="{{ false }}">
+                <div style="text-align:center;padding:18px 10px">
+                  <div style="font-family:'Fraunces',serif;font-size:2rem;color:var(--forest);font-weight:700">{{ rqFinal }}</div>
+                  <div class="muted">{{ rqPct }}</div>
+                  <sc-if value="{{ rqFailed }}" hint-placeholder-val="{{ false }}">
+                    <div style="background:var(--gold-light);color:#7A5A0C;border-radius:8px;padding:13px;margin-top:12px;text-align:left">{{ rqRemNote }}</div>
+                    <button onClick="{{ rqRemStart }}" style="{{ btnPrimary }}margin-top:12px">{{ rqRemLabel }}</button>
+                  </sc-if>
+                </div>
+              </sc-if>
+            </sc-if>
+
+            <sc-if value="{{ aSkill }}" hint-placeholder-val="{{ false }}">
+              <div class="box"><h3 style="margin-bottom:4px">{{ gzTitle }}</h3><p class="muted" style="margin:0">{{ gzStandard }}</p></div>
+            </sc-if>
+
+            <sc-if value="{{ aGz }}" hint-placeholder-val="{{ false }}">
+              <sc-if value="{{ gzNotStarted }}" hint-placeholder-val="{{ true }}">
+                <div style="text-align:center;padding:16px"><button onClick="{{ gzStart }}" style="{{ btnPrimary }}">Start the drill</button></div>
+              </sc-if>
+              <sc-if value="{{ gzActive }}" hint-placeholder-val="{{ false }}">
+                <div style="display:flex;justify-content:space-between;font-size:.88rem;color:var(--ink-soft);margin-bottom:10px">
+                  <span>{{ gzProgress }}</span><span style="color:var(--forest);font-weight:600">{{ gzScore }}</span>
+                </div>
+                <div class="q-box">
+                  <div style="font-size:1.04rem;font-weight:600;margin-bottom:13px">{{ gzPrompt }}</div>
+                  <sc-for list="{{ gzChoices }}" as="c" hint-placeholder-count="4">
+                    <button onClick="{{ c.onClick }}" style="{{ c.style }}">{{ c.text }}</button>
+                  </sc-for>
+                  <sc-if value="{{ gzFbShow }}" hint-placeholder-val="{{ false }}"><div style="{{ gzFbStyle }}">{{ gzFb }}</div></sc-if>
+                  <div style="margin-top:14px"><button onClick="{{ gzNext }}" style="{{ gzNextStyle }}">Next</button></div>
+                </div>
+              </sc-if>
+              <sc-if value="{{ gzDone }}" hint-placeholder-val="{{ false }}">
+                <div style="text-align:center;padding:18px 10px">
+                  <div style="font-family:'Fraunces',serif;font-size:2rem;color:var(--forest);font-weight:700">{{ gzFinal }}</div>
+                  <div class="muted">{{ gzPct }}</div>
+                  <sc-if value="{{ gzFailed }}" hint-placeholder-val="{{ false }}">
+                    <div style="background:var(--gold-light);color:#7A5A0C;border-radius:8px;padding:13px;margin-top:12px;text-align:left">{{ gzRemNote }}</div>
+                    <button onClick="{{ gzRemStart }}" style="{{ btnPrimary }}margin-top:12px">{{ gzRemLabel }}</button>
+                  </sc-if>
+                </div>
+              </sc-if>
+            </sc-if>
+
+            <sc-if value="{{ aStudy }}" hint-placeholder-val="{{ false }}">
+              <div class="word-grid">
+                <sc-for list="{{ spWords }}" as="w" hint-placeholder-count="12">
+                  <div class="word-chip">{{ w.text }}</div>
+                </sc-for>
+              </div>
+            </sc-if>
+
+            <sc-if value="{{ aSq }}" hint-placeholder-val="{{ false }}">
+              <sc-if value="{{ sqNotStarted }}" hint-placeholder-val="{{ true }}">
+                <div style="text-align:center;padding:16px"><button onClick="{{ sqStart }}" style="{{ btnPrimary }}">Start the drill</button></div>
+              </sc-if>
+              <sc-if value="{{ sqActive }}" hint-placeholder-val="{{ false }}">
+                <div style="display:flex;justify-content:space-between;font-size:.88rem;color:var(--ink-soft);margin-bottom:10px">
+                  <span>{{ sqProgress }}</span><span style="color:var(--forest);font-weight:600">{{ sqScore }}</span>
+                </div>
+                <div class="q-box">
+                  <button onClick="{{ sqHear }}" style="{{ btnSecondary }}">Hear the word again</button>
+                  <div style="display:flex;gap:9px;align-items:center;margin-top:13px">
+                    <input value="{{ sqValue }}" onChange="{{ sqSet }}" placeholder="Type the word" style="flex:1;padding:10px 12px;font-size:1rem;border:1px solid var(--rule);border-radius:6px;font-family:'Public Sans',sans-serif">
+                    <button onClick="{{ sqCheck }}" style="{{ btnPrimary }}">Check</button>
+                  </div>
+                  <sc-if value="{{ sqFbShow }}" hint-placeholder-val="{{ false }}"><div style="{{ sqFbStyle }}">{{ sqFb }}</div></sc-if>
+                  <div style="margin-top:14px"><button onClick="{{ sqNext }}" style="{{ sqNextStyle }}">Next</button></div>
+                </div>
+              </sc-if>
+              <sc-if value="{{ sqDone }}" hint-placeholder-val="{{ false }}">
+                <div style="text-align:center;padding:18px 10px">
+                  <div style="font-family:'Fraunces',serif;font-size:2rem;color:var(--forest);font-weight:700">{{ sqFinal }}</div>
+                  <div class="muted">{{ sqPct }}</div>
+                </div>
+              </sc-if>
+            </sc-if>
+
+            <sc-if value="{{ aTask }}" hint-placeholder-val="{{ false }}">
+              <div class="box">
+                <h3 style="margin-bottom:4px">{{ asTitle }}</h3>
+                <p style="margin:0 0 8px">{{ asInstructions }}</p>
+                <button onClick="{{ asListen }}" style="{{ btnSecondary }}">Read it to me</button>
+              </div>
+            </sc-if>
+
+            <sc-if value="{{ aPhoto }}" hint-placeholder-val="{{ false }}">
+              <div class="box">
+                <p style="margin:0 0 9px">{{ asPrompt }}</p>
+                <input type="file" accept="image/*" onChange="{{ asPick }}" style="font-size:.92rem">
+                <div style="margin-top:11px"><button onClick="{{ asGrade }}" style="{{ asGradeStyle }}">Grade this work</button></div>
+                <sc-if value="{{ asHasResult }}" hint-placeholder-val="{{ false }}">
+                  <div class="box" style="margin-top:11px">{{ asNote }}</div>
+                </sc-if>
+                <sc-if value="{{ asHasError }}" hint-placeholder-val="{{ false }}">
+                  <div style="background:#F6DED6;color:#8A3E14;border-radius:6px;padding:11px;margin-top:11px;font-size:.9rem">{{ asError }}</div>
+                </sc-if>
+              </div>
+            </sc-if>
+          </div>
+        </sc-if>
         <!-- END -->
         <sc-if value="{{ showDayComplete }}" hint-placeholder-val="{{ false }}">
           <div class="done-banner">
@@ -271,15 +406,23 @@
     </sc-if>
 
     <sc-if value="{{ isSpelling }}" hint-placeholder-val="{{ false }}">
-      <div class="card">
-        <h2>{{ spTitle }}</h2>
-        <p class="muted">Study these first. Say each one out loud, then start the drill.</p>
-        <div class="word-grid">
-          <sc-for list="{{ spWords }}" as="w" hint-placeholder-count="12">
-            <div class="word-chip">{{ w.text }}</div>
-          </sc-for>
+      <sc-if value="{{ showWordList }}" hint-placeholder-val="{{ true }}">
+        <div class="card">
+          <h2>{{ spTitle }}</h2>
+          <p class="muted">Study these first. Say each one out loud, then start the drill.</p>
+          <div class="word-grid">
+            <sc-for list="{{ spWords }}" as="w" hint-placeholder-count="12">
+              <div class="word-chip">{{ w.text }}</div>
+            </sc-for>
+          </div>
         </div>
-      </div>
+      </sc-if>
+      <sc-if value="{{ hideWordList }}" hint-placeholder-val="{{ false }}">
+        <div class="card">
+          <h2>{{ spTitle }}</h2>
+          <p class="muted">The list is hidden while you are drilling — a spelling test you can read the answers off is not a spelling test. It comes back on the Spelling tab once the drill is finished.</p>
+        </div>
+      </sc-if>
       <div class="card">
         <h2>Spelling drill</h2>
         <p class="muted">Listen to each word, then type it. The word is never shown on screen.</p>
@@ -540,16 +683,17 @@ class Component extends DCLogic {
     })(),
     week:(()=>{ try{ return Math.min(36,Math.max(1,parseInt(localStorage.getItem("la.week")||"1",10)||1)); }catch(e){ return 1; } })(),
     done:(()=>{ try{ return JSON.parse(localStorage.getItem("la.done")||"{}"); }catch(e){ return {}; } })(),
-    qDay:(function(){ return ["Mon","Mon","Tue","Wed","Thu","Fri","Fri"][new Date().getDay()]; })(),
     day:(function(){ try{ const d=localStorage.getItem("la.day"); if(d) return d; }catch(e){}
       return ["Mon","Mon","Tue","Wed","Thu","Fri","Fri"][new Date().getDay()]; })(),
     landed:false,           // has the opening jump-to-frontier happened yet
+    openStep:null,          // which assignment is open inline on Today
     started:false,          // has START TODAY been pressed
     stepDone:(function(){ try{ return JSON.parse(localStorage.getItem("la.stepDone")||"{}"); }catch(e){ return {}; } })(),
     round:1,                // which attempt of the current scored step
     lastResult:null,        // {kind, score, total, passed, missed:[], seen:[]}
     remediation:null,       // {items, note, round, isFinalRound}
     stuck:(function(){ try{ return JSON.parse(localStorage.getItem("la.stuck")||"{}"); }catch(e){ return {}; } })(),
+    stepResult:(function(){ try{ return JSON.parse(localStorage.getItem("la.stepResult")||"{}"); }catch(e){ return {}; } })(),
     excused:(function(){ try{ return JSON.parse(localStorage.getItem("la.excused")||"{}"); }catch(e){ return {}; } })(),
     gz:null, sq:null, rq:null, rv:null,
     asKind:"handwriting", asImage:null, asStatus:"idle", asResult:null, asError:""
@@ -666,7 +810,7 @@ class Component extends DCLogic {
     this.setState(p);
     if(idx>=q.items.length){
       if(doneKey) this.markDone(doneKey);
-      // Report to the mastery gate. missedIds was accumulated as we went.
+      // Record the actual score against the step, then report to the gate.
       const M=window.__CURR.LA_MASTERY;
       const plan=M.dayPlan(this.state.year, this.state.week, this.state.day);
       const step=plan.steps.filter(function(x){ return x.key===slot; })[0];
@@ -674,6 +818,7 @@ class Component extends DCLogic {
         const missed=(q.missed||[]);
         const seen=q.items.map(function(i){ return i.id; }).concat(q.seenBefore||[]);
         const kind = slot==="sq" ? "spelling" : slot==="rq" ? "reading" : "grammar";
+        this.recordResult(step, q.score, q.items.length);
         this.finishScored(step, kind, q.score, q.items.length, missed, seen);
       }
     }
@@ -756,6 +901,7 @@ class Component extends DCLogic {
     const step=plan.steps.filter(function(x){ return x.key==="sq"; })[0];
     if(step){
       const seen=s.items.map(function(i){ return i.id; }).concat(s.seenBefore||[]);
+      this.recordResult(step, s.score, s.items.length);
       this.finishScored(step, "spelling", s.score, s.items.length, s.missed||[], seen);
     }
   };
@@ -836,6 +982,35 @@ class Component extends DCLogic {
     this.setWeek(week);
     this.setDay(day);
   };
+
+  openAssignment=(key)=>{
+    this.setState({openStep:key});
+    // start the drill for the step being opened, so Go always lands on work
+    if(key==="rq" && !this.state.rq) this.rqAuto=true;
+    if(key==="gz" && !this.state.gz) this.gzAuto=true;
+    if(key==="sq" && !this.state.sq) this.sqAuto=true;
+    if(key==="rv" && !this.state.rv) this.rvAuto=true;
+    window.scrollTo(0,0);
+  };
+  closeAssignment=()=>this.setState({openStep:null});
+
+  /* A scored step is DONE only when a real result was recorded for it.
+   *
+   * It used to be marked done by completeStep alone, which meant a row could
+   * read "Done" when nothing had been answered — the child had pressed
+   * something, or a previous version had ticked it. The score is now stored
+   * with the step and shown next to it, so "Done" always has a number behind
+   * it that the child and the parent can both check. */
+  recordResult=(step, score, total)=>{
+    const k=this.state.year+":"+this.state.week+":"+this.stepKey(step);
+    const stepResult={...(this.state.stepResult||{}), [k]:{score:score, total:total, at:Date.now()}};
+    try{ localStorage.setItem("la.stepResult", JSON.stringify(stepResult)); }catch(e){}
+    this.syncSave({stepResult});
+  };
+  resultFor(step){
+    const k=this.state.year+":"+this.state.week+":"+this.stepKey(step);
+    return (this.state.stepResult||{})[k]||null;
+  }
 
   startDay=()=>{ this.setState({started:true, round:1, lastResult:null, remediation:null}); window.scrollTo(0,0); };
 
@@ -957,7 +1132,13 @@ class Component extends DCLogic {
     const yearFinished = MS.TOTAL_DAYS ? seq.frontier >= MS.TOTAL_DAYS : false;
 
     const stepStates=plan.steps.map(function(step){
-      return {step:step, done:self.isStepDone(step), stuck:self.isStepStuck(step)};
+      /* Scored steps need a recorded result, not just a completion flag, or a
+       * row can read "Done" with nothing behind it. Ack and end steps are a
+       * deliberate press and stay as they were. */
+      const res=self.resultFor(step);
+      const flagged=self.isStepDone(step);
+      const done=(step.gate==="score") ? (!!res || self.isStepStuck(step)) : flagged;
+      return {step:step, done:done, stuck:self.isStepStuck(step), result:res};
     });
     // first not-done index is the only actionable step
     let currentIdx=stepStates.findIndex(function(x){ return !x.done; });
@@ -965,9 +1146,13 @@ class Component extends DCLogic {
     const doneCount=stepStates.filter(function(x){ return x.done; }).length;
     const dayComplete=doneCount===plan.steps.length;
 
-    const stepPanel={read:"reading", rq:"reading", skill:"grammar", gz:"grammar",
-                     study:"spelling", sq:"spelling", prompt:"writing", write:"writing",
-                     photo:"writing", speak:"speaking", rv:"speaking"};
+    /* Every step's work now opens ON this tab. It used to send the child to
+     * another tab, which is why some rows had a Go that appeared to do
+     * nothing: the assignment was there, just somewhere else, and the child
+     * had to find their way back. The subject tabs along the top are now
+     * reference only — look up a past passage or word list — and the day's
+     * actual work all happens here. */
+    const openStep = st.openStep;
 
     const daySteps=stepStates.map(function(x,i){
       const done=x.done, current=(i===currentIdx), locked=(i>currentIdx);
@@ -980,16 +1165,18 @@ class Component extends DCLogic {
         onClick = function(){};
       } else if(locked){
         // Not locked, just out of order: still usable, visually secondary.
-        btnLabel = x.step.gate==="ack" ? "I did this"
-                 : x.step.gate==="end" ? "Finish the day" : "Go";
+        btnLabel = x.step.gate==="end" ? "Finish the day" : "Go";
         btnStyle = self.btn("secondary", true);
-        onClick = x.step.gate==="ack" ? function(){ self.completeStep(x.step); }
+        onClick = x.step.gate==="ack" ? function(){ self.openAssignment(x.step.key); }
                 : x.step.gate==="end" ? function(){ self.completeStep(x.step); window.scrollTo(0,0); }
-                : function(){ self.goto(stepPanel[x.step.key]||"home"); };
+                : function(){ self.openAssignment(x.step.key); };
       } else if(x.step.gate==="ack"){
-        btnLabel = "I did this";
+        // Go, not "I did this": the row opens the work, and the tick lives
+        // inside it. A child should never be able to mark something done
+        // without the assignment having been in front of him.
+        btnLabel = "Go";
         btnStyle = self.btn("primary", true);
-        onClick = function(){ self.completeStep(x.step); };
+        onClick = function(){ self.openAssignment(x.step.key); };
       } else if(x.step.gate==="end"){
         btnLabel = "Finish the day";
         btnStyle = self.btn("primary", true);
@@ -997,12 +1184,16 @@ class Component extends DCLogic {
       } else {
         btnLabel = "Go";
         btnStyle = self.btn("primary", true);
-        onClick = function(){ self.goto(stepPanel[x.step.key]||"home"); };
+        onClick = function(){ self.openAssignment(x.step.key); };
       }
       return {
         label:x.step.n+". "+x.step.label,
         detail: locked ? (x.step.detail+" (Step "+(currentIdx+1)+" comes first, but you can do this now if you need to.)") : x.step.detail,
-        doneNote: done ? (x.stuck ? "Marked for a grown-up to look at." : x.step.done) : "",
+        doneNote: done
+          ? (x.stuck ? "Marked for a grown-up to look at."
+             : x.result ? ("Scored "+x.result.score+" out of "+x.result.total+".")
+             : x.step.done)
+          : "",
         doneNoteStyle: done
           ? "margin:4px 0 0;font-size:.84rem;color:"+(x.stuck?"var(--brick-dark)":"var(--forest)")+";font-weight:600"
           : "display:none",
@@ -1020,7 +1211,10 @@ class Component extends DCLogic {
     const lastFailKind = st.lastResult && !st.lastResult.passed ? st.lastResult.kind : "";
 
     const QT=window.__CURR.LA_QUOTES;
-    const q=QT ? QT.quoteFor(st.year, st.week, st.qDay)
+    /* One quote, for the day being worked. It used to have its own day
+     * picker, which meant five quotes visible at once and a child could read
+     * ahead or skip. It is the day's quote or nothing. */
+    const q=QT ? QT.quoteFor(st.year, st.week, st.day)
                : {text:"",source:"",think:"",kindLabel:""};
 
     const cats=[]; const seen={};
@@ -1079,6 +1273,10 @@ class Component extends DCLogic {
 
       spTitle:spellingSet.title,
       spWords:spellingSet.words.map(function(w){ return {text:w}; }),
+      /* The list is hidden while the drill runs. A spelling test you can read
+       * the answers off is not a test, and it reads as a pass. */
+      showWordList: !(st.sq && st.sq.idx < st.sq.items.length),
+      hideWordList: !!(st.sq && st.sq.idx < st.sq.items.length),
       sqNotStarted:!st.sq,
       sqActive:!!st.sq && st.sq.idx<st.sq.items.length,
       sqDone:!!st.sq && st.sq.idx>=st.sq.items.length,
@@ -1201,6 +1399,41 @@ class Component extends DCLogic {
         "background:var(--brick);color:#fff;border:none;border-radius:8px;padding:13px 34px;cursor:pointer",
       // Nothing is locked. An out-of-order day still opens; it just carries a
       // warning naming the unfinished work behind it.
+      /* Which assignment is open on this tab, and what it is. */
+      showAssignment: !!openStep && openStep!=="end",
+      closeAssignment: this.closeAssignment,
+      assignTitle:(function(){
+        const stp=(plan.steps.filter(function(x){ return x.key===openStep; })[0])||null;
+        return stp ? stp.label : "";
+      })(),
+      assignHint:(function(){
+        const stp=(plan.steps.filter(function(x){ return x.key===openStep; })[0])||null;
+        return stp ? stp.detail : "";
+      })(),
+      /* The quote is already on screen above, so opening it shows only its
+       * tick rather than repeating the card. */
+      aQuote: openStep==="quote",
+      aRead:  openStep==="read",
+      aRq:    openStep==="rq",
+      aSkill: openStep==="skill",
+      aGz:    openStep==="gz",
+      aStudy: openStep==="study",
+      aSq:    openStep==="sq",
+      aTask:  openStep==="prompt" || openStep==="write" || openStep==="speak" || openStep==="rv",
+      aPhoto: openStep==="photo",
+      assignCanTick:(function(){
+        const stp=(plan.steps.filter(function(x){ return x.key===openStep; })[0])||null;
+        return !!stp && stp.gate==="ack";
+      })(),
+      assignTickLabel:(function(){
+        return openStep==="quote" ? "I have read it" : "I did this";
+      })(),
+      assignTick:(function(){
+        const stp=(plan.steps.filter(function(x){ return x.key===openStep; })[0])||null;
+        return stp ? function(){ self.completeStep(stp); self.closeAssignment(); }
+                   : function(){};
+      })(),
+
       showStart: !st.started && !dayComplete,
       showChecklist: st.started && !dayComplete,
       showDayComplete: dayComplete,
@@ -1244,12 +1477,8 @@ class Component extends DCLogic {
       // reachable — missing a day should not mean missing the reading.
       qText:q.text, qSource:q.source, qThink:q.think, qKind:q.kindLabel,
       qTheme:q.themeLabel||"",
-      qDayLabel:({Mon:"Monday",Tue:"Tuesday",Wed:"Wednesday",Thu:"Thursday",Fri:"Friday"}[st.qDay]||st.qDay),
-      qListen:function(){ self.speak(q.text+". "+q.source+". "+q.think); },
-      qDayPicker:["Mon","Tue","Wed","Thu","Fri"].map(function(d){
-        return {label:d, onClick:function(){ self.setState({qDay:d}); },
-                style:self.pill(st.qDay===d)};
-      })
+      qDayLabel:({Mon:"Monday",Tue:"Tuesday",Wed:"Wednesday",Thu:"Thursday",Fri:"Friday"}[st.day]||st.day),
+      qListen:function(){ self.speak(q.text+". "+q.source+". "+q.think); }
     };
 
     const rq=this.quizVals("rq","rq","reading",function(){ self.quizStart("rq", self.prepMC(passage.questions)); });

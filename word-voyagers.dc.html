@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=2026-09-03-1629"></script>
-  <script data-build>window.__BUILD__="2026-09-03-1629";</script>
+<script src="./support.js?v=2026-09-03-1645"></script>
+  <script data-build>window.__BUILD__="2026-09-03-1645";</script>
 </head>
 <body>
 <x-dc>
@@ -36,26 +36,26 @@
   .book-title{font-family:'Fraunces',serif;font-size:1rem;color:var(--brick-dark);margin:0 0 3px}
   .done-banner{text-align:center;padding:22px;margin-top:6px;background:var(--forest-light);border-radius:8px;color:#2E4E38}
 </style>
-<script src="./curriculum/sync.js?v=2026-09-03-1629"></script>
-<script src="./curriculum/students.js?v=2026-09-03-1629"></script>
-<script src="./curriculum/subjects.js?v=2026-09-03-1629"></script>
-<script src="./curriculum/question-types.js?v=2026-09-03-1629"></script>
-<script src="./curriculum/la-y1-spine.js?v=2026-09-03-1629"></script>
-<script src="./curriculum/la-y1-words.js?v=2026-09-03-1629"></script>
-<script src="./curriculum/la-y1-grammar.js?v=2026-09-03-1629"></script>
-<script src="./curriculum/la-y1-reading.js?v=2026-09-03-1629"></script>
-<script src="./curriculum/la-y1-tasks.js?v=2026-09-03-1629"></script>
-<script src="./curriculum/la-books.js?v=2026-09-03-1629"></script>
-<script src="./curriculum/la-y2-spine.js?v=2026-09-03-1629"></script>
-<script src="./curriculum/la-y2-words.js?v=2026-09-03-1629"></script>
-<script src="./curriculum/la-y2-grammar.js?v=2026-09-03-1629"></script>
-<script src="./curriculum/la-y2-reading.js?v=2026-09-03-1629"></script>
-<script src="./curriculum/la-y2-tasks.js?v=2026-09-03-1629"></script>
-<script src="./curriculum/la-books-y2.js?v=2026-09-03-1629"></script>
-<script src="./curriculum/la-quotes.js?v=2026-09-03-1629"></script>
-<script src="./curriculum/la-mastery.js?v=2026-09-03-1629"></script>
-<script src="./curriculum/la-calendar.js?v=2026-09-03-1629"></script>
-<script src="./curriculum/la-grader.js?v=2026-09-03-1629"></script>
+<script src="./curriculum/sync.js?v=2026-09-03-1645"></script>
+<script src="./curriculum/students.js?v=2026-09-03-1645"></script>
+<script src="./curriculum/subjects.js?v=2026-09-03-1645"></script>
+<script src="./curriculum/question-types.js?v=2026-09-03-1645"></script>
+<script src="./curriculum/la-y1-spine.js?v=2026-09-03-1645"></script>
+<script src="./curriculum/la-y1-words.js?v=2026-09-03-1645"></script>
+<script src="./curriculum/la-y1-grammar.js?v=2026-09-03-1645"></script>
+<script src="./curriculum/la-y1-reading.js?v=2026-09-03-1645"></script>
+<script src="./curriculum/la-y1-tasks.js?v=2026-09-03-1645"></script>
+<script src="./curriculum/la-books.js?v=2026-09-03-1645"></script>
+<script src="./curriculum/la-y2-spine.js?v=2026-09-03-1645"></script>
+<script src="./curriculum/la-y2-words.js?v=2026-09-03-1645"></script>
+<script src="./curriculum/la-y2-grammar.js?v=2026-09-03-1645"></script>
+<script src="./curriculum/la-y2-reading.js?v=2026-09-03-1645"></script>
+<script src="./curriculum/la-y2-tasks.js?v=2026-09-03-1645"></script>
+<script src="./curriculum/la-books-y2.js?v=2026-09-03-1645"></script>
+<script src="./curriculum/la-quotes.js?v=2026-09-03-1645"></script>
+<script src="./curriculum/la-mastery.js?v=2026-09-03-1645"></script>
+<script src="./curriculum/la-calendar.js?v=2026-09-03-1645"></script>
+<script src="./curriculum/la-grader.js?v=2026-09-03-1645"></script>
 </helmet>
 
 <div style="min-height:100vh;display:flex;flex-direction:column">
@@ -265,16 +265,58 @@
             <sc-if value="{{ aTask }}" hint-placeholder-val="{{ false }}">
               <div class="box">
                 <h3 style="margin-bottom:4px">{{ asTitle }}</h3>
-                <p style="margin:0 0 8px">{{ asInstructions }}</p>
-                <button onClick="{{ asListen }}" style="{{ btnSecondary }}">Read it to me</button>
+                <p class="muted" style="margin:0 0 9px">{{ asInstructions }}</p>
+                <div class="q-box" style="border-left:4px solid var(--brick)">{{ asPrompt }}</div>
+                <div style="margin-top:12px"><button onClick="{{ asListen }}" style="{{ btnSecondary }}">Read it to me</button></div>
               </div>
+            </sc-if>
+
+            <sc-if value="{{ aSpeak }}" hint-placeholder-val="{{ false }}">
+              <div class="box">
+                <h3 style="margin-bottom:4px">{{ skTitle }}</h3>
+                <p class="muted" style="margin:0 0 9px">This one is done out loud with another person. Nothing here is scored by the computer.</p>
+                <div class="q-box" style="border-left:4px solid var(--forest)">{{ skPrompt }}</div>
+                <div style="margin-top:12px"><button onClick="{{ skListen }}" style="{{ btnSecondary }}">Read it to me</button></div>
+              </div>
+            </sc-if>
+
+            <sc-if value="{{ aRv }}" hint-placeholder-val="{{ false }}">
+              <p class="muted">Four mixed questions from this week's grammar, before you move on.</p>
+              <sc-if value="{{ rvNotStarted }}" hint-placeholder-val="{{ true }}">
+                <div style="text-align:center;padding:16px"><button onClick="{{ rvStart }}" style="{{ btnPrimary }}">Start the review</button></div>
+              </sc-if>
+              <sc-if value="{{ rvActive }}" hint-placeholder-val="{{ false }}">
+                <div style="display:flex;justify-content:space-between;font-size:.88rem;color:var(--ink-soft);margin-bottom:10px">
+                  <span>{{ rvProgress }}</span><span style="color:var(--forest);font-weight:600">{{ rvScore }}</span>
+                </div>
+                <div class="q-box">
+                  <div style="font-size:1.04rem;font-weight:600;margin-bottom:13px">{{ rvPrompt }}</div>
+                  <sc-for list="{{ rvChoices }}" as="c" hint-placeholder-count="4">
+                    <button onClick="{{ c.onClick }}" style="{{ c.style }}">{{ c.text }}</button>
+                  </sc-for>
+                  <sc-if value="{{ rvFbShow }}" hint-placeholder-val="{{ false }}"><div style="{{ rvFbStyle }}">{{ rvFb }}</div></sc-if>
+                  <div style="margin-top:14px"><button onClick="{{ rvNext }}" style="{{ rvNextStyle }}">Next</button></div>
+                </div>
+              </sc-if>
+              <sc-if value="{{ rvDone }}" hint-placeholder-val="{{ false }}">
+                <div style="text-align:center;padding:18px 10px">
+                  <div style="font-family:'Fraunces',serif;font-size:2rem;color:var(--forest);font-weight:700">{{ rvFinal }}</div>
+                  <div class="muted">{{ rvPct }}</div>
+                </div>
+              </sc-if>
             </sc-if>
 
             <sc-if value="{{ aPhoto }}" hint-placeholder-val="{{ false }}">
               <div class="box">
-                <p style="margin:0 0 9px">{{ asPrompt }}</p>
-                <input type="file" accept="image/*" onChange="{{ asPick }}" style="font-size:.92rem">
-                <div style="margin-top:11px"><button onClick="{{ asGrade }}" style="{{ asGradeStyle }}">Grade this work</button></div>
+                <div class="q-box" style="border-left:4px solid var(--brick)">{{ asPrompt }}</div>
+                <div class="upload-box" style="margin-top:12px">
+                  <input ref="{{ asFileRef }}" onChange="{{ asFilePicked }}" type="file" accept="image/*" capture="environment" style="display:none">
+                  <button onClick="{{ asPick }}" style="{{ btnPrimary }}">Photograph your page</button>
+                  <sc-if value="{{ asHasImage }}" hint-placeholder-val="{{ false }}">
+                    <div><img src="{{ asPreview }}" class="preview-img" alt="Photo of the handwritten page"></div>
+                  </sc-if>
+                </div>
+                <div style="margin-top:13px"><button onClick="{{ asGrade }}" style="{{ asGradeStyle }}">Grade this work</button></div>
                 <sc-if value="{{ asHasResult }}" hint-placeholder-val="{{ false }}">
                   <div class="box" style="margin-top:11px">{{ asNote }}</div>
                 </sc-if>
@@ -1039,7 +1081,12 @@ class Component extends DCLogic {
   };
 
   openAssignment=(key)=>{
-    this.setState({openStep:key});
+    // The writing panel can show handwriting or a writing task; the checklist
+    // step says which, so set it rather than inheriting whatever was last
+    // looked at on the Writing tab.
+    const patch={openStep:key};
+    if(key==="prompt"||key==="write"||key==="photo") patch.asKind="handwriting";
+    this.setState(patch);
     // start the drill for the step being opened, so Go always lands on work
     if(key==="rq" && !this.state.rq) this.rqAuto=true;
     if(key==="gz" && !this.state.gz) this.gzAuto=true;
@@ -1478,7 +1525,12 @@ class Component extends DCLogic {
       aGz:    openStep==="gz",
       aStudy: openStep==="study",
       aSq:    openStep==="sq",
-      aTask:  openStep==="prompt" || openStep==="write" || openStep==="speak" || openStep==="rv",
+      /* Each step shows ITS OWN work. These were lumped together, so Friday's
+       * speaking step showed Thursday's handwriting task and the week review
+       * showed a task instead of its drill. */
+      aTask:  openStep==="prompt" || openStep==="write",
+      aSpeak: openStep==="speak",
+      aRv:    openStep==="rv",
       aPhoto: openStep==="photo",
       assignCanTick:(function(){
         const stp=(plan.steps.filter(function(x){ return x.key===openStep; })[0])||null;

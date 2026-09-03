@@ -30,7 +30,7 @@ const UNITS = [
    project:"Fold the Universe — build a paper number line to 1 and land every fraction you meet on it.",
    game:"Closest to One — draw cards, build a fraction, get nearest without going over.",
    badgeName:"The Equivalence Badge",badgeReq:"Earned by scoring 85% or higher on the Mission 04 test and explaining the Big Question out loud."},
-  {n:5,name:"Decimals & Money",short:"Decimals & Money",color:"#A3E635",weeks:"21–24",badge:"$",size:72,glyph:"32px",
+  {n:5,name:"Adding & Subtracting",short:"Add & Subtract",color:"#A3E635",weeks:"21–24",badge:"$",size:72,glyph:"32px",
    bigQ:"A decimal and a fraction can be the same amount — so why do we have both?",
    skills:["Decimal place value","Money math","Rounding","Budget planning"],
    project:"The $40 Grocery Mission — plan three real dinners on a real $40 budget, then shop it and reconcile the receipt.",
@@ -256,7 +256,7 @@ const WEEKS_U4 = [
 
 const WEEKS_U5 = [
   {n:1,title:"Decimals Are Fractions",gate:"Full worksheets",gateColor:"#4ADE80",isFull:true,
-   summary:"A decimal is a fraction whose bottom number is always ten, a hundred, or a thousand. By Friday he can read any decimal, place it on a line, and swap it for a fraction without thinking.",
+   summary:"The domain Year One never taught. Georgia asks for fluency in addition and subtraction within 1,000 by the end of third grade, and this mission is where it is built \u2014 columns, regrouping, estimating to check, then two-step problems. Money and decimals stay as the Challenge tier, which is where grade 4 content belongs.",
    days:[
      {day:"Mon · 1.1",title:"Tenths and hundredths",detail:"0.3 is 3/10. 0.07 is 7/100. The places carry on to the right of the point.",tiers:[0,1,2]},
      {day:"Tue · 1.2",title:"Decimals on the line",detail:"Where does 0.7 sit? Between which two tenths is 0.65?",tiers:[0,1,2]},
@@ -477,11 +477,10 @@ const PUZZLES_U5 = [
 ];
 
 const STANDARDS_U5 = [
-  {code:"4.NF.C.6",where:"Week 1",text:"Use decimal notation for fractions with denominators 10 or 100; locate decimals on a number line."},
-  {code:"4.NF.C.7",where:"Week 1",text:"Compare two decimals to hundredths by reasoning about their size; record with >, = and <."},
-  {code:"4.MD.A.2",where:"Weeks 2–3",text:"Solve word problems involving money, including problems that require making change."},
-  {code:"5.NBT.A.4",where:"Week 3",text:"Use place-value understanding to round decimals to any place."},
-  {code:"5.NBT.B.7",where:"Week 2 ceiling",text:"Add and subtract decimals to hundredths using concrete models or drawings and place-value strategies — the grade+1 stretch target."}
+  {code:"3.PAR.2",level:"on-grade",where:"Weeks 1-3",text:"Add and subtract within 10,000, with fluency required within 1,000 by the end of the year."},
+  {code:"3.PAR.3",level:"on-grade",where:"Week 3",text:"Two-step word problems using the four operations, with a letter standing for the unknown."},
+  {code:"4.NF.C.6",level:"acceleration",where:"Week 4",text:"Decimal notation for fractions with denominators 10 or 100. Georgia introduces decimals in grade 4; kept here as the Challenge tier rather than as the mission's core work."},
+  {code:"4.MD.A.2",level:"acceleration",where:"Week 4",text:"Money problems in decimal notation."}
 ];
 
 const PUZZLES_U4 = [
@@ -1369,14 +1368,14 @@ const PRACTICE_U4_W6 = [
 const PRACTICE_U5_W2 = [
   {id:"u5w2p1",w:2,label:"2.1",title:"Line Up the Point",note:"Not the last digit — the point. Fill the gaps with zeros.",
    items:[
-     {t:2,q:"0.3 + 0.4",a:"0.7"},{t:0,q:"1.2 + 2.5",a:"3.7"},{t:2,q:"0.25 + 0.25",a:"0.5"},{t:0,q:"2.5 + 1.5",a:"4"},{t:2,q:"0.6 + 0.9",a:"1.5"},{t:0,q:"3.4 + 1.2",a:"4.6"},
-     {t:2,q:"3.5 + 0.47",a:"3.97"},{t:1,q:"12.6 + 4.85",a:"17.45"},{t:2,q:"9.4 + 0.68",a:"10.08"},{t:2,q:"0.125 + 0.875",a:"1"},{t:1,q:"7.05 + 2.9",a:"9.95"},
+     {t:2,q:"0.3 + 0.4",a:"0.7"},{t:2,q:"1.2 + 2.5",a:"3.7"},{t:2,q:"0.25 + 0.25",a:"0.5"},{t:2,q:"2.5 + 1.5",a:"4"},{t:2,q:"0.6 + 0.9",a:"1.5"},{t:2,q:"3.4 + 1.2",a:"4.6"},
+     {t:2,q:"3.5 + 0.47",a:"3.97"},{t:2,q:"12.6 + 4.85",a:"17.45"},{t:2,q:"9.4 + 0.68",a:"10.08"},{t:2,q:"0.125 + 0.875",a:"1"},{t:2,q:"7.05 + 2.9",a:"9.95"},
      {t:2,q:"2.5 + 3.75 + 0.125",a:"6.375"},{t:2,q:"What adds to 4.6 to make 10",a:"5.4"}
    ]},
   {id:"u5w2p2",w:2,label:"2.2",title:"Subtracting Decimals",note:"Same alignment. Borrow across the point when you must.",
    items:[
-     {t:2,q:"0.9 − 0.4",a:"0.5"},{t:0,q:"3.7 − 1.2",a:"2.5"},{t:2,q:"1 − 0.5",a:"0.5"},{t:2,q:"2.5 − 0.5",a:"2"},{t:2,q:"0.75 − 0.25",a:"0.5"},{t:0,q:"5.8 − 2.3",a:"3.5"},
-     {t:1,q:"4 − 1.35",a:"2.65"},{t:2,q:"10 − 0.07",a:"9.93"},{t:1,q:"8.2 − 3.45",a:"4.75"},{t:1,q:"6.05 − 2.5",a:"3.55"},{t:1,q:"12.3 − 4.75",a:"7.55"},
+     {t:2,q:"0.9 − 0.4",a:"0.5"},{t:2,q:"3.7 − 1.2",a:"2.5"},{t:2,q:"1 − 0.5",a:"0.5"},{t:2,q:"2.5 − 0.5",a:"2"},{t:2,q:"0.75 − 0.25",a:"0.5"},{t:2,q:"5.8 − 2.3",a:"3.5"},
+     {t:2,q:"4 − 1.35",a:"2.65"},{t:2,q:"10 − 0.07",a:"9.93"},{t:2,q:"8.2 − 3.45",a:"4.75"},{t:2,q:"6.05 − 2.5",a:"3.55"},{t:2,q:"12.3 − 4.75",a:"7.55"},
      {t:2,q:"12.4 − 7.856",a:"4.544"},{t:2,q:"A 2.5 m board with 0.85 m cut off — metres left",a:"1.65"}
    ]},
   {id:"u5w2p3",w:2,label:"2.3",title:"Change from a Twenty",note:"Money is decimals wearing a dollar sign. Type numbers only.",
@@ -1414,7 +1413,7 @@ const PRACTICE_U5_W3 = [
    ]},
   {id:"u5w3p3",w:3,label:"3.3",title:"Is It Actually a Deal",note:"Bigger box, better price? Only sometimes. Prove it.",
    items:[
-     {t:0,q:"$1 each or $5 for 5 — cheaper per item, type the price each for the pack",a:"1"},{t:0,q:"$2 each or $9 for 5 — price each for the pack",a:"1.8"},{t:0,q:"Which is cheaper each — type 1.8 or 2",a:"1.8"},{t:0,q:"$3 each, buy 4 — total",a:"12"},{t:0,q:"$10 for 4 — price each",a:"2.5"},{t:0,q:"Save per item vs $3 each",a:"0.5"},
+     {t:0,q:"$1 each or $5 for 5 — cheaper per item, type the price each for the pack",a:"1"},{t:0,q:"$2 each or $9 for 5 — price each for the pack",a:"1.8"},{t:2,q:"Which is cheaper each — type 1.8 or 2",a:"1.8"},{t:0,q:"$3 each, buy 4 — total",a:"12"},{t:0,q:"$10 for 4 — price each",a:"2.5"},{t:0,q:"Save per item vs $3 each",a:"0.5"},
      {t:1,q:"400 g for $5 — price per 100 g",a:"1.25"},{t:1,q:"800 g for $9 — price per 100 g",a:"1.125"},{t:1,q:"Better value — type 400 or 800",a:"800"},{t:1,q:"A $12 item at 25% off — the price paid",a:"9"},{t:1,q:"Buy 2 get 1 free at $6 each — price each across 3",a:"4"},
      {t:2,q:"1 kg for $8 or 750 g for $5.40 — price per kg of the small one",a:"7.2"},{t:2,q:"So which is better value — type 1kg or 750g",a:"750g"}
    ]},
@@ -1427,7 +1426,7 @@ const PRACTICE_U5_W3 = [
   {id:"u5w3p5",w:3,label:"Fri",title:"Mid-Unit Quiz",note:"Eight items across Weeks 1–3. 85% to keep flying.",
    items:[
      {t:2,q:"0.3 + 0.4",a:"0.7"},{t:2,q:"Round $4.60 to the nearest dollar",a:"5"},
-     {t:2,q:"3.5 + 0.47",a:"3.97"},{t:2,q:"$20 − $13.68",a:"6.32"},{t:2,q:"$4.50 for 3 — price each",a:"1.5"},{t:1,q:"8.2 − 3.45",a:"4.75"},{t:2,q:"3 at $4.99 — total",a:"14.97"},
+     {t:2,q:"3.5 + 0.47",a:"3.97"},{t:2,q:"$20 − $13.68",a:"6.32"},{t:2,q:"$4.50 for 3 — price each",a:"1.5"},{t:2,q:"8.2 − 3.45",a:"4.75"},{t:2,q:"3 at $4.99 — total",a:"14.97"},
      {t:2,q:"$40 budget, 3 dinners at $11.25 — dollars left",a:"6.25"}
    ]}
 ];
@@ -1454,13 +1453,13 @@ const PRACTICE_U5_W4 = [
   {id:"u5w4p4",w:4,label:"Thu",title:"Error Journal Sweep",note:"Mixed review of the whole mission. Fix only what repeats.",
    items:[
      {t:2,q:"0.25 + 0.25",a:"0.5"},{t:2,q:"1 − 0.5",a:"0.5"},{t:2,q:"Round $9.99 to the nearest dollar",a:"10"},{t:0,q:"$10 for 5 — price each",a:"2"},{t:0,q:"$20 − $15",a:"5"},{t:2,q:"$3.25 + $1.75",a:"5"},
-     {t:1,q:"12.6 + 4.85",a:"17.45"},{t:2,q:"10 − 0.07",a:"9.93"},{t:2,q:"$7.20 for 8 — price each",a:"0.9"},{t:2,q:"3 at $4.99 — total",a:"14.97"},{t:2,q:"Round $3.456 to the nearest cent",a:"3.46"},
+     {t:2,q:"12.6 + 4.85",a:"17.45"},{t:2,q:"10 − 0.07",a:"9.93"},{t:2,q:"$7.20 for 8 — price each",a:"0.9"},{t:2,q:"3 at $4.99 — total",a:"14.97"},{t:2,q:"Round $3.456 to the nearest cent",a:"3.46"},
      {t:2,q:"12.4 − 7.856",a:"4.544"},{t:2,q:"$40 budget, 3 dinners at $11.25 — dollars left",a:"6.25"}
    ]},
   {id:"u5w4p5",w:4,label:"Fri",title:"Mission 05 Test",note:"Twelve items plus the Big Question, answered out loud.",
    items:[
      {t:2,q:"0.6 + 0.9",a:"1.5"},{t:2,q:"$20 − $10.50",a:"9.5"},
-     {t:2,q:"3.5 + 0.47",a:"3.97"},{t:1,q:"8.2 − 3.45",a:"4.75"},{t:2,q:"$50 − $27.45",a:"22.55"},{t:2,q:"$11.25 for 5 — price each",a:"2.25"},{t:2,q:"Round $27.45 to the nearest dollar",a:"27"},{t:2,q:"3 at $4.99 — change from $20",a:"5.03"},{t:1,q:"$15 for 12 — price each",a:"1.25"},{t:2,q:"$12.75 + $8.60",a:"21.35"},
+     {t:2,q:"3.5 + 0.47",a:"3.97"},{t:2,q:"8.2 − 3.45",a:"4.75"},{t:2,q:"$50 − $27.45",a:"22.55"},{t:2,q:"$11.25 for 5 — price each",a:"2.25"},{t:2,q:"Round $27.45 to the nearest dollar",a:"27"},{t:2,q:"3 at $4.99 — change from $20",a:"5.03"},{t:1,q:"$15 for 12 — price each",a:"1.25"},{t:2,q:"$12.75 + $8.60",a:"21.35"},
      {t:2,q:"12.4 − 7.856",a:"4.544"},{t:2,q:"$40 budget, spent $36.45, three dinners — average per dinner",a:"12.15"}
    ]}
 ];

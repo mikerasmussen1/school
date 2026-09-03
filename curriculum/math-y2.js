@@ -92,11 +92,17 @@ const WEEKS_Y5 = {
      ["Wed · 2.3","Four digits by two","Longer, not harder."],
      ["Thu · 2.4","Catch the error","Given a wrong worked answer, find the line it went wrong."],
      ["Fri · Quiz","Mid-unit quiz","8 items across Weeks 1–2.",[1]]]),
-   mkWeek(3,"Scale & Proof",...GATE_TEST,false,"Floor Plan at Scale gets measured, scaled and checked two ways, and the Mission 02 test closes the mission.",[
+   mkWeek(3,"Scale & Proof",...GATE_FULL,true,"Floor Plan at Scale gets measured, scaled and checked two ways, and the Mission 02 test closes the mission.",[
      ["Mon · 3.1","Measure the room","Real tape measure, real numbers.",[0,2]],
      ["Tue · 3.2","Scale it up","Multiply every dimension by your factor.",[1,2]],
      ["Wed · 3.3","Area two ways","Area model and algorithm must agree."],
-     ["Thu · Review","Error journal sweep","Fix only what repeats.",[0,1]],
+     ["Thu · 3.4","Mark somebody's work","Six worked answers, three wrong. Find them by estimating.",[0,1]],
+     ["Fri · Test","Mission 02 test","12 items + one explanation.",[1,2]]]),
+   mkWeek(4,"Stadium Capacity",...GATE_TEST,false,"A project week whose work was already written with no plan attached to it: three sets existed for week 4 while this summary stopped at three, so nothing on the page ever sent a child to them. One question runs the week — how many seats are in the stadium — answered by multiplying up from a single section, then explaining the gap against the published figure.",[
+     ["Mon · 4.1","Count a section","Seats per row, rows per section. Small numbers, carefully."],
+     ["Tue · 4.2","Scale it up","One section times the number of sections — 3-digit by 2-digit, which is exactly 5.NR.2."],
+     ["Wed · 4.3","Explain the gap","Compare with the published capacity and account for the difference."],
+     ["Thu · Journal","Error journal","Fix only what repeats.",[0,1]],
      ["Fri · Test","Mission 02 test","12 items + one explanation.",[1,2]]])],
  3:[mkWeek(1,"What Division Counts",...GATE_FULL,true,"Before any algorithm, the question: how many groups of this size fit inside that? Every step of long division answers it once.",[
      ["Mon · 1.1","Groups that fit","Estimate how many 30s fit in 400 before dividing anything."],

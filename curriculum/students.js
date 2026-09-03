@@ -57,7 +57,20 @@
     }));
   }
 
-  /* "BROCK - 3rd Grade" — the label on every level tab.
+  /* A CONSTRAINT THAT RUNS THROUGH THE WHOLE APP: a signed-in child sees
+   * their own work and nothing else. No sibling's name, no sibling's track,
+   * no way to wander into it. The names below therefore belong to the TEACHER
+   * view, where a grown-up is choosing between children on purpose.
+   *
+   * A child choosing a course level is not choosing a person — it is a
+   * placement. So the child-facing label is the grade alone.
+   */
+  function levelLabel(id){
+    const s = STUDENTS[id];
+    return s ? s.grade : String(id||"");
+  }
+
+  /* "BROCK - 3rd Grade" — teacher-facing only.
    * Spelled out in full rather than abbreviated to "3rd": these tabs are the
    * one place a boy decides which course is his, and a full grade name is
    * unambiguous where "3rd" alone reads as a rank or a date. */
@@ -82,5 +95,5 @@
   function gradeOf(id){ const s=STUDENTS[id]; return s?s.grade:""; }
 
   window.__CURR = window.__CURR || {};
-  window.__CURR.STUDENTS = {STUDENTS, TABS, tabsFor, tab, shortTab, full, nameOf, gradeOf};
+  window.__CURR.STUDENTS = {STUDENTS, TABS, tabsFor, tab, shortTab, full, levelLabel, nameOf, gradeOf};
 })();

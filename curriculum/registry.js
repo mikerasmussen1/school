@@ -36,12 +36,12 @@ window.Subjects.register({
   order: 10,
   // The child picks their year on the landing card. Both years are the same
   // eight-mission shape; the sets, banks and worksheets differ.
-  // Labelled by boy, not by grade, so each of them can see at a glance which
-  // button is his. Names come from curriculum/students.js; the ids stay y3/y5.
+  // The grade alone. A signed-in child is choosing their own placement, not
+  // choosing between people, and must never see another child's name here.
   levels: Object.keys(CURRICULA).map(k=>{
     const ST = window.__CURR && window.__CURR.STUDENTS;
     return {id:k,
-      label: ST ? ST.tab(k) : CURRICULA[k].label.replace(/ Math$/,""),
+      label: ST ? ST.levelLabel(k) : CURRICULA[k].label.replace(/ Math$/,""),
       sub:   ST ? ST.gradeOf(k) : CURRICULA[k].sub.split(" \u00b7 ")[0]};
   }),
   open: "builtin"

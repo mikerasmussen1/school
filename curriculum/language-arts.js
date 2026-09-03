@@ -42,13 +42,12 @@
     blurb: "3rd Grade and 5th Grade, each 36 weeks in nine unit studies. Reading, grammar and spelling drills that grade themselves, a handwritten page each week graded from a photo, and one speaking task done out loud.",
     status: "live",
     order: 20,
-    // Chips on the landing card so each boy picks his own track before he
-    // ever opens the page. Word Voyagers stores y1/y2 internally; the chips
-    // are labelled from curriculum/students.js against y3/y5, and the page
-    // maps between them.
+    // A signed-in child picks their own level here. The label is the grade
+    // alone — no child sees another child's name or track. Word Voyagers
+    // stores y1/y2 internally; the label maps through students.js.
     levels: [
-      {id:"y1", label:(window.__CURR&&window.__CURR.STUDENTS)?window.__CURR.STUDENTS.tab("y3"):"3rd", sub:"3rd Grade"},
-      {id:"y2", label:(window.__CURR&&window.__CURR.STUDENTS)?window.__CURR.STUDENTS.tab("y5"):"5th", sub:"5th Grade"}
+      {id:"y1", label:(window.__CURR&&window.__CURR.STUDENTS)?window.__CURR.STUDENTS.levelLabel("y3"):"3rd", sub:"3rd Grade"},
+      {id:"y2", label:(window.__CURR&&window.__CURR.STUDENTS)?window.__CURR.STUDENTS.levelLabel("y5"):"5th", sub:"5th Grade"}
     ],
     open: {href:"word-voyagers.dc.html"}
   });

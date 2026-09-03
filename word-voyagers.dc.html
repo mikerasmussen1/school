@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=2026-09-03-1830"></script>
-  <script data-build>window.__BUILD__="2026-09-03-1830";</script>
-  <script src="./curriculum/freshness.js?v=2026-09-03-1830"></script>
+<script src="./support.js?v=2026-09-03-1839"></script>
+  <script data-build>window.__BUILD__="2026-09-03-1839";</script>
+  <script src="./curriculum/freshness.js?v=2026-09-03-1839"></script>
 </head>
 <body>
 <x-dc>
@@ -38,27 +38,27 @@
   .book-title{font-family:'Fraunces',serif;font-size:1rem;color:var(--brick-dark);margin:0 0 3px}
   .done-banner{text-align:center;padding:22px;margin-top:6px;background:var(--forest-light);border-radius:8px;color:#2E4E38}
 </style>
-<script src="./curriculum/sync.js?v=2026-09-03-1830"></script>
-<script src="./curriculum/students.js?v=2026-09-03-1830"></script>
-<script src="./curriculum/subjects.js?v=2026-09-03-1830"></script>
-<script src="./curriculum/question-types.js?v=2026-09-03-1830"></script>
-<script src="./curriculum/la-y1-spine.js?v=2026-09-03-1830"></script>
-<script src="./curriculum/la-y1-words.js?v=2026-09-03-1830"></script>
-<script src="./curriculum/la-y1-grammar.js?v=2026-09-03-1830"></script>
-<script src="./curriculum/la-y1-reading.js?v=2026-09-03-1830"></script>
-<script src="./curriculum/la-y1-tasks.js?v=2026-09-03-1830"></script>
-<script src="./curriculum/la-books.js?v=2026-09-03-1830"></script>
-<script src="./curriculum/la-y2-spine.js?v=2026-09-03-1830"></script>
-<script src="./curriculum/la-y2-words.js?v=2026-09-03-1830"></script>
-<script src="./curriculum/la-y2-grammar.js?v=2026-09-03-1830"></script>
-<script src="./curriculum/la-y2-reading.js?v=2026-09-03-1830"></script>
-<script src="./curriculum/la-y2-tasks.js?v=2026-09-03-1830"></script>
-<script src="./curriculum/la-books-y2.js?v=2026-09-03-1830"></script>
-<script src="./curriculum/la-quotes.js?v=2026-09-03-1830"></script>
-<script src="./curriculum/la-daily-fix.js?v=2026-09-03-1830"></script>
-<script src="./curriculum/la-mastery.js?v=2026-09-03-1830"></script>
-<script src="./curriculum/la-calendar.js?v=2026-09-03-1830"></script>
-<script src="./curriculum/la-grader.js?v=2026-09-03-1830"></script>
+<script src="./curriculum/sync.js?v=2026-09-03-1839"></script>
+<script src="./curriculum/students.js?v=2026-09-03-1839"></script>
+<script src="./curriculum/subjects.js?v=2026-09-03-1839"></script>
+<script src="./curriculum/question-types.js?v=2026-09-03-1839"></script>
+<script src="./curriculum/la-y1-spine.js?v=2026-09-03-1839"></script>
+<script src="./curriculum/la-y1-words.js?v=2026-09-03-1839"></script>
+<script src="./curriculum/la-y1-grammar.js?v=2026-09-03-1839"></script>
+<script src="./curriculum/la-y1-reading.js?v=2026-09-03-1839"></script>
+<script src="./curriculum/la-y1-tasks.js?v=2026-09-03-1839"></script>
+<script src="./curriculum/la-books.js?v=2026-09-03-1839"></script>
+<script src="./curriculum/la-y2-spine.js?v=2026-09-03-1839"></script>
+<script src="./curriculum/la-y2-words.js?v=2026-09-03-1839"></script>
+<script src="./curriculum/la-y2-grammar.js?v=2026-09-03-1839"></script>
+<script src="./curriculum/la-y2-reading.js?v=2026-09-03-1839"></script>
+<script src="./curriculum/la-y2-tasks.js?v=2026-09-03-1839"></script>
+<script src="./curriculum/la-books-y2.js?v=2026-09-03-1839"></script>
+<script src="./curriculum/la-quotes.js?v=2026-09-03-1839"></script>
+<script src="./curriculum/la-daily-fix.js?v=2026-09-03-1839"></script>
+<script src="./curriculum/la-mastery.js?v=2026-09-03-1839"></script>
+<script src="./curriculum/la-calendar.js?v=2026-09-03-1839"></script>
+<script src="./curriculum/la-grader.js?v=2026-09-03-1839"></script>
 </helmet>
 
 <div style="min-height:100vh;display:flex;flex-direction:column">
@@ -881,7 +881,7 @@ class Component extends DCLogic {
     approvals:(function(){ try{ return JSON.parse(localStorage.getItem("la.approvals")||"{}"); }catch(e){ return {}; } })(),
     approveGrade:null, approveNote:"",
     excused:(function(){ try{ return JSON.parse(localStorage.getItem("la.excused")||"{}"); }catch(e){ return {}; } })(),
-    gz:null, sq:null, rq:null, rv:null,
+    fx:null, gz:null, sq:null, rq:null, rv:null,
     asKind:"handwriting", asImage:null, asStatus:"idle", asResult:null, asError:""
   };
 
@@ -892,7 +892,7 @@ class Component extends DCLogic {
 
   setYear=(y)=>{
     try{ localStorage.setItem("la.year", y); localStorage.setItem("la.week","1"); }catch(e){}
-    this.setState({year:y, week:1, gz:null, sq:null, rq:null, rv:null,
+    this.setState({year:y, week:1, fx:null, gz:null, sq:null, rq:null, rv:null,
       asImage:null, asStatus:"idle", asResult:null, asError:""});
     window.scrollTo(0,0);
   };
@@ -932,7 +932,7 @@ class Component extends DCLogic {
   setWeek=(w)=>{
     const week=Math.min(36,Math.max(1,w));
     try{ localStorage.setItem("la.week",String(week)); }catch(e){}
-    this.setState({week, gz:null, sq:null, rq:null, rv:null,
+    this.setState({week, fx:null, gz:null, sq:null, rq:null, rv:null,
       asImage:null, asStatus:"idle", asResult:null, asError:""});
     window.scrollTo(0,0);
   };
@@ -1223,7 +1223,7 @@ class Component extends DCLogic {
     }catch(e){}
     this.setState({stepDone, stuck, stepResult, approvals,
       started:false, openStep:null, dayResetArmed:false,
-      gz:null, sq:null, rq:null, rv:null, remediation:null, round:1, lastResult:null});
+      fx:null, gz:null, sq:null, rq:null, rv:null, remediation:null, round:1, lastResult:null});
     this.syncSave({stepDone, stuck, stepResult, approvals});
     window.scrollTo(0,0);
   };
@@ -1238,7 +1238,7 @@ class Component extends DCLogic {
     KEYS.forEach(function(k){ try{ localStorage.removeItem(k); }catch(e){} });
     const empty={stepDone:{}, stuck:{}, stepResult:{}, approvals:{}, done:{}, excused:{}, week:1, day:"Mon"};
     this.setState({...empty, resetArmed:false, started:false, openStep:null,
-                   gz:null, sq:null, rq:null, rv:null, remediation:null, round:1, lastResult:null});
+                   fx:null, gz:null, sq:null, rq:null, rv:null, remediation:null, round:1, lastResult:null});
     const SY=window.__CURR&&window.__CURR.SYNC;
     if(SY){
       // Push the cleared state up, and only reload once it has landed, so the
@@ -1318,7 +1318,7 @@ class Component extends DCLogic {
   setDay=(d)=>{
     try{ localStorage.setItem("la.day", d); }catch(e){}
     this.setState({day:d, started:false, round:1, lastResult:null, remediation:null,
-      gz:null, sq:null, rq:null, rv:null, asImage:null, asStatus:"idle", asResult:null, asError:""});
+      fx:null, gz:null, sq:null, rq:null, rv:null, asImage:null, asStatus:"idle", asResult:null, asError:""});
     window.scrollTo(0,0);
   };
 

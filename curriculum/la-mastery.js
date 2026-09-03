@@ -55,6 +55,12 @@
    *            above it with no way to tick it off
    *   "score"  a drill that must clear MASTERY
    *   "photo"  a handwritten page graded from a photo
+   *   "approve" a grown-up looks at the actual paper and marks it. This is
+   *            the only step a child cannot complete for himself, and it is
+   *            deliberately last: the photo feedback is instant and useful,
+   *            but a machine reading a photograph is not the same as a parent
+   *            holding the page, and handwriting is exactly the subject where
+   *            that difference matters most.
    *   "end"    the explicit close of the day
    */
   const PLANS = {
@@ -110,6 +116,9 @@
       {key:"photo", label:"Photograph it and get feedback",  gate:"photo",
        detail:"Take a picture of your page and press Grade this work.",
        done:"You have read your feedback."},
+      {key:"approve", label:"Take it to a grown-up to mark", gate:"approve",
+       detail:"Carry the paper to a grown-up. They look at the real page, not the photo, and mark it here.",
+       done:"A grown-up has marked it."},
       {key:"end",   label:"Finish Thursday",                 gate:"end",
        detail:"Handwriting day complete.", done:"Day closed."}
     ],

@@ -76,6 +76,43 @@ function resolve(file, label) {
   return null;
 }
 
+/* Pages whose label is not "N.N Something" — the Friday tests, the mid-unit
+ * quizzes, the Thursday error-journal sweeps, the enrichment duels — were
+ * skipped entirely by the id-pattern resolver, so they were never regenerated
+ * AND never checked. That is the same shape of hole as the tier regex: a whole
+ * class of page quietly outside the tooling. These carry the tests, which are
+ * the worst pages to mis-map.
+ *
+ * So when the id pattern does not match, fall back to matching the page title
+ * against the set title inside the same unit. "· back" is a reverse side of the
+ * page before it and resolves to the same set — the numbering continues across
+ * the two sides. */
+const deent = s => String(s).replace(/&amp;/g, "&").replace(/&nbsp;/g, " ")
+  .replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/\s+/g, " ").trim();
+function resolveByTitle(file, label) {
+  const u = (file.match(/Unit (\d+)/) || [])[1];
+  if (!u) return null;
+  const unit = +u, y2 = /^Y2 /.test(file);
+  const want = deent(label)
+    .replace(/^(Mon|Tue|Wed|Thu|Fri)\s+/i, "")
+    .replace(/\s*·\s*back\s*$/i, "")
+    .toLowerCase();
+  if (!want) return null;
+  /* Titles are NOT unique inside a unit — "Mission 07 Test" is both u7w3p5 and
+   * u7w5p5, and "Chance as a Number" is both u7p4 and u7w2p4. Silently taking
+   * the first match would write one set's questions onto the other's page,
+   * which is the failure this whole exercise exists to prevent. So an
+   * ambiguous title resolves to nothing and the page is left alone and
+   * reported, rather than being confidently rewritten with the wrong content. */
+  const pre = y2 ? `y5u${unit}` : `u${unit}`;
+  const hits = (sb.__CURR.ALL_SETS || []).filter(s => {
+    const id = String(s.id);
+    return id.startsWith(pre) && y2 === id.startsWith("y5")
+      && deent(s.title || "").toLowerCase() === want;
+  });
+  return hits.length === 1 ? hits[0] : null;
+}
+
 // Numbered problems appear in THREE styles, one per tier, and matching only
 // the first is how a generator and a checker sharing this regex both went
 // blind to two thirds of every page:
@@ -102,7 +139,7 @@ for (const file of fs.readdirSync(".").filter(f => /Worksheets\.dc\.html$/.test(
     const label = (sec.match(/data-screen-label="([^"]*)"/) || [])[1];
     if (!label) continue;
     // "1.1 Arrays Become Area" -> "Arrays Become Area"
-    const set = resolve(file, label);
+    const set = resolve(file, label) || resolveByTitle(file, label);
     if (!set) { skipped.push(`${file}: "${label}"`); continue; }
     // printed problems: <span ...>N</span>&nbsp; QUESTION</div>
     const printed = [...sec.matchAll(PROBLEM_RX)]

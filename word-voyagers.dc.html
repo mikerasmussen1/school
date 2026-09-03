@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=2026-09-03-1754"></script>
-  <script data-build>window.__BUILD__="2026-09-03-1754";</script>
-  <script src="./curriculum/freshness.js?v=2026-09-03-1754"></script>
+<script src="./support.js?v=2026-09-03-1804"></script>
+  <script data-build>window.__BUILD__="2026-09-03-1804";</script>
+  <script src="./curriculum/freshness.js?v=2026-09-03-1804"></script>
 </head>
 <body>
 <x-dc>
@@ -38,26 +38,27 @@
   .book-title{font-family:'Fraunces',serif;font-size:1rem;color:var(--brick-dark);margin:0 0 3px}
   .done-banner{text-align:center;padding:22px;margin-top:6px;background:var(--forest-light);border-radius:8px;color:#2E4E38}
 </style>
-<script src="./curriculum/sync.js?v=2026-09-03-1754"></script>
-<script src="./curriculum/students.js?v=2026-09-03-1754"></script>
-<script src="./curriculum/subjects.js?v=2026-09-03-1754"></script>
-<script src="./curriculum/question-types.js?v=2026-09-03-1754"></script>
-<script src="./curriculum/la-y1-spine.js?v=2026-09-03-1754"></script>
-<script src="./curriculum/la-y1-words.js?v=2026-09-03-1754"></script>
-<script src="./curriculum/la-y1-grammar.js?v=2026-09-03-1754"></script>
-<script src="./curriculum/la-y1-reading.js?v=2026-09-03-1754"></script>
-<script src="./curriculum/la-y1-tasks.js?v=2026-09-03-1754"></script>
-<script src="./curriculum/la-books.js?v=2026-09-03-1754"></script>
-<script src="./curriculum/la-y2-spine.js?v=2026-09-03-1754"></script>
-<script src="./curriculum/la-y2-words.js?v=2026-09-03-1754"></script>
-<script src="./curriculum/la-y2-grammar.js?v=2026-09-03-1754"></script>
-<script src="./curriculum/la-y2-reading.js?v=2026-09-03-1754"></script>
-<script src="./curriculum/la-y2-tasks.js?v=2026-09-03-1754"></script>
-<script src="./curriculum/la-books-y2.js?v=2026-09-03-1754"></script>
-<script src="./curriculum/la-quotes.js?v=2026-09-03-1754"></script>
-<script src="./curriculum/la-mastery.js?v=2026-09-03-1754"></script>
-<script src="./curriculum/la-calendar.js?v=2026-09-03-1754"></script>
-<script src="./curriculum/la-grader.js?v=2026-09-03-1754"></script>
+<script src="./curriculum/sync.js?v=2026-09-03-1804"></script>
+<script src="./curriculum/students.js?v=2026-09-03-1804"></script>
+<script src="./curriculum/subjects.js?v=2026-09-03-1804"></script>
+<script src="./curriculum/question-types.js?v=2026-09-03-1804"></script>
+<script src="./curriculum/la-y1-spine.js?v=2026-09-03-1804"></script>
+<script src="./curriculum/la-y1-words.js?v=2026-09-03-1804"></script>
+<script src="./curriculum/la-y1-grammar.js?v=2026-09-03-1804"></script>
+<script src="./curriculum/la-y1-reading.js?v=2026-09-03-1804"></script>
+<script src="./curriculum/la-y1-tasks.js?v=2026-09-03-1804"></script>
+<script src="./curriculum/la-books.js?v=2026-09-03-1804"></script>
+<script src="./curriculum/la-y2-spine.js?v=2026-09-03-1804"></script>
+<script src="./curriculum/la-y2-words.js?v=2026-09-03-1804"></script>
+<script src="./curriculum/la-y2-grammar.js?v=2026-09-03-1804"></script>
+<script src="./curriculum/la-y2-reading.js?v=2026-09-03-1804"></script>
+<script src="./curriculum/la-y2-tasks.js?v=2026-09-03-1804"></script>
+<script src="./curriculum/la-books-y2.js?v=2026-09-03-1804"></script>
+<script src="./curriculum/la-quotes.js?v=2026-09-03-1804"></script>
+<script src="./curriculum/la-daily-fix.js?v=2026-09-03-1804"></script>
+<script src="./curriculum/la-mastery.js?v=2026-09-03-1804"></script>
+<script src="./curriculum/la-calendar.js?v=2026-09-03-1804"></script>
+<script src="./curriculum/la-grader.js?v=2026-09-03-1804"></script>
 </helmet>
 
 <div style="min-height:100vh;display:flex;flex-direction:column">
@@ -174,6 +175,32 @@
                 <div style="font-size:.85rem;color:var(--ink-soft);font-style:italic;margin-top:6px">{{ qSource }}</div>
                 <div style="margin-top:10px;font-size:.92rem"><span style="color:var(--brick-dark);font-weight:600">Today: </span>{{ qThink }}</div>
               </div>
+            </sc-if>
+
+            <sc-if value="{{ aFix }}" hint-placeholder-val="{{ false }}">
+              <sc-if value="{{ fxNotStarted }}" hint-placeholder-val="{{ true }}">
+                <div class="box">
+                  <div style="font-size:1.06rem;line-height:1.6">“{{ fixSentence }}”</div>
+                  <p class="muted" style="margin:9px 0 0">Read it aloud first. One word is wrong.</p>
+                </div>
+                <div style="text-align:center;padding:14px"><button onClick="{{ fxStart }}" style="{{ btnPrimary }}">Find the mistake</button></div>
+              </sc-if>
+              <sc-if value="{{ fxActive }}" hint-placeholder-val="{{ false }}">
+                <div class="q-box">
+                  <div style="font-size:1.04rem;font-weight:600;margin-bottom:13px">{{ fxPrompt }}</div>
+                  <sc-for list="{{ fxChoices }}" as="c" hint-placeholder-count="4">
+                    <button onClick="{{ c.onClick }}" style="{{ c.style }}">{{ c.text }}</button>
+                  </sc-for>
+                  <sc-if value="{{ fxFbShow }}" hint-placeholder-val="{{ false }}"><div style="{{ fxFbStyle }}">{{ fxFb }}</div></sc-if>
+                  <div style="margin-top:14px"><button onClick="{{ fxNext }}" style="{{ fxNextStyle }}">Next</button></div>
+                </div>
+              </sc-if>
+              <sc-if value="{{ fxDone }}" hint-placeholder-val="{{ false }}">
+                <div class="box" style="border-left:4px solid var(--forest)">
+                  <div style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:5px">Put right</div>
+                  <div style="font-size:1.06rem;line-height:1.6">{{ fixCorrected }}</div>
+                </div>
+              </sc-if>
             </sc-if>
 
             <sc-if value="{{ aRead }}" hint-placeholder-val="{{ false }}">
@@ -979,7 +1006,13 @@ class Component extends DCLogic {
       // Record the actual score against the step, then report to the gate.
       const M=window.__CURR.LA_MASTERY;
       const plan=M.dayPlan(this.state.year, this.state.week, this.state.day);
-      const step=plan.steps.filter(function(x){ return x.key===slot; })[0];
+      /* The drill slot and the checklist step key are not always the same
+       * word: the find-the-mistake drill runs in slot "fx" while its step is
+       * "fix". Without this map the lookup silently found nothing and the step
+       * never ticked, even though the drill had been completed correctly. */
+      const SLOT_STEP={fx:"fix"};
+      const wantKey=SLOT_STEP[slot]||slot;
+      const step=plan.steps.filter(function(x){ return x.key===wantKey; })[0];
       if(step){
         const missed=(q.missed||[]);
         const seen=q.items.map(function(i){ return i.id; }).concat(q.seenBefore||[]);
@@ -1701,6 +1734,7 @@ class Component extends DCLogic {
       /* The quote is already on screen above, so opening it shows only its
        * tick rather than repeating the card. */
       aQuote: openStep==="quote",
+      aFix:   openStep==="fix",
       aRead:  openStep==="read",
       aRq:    openStep==="rq",
       aSkill: openStep==="skill",
@@ -1877,11 +1911,19 @@ class Component extends DCLogic {
       qListen:function(){ self.speak(q.text+". "+q.source+". "+q.think); }
     };
 
+    const FX=window.__CURR.LA_FIX;
+    const fixItem=FX?FX.fixFor(st.year, st.week, st.day):null;
+    const fx=this.quizVals("fx","fx",null,function(){
+      self.quizStart("fx", self.prepMC(FX.setFor(st.year, st.week, st.day).items));
+    });
+
     const rq=this.quizVals("rq","rq","reading",function(){ self.quizStart("rq", self.prepMC(passage.questions)); });
     const gz=this.quizVals("gz","gz","grammar",function(){ self.quizStart("gz", self.prepMC(grammarSet.items)); });
     const rv=this.quizVals("rv","rv",null,function(){ self.quizStart("rv", self.prepMC(grammarSet.items,4)); });
 
-    return Object.assign(base, rq, gz, rv);
+    base.fixSentence  = fixItem?fixItem.sentence:"";
+    base.fixCorrected = fixItem?fixItem.corrected:"";
+    return Object.assign(base, rq, gz, rv, fx);
   }
 }
 </script>

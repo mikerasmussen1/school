@@ -28,7 +28,13 @@ function section(t) { console.log("\n" + t); }
 // ── 1. Every script index.html loads must exist ──────────────────────────
 section("1. Script dependencies");
 const index = fs.readFileSync("index.html", "utf8");
-const srcs = [...index.matchAll(/<script src="([^"]+)"/g)].map(m => m[1].replace(/^\.\//, ""));
+// The build stamp appends ?v=<commit> to every script tag so a cached page is
+// obvious. Strip it before touching the filesystem — without this the checker
+// looks for a file literally named "lessons.js?v=abc1234" and every asset
+// check fails, which is how this suite sat at 35 red for days while the thing
+// it was meant to guard was fine.
+const srcs = [...index.matchAll(/<script src="([^"]+)"/g)]
+  .map(m => m[1].replace(/^\.\//, "").split("?")[0]);
 if (!srcs.length) fail("index.html declares no <script src> tags — did it get truncated?");
 for (const s of srcs) {
   fs.existsSync(s) ? pass(`index.html -> ${s} exists`) : fail(`index.html loads "${s}" but the file is missing`);
@@ -103,7 +109,7 @@ section("2b. Content volume vs origin/main");
 // the tree was being restructured.
 function countsFor(loader, indexHtml) {
   const files = [...indexHtml.matchAll(/<script src="([^"]+)"/g)]
-    .map(m => m[1].replace(/^\.\//, ""))
+    .map(m => m[1].replace(/^\.\//, "").split("?")[0])
     .filter(s => s.startsWith("curriculum/"));
   const sb = { __CURR: {} }; sb.window = sb;
   for (const f of files) new Function("window", "console", loader(f))(sb, { log() {}, warn() {}, error() {} });

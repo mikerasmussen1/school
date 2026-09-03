@@ -45,7 +45,7 @@ function sheetFor(set) {
 const sb = { __CURR: {} }; sb.window = sb;
 const curriculumFiles = [...fs.readFileSync("index.html", "utf8")
   .matchAll(/<script src="([^"]+)"/g)]
-  .map(m => m[1].replace(/^\.\//, ""))
+  .map(m => m[1].replace(/^\.\//, "").split("?")[0])
   .filter(s => s.startsWith("curriculum/"));
 if (!curriculumFiles.length) {
   console.log("  FAIL  index.html declares no curriculum/*.js scripts");

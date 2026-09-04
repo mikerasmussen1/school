@@ -1447,6 +1447,271 @@
       </div>
     </div>
 
+    <!-- ============ THE MATH IS THE ART · YEAR TWO ============
+         One manipulative per mission, gated the way Year One's are. Year Two
+         had none of these until now. Each answers its own mission's Big
+         Question with something the child can move rather than restating it in
+         another sentence. -->
+    <h2 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.45);margin:0 0 20px">The math is the art</h2>
+
+    <!-- M1 · Powers of Ten -->
+    <sc-if value="{{ isY5M1 }}" hint-placeholder-val="{{ true }}">
+    <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:22px;padding:26px 28px;margin-bottom:44px">
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;margin-bottom:22px">
+        <div>
+          <div style="font-family:Fredoka,sans-serif;font-size:22px">The Digit Shifter</div>
+          <div style="font-size:13px;color:rgba(238,242,255,.6);margin-top:4px">Watch which one actually moves.</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px">
+          <input value="{{ ptV }}" onChange="{{ setPtV }}" inputMode="decimal" style="width:96px;padding:8px 10px;text-align:center;font-family:Fredoka,sans-serif;font-size:24px;background:rgba(255,255,255,.07);border:1.5px solid rgba(56,189,248,.5);border-radius:12px;color:#38BDF8">
+          <button onClick="{{ ptDown }}" style="font-family:Fredoka,sans-serif;font-size:20px;width:42px;height:42px;border-radius:11px;cursor:pointer;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.18);color:#EEF2FF" style-hover="filter:brightness(1.3)">÷</button>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:15px;color:#FBBF24;min-width:74px;text-align:center">{{ ptExp }}</div>
+          <button onClick="{{ ptUp }}" style="font-family:Fredoka,sans-serif;font-size:20px;width:42px;height:42px;border-radius:11px;cursor:pointer;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.18);color:#EEF2FF" style-hover="filter:brightness(1.3)">×</button>
+        </div>
+      </div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(238,242,255,.4);margin-bottom:7px">Before · {{ ptShown }}</div>
+      <div style="display:grid;grid-template-columns:repeat(9,minmax(0,1fr));gap:6px;margin-bottom:16px">
+        <sc-for list="{{ ptBefore }}" as="c" hint-placeholder-count="9">
+          <div style="{{ c.style }}">{{ c.d }}</div>
+        </sc-for>
+      </div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:#38BDF8;margin-bottom:7px">After · {{ ptResult }}</div>
+      <div style="display:grid;grid-template-columns:repeat(9,minmax(0,1fr));gap:6px">
+        <sc-for list="{{ ptAfter }}" as="c" hint-placeholder-count="9">
+          <div style="{{ c.style }}">{{ c.d }}</div>
+        </sc-for>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(9,minmax(0,1fr));gap:6px;margin-top:7px">
+        <sc-for list="{{ ptAfter }}" as="c" hint-placeholder-count="9">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:8.5px;text-align:center;color:rgba(238,242,255,.35)">{{ c.label }}</div>
+        </sc-for>
+      </div>
+      <div style="margin-top:20px;padding-top:18px;border-top:1px dashed rgba(255,255,255,.16);font-size:14px;line-height:1.55;color:rgba(238,242,255,.8)">{{ ptSays }}</div>
+    </div>
+    </sc-if>
+
+    <!-- M2 · Big Multiplication -->
+    <sc-if value="{{ isY5M2 }}" hint-placeholder-val="{{ false }}">
+    <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:22px;padding:26px 28px;margin-bottom:44px">
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;margin-bottom:22px">
+        <div>
+          <div style="font-family:Fredoka,sans-serif;font-size:22px">Six Rooms</div>
+          <div style="font-size:13px;color:rgba(238,242,255,.6);margin-top:4px">The area model the algorithm folds up.</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;font-family:Fredoka,sans-serif;font-size:24px">
+          <input value="{{ bmA }}" onChange="{{ setBmA }}" inputMode="numeric" style="width:88px;padding:8px 10px;text-align:center;font-family:Fredoka,sans-serif;font-size:24px;background:rgba(255,255,255,.07);border:1.5px solid rgba(56,189,248,.5);border-radius:12px;color:#38BDF8">
+          <span style="color:rgba(238,242,255,.5)">×</span>
+          <input value="{{ bmB }}" onChange="{{ setBmB }}" inputMode="numeric" style="width:70px;padding:8px 10px;text-align:center;font-family:Fredoka,sans-serif;font-size:24px;background:rgba(255,255,255,.07);border:1.5px solid rgba(251,191,36,.5);border-radius:12px;color:#FBBF24">
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;margin-bottom:7px">
+        <sc-for list="{{ bmRowA }}" as="h" hint-placeholder-count="3">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;text-align:center;color:#38BDF8">{{ h }}</div>
+        </sc-for>
+      </div>
+      <div style="{{ bmGrid }}">
+        <sc-for list="{{ bmCells }}" as="c" hint-placeholder-count="6">
+          <div style="{{ c.style }}">
+            <div style="{{ c.small }}">{{ c.a }} × {{ c.b }}</div>
+            <div style="{{ c.big }}">{{ c.v }}</div>
+          </div>
+        </sc-for>
+      </div>
+      <div style="margin-top:20px;padding-top:18px;border-top:1px dashed rgba(255,255,255,.16);font-family:'JetBrains Mono',monospace;font-size:15px;color:rgba(238,242,255,.8)">
+        {{ bmShown }} = <span style="font-family:Fredoka,sans-serif;font-size:26px;color:#38BDF8">{{ bmTotal }}</span>
+      </div>
+      <div style="font-size:14px;line-height:1.55;margin-top:12px;color:rgba(238,242,255,.72)">{{ bmSays }}</div>
+    </div>
+    </sc-if>
+
+    <!-- M3 · Long Division -->
+    <sc-if value="{{ isY5M3 }}" hint-placeholder-val="{{ false }}">
+    <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:22px;padding:26px 28px;margin-bottom:44px">
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;margin-bottom:22px">
+        <div>
+          <div style="font-family:Fredoka,sans-serif;font-size:22px">How Many Fit</div>
+          <div style="font-size:13px;color:rgba(238,242,255,.6);margin-top:4px">Every row is the same question, one place smaller.</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;font-family:Fredoka,sans-serif;font-size:24px">
+          <input value="{{ ldA }}" onChange="{{ setLdA }}" inputMode="numeric" style="width:96px;padding:8px 10px;text-align:center;font-family:Fredoka,sans-serif;font-size:24px;background:rgba(255,255,255,.07);border:1.5px solid rgba(167,139,250,.5);border-radius:12px;color:#A78BFA">
+          <span style="color:rgba(238,242,255,.5)">÷</span>
+          <input value="{{ ldB }}" onChange="{{ setLdB }}" inputMode="numeric" style="width:62px;padding:8px 10px;text-align:center;font-family:Fredoka,sans-serif;font-size:24px;background:rgba(255,255,255,.07);border:1.5px solid rgba(45,212,191,.5);border-radius:12px;color:#2DD4BF">
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:34px 1fr 1fr 1fr 1fr;gap:10px;padding:0 13px 8px;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(238,242,255,.38)">
+        <div>bring</div><div>have</div><div>fit</div><div>uses</div><div>left</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:7px">
+        <sc-for list="{{ ldSteps }}" as="s" hint-placeholder-count="3">
+          <div style="{{ s.style }}">
+            <div style="color:#A78BFA;font-size:16px">{{ s.bring }}</div>
+            <div style="color:rgba(238,242,255,.8)">{{ s.cur }}</div>
+            <div style="color:#2DD4BF;font-size:16px">{{ s.fit }}</div>
+            <div style="color:rgba(238,242,255,.5)">− {{ s.used }}</div>
+            <div style="color:#FBBF24">{{ s.left }}</div>
+          </div>
+        </sc-for>
+      </div>
+      <div style="margin-top:20px;padding-top:18px;border-top:1px dashed rgba(255,255,255,.16);font-family:'JetBrains Mono',monospace;font-size:15px;color:rgba(238,242,255,.8)">
+        {{ ldShown }} = <span style="font-family:Fredoka,sans-serif;font-size:26px;color:#2DD4BF">{{ ldQ }}</span><sc-if value="{{ ldHasR }}" hint-placeholder-val="{{ true }}"><span style="font-size:15px;color:#FBBF24"> remainder {{ ldR }}</span></sc-if>
+      </div>
+      <div style="font-size:14px;line-height:1.55;margin-top:12px;color:rgba(238,242,255,.72)">{{ ldSays }}</div>
+    </div>
+    </sc-if>
+
+    <!-- M4 · Decimal Operations -->
+    <sc-if value="{{ isY5M4 }}" hint-placeholder-val="{{ false }}">
+    <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:22px;padding:26px 28px;margin-bottom:44px">
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;margin-bottom:24px">
+        <div>
+          <div style="font-family:Fredoka,sans-serif;font-size:22px">Part Of, Not Times More</div>
+          <div style="font-size:13px;color:rgba(238,242,255,.6);margin-top:4px">Try a second number below one.</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;font-family:Fredoka,sans-serif;font-size:24px">
+          <input value="{{ dmA }}" onChange="{{ setDmA }}" inputMode="decimal" style="width:82px;padding:8px 10px;text-align:center;font-family:Fredoka,sans-serif;font-size:24px;background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.28);border-radius:12px;color:#EEF2FF">
+          <span style="color:rgba(238,242,255,.5)">×</span>
+          <input value="{{ dmB }}" onChange="{{ setDmB }}" inputMode="decimal" style="width:82px;padding:8px 10px;text-align:center;font-family:Fredoka,sans-serif;font-size:24px;background:rgba(255,255,255,.07);border:1.5px solid rgba(163,230,53,.5);border-radius:12px;color:#A3E635">
+        </div>
+      </div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(238,242,255,.4);margin-bottom:6px">You started with {{ dmA }}</div>
+      <div style="{{ dmBarFull }}"></div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:#A3E635;margin:14px 0 6px">You ended with {{ dmOut }}</div>
+      <div style="{{ dmBarOut }}"></div>
+      <div style="margin-top:22px;padding-top:18px;border-top:1px dashed rgba(255,255,255,.16);font-size:14px;line-height:1.55;color:rgba(238,242,255,.8)">{{ dmSays }}</div>
+    </div>
+    </sc-if>
+
+    <!-- M5 · Fraction Sums -->
+    <sc-if value="{{ isY5M5 }}" hint-placeholder-val="{{ false }}">
+    <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:22px;padding:26px 28px;margin-bottom:44px">
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;margin-bottom:22px">
+        <div>
+          <div style="font-family:Fredoka,sans-serif;font-size:22px">Same-Size Pieces</div>
+          <div style="font-size:13px;color:rgba(238,242,255,.6);margin-top:4px">{{ fsFace }}</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;font-family:Fredoka,sans-serif;font-size:19px">
+          <input value="{{ fsA }}" onChange="{{ setFsA }}" inputMode="numeric" style="width:48px;padding:6px;text-align:center;font-family:Fredoka,sans-serif;font-size:19px;background:rgba(255,255,255,.07);border:1.5px solid rgba(167,139,250,.5);border-radius:10px;color:#A78BFA">
+          <span style="color:rgba(238,242,255,.4)">/</span>
+          <input value="{{ fsB }}" onChange="{{ setFsB }}" inputMode="numeric" style="width:48px;padding:6px;text-align:center;font-family:Fredoka,sans-serif;font-size:19px;background:rgba(255,255,255,.07);border:1.5px solid rgba(167,139,250,.5);border-radius:10px;color:#A78BFA">
+          <span style="color:rgba(238,242,255,.5);margin:0 4px">+</span>
+          <input value="{{ fsC }}" onChange="{{ setFsC }}" inputMode="numeric" style="width:48px;padding:6px;text-align:center;font-family:Fredoka,sans-serif;font-size:19px;background:rgba(255,255,255,.07);border:1.5px solid rgba(56,189,248,.5);border-radius:10px;color:#38BDF8">
+          <span style="color:rgba(238,242,255,.4)">/</span>
+          <input value="{{ fsD }}" onChange="{{ setFsD }}" inputMode="numeric" style="width:48px;padding:6px;text-align:center;font-family:Fredoka,sans-serif;font-size:19px;background:rgba(255,255,255,.07);border:1.5px solid rgba(56,189,248,.5);border-radius:10px;color:#38BDF8">
+        </div>
+      </div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(238,242,255,.4);margin-bottom:7px">Different sizes — you cannot count these together</div>
+      <div style="display:flex;gap:3px;margin-bottom:9px">
+        <sc-for list="{{ fsTop }}" as="p" hint-placeholder-count="3"><div style="{{ p.style }}"></div></sc-for>
+      </div>
+      <div style="display:flex;gap:3px;margin-bottom:20px">
+        <sc-for list="{{ fsBot }}" as="p" hint-placeholder-count="4"><div style="{{ p.style }}"></div></sc-for>
+      </div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:#4ADE80;margin-bottom:7px">Both cut into {{ fsL }}ths — now every piece matches</div>
+      <div style="display:flex;gap:2px;margin-bottom:9px">
+        <sc-for list="{{ fsTopL }}" as="p" hint-placeholder-count="12"><div style="{{ p.style }}"></div></sc-for>
+      </div>
+      <div style="display:flex;gap:2px">
+        <sc-for list="{{ fsBotL }}" as="p" hint-placeholder-count="12"><div style="{{ p.style }}"></div></sc-for>
+      </div>
+      <div style="margin-top:20px;padding-top:18px;border-top:1px dashed rgba(255,255,255,.16);font-family:'JetBrains Mono',monospace;font-size:15px;color:#4ADE80">{{ fsRetiled }}</div>
+      <div style="font-size:14px;line-height:1.55;margin-top:12px;color:rgba(238,242,255,.72)">{{ fsSays }}</div>
+    </div>
+    </sc-if>
+
+    <!-- M6 · Fraction Products -->
+    <sc-if value="{{ isY5M6 }}" hint-placeholder-val="{{ false }}">
+    <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:22px;padding:26px 28px;margin-bottom:44px">
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;margin-bottom:22px">
+        <div>
+          <div style="font-family:Fredoka,sans-serif;font-size:22px">How Many Halves Fit</div>
+          <div style="font-size:13px;color:rgba(238,242,255,.6);margin-top:4px">{{ fpShown }}</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;font-family:Fredoka,sans-serif;font-size:22px">
+          <input value="{{ fpN }}" onChange="{{ setFpN }}" inputMode="numeric" style="width:56px;padding:7px;text-align:center;font-family:Fredoka,sans-serif;font-size:22px;background:rgba(255,255,255,.07);border:1.5px solid rgba(251,191,36,.5);border-radius:11px;color:#FBBF24">
+          <span style="color:rgba(238,242,255,.5)">÷ 1/</span>
+          <input value="{{ fpD }}" onChange="{{ setFpD }}" inputMode="numeric" style="width:56px;padding:7px;text-align:center;font-family:Fredoka,sans-serif;font-size:22px;background:rgba(255,255,255,.07);border:1.5px solid rgba(251,191,36,.5);border-radius:11px;color:#FBBF24">
+        </div>
+      </div>
+      <div style="display:flex;gap:12px;flex-wrap:wrap">
+        <sc-for list="{{ fpWholes }}" as="w" hint-placeholder-count="3">
+          <div style="{{ w.style }}">
+            <sc-for list="{{ w.parts }}" as="p" hint-placeholder-count="2"><div style="{{ p.style }}"></div></sc-for>
+          </div>
+        </sc-for>
+      </div>
+      <div style="margin-top:20px;padding-top:18px;border-top:1px dashed rgba(255,255,255,.16);font-family:'JetBrains Mono',monospace;font-size:15px;color:rgba(238,242,255,.8)">
+        {{ fpShown }} = <span style="font-family:Fredoka,sans-serif;font-size:26px;color:#FBBF24">{{ fpAns }}</span>
+      </div>
+      <div style="font-size:14px;line-height:1.55;margin-top:12px;color:rgba(238,242,255,.72)">{{ fpSays }}</div>
+    </div>
+    </sc-if>
+
+    <!-- M7 · Volume & Measure -->
+    <sc-if value="{{ isY5M7 }}" hint-placeholder-val="{{ false }}">
+    <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:22px;padding:26px 28px;margin-bottom:44px">
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;margin-bottom:22px">
+        <div>
+          <div style="font-family:Fredoka,sans-serif;font-size:22px">One Layer, Then Stack It</div>
+          <div style="font-size:13px;color:rgba(238,242,255,.6);margin-top:4px">Squared covers a floor. Cubed fills a room.</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;font-family:Fredoka,sans-serif;font-size:20px">
+          <input value="{{ vL }}" onChange="{{ setVL }}" inputMode="numeric" style="width:52px;padding:6px;text-align:center;font-family:Fredoka,sans-serif;font-size:20px;background:rgba(255,255,255,.07);border:1.5px solid rgba(45,212,191,.5);border-radius:10px;color:#2DD4BF">
+          <span style="color:rgba(238,242,255,.4)">×</span>
+          <input value="{{ vW }}" onChange="{{ setVW }}" inputMode="numeric" style="width:52px;padding:6px;text-align:center;font-family:Fredoka,sans-serif;font-size:20px;background:rgba(255,255,255,.07);border:1.5px solid rgba(45,212,191,.5);border-radius:10px;color:#2DD4BF">
+          <span style="color:rgba(238,242,255,.4)">×</span>
+          <input value="{{ vH }}" onChange="{{ setVH }}" inputMode="numeric" style="width:52px;padding:6px;text-align:center;font-family:Fredoka,sans-serif;font-size:20px;background:rgba(255,255,255,.07);border:1.5px solid rgba(96,165,250,.5);border-radius:10px;color:#60A5FA">
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:minmax(0,1fr) 130px;gap:26px;align-items:center">
+        <div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:#2DD4BF;margin-bottom:8px">One layer · {{ vArea }} squares</div>
+          <div style="{{ vGrid }}">
+            <sc-for list="{{ vLayer }}" as="c" hint-placeholder-count="12"><div style="{{ c.style }}"></div></sc-for>
+          </div>
+        </div>
+        <div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:#60A5FA;margin-bottom:8px">{{ vH }} layers</div>
+          <div style="display:flex;flex-direction:column;gap:4px">
+            <sc-for list="{{ vStack }}" as="s" hint-placeholder-count="2"><div style="{{ s.style }}"></div></sc-for>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top:20px;padding-top:18px;border-top:1px dashed rgba(255,255,255,.16);font-family:'JetBrains Mono',monospace;font-size:15px;color:rgba(238,242,255,.8)">
+        {{ vArea }} × {{ vH }} = <span style="font-family:Fredoka,sans-serif;font-size:26px;color:#2DD4BF">{{ vVol }}</span> cubes
+      </div>
+      <div style="font-size:14px;line-height:1.55;margin-top:12px;color:rgba(238,242,255,.72)">{{ vSays }}</div>
+    </div>
+    </sc-if>
+
+    <!-- M8 · Coordinate Geometry -->
+    <sc-if value="{{ isY5M8 }}" hint-placeholder-val="{{ false }}">
+    <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:22px;padding:26px 28px;margin-bottom:44px">
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;margin-bottom:22px">
+        <div>
+          <div style="font-family:Fredoka,sans-serif;font-size:22px">Two Patterns, One Line</div>
+          <div style="font-size:13px;color:rgba(238,242,255,.6);margin-top:4px">{{ cgRule }}</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;font-family:Fredoka,sans-serif;font-size:20px">
+          <span style="font-size:13px;color:rgba(238,242,255,.5)">x adds</span>
+          <input value="{{ cgA }}" onChange="{{ setCgA }}" inputMode="numeric" style="width:52px;padding:6px;text-align:center;font-family:Fredoka,sans-serif;font-size:20px;background:rgba(255,255,255,.07);border:1.5px solid rgba(45,212,191,.5);border-radius:10px;color:#2DD4BF">
+          <span style="font-size:13px;color:rgba(238,242,255,.5)">y adds</span>
+          <input value="{{ cgB }}" onChange="{{ setCgB }}" inputMode="numeric" style="width:52px;padding:6px;text-align:center;font-family:Fredoka,sans-serif;font-size:20px;background:rgba(255,255,255,.07);border:1.5px solid rgba(45,212,191,.5);border-radius:10px;color:#2DD4BF">
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:minmax(0,1fr) 150px;gap:26px;align-items:start">
+        <div style="display:grid;grid-template-columns:repeat(11,minmax(0,1fr));gap:3px;max-width:400px">
+          <sc-for list="{{ cgCells }}" as="c" hint-placeholder-count="121"><div style="{{ c.style }}"></div></sc-for>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <sc-for list="{{ cgRows }}" as="r" hint-placeholder-count="4">
+            <div style="{{ r.style }}">{{ r.label }}</div>
+          </sc-for>
+        </div>
+      </div>
+      <div style="margin-top:20px;padding-top:18px;border-top:1px dashed rgba(255,255,255,.16);font-size:14px;line-height:1.55;color:rgba(238,242,255,.8)">{{ cgSays }}</div>
+    </div>
+    </sc-if>
+
     <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:22px;margin-bottom:44px">
       <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:22px;padding:26px 28px">
         <div style="font-family:Fredoka,sans-serif;font-size:22px">What this mission builds</div>
@@ -3217,6 +3482,15 @@ class Component extends DCLogic {
            fN:3, fD:4, aN:2, aD:3, bN:3, bD:5, decV:"0.35", payV:"20.00", costV:"13.75",
            recW:8, recH:3, ptX:3, ptY:5,
            dat:"4,7,7,9,13", bagR:3, bagB:5, fnM:3, fnB:2, eqOp:"+", eqA:7, eqB:19,
+           /* Year Two's eight manipulatives. Year One had eight and Hank had
+            * none, which is the whole reason these exist. They are not the Year
+            * One ones relabelled: the same idea at this grade is a different
+            * object — Brock's area model is 2-digit by 2-digit and Hank's is
+            * 3-digit by 2-digit, because his mission is about finding that
+            * model hidden inside the standard algorithm. */
+           ptV:"3.7", ptE:2, bmA:243, bmB:36, ldA:748, ldB:4,
+           dmA:"6", dmB:"0.4", fsA:1, fsB:3, fsC:1, fsD:4, fpN:3, fpD:2,
+           vL:4, vW:3, vH:2, cgA:2, cgB:3,
            ans:{}, pset:"p1", pAns:{}, pChecked:{}, pRuns:{}, pTier:null, pPaper:{}, lstep:{}, playing:false,
            pLog:{}, qbank:"idle", qbankLine:"",
            dyn:{}, coach:null, dynBusy:false, dynErr:"",
@@ -6177,6 +6451,176 @@ class Component extends DCLogic {
     const tests=[[2,dvN%2===0,"last digit is even"],[3,digitSum%3===0,"digits add to "+digitSum],
                  [5,dvN%5===0,"ends in 0 or 5"],[9,digitSum%9===0,"digits add to "+digitSum],[10,dvN%10===0,"ends in 0"]];
 
+    /* ---- YEAR TWO'S MANIPULATIVES ------------------------------------------
+     * Year One had eight of these and Year Two had none, which is the whole
+     * reason they exist. Each answers its own mission's Big Question with
+     * something you can move, rather than restating it:
+     *
+     *   M1 the digits move, not the point   M5 you cannot add unlike pieces
+     *   M2 the area model inside the        M6 dividing by a half asks how
+     *      standard algorithm                  many halves fit
+     *   M3 how many groups fit              M7 squared covers, cubed fills
+     *   M4 why x0.4 shrinks                 M8 two patterns, one line
+     *
+     * Deliberately not Year One's relabelled. The same idea at this grade is a
+     * different object: Brock's area model is 2-digit by 2-digit, Hank's is
+     * 3-digit by 2-digit with all six partial products, because his mission is
+     * about finding that model hidden inside the algorithm. */
+    const y5c=(v,lo,hi,d)=>Math.max(lo,Math.min(hi,parseInt(v,10)||d));
+    const tidy=n=>{ const r=Math.round(n*1e6)/1e6; return String(r); };
+    const cell=(bg,bd)=>`display:grid;place-items:center;min-height:44px;border-radius:9px;background:${bg};border:1px solid ${bd}`;
+
+    /* M1 · Powers of Ten — the digits move, the point does not
+     *
+     * The digit for a place is taken in integer THOUSANDTHS, never by dividing
+     * by a negative power of ten. 0.7/0.1 is 6.999999999999999 in floating
+     * point, so the obvious version showed a 6 in the tenths column of 0.7 —
+     * a manipulative that teaches the wrong digit is worse than no
+     * manipulative, and this is the one screen whose whole job is which digit
+     * sits where.
+     *
+     * The shift is also bounded to what the columns can show. Nine places hold
+     * 999999 down to 0.001; letting the child shift past that would slide a
+     * digit off the end and quietly display a different number from the one
+     * printed above it. */
+    const PT_PLACES=[[5,"hundred thousands"],[4,"ten thousands"],[3,"thousands"],
+                     [2,"hundreds"],[1,"tens"],[0,"ones"],
+                     [-1,"tenths"],[-2,"hundredths"],[-3,"thousandths"]];
+    const PT_HI=999999, PT_LO=0.001;
+    const ptVal=Math.min(999.999,Math.max(PT_LO,
+      Math.round((Math.abs(parseFloat(st.ptV))||1)*1000)/1000));
+    const ptMaxUp=Math.floor(Math.log10(PT_HI/ptVal)+1e-9);
+    const ptMaxDown=Math.floor(Math.log10(ptVal/PT_LO)+1e-9);
+    const ptE=Math.max(-Math.min(3,ptMaxDown),
+                       Math.min(Math.min(3,ptMaxUp), parseInt(st.ptE,10)||0));
+    const ptOut=Math.round(ptVal*Math.pow(10,ptE)*1e6)/1e6;
+    const ptDigit=(n,p)=>{
+      const th=Math.round(n*1000);                 // integer thousandths
+      const div=Math.round(Math.pow(10,p+3));      // also an integer, p >= -3
+      return Math.floor(th/div)%10;
+    };
+    const ptRow=n=>PT_PLACES.map(([p,label])=>{
+      const d=ptDigit(n,p);
+      const lit=d!==0;
+      return {d:String(d), label, ones:p===0,
+        style:cell(lit?"rgba(56,189,248,.28)":"rgba(255,255,255,.04)",
+                   lit?"rgba(56,189,248,.7)":"rgba(255,255,255,.09)")
+              +";font-family:Fredoka,sans-serif;font-size:20px"};
+    });
+    const ptBefore=ptRow(ptVal), ptAfter=ptRow(ptOut);
+    const ptDir=ptE===0?"nowhere" : (ptE>0?"left":"right");
+    const ptSays=ptE===0 ? "Multiplying by 1 changes nothing."
+      : "×10"+(ptE>0?("^"+ptE):("^"+ptE))+" moves every digit "+Math.abs(ptE)+
+        " place"+(Math.abs(ptE)===1?"":"s")+" to the "+ptDir+
+        ". The decimal point never moved — the digits did.";
+    const ptExp=(ptE>=0?"× ":"÷ ")+"10"+(Math.abs(ptE)===1?"":"^"+Math.abs(ptE));
+
+    // M2 · Big Multiplication — the area model inside the algorithm
+    const bmA=y5c(st.bmA,100,999,243), bmB=y5c(st.bmB,10,99,36);
+    const bmAP=[Math.floor(bmA/100)*100, Math.floor(bmA/10)%10*10, bmA%10];
+    const bmBP=[Math.floor(bmB/10)*10, bmB%10];
+    const BM_HUES=["rgba(56,189,248","rgba(74,222,128","rgba(244,114,182"];
+    const bmCells=[];
+    bmBP.forEach((b,bi)=>bmAP.forEach((a,ai)=>{
+      const h=BM_HUES[ai];
+      bmCells.push({v:String(a*b), a:String(a), b:String(b),
+        style:cell(h+",.2)", h+",.55)")+";flex-direction:column;gap:2px;padding:8px;min-height:58px",
+        small:"font-family:'JetBrains Mono',monospace;font-size:9.5px;color:rgba(238,242,255,.5)",
+        big:"font-family:Fredoka,sans-serif;font-size:17px"});
+    }));
+    const bmGrid=`display:grid;grid-template-columns:repeat(${bmAP.length},minmax(0,1fr));gap:7px`;
+    const bmRowB=bmBP.map(b=>String(b)), bmRowA=bmAP.map(a=>String(a));
+    const bmTotal=bmA*bmB;
+    const bmLine1=bmAP.reduce((n,a)=>n+a*bmBP[1],0), bmLine2=bmAP.reduce((n,a)=>n+a*bmBP[0],0);
+    const bmSays="The algorithm writes two lines, "+bmLine1+" and "+bmLine2+
+      ". They are these six rooms added in twos — the bottom row is the first line, the top row the second.";
+
+    // M3 · Long Division — how many groups fit
+    const ldA=y5c(st.ldA,10,9999,748), ldB=y5c(st.ldB,2,12,4);
+    const ldSteps=[]; let carry=0;
+    String(ldA).split("").forEach((ch,i)=>{
+      const cur=carry*10+(+ch);
+      const fit=Math.floor(cur/ldB);
+      const used=fit*ldB;
+      carry=cur-used;
+      ldSteps.push({bring:ch, cur:String(cur), fit:String(fit), used:String(used), left:String(carry),
+        place:String(Math.pow(10,String(ldA).length-1-i)),
+        style:"display:grid;grid-template-columns:34px 1fr 1fr 1fr 1fr;gap:10px;align-items:center;padding:9px 13px;border-radius:11px;background:rgba(0,0,0,.22);border:1px solid rgba(255,255,255,.09);font-family:'JetBrains Mono',monospace;font-size:13px"});
+    });
+    const ldQ=Math.floor(ldA/ldB), ldR=ldA%ldB;
+    const ldSays="Each row asks the same question — how many "+ldB+"s fit — just at a smaller place each time.";
+
+    // M4 · Decimal Operations — why multiplying can shrink
+    const dmA=Math.abs(parseFloat(st.dmA))||0, dmB=Math.abs(parseFloat(st.dmB))||0;
+    const dmOut=Math.round(dmA*dmB*1e6)/1e6;
+    const dmShrinks=dmB>0&&dmB<1, dmGrows=dmB>1;
+    const dmPct=dmA>0?Math.max(2,Math.min(100,Math.round(dmOut/Math.max(dmA,dmOut)*100))):0;
+    const dmFullPct=dmA>0?Math.max(2,Math.min(100,Math.round(dmA/Math.max(dmA,dmOut)*100))):0;
+    const dmSays=dmB===0?"Nothing times zero is nothing."
+      :dmShrinks?("×"+tidy(dmB)+" means take "+tidy(dmB)+" OF "+tidy(dmA)+" — a part of it, so the answer is smaller. It is still multiplying.")
+      :dmGrows?("×"+tidy(dmB)+" is more than one whole "+tidy(dmA)+", so it grows.")
+      :("×1 is exactly one "+tidy(dmA)+".");
+    const dmBarFull="height:30px;border-radius:8px;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.18);width:"+dmFullPct+"%";
+    const dmBarOut="height:30px;border-radius:8px;background:rgba(163,230,53,.45);border:1px solid rgba(163,230,53,.8);width:"+dmPct+"%";
+
+    // M5 · Fraction Sums — you cannot add unlike pieces
+    const fsB=y5c(st.fsB,2,12,3), fsA=y5c(st.fsA,1,fsB,1);
+    const fsD=y5c(st.fsD,2,12,4), fsC=y5c(st.fsC,1,fsD,1);
+    const fsL=fsB*fsD/(gcd(fsB,fsD)||1);
+    const fsAn=fsA*(fsL/fsB), fsCn=fsC*(fsL/fsD);
+    const strip=(n,d,hue)=>Array.from({length:d},(_,i)=>({
+      style:`flex:1;min-width:0;height:34px;border-radius:4px;`+
+        (i<n?`background:${hue},.42);border:1.5px solid ${hue},.85)`
+            :"background:rgba(255,255,255,.04);border:1.5px solid rgba(255,255,255,.1)")}));
+    const fsTop=strip(fsA,fsB,"rgba(167,139,250"), fsBot=strip(fsC,fsD,"rgba(56,189,248");
+    const fsTopL=strip(fsAn,fsL,"rgba(167,139,250"), fsBotL=strip(fsCn,fsL,"rgba(56,189,248");
+    const fsSum=fsAn+fsCn;
+    const fsSays="Thirds and "+(fsD===2?"halves":fsD+"ths")+" are different sizes, so counting them together means nothing. Cut both into "+fsL+"ths and every piece is the same size — now they add.";
+    const fsOver=fsSum>fsL;
+
+    // M6 · Fraction Products — how many halves fit
+    const fpN=y5c(st.fpN,1,8,3), fpD=y5c(st.fpD,2,8,2);
+    const fpAns=fpN*fpD;
+    const fpWholes=Array.from({length:fpN},(_,w)=>({
+      n:w, parts:Array.from({length:fpD},(_,i)=>({
+        style:`flex:1;min-width:0;height:40px;border-radius:4px;background:rgba(251,191,36,.34);border:1.5px solid rgba(251,191,36,.8)`})),
+      style:"display:flex;gap:3px;flex:1;min-width:70px"}));
+    const fpSays="÷ 1/"+fpD+" is not “make it smaller” — it asks how many "+
+      (fpD===2?"halves":"1/"+fpD+"s")+" fit inside "+fpN+". There are "+fpAns+
+      ", which is why dividing by a fraction below one gives a bigger answer.";
+
+    // M7 · Volume & Measure — squared covers, cubed fills
+    const vL=y5c(st.vL,1,8,4), vW=y5c(st.vW,1,8,3), vH=y5c(st.vH,1,8,2);
+    const vArea=vL*vW, vVol=vArea*vH;
+    const vLayer=Array.from({length:vArea},()=>({
+      style:"width:100%;aspect-ratio:1;border-radius:3px;background:rgba(45,212,191,.4);border:1px solid rgba(45,212,191,.8)"}));
+    const vGrid=`display:grid;grid-template-columns:repeat(${vL},minmax(0,1fr));gap:3px;max-width:${Math.min(300,vL*36)}px`;
+    const vStack=Array.from({length:vH},(_,i)=>({
+      style:`height:16px;border-radius:4px;background:rgba(45,212,191,${0.5-i*0.045});border:1px solid rgba(45,212,191,.7)`}));
+    const vSays="One layer covers "+vArea+" squares — that is area, and it is squared because it took two lengths. Stack "+
+      vH+" of them and you have filled "+vVol+" cubes — cubed, because it took three.";
+
+    // M8 · Coordinate Geometry — two patterns, one line
+    const cgA=y5c(st.cgA,1,5,2), cgB=y5c(st.cgB,1,5,3);
+    const CG_MAX=10;
+    const cgPts=[];
+    for(let i=0;i<=CG_MAX;i++){ const x=i*cgA, y=i*cgB; if(x<=CG_MAX&&y<=CG_MAX) cgPts.push({x,y,i}); }
+    const cgHas={}; cgPts.forEach(p=>{ cgHas[p.x+","+p.y]=true; });
+    const cgCells=[];
+    for(let row=CG_MAX; row>=0; row--){
+      for(let col=0; col<=CG_MAX; col++){
+        const on=cgHas[col+","+row];
+        cgCells.push({style:"width:100%;aspect-ratio:1;border-radius:3px;transition:.15s;"+
+          (on?"background:#2DD4BF;box-shadow:0 0 10px rgba(45,212,191,.75)"
+             :"background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.07)")});
+      }
+    }
+    const cgRows=cgPts.map(p=>({label:"("+p.x+", "+p.y+")",
+      style:"padding:7px 12px;border-radius:10px;font-family:'JetBrains Mono',monospace;font-size:12.5px;background:rgba(45,212,191,.14);border:1px solid rgba(45,212,191,.45);color:#5EEAD4"}));
+    const cgSays="One pattern adds "+cgA+" each step, the other adds "+cgB+
+      ". Pair them up and every pair lands on the same straight line, because y is always "+
+      tidy(cgB/cgA)+" times x.";
+
     return {
       studentName, mascot, badgesEarned:done, currentWeek:done>0?done*4+1:1,
       isMap:st.view==="map",
@@ -6189,6 +6633,59 @@ class Component extends DCLogic {
        * eight per-mission manipulatives inside it — that is the only part of
        * the page that genuinely differs from one mission to the next. */
       isUnitY3:st.view==="unit"&&!y5,
+      /* Year Two's eight manipulative gates, same shape as Year One's. */
+      isY5M1:st.view==="unit"&&y5&&st.uview===1, isY5M2:st.view==="unit"&&y5&&st.uview===2,
+      isY5M3:st.view==="unit"&&y5&&st.uview===3, isY5M4:st.view==="unit"&&y5&&st.uview===4,
+      isY5M5:st.view==="unit"&&y5&&st.uview===5, isY5M6:st.view==="unit"&&y5&&st.uview===6,
+      isY5M7:st.view==="unit"&&y5&&st.uview===7, isY5M8:st.view==="unit"&&y5&&st.uview===8,
+
+      // M1 Powers of Ten
+      ptV:st.ptV, ptE:String(ptE), ptBefore, ptAfter, ptSays, ptExp,
+      ptShown:tidy(ptVal), ptResult:tidy(ptOut),
+      setPtV:e=>this.setState({ptV:e.target.value.replace(/[^\d.]/g,"").slice(0,7)}),
+      ptUp:()=>this.setState({ptE:Math.min(3,ptE+1)}),
+      ptDown:()=>this.setState({ptE:Math.max(-3,ptE-1)}),
+      // M2 Big Multiplication
+      bmA:String(bmA), bmB:String(bmB), bmCells, bmGrid, bmRowA, bmRowB,
+      bmTotal:String(bmTotal), bmSays, bmShown:bmA+" × "+bmB,
+      setBmA:e=>this.setState({bmA:e.target.value.replace(/\D/g,"").slice(0,3)}),
+      setBmB:e=>this.setState({bmB:e.target.value.replace(/\D/g,"").slice(0,2)}),
+      // M3 Long Division
+      ldA:String(ldA), ldB:String(ldB), ldSteps, ldSays,
+      ldQ:String(ldQ), ldR:String(ldR), ldHasR:ldR>0, ldShown:ldA+" ÷ "+ldB,
+      setLdA:e=>this.setState({ldA:e.target.value.replace(/\D/g,"").slice(0,4)}),
+      setLdB:e=>this.setState({ldB:e.target.value.replace(/\D/g,"").slice(0,2)}),
+      // M4 Decimal Operations
+      dmA:st.dmA, dmB:st.dmB, dmOut:tidy(dmOut), dmSays, dmBarFull, dmBarOut,
+      dmShrinks, setDmA:e=>this.setState({dmA:e.target.value.replace(/[^\d.]/g,"").slice(0,6)}),
+      setDmB:e=>this.setState({dmB:e.target.value.replace(/[^\d.]/g,"").slice(0,6)}),
+      // M5 Fraction Sums
+      fsA:String(fsA), fsB:String(fsB), fsC:String(fsC), fsD:String(fsD),
+      fsTop, fsBot, fsTopL, fsBotL, fsL:String(fsL), fsSays, fsOver,
+      fsAn:String(fsAn), fsCn:String(fsCn), fsSum:String(fsSum),
+      fsFace:fsA+"/"+fsB+" + "+fsC+"/"+fsD,
+      fsRetiled:fsAn+"/"+fsL+" + "+fsCn+"/"+fsL+" = "+fsSum+"/"+fsL,
+      setFsA:e=>this.setState({fsA:e.target.value.replace(/\D/g,"").slice(0,2)}),
+      setFsB:e=>this.setState({fsB:e.target.value.replace(/\D/g,"").slice(0,2)}),
+      setFsC:e=>this.setState({fsC:e.target.value.replace(/\D/g,"").slice(0,2)}),
+      setFsD:e=>this.setState({fsD:e.target.value.replace(/\D/g,"").slice(0,2)}),
+      // M6 Fraction Products
+      fpN:String(fpN), fpD:String(fpD), fpWholes, fpAns:String(fpAns), fpSays,
+      fpShown:fpN+" ÷ 1/"+fpD,
+      setFpN:e=>this.setState({fpN:e.target.value.replace(/\D/g,"").slice(0,1)}),
+      setFpD:e=>this.setState({fpD:e.target.value.replace(/\D/g,"").slice(0,1)}),
+      // M7 Volume & Measure
+      vL:String(vL), vW:String(vW), vH:String(vH), vLayer, vGrid, vStack,
+      vArea:String(vArea), vVol:String(vVol), vSays,
+      setVL:e=>this.setState({vL:e.target.value.replace(/\D/g,"").slice(0,1)}),
+      setVW:e=>this.setState({vW:e.target.value.replace(/\D/g,"").slice(0,1)}),
+      setVH:e=>this.setState({vH:e.target.value.replace(/\D/g,"").slice(0,1)}),
+      // M8 Coordinate Geometry
+      cgA:String(cgA), cgB:String(cgB), cgCells, cgRows, cgSays,
+      cgRule:"x adds "+cgA+", y adds "+cgB,
+      setCgA:e=>this.setState({cgA:e.target.value.replace(/\D/g,"").slice(0,1)}),
+      setCgB:e=>this.setState({cgB:e.target.value.replace(/\D/g,"").slice(0,1)}),
+
       uColor:sel.color, uName:sel.name, uNo:"Mission 0"+sel.n,
       /* Prose that reads as page furniture but is written per mission: which
        * of Practice Bay and the print pack carries this mission's work, what

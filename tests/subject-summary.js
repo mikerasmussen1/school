@@ -200,6 +200,46 @@ const math = S.get("math");
   has("and adds no competing numbers", out && !out.rows);
 }
 
+console.log("\n=== Teacher HQ reads the pilot it says it is reading ===");
+{
+  /* subjectProgress() read `lens()[0].slice` — but lens() returns the slice
+   * itself, so that was always undefined and it fell through to this device's
+   * own child. HQ showed the viewed pilot's name above somebody else's
+   * progress, and never errored, because the fallback is a valid record. */
+  const fs2 = require('fs');
+  const hh = fs2.readFileSync(__dirname + '/../index.html', 'utf8');
+  global.document = {addEventListener(){}, removeEventListener(){},
+    visibilityState:"visible", createElement:()=>({style:{}}), body:{}};
+  global.setTimeout = ()=>0; global.clearTimeout = ()=>{};
+  global.navigator = {onLine:true};
+  global.speechSynthesis = {cancel(){}, speak(){}};
+  global.SpeechSynthesisUtterance = function(){};
+  global.React = {createElement:(t,p,...c)=>({__el:t, props:p, children:c})};
+  class DCLogic { setState(p){ this.state = {...this.state, ...p}; } }
+  global.DCLogic = DCLogic;
+  const parts = hh.split('data-dc-script>');
+  const src = (parts[1] || hh.split(/<script(?![^>]*src)[^>]*>/).pop()).split('</script>')[0];
+  const Comp = eval("(function(){ " + src + "\n return Component; })()");
+
+  const c = new Comp(); c.props = {};
+  const device = {la:{opened:5, days:[1], level:"y1", data:{__at:1, year:"y1", week:1,
+    stepDone:{"y1:1:Mon:end":true, "y1:1:Tue:end":true, "y1:1:Wed:end":true}}}};
+  const viewed = {la:{opened:2, days:[1], level:"y2", data:{__at:1, year:"y2", week:9,
+    stepDone:{"y2:9:Mon:end":true}}}};
+
+  c.state = {...c.state, subjects:device, tView:null};
+  let row = c.subjectProgress().filter(r => r.id === "la")[0];
+  eq("with nobody viewed, HQ shows this device's child", row.detail,
+     "3 of 180 days finished · currently on week 1");
+
+  c.state = {...c.state, tView:{key:"k", name:"the other pilot", curriculum:"y5",
+                                slice:{subjects:viewed}}};
+  row = c.subjectProgress().filter(r => r.id === "la")[0];
+  eq("while viewing another pilot, HQ shows THEIR record", row.detail,
+     "1 of 180 days finished · currently on week 9");
+  has("and not this device's", !/3 of 180/.test(row.detail));
+}
+
 console.log("\n=== tones stay inside the vocabulary Mission Control renders ===");
 {
   const OK = ["", "good", "watch", "urgent"];

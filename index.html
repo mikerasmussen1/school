@@ -4068,8 +4068,16 @@ class Component extends DCLogic {
    * the row says what is actually true. */
   subjectProgress(){
     const st=this.state;
-    const lens=this.lens ? this.lens() : null;
-    const slice=(lens && lens[0] && lens[0].slice) || st;
+    /* lens() returns the viewed pilot's SLICE, or null when nobody is being
+     * viewed. This used to index it as `lens[0].slice`, which is undefined on
+     * an object, so the whole expression fell through to `st` — this device's
+     * own child — every single time. Teacher HQ therefore showed the pilot's
+     * name at the top of the page and somebody else's progress underneath it,
+     * silently, because the fallback is a legitimate value rather than an
+     * error. Now that each subject reports real counts rather than one vague
+     * sentence, that mix-up would put precise numbers against the wrong
+     * child. */
+    const slice=(this.lens && this.lens()) || st;
     const rec=(slice.subjects)||{};
     const S=(window.Subjects&&window.Subjects.all())||[];
     const ST=window.__CURR&&window.__CURR.STUDENTS;

@@ -137,6 +137,10 @@ run("node", ["scripts/check-tier-sections.js"], "check-tier-sections");
 /* Measures what the other three cannot see: whether a page had to be shrunk to
  * fit, and how far. All three were green on a worksheet scaled to about 5pt. */
 run("node", ["scripts/check-print-fit.js"], "check-print-fit");
+/* An undefined var(--token) invalidates its declaration, so the element keeps
+ * whatever colour it inherited — silently, and it can look deliberate. Field
+ * Notes shipped four of those. */
+run("node", ["scripts/check-css-tokens.js"], "check-css-tokens");
 run("node", ["scripts/qa-verify.js"], "qa-verify");
 
 console.log();

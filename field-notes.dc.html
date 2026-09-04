@@ -15,16 +15,23 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --paper:#F4F7F3; --card:#E6EFE7; --ink:#22332C; --soft:#5B7268;
-    --rule:#C3D6C8; --deep:#2E7D6B; --deep-d:#1F5A4C; --gold:#C79319;
-    --gold-l:#F3E3B0; --clay:#B5651D; --forest-l:#DCEEE1;
+    --paper:#F4F7F3; --paper-card:#E6EFE7; --ink:#22332C; --ink-soft:#5B7268;
+    --rule:#C3D6C8; --deep:#2E7D6B; --deep-dark:#1F5A4C; --gold:#C79319;
+    --gold-light:#F3E3B0; --clay:#B5651D; --forest-light:#DCEEE1;
+    /* Four places here already asked for --brick-dark and nothing defined it,
+       so those alert boxes drew their text with no colour at all: an undefined
+       var() makes the whole declaration invalid, and the dark green body ink
+       inherited through onto a pink #F3DCD5 ground. It looked deliberate
+       enough that nobody caught it. This is the value the token carries in
+       Word Voyagers, which is plainly what was meant. */
+    --brick-dark:#8E2C22;
   }
   *{box-sizing:border-box}
   body{margin:0;background:var(--paper);color:var(--ink);font-family:'Public Sans',system-ui,sans-serif;line-height:1.55}
   h1,h2,h3{font-family:'Fraunces',serif;font-weight:600;margin:0}
   .wrap{max-width:900px;margin:0 auto;padding:0 20px 70px}
-  .card{background:var(--card);border:1px solid var(--rule);border-radius:8px;padding:22px 24px;margin-bottom:20px}
-  .muted{color:var(--soft);font-size:.95rem}
+  .card{background:var(--paper-card);border:1px solid var(--rule);border-radius:8px;padding:22px 24px;margin-bottom:20px}
+  .muted{color:var(--ink-soft);font-size:.95rem}
   .box{background:var(--paper);border:1px solid var(--rule);border-radius:6px;padding:18px 20px}
   .unit-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
   @media(max-width:640px){.unit-grid{grid-template-columns:1fr}}
@@ -52,7 +59,7 @@
       </div>
       <div style="font-family:'Public Sans',sans-serif;font-weight:600;font-size:.78rem;padding:6px 12px;border-radius:999px;border:1px solid rgba(250,246,236,.25);color:rgba(250,246,236,.8)">{{ gradeLabel }}</div>
       <button onClick="{{ goPrevWeek }}" style="{{ navStyle }}">&lsaquo;</button>
-      <div style="font-family:'Fraunces',serif;font-size:13px;color:var(--gold-l);min-width:88px;text-align:center">{{ weekLabel }}</div>
+      <div style="font-family:'Fraunces',serif;font-size:13px;color:var(--gold-light);min-width:88px;text-align:center">{{ weekLabel }}</div>
       <button onClick="{{ goNextWeek }}" style="{{ navStyle }}">&rsaquo;</button>
       <a href="index.html" style="font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:rgba(244,247,243,.7);border:1px solid rgba(244,247,243,.25);border-radius:999px;padding:8px 13px;text-decoration:none">&larr; Mission Control</a>
     </div>
@@ -78,7 +85,7 @@
           <h2 style="margin:4px 0 10px">{{ labQuestion }}</h2>
           <div style="{{ tierStyle }}">{{ tierLabel }}</div>
           <sc-if value="{{ hasRule }}" hint-placeholder-val="{{ false }}">
-            <div style="background:var(--gold-l);color:#7A5A0C;border-radius:8px;padding:12px 15px;margin-bottom:14px;font-size:.93rem">
+            <div style="background:var(--gold-light);color:#7A5A0C;border-radius:8px;padding:12px 15px;margin-bottom:14px;font-size:.93rem">
               <strong>Read this first:</strong> {{ safetyRule }}
             </div>
           </sc-if>
@@ -137,7 +144,7 @@
               <div style="text-align:center;padding:16px"><button onClick="{{ qStart }}" style="{{ btnPrimary }}">Start the check</button></div>
             </sc-if>
             <sc-if value="{{ qActive }}" hint-placeholder-val="{{ false }}">
-              <div style="display:flex;justify-content:space-between;font-size:.88rem;color:var(--soft);margin-bottom:10px">
+              <div style="display:flex;justify-content:space-between;font-size:.88rem;color:var(--ink-soft);margin-bottom:10px">
                 <span>{{ qProgress }}</span><span style="color:var(--deep);font-weight:600">{{ qScore }}</span>
               </div>
               <div class="box">
@@ -158,7 +165,7 @@
             </sc-if>
           </sc-if>
           <sc-if value="{{ noCheck }}" hint-placeholder-val="{{ false }}">
-            <div style="background:var(--gold-l);color:#7A5A0C;border-radius:8px;padding:13px 16px;font-size:.93rem">{{ noCheckNote }}</div>
+            <div style="background:var(--gold-light);color:#7A5A0C;border-radius:8px;padding:13px 16px;font-size:.93rem">{{ noCheckNote }}</div>
           </sc-if>
         </div>
       </sc-if>
@@ -174,12 +181,12 @@
           <div onClick="{{ u.go }}" style="{{ u.style }}">
             <div style="display:flex;align-items:baseline;gap:9px">
               <div style="font-size:19px;color:{{ u.color }}">{{ u.badge }}</div>
-              <div style="font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--soft)">Unit {{ u.n }} &middot; wks {{ u.weeks }} &middot; {{ u.strand }}</div>
+              <div style="font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft)">Unit {{ u.n }} &middot; wks {{ u.weeks }} &middot; {{ u.strand }}</div>
             </div>
             <h3 style="margin:5px 0 3px;font-size:1.06rem">{{ u.name }}</h3>
             <div style="font-size:.86rem;color:var(--gold);font-style:italic;margin-bottom:5px">{{ u.code }}</div>
-            <div style="font-size:.9rem;color:var(--soft)">{{ u.bigQ }}</div>
-            <div style="margin-top:8px;font-size:.85rem;color:var(--soft)">Project: {{ u.project }}</div>
+            <div style="font-size:.9rem;color:var(--ink-soft)">{{ u.bigQ }}</div>
+            <div style="margin-top:8px;font-size:.85rem;color:var(--ink-soft)">Project: {{ u.project }}</div>
           </div>
         </sc-for>
       </div>
@@ -247,7 +254,7 @@
               <div class="muted" style="margin-top:10px">Nothing to buy this month.</div>
             </sc-if>
             <sc-if value="{{ m.hasHave }}" hint-placeholder-val="{{ true }}">
-              <h3 style="font-size:.95rem;margin:14px 0 4px;color:var(--soft)">You probably have these</h3>
+              <h3 style="font-size:.95rem;margin:14px 0 4px;color:var(--ink-soft)">You probably have these</h3>
               <div class="muted" style="font-size:.9rem">{{ m.haveLine }}</div>
             </sc-if>
           </div>
@@ -266,7 +273,7 @@
       <sc-if value="{{ isByUnit }}" hint-placeholder-val="{{ true }}">
       <sc-for list="{{ kitUnits }}" as="k" hint-placeholder-count="9">
         <div class="card">
-          <div style="font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--soft)">Unit {{ k.n }} &middot; weeks {{ k.weeks }}</div>
+          <div style="font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft)">Unit {{ k.n }} &middot; weeks {{ k.weeks }}</div>
           <h3 style="margin:3px 0 6px;font-size:1.05rem">{{ k.name }}</h3>
           <ul class="mats">
             <sc-for list="{{ k.materials }}" as="m" hint-placeholder-count="6">
@@ -320,14 +327,14 @@
 
       <div class="card">
         <h2>Where the auto-graded checks stand</h2>
-        <div style="background:var(--gold-l);color:#7A5A0C;border-radius:8px;padding:13px 16px;font-size:.93rem">{{ coverageNote }}</div>
+        <div style="background:var(--gold-light);color:#7A5A0C;border-radius:8px;padding:13px 16px;font-size:.93rem">{{ coverageNote }}</div>
         <p class="muted" style="margin-top:10px">The written claim runs every week regardless. It is the thing the Georgia practices standards actually ask for, and no multiple-choice item can stand in for it.</p>
       </div>
       <div class="card">
         <h2>Standards covered</h2>
         <sc-for list="{{ standards }}" as="s" hint-placeholder-count="10">
           <div style="display:grid;grid-template-columns:92px 1fr;gap:12px;padding:8px 0;border-bottom:1px solid var(--rule)">
-            <div style="font-family:'Fraunces',serif;font-size:.85rem;color:var(--deep-d)">{{ s.tag }}</div>
+            <div style="font-family:'Fraunces',serif;font-size:.85rem;color:var(--deep-dark)">{{ s.tag }}</div>
             <div><div style="font-size:.93rem">{{ s.text }}</div><div class="muted" style="font-size:.82rem">Weeks: {{ s.weeks }}</div></div>
           </div>
         </sc-for>
@@ -452,13 +459,13 @@ class Component extends DCLogic {
   }
   pill(a){ return "font-family:'Public Sans',sans-serif;font-weight:600;font-size:.85rem;padding:7px 14px;border-radius:999px;cursor:pointer;border:1px solid "+(a?"var(--deep)":"var(--rule)")+";background:"+(a?"var(--deep)":"transparent")+";color:"+(a?"#fff":"var(--ink)"); }
   pillDark(a){ return "font-family:'Public Sans',sans-serif;font-weight:600;font-size:.78rem;padding:6px 12px;border-radius:999px;cursor:pointer;border:1px solid "+(a?"var(--gold)":"rgba(244,247,243,.3)")+";background:"+(a?"var(--gold)":"transparent")+";color:"+(a?"#22332C":"rgba(244,247,243,.85)"); }
-  navBtn(a){ return "font-family:'Fraunces',serif;font-weight:600;font-size:.88rem;padding:9px 14px;border-radius:8px 8px 0 0;cursor:pointer;border:none;background:"+(a?"var(--paper)":"#33473E")+";color:"+(a?"var(--deep-d)":"#C9D8CE"); }
+  navBtn(a){ return "font-family:'Fraunces',serif;font-weight:600;font-size:.88rem;padding:9px 14px;border-radius:8px 8px 0 0;cursor:pointer;border:none;background:"+(a?"var(--paper)":"#33473E")+";color:"+(a?"var(--deep-dark)":"#C9D8CE"); }
   choice(s){
-    const bg=s==="correct"?"var(--forest-l)":s==="incorrect"?"#F6DED6":"#fff";
+    const bg=s==="correct"?"var(--forest-light)":s==="incorrect"?"#F6DED6":"#fff";
     const bd=s==="correct"?"var(--deep)":s==="incorrect"?"var(--clay)":"var(--rule)";
     return "display:block;width:100%;text-align:left;background:"+bg+";border:1px solid "+bd+";border-radius:6px;padding:10px 13px;font-family:'Public Sans',sans-serif;font-size:.95rem;cursor:pointer;color:var(--ink);margin-bottom:7px";
   }
-  fbStyle(ok){ return "margin-top:10px;padding:10px 12px;border-radius:6px;font-size:.9rem;"+(ok?"background:var(--forest-l);color:#1F5A4C":"background:#F6DED6;color:#8A3E14"); }
+  fbStyle(ok){ return "margin-top:10px;padding:10px 12px;border-radius:6px;font-size:.9rem;"+(ok?"background:var(--forest-light);color:#1F5A4C":"background:#F6DED6;color:#8A3E14"); }
 
   qStart=()=>{ const set=this.Q.setFor(this.state.grade, this.state.week);
     this.setState({q:{items:this.prep(set.items), idx:0, score:0, answered:false, chosen:null, ok:null}}); };
@@ -546,7 +553,7 @@ class Component extends DCLogic {
       tierStyle:(function(){
         if(!AUT) return "display:none";
         const T=AUT.tierFor(st.grade,st.week);
-        const bg = T.tier==="solo" ? "var(--forest-l)" : T.tier==="rule" ? "var(--gold-l)" : "#F3DCD5";
+        const bg = T.tier==="solo" ? "var(--forest-light)" : T.tier==="rule" ? "var(--gold-light)" : "#F3DCD5";
         const col= T.tier==="solo" ? "#2E4E38"        : T.tier==="rule" ? "#7A5A0C"      : "var(--brick-dark)";
         return "display:inline-block;background:"+bg+";color:"+col+";border-radius:999px;"+
                "padding:6px 14px;margin-bottom:12px;font-size:.85rem;font-weight:600";
@@ -578,7 +585,7 @@ class Component extends DCLogic {
         const first=S.WEEKS.filter(function(w){ return w.unit===u.n; })[0];
         return {n:u.n, name:u.name, weeks:u.weeks, strand:u.strand, code:u.code,
           bigQ:u.bigQ, project:u.project, badge:u.badge, color:u.color,
-          style:"background:var(--card);border:1px solid "+(unit.n===u.n?"var(--deep)":"var(--rule)")+";border-radius:8px;padding:15px 17px;cursor:pointer",
+          style:"background:var(--paper-card);border:1px solid "+(unit.n===u.n?"var(--deep)":"var(--rule)")+";border-radius:8px;padding:15px 17px;cursor:pointer",
           go:function(){ self.setWeek(first?first.n:1); self.goto("week"); }};
       }),
 
@@ -665,9 +672,9 @@ class Component extends DCLogic {
         const c=AUT.counts(st.grade);
         return [
           {count:c.solo+" weeks", text:"he does entirely on his own.",
-           style:"background:var(--forest-l);color:#2E4E38;border-radius:6px;padding:10px 14px;font-size:.93rem"},
+           style:"background:var(--forest-light);color:#2E4E38;border-radius:6px;padding:10px 14px;font-size:.93rem"},
           {count:c.rule+" weeks", text:"he does alone after reading one safety rule on the page — goggles on, gloves on, stay in the yard, keep the bag sealed. The rule is the control, not you.",
-           style:"background:var(--gold-l);color:#7A5A0C;border-radius:6px;padding:10px 14px;font-size:.93rem"},
+           style:"background:var(--gold-light);color:#7A5A0C;border-radius:6px;padding:10px 14px;font-size:.93rem"},
           {count:c.adult+" weeks", text:"genuinely need you there: flame, a heat source, stains, plaster dust, biological samples. These were not downgraded to flatter the number.",
            style:"background:#F3DCD5;color:var(--brick-dark);border-radius:6px;padding:10px 14px;font-size:.93rem"}
         ];

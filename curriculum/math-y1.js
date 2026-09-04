@@ -793,7 +793,7 @@ const PRACTICE_U7 = [
   {id:"u7p3",label:"1.3",title:"When the Average Lies",note:"One extreme value. Watch carefully which measures move and which do not.",
    items:[
      {t:2,q:"Mean of 5, 5, 5, 5",a:"5"},{t:0,q:"Median of 5, 5, 5, 5",a:"5"},{t:2,q:"Mean of 5, 5, 5, 25",a:"10"},{t:0,q:"Median of 5, 5, 5, 25",a:"5"},{t:0,q:"Range of 5, 5, 5, 25",a:"20"},{t:0,q:"Mode of 5, 5, 5, 25",a:"5"},
-     {t:2,q:"Four people earn 10 each, a fifth earns 60 — mean",a:"20",hint:"100 ÷ 5"},{t:1,q:"Those same five people — median",a:"10"},{t:1,q:"Those same five people — range",a:"50"},{t:2,q:"Remove the 60. Mean of the four left",a:"10"},{t:1,q:"Type the value of the measure that best describes a typical one of those five people",a:"10",hint:"The median, 10 — the mean of 20 describes nobody"},
+     {t:2,q:"Four people earn 10 each, a fifth earns 60 — mean",a:"20",hint:"100 ÷ 5"},{t:1,q:"Four people earn 10 each, a fifth earns 60 — median",a:"10"},{t:1,q:"Those same five people — range",a:"50"},{t:2,q:"Remove the 60. Mean of the four left",a:"10"},{t:1,q:"Type the value of the measure that best describes a typical one of those five people",a:"10",hint:"The median, 10 — the mean of 20 describes nobody"},
      {t:2,q:"Six houses cost 200 each and one costs 900 — mean",a:"300",hint:"2100 ÷ 7"},{t:2,q:"Those same seven houses — median",a:"200"}
    ]},
   {id:"u7p4",label:"1.4",title:"Chance as a Number",note:"Chance is a count out of a total. Type the count that is asked for.",
@@ -1013,8 +1013,8 @@ const PRACTICE_U2_W2 = [
   {id:"u2w2p5",w:2,label:"Fri",title:"Snack Run Planning",note:"Real quantities, real people. Every leftover decision written down.",
    items:[
      {t:0,q:"24 crackers between 4 — each",a:"6"},{t:0,q:"20 grapes between 3 — whole each",a:"6"},
-     {t:1,q:"A pack of 18 between 5 — whole each",a:"3"},{t:1,q:"That pack — leftover",a:"3"},
-     {t:2,q:"$12 of snacks split 5 ways — dollars each",a:"2.4"},{t:2,q:"You need 7 each for 6 people. Packs of 10 needed",a:"5"},{t:2,q:"Those packs — snacks left over",a:"8"}
+     {t:1,q:"A pack of 18 between 5 — whole each",a:"3"},{t:1,q:"A pack of 18 between 5 — leftover",a:"3"},
+     {t:2,q:"$12 of snacks split 5 ways — dollars each",a:"2.4"},{t:2,q:"You need 7 each for 6 people. Packs of 10 needed",a:"5"},{t:2,q:"You need 7 each for 6 people. Packs of 10 needed — snacks left over",a:"8"}
    ]}
 ];
 
@@ -1094,7 +1094,7 @@ const PRACTICE_U2_W5 = [
   {id:"u2w5p2",w:5,label:"5.2",title:"Snack Run",note:"Real quantities, real people, every leftover call written down.",
    items:[
      {t:0,q:"30 crackers between 5 — each",a:"6"},{t:0,q:"24 grapes between 4 — each",a:"6"},{t:0,q:"18 between 6 — each",a:"3"},{t:0,q:"25 between 5 — each",a:"5"},{t:0,q:"40 between 8 — each",a:"5"},{t:0,q:"21 between 7 — each",a:"3"},
-     {t:1,q:"A 44-pack between 6 — whole each",a:"7"},{t:1,q:"That pack — leftover",a:"2"},{t:1,q:"$18 split 4 ways — dollars each",a:"4.5"},{t:1,q:"You need 5 each for 9 people. Packs of 12 needed",a:"4"},{t:1,q:"Those packs — snacks left over",a:"3"},
+     {t:1,q:"A 44-pack between 6 — whole each",a:"7"},{t:1,q:"A 44-pack between 6 — leftover",a:"2"},{t:1,q:"$18 split 4 ways — dollars each",a:"4.5"},{t:1,q:"You need 5 each for 9 people. Packs of 12 needed",a:"4"},{t:1,q:"You need 5 each for 9 people. Packs of 12 needed — snacks left over",a:"3"},
      {t:2,q:"$25 buys packs at $4 — whole packs",a:"6"},{t:2,q:"That purchase — dollars change",a:"1"}
    ]},
   {id:"u2w5p3",w:5,label:"5.3",title:"Remainder Defence",note:"One division, four right answers. Say which one the question wanted.",
@@ -1425,7 +1425,7 @@ const PRACTICE_U5_W3 = [
    items:[
      {t:0,q:"$6 for 2 — price each",a:"3"},{t:0,q:"$10 for 5 — price each",a:"2"},{t:0,q:"$12 for 4 — price each",a:"3"},{t:0,q:"$8 for 8 — price each",a:"1"},{t:0,q:"$20 for 10 — price each",a:"2"},{t:0,q:"$9 for 3 — price each",a:"3"},
      {t:2,q:"$4.50 for 3 — price each",a:"1.5"},{t:2,q:"$7.20 for 8 — price each",a:"0.9"},{t:2,q:"$11.25 for 5 — price each",a:"2.25"},{t:2,q:"$2.40 for 6 — price each",a:"0.4"},{t:1,q:"$15 for 12 — price each",a:"1.25"},
-     {t:2,q:"Pack A: $5 for 4. Pack B: $9 for 8. Price each for B",a:"1.125"},{t:2,q:"Same packs — price each for A",a:"1.25"}
+     {t:2,q:"Pack A: $5 for 4. Pack B: $9 for 8. Price each for B",a:"1.125"},{t:2,q:"Pack A: $5 for 4. Pack B: $9 for 8 — price each for A",a:"1.25"}
    ]},
   {id:"u5w3p3",w:3,label:"3.3",title:"Is It Actually a Deal",note:"Bigger box, better price? Only sometimes. Prove it.",
    items:[
@@ -1435,8 +1435,8 @@ const PRACTICE_U5_W3 = [
    ]},
   {id:"u5w3p4",w:3,label:"3.4",title:"Multi-Step Money",note:"Two operations, in the right order, with an estimate first.",
    items:[
-     {t:0,q:"3 items at $2 — total",a:"6"},{t:0,q:"Change from $10",a:"4"},{t:2,q:"4 items at $1.50 — total",a:"6"},{t:0,q:"Change from $20",a:"14"},{t:2,q:"2 items at $3.25 — total",a:"6.5"},{t:0,q:"Change from $10",a:"3.5"},
-     {t:2,q:"3 at $4.99 — total",a:"14.97"},{t:1,q:"Change from $20",a:"5.03"},{t:2,q:"5 at $2.40 plus one at $3.10 — total",a:"15.1"},{t:1,q:"$50 split between 4 people — each",a:"12.5"},{t:2,q:"6 at $1.75 — total",a:"10.5"},
+     {t:0,q:"3 items at $2 — total",a:"6"},{t:0,q:"3 items at $2 — change from $10",a:"4"},{t:2,q:"4 items at $1.50 — total",a:"6"},{t:0,q:"4 items at $1.50 — change from $20",a:"14"},{t:2,q:"2 items at $3.25 — total",a:"6.5"},{t:0,q:"2 items at $3.25 — change from $10",a:"3.5"},
+     {t:2,q:"3 at $4.99 — total",a:"14.97"},{t:1,q:"3 at $4.99 — change from $20",a:"5.03"},{t:2,q:"5 at $2.40 plus one at $3.10 — total",a:"15.1"},{t:1,q:"$50 split between 4 people — each",a:"12.5"},{t:2,q:"6 at $1.75 — total",a:"10.5"},
      {t:2,q:"$40 budget, 3 dinners at $11.25 — dollars left",a:"6.25"},{t:2,q:"$100 for items at $12.50 — how many whole ones",a:"8"}
    ]},
   {id:"u5w3p5",w:3,label:"Fri",title:"Mid-Unit Quiz",note:"Eight items across Weeks 1–3. 85% to keep flying.",
@@ -1451,14 +1451,14 @@ const PRACTICE_U5_W4 = [
   {id:"u5w4p1",w:4,label:"4.1",title:"Build the Budget",note:"Three dinners, $40, and no going over.",
    items:[
      {t:0,q:"$40 split 4 ways",a:"10"},{t:0,q:"$40 split 5 ways",a:"8"},{t:0,q:"$12 + $15",a:"27"},{t:0,q:"$40 − $27",a:"13"},{t:0,q:"$40 split 8 ways",a:"5"},{t:0,q:"3 items at $5",a:"15"},
-     {t:2,q:"Three dinners at $11.25 — total",a:"33.75"},{t:1,q:"Left from $40",a:"6.25"},{t:1,q:"$40 ÷ 3, rounded down to the cent",a:"13.33"},{t:2,q:"Two dinners at $14.50 — total",a:"29"},{t:1,q:"Left from $40",a:"11"},
+     {t:2,q:"Three dinners at $11.25 — total",a:"33.75"},{t:1,q:"Left from $40",a:"6.25"},{t:1,q:"$40 ÷ 3, rounded down to the cent",a:"13.33"},{t:2,q:"Two dinners at $14.50 — total",a:"29"},{t:1,q:"Two dinners at $14.50 — left from $40",a:"11"},
      {t:2,q:"Feeding 4 people three dinners on $40 — dollars per person per dinner",a:"3.33",hint:"$40 ÷ 12, to the cent"},{t:2,q:"$40 with 15% left as buffer — dollars to spend",a:"34"}
    ]},
   {id:"u5w4p2",w:4,label:"4.2",title:"Shop It",note:"Real prices, real quantities, running total in your head.",
    items:[
      {t:2,q:"$3.50 + $2.50",a:"6"},{t:2,q:"$6 + $4.25",a:"10.25"},{t:2,q:"2 at $1.99",a:"3.98"},{t:0,q:"3 at $2",a:"6"},{t:2,q:"$5.75 + $4.25",a:"10"},{t:2,q:"$8.40 + $1.60",a:"10"},
      {t:2,q:"2 at $3.49 plus 1 at $5.99 — total",a:"12.97"},{t:2,q:"$12.97 rounded to the nearest dollar",a:"13"},{t:2,q:"4 at $2.25 plus 2 at $1.10 — total",a:"11.2"},{t:2,q:"Left from $40 after spending $28.65",a:"11.35"},{t:2,q:"3 at $6.99 — total",a:"20.97"},
-     {t:2,q:"A cart of $33.75 with $2.70 tax — total",a:"36.45"},{t:2,q:"Change from $40 on that cart",a:"3.55"}
+     {t:2,q:"A cart of $33.75 with $2.70 tax — total",a:"36.45"},{t:2,q:"A cart of $33.75 with $2.70 tax — change from $40",a:"3.55"}
    ]},
   {id:"u5w4p3",w:4,label:"4.3",title:"Reconcile the Receipt",note:"Your total against theirs. Find the gap and name it.",
    items:[
@@ -1523,7 +1523,7 @@ const PRACTICE_U6_W3 = [
   {id:"u6w3p2",w:3,label:"3.2",title:"Shapes on the Grid",note:"Plot the corners, then read off what you built.",
    items:[
      {t:0,q:"Corners on a rectangle",a:"4"},{t:0,q:"Corners on a triangle",a:"3"},{t:0,q:"(1,1) to (5,1) — the length",a:"4"},{t:0,q:"(1,1) to (1,4) — the length",a:"3"},{t:0,q:"Sides on a square",a:"4"},{t:0,q:"(0,0) to (3,0) — the length",a:"3"},
-     {t:1,q:"(1,1), (1,5), (6,5), (6,1) — the area",a:"20"},{t:1,q:"That shape's perimeter",a:"18"},{t:1,q:"(2,2), (2,7), (5,7), (5,2) — the area",a:"15"},{t:1,q:"(0,0), (0,4), (4,4), (4,0) — the shape's name",a:"square"},{t:1,q:"The missing corner of a rectangle at (1,1),(1,4),(6,4) — type as a,b",a:"6,1"},
+     {t:1,q:"(1,1), (1,5), (6,5), (6,1) — the area",a:"20"},{t:1,q:"(2,2),(2,6),(7,6),(7,2) — perimeter",a:"18"},{t:1,q:"(2,2), (2,7), (5,7), (5,2) — the area",a:"15"},{t:1,q:"(0,0), (0,4), (4,4), (4,0) — the shape's name",a:"square"},{t:1,q:"The missing corner of a rectangle at (1,1),(1,4),(6,4) — type as a,b",a:"6,1"},
      {t:2,q:"(0,0), (8,0), (8,5), (0,5) — the area",a:"40"},{t:2,q:"A square with corners (2,2) and (7,7) opposite — its area",a:"25"}
    ]},
   {id:"u6w3p3",w:3,label:"3.3",title:"Reading a Map",note:"Coordinates are directions somebody else has to follow.",
@@ -1627,9 +1627,9 @@ const PRACTICE_U7_W2 = [
    ]},
   {id:"u7w2p3",w:2,label:"2.3",title:"Graph What You Got",note:"Bar graph of your own data, plus all four measures.",
    items:[
-     {t:0,q:"Counts 8, 6, 4, 2 — the total",a:"20"},{t:2,q:"Their mean",a:"5"},{t:0,q:"Their range",a:"6"},{t:0,q:"The mode of 5, 7, 7, 9",a:"7"},{t:0,q:"The median of 2, 5, 9",a:"5"},{t:0,q:"A scale marked every 2 — the value 3 marks up",a:"6"},
-     {t:2,q:"Counts 12, 8, 6, 4 — the mean",a:"7.5"},{t:1,q:"Those counts — the median",a:"7"},{t:1,q:"Those counts — the range",a:"8"},{t:1,q:"Water 8, juice 6, milk 4, tea 2 — the mode",a:"water"},{t:1,q:"Out of 100 people, expect how many water",a:"40"},
-     {t:2,q:"Counts 9, 5, 3, 2, 1 — the mean",a:"4"},{t:2,q:"Those counts — the median",a:"3"}
+     {t:0,q:"Counts 8, 6, 4, 2 — the total",a:"20"},{t:2,q:"Counts 8, 6, 4, 2 — the mean",a:"5"},{t:0,q:"Counts 8, 6, 4, 2 — the range",a:"6"},{t:0,q:"The mode of 5, 7, 7, 9",a:"7"},{t:0,q:"The median of 2, 5, 9",a:"5"},{t:0,q:"A scale marked every 2 — the value 3 marks up",a:"6"},
+     {t:2,q:"Counts 12, 8, 6, 4 — the mean",a:"7.5"},{t:1,q:"Counts 12, 8, 6, 4 — the median",a:"7"},{t:1,q:"Those counts — the range",a:"8"},{t:1,q:"Water 8, juice 6, milk 4, tea 2 — the mode",a:"water"},{t:1,q:"Out of 100 people, expect how many water",a:"40"},
+     {t:2,q:"Counts 9, 5, 3, 2, 1 — the mean",a:"4"},{t:2,q:"Counts 9, 5, 3, 2, 1 — the median",a:"3"}
    ]},
   {id:"u7w2p4",w:2,label:"2.4",title:"Chance as a Number",note:"Chance is a count out of a total. Nothing more mysterious.",
    items:[
@@ -1667,13 +1667,13 @@ const PRACTICE_U7_W3 = [
   {id:"u7w3p4",w:3,label:"Thu",title:"Error Journal Sweep",note:"Re-read every entry from the mission. Fix only what repeats.",
    items:[
      {t:2,q:"Mean of 4, 6, 8",a:"6"},{t:0,q:"Median of 2, 5, 9",a:"5"},{t:0,q:"Mode of 5, 7, 7, 9",a:"7"},{t:0,q:"Range of 3, 9, 12",a:"9"},{t:0,q:"Each ★ = 5. 6 ★ — books",a:"30"},{t:0,q:"Even numbers on a die",a:"3"},
-     {t:2,q:"Mean of 4, 7, 7, 9, 13",a:"8"},{t:1,q:"Median of that set",a:"7"},{t:2,q:"Five numbers with mean 10 — their total",a:"50"},{t:1,q:"60 rolls — expected 3s",a:"10"},{t:1,q:"15 of 20 — the percent",a:"75"},
+     {t:2,q:"Mean of 4, 7, 7, 9, 13",a:"8"},{t:1,q:"4, 7, 7, 9, 13 — the median",a:"7"},{t:2,q:"Five numbers with mean 10 — their total",a:"50"},{t:1,q:"60 rolls — expected 3s",a:"10"},{t:1,q:"15 of 20 — the percent",a:"75"},
      {t:2,q:"Six houses at 200 and one at 900 — the mean",a:"300"},{t:2,q:"Those same houses — the median",a:"200"}
    ]},
   {id:"u7w3p5",w:3,label:"Fri",title:"Mission 07 Test",note:"Twelve items plus the Big Question, answered out loud.",
    items:[
      {t:0,q:"A bar chart marked every 4, a bar at the third mark — its value",a:"12"},{t:0,q:"Each ▮ = 2 goals. 9 ▮ — goals",a:"18"},
-     {t:2,q:"Mean of 14, 16, 18, 20",a:"17"},{t:1,q:"Median of 5, 12, 3, 8, 21, 9",a:"8.5"},{t:1,q:"Range of 7, 7, 19, 4, 11",a:"15"},{t:2,q:"Five scores total 45, a sixth of 9 added — new mean",a:"9"},{t:1,q:"A spinner of 8 parts, 2 gold, 40 spins — expected golds",a:"10"},{t:1,q:"20 people, 8 pick water — out of 100",a:"40"},{t:2,q:"Water 8, juice 6, milk 4, tea 2 — the mean",a:"5"},{t:1,q:"Those four — the mode",a:"water"},
+     {t:2,q:"Mean of 14, 16, 18, 20",a:"17"},{t:1,q:"Median of 5, 12, 3, 8, 21, 9",a:"8.5"},{t:1,q:"Range of 7, 7, 19, 4, 11",a:"15"},{t:2,q:"Five scores total 45, a sixth of 9 added — new mean",a:"9"},{t:1,q:"A spinner of 8 parts, 2 gold, 40 spins — expected golds",a:"10"},{t:1,q:"20 people, 8 pick water — out of 100",a:"40"},{t:2,q:"Water 8, juice 6, milk 4, tea 2 — the mean",a:"5"},{t:1,q:"Water 8, juice 6, milk 4, tea 2 — the mode",a:"water"},
      {t:2,q:"Two dice — ways to total 7",a:"6"},{t:2,q:"2, 2, 2, 2, 22 — mean and median; type the median",a:"2"}
    ]}
 ];

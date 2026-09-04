@@ -643,8 +643,8 @@ const PRACTICE_Y5_W2 = {
     q(1,"2.5 kg at $4 per kg","10"),q(1,"$12 buys how many at $2.40","5"),q(1,"1.5 m plus 0.85 m — metres","2.35"),q(1,"6 at $3.99 — total","23.94"),q(1,"$50 − $27.45","22.55"),
     q(2,"0.75 kg at $6.40 per kg","4.8"),q(2,"$18 buys how many at $0.75","24")]},
   {id:"y5u4w4p2",w:4,label:"4.2",title:"Two-Step Problems",note:"Multiply then subtract, in that order.",items:[
-    q(0,"3 at $2, change from $10","4"),q(0,"4 at $1.50, change from $10","4"),q(0,"2 at $3.25 — total","6.5"),q(0,"Change from $10","3.5"),q(0,"5 at $2 — total","10"),q(0,"Change from $20","10"),
-    q(1,"3 at $4.99, change from $20","5.03"),q(1,"6 at $1.75 — total","10.5"),q(1,"Change from $20","9.5"),q(1,"2.5 kg at $3.20, change from $10","2"),q(1,"4 at $6.25 — total","25"),
+    q(0,"3 at $2, change from $10","4"),q(0,"4 at $1.50, change from $10","4"),q(0,"2 at $3.25 — total","6.5"),q(0,"2 at $3.25 — change from $10","3.5"),q(0,"5 at $2 — total","10"),q(0,"5 at $2 — change from $20","10"),
+    q(1,"3 at $4.99, change from $20","5.03"),q(1,"6 at $1.75 — total","10.5"),q(1,"6 at $1.75 — change from $20","9.5"),q(1,"2.5 kg at $3.20, change from $10","2"),q(1,"4 at $6.25 — total","25"),
     q(2,"$40 less 3 dinners at $11.25","6.25"),q(2,"1.5 kg at $4.80 plus $2.50 delivery","9.7")]},
   {id:"y5u4w4p3",w:4,label:"4.3",title:"Measurement Contexts",note:"Metres, litres and kilograms, all carrying decimals.",items:[
     q(0,"1.5 m + 0.5 m","2"),q(0,"2.5 L − 1 L","1.5"),q(0,"0.5 kg × 4","2"),q(0,"3 m ÷ 2","1.5"),q(0,"1.2 m + 0.8 m","2"),q(0,"4.5 kg − 1.5 kg","3"),
@@ -791,7 +791,7 @@ const PRACTICE_Y5_W4 = {
     q(1,"20 × 3/4 — bigger or smaller","smaller"),q(1,"20 × 5/4 — bigger or smaller","bigger"),
     q(2,"20 × 4/4 — bigger, smaller or same","same"),q(2,"Larger: 15 × 3/4 or 15 × 4/3 — type the fraction","4/3"),q(2,"36 × 5/6","30")]},
   {id:"y5u6w3p1",w:3,label:"3.1",title:"Bigger or Smaller",note:"Decide without calculating. Then check yourself.",items:[
-    q(0,"10 × 2 — bigger or smaller than 10","bigger"),q(0,"10 × 1/2","smaller"),q(0,"10 × 1 — bigger, smaller or same","same"),q(0,"8 × 1/4 — bigger or smaller","smaller"),q(0,"8 × 3 — bigger or smaller","bigger"),q(0,"8 × 1/2","4"),
+    q(0,"10 × 2 — bigger or smaller than 10","bigger"),q(0,"10 × 1/2 — bigger or smaller","smaller"),q(0,"10 × 1 — bigger, smaller or same","same"),q(0,"8 × 1/4 — bigger or smaller","smaller"),q(0,"8 × 3 — bigger or smaller","bigger"),q(0,"8 × 1/2","4"),
     q(1,"24 × 2/3 — bigger or smaller","smaller"),q(1,"24 × 2/3","16"),q(1,"24 × 3/2 — bigger or smaller","bigger"),q(1,"24 × 3/2","36"),q(1,"12 × 7/6","14"),
     q(2,"Multiplying by a fraction under 1 makes it — type bigger or smaller","smaller"),q(2,"45 × 4/5","36")]},
   {id:"y5u6w3p2",w:3,label:"3.2",title:"Why × 1 Changes Nothing",note:"3/3 is one wearing a costume.",items:[
@@ -889,7 +889,7 @@ const PRACTICE_Y5_W5 = {
     q(1,"1/2 + 1/4 + 1/4","1"),q(1,"Range of 1/8 and 7/8","3/4"),q(1,"Five items totalling 5/2 — the mean","1/2"),q(1,"Difference between 7/8 and 3/8","1/2"),q(1,"Four measurements of 3/4 — total","3"),
     q(2,"Six pencils totalling 9/2 inches shared equally — each","3/4"),q(2,"Two at 1/8, three at 1/4, one at 1/2 — total","3/2")]},
   {id:"y5u7w3p4",w:3,label:"3.4",title:"Read the Plot",note:"Total, difference, and redistribution.",items:[
-    q(0,"Five values of 1/2 — total","5/2"),q(0,"Their mean","1/2"),q(0,"Four values of 1/4 — total","1"),q(0,"Their mean","1/4"),q(0,"Range of 1/4 and 3/4","1/2"),q(0,"Range of 1/8 and 5/8","1/2"),
+    q(0,"Five values of 1/2 — total","5/2"),q(0,"Values 1/4, 1/2, 3/4 — the mean","1/2"),q(0,"Four values of 1/4 — total","1"),q(0,"Four values of 1/4 — the mean","1/4"),q(0,"Range of 1/4 and 3/4","1/2"),q(0,"Range of 1/8 and 5/8","1/2"),
     q(1,"Values 1/4, 1/2, 3/4 — total","3/2"),q(1,"Their mean","1/2"),q(1,"Values 1/8, 3/8, 1/2 — total","1"),q(1,"Four values totalling 3 — the mean","3/4"),q(1,"Range of 1/8 and 1","7/8"),
     q(2,"Eight values totalling 5 — the mean","5/8"),q(2,"Redistribute 9/2 across 6 equally — each","3/4")]},
   {id:"y5u7w3p5",w:3,label:"Fri",title:"Mid-Unit Quiz",note:"Eight items across Weeks 1–3. 85% to keep flying.",items:[

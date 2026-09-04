@@ -63,6 +63,9 @@ section("1b. index.html inline script");
 section("2. Curriculum boots (simulated browser load)");
 const curriculumSrcs = srcs.filter(s => s.startsWith("curriculum/"));
 const sandbox = { window: { __CURR: {} }, console };
+// freshness.js registers listeners as it loads; without these the load throws
+// and this whole section reports a curriculum failure that is not real.
+Object.assign(sandbox.window, { addEventListener(){}, removeEventListener(){}, matchMedia:()=>({matches:false,addEventListener(){},removeEventListener(){}}), setInterval:()=>0, clearInterval(){} });
 sandbox.window.window = sandbox.window;
 try {
   for (const f of curriculumSrcs) {
@@ -112,6 +115,9 @@ function countsFor(loader, indexHtml) {
     .map(m => m[1].replace(/^\.\//, "").split("?")[0])
     .filter(s => s.startsWith("curriculum/"));
   const sb = { __CURR: {} }; sb.window = sb;
+    // freshness.js registers listeners at load time; a sandbox without them
+    // throws and every one of these checkers exits before it checks anything.
+  Object.assign(sb, { addEventListener(){}, removeEventListener(){}, matchMedia:()=>({matches:false,addEventListener(){},removeEventListener(){}}), setInterval:()=>0, clearInterval(){} });
   for (const f of files) new Function("window", "console", loader(f))(sb, { log() {}, warn() {}, error() {} });
   const C = sb.__CURR;
   return {

@@ -62,6 +62,13 @@ function loadCurriculum() {
     document: { querySelector: () => null, createElement: () => ({}), addEventListener(){}, head:{ appendChild(){} } },
     localStorage: { getItem: () => null, setItem(){} }, fetch: () => Promise.reject(new Error("no net")) };
   ctx.window = ctx; ctx.globalThis = ctx; ctx.self = ctx;
+  // freshness.js calls window.addEventListener as it loads. Without these the
+  // load throws, loadCurriculum exits(2), and every check downstream of it
+  // reports nothing rather than reporting a problem.
+  ctx.addEventListener = ctx.removeEventListener = function(){};
+  ctx.setInterval = function(){ return 0; }; ctx.clearInterval = function(){};
+  ctx.matchMedia = function(){ return {matches:false, addEventListener(){}, removeEventListener(){}}; };
+
   vm.createContext(ctx);
   const order = fs.readFileSync("index.html", "utf8")
     .match(/curriculum\/[a-z0-9-]*\.js/g).map(s => s.split("/")[1])

@@ -36,6 +36,51 @@
   // it with zero errors, so no retry fired.
   const answers = v => arr(v).filter(x => String(x==null?"":x).trim() !== "");
 
+  /* ---- Does the child's answer MEAN the same as the key? ----------------
+   *
+   * String comparison alone marked correct work wrong, on a scale worth
+   * stating: every one of the ~9,300 maths items carries exactly one accepted
+   * string, 1,007 of them fractions. A child who wrote .6 for 0.6, or 0.60, or
+   * 3/6 where the key said 1/2, was told they were wrong. norm() did not help
+   * — it strips leading zeros only before a DIGIT, so "0.6" and ".6" stayed
+   * different strings.
+   *
+   * Fixing it in the grader rather than in the data is deliberate. The
+   * alternative was adding an array of accepted forms to a thousand items,
+   * which is a thousand chances to miss one and does nothing for the next item
+   * anybody writes.
+   *
+   * WHAT IS NOT ACCEPTED, and why. A fraction is only matched by value when
+   * the question is not asking about form. "Simplest form: 4/6" wants 2/3, and
+   * taking 4/6 for it would mark the child correct for doing none of the work
+   * the question is about — so when the prompt says simplest, lowest terms or
+   * simplify, the key must be matched exactly. A decimal typed where a
+   * fraction was asked for is likewise not accepted: "type as a/b" is teaching
+   * notation, and 0.5 is not the answer to it. */
+  const valueOf = s => {
+    const t = String(s==null?"":s).replace(/[\s,$]/g,"");
+    if(t === "") return NaN;
+    let m = t.match(/^(-?\d+)\/(\d+)$/);                 // 3/6
+    if(m) return +m[2] === 0 ? NaN : +m[1] / +m[2];
+    m = t.match(/^(-?\d+)(\d+)\/(\d+)$/);                // 1 1/2 (spaces stripped)
+    if(m) return +m[3] === 0 ? NaN : +m[1] + (+m[2] / +m[3]);
+    if(/^-?(\d+\.?\d*|\.\d+)$/.test(t)) return parseFloat(t);
+    return NaN;
+  };
+  const isFraction = s => /^\s*-?\d+\s*\/\s*\d+\s*$/.test(String(s==null?"":s));
+  const wantsForm = it => /simplest|lowest term|simplify|reduce/i.test(String((it&&it.q)||""));
+
+  const sameValue = (it, key, resp) => {
+    if(norm(key) === norm(resp)) return true;               // exact, as before
+    const a = valueOf(key), b = valueOf(resp);
+    if(isNaN(a) || isNaN(b)) return false;
+    // A question about form is answered by the form, not the value.
+    if(wantsForm(it)) return false;
+    // Do not let a decimal answer a question that asked for a fraction.
+    if(isFraction(key) && !isFraction(resp)) return false;
+    return Math.abs(a - b) < 1e-9;
+  };
+
   /* Each type answers four questions:
    *   input   what the child is given to answer with
    *   grade   (item, response) -> true | false | null   (null = needs a human)
@@ -45,7 +90,7 @@
 
     "short-answer": {
       label:"Short answer", input:"text", graded:true,
-      grade:(it,r)=> norm(r)!=="" && arr(it.a).some(a=>norm(a)===norm(r)),
+      grade:(it,r)=> norm(r)!=="" && arr(it.a).some(a=>sameValue(it,a,r)),
       text:it=> arr(it.a).join(" or "),
       check:it=> answers(it.a).length ? null : "needs an answer"
     },

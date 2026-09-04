@@ -43,6 +43,9 @@ function sheetFor(set) {
 // when nothing was wrong with it. Deriving the list means adding a subject can
 // never again produce a false failure here.
 const sb = { __CURR: {} }; sb.window = sb;
+    // freshness.js registers listeners at load time; a sandbox without them
+    // throws and every one of these checkers exits before it checks anything.
+  Object.assign(sb, { addEventListener(){}, removeEventListener(){}, matchMedia:()=>({matches:false,addEventListener(){},removeEventListener(){}}), setInterval:()=>0, clearInterval(){} });
 const curriculumFiles = [...fs.readFileSync("index.html", "utf8")
   .matchAll(/<script src="([^"]+)"/g)]
   .map(m => m[1].replace(/^\.\//, "").split("?")[0])

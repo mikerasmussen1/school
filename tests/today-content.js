@@ -34,7 +34,10 @@ const CONTENT={
   prompt:v=>v.asTitle && v.asPrompt && String(v.asPrompt).length>20,
   write: v=>v.asTitle && v.asPrompt && String(v.asPrompt).length>20,
   photo: v=>v.asPrompt && typeof v.asPick==="function",
-  speak: v=>v.skTitle && v.skPrompt && String(v.skPrompt).length>20,
+  // a speaking task must come with the week's passage: several say "read a
+  // paragraph aloud", and without text on screen there is nothing to read
+  speak: v=>v.skTitle && v.skPrompt && String(v.skPrompt).length>20
+            && Array.isArray(v.rdParas) && v.rdParas.length>0 && !!v.rdTitle,
   approve: v=>Array.isArray(v.approveGrades) && v.approveGrades.length===4 && !!v.approveFocus,
   rv:    v=>v.rvNotStarted===true || v.rvActive===true
 };

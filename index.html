@@ -120,7 +120,43 @@
     --well-indigo:#0d1330;
     --well-violet:#12081f;
     --blue-light:#93c5fd;
+
+    /* THE PAGE GUTTER, as a token, because it has to change with the screen.
+     *
+     * This page styles almost everything inline, and a media query cannot reach
+     * an inline style — but an inline style CAN read a custom property, and the
+     * property is free to change in a media query. So the ten screens that pad
+     * themselves say `var(--gutter)` and this one block decides what that means.
+     *
+     * It is not cosmetic. At 44px a side, a 390px phone spent 88px — nearly a
+     * quarter of the screen — on empty margin, which pushed the header's tab
+     * strip out to 427px. The wrapper clips rather than scrolls, so "Teacher HQ"
+     * was not merely off to the right, it was unreachable. */
+    --gutter:44px;
+
+    /* The mission map's row. `auto` lets the eight planets spread across a wide
+     * screen; `max-content` stops them being squashed on a narrow one so the
+     * row keeps its true width and its container scrolls instead. */
+    --map-min:auto;
+
+    /* Teacher HQ's standards table: code, where, and the standard's text.
+     * The third track was a bare 1fr, whose automatic minimum is min-content —
+     * so one long word in a standard held the row wider than a phone. An
+     * explicit minmax floor lets the prose wrap, and on a narrow screen the
+     * three columns stack instead of being squeezed into strips. */
+    --std-cols:96px 130px minmax(0,1fr);
+
+    /* The same story in three more tables: a fixed label column or two, then
+     * prose in a bare 1fr whose automatic minimum is min-content. Each stacks
+     * rather than being squeezed once the screen is narrow. */
+    --compact-cols:110px 130px minmax(0,1fr);
+    --wide4-cols:38px 150px minmax(0,1fr) 190px;
+    --five-cols:34px repeat(4,minmax(0,1fr));
   }
+  @media (max-width:900px){ :root{ --gutter:26px } }
+  @media (max-width:560px){ :root{ --gutter:16px; --map-min:max-content; --std-cols:minmax(0,1fr);
+    --compact-cols:minmax(0,1fr); --wide4-cols:minmax(0,1fr);
+    --five-cols:34px repeat(2,minmax(0,1fr)) } }
   body{margin:0;background:var(--well-bg);font-family:"Nunito Sans",system-ui,sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased}
   a{color:var(--amber);text-decoration:none}
   a:hover{color:var(--amber-pale)}
@@ -139,7 +175,7 @@
 
   <div style="position:absolute;inset:0;pointer-events:none;opacity:.85;background-image:radial-gradient(1.4px 1.4px at 12% 18%,#fff,transparent),radial-gradient(1.2px 1.2px at 28% 62%,#fff,transparent),radial-gradient(1.6px 1.6px at 44% 26%,#fff,transparent),radial-gradient(1.1px 1.1px at 61% 74%,#fff,transparent),radial-gradient(1.5px 1.5px at 74% 12%,#fff,transparent),radial-gradient(1.2px 1.2px at 88% 48%,#fff,transparent),radial-gradient(1.3px 1.3px at 19% 88%,#fff,transparent),radial-gradient(1.1px 1.1px at 53% 94%,#fff,transparent),radial-gradient(1.4px 1.4px at 93% 82%,#fff,transparent),radial-gradient(1.2px 1.2px at 36% 44%,#fff,transparent);animation:twinkle 6s ease-in-out infinite"></div>
 
-  <header style="position:relative;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:22px 44px 0;flex-wrap:wrap">
+  <header style="position:relative;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:22px var(--gutter) 0;flex-wrap:wrap">
     <div style="display:flex;align-items:center;gap:14px">
       <div style="width:44px;height:44px;border-radius:14px;background:{{ subjGradient }};display:grid;place-items:center;font-family:Fredoka,sans-serif;font-size:24px;font-weight:600;color:var(--well-violet);box-shadow:0 6px 24px rgba(var(--well-rgb),.35)">{{ subjGlyph }}</div>
       <div>
@@ -150,9 +186,14 @@
         <button onClick="{{ goBack }}" style="display:flex;align-items:center;gap:8px;font-family:Fredoka,sans-serif;font-size:12.5px;color:rgba(var(--ink-rgb),.72);background:rgba(var(--line-rgb),.05);border:1px solid rgba(var(--line-rgb),.14);border-radius:999px;padding:7px 14px;white-space:nowrap;cursor:pointer" style-hover="filter:brightness(1.4)">← {{ backLabel }}</button>
       </sc-if>
     </div>
-    <div style="display:flex;align-items:center;gap:12px">
+    <!-- Both of these wrap. The header itself already did, but this row and the
+         tab strip inside it did not, so on a phone the four maths tabs and the
+         profile chip were laid out on one line running past the edge of a
+         wrapper that CLIPS rather than scrolls — which put Teacher HQ somewhere
+         no finger could reach rather than merely off to the right. -->
+    <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;min-width:0">
       <sc-if value="{{ showMathTabs }}" hint-placeholder-val="{{ true }}">
-        <div style="display:flex;gap:8px;background:rgba(var(--line-rgb),.05);border:1px solid rgba(var(--line-rgb),.09);padding:6px;border-radius:16px">
+        <div style="display:flex;gap:8px;flex-wrap:wrap;background:rgba(var(--line-rgb),.05);border:1px solid rgba(var(--line-rgb),.09);padding:6px;border-radius:16px">
           <sc-for list="{{ tabs }}" as="tab" hint-placeholder-count="3">
             <button onClick="{{ tab.go }}" style="{{ tab.style }}" style-hover="filter:brightness(1.15)">{{ tab.label }}</button>
           </sc-for>
@@ -167,7 +208,7 @@
 
   <!-- ============ TODAY: SUBJECT PICKER ============ -->
   <sc-if value="{{ isToday }}" hint-placeholder-val="{{ false }}">
-  <main style="position:relative;padding:44px 44px 80px;max-width:1180px">
+  <main style="position:relative;padding:44px var(--gutter) 80px;max-width:1180px">
     <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--amber)">{{ todayDate }}</div>
     <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:52px;line-height:1.02;margin:10px 0 12px;letter-spacing:-.5px">{{ todayGreeting }}</h1>
     <p style="margin:0 0 34px;max-width:640px;font-size:16.5px;line-height:1.55;color:rgba(var(--ink-rgb),.72);text-wrap:pretty">{{ todayNote }}</p>
@@ -259,7 +300,7 @@
 
   <!-- ============ SUBJECT STUB (registry-driven) ============ -->
   <sc-if value="{{ isStub }}" hint-placeholder-val="{{ false }}">
-  <main style="position:relative;padding:60px 44px 80px;max-width:760px">
+  <main style="position:relative;padding:60px var(--gutter) 80px;max-width:760px">
     <div style="{{ stubTileStyle }}">{{ stubGlyph }}</div>
     <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:{{ stubColor }};margin-top:26px">{{ stubTagline }}</div>
     <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:46px;line-height:1.05;margin:10px 0 18px;letter-spacing:-.5px">{{ stubHeading }}</h1>
@@ -275,7 +316,7 @@
 
   <!-- ============ MISSION MAP ============ -->
   <sc-if value="{{ isMap }}" hint-placeholder-val="{{ true }}">
-  <main style="position:relative;padding:34px 44px 72px">
+  <main style="position:relative;padding:34px var(--gutter) 72px">
 
     <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:32px;flex-wrap:wrap;margin-bottom:34px">
       <div style="max-width:680px">
@@ -296,9 +337,15 @@
     </div>
 
     <!-- trajectory -->
-    <div style="position:relative;padding:26px 0 10px;margin-bottom:38px">
+    <!-- Eight fixed-size planets on one line do not fit a phone; at 390px the
+         row ran to 474px and the last three missions were simply gone, because
+         the wrapper above clips. This scrolls sideways instead of wrapping: the
+         dashed trajectory behind it is one absolutely-positioned line, so a
+         wrapped map would draw the journey through the middle of two rows.
+         Only the map scrolls — the page itself never does. -->
+    <div style="position:relative;padding:26px 0 10px;margin-bottom:38px;overflow-x:auto">
       <div style="position:absolute;left:0;right:0;top:50%;height:2px;background:repeating-linear-gradient(90deg,rgba(var(--line-rgb),.32) 0 9px,transparent 9px 20px)"></div>
-      <div style="position:relative;display:flex;align-items:center;justify-content:space-between;gap:8px">
+      <div style="position:relative;display:flex;align-items:center;justify-content:space-between;gap:8px;min-width:var(--map-min)">
         <sc-for list="{{ units }}" as="u" hint-placeholder-count="8">
           <button onClick="{{ u.select }}" style="{{ u.nodeStyle }}" style-hover="transform:translateY(-6px)">
             <div style="{{ u.planetStyle }}">
@@ -349,7 +396,7 @@
        and it keeps its own isUnitN gate below.
        Year Two has rendered this way from one page all along. -->
   <sc-if value="{{ isUnitY3 }}" hint-placeholder-val="{{ true }}">
-  <main style="position:relative;padding:34px 44px 72px;max-width:1280px">
+  <main style="position:relative;padding:34px var(--gutter) 72px;max-width:1280px">
     <!-- Hero, rendered from the curriculum rather than typed per mission.
          Every value here had drifted at least once: Mission 05 still read
          "Decimals & Money" after it was renamed, Mission 07 still claimed
@@ -389,7 +436,7 @@
          commit claimed the mission page already showed them; it did not — only
          the Y5 template did, so for Brock's year they became unreachable, and
          the badge name and requirement were unreachable anywhere in the app. -->
-    <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:22px;margin-bottom:22px">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:22px;margin-bottom:22px">
       <div style="background:rgba(var(--line-rgb),.04);border:1px solid rgba(var(--line-rgb),.1);border-radius:22px;padding:24px 26px">
         <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:rgba(var(--ink-rgb),.45);margin-bottom:9px">Hands-on project</div>
         <div style="font-size:14.5px;line-height:1.55;color:rgba(var(--ink-rgb),.85)">{{ uProject }}</div>
@@ -837,7 +884,7 @@
       </div>
     </div>
 
-    <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:22px;margin-bottom:44px">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:22px;margin-bottom:44px">
       <div style="background:rgba(var(--line-rgb),.04);border:1px solid rgba(var(--line-rgb),.1);border-radius:22px;padding:26px 28px">
         <div style="font-family:Fredoka,sans-serif;font-size:22px">The Same Amount, Three Ways</div>
         <div style="font-size:13px;color:rgba(var(--ink-rgb),.6);margin-top:4px;margin-bottom:18px">Every row is one number. The spelling changes; the value doesn't.</div>
@@ -952,7 +999,7 @@
       </div>
     </div>
 
-    <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:22px;margin-bottom:44px">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:22px;margin-bottom:44px">
       <div style="background:rgba(var(--line-rgb),.04);border:1px solid rgba(var(--line-rgb),.1);border-radius:22px;padding:26px 28px">
         <div style="font-family:Fredoka,sans-serif;font-size:22px">Angles That Add Up</div>
         <div style="font-size:13px;color:rgba(var(--ink-rgb),.6);margin-top:4px;margin-bottom:18px">Four facts that solve most angle questions without a protractor.</div>
@@ -1077,7 +1124,7 @@
       </div>
     </div>
 
-    <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:22px;margin-bottom:44px">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:22px;margin-bottom:44px">
       <div style="background:rgba(var(--line-rgb),.04);border:1px solid rgba(var(--line-rgb),.1);border-radius:22px;padding:26px 28px">
         <div style="font-family:Fredoka,sans-serif;font-size:22px">Four Measures, Plain English</div>
         <div style="font-size:13px;color:rgba(var(--ink-rgb),.6);margin-top:4px;margin-bottom:18px">Say which one you used and why. That sentence is the whole skill.</div>
@@ -1208,7 +1255,7 @@
       </div>
     </div>
 
-    <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:22px;margin-bottom:44px">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:22px;margin-bottom:44px">
       <div style="background:rgba(var(--line-rgb),.04);border:1px solid rgba(var(--line-rgb),.1);border-radius:22px;padding:26px 28px">
         <div style="font-family:Fredoka,sans-serif;font-size:22px">What the Letter Is Not</div>
         <div style="font-size:13px;color:rgba(var(--ink-rgb),.6);margin-top:4px;margin-bottom:18px">Four wrong readings that cause almost every mistake in this mission.</div>
@@ -1340,7 +1387,7 @@
   <!-- ============ TEACHER FRONT DOOR ============ -->
   <sc-if value="{{ tFront }}" hint-placeholder-val="{{ false }}">
   <div style="position:fixed;inset:0;z-index:80;background:#070B1C;overflow:auto">
-    <div style="max-width:1180px;margin:0 auto;padding:44px 44px 80px">
+    <div style="max-width:1180px;margin:0 auto;padding:44px var(--gutter) 80px">
 
       <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-bottom:32px">
         <div>
@@ -1404,7 +1451,7 @@
 
   <!-- ============ YEAR TWO · GENERIC MISSION PAGE ============ -->
   <sc-if value="{{ isUnitY5 }}" hint-placeholder-val="{{ false }}">
-  <main style="position:relative;padding:34px 44px 72px;max-width:1280px">
+  <main style="position:relative;padding:34px var(--gutter) 72px;max-width:1280px">
 
     <div style="display:flex;align-items:center;gap:10px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:rgba(var(--ink-rgb),.5);margin-bottom:14px">
       <span style="color:{{ uColor }}">{{ uNo }}</span><span>·</span><span>{{ uWeeks }}</span><span>·</span><span>{{ uLessonCount }}</span>
@@ -1450,7 +1497,7 @@
         </button>
       </sc-for>
     </div>
-    <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:22px;margin-bottom:44px">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:22px;margin-bottom:44px">
       <div style="background:rgba(var(--line-rgb),.04);border:1px solid rgba(var(--line-rgb),.1);border-radius:22px;padding:24px 26px">
         <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:rgba(var(--ink-rgb),.45);margin-bottom:9px">Hands-on project</div>
         <div style="font-size:14.5px;line-height:1.55;color:rgba(var(--ink-rgb),.85)">{{ uProject }}</div>
@@ -1592,7 +1639,7 @@
           <input value="{{ ldB }}" onChange="{{ setLdB }}" inputMode="numeric" style="width:62px;padding:8px 10px;text-align:center;font-family:Fredoka,sans-serif;font-size:24px;background:rgba(var(--line-rgb),.07);border:1.5px solid rgba(45,212,191,.5);border-radius:12px;color:var(--teal)">
         </div>
       </div>
-      <div style="display:grid;grid-template-columns:34px 1fr 1fr 1fr 1fr;gap:10px;padding:0 13px 8px;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(var(--ink-rgb),.38)">
+      <div style="display:grid;grid-template-columns:var(--five-cols);gap:10px;padding:0 13px 8px;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(var(--ink-rgb),.38)">
         <div>bring</div><div>have</div><div>fit</div><div>uses</div><div>left</div>
       </div>
       <div style="display:flex;flex-direction:column;gap:7px">
@@ -1766,7 +1813,7 @@
     </div>
     </sc-if>
 
-    <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:22px;margin-bottom:44px">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:22px;margin-bottom:44px">
       <div style="background:rgba(var(--line-rgb),.04);border:1px solid rgba(var(--line-rgb),.1);border-radius:22px;padding:26px 28px">
         <div style="font-family:Fredoka,sans-serif;font-size:22px">What this mission builds</div>
         <div style="font-size:13px;color:rgba(var(--ink-rgb),.6);margin-top:4px;margin-bottom:18px">Each one is a strand on the pre-assessment and a row on the skip chart.</div>
@@ -1845,7 +1892,7 @@
 
   <!-- ============ TEACHER HQ ============ -->
   <sc-if value="{{ isHQ }}" hint-placeholder-val="{{ false }}">
-  <main style="position:relative;padding:34px 44px 72px;max-width:1280px">
+  <main style="position:relative;padding:34px var(--gutter) 72px;max-width:1280px">
     <sc-if value="{{ hqViewing }}" hint-placeholder-val="{{ false }}">
       <div style="display:grid;grid-template-columns:1fr auto;gap:20px;align-items:center;background:linear-gradient(150deg,rgba(56,189,248,.16),rgba(167,139,250,.1));border:1px solid rgba(56,189,248,.45);border-radius:18px;padding:18px 24px;margin-bottom:26px">
         <div>
@@ -1907,7 +1954,7 @@
     <h2 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:rgba(var(--ink-rgb),.45);margin:0 0 20px">Pilots on this device</h2>
     <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:44px">
       <sc-for list="{{ pfRoster }}" as="r" hint-placeholder-count="1">
-        <div style="background:rgba(var(--line-rgb),.04);border:1px solid rgba(var(--line-rgb),.1);border-radius:18px;padding:18px 22px;display:grid;grid-template-columns:38px 150px 1fr 190px;gap:20px 20px;align-items:center">
+        <div style="background:rgba(var(--line-rgb),.04);border:1px solid rgba(var(--line-rgb),.1);border-radius:18px;padding:18px 22px;display:grid;grid-template-columns:var(--wide4-cols);gap:20px 20px;align-items:center">
           <div style="{{ r.avatarStyle }}">{{ r.initial }}</div>
           <div>
             <div style="font-family:Fredoka,sans-serif;font-size:19px;line-height:1.1">{{ r.name }}</div>
@@ -2173,7 +2220,7 @@
       <div style="font-size:13.5px;line-height:1.55;color:rgba(var(--ink-rgb),.7);margin-bottom:20px">{{ stdY5Note }}</div>
       <div style="display:flex;flex-direction:column;gap:0">
         <sc-for list="{{ standards }}" as="st" hint-placeholder-count="5">
-          <div style="display:grid;grid-template-columns:110px 130px 1fr;gap:16px;padding:13px 0;border-bottom:1px dashed rgba(var(--line-rgb),.11);align-items:baseline">
+          <div style="display:grid;grid-template-columns:var(--compact-cols);gap:16px;padding:13px 0;border-bottom:1px dashed rgba(var(--line-rgb),.11);align-items:baseline">
             <div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;color:{{ stdY5Color }}">{{ st.code }}</div>
             <div style="display:flex;flex-direction:column;gap:6px;align-items:flex-start">
               <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(var(--ink-rgb),.45)">{{ st.where }}</span>
@@ -2188,7 +2235,12 @@
 
     <!-- weekly rhythm -->
     <h2 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:rgba(var(--ink-rgb),.45);margin:0 0 20px">The weekly rhythm · 45 minutes</h2>
-    <div style="display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px;margin-bottom:44px">
+    <!-- Five columns is right on a desk and impossible on a phone: at 390px each
+         card came out about 60px wide, of which 42px is its own padding, so the
+         text inside spilled out and was clipped. minmax(0,1fr) keeps the GRID
+         inside the screen but says nothing about whether its contents fit.
+         auto-fit folds to two columns, then one. -->
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:14px;margin-bottom:44px">
       <sc-for list="{{ rhythm }}" as="r" hint-placeholder-count="5">
         <div style="background:rgba(var(--line-rgb),.04);border:1px solid rgba(var(--line-rgb),.1);border-radius:18px;padding:22px 20px 24px;display:flex;flex-direction:column">
           <div style="font-family:Fredoka,sans-serif;font-size:22px;color:{{ r.color }};line-height:1">{{ r.day }}</div>
@@ -2206,7 +2258,7 @@
     </div>
 
     <!-- assessment system -->
-    <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:22px;margin-bottom:44px">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:22px;margin-bottom:44px">
       <div style="background:rgba(var(--line-rgb),.04);border:1px solid rgba(var(--line-rgb),.1);border-radius:22px;padding:28px 30px">
         <div style="font-family:Fredoka,sans-serif;font-size:24px;margin-bottom:6px">The assessment system</div>
         <div style="font-size:13.5px;color:rgba(var(--ink-rgb),.62);margin-bottom:22px">Four instruments. Nothing else needs grading.</div>
@@ -2231,7 +2283,7 @@
           <sc-for list="{{ compactRows }}" as="cr" hint-placeholder-count="4">
             <div style="display:flex;gap:14px;align-items:center;background:rgba(var(--well-rgb),.2);border:1px solid rgba(var(--line-rgb),.08);border-radius:13px;padding:13px 16px">
               <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:{{ cr.color }};flex:none;width:64px">{{ cr.score }}</div>
-              <div style="font-size:13.5px;line-height:1.45;color:rgba(var(--ink-rgb),.85)">{{ cr.action }}</div>
+              <div style="font-size:13.5px;line-height:1.45;color:rgba(var(--ink-rgb),.85);min-width:0">{{ cr.action }}</div>
             </div>
           </sc-for>
         </div>
@@ -2257,7 +2309,7 @@
     </div>
 
     <!-- praise + error journal -->
-    <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:22px;margin-bottom:44px">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:22px;margin-bottom:44px">
       <div style="background:linear-gradient(150deg,rgba(74,222,128,.12),rgba(var(--line-rgb),.03));border:1px solid rgba(74,222,128,.28);border-radius:22px;padding:28px 30px">
         <div style="font-family:Fredoka,sans-serif;font-size:24px;color:var(--green);margin-bottom:16px">Say this, not that</div>
         <div style="display:flex;flex-direction:column;gap:14px">
@@ -2395,7 +2447,7 @@
       <div style="font-size:13.5px;line-height:1.55;color:rgba(var(--ink-rgb),.7);margin-bottom:20px">Kept on your side only — his pages stay clean. Mission 01 sits at grade 4 with a grade-5 ceiling.</div>
       <div style="display:flex;flex-direction:column;gap:0">
         <sc-for list="{{ standards }}" as="st" hint-placeholder-count="5">
-          <div style="display:grid;grid-template-columns:96px 130px 1fr;gap:16px;padding:13px 0;border-bottom:1px dashed rgba(var(--line-rgb),.11);align-items:baseline">
+          <div style="display:grid;grid-template-columns:var(--std-cols);gap:16px;padding:13px 0;border-bottom:1px dashed rgba(var(--line-rgb),.11);align-items:baseline">
             <div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--orange)">{{ st.code }}</div>
             <div style="display:flex;flex-direction:column;gap:6px;align-items:flex-start">
               <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(var(--ink-rgb),.45)">{{ st.where }}</span>
@@ -2413,7 +2465,7 @@
       <div style="font-size:13.5px;line-height:1.55;color:rgba(var(--ink-rgb),.7);margin-bottom:20px">Kept on your side only — his pages stay clean. Mission 02 sits at grade 4 with a grade-5 ceiling on two-digit divisors.</div>
       <div style="display:flex;flex-direction:column;gap:0">
         <sc-for list="{{ standards }}" as="st" hint-placeholder-count="5">
-          <div style="display:grid;grid-template-columns:96px 130px 1fr;gap:16px;padding:13px 0;border-bottom:1px dashed rgba(var(--line-rgb),.11);align-items:baseline">
+          <div style="display:grid;grid-template-columns:var(--std-cols);gap:16px;padding:13px 0;border-bottom:1px dashed rgba(var(--line-rgb),.11);align-items:baseline">
             <div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--teal)">{{ st.code }}</div>
             <div style="display:flex;flex-direction:column;gap:6px;align-items:flex-start">
               <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(var(--ink-rgb),.45)">{{ st.where }}</span>
@@ -2431,7 +2483,7 @@
       <div style="font-size:13.5px;line-height:1.55;color:rgba(var(--ink-rgb),.7);margin-bottom:20px">Kept on your side only — his pages stay clean. Mission 03 sits at grade 4 with the grade-5 ceiling on brackets and powers of ten.</div>
       <div style="display:flex;flex-direction:column;gap:0">
         <sc-for list="{{ standards }}" as="st" hint-placeholder-count="5">
-          <div style="display:grid;grid-template-columns:96px 130px 1fr;gap:16px;padding:13px 0;border-bottom:1px dashed rgba(var(--line-rgb),.11);align-items:baseline">
+          <div style="display:grid;grid-template-columns:var(--std-cols);gap:16px;padding:13px 0;border-bottom:1px dashed rgba(var(--line-rgb),.11);align-items:baseline">
             <div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--violet)">{{ st.code }}</div>
             <div style="display:flex;flex-direction:column;gap:6px;align-items:flex-start">
               <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(var(--ink-rgb),.45)">{{ st.where }}</span>
@@ -2449,7 +2501,7 @@
       <div style="font-size:13.5px;line-height:1.55;color:rgba(var(--ink-rgb),.7);margin-bottom:20px">Kept on your side only — his pages stay clean. Mission 04 starts at grade 3 for the number line and finishes at the grade-5 ceiling on unlike denominators.</div>
       <div style="display:flex;flex-direction:column;gap:0">
         <sc-for list="{{ standards }}" as="st" hint-placeholder-count="5">
-          <div style="display:grid;grid-template-columns:96px 130px 1fr;gap:16px;padding:13px 0;border-bottom:1px dashed rgba(var(--line-rgb),.11);align-items:baseline">
+          <div style="display:grid;grid-template-columns:var(--std-cols);gap:16px;padding:13px 0;border-bottom:1px dashed rgba(var(--line-rgb),.11);align-items:baseline">
             <div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--pink)">{{ st.code }}</div>
             <div style="display:flex;flex-direction:column;gap:6px;align-items:flex-start">
               <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(var(--ink-rgb),.45)">{{ st.where }}</span>
@@ -2467,7 +2519,7 @@
       <div style="font-size:13.5px;line-height:1.55;color:rgba(var(--ink-rgb),.7);margin-bottom:20px">Kept on your side only — his pages stay clean. Mission 05 sits at grade 4 with the grade-5 ceiling on decimal addition and rounding.</div>
       <div style="display:flex;flex-direction:column;gap:0">
         <sc-for list="{{ standards }}" as="st" hint-placeholder-count="5">
-          <div style="display:grid;grid-template-columns:96px 130px 1fr;gap:16px;padding:13px 0;border-bottom:1px dashed rgba(var(--line-rgb),.11);align-items:baseline">
+          <div style="display:grid;grid-template-columns:var(--std-cols);gap:16px;padding:13px 0;border-bottom:1px dashed rgba(var(--line-rgb),.11);align-items:baseline">
             <div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--lime)">{{ st.code }}</div>
             <div style="display:flex;flex-direction:column;gap:6px;align-items:flex-start">
               <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(var(--ink-rgb),.45)">{{ st.where }}</span>
@@ -2485,7 +2537,7 @@
       <div style="font-size:13.5px;line-height:1.55;color:rgba(var(--ink-rgb),.7);margin-bottom:20px">Kept on your side only — his pages stay clean. Mission 06 sits at grade 4 with the grade-5 ceiling on the coordinate plane.</div>
       <div style="display:flex;flex-direction:column;gap:0">
         <sc-for list="{{ standards }}" as="st" hint-placeholder-count="5">
-          <div style="display:grid;grid-template-columns:96px 130px 1fr;gap:16px;padding:13px 0;border-bottom:1px dashed rgba(var(--line-rgb),.11);align-items:baseline">
+          <div style="display:grid;grid-template-columns:var(--std-cols);gap:16px;padding:13px 0;border-bottom:1px dashed rgba(var(--line-rgb),.11);align-items:baseline">
             <div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--blue)">{{ st.code }}</div>
             <div style="display:flex;flex-direction:column;gap:6px;align-items:flex-start">
               <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(var(--ink-rgb),.45)">{{ st.where }}</span>
@@ -2503,7 +2555,7 @@
       <div style="font-size:13.5px;line-height:1.55;color:rgba(var(--ink-rgb),.7);margin-bottom:20px">Kept on your side only — his pages stay clean. Mission 07 starts at grade 3 for scaled graphs and reaches grades 6 and 7 for measures of centre and probability, the widest span of the year.</div>
       <div style="display:flex;flex-direction:column;gap:0">
         <sc-for list="{{ standards }}" as="st" hint-placeholder-count="5">
-          <div style="display:grid;grid-template-columns:96px 130px 1fr;gap:16px;padding:13px 0;border-bottom:1px dashed rgba(var(--line-rgb),.11);align-items:baseline">
+          <div style="display:grid;grid-template-columns:var(--std-cols);gap:16px;padding:13px 0;border-bottom:1px dashed rgba(var(--line-rgb),.11);align-items:baseline">
             <div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--rose)">{{ st.code }}</div>
             <div style="display:flex;flex-direction:column;gap:6px;align-items:flex-start">
               <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(var(--ink-rgb),.45)">{{ st.where }}</span>
@@ -2521,7 +2573,7 @@
       <div style="font-size:13.5px;line-height:1.55;color:rgba(var(--ink-rgb),.7);margin-bottom:20px">Kept on your side only — his pages stay clean. Mission 08 sits at grades 4 and 5 for patterns, with the grade-6 expressions and equations standards as the ceiling.</div>
       <div style="display:flex;flex-direction:column;gap:0">
         <sc-for list="{{ standards }}" as="st" hint-placeholder-count="5">
-          <div style="display:grid;grid-template-columns:96px 130px 1fr;gap:16px;padding:13px 0;border-bottom:1px dashed rgba(var(--line-rgb),.11);align-items:baseline">
+          <div style="display:grid;grid-template-columns:var(--std-cols);gap:16px;padding:13px 0;border-bottom:1px dashed rgba(var(--line-rgb),.11);align-items:baseline">
             <div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--amber-bright)">{{ st.code }}</div>
             <div style="display:flex;flex-direction:column;gap:6px;align-items:flex-start">
               <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(var(--ink-rgb),.45)">{{ st.where }}</span>
@@ -2621,7 +2673,7 @@
 
   <!-- ============ COACH · dynamic difficulty ============ -->
   <sc-if value="{{ isCoach }}" hint-placeholder-val="{{ false }}">
-  <main style="position:relative;padding:34px 44px 80px;max-width:920px">
+  <main style="position:relative;padding:34px var(--gutter) 80px;max-width:920px">
     <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:14px">
       <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--amber)">A closer look</div>
       <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(var(--ink-rgb),.4)">{{ coachRound }} · {{ coachConcept }}</div>
@@ -2700,7 +2752,7 @@
 
   <!-- ============ PRACTICE BAY ============ -->
   <sc-if value="{{ isPractice }}" hint-placeholder-val="{{ false }}">
-  <main style="position:relative;padding:34px 44px 72px;max-width:1180px">
+  <main style="position:relative;padding:34px var(--gutter) 72px;max-width:1180px">
     <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--sky);margin-bottom:12px">{{ pUnitLabel }}</div>
     <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.13em;text-transform:uppercase;color:rgba(var(--ink-rgb),.38);margin-bottom:12px">{{ pBankLine }} · <a href="Worksheet Builder.dc.html">print these questions</a></div>
     <sc-if value="{{ dynBusy }}" hint-placeholder-val="{{ false }}">
@@ -6627,7 +6679,7 @@ class Component extends DCLogic {
       carry=cur-used;
       ldSteps.push({bring:ch, cur:String(cur), fit:String(fit), used:String(used), left:String(carry),
         place:String(Math.pow(10,String(ldA).length-1-i)),
-        style:"display:grid;grid-template-columns:34px 1fr 1fr 1fr 1fr;gap:10px;align-items:center;padding:9px 13px;border-radius:11px;background:rgba(var(--well-rgb),.22);border:1px solid rgba(var(--line-rgb),.09);font-family:'JetBrains Mono',monospace;font-size:13px"});
+        style:"display:grid;grid-template-columns:var(--five-cols);gap:10px;align-items:center;padding:9px 13px;border-radius:11px;background:rgba(var(--well-rgb),.22);border:1px solid rgba(var(--line-rgb),.09);font-family:'JetBrains Mono',monospace;font-size:13px"});
     });
     const ldQ=Math.floor(ldA/ldB), ldR=ldA%ldB;
     const ldSays="Each row asks the same question — how many "+ldB+"s fit — just at a smaller place each time.";

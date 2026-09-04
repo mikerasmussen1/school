@@ -151,6 +151,13 @@ run("node", ["scripts/check-item-ids.js"], "check-item-ids");
  * not be typed at all. Every other check above stayed green throughout, because
  * the question and the key were correct everywhere they looked. */
 run("node", ["scripts/check-answerable.js"], "check-answerable");
+/* Lays each screen out at phone and tablet widths and asks the browser what
+ * overflowed. Reading the CSS cannot answer this — the pages style inline, so
+ * there is nothing for a media query to reach and nothing to reason about. It
+ * caught a header whose "Teacher HQ" tab sat past the edge of a wrapper that
+ * clips rather than scrolls, which made the button not merely off-screen but
+ * impossible to press. */
+run("node", ["scripts/check-responsive.js"], "check-responsive");
 run("node", ["scripts/qa-verify.js"], "qa-verify");
 
 console.log();

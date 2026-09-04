@@ -47,7 +47,7 @@
   <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
     <div style="max-width:1060px;margin:0 auto;padding:38px 28px 70px;width:100%">
       <div style="display:flex;gap:34px;align-items:flex-start;flex-wrap:wrap;margin-bottom:34px">
-        <div style="flex:1;min-width:320px">
+        <div style="flex:1 1 320px;min-width:min(100%,320px)">
           <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:#B23A28;margin-bottom:10px">Sixteen stops on the road to Japan</div>
           <h1 style="font-family:'Kaisei Decol',serif;font-weight:700;font-size:40px;line-height:1.08;margin:0 0 14px;letter-spacing:-.5px">From the world's oldest pottery to the bullet train — then you go stand in it.</h1>
           <div style="font-size:15.5px;line-height:1.65;color:rgba(42,33,24,.78);max-width:560px">Two lessons a week, read together out loud. Each stop has the story, a few Japanese words, videos to watch, and questions to argue about at dinner. No grades — the trip is the test. Every lesson ends with exactly where you'll meet it in Japan.</div>
@@ -57,7 +57,10 @@
             <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.08em;background:rgba(46,125,107,.1);border:1px solid rgba(46,125,107,.3);border-radius:999px;padding:6px 12px;color:#2E7D6B">NO GRADES</span>
           </div>
         </div>
-        <div style="flex:none;width:280px;background:#FDFAF2;border:1.5px solid rgba(42,33,24,.14);border-radius:18px;padding:20px 22px">
+        <!-- Shrinkable rather than flex:none. It never needs to grow, but on a
+             narrow phone a rigid 280px plus this row's padding is wider than
+             the screen. -->
+        <div style="flex:0 1 280px;min-width:0;background:#FDFAF2;border:1.5px solid rgba(42,33,24,.14);border-radius:18px;padding:20px 22px">
           <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:#B23A28;margin-bottom:9px">About the photo frames</div>
           <div style="font-size:13px;line-height:1.6;color:rgba(42,33,24,.75)">Every lesson has empty photo frames — they're drop zones. Search the topic in Google Images and drag pictures straight in; they stick. After the trip, replace them with your own photos and the unit becomes your travel journal.</div>
         </div>
@@ -69,7 +72,14 @@
             <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(42,33,24,.45)">{{ w.wk }}</div>
             <div style="font-family:'Kaisei Decol',serif;font-size:19px;color:#2A2118">{{ w.theme }}</div>
           </div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+          <!-- auto-fit, not "1fr 1fr". A bare 1fr track has an AUTO minimum,
+               which resolves to min-content — and a stop card is a kanji chip
+               and a title on one flex line, so the tracks refused to go
+               narrower than the longest title and the grid grew past the
+               screen. On a 390px phone this page scrolled to 494px. An explicit
+               minmax floor lets a track shrink, and auto-fit drops to one
+               column once two no longer fit. -->
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:14px">
             <sc-for list="{{ w.lessons }}" as="l" hint-placeholder-count="2">
               <div onClick="{{ l.open }}" style="{{ l.cardStyle }}" style-hover="transform:translateY(-2px);box-shadow:0 10px 26px rgba(42,33,24,.14)">
                 <div style="flex:none;width:58px;height:58px;border-radius:14px;display:grid;place-items:center;font-family:'Noto Sans JP',sans-serif;font-weight:900;font-size:24px;background:{{ l.chipBg }};color:{{ l.color }}">{{ l.kanji }}</div>
@@ -122,7 +132,7 @@
         <div style="font-size:14.5px;line-height:1.6">{{ lWow }}</div></div>
       </div>
 
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:26px 0">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:16px;margin:26px 0">
         <sc-for list="{{ lPhotos }}" as="ph" hint-placeholder-count="2">
           <div>
             <div style="height:225px;border-radius:14px;overflow:hidden;border:1.5px solid rgba(42,33,24,.15)">
@@ -134,7 +144,7 @@
       </div>
 
       <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(42,33,24,.5);margin:26px 0 10px">Words for the trip · 言葉</div>
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;max-width:720px">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:12px;max-width:720px">
         <sc-for list="{{ lWords }}" as="wd" hint-placeholder-count="3">
           <div onClick="{{ wd.speak }}" style="background:#FDFAF2;border:1.5px solid rgba(42,33,24,.13);border-radius:14px;padding:14px 16px;text-align:center;cursor:pointer;position:relative" style-hover="border-color:#B23A28;box-shadow:0 4px 14px rgba(42,33,24,.1)" title="Tap to hear it spoken">
             <div style="position:absolute;top:8px;right:10px;font-size:11px;color:rgba(178,58,40,.55)">🔊</div>

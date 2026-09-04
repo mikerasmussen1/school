@@ -2777,6 +2777,23 @@
             <div>active {{ r.recent }}</div>
           </div>
           <div style="{{ r.detailStyle }}">{{ r.detail }}</div>
+          <!-- The numbers the subject itself reported. Each course decides
+               what its own units are — days for Word Voyagers, weeks for
+               Field Notes — so nothing here assumes a shape. -->
+          <div style="display:flex;gap:26px;flex-wrap:wrap;margin-top:12px">
+            <sc-for list="{{ r.rows }}" as="x" hint-placeholder-count="3">
+              <div>
+                <div style="{{ x.labelStyle }}">{{ x.label }}</div>
+                <div style="{{ x.valueStyle }}">{{ x.value }}</div>
+              </div>
+            </sc-for>
+          </div>
+          <!-- What to actually do about it. -->
+          <div style="display:flex;flex-direction:column;gap:7px;margin-top:12px">
+            <sc-for list="{{ r.flags }}" as="f" hint-placeholder-count="1">
+              <div style="{{ f.style }}">{{ f.text }}</div>
+            </sc-for>
+          </div>
         </div>
       </sc-for>
     </div>
@@ -5289,21 +5306,27 @@ class Component extends DCLogic {
       // so "deep" is no longer a maths privilege — it is simply whether this
       // subject has stored anything yet.
       const data=r.data||{};
-      let detail="";
-      if(s.id==="math"){
-        detail = r.opened ? "Full working record below \u2014 every set, every attempt." : "";
-      } else if(s.id==="la"){
-        const steps=Object.keys(data.stepDone||{}).length;
-        const flagged=Object.keys(data.stuck||{}).filter(k=>data.stuck[k]).length;
-        detail = steps
-          ? (steps+" steps completed"+(flagged?", "+flagged+" flagged for a look":"")+
-             (data.week?" \u00b7 currently on week "+data.week:""))
-          : "";
-      } else if(s.id==="sci"){
-        const done=Object.keys(data.completed||{}).length;
-        detail = done
-          ? (done+" week"+(done===1?"":"s")+" finished"+(data.week?" \u00b7 currently on week "+data.week:""))
-          : "";
+      /* Each subject describes its own progress now \u2014 the `summary` contract
+       * in subjects.js. This was an if/else chain on subject id right here,
+       * which meant a fourth subject could not be added without editing this
+       * file: the exact coupling the registry exists to prevent, and it had
+       * already drifted (maths read r.opened, the others read inside data).
+       *
+       * Guarded because a subject author's bug must not take Mission Control
+       * down with it. A summary() that throws costs that one row its detail
+       * and every other row still draws. */
+      let detail="", rows=[], flags=[];
+      if(typeof s.summary==="function"){
+        let out=null;
+        try{
+          out=s.summary(data, {opened:r.opened||0, days:days, level:lvl,
+                               recent:recent, lastDay:last, today:today, slice:slice});
+        }catch(e){ out=null; }
+        if(out){
+          detail=out.detail||"";
+          rows=Array.isArray(out.rows)?out.rows:[];
+          flags=Array.isArray(out.flags)?out.flags:[];
+        }
       }
       const synced=!!data.__at;
       const deep=(s.id==="math")||synced;
@@ -5316,7 +5339,7 @@ class Component extends DCLogic {
                  : (today-last)+" days ago",
         recent:recent,
         level:lvl, whose:whose,
-        deep:deep, detail:detail, synced:synced
+        deep:deep, detail:detail, rows:rows, flags:flags, synced:synced
       };
     });
   }
@@ -5506,11 +5529,49 @@ class Component extends DCLogic {
       }).call(this),
       tSubjRows:(function(){
         const sel=st.tSubject||"all";
+        /* Subjects name a tone; Mission Control decides what a tone looks
+         * like. Keeping the palette here is the point of the split — a course
+         * author should never be picking hex values out of this file, and the
+         * four tones stay consistent across subjects that never see each
+         * other's code. Alert red follows the convention already in use:
+         * #FCA5A5 text over rgba(248,113,113,…). */
+        const TONE={
+          good:  "#4ADE80",
+          watch: "#FBBF24",
+          urgent:"#FCA5A5",
+          "":    "rgba(238,242,255,.72)"
+        };
+        const ink=function(t){ return TONE[t] || TONE[""]; };
         return this.subjectProgress()
           .filter(function(r){ return sel==="all" || r.id===sel; })
           .map(function(r){
             return {
               name:r.name,
+              /* Only the numbers a subject actually reported. An empty list
+               * renders nothing rather than an empty strip. */
+              rows:(r.rows||[]).map(function(x){
+                return {
+                  label:x.label, value:x.value,
+                  labelStyle:"font-family:'JetBrains Mono',monospace;font-size:9.5px;"+
+                    "letter-spacing:.14em;text-transform:uppercase;color:rgba(238,242,255,.4)",
+                  valueStyle:"font-family:Fredoka,sans-serif;font-size:16px;margin-top:3px;"+
+                    "font-variant-numeric:tabular-nums;color:"+ink(x.tone)
+                };
+              }),
+              /* Flags are the half a parent is meant to act on, so they read
+               * as a list of sentences rather than another row of numbers. */
+              flags:(r.flags||[]).map(function(x){
+                const c=ink(x.tone);
+                const bg=x.tone==="urgent" ? "rgba(248,113,113,.1)"
+                       : x.tone==="watch"  ? "rgba(251,191,36,.09)"
+                       : "rgba(255,255,255,.04)";
+                const bd=x.tone==="urgent" ? "rgba(248,113,113,.3)"
+                       : x.tone==="watch"  ? "rgba(251,191,36,.28)"
+                       : "rgba(255,255,255,.1)";
+                return {text:x.text,
+                  style:"font-size:12.5px;line-height:1.5;color:"+c+";background:"+bg+
+                    ";border:1px solid "+bd+";border-radius:10px;padding:9px 13px"};
+              }),
               who: r.whose ? (r.whose+"'s track") : "no track chosen yet",
               opened: r.opened+(r.opened===1?" visit":" visits"),
               last: r.lastLabel,

@@ -44,7 +44,26 @@ window.Subjects.register({
       label: ST ? ST.levelLabel(k) : CURRICULA[k].label.replace(/ Math$/,""),
       sub:   ST ? ST.gradeOf(k) : CURRICULA[k].sub.split(" \u00b7 ")[0]};
   }),
-  open: "builtin"
+  open: "builtin",
+
+  /* What Teacher HQ shows for maths. See the `summary` contract in
+   * subjects.js; this used to be an `if(s.id==="math")` branch in index.html.
+   *
+   * Deliberately thin, and it is the one subject where that is right: maths
+   * already renders its full working record further down the same screen —
+   * every set, every attempt, most-missed, dynamic difficulty, the standards
+   * tables. A rows-and-flags digest here would restate the drill-down badly
+   * and give a parent two numbers to reconcile.
+   *
+   * It also cannot yet do better. Maths still writes pHist/pAns/pStreak at the
+   * TOP LEVEL of the slice rather than into its own `data` namespace (see the
+   * note in subjects.js), so `data` arrives empty and only ctx.slice would
+   * reach the real record. When that migration lands, this becomes the natural
+   * place for "reteach this" flags off most-missed. */
+  summary: function(data, ctx){
+    if(!ctx || !ctx.opened) return null;
+    return {detail:"Full working record below — every set, every attempt."};
+  }
 });
 
 Object.assign(window.__CURR, {CURRICULA, lessonFor, ALL_LESSONS});

@@ -29,6 +29,35 @@
  *            card before the subject opens. Use it for grade levels or tracks.
  *            The pick is saved as slice.subjects[<id>].level, per child.
  *   stub     {heading, lines:[...], footer} for status:"soon" subjects
+ *   summary  optional. What Teacher HQ shows for this subject — see below.
+ *
+ * TELLING TEACHER HQ WHAT YOU KNOW
+ * Mission Control cannot read inside your `data` — it does not know what a
+ * "step" or a "week" means in your course, and it should not have to. So it
+ * asks you:
+ *
+ *   summary(data, ctx) -> null | {
+ *     detail: "one line, the headline"       shown under the subject name
+ *     rows:   [{label, value, tone}]         the numbers worth seeing
+ *     flags:  [{text, tone}]                 things a parent should ACT on
+ *   }
+ *
+ * `tone` is "" (neutral), "good", "watch" or "urgent". Mission Control owns
+ * what those look like; you only say which one it is.
+ *
+ * `ctx` carries what the shell already knows: {opened, days, level, recent,
+ * lastDay, today, slice}. Return null when nothing is finished yet — HQ has
+ * its own wording for that case and it is better than an empty row.
+ *
+ * Only report what your own data proves. A flag is a claim that something
+ * needs a parent's attention, and a false one costs their trust in all the
+ * others. Be careful about pace especially: Word Voyagers deliberately does
+ * not judge a child against a schedule (see the long note in la-calendar.js),
+ * and a summary is not the place to reintroduce that through the back door.
+ *
+ * This runs inside Mission Control's render. If it throws, that subject's row
+ * loses its detail and every other row still draws — but it is your bug and
+ * it will be silent, so keep it total and cheap.
  *
  * PROGRESS IN THE DATABASE
  * Every subject gets its own namespace inside the child's saved record:
@@ -66,7 +95,8 @@
         status: "live",
         order: 100,
         levels: null,
-        stub: null
+        stub: null,
+        summary: null
       }, def);
       list.push(s); byId[s.id] = s;
       list.sort((a,b)=> (a.order-b.order) || a.name.localeCompare(b.name));

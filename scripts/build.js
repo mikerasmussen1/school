@@ -141,6 +141,10 @@ run("node", ["scripts/check-print-fit.js"], "check-print-fit");
  * whatever colour it inherited — silently, and it can look deliberate. Field
  * Notes shipped four of those. */
 run("node", ["scripts/check-css-tokens.js"], "check-css-tokens");
+/* Two questions whose text normalises the same would see one silently vanish
+ * from the printed page while still sitting in the bank, and every other check
+ * would stay green because the app and the sheet agree by construction. */
+run("node", ["scripts/check-item-ids.js"], "check-item-ids");
 run("node", ["scripts/qa-verify.js"], "qa-verify");
 
 console.log();

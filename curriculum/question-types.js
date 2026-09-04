@@ -288,8 +288,70 @@
     return out;
   }
 
+  /* ---- WHICH QUESTION WAS THIS? -----------------------------------------
+   *
+   * The header above promises every item carries a stable id that "the attempt
+   * log, the printed sheets and the scanner all key off". Not one of the 9,300
+   * items has ever had one, so logAttempt fell back to `set.id + "-i" + (n+1)`
+   * — the item's POSITION.
+   *
+   * That is not an id, it is a slot number, and it silently re-points history.
+   * Insert one question at the top of a set and yesterday's "u1w1p1-i3" names a
+   * different question; every stored attempt for that set shifts by one and
+   * nothing says so. Most-missed, dynamic difficulty and the teacher drill-down
+   * all read that log.
+   *
+   * idFor derives the id from the item's CONTENT instead. That fixes the real
+   * failure — inserting and reordering no longer disturb anything — without
+   * rewriting 9,300 authored items. The trade is worth stating plainly: edit a
+   * question's text and its id changes, so its history detaches. That is the
+   * better of the two errors. A slot number keeps the history and quietly
+   * attaches it to a different question; a content id admits that the question
+   * is not the one that was answered.
+   *
+   * Ids frozen into the source data would survive text edits as well, and are
+   * still the eventual answer. This is the part that needed no mass mutation.
+   *
+   * Exact duplicates exist — 222 of them, identical in both question and answer
+   * — so occurrences are numbered to keep ids unique inside a set.
+   */
+  function fnv1a(str){
+    let h = 0x811c9dc5;
+    for(let i=0;i<str.length;i++){
+      h ^= str.charCodeAt(i);
+      h = (h + ((h<<1)+(h<<4)+(h<<7)+(h<<8)+(h<<24))) >>> 0;
+    }
+    return h >>> 0;
+  }
+  function fingerprint(it){
+    const q = String((it&&it.q)==null?"":it.q).replace(/\s+/g," ").trim().toLowerCase();
+    const a = arr(it&&it.a).map(x=>String(x==null?"":x).trim().toLowerCase()).join("");
+    const t = (it&&it.t)==null ? "" : String(it.t);
+    return fnv1a(q+""+a+""+t).toString(36);
+  }
+  function idFor(set, item){
+    if(item && item.id) return String(item.id);      // an authored id always wins
+    const fp = fingerprint(item);
+    const items = (set && set.items) || [];
+    /* Occurrence is counted only up to THIS item, found by identity. If the
+     * caller handed us a copy rather than the item itself — or a synthetic set
+     * with no items at all, which the tutor path does — we cannot know which
+     * occurrence it is, and counting matches would invent a ".1" and split one
+     * question's history in two. Occurrence 0 is the honest answer there: it
+     * names the first item with this content, which is what a copy came from. */
+    let n = 0, found = false;
+    for(let i=0;i<items.length;i++){
+      if(items[i] === item){ found = true; break; }
+      if(!items[i] || items[i].id) continue;
+      if(fingerprint(items[i]) === fp) n++;
+    }
+    const base = ((set && set.id) ? set.id : "?") + ":" + fp;
+    return (found && n) ? (base + "." + n) : base;
+  }
+
   window.QTypes = {
     TYPES, DEFAULT, MIX,
+    idFor, fingerprint,
     normalize, normalizeSet, grade, answerText, isAutoGraded,
     inputKind, typeLabel, typeOf, validateSet, mixOrder,
     norm, looseNorm:loose,

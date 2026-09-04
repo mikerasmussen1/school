@@ -5552,8 +5552,11 @@ class Component extends DCLogic {
   // actually typed on a miss — so Teacher HQ can show the item grid. Capped
   // per set so the synced record cannot grow without bound.
   logAttempt(set, it, idx, given, verdict, mode){
+    /* qid used to be set.id+"-i"+(idx+1) — the item's POSITION — so inserting
+     * a question anywhere in a set re-pointed every attempt already logged
+     * against it. QTypes.idFor derives it from the item's content. */
     const entry={ts:Date.now(), d:dayNo(), i:idx,
-      qid:it.id||(set.id+"-i"+(idx+1)), q:String(it.q||"").slice(0,160),
+      qid:QTypes.idFor(set,it), q:String(it.q||"").slice(0,160),
       exp:String(QTypes.answerText(it)).slice(0,80),
       given:String(given==null?"":given).slice(0,80),
       ok:verdict===null?null:!!verdict, t:it.t==null?null:it.t, m:mode||"grid"};
@@ -5567,7 +5570,7 @@ class Component extends DCLogic {
     if(!rows.length) return;
     const d=dayNo(), ts=Date.now();
     const entries=rows.map(r=>({ts, d, i:r.i,
-      qid:(r.it.id||(set.id+"-i"+(r.i+1))), q:String(r.it.q||"").slice(0,160),
+      qid:QTypes.idFor(set,r.it), q:String(r.it.q||"").slice(0,160),
       exp:String(QTypes.answerText(r.it)).slice(0,80),
       given:String(r.given==null?"":r.given).slice(0,80),
       ok:r.ok===null?null:!!r.ok, t:r.it.t==null?null:r.it.t, m:mode||"grid"}));

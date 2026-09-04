@@ -285,8 +285,16 @@
   </main>
   </sc-if>
 
-  <!-- ============ UNIT 1 ============ -->
-  <sc-if value="{{ isUnit1 }}" hint-placeholder-val="{{ false }}">
+  <!-- ============ YEAR ONE · GENERIC MISSION PAGE ============ -->
+  <!-- This was eight near-identical copies of the same page, one per mission,
+       2,214 lines between them. The heads and tails were byte-identical once
+       three per-mission sentences, the accent colour, the print-pack href and
+       the briefing quote became data — all of which the record already held or
+       now holds in math-y1.js. What genuinely differs from mission to mission
+       is the manipulative, so that is the only thing still written eight times
+       and it keeps its own isUnitN gate below.
+       Year Two has rendered this way from one page all along. -->
+  <sc-if value="{{ isUnitY3 }}" hint-placeholder-val="{{ true }}">
   <main style="position:relative;padding:34px 44px 72px;max-width:1280px">
     <!-- Hero, rendered from the curriculum rather than typed per mission.
          Every value here had drifted at least once: Mission 05 still read
@@ -374,12 +382,14 @@
     </div>
 
     <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;background:rgba(0,0,0,.22);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:16px 20px;margin-bottom:44px">
-      <span style="font-size:14px;line-height:1.5;color:rgba(238,242,255,.72);flex:1;min-width:280px">That's the structure — the actual problems live in two places. Practice Bay has all of Week 1 on screen, graded instantly. The print pack has the same work as worksheets with show-your-work space.</span>
+      <span style="font-size:14px;line-height:1.5;color:rgba(238,242,255,.72);flex:1;min-width:280px">{{ uPractice }}</span>
       <button onClick="{{ goPractice }}" style="font-family:Fredoka,sans-serif;font-size:15px;padding:11px 20px;border-radius:13px;border:1px solid rgba(56,189,248,.5);cursor:pointer;background:rgba(56,189,248,.16);color:#38BDF8" style-hover="filter:brightness(1.15)">Open Practice Bay →</button>
-      <a href="Unit 1 Print Pack.pdf" style="font-family:Fredoka,sans-serif;font-size:15px;padding:11px 20px;border-radius:13px;border:1px solid rgba(251,191,36,.45);background:rgba(251,191,36,.14);color:#FBBF24">Print pack →</a> <a href="Unit 1 Worksheets.pdf" style="font-family:Fredoka,sans-serif;font-size:15px;padding:11px 20px;border-radius:13px;border:1px solid rgba(251,191,36,.45);background:rgba(251,191,36,.14);color:#FBBF24">Worksheets · all weeks →</a>
+      <a href="{{ uPackHref }}" style="font-family:Fredoka,sans-serif;font-size:15px;padding:11px 20px;border-radius:13px;border:1px solid rgba(251,191,36,.45);background:rgba(251,191,36,.14);color:#FBBF24">Print pack →</a> <a href="Unit 1 Worksheets.pdf" style="font-family:Fredoka,sans-serif;font-size:15px;padding:11px 20px;border-radius:13px;border:1px solid rgba(251,191,36,.45);background:rgba(251,191,36,.14);color:#FBBF24">Worksheets · all weeks →</a>
     </div>
 
-    <!-- MATH AS ART -->
+
+    <!-- MATH AS ART — the per-mission manipulative -->
+    <sc-if value="{{ isUnit1 }}" hint-placeholder-val="{{ true }}">
     <h2 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.45);margin:0 0 20px">The math is the art</h2>
     <div style="display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:22px;margin-bottom:22px">
 
@@ -456,187 +466,9 @@
         <div style="font-size:12.5px;line-height:1.5;margin-top:18px;color:rgba(238,242,255,.55);font-style:italic">{{ puzzleHint }}</div>
       </div>
     </div>
+    </sc-if>
 
-    <!-- WEEK BY WEEK -->
-    <h2 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.45);margin:0 0 20px">Five weeks, gate to gate</h2>
-
-    <div style="display:flex;gap:10px;margin-bottom:22px;flex-wrap:wrap">
-      <sc-for list="{{ weekTabs }}" as="w" hint-placeholder-count="5">
-        <button onClick="{{ w.go }}" style="{{ w.style }}" style-hover="filter:brightness(1.15)">
-          <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;opacity:.65">WEEK {{ w.n }}</div>
-          <div style="font-family:Fredoka,sans-serif;font-size:15px;margin-top:3px">{{ w.title }}</div>
-        </button>
-      </sc-for>
-    </div>
-
-    <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.11);border-radius:22px;padding:28px 30px;margin-bottom:44px">
-      <div style="display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:6px">
-        <div style="font-family:Fredoka,sans-serif;font-size:28px;color:#FF9F1C">Week {{ wk.n }} · {{ wk.title }}</div>
-        <span style="{{ wk.gateChip }}">{{ wk.gate }}</span>
-      </div>
-      <div style="font-size:14.5px;line-height:1.5;color:rgba(238,242,255,.72);max-width:820px;margin-bottom:24px">{{ wk.summary }}</div>
-      <div style="display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px">
-        <sc-for list="{{ wk.days }}" as="d" hint-placeholder-count="5">
-          <div style="{{ d.cardStyle }}">
-            <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:{{ d.dayColor }}">{{ d.day }}</div>
-            <div style="font-family:Fredoka,sans-serif;font-size:15.5px;line-height:1.2;margin:7px 0 9px;min-height:38px">{{ d.title }}</div>
-            <div style="font-size:12.5px;line-height:1.45;color:rgba(238,242,255,.62)">{{ d.detail }}</div>
-            <div style="display:flex;gap:5px;margin-top:12px">
-              <sc-for list="{{ d.tiers }}" as="tc" hint-placeholder-count="3">
-                <span style="{{ tc.style }}">{{ tc.icon }}</span>
-              </sc-for>
-            </div>
-          </div>
-        </sc-for>
-      </div>
-      <sc-if value="{{ wk.isFull }}" hint-placeholder-val="{{ true }}">
-        <div style="margin-top:22px;padding-top:20px;border-top:1px dashed rgba(255,255,255,.16);display:flex;align-items:center;gap:14px;flex-wrap:wrap">
-          <span style="font-size:13.5px;color:rgba(238,242,255,.7)">All five weeks have graded sets in Practice Bay, and the worksheets file prints every one of them.</span>
-          <a href="Unit 1 Print Pack.pdf" style="font-family:Fredoka,sans-serif;font-size:14.5px;padding:10px 18px;border-radius:12px;background:rgba(251,191,36,.16);border:1px solid rgba(251,191,36,.45);color:#FBBF24">Open the print pack →</a> <a href="Unit 1 Worksheets.pdf" style="font-family:Fredoka,sans-serif;font-size:14.5px;padding:10px 18px;border-radius:12px;background:rgba(251,191,36,.16);border:1px solid rgba(251,191,36,.45);color:#FBBF24">Worksheets · all weeks →</a>
-        </div>
-      </sc-if>
-    </div>
-
-    <!-- GATES -->
-    <h2 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.45);margin:0 0 20px">Mastery gates</h2>
-    <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-bottom:26px">
-      <sc-for list="{{ gates }}" as="g" hint-placeholder-count="4">
-        <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:18px;padding:22px 22px 24px">
-          <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:{{ g.color }}">{{ g.when }}</div>
-          <div style="font-family:Fredoka,sans-serif;font-size:20px;line-height:1.15;margin:8px 0 10px">{{ g.name }}</div>
-          <div style="font-size:13px;line-height:1.5;color:rgba(238,242,255,.7)">{{ g.desc }}</div>
-          <div style="margin-top:14px;font-family:'JetBrains Mono',monospace;font-size:11px;color:{{ g.color }}">{{ g.rule }}</div>
-        </div>
-      </sc-for>
-    </div>
-
-    <!-- trophy bands -->
-    <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.11);border-radius:22px;padding:28px 30px;margin-bottom:44px">
-      <div style="font-family:Fredoka,sans-serif;font-size:24px;margin-bottom:4px">Unit Test · Trophy Bands</div>
-      <div style="font-size:13.5px;color:rgba(238,242,255,.62);margin-bottom:22px">12 questions plus one “explain your thinking.” The explanation is scored on reasoning, not neatness.</div>
-      <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px">
-        <sc-for list="{{ bands }}" as="b" hint-placeholder-count="3">
-          <div style="{{ b.style }}">
-            <div style="font-family:Fredoka,sans-serif;font-size:34px;color:{{ b.color }};line-height:1">{{ b.range }}</div>
-            <div style="font-family:Fredoka,sans-serif;font-size:19px;margin:8px 0 8px">{{ b.name }}</div>
-            <div style="font-size:13px;line-height:1.5;color:rgba(238,242,255,.72)">{{ b.desc }}</div>
-          </div>
-        </sc-for>
-      </div>
-    </div>
-
-    <div style="display:flex;align-items:flex-start;gap:20px;max-width:900px">
-      <div style="flex:none;animation:float 5s ease-in-out infinite">
-        <div style="width:64px;height:64px;border-radius:20px;background:linear-gradient(160deg,#C7D2FE,#818CF8);position:relative;box-shadow:0 10px 28px rgba(129,140,248,.32)">
-          <div style="position:absolute;top:-12px;left:50%;width:2px;height:12px;background:#818CF8"></div>
-          <div style="position:absolute;top:-19px;left:50%;transform:translateX(-50%);width:9px;height:9px;border-radius:50%;background:#FBBF24;box-shadow:0 0 12px #FBBF24"></div>
-          <div style="position:absolute;top:21px;left:12px;width:13px;height:13px;border-radius:50%;background:#111938"></div>
-          <div style="position:absolute;top:21px;right:12px;width:13px;height:13px;border-radius:50%;background:#111938"></div>
-          <div style="position:absolute;bottom:11px;left:50%;transform:translateX(-50%);width:24px;height:4px;border-radius:3px;background:rgba(17,25,56,.45)"></div>
-        </div>
-      </div>
-      <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.11);border-radius:20px;border-top-left-radius:4px;padding:20px 24px">
-        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#818CF8;margin-bottom:8px">{{ mascot }} · Mission 01 briefing</div>
-        <div style="font-family:Fredoka,sans-serif;font-size:19px;line-height:1.35">“If you can already do 47 × 32, don't sit through five weeks of it. Take the pre-assessment, prove it, and skip straight to the puzzles. That's not cheating — that's flight planning.”</div>
-      </div>
-    </div>
-  </main>
-  </sc-if>
-
-  <!-- ============ UNIT 2 ============ -->
-  <sc-if value="{{ isUnit2 }}" hint-placeholder-val="{{ false }}">
-  <main style="position:relative;padding:34px 44px 72px;max-width:1280px">
-    <!-- Hero, rendered from the curriculum rather than typed per mission.
-         Every value here had drifted at least once: Mission 05 still read
-         "Decimals & Money" after it was renamed, Mission 07 still claimed
-         3 weeks and 12 lessons after it grew to 5 and 20, and Mission 08's
-         week range was never renumbered when 07 grew underneath it. -->
-    <div style="display:flex;align-items:center;gap:10px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.5);margin-bottom:14px">
-      <span style="color:{{ uColor }}">{{ uNo }}</span><span>&middot;</span><span>{{ uWeeks }}</span><span>&middot;</span><span>{{ uDayBreakdown }}</span>
-    </div>
-    <h1 style="{{ uTitleStyle }}">{{ uName }}</h1>
-    <p style="max-width:720px;margin:0 0 30px;font-size:16.5px;line-height:1.55;color:rgba(238,242,255,.72);text-wrap:pretty">{{ uBlurb }}</p>
-    <div style="{{ uHeroStyle }}">
-      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:{{ uColor }};margin-bottom:10px">{{ uNo }} &middot; The Big Question</div>
-      <div style="font-family:Fredoka,sans-serif;font-size:29px;line-height:1.2;max-width:900px">{{ uBigQ }}</div>
-      <div style="font-size:14px;line-height:1.5;margin-top:12px;color:rgba(238,242,255,.7);max-width:820px">{{ uClosing }}</div>
-    </div>
-
-    <!-- This week's days. The work comes before the briefing, the way Field
-         Notes opens a week onto its investigation. -->
-    <div style="display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:14px">
-      <div style="font-family:Fredoka,sans-serif;font-weight:600;font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.45)">{{ uWeekLabel }}</div>
-      <button onClick="{{ goPractice }}" style="font-family:Fredoka,sans-serif;font-size:13.5px;padding:8px 16px;border-radius:11px;border:1px solid rgba(56,189,248,.45);cursor:pointer;background:rgba(56,189,248,.12);color:#38BDF8" style-hover="filter:brightness(1.2)">All weeks in Practice Bay &rarr;</button>
-    </div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:11px;margin-bottom:40px">
-      <sc-for list="{{ uDays }}" as="d" hint-placeholder-count="5">
-        <button onClick="{{ d.go }}" style="{{ d.style }}" style-hover="filter:brightness(1.25)">
-          <div style="display:flex;align-items:center;justify-content:space-between;gap:8px">
-            <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(238,242,255,.5)">{{ d.label }}</span>
-            <span style="{{ d.markStyle }}">{{ d.mark }}</span>
-          </div>
-          <div style="font-family:Fredoka,sans-serif;font-size:14.5px;line-height:1.25">{{ d.title }}</div>
-        </button>
-      </sc-for>
-    </div>
-
-    <!-- Skills, project, game and badge. These were on the mission map's detail
-         panel, which f933cc1 removed when the planets started navigating. That
-         commit claimed the mission page already showed them; it did not — only
-         the Y5 template did, so for Brock's year they became unreachable, and
-         the badge name and requirement were unreachable anywhere in the app. -->
-    <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:22px;margin-bottom:22px">
-      <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:22px;padding:24px 26px">
-        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.45);margin-bottom:9px">Hands-on project</div>
-        <div style="font-size:14.5px;line-height:1.55;color:rgba(238,242,255,.85)">{{ uProject }}</div>
-      </div>
-      <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:22px;padding:24px 26px">
-        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.45);margin-bottom:9px">Fluency game</div>
-        <div style="font-size:14.5px;line-height:1.55;color:rgba(238,242,255,.85)">{{ uGame }}</div>
-      </div>
-    </div>
-    <div style="display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:22px;margin-bottom:38px">
-      <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:22px;padding:26px 28px">
-        <div style="font-family:Fredoka,sans-serif;font-size:22px">What this mission builds</div>
-        <div style="font-size:13px;color:rgba(238,242,255,.6);margin-top:4px;margin-bottom:18px">Each one is a strand on the pre-assessment and a row on the skip chart.</div>
-        <div style="display:flex;flex-direction:column;gap:9px">
-          <sc-for list="{{ uSkills }}" as="s" hint-placeholder-count="5">
-            <div style="display:flex;align-items:center;gap:14px;background:rgba(0,0,0,.22);border:1px solid rgba(255,255,255,.09);border-radius:12px;padding:12px 16px">
-              <span style="{{ s.dotStyle }}"></span>
-              <span style="font-size:14px;color:rgba(238,242,255,.86)">{{ s.name }}</span>
-            </div>
-          </sc-for>
-        </div>
-      </div>
-      <div style="{{ uBadgeWellStyle }}">
-        <div style="{{ uBigBadgeStyle }}"><span style="font-family:Fredoka,sans-serif;font-weight:600;color:#0B0F24;font-size:{{ uBadgeGlyphSize }}">{{ uBadge }}</span></div>
-        <div style="font-family:Fredoka,sans-serif;font-size:17px;margin-top:22px;text-align:center;color:{{ uColor }}">{{ uBadgeName }}</div>
-        <div style="font-size:13px;line-height:1.5;margin-top:8px;text-align:center;max-width:250px;color:rgba(238,242,255,.6)">{{ uBadgeReq }}</div>
-      </div>
-    </div>
-    <div style="font-family:Fredoka,sans-serif;font-weight:600;font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.45);margin:0 0 16px">Every worksheet has three tiers</div>
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:16px">
-      <sc-for list="{{ tiers }}" as="t" hint-placeholder-count="3">
-        <button onClick="{{ t.open }}" style="{{ t.cardStyle }}" style-hover="filter:brightness(1.25);transform:translateY(-3px)">
-          <div style="display:flex;align-items:center;gap:11px;margin-bottom:10px">
-            <div style="{{ t.iconStyle }}">{{ t.icon }}</div>
-            <div>
-              <div style="font-family:Fredoka,sans-serif;font-size:19px;color:{{ t.color }};line-height:1.1">{{ t.name }}</div>
-              <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(238,242,255,.45);margin-top:3px">{{ t.meta }}</div>
-            </div>
-          </div>
-          <div style="font-size:13.5px;line-height:1.5;color:rgba(238,242,255,.78)">{{ t.desc }}</div>
-          <div style="{{ t.ctaStyle }}">{{ t.cta }}</div>
-        </button>
-      </sc-for>
-    </div>
-
-    <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;background:rgba(0,0,0,.22);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:16px 20px;margin-bottom:44px">
-      <span style="font-size:14px;line-height:1.5;color:rgba(238,242,255,.72);flex:1;min-width:280px">Week 1 of this mission is on screen in Practice Bay, graded instantly. The print pack has the same work as worksheets with room to draw the rectangles.</span>
-      <button onClick="{{ goPractice }}" style="font-family:Fredoka,sans-serif;font-size:15px;padding:11px 20px;border-radius:13px;border:1px solid rgba(56,189,248,.5);cursor:pointer;background:rgba(56,189,248,.16);color:#38BDF8" style-hover="filter:brightness(1.15)">Open Practice Bay →</button>
-      <a href="Unit 2 Print Pack.pdf" style="font-family:Fredoka,sans-serif;font-size:15px;padding:11px 20px;border-radius:13px;border:1px solid rgba(45,212,191,.45);background:rgba(45,212,191,.14);color:#2DD4BF">Print pack →</a> <a href="Unit 2 Worksheets.pdf" style="font-family:Fredoka,sans-serif;font-size:15px;padding:11px 20px;border-radius:13px;border:1px solid rgba(45,212,191,.45);background:rgba(45,212,191,.14);color:#2DD4BF">Worksheets · all weeks →</a>
-    </div>
-
+    <sc-if value="{{ isUnit2 }}" hint-placeholder-val="{{ false }}">
     <h2 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.45);margin:0 0 20px">The math is the art</h2>
     <div style="display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:22px;margin-bottom:22px">
 
@@ -730,184 +562,9 @@
         <div style="font-size:12.5px;line-height:1.5;margin-top:18px;color:rgba(238,242,255,.55);font-style:italic">{{ puzzleHint }}</div>
       </div>
     </div>
+    </sc-if>
 
-    <h2 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.45);margin:0 0 20px">Five weeks, gate to gate</h2>
-
-    <div style="display:flex;gap:10px;margin-bottom:22px;flex-wrap:wrap">
-      <sc-for list="{{ weekTabs }}" as="w" hint-placeholder-count="5">
-        <button onClick="{{ w.go }}" style="{{ w.style }}" style-hover="filter:brightness(1.15)">
-          <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;opacity:.65">WEEK {{ w.n }}</div>
-          <div style="font-family:Fredoka,sans-serif;font-size:15px;margin-top:3px">{{ w.title }}</div>
-        </button>
-      </sc-for>
-    </div>
-
-    <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.11);border-radius:22px;padding:28px 30px;margin-bottom:44px">
-      <div style="display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:6px">
-        <div style="font-family:Fredoka,sans-serif;font-size:28px;color:#2DD4BF">Week {{ wk.n }} · {{ wk.title }}</div>
-        <span style="{{ wk.gateChip }}">{{ wk.gate }}</span>
-      </div>
-      <div style="font-size:14.5px;line-height:1.5;color:rgba(238,242,255,.72);max-width:820px;margin-bottom:24px">{{ wk.summary }}</div>
-      <div style="display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px">
-        <sc-for list="{{ wk.days }}" as="d" hint-placeholder-count="5">
-          <div style="{{ d.cardStyle }}">
-            <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:{{ d.dayColor }}">{{ d.day }}</div>
-            <div style="font-family:Fredoka,sans-serif;font-size:15.5px;line-height:1.2;margin:7px 0 9px;min-height:38px">{{ d.title }}</div>
-            <div style="font-size:12.5px;line-height:1.45;color:rgba(238,242,255,.62)">{{ d.detail }}</div>
-            <div style="display:flex;gap:5px;margin-top:12px">
-              <sc-for list="{{ d.tiers }}" as="tc" hint-placeholder-count="3">
-                <span style="{{ tc.style }}">{{ tc.icon }}</span>
-              </sc-for>
-            </div>
-          </div>
-        </sc-for>
-      </div>
-      <sc-if value="{{ wk.isFull }}" hint-placeholder-val="{{ true }}">
-        <div style="margin-top:22px;padding-top:20px;border-top:1px dashed rgba(255,255,255,.16);display:flex;align-items:center;gap:14px;flex-wrap:wrap">
-          <span style="font-size:13.5px;color:rgba(238,242,255,.7)">Every week is written out in full — printable worksheets with answer keys for the whole mission.</span>
-          <a href="Unit 2 Print Pack.pdf" style="font-family:Fredoka,sans-serif;font-size:14.5px;padding:10px 18px;border-radius:12px;background:rgba(45,212,191,.16);border:1px solid rgba(45,212,191,.45);color:#2DD4BF">Open the print pack →</a> <a href="Unit 2 Worksheets.pdf" style="font-family:Fredoka,sans-serif;font-size:14.5px;padding:10px 18px;border-radius:12px;background:rgba(45,212,191,.16);border:1px solid rgba(45,212,191,.45);color:#2DD4BF">Worksheets · all weeks →</a>
-        </div>
-      </sc-if>
-    </div>
-
-    <h2 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.45);margin:0 0 20px">Mastery gates</h2>
-    <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-bottom:26px">
-      <sc-for list="{{ gates }}" as="g" hint-placeholder-count="4">
-        <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:18px;padding:22px 22px 24px">
-          <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:{{ g.color }}">{{ g.when }}</div>
-          <div style="font-family:Fredoka,sans-serif;font-size:20px;line-height:1.15;margin:8px 0 10px">{{ g.name }}</div>
-          <div style="font-size:13px;line-height:1.5;color:rgba(238,242,255,.7)">{{ g.desc }}</div>
-          <div style="margin-top:14px;font-family:'JetBrains Mono',monospace;font-size:11px;color:{{ g.color }}">{{ g.rule }}</div>
-        </div>
-      </sc-for>
-    </div>
-
-    <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.11);border-radius:22px;padding:28px 30px;margin-bottom:44px">
-      <div style="font-family:Fredoka,sans-serif;font-size:24px;margin-bottom:4px">Unit Test · Trophy Bands</div>
-      <div style="font-size:13.5px;color:rgba(238,242,255,.62);margin-bottom:22px">12 questions plus one “explain your thinking.” The explanation is scored on reasoning, not neatness.</div>
-      <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px">
-        <sc-for list="{{ bands }}" as="b" hint-placeholder-count="3">
-          <div style="{{ b.style }}">
-            <div style="font-family:Fredoka,sans-serif;font-size:34px;color:{{ b.color }};line-height:1">{{ b.range }}</div>
-            <div style="font-family:Fredoka,sans-serif;font-size:19px;margin:8px 0 8px">{{ b.name }}</div>
-            <div style="font-size:13px;line-height:1.5;color:rgba(238,242,255,.72)">{{ b.desc }}</div>
-          </div>
-        </sc-for>
-      </div>
-    </div>
-
-    <div style="display:flex;align-items:flex-start;gap:20px;max-width:900px">
-      <div style="flex:none;animation:float 5s ease-in-out infinite">
-        <div style="width:64px;height:64px;border-radius:20px;background:linear-gradient(160deg,#C7D2FE,#818CF8);position:relative;box-shadow:0 10px 28px rgba(129,140,248,.32)">
-          <div style="position:absolute;top:-12px;left:50%;width:2px;height:12px;background:#818CF8"></div>
-          <div style="position:absolute;top:-19px;left:50%;transform:translateX(-50%);width:9px;height:9px;border-radius:50%;background:#FBBF24;box-shadow:0 0 12px #FBBF24"></div>
-          <div style="position:absolute;top:21px;left:12px;width:13px;height:13px;border-radius:50%;background:#111938"></div>
-          <div style="position:absolute;top:21px;right:12px;width:13px;height:13px;border-radius:50%;background:#111938"></div>
-          <div style="position:absolute;bottom:11px;left:50%;transform:translateX(-50%);width:24px;height:4px;border-radius:3px;background:rgba(17,25,56,.45)"></div>
-        </div>
-      </div>
-      <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.11);border-radius:20px;border-top-left-radius:4px;padding:20px 24px">
-        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#818CF8;margin-bottom:8px">{{ mascot }} · Mission 02 briefing</div>
-        <div style="font-family:Fredoka,sans-serif;font-size:19px;line-height:1.35">“Every pilot I've flown with wanted the remainder to go away. It doesn't. Learn to say what it means and you're ahead of most adults.”</div>
-      </div>
-    </div>
-  </main>
-  </sc-if>
-
-  <!-- ============ UNIT 3 ============ -->
-  <sc-if value="{{ isUnit3 }}" hint-placeholder-val="{{ false }}">
-  <main style="position:relative;padding:34px 44px 72px;max-width:1280px">
-    <!-- Hero, rendered from the curriculum rather than typed per mission.
-         Every value here had drifted at least once: Mission 05 still read
-         "Decimals & Money" after it was renamed, Mission 07 still claimed
-         3 weeks and 12 lessons after it grew to 5 and 20, and Mission 08's
-         week range was never renumbered when 07 grew underneath it. -->
-    <div style="display:flex;align-items:center;gap:10px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.5);margin-bottom:14px">
-      <span style="color:{{ uColor }}">{{ uNo }}</span><span>&middot;</span><span>{{ uWeeks }}</span><span>&middot;</span><span>{{ uDayBreakdown }}</span>
-    </div>
-    <h1 style="{{ uTitleStyle }}">{{ uName }}</h1>
-    <p style="max-width:720px;margin:0 0 30px;font-size:16.5px;line-height:1.55;color:rgba(238,242,255,.72);text-wrap:pretty">{{ uBlurb }}</p>
-    <div style="{{ uHeroStyle }}">
-      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:{{ uColor }};margin-bottom:10px">{{ uNo }} &middot; The Big Question</div>
-      <div style="font-family:Fredoka,sans-serif;font-size:29px;line-height:1.2;max-width:900px">{{ uBigQ }}</div>
-      <div style="font-size:14px;line-height:1.5;margin-top:12px;color:rgba(238,242,255,.7);max-width:820px">{{ uClosing }}</div>
-    </div>
-
-    <!-- This week's days. The work comes before the briefing, the way Field
-         Notes opens a week onto its investigation. -->
-    <div style="display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:14px">
-      <div style="font-family:Fredoka,sans-serif;font-weight:600;font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.45)">{{ uWeekLabel }}</div>
-      <button onClick="{{ goPractice }}" style="font-family:Fredoka,sans-serif;font-size:13.5px;padding:8px 16px;border-radius:11px;border:1px solid rgba(56,189,248,.45);cursor:pointer;background:rgba(56,189,248,.12);color:#38BDF8" style-hover="filter:brightness(1.2)">All weeks in Practice Bay &rarr;</button>
-    </div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:11px;margin-bottom:40px">
-      <sc-for list="{{ uDays }}" as="d" hint-placeholder-count="5">
-        <button onClick="{{ d.go }}" style="{{ d.style }}" style-hover="filter:brightness(1.25)">
-          <div style="display:flex;align-items:center;justify-content:space-between;gap:8px">
-            <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(238,242,255,.5)">{{ d.label }}</span>
-            <span style="{{ d.markStyle }}">{{ d.mark }}</span>
-          </div>
-          <div style="font-family:Fredoka,sans-serif;font-size:14.5px;line-height:1.25">{{ d.title }}</div>
-        </button>
-      </sc-for>
-    </div>
-
-    <!-- Skills, project, game and badge. These were on the mission map's detail
-         panel, which f933cc1 removed when the planets started navigating. That
-         commit claimed the mission page already showed them; it did not — only
-         the Y5 template did, so for Brock's year they became unreachable, and
-         the badge name and requirement were unreachable anywhere in the app. -->
-    <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:22px;margin-bottom:22px">
-      <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:22px;padding:24px 26px">
-        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.45);margin-bottom:9px">Hands-on project</div>
-        <div style="font-size:14.5px;line-height:1.55;color:rgba(238,242,255,.85)">{{ uProject }}</div>
-      </div>
-      <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:22px;padding:24px 26px">
-        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.45);margin-bottom:9px">Fluency game</div>
-        <div style="font-size:14.5px;line-height:1.55;color:rgba(238,242,255,.85)">{{ uGame }}</div>
-      </div>
-    </div>
-    <div style="display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:22px;margin-bottom:38px">
-      <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:22px;padding:26px 28px">
-        <div style="font-family:Fredoka,sans-serif;font-size:22px">What this mission builds</div>
-        <div style="font-size:13px;color:rgba(238,242,255,.6);margin-top:4px;margin-bottom:18px">Each one is a strand on the pre-assessment and a row on the skip chart.</div>
-        <div style="display:flex;flex-direction:column;gap:9px">
-          <sc-for list="{{ uSkills }}" as="s" hint-placeholder-count="5">
-            <div style="display:flex;align-items:center;gap:14px;background:rgba(0,0,0,.22);border:1px solid rgba(255,255,255,.09);border-radius:12px;padding:12px 16px">
-              <span style="{{ s.dotStyle }}"></span>
-              <span style="font-size:14px;color:rgba(238,242,255,.86)">{{ s.name }}</span>
-            </div>
-          </sc-for>
-        </div>
-      </div>
-      <div style="{{ uBadgeWellStyle }}">
-        <div style="{{ uBigBadgeStyle }}"><span style="font-family:Fredoka,sans-serif;font-weight:600;color:#0B0F24;font-size:{{ uBadgeGlyphSize }}">{{ uBadge }}</span></div>
-        <div style="font-family:Fredoka,sans-serif;font-size:17px;margin-top:22px;text-align:center;color:{{ uColor }}">{{ uBadgeName }}</div>
-        <div style="font-size:13px;line-height:1.5;margin-top:8px;text-align:center;max-width:250px;color:rgba(238,242,255,.6)">{{ uBadgeReq }}</div>
-      </div>
-    </div>
-    <div style="font-family:Fredoka,sans-serif;font-weight:600;font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.45);margin:0 0 16px">Every worksheet has three tiers</div>
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:16px">
-      <sc-for list="{{ tiers }}" as="t" hint-placeholder-count="3">
-        <button onClick="{{ t.open }}" style="{{ t.cardStyle }}" style-hover="filter:brightness(1.25);transform:translateY(-3px)">
-          <div style="display:flex;align-items:center;gap:11px;margin-bottom:10px">
-            <div style="{{ t.iconStyle }}">{{ t.icon }}</div>
-            <div>
-              <div style="font-family:Fredoka,sans-serif;font-size:19px;color:{{ t.color }};line-height:1.1">{{ t.name }}</div>
-              <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(238,242,255,.45);margin-top:3px">{{ t.meta }}</div>
-            </div>
-          </div>
-          <div style="font-size:13.5px;line-height:1.5;color:rgba(238,242,255,.78)">{{ t.desc }}</div>
-          <div style="{{ t.ctaStyle }}">{{ t.cta }}</div>
-        </button>
-      </sc-for>
-    </div>
-
-    <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;background:rgba(0,0,0,.22);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:16px 20px;margin-bottom:44px">
-      <span style="font-size:14px;line-height:1.5;color:rgba(238,242,255,.72);flex:1;min-width:280px">Four weeks instead of five — the mid-unit quiz lands at the end of Week 3 and the test a week later. Week 1 is on screen in Practice Bay and in the print pack.</span>
-      <button onClick="{{ goPractice }}" style="font-family:Fredoka,sans-serif;font-size:15px;padding:11px 20px;border-radius:13px;border:1px solid rgba(56,189,248,.5);cursor:pointer;background:rgba(56,189,248,.16);color:#38BDF8" style-hover="filter:brightness(1.15)">Open Practice Bay →</button>
-      <a href="Unit 3 Print Pack.pdf" style="font-family:Fredoka,sans-serif;font-size:15px;padding:11px 20px;border-radius:13px;border:1px solid rgba(167,139,250,.45);background:rgba(167,139,250,.14);color:#C4B5FD">Print pack →</a> <a href="Unit 3 Worksheets.pdf" style="font-family:Fredoka,sans-serif;font-size:15px;padding:11px 20px;border-radius:13px;border:1px solid rgba(167,139,250,.45);background:rgba(167,139,250,.14);color:#C4B5FD">Worksheets · all weeks →</a>
-    </div>
-
+    <sc-if value="{{ isUnit3 }}" hint-placeholder-val="{{ false }}">
     <h2 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.45);margin:0 0 20px">The math is the art</h2>
 
     <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:22px;padding:26px 28px;margin-bottom:22px">
@@ -982,184 +639,9 @@
         <div style="font-size:12.5px;line-height:1.5;margin-top:18px;color:rgba(238,242,255,.55);font-style:italic">{{ puzzleHint }}</div>
       </div>
     </div>
+    </sc-if>
 
-    <h2 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.45);margin:0 0 20px">Four weeks, gate to gate</h2>
-
-    <div style="display:flex;gap:10px;margin-bottom:22px;flex-wrap:wrap">
-      <sc-for list="{{ weekTabs }}" as="w" hint-placeholder-count="4">
-        <button onClick="{{ w.go }}" style="{{ w.style }}" style-hover="filter:brightness(1.15)">
-          <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;opacity:.65">WEEK {{ w.n }}</div>
-          <div style="font-family:Fredoka,sans-serif;font-size:15px;margin-top:3px">{{ w.title }}</div>
-        </button>
-      </sc-for>
-    </div>
-
-    <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.11);border-radius:22px;padding:28px 30px;margin-bottom:44px">
-      <div style="display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:6px">
-        <div style="font-family:Fredoka,sans-serif;font-size:28px;color:#A78BFA">Week {{ wk.n }} · {{ wk.title }}</div>
-        <span style="{{ wk.gateChip }}">{{ wk.gate }}</span>
-      </div>
-      <div style="font-size:14.5px;line-height:1.5;color:rgba(238,242,255,.72);max-width:820px;margin-bottom:24px">{{ wk.summary }}</div>
-      <div style="display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px">
-        <sc-for list="{{ wk.days }}" as="d" hint-placeholder-count="5">
-          <div style="{{ d.cardStyle }}">
-            <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:{{ d.dayColor }}">{{ d.day }}</div>
-            <div style="font-family:Fredoka,sans-serif;font-size:15.5px;line-height:1.2;margin:7px 0 9px;min-height:38px">{{ d.title }}</div>
-            <div style="font-size:12.5px;line-height:1.45;color:rgba(238,242,255,.62)">{{ d.detail }}</div>
-            <div style="display:flex;gap:5px;margin-top:12px">
-              <sc-for list="{{ d.tiers }}" as="tc" hint-placeholder-count="3">
-                <span style="{{ tc.style }}">{{ tc.icon }}</span>
-              </sc-for>
-            </div>
-          </div>
-        </sc-for>
-      </div>
-      <sc-if value="{{ wk.isFull }}" hint-placeholder-val="{{ true }}">
-        <div style="margin-top:22px;padding-top:20px;border-top:1px dashed rgba(255,255,255,.16);display:flex;align-items:center;gap:14px;flex-wrap:wrap">
-          <span style="font-size:13.5px;color:rgba(238,242,255,.7)">Every week is written out in full — printable worksheets with answer keys for the whole mission.</span>
-          <a href="Unit 3 Print Pack.pdf" style="font-family:Fredoka,sans-serif;font-size:14.5px;padding:10px 18px;border-radius:12px;background:rgba(167,139,250,.16);border:1px solid rgba(167,139,250,.45);color:#C4B5FD">Open the print pack →</a> <a href="Unit 3 Worksheets.pdf" style="font-family:Fredoka,sans-serif;font-size:14.5px;padding:10px 18px;border-radius:12px;background:rgba(167,139,250,.16);border:1px solid rgba(167,139,250,.45);color:#C4B5FD">Worksheets · all weeks →</a>
-        </div>
-      </sc-if>
-    </div>
-
-    <h2 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.45);margin:0 0 20px">Mastery gates</h2>
-    <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-bottom:26px">
-      <sc-for list="{{ gates }}" as="g" hint-placeholder-count="4">
-        <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:18px;padding:22px 22px 24px">
-          <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:{{ g.color }}">{{ g.when }}</div>
-          <div style="font-family:Fredoka,sans-serif;font-size:20px;line-height:1.15;margin:8px 0 10px">{{ g.name }}</div>
-          <div style="font-size:13px;line-height:1.5;color:rgba(238,242,255,.7)">{{ g.desc }}</div>
-          <div style="margin-top:14px;font-family:'JetBrains Mono',monospace;font-size:11px;color:{{ g.color }}">{{ g.rule }}</div>
-        </div>
-      </sc-for>
-    </div>
-
-    <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.11);border-radius:22px;padding:28px 30px;margin-bottom:44px">
-      <div style="font-family:Fredoka,sans-serif;font-size:24px;margin-bottom:4px">Unit Test · Trophy Bands</div>
-      <div style="font-size:13.5px;color:rgba(238,242,255,.62);margin-bottom:22px">12 questions plus one “explain your thinking.” The explanation is scored on reasoning, not neatness.</div>
-      <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px">
-        <sc-for list="{{ bands }}" as="b" hint-placeholder-count="3">
-          <div style="{{ b.style }}">
-            <div style="font-family:Fredoka,sans-serif;font-size:34px;color:{{ b.color }};line-height:1">{{ b.range }}</div>
-            <div style="font-family:Fredoka,sans-serif;font-size:19px;margin:8px 0 8px">{{ b.name }}</div>
-            <div style="font-size:13px;line-height:1.5;color:rgba(238,242,255,.72)">{{ b.desc }}</div>
-          </div>
-        </sc-for>
-      </div>
-    </div>
-
-    <div style="display:flex;align-items:flex-start;gap:20px;max-width:900px">
-      <div style="flex:none;animation:float 5s ease-in-out infinite">
-        <div style="width:64px;height:64px;border-radius:20px;background:linear-gradient(160deg,#C7D2FE,#818CF8);position:relative;box-shadow:0 10px 28px rgba(129,140,248,.32)">
-          <div style="position:absolute;top:-12px;left:50%;width:2px;height:12px;background:#818CF8"></div>
-          <div style="position:absolute;top:-19px;left:50%;transform:translateX(-50%);width:9px;height:9px;border-radius:50%;background:#FBBF24;box-shadow:0 0 12px #FBBF24"></div>
-          <div style="position:absolute;top:21px;left:12px;width:13px;height:13px;border-radius:50%;background:#111938"></div>
-          <div style="position:absolute;top:21px;right:12px;width:13px;height:13px;border-radius:50%;background:#111938"></div>
-          <div style="position:absolute;bottom:11px;left:50%;transform:translateX(-50%);width:24px;height:4px;border-radius:3px;background:rgba(17,25,56,.45)"></div>
-        </div>
-      </div>
-      <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.11);border-radius:20px;border-top-left-radius:4px;padding:20px 24px">
-        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#818CF8;margin-bottom:8px">{{ mascot }} · Mission 03 briefing</div>
-        <div style="font-family:Fredoka,sans-serif;font-size:19px;line-height:1.35">“The order of operations isn't a law of nature. It's an agreement, so that everyone reading the same line gets the same number. Agreements are still worth understanding.”</div>
-      </div>
-    </div>
-  </main>
-  </sc-if>
-
-  <!-- ============ UNIT 4 ============ -->
-  <sc-if value="{{ isUnit4 }}" hint-placeholder-val="{{ false }}">
-  <main style="position:relative;padding:34px 44px 72px;max-width:1280px">
-    <!-- Hero, rendered from the curriculum rather than typed per mission.
-         Every value here had drifted at least once: Mission 05 still read
-         "Decimals & Money" after it was renamed, Mission 07 still claimed
-         3 weeks and 12 lessons after it grew to 5 and 20, and Mission 08's
-         week range was never renumbered when 07 grew underneath it. -->
-    <div style="display:flex;align-items:center;gap:10px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.5);margin-bottom:14px">
-      <span style="color:{{ uColor }}">{{ uNo }}</span><span>&middot;</span><span>{{ uWeeks }}</span><span>&middot;</span><span>{{ uDayBreakdown }}</span>
-    </div>
-    <h1 style="{{ uTitleStyle }}">{{ uName }}</h1>
-    <p style="max-width:720px;margin:0 0 30px;font-size:16.5px;line-height:1.55;color:rgba(238,242,255,.72);text-wrap:pretty">{{ uBlurb }}</p>
-    <div style="{{ uHeroStyle }}">
-      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:{{ uColor }};margin-bottom:10px">{{ uNo }} &middot; The Big Question</div>
-      <div style="font-family:Fredoka,sans-serif;font-size:29px;line-height:1.2;max-width:900px">{{ uBigQ }}</div>
-      <div style="font-size:14px;line-height:1.5;margin-top:12px;color:rgba(238,242,255,.7);max-width:820px">{{ uClosing }}</div>
-    </div>
-
-    <!-- This week's days. The work comes before the briefing, the way Field
-         Notes opens a week onto its investigation. -->
-    <div style="display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:14px">
-      <div style="font-family:Fredoka,sans-serif;font-weight:600;font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.45)">{{ uWeekLabel }}</div>
-      <button onClick="{{ goPractice }}" style="font-family:Fredoka,sans-serif;font-size:13.5px;padding:8px 16px;border-radius:11px;border:1px solid rgba(56,189,248,.45);cursor:pointer;background:rgba(56,189,248,.12);color:#38BDF8" style-hover="filter:brightness(1.2)">All weeks in Practice Bay &rarr;</button>
-    </div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:11px;margin-bottom:40px">
-      <sc-for list="{{ uDays }}" as="d" hint-placeholder-count="5">
-        <button onClick="{{ d.go }}" style="{{ d.style }}" style-hover="filter:brightness(1.25)">
-          <div style="display:flex;align-items:center;justify-content:space-between;gap:8px">
-            <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(238,242,255,.5)">{{ d.label }}</span>
-            <span style="{{ d.markStyle }}">{{ d.mark }}</span>
-          </div>
-          <div style="font-family:Fredoka,sans-serif;font-size:14.5px;line-height:1.25">{{ d.title }}</div>
-        </button>
-      </sc-for>
-    </div>
-
-    <!-- Skills, project, game and badge. These were on the mission map's detail
-         panel, which f933cc1 removed when the planets started navigating. That
-         commit claimed the mission page already showed them; it did not — only
-         the Y5 template did, so for Brock's year they became unreachable, and
-         the badge name and requirement were unreachable anywhere in the app. -->
-    <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:22px;margin-bottom:22px">
-      <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:22px;padding:24px 26px">
-        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.45);margin-bottom:9px">Hands-on project</div>
-        <div style="font-size:14.5px;line-height:1.55;color:rgba(238,242,255,.85)">{{ uProject }}</div>
-      </div>
-      <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:22px;padding:24px 26px">
-        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.45);margin-bottom:9px">Fluency game</div>
-        <div style="font-size:14.5px;line-height:1.55;color:rgba(238,242,255,.85)">{{ uGame }}</div>
-      </div>
-    </div>
-    <div style="display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:22px;margin-bottom:38px">
-      <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:22px;padding:26px 28px">
-        <div style="font-family:Fredoka,sans-serif;font-size:22px">What this mission builds</div>
-        <div style="font-size:13px;color:rgba(238,242,255,.6);margin-top:4px;margin-bottom:18px">Each one is a strand on the pre-assessment and a row on the skip chart.</div>
-        <div style="display:flex;flex-direction:column;gap:9px">
-          <sc-for list="{{ uSkills }}" as="s" hint-placeholder-count="5">
-            <div style="display:flex;align-items:center;gap:14px;background:rgba(0,0,0,.22);border:1px solid rgba(255,255,255,.09);border-radius:12px;padding:12px 16px">
-              <span style="{{ s.dotStyle }}"></span>
-              <span style="font-size:14px;color:rgba(238,242,255,.86)">{{ s.name }}</span>
-            </div>
-          </sc-for>
-        </div>
-      </div>
-      <div style="{{ uBadgeWellStyle }}">
-        <div style="{{ uBigBadgeStyle }}"><span style="font-family:Fredoka,sans-serif;font-weight:600;color:#0B0F24;font-size:{{ uBadgeGlyphSize }}">{{ uBadge }}</span></div>
-        <div style="font-family:Fredoka,sans-serif;font-size:17px;margin-top:22px;text-align:center;color:{{ uColor }}">{{ uBadgeName }}</div>
-        <div style="font-size:13px;line-height:1.5;margin-top:8px;text-align:center;max-width:250px;color:rgba(238,242,255,.6)">{{ uBadgeReq }}</div>
-      </div>
-    </div>
-    <div style="font-family:Fredoka,sans-serif;font-weight:600;font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.45);margin:0 0 16px">Every worksheet has three tiers</div>
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:16px">
-      <sc-for list="{{ tiers }}" as="t" hint-placeholder-count="3">
-        <button onClick="{{ t.open }}" style="{{ t.cardStyle }}" style-hover="filter:brightness(1.25);transform:translateY(-3px)">
-          <div style="display:flex;align-items:center;gap:11px;margin-bottom:10px">
-            <div style="{{ t.iconStyle }}">{{ t.icon }}</div>
-            <div>
-              <div style="font-family:Fredoka,sans-serif;font-size:19px;color:{{ t.color }};line-height:1.1">{{ t.name }}</div>
-              <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(238,242,255,.45);margin-top:3px">{{ t.meta }}</div>
-            </div>
-          </div>
-          <div style="font-size:13.5px;line-height:1.5;color:rgba(238,242,255,.78)">{{ t.desc }}</div>
-          <div style="{{ t.ctaStyle }}">{{ t.cta }}</div>
-        </button>
-      </sc-for>
-    </div>
-
-    <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;background:rgba(0,0,0,.22);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:16px 20px;margin-bottom:44px">
-      <span style="font-size:14px;line-height:1.5;color:rgba(238,242,255,.72);flex:1;min-width:280px">Six weeks, so the mid-unit quiz still lands at the end of Week 3 and the test three weeks later. Week 1 is on screen in Practice Bay and in the print pack.</span>
-      <button onClick="{{ goPractice }}" style="font-family:Fredoka,sans-serif;font-size:15px;padding:11px 20px;border-radius:13px;border:1px solid rgba(56,189,248,.5);cursor:pointer;background:rgba(56,189,248,.16);color:#38BDF8" style-hover="filter:brightness(1.15)">Open Practice Bay →</button>
-      <a href="Unit 4 Print Pack.pdf" style="font-family:Fredoka,sans-serif;font-size:15px;padding:11px 20px;border-radius:13px;border:1px solid rgba(244,114,182,.45);background:rgba(244,114,182,.14);color:#F9A8D4">Print pack →</a> <a href="Unit 4 Worksheets.pdf" style="font-family:Fredoka,sans-serif;font-size:15px;padding:11px 20px;border-radius:13px;border:1px solid rgba(244,114,182,.45);background:rgba(244,114,182,.14);color:#F9A8D4">Worksheets · all weeks →</a>
-    </div>
-
+    <sc-if value="{{ isUnit4 }}" hint-placeholder-val="{{ false }}">
     <h2 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.45);margin:0 0 20px">The math is the art</h2>
 
     <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:22px;padding:26px 28px;margin-bottom:22px">
@@ -1238,184 +720,9 @@
         <div style="font-size:12.5px;line-height:1.5;margin-top:18px;color:rgba(238,242,255,.55);font-style:italic">{{ puzzleHint }}</div>
       </div>
     </div>
+    </sc-if>
 
-    <h2 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.45);margin:0 0 20px">Six weeks, gate to gate</h2>
-
-    <div style="display:flex;gap:10px;margin-bottom:22px;flex-wrap:wrap">
-      <sc-for list="{{ weekTabs }}" as="w" hint-placeholder-count="6">
-        <button onClick="{{ w.go }}" style="{{ w.style }}" style-hover="filter:brightness(1.15)">
-          <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;opacity:.65">WEEK {{ w.n }}</div>
-          <div style="font-family:Fredoka,sans-serif;font-size:15px;margin-top:3px">{{ w.title }}</div>
-        </button>
-      </sc-for>
-    </div>
-
-    <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.11);border-radius:22px;padding:28px 30px;margin-bottom:44px">
-      <div style="display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:6px">
-        <div style="font-family:Fredoka,sans-serif;font-size:28px;color:#F472B6">Week {{ wk.n }} · {{ wk.title }}</div>
-        <span style="{{ wk.gateChip }}">{{ wk.gate }}</span>
-      </div>
-      <div style="font-size:14.5px;line-height:1.5;color:rgba(238,242,255,.72);max-width:820px;margin-bottom:24px">{{ wk.summary }}</div>
-      <div style="display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px">
-        <sc-for list="{{ wk.days }}" as="d" hint-placeholder-count="5">
-          <div style="{{ d.cardStyle }}">
-            <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:{{ d.dayColor }}">{{ d.day }}</div>
-            <div style="font-family:Fredoka,sans-serif;font-size:15.5px;line-height:1.2;margin:7px 0 9px;min-height:38px">{{ d.title }}</div>
-            <div style="font-size:12.5px;line-height:1.45;color:rgba(238,242,255,.62)">{{ d.detail }}</div>
-            <div style="display:flex;gap:5px;margin-top:12px">
-              <sc-for list="{{ d.tiers }}" as="tc" hint-placeholder-count="3">
-                <span style="{{ tc.style }}">{{ tc.icon }}</span>
-              </sc-for>
-            </div>
-          </div>
-        </sc-for>
-      </div>
-      <sc-if value="{{ wk.isFull }}" hint-placeholder-val="{{ true }}">
-        <div style="margin-top:22px;padding-top:20px;border-top:1px dashed rgba(255,255,255,.16);display:flex;align-items:center;gap:14px;flex-wrap:wrap">
-          <span style="font-size:13.5px;color:rgba(238,242,255,.7)">Every week is written out in full — printable worksheets with answer keys for the whole mission.</span>
-          <a href="Unit 4 Print Pack.pdf" style="font-family:Fredoka,sans-serif;font-size:14.5px;padding:10px 18px;border-radius:12px;background:rgba(244,114,182,.16);border:1px solid rgba(244,114,182,.45);color:#F9A8D4">Open the print pack →</a> <a href="Unit 4 Worksheets.pdf" style="font-family:Fredoka,sans-serif;font-size:14.5px;padding:10px 18px;border-radius:12px;background:rgba(244,114,182,.16);border:1px solid rgba(244,114,182,.45);color:#F9A8D4">Worksheets · all weeks →</a>
-        </div>
-      </sc-if>
-    </div>
-
-    <h2 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.45);margin:0 0 20px">Mastery gates</h2>
-    <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-bottom:26px">
-      <sc-for list="{{ gates }}" as="g" hint-placeholder-count="4">
-        <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:18px;padding:22px 22px 24px">
-          <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:{{ g.color }}">{{ g.when }}</div>
-          <div style="font-family:Fredoka,sans-serif;font-size:20px;line-height:1.15;margin:8px 0 10px">{{ g.name }}</div>
-          <div style="font-size:13px;line-height:1.5;color:rgba(238,242,255,.7)">{{ g.desc }}</div>
-          <div style="margin-top:14px;font-family:'JetBrains Mono',monospace;font-size:11px;color:{{ g.color }}">{{ g.rule }}</div>
-        </div>
-      </sc-for>
-    </div>
-
-    <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.11);border-radius:22px;padding:28px 30px;margin-bottom:44px">
-      <div style="font-family:Fredoka,sans-serif;font-size:24px;margin-bottom:4px">Unit Test · Trophy Bands</div>
-      <div style="font-size:13.5px;color:rgba(238,242,255,.62);margin-bottom:22px">12 questions plus one “explain your thinking.” The explanation is scored on reasoning, not neatness.</div>
-      <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px">
-        <sc-for list="{{ bands }}" as="b" hint-placeholder-count="3">
-          <div style="{{ b.style }}">
-            <div style="font-family:Fredoka,sans-serif;font-size:34px;color:{{ b.color }};line-height:1">{{ b.range }}</div>
-            <div style="font-family:Fredoka,sans-serif;font-size:19px;margin:8px 0 8px">{{ b.name }}</div>
-            <div style="font-size:13px;line-height:1.5;color:rgba(238,242,255,.72)">{{ b.desc }}</div>
-          </div>
-        </sc-for>
-      </div>
-    </div>
-
-    <div style="display:flex;align-items:flex-start;gap:20px;max-width:900px">
-      <div style="flex:none;animation:float 5s ease-in-out infinite">
-        <div style="width:64px;height:64px;border-radius:20px;background:linear-gradient(160deg,#C7D2FE,#818CF8);position:relative;box-shadow:0 10px 28px rgba(129,140,248,.32)">
-          <div style="position:absolute;top:-12px;left:50%;width:2px;height:12px;background:#818CF8"></div>
-          <div style="position:absolute;top:-19px;left:50%;transform:translateX(-50%);width:9px;height:9px;border-radius:50%;background:#FBBF24;box-shadow:0 0 12px #FBBF24"></div>
-          <div style="position:absolute;top:21px;left:12px;width:13px;height:13px;border-radius:50%;background:#111938"></div>
-          <div style="position:absolute;top:21px;right:12px;width:13px;height:13px;border-radius:50%;background:#111938"></div>
-          <div style="position:absolute;bottom:11px;left:50%;transform:translateX(-50%);width:24px;height:4px;border-radius:3px;background:rgba(17,25,56,.45)"></div>
-        </div>
-      </div>
-      <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.11);border-radius:20px;border-top-left-radius:4px;padding:20px 24px">
-        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#818CF8;margin-bottom:8px">{{ mascot }} · Mission 04 briefing</div>
-        <div style="font-family:Fredoka,sans-serif;font-size:19px;line-height:1.35">“Six weeks is a long tour. Most pilots who struggle later struggle here, and they struggle because they treated a fraction as two numbers instead of one. Don't.”</div>
-      </div>
-    </div>
-  </main>
-  </sc-if>
-
-  <!-- ============ UNIT 5 ============ -->
-  <sc-if value="{{ isUnit5 }}" hint-placeholder-val="{{ false }}">
-  <main style="position:relative;padding:34px 44px 72px;max-width:1280px">
-    <!-- Hero, rendered from the curriculum rather than typed per mission.
-         Every value here had drifted at least once: Mission 05 still read
-         "Decimals & Money" after it was renamed, Mission 07 still claimed
-         3 weeks and 12 lessons after it grew to 5 and 20, and Mission 08's
-         week range was never renumbered when 07 grew underneath it. -->
-    <div style="display:flex;align-items:center;gap:10px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.5);margin-bottom:14px">
-      <span style="color:{{ uColor }}">{{ uNo }}</span><span>&middot;</span><span>{{ uWeeks }}</span><span>&middot;</span><span>{{ uDayBreakdown }}</span>
-    </div>
-    <h1 style="{{ uTitleStyle }}">{{ uName }}</h1>
-    <p style="max-width:720px;margin:0 0 30px;font-size:16.5px;line-height:1.55;color:rgba(238,242,255,.72);text-wrap:pretty">{{ uBlurb }}</p>
-    <div style="{{ uHeroStyle }}">
-      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:{{ uColor }};margin-bottom:10px">{{ uNo }} &middot; The Big Question</div>
-      <div style="font-family:Fredoka,sans-serif;font-size:29px;line-height:1.2;max-width:900px">{{ uBigQ }}</div>
-      <div style="font-size:14px;line-height:1.5;margin-top:12px;color:rgba(238,242,255,.7);max-width:820px">{{ uClosing }}</div>
-    </div>
-
-    <!-- This week's days. The work comes before the briefing, the way Field
-         Notes opens a week onto its investigation. -->
-    <div style="display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:14px">
-      <div style="font-family:Fredoka,sans-serif;font-weight:600;font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.45)">{{ uWeekLabel }}</div>
-      <button onClick="{{ goPractice }}" style="font-family:Fredoka,sans-serif;font-size:13.5px;padding:8px 16px;border-radius:11px;border:1px solid rgba(56,189,248,.45);cursor:pointer;background:rgba(56,189,248,.12);color:#38BDF8" style-hover="filter:brightness(1.2)">All weeks in Practice Bay &rarr;</button>
-    </div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:11px;margin-bottom:40px">
-      <sc-for list="{{ uDays }}" as="d" hint-placeholder-count="5">
-        <button onClick="{{ d.go }}" style="{{ d.style }}" style-hover="filter:brightness(1.25)">
-          <div style="display:flex;align-items:center;justify-content:space-between;gap:8px">
-            <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(238,242,255,.5)">{{ d.label }}</span>
-            <span style="{{ d.markStyle }}">{{ d.mark }}</span>
-          </div>
-          <div style="font-family:Fredoka,sans-serif;font-size:14.5px;line-height:1.25">{{ d.title }}</div>
-        </button>
-      </sc-for>
-    </div>
-
-    <!-- Skills, project, game and badge. These were on the mission map's detail
-         panel, which f933cc1 removed when the planets started navigating. That
-         commit claimed the mission page already showed them; it did not — only
-         the Y5 template did, so for Brock's year they became unreachable, and
-         the badge name and requirement were unreachable anywhere in the app. -->
-    <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:22px;margin-bottom:22px">
-      <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:22px;padding:24px 26px">
-        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.45);margin-bottom:9px">Hands-on project</div>
-        <div style="font-size:14.5px;line-height:1.55;color:rgba(238,242,255,.85)">{{ uProject }}</div>
-      </div>
-      <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:22px;padding:24px 26px">
-        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.45);margin-bottom:9px">Fluency game</div>
-        <div style="font-size:14.5px;line-height:1.55;color:rgba(238,242,255,.85)">{{ uGame }}</div>
-      </div>
-    </div>
-    <div style="display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:22px;margin-bottom:38px">
-      <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:22px;padding:26px 28px">
-        <div style="font-family:Fredoka,sans-serif;font-size:22px">What this mission builds</div>
-        <div style="font-size:13px;color:rgba(238,242,255,.6);margin-top:4px;margin-bottom:18px">Each one is a strand on the pre-assessment and a row on the skip chart.</div>
-        <div style="display:flex;flex-direction:column;gap:9px">
-          <sc-for list="{{ uSkills }}" as="s" hint-placeholder-count="5">
-            <div style="display:flex;align-items:center;gap:14px;background:rgba(0,0,0,.22);border:1px solid rgba(255,255,255,.09);border-radius:12px;padding:12px 16px">
-              <span style="{{ s.dotStyle }}"></span>
-              <span style="font-size:14px;color:rgba(238,242,255,.86)">{{ s.name }}</span>
-            </div>
-          </sc-for>
-        </div>
-      </div>
-      <div style="{{ uBadgeWellStyle }}">
-        <div style="{{ uBigBadgeStyle }}"><span style="font-family:Fredoka,sans-serif;font-weight:600;color:#0B0F24;font-size:{{ uBadgeGlyphSize }}">{{ uBadge }}</span></div>
-        <div style="font-family:Fredoka,sans-serif;font-size:17px;margin-top:22px;text-align:center;color:{{ uColor }}">{{ uBadgeName }}</div>
-        <div style="font-size:13px;line-height:1.5;margin-top:8px;text-align:center;max-width:250px;color:rgba(238,242,255,.6)">{{ uBadgeReq }}</div>
-      </div>
-    </div>
-    <div style="font-family:Fredoka,sans-serif;font-weight:600;font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.45);margin:0 0 16px">Every worksheet has three tiers</div>
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:16px">
-      <sc-for list="{{ tiers }}" as="t" hint-placeholder-count="3">
-        <button onClick="{{ t.open }}" style="{{ t.cardStyle }}" style-hover="filter:brightness(1.25);transform:translateY(-3px)">
-          <div style="display:flex;align-items:center;gap:11px;margin-bottom:10px">
-            <div style="{{ t.iconStyle }}">{{ t.icon }}</div>
-            <div>
-              <div style="font-family:Fredoka,sans-serif;font-size:19px;color:{{ t.color }};line-height:1.1">{{ t.name }}</div>
-              <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(238,242,255,.45);margin-top:3px">{{ t.meta }}</div>
-            </div>
-          </div>
-          <div style="font-size:13.5px;line-height:1.5;color:rgba(238,242,255,.78)">{{ t.desc }}</div>
-          <div style="{{ t.ctaStyle }}">{{ t.cta }}</div>
-        </button>
-      </sc-for>
-    </div>
-
-    <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;background:rgba(0,0,0,.22);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:16px 20px;margin-bottom:44px">
-      <span style="font-size:14px;line-height:1.5;color:rgba(238,242,255,.72);flex:1;min-width:280px">Practice answers are typed in cents or hundredths, so everything stays a whole number on screen. The print pack uses dollar signs and decimal points, the way a receipt does.</span>
-      <button onClick="{{ goPractice }}" style="font-family:Fredoka,sans-serif;font-size:15px;padding:11px 20px;border-radius:13px;border:1px solid rgba(56,189,248,.5);cursor:pointer;background:rgba(56,189,248,.16);color:#38BDF8" style-hover="filter:brightness(1.15)">Open Practice Bay →</button>
-      <a href="Unit 5 Print Pack.pdf" style="font-family:Fredoka,sans-serif;font-size:15px;padding:11px 20px;border-radius:13px;border:1px solid rgba(163,230,53,.45);background:rgba(163,230,53,.14);color:#BEF264">Print pack →</a> <a href="Unit 5 Worksheets.pdf" style="font-family:Fredoka,sans-serif;font-size:15px;padding:11px 20px;border-radius:13px;border:1px solid rgba(163,230,53,.45);background:rgba(163,230,53,.14);color:#BEF264">Worksheets · all weeks →</a>
-    </div>
-
+    <sc-if value="{{ isUnit5 }}" hint-placeholder-val="{{ false }}">
     <h2 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.45);margin:0 0 20px">The math is the art</h2>
 
     <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:22px;margin-bottom:22px">
@@ -1521,184 +828,9 @@
         <div style="font-size:12.5px;line-height:1.5;margin-top:18px;color:rgba(238,242,255,.55);font-style:italic">{{ puzzleHint }}</div>
       </div>
     </div>
+    </sc-if>
 
-    <h2 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.45);margin:0 0 20px">Four weeks, gate to gate</h2>
-
-    <div style="display:flex;gap:10px;margin-bottom:22px;flex-wrap:wrap">
-      <sc-for list="{{ weekTabs }}" as="w" hint-placeholder-count="4">
-        <button onClick="{{ w.go }}" style="{{ w.style }}" style-hover="filter:brightness(1.15)">
-          <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;opacity:.65">WEEK {{ w.n }}</div>
-          <div style="font-family:Fredoka,sans-serif;font-size:15px;margin-top:3px">{{ w.title }}</div>
-        </button>
-      </sc-for>
-    </div>
-
-    <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.11);border-radius:22px;padding:28px 30px;margin-bottom:44px">
-      <div style="display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:6px">
-        <div style="font-family:Fredoka,sans-serif;font-size:28px;color:#A3E635">Week {{ wk.n }} · {{ wk.title }}</div>
-        <span style="{{ wk.gateChip }}">{{ wk.gate }}</span>
-      </div>
-      <div style="font-size:14.5px;line-height:1.5;color:rgba(238,242,255,.72);max-width:820px;margin-bottom:24px">{{ wk.summary }}</div>
-      <div style="display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px">
-        <sc-for list="{{ wk.days }}" as="d" hint-placeholder-count="5">
-          <div style="{{ d.cardStyle }}">
-            <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:{{ d.dayColor }}">{{ d.day }}</div>
-            <div style="font-family:Fredoka,sans-serif;font-size:15.5px;line-height:1.2;margin:7px 0 9px;min-height:38px">{{ d.title }}</div>
-            <div style="font-size:12.5px;line-height:1.45;color:rgba(238,242,255,.62)">{{ d.detail }}</div>
-            <div style="display:flex;gap:5px;margin-top:12px">
-              <sc-for list="{{ d.tiers }}" as="tc" hint-placeholder-count="3">
-                <span style="{{ tc.style }}">{{ tc.icon }}</span>
-              </sc-for>
-            </div>
-          </div>
-        </sc-for>
-      </div>
-      <sc-if value="{{ wk.isFull }}" hint-placeholder-val="{{ true }}">
-        <div style="margin-top:22px;padding-top:20px;border-top:1px dashed rgba(255,255,255,.16);display:flex;align-items:center;gap:14px;flex-wrap:wrap">
-          <span style="font-size:13.5px;color:rgba(238,242,255,.7)">Every week is written out in full — printable worksheets with answer keys for the whole mission.</span>
-          <a href="Unit 5 Print Pack.pdf" style="font-family:Fredoka,sans-serif;font-size:14.5px;padding:10px 18px;border-radius:12px;background:rgba(163,230,53,.16);border:1px solid rgba(163,230,53,.45);color:#BEF264">Open the print pack →</a> <a href="Unit 5 Worksheets.pdf" style="font-family:Fredoka,sans-serif;font-size:14.5px;padding:10px 18px;border-radius:12px;background:rgba(163,230,53,.16);border:1px solid rgba(163,230,53,.45);color:#BEF264">Worksheets · all weeks →</a>
-        </div>
-      </sc-if>
-    </div>
-
-    <h2 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.45);margin:0 0 20px">Mastery gates</h2>
-    <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-bottom:26px">
-      <sc-for list="{{ gates }}" as="g" hint-placeholder-count="4">
-        <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:18px;padding:22px 22px 24px">
-          <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:{{ g.color }}">{{ g.when }}</div>
-          <div style="font-family:Fredoka,sans-serif;font-size:20px;line-height:1.15;margin:8px 0 10px">{{ g.name }}</div>
-          <div style="font-size:13px;line-height:1.5;color:rgba(238,242,255,.7)">{{ g.desc }}</div>
-          <div style="margin-top:14px;font-family:'JetBrains Mono',monospace;font-size:11px;color:{{ g.color }}">{{ g.rule }}</div>
-        </div>
-      </sc-for>
-    </div>
-
-    <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.11);border-radius:22px;padding:28px 30px;margin-bottom:44px">
-      <div style="font-family:Fredoka,sans-serif;font-size:24px;margin-bottom:4px">Unit Test · Trophy Bands</div>
-      <div style="font-size:13.5px;color:rgba(238,242,255,.62);margin-bottom:22px">12 questions plus one “explain your thinking.” The explanation is scored on reasoning, not neatness.</div>
-      <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px">
-        <sc-for list="{{ bands }}" as="b" hint-placeholder-count="3">
-          <div style="{{ b.style }}">
-            <div style="font-family:Fredoka,sans-serif;font-size:34px;color:{{ b.color }};line-height:1">{{ b.range }}</div>
-            <div style="font-family:Fredoka,sans-serif;font-size:19px;margin:8px 0 8px">{{ b.name }}</div>
-            <div style="font-size:13px;line-height:1.5;color:rgba(238,242,255,.72)">{{ b.desc }}</div>
-          </div>
-        </sc-for>
-      </div>
-    </div>
-
-    <div style="display:flex;align-items:flex-start;gap:20px;max-width:900px">
-      <div style="flex:none;animation:float 5s ease-in-out infinite">
-        <div style="width:64px;height:64px;border-radius:20px;background:linear-gradient(160deg,#C7D2FE,#818CF8);position:relative;box-shadow:0 10px 28px rgba(129,140,248,.32)">
-          <div style="position:absolute;top:-12px;left:50%;width:2px;height:12px;background:#818CF8"></div>
-          <div style="position:absolute;top:-19px;left:50%;transform:translateX(-50%);width:9px;height:9px;border-radius:50%;background:#FBBF24;box-shadow:0 0 12px #FBBF24"></div>
-          <div style="position:absolute;top:21px;left:12px;width:13px;height:13px;border-radius:50%;background:#111938"></div>
-          <div style="position:absolute;top:21px;right:12px;width:13px;height:13px;border-radius:50%;background:#111938"></div>
-          <div style="position:absolute;bottom:11px;left:50%;transform:translateX(-50%);width:24px;height:4px;border-radius:3px;background:rgba(17,25,56,.45)"></div>
-        </div>
-      </div>
-      <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.11);border-radius:20px;border-top-left-radius:4px;padding:20px 24px">
-        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#818CF8;margin-bottom:8px">{{ mascot }} · Mission 05 briefing</div>
-        <div style="font-family:Fredoka,sans-serif;font-size:19px;line-height:1.35">“This is the first mission where being wrong costs actual money. Take the receipt seriously — it's the only marker that doesn't care how you feel about it.”</div>
-      </div>
-    </div>
-  </main>
-  </sc-if>
-
-  <!-- ============ UNIT 6 ============ -->
-  <sc-if value="{{ isUnit6 }}" hint-placeholder-val="{{ false }}">
-  <main style="position:relative;padding:34px 44px 72px;max-width:1280px">
-    <!-- Hero, rendered from the curriculum rather than typed per mission.
-         Every value here had drifted at least once: Mission 05 still read
-         "Decimals & Money" after it was renamed, Mission 07 still claimed
-         3 weeks and 12 lessons after it grew to 5 and 20, and Mission 08's
-         week range was never renumbered when 07 grew underneath it. -->
-    <div style="display:flex;align-items:center;gap:10px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.5);margin-bottom:14px">
-      <span style="color:{{ uColor }}">{{ uNo }}</span><span>&middot;</span><span>{{ uWeeks }}</span><span>&middot;</span><span>{{ uDayBreakdown }}</span>
-    </div>
-    <h1 style="{{ uTitleStyle }}">{{ uName }}</h1>
-    <p style="max-width:720px;margin:0 0 30px;font-size:16.5px;line-height:1.55;color:rgba(238,242,255,.72);text-wrap:pretty">{{ uBlurb }}</p>
-    <div style="{{ uHeroStyle }}">
-      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:{{ uColor }};margin-bottom:10px">{{ uNo }} &middot; The Big Question</div>
-      <div style="font-family:Fredoka,sans-serif;font-size:29px;line-height:1.2;max-width:900px">{{ uBigQ }}</div>
-      <div style="font-size:14px;line-height:1.5;margin-top:12px;color:rgba(238,242,255,.7);max-width:820px">{{ uClosing }}</div>
-    </div>
-
-    <!-- This week's days. The work comes before the briefing, the way Field
-         Notes opens a week onto its investigation. -->
-    <div style="display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:14px">
-      <div style="font-family:Fredoka,sans-serif;font-weight:600;font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.45)">{{ uWeekLabel }}</div>
-      <button onClick="{{ goPractice }}" style="font-family:Fredoka,sans-serif;font-size:13.5px;padding:8px 16px;border-radius:11px;border:1px solid rgba(56,189,248,.45);cursor:pointer;background:rgba(56,189,248,.12);color:#38BDF8" style-hover="filter:brightness(1.2)">All weeks in Practice Bay &rarr;</button>
-    </div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:11px;margin-bottom:40px">
-      <sc-for list="{{ uDays }}" as="d" hint-placeholder-count="5">
-        <button onClick="{{ d.go }}" style="{{ d.style }}" style-hover="filter:brightness(1.25)">
-          <div style="display:flex;align-items:center;justify-content:space-between;gap:8px">
-            <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(238,242,255,.5)">{{ d.label }}</span>
-            <span style="{{ d.markStyle }}">{{ d.mark }}</span>
-          </div>
-          <div style="font-family:Fredoka,sans-serif;font-size:14.5px;line-height:1.25">{{ d.title }}</div>
-        </button>
-      </sc-for>
-    </div>
-
-    <!-- Skills, project, game and badge. These were on the mission map's detail
-         panel, which f933cc1 removed when the planets started navigating. That
-         commit claimed the mission page already showed them; it did not — only
-         the Y5 template did, so for Brock's year they became unreachable, and
-         the badge name and requirement were unreachable anywhere in the app. -->
-    <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:22px;margin-bottom:22px">
-      <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:22px;padding:24px 26px">
-        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.45);margin-bottom:9px">Hands-on project</div>
-        <div style="font-size:14.5px;line-height:1.55;color:rgba(238,242,255,.85)">{{ uProject }}</div>
-      </div>
-      <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:22px;padding:24px 26px">
-        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.45);margin-bottom:9px">Fluency game</div>
-        <div style="font-size:14.5px;line-height:1.55;color:rgba(238,242,255,.85)">{{ uGame }}</div>
-      </div>
-    </div>
-    <div style="display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:22px;margin-bottom:38px">
-      <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:22px;padding:26px 28px">
-        <div style="font-family:Fredoka,sans-serif;font-size:22px">What this mission builds</div>
-        <div style="font-size:13px;color:rgba(238,242,255,.6);margin-top:4px;margin-bottom:18px">Each one is a strand on the pre-assessment and a row on the skip chart.</div>
-        <div style="display:flex;flex-direction:column;gap:9px">
-          <sc-for list="{{ uSkills }}" as="s" hint-placeholder-count="5">
-            <div style="display:flex;align-items:center;gap:14px;background:rgba(0,0,0,.22);border:1px solid rgba(255,255,255,.09);border-radius:12px;padding:12px 16px">
-              <span style="{{ s.dotStyle }}"></span>
-              <span style="font-size:14px;color:rgba(238,242,255,.86)">{{ s.name }}</span>
-            </div>
-          </sc-for>
-        </div>
-      </div>
-      <div style="{{ uBadgeWellStyle }}">
-        <div style="{{ uBigBadgeStyle }}"><span style="font-family:Fredoka,sans-serif;font-weight:600;color:#0B0F24;font-size:{{ uBadgeGlyphSize }}">{{ uBadge }}</span></div>
-        <div style="font-family:Fredoka,sans-serif;font-size:17px;margin-top:22px;text-align:center;color:{{ uColor }}">{{ uBadgeName }}</div>
-        <div style="font-size:13px;line-height:1.5;margin-top:8px;text-align:center;max-width:250px;color:rgba(238,242,255,.6)">{{ uBadgeReq }}</div>
-      </div>
-    </div>
-    <div style="font-family:Fredoka,sans-serif;font-weight:600;font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.45);margin:0 0 16px">Every worksheet has three tiers</div>
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:16px">
-      <sc-for list="{{ tiers }}" as="t" hint-placeholder-count="3">
-        <button onClick="{{ t.open }}" style="{{ t.cardStyle }}" style-hover="filter:brightness(1.25);transform:translateY(-3px)">
-          <div style="display:flex;align-items:center;gap:11px;margin-bottom:10px">
-            <div style="{{ t.iconStyle }}">{{ t.icon }}</div>
-            <div>
-              <div style="font-family:Fredoka,sans-serif;font-size:19px;color:{{ t.color }};line-height:1.1">{{ t.name }}</div>
-              <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(238,242,255,.45);margin-top:3px">{{ t.meta }}</div>
-            </div>
-          </div>
-          <div style="font-size:13.5px;line-height:1.5;color:rgba(238,242,255,.78)">{{ t.desc }}</div>
-          <div style="{{ t.ctaStyle }}">{{ t.cta }}</div>
-        </button>
-      </sc-for>
-    </div>
-
-    <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;background:rgba(0,0,0,.22);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:16px 20px;margin-bottom:44px">
-      <span style="font-size:14px;line-height:1.5;color:rgba(238,242,255,.72);flex:1;min-width:280px">This mission needs a protractor and squared paper more than it needs a screen. Practice Bay covers the arithmetic; the drawing lives in the print pack.</span>
-      <button onClick="{{ goPractice }}" style="font-family:Fredoka,sans-serif;font-size:15px;padding:11px 20px;border-radius:13px;border:1px solid rgba(56,189,248,.5);cursor:pointer;background:rgba(56,189,248,.16);color:#38BDF8" style-hover="filter:brightness(1.15)">Open Practice Bay →</button>
-      <a href="Unit 6 Print Pack.pdf" style="font-family:Fredoka,sans-serif;font-size:15px;padding:11px 20px;border-radius:13px;border:1px solid rgba(96,165,250,.45);background:rgba(96,165,250,.14);color:#93C5FD">Print pack →</a> <a href="Unit 6 Worksheets.pdf" style="font-family:Fredoka,sans-serif;font-size:15px;padding:11px 20px;border-radius:13px;border:1px solid rgba(96,165,250,.45);background:rgba(96,165,250,.14);color:#93C5FD">Worksheets · all weeks →</a>
-    </div>
-
+    <sc-if value="{{ isUnit6 }}" hint-placeholder-val="{{ false }}">
     <h2 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.45);margin:0 0 20px">The math is the art</h2>
 
     <div style="display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:22px;margin-bottom:22px">
@@ -1809,184 +941,9 @@
         <div style="font-size:12.5px;line-height:1.5;margin-top:18px;color:rgba(238,242,255,.55);font-style:italic">{{ puzzleHint }}</div>
       </div>
     </div>
+    </sc-if>
 
-    <h2 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.45);margin:0 0 20px">Five weeks, gate to gate</h2>
-
-    <div style="display:flex;gap:10px;margin-bottom:22px;flex-wrap:wrap">
-      <sc-for list="{{ weekTabs }}" as="w" hint-placeholder-count="5">
-        <button onClick="{{ w.go }}" style="{{ w.style }}" style-hover="filter:brightness(1.15)">
-          <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;opacity:.65">WEEK {{ w.n }}</div>
-          <div style="font-family:Fredoka,sans-serif;font-size:15px;margin-top:3px">{{ w.title }}</div>
-        </button>
-      </sc-for>
-    </div>
-
-    <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.11);border-radius:22px;padding:28px 30px;margin-bottom:44px">
-      <div style="display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:6px">
-        <div style="font-family:Fredoka,sans-serif;font-size:28px;color:#60A5FA">Week {{ wk.n }} · {{ wk.title }}</div>
-        <span style="{{ wk.gateChip }}">{{ wk.gate }}</span>
-      </div>
-      <div style="font-size:14.5px;line-height:1.5;color:rgba(238,242,255,.72);max-width:820px;margin-bottom:24px">{{ wk.summary }}</div>
-      <div style="display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px">
-        <sc-for list="{{ wk.days }}" as="d" hint-placeholder-count="5">
-          <div style="{{ d.cardStyle }}">
-            <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:{{ d.dayColor }}">{{ d.day }}</div>
-            <div style="font-family:Fredoka,sans-serif;font-size:15.5px;line-height:1.2;margin:7px 0 9px;min-height:38px">{{ d.title }}</div>
-            <div style="font-size:12.5px;line-height:1.45;color:rgba(238,242,255,.62)">{{ d.detail }}</div>
-            <div style="display:flex;gap:5px;margin-top:12px">
-              <sc-for list="{{ d.tiers }}" as="tc" hint-placeholder-count="3">
-                <span style="{{ tc.style }}">{{ tc.icon }}</span>
-              </sc-for>
-            </div>
-          </div>
-        </sc-for>
-      </div>
-      <sc-if value="{{ wk.isFull }}" hint-placeholder-val="{{ true }}">
-        <div style="margin-top:22px;padding-top:20px;border-top:1px dashed rgba(255,255,255,.16);display:flex;align-items:center;gap:14px;flex-wrap:wrap">
-          <span style="font-size:13.5px;color:rgba(238,242,255,.7)">Every week is written out in full — printable worksheets with answer keys for the whole mission.</span>
-          <a href="Unit 6 Print Pack.pdf" style="font-family:Fredoka,sans-serif;font-size:14.5px;padding:10px 18px;border-radius:12px;background:rgba(96,165,250,.16);border:1px solid rgba(96,165,250,.45);color:#93C5FD">Open the print pack →</a> <a href="Unit 6 Worksheets.pdf" style="font-family:Fredoka,sans-serif;font-size:14.5px;padding:10px 18px;border-radius:12px;background:rgba(96,165,250,.16);border:1px solid rgba(96,165,250,.45);color:#93C5FD">Worksheets · all weeks →</a>
-        </div>
-      </sc-if>
-    </div>
-
-    <h2 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.45);margin:0 0 20px">Mastery gates</h2>
-    <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-bottom:26px">
-      <sc-for list="{{ gates }}" as="g" hint-placeholder-count="4">
-        <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:18px;padding:22px 22px 24px">
-          <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:{{ g.color }}">{{ g.when }}</div>
-          <div style="font-family:Fredoka,sans-serif;font-size:20px;line-height:1.15;margin:8px 0 10px">{{ g.name }}</div>
-          <div style="font-size:13px;line-height:1.5;color:rgba(238,242,255,.7)">{{ g.desc }}</div>
-          <div style="margin-top:14px;font-family:'JetBrains Mono',monospace;font-size:11px;color:{{ g.color }}">{{ g.rule }}</div>
-        </div>
-      </sc-for>
-    </div>
-
-    <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.11);border-radius:22px;padding:28px 30px;margin-bottom:44px">
-      <div style="font-family:Fredoka,sans-serif;font-size:24px;margin-bottom:4px">Unit Test · Trophy Bands</div>
-      <div style="font-size:13.5px;color:rgba(238,242,255,.62);margin-bottom:22px">12 questions plus one “explain your thinking.” The explanation is scored on reasoning, not neatness.</div>
-      <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px">
-        <sc-for list="{{ bands }}" as="b" hint-placeholder-count="3">
-          <div style="{{ b.style }}">
-            <div style="font-family:Fredoka,sans-serif;font-size:34px;color:{{ b.color }};line-height:1">{{ b.range }}</div>
-            <div style="font-family:Fredoka,sans-serif;font-size:19px;margin:8px 0 8px">{{ b.name }}</div>
-            <div style="font-size:13px;line-height:1.5;color:rgba(238,242,255,.72)">{{ b.desc }}</div>
-          </div>
-        </sc-for>
-      </div>
-    </div>
-
-    <div style="display:flex;align-items:flex-start;gap:20px;max-width:900px">
-      <div style="flex:none;animation:float 5s ease-in-out infinite">
-        <div style="width:64px;height:64px;border-radius:20px;background:linear-gradient(160deg,#C7D2FE,#818CF8);position:relative;box-shadow:0 10px 28px rgba(129,140,248,.32)">
-          <div style="position:absolute;top:-12px;left:50%;width:2px;height:12px;background:#818CF8"></div>
-          <div style="position:absolute;top:-19px;left:50%;transform:translateX(-50%);width:9px;height:9px;border-radius:50%;background:#FBBF24;box-shadow:0 0 12px #FBBF24"></div>
-          <div style="position:absolute;top:21px;left:12px;width:13px;height:13px;border-radius:50%;background:#111938"></div>
-          <div style="position:absolute;top:21px;right:12px;width:13px;height:13px;border-radius:50%;background:#111938"></div>
-          <div style="position:absolute;bottom:11px;left:50%;transform:translateX(-50%);width:24px;height:4px;border-radius:3px;background:rgba(17,25,56,.45)"></div>
-        </div>
-      </div>
-      <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.11);border-radius:20px;border-top-left-radius:4px;padding:20px 24px">
-        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#818CF8;margin-bottom:8px">{{ mascot }} · Mission 06 briefing</div>
-        <div style="font-family:Fredoka,sans-serif;font-size:19px;line-height:1.35">“Navigation is geometry with consequences. Get a coordinate backwards on a real chart and you don't arrive. Across first, then up — say it out loud until it's boring.”</div>
-      </div>
-    </div>
-  </main>
-  </sc-if>
-
-  <!-- ============ UNIT 7 ============ -->
-  <sc-if value="{{ isUnit7 }}" hint-placeholder-val="{{ false }}">
-  <main style="position:relative;padding:34px 44px 72px;max-width:1280px">
-    <!-- Hero, rendered from the curriculum rather than typed per mission.
-         Every value here had drifted at least once: Mission 05 still read
-         "Decimals & Money" after it was renamed, Mission 07 still claimed
-         3 weeks and 12 lessons after it grew to 5 and 20, and Mission 08's
-         week range was never renumbered when 07 grew underneath it. -->
-    <div style="display:flex;align-items:center;gap:10px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.5);margin-bottom:14px">
-      <span style="color:{{ uColor }}">{{ uNo }}</span><span>&middot;</span><span>{{ uWeeks }}</span><span>&middot;</span><span>{{ uDayBreakdown }}</span>
-    </div>
-    <h1 style="{{ uTitleStyle }}">{{ uName }}</h1>
-    <p style="max-width:720px;margin:0 0 30px;font-size:16.5px;line-height:1.55;color:rgba(238,242,255,.72);text-wrap:pretty">{{ uBlurb }}</p>
-    <div style="{{ uHeroStyle }}">
-      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:{{ uColor }};margin-bottom:10px">{{ uNo }} &middot; The Big Question</div>
-      <div style="font-family:Fredoka,sans-serif;font-size:29px;line-height:1.2;max-width:900px">{{ uBigQ }}</div>
-      <div style="font-size:14px;line-height:1.5;margin-top:12px;color:rgba(238,242,255,.7);max-width:820px">{{ uClosing }}</div>
-    </div>
-
-    <!-- This week's days. The work comes before the briefing, the way Field
-         Notes opens a week onto its investigation. -->
-    <div style="display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:14px">
-      <div style="font-family:Fredoka,sans-serif;font-weight:600;font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.45)">{{ uWeekLabel }}</div>
-      <button onClick="{{ goPractice }}" style="font-family:Fredoka,sans-serif;font-size:13.5px;padding:8px 16px;border-radius:11px;border:1px solid rgba(56,189,248,.45);cursor:pointer;background:rgba(56,189,248,.12);color:#38BDF8" style-hover="filter:brightness(1.2)">All weeks in Practice Bay &rarr;</button>
-    </div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:11px;margin-bottom:40px">
-      <sc-for list="{{ uDays }}" as="d" hint-placeholder-count="5">
-        <button onClick="{{ d.go }}" style="{{ d.style }}" style-hover="filter:brightness(1.25)">
-          <div style="display:flex;align-items:center;justify-content:space-between;gap:8px">
-            <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(238,242,255,.5)">{{ d.label }}</span>
-            <span style="{{ d.markStyle }}">{{ d.mark }}</span>
-          </div>
-          <div style="font-family:Fredoka,sans-serif;font-size:14.5px;line-height:1.25">{{ d.title }}</div>
-        </button>
-      </sc-for>
-    </div>
-
-    <!-- Skills, project, game and badge. These were on the mission map's detail
-         panel, which f933cc1 removed when the planets started navigating. That
-         commit claimed the mission page already showed them; it did not — only
-         the Y5 template did, so for Brock's year they became unreachable, and
-         the badge name and requirement were unreachable anywhere in the app. -->
-    <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:22px;margin-bottom:22px">
-      <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:22px;padding:24px 26px">
-        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.45);margin-bottom:9px">Hands-on project</div>
-        <div style="font-size:14.5px;line-height:1.55;color:rgba(238,242,255,.85)">{{ uProject }}</div>
-      </div>
-      <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:22px;padding:24px 26px">
-        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.45);margin-bottom:9px">Fluency game</div>
-        <div style="font-size:14.5px;line-height:1.55;color:rgba(238,242,255,.85)">{{ uGame }}</div>
-      </div>
-    </div>
-    <div style="display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:22px;margin-bottom:38px">
-      <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:22px;padding:26px 28px">
-        <div style="font-family:Fredoka,sans-serif;font-size:22px">What this mission builds</div>
-        <div style="font-size:13px;color:rgba(238,242,255,.6);margin-top:4px;margin-bottom:18px">Each one is a strand on the pre-assessment and a row on the skip chart.</div>
-        <div style="display:flex;flex-direction:column;gap:9px">
-          <sc-for list="{{ uSkills }}" as="s" hint-placeholder-count="5">
-            <div style="display:flex;align-items:center;gap:14px;background:rgba(0,0,0,.22);border:1px solid rgba(255,255,255,.09);border-radius:12px;padding:12px 16px">
-              <span style="{{ s.dotStyle }}"></span>
-              <span style="font-size:14px;color:rgba(238,242,255,.86)">{{ s.name }}</span>
-            </div>
-          </sc-for>
-        </div>
-      </div>
-      <div style="{{ uBadgeWellStyle }}">
-        <div style="{{ uBigBadgeStyle }}"><span style="font-family:Fredoka,sans-serif;font-weight:600;color:#0B0F24;font-size:{{ uBadgeGlyphSize }}">{{ uBadge }}</span></div>
-        <div style="font-family:Fredoka,sans-serif;font-size:17px;margin-top:22px;text-align:center;color:{{ uColor }}">{{ uBadgeName }}</div>
-        <div style="font-size:13px;line-height:1.5;margin-top:8px;text-align:center;max-width:250px;color:rgba(238,242,255,.6)">{{ uBadgeReq }}</div>
-      </div>
-    </div>
-    <div style="font-family:Fredoka,sans-serif;font-weight:600;font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.45);margin:0 0 16px">Every worksheet has three tiers</div>
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:16px">
-      <sc-for list="{{ tiers }}" as="t" hint-placeholder-count="3">
-        <button onClick="{{ t.open }}" style="{{ t.cardStyle }}" style-hover="filter:brightness(1.25);transform:translateY(-3px)">
-          <div style="display:flex;align-items:center;gap:11px;margin-bottom:10px">
-            <div style="{{ t.iconStyle }}">{{ t.icon }}</div>
-            <div>
-              <div style="font-family:Fredoka,sans-serif;font-size:19px;color:{{ t.color }};line-height:1.1">{{ t.name }}</div>
-              <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(238,242,255,.45);margin-top:3px">{{ t.meta }}</div>
-            </div>
-          </div>
-          <div style="font-size:13.5px;line-height:1.5;color:rgba(238,242,255,.78)">{{ t.desc }}</div>
-          <div style="{{ t.ctaStyle }}">{{ t.cta }}</div>
-        </button>
-      </sc-for>
-    </div>
-
-    <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;background:rgba(0,0,0,.22);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:16px 20px;margin-bottom:44px">
-      <span style="font-size:14px;line-height:1.5;color:rgba(238,242,255,.72);flex:1;min-width:280px">This is the only mission where the data has to come from outside the house. Twenty real people, tallied as they answer — Practice Bay handles the arithmetic.</span>
-      <button onClick="{{ goPractice }}" style="font-family:Fredoka,sans-serif;font-size:15px;padding:11px 20px;border-radius:13px;border:1px solid rgba(56,189,248,.5);cursor:pointer;background:rgba(56,189,248,.16);color:#38BDF8" style-hover="filter:brightness(1.15)">Open Practice Bay →</button>
-      <a href="Unit 7 Print Pack.pdf" style="font-family:Fredoka,sans-serif;font-size:15px;padding:11px 20px;border-radius:13px;border:1px solid rgba(251,113,133,.45);background:rgba(251,113,133,.14);color:#FDA4AF">Print pack →</a> <a href="Unit 7 Worksheets.pdf" style="font-family:Fredoka,sans-serif;font-size:15px;padding:11px 20px;border-radius:13px;border:1px solid rgba(251,113,133,.45);background:rgba(251,113,133,.14);color:#FDA4AF">Worksheets · all weeks →</a>
-    </div>
-
+    <sc-if value="{{ isUnit7 }}" hint-placeholder-val="{{ false }}">
     <h2 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.45);margin:0 0 20px">The math is the art</h2>
 
     <div style="display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:22px;margin-bottom:22px">
@@ -2109,184 +1066,9 @@
         <div style="font-size:12.5px;line-height:1.5;margin-top:18px;color:rgba(238,242,255,.55);font-style:italic">{{ puzzleHint }}</div>
       </div>
     </div>
+    </sc-if>
 
-    <h2 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.45);margin:0 0 20px">Three weeks, gate to gate</h2>
-
-    <div style="display:flex;gap:10px;margin-bottom:22px;flex-wrap:wrap">
-      <sc-for list="{{ weekTabs }}" as="w" hint-placeholder-count="3">
-        <button onClick="{{ w.go }}" style="{{ w.style }}" style-hover="filter:brightness(1.15)">
-          <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;opacity:.65">WEEK {{ w.n }}</div>
-          <div style="font-family:Fredoka,sans-serif;font-size:15px;margin-top:3px">{{ w.title }}</div>
-        </button>
-      </sc-for>
-    </div>
-
-    <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.11);border-radius:22px;padding:28px 30px;margin-bottom:44px">
-      <div style="display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:6px">
-        <div style="font-family:Fredoka,sans-serif;font-size:28px;color:#FB7185">Week {{ wk.n }} · {{ wk.title }}</div>
-        <span style="{{ wk.gateChip }}">{{ wk.gate }}</span>
-      </div>
-      <div style="font-size:14.5px;line-height:1.5;color:rgba(238,242,255,.72);max-width:820px;margin-bottom:24px">{{ wk.summary }}</div>
-      <div style="display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px">
-        <sc-for list="{{ wk.days }}" as="d" hint-placeholder-count="5">
-          <div style="{{ d.cardStyle }}">
-            <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:{{ d.dayColor }}">{{ d.day }}</div>
-            <div style="font-family:Fredoka,sans-serif;font-size:15.5px;line-height:1.2;margin:7px 0 9px;min-height:38px">{{ d.title }}</div>
-            <div style="font-size:12.5px;line-height:1.45;color:rgba(238,242,255,.62)">{{ d.detail }}</div>
-            <div style="display:flex;gap:5px;margin-top:12px">
-              <sc-for list="{{ d.tiers }}" as="tc" hint-placeholder-count="3">
-                <span style="{{ tc.style }}">{{ tc.icon }}</span>
-              </sc-for>
-            </div>
-          </div>
-        </sc-for>
-      </div>
-      <sc-if value="{{ wk.isFull }}" hint-placeholder-val="{{ true }}">
-        <div style="margin-top:22px;padding-top:20px;border-top:1px dashed rgba(255,255,255,.16);display:flex;align-items:center;gap:14px;flex-wrap:wrap">
-          <span style="font-size:13.5px;color:rgba(238,242,255,.7)">Every week is written out in full — printable worksheets with answer keys for the whole mission.</span>
-          <a href="Unit 7 Print Pack.pdf" style="font-family:Fredoka,sans-serif;font-size:14.5px;padding:10px 18px;border-radius:12px;background:rgba(251,113,133,.16);border:1px solid rgba(251,113,133,.45);color:#FDA4AF">Open the print pack →</a> <a href="Unit 7 Worksheets.pdf" style="font-family:Fredoka,sans-serif;font-size:14.5px;padding:10px 18px;border-radius:12px;background:rgba(251,113,133,.16);border:1px solid rgba(251,113,133,.45);color:#FDA4AF">Worksheets · all weeks →</a>
-        </div>
-      </sc-if>
-    </div>
-
-    <h2 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.45);margin:0 0 20px">Mastery gates</h2>
-    <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-bottom:26px">
-      <sc-for list="{{ gates }}" as="g" hint-placeholder-count="4">
-        <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:18px;padding:22px 22px 24px">
-          <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:{{ g.color }}">{{ g.when }}</div>
-          <div style="font-family:Fredoka,sans-serif;font-size:20px;line-height:1.15;margin:8px 0 10px">{{ g.name }}</div>
-          <div style="font-size:13px;line-height:1.5;color:rgba(238,242,255,.7)">{{ g.desc }}</div>
-          <div style="margin-top:14px;font-family:'JetBrains Mono',monospace;font-size:11px;color:{{ g.color }}">{{ g.rule }}</div>
-        </div>
-      </sc-for>
-    </div>
-
-    <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.11);border-radius:22px;padding:28px 30px;margin-bottom:44px">
-      <div style="font-family:Fredoka,sans-serif;font-size:24px;margin-bottom:4px">Unit Test · Trophy Bands</div>
-      <div style="font-size:13.5px;color:rgba(238,242,255,.62);margin-bottom:22px">12 questions plus one “explain your thinking.” The explanation is scored on reasoning, not neatness.</div>
-      <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px">
-        <sc-for list="{{ bands }}" as="b" hint-placeholder-count="3">
-          <div style="{{ b.style }}">
-            <div style="font-family:Fredoka,sans-serif;font-size:34px;color:{{ b.color }};line-height:1">{{ b.range }}</div>
-            <div style="font-family:Fredoka,sans-serif;font-size:19px;margin:8px 0 8px">{{ b.name }}</div>
-            <div style="font-size:13px;line-height:1.5;color:rgba(238,242,255,.72)">{{ b.desc }}</div>
-          </div>
-        </sc-for>
-      </div>
-    </div>
-
-    <div style="display:flex;align-items:flex-start;gap:20px;max-width:900px">
-      <div style="flex:none;animation:float 5s ease-in-out infinite">
-        <div style="width:64px;height:64px;border-radius:20px;background:linear-gradient(160deg,#C7D2FE,#818CF8);position:relative;box-shadow:0 10px 28px rgba(129,140,248,.32)">
-          <div style="position:absolute;top:-12px;left:50%;width:2px;height:12px;background:#818CF8"></div>
-          <div style="position:absolute;top:-19px;left:50%;transform:translateX(-50%);width:9px;height:9px;border-radius:50%;background:#FBBF24;box-shadow:0 0 12px #FBBF24"></div>
-          <div style="position:absolute;top:21px;left:12px;width:13px;height:13px;border-radius:50%;background:#111938"></div>
-          <div style="position:absolute;top:21px;right:12px;width:13px;height:13px;border-radius:50%;background:#111938"></div>
-          <div style="position:absolute;bottom:11px;left:50%;transform:translateX(-50%);width:24px;height:4px;border-radius:3px;background:rgba(17,25,56,.45)"></div>
-        </div>
-      </div>
-      <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.11);border-radius:20px;border-top-left-radius:4px;padding:20px 24px">
-        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#818CF8;margin-bottom:8px">{{ mascot }} · Mission 07 briefing</div>
-        <div style="font-family:Fredoka,sans-serif;font-size:19px;line-height:1.35">“Every briefing I've ever been handed came with an average on it. The good officers asked what got averaged. Ask that, every time, and you'll be right more often than the room.”</div>
-      </div>
-    </div>
-  </main>
-  </sc-if>
-
-  <!-- ============ UNIT 8 ============ -->
-  <sc-if value="{{ isUnit8 }}" hint-placeholder-val="{{ false }}">
-  <main style="position:relative;padding:34px 44px 72px;max-width:1280px">
-    <!-- Hero, rendered from the curriculum rather than typed per mission.
-         Every value here had drifted at least once: Mission 05 still read
-         "Decimals & Money" after it was renamed, Mission 07 still claimed
-         3 weeks and 12 lessons after it grew to 5 and 20, and Mission 08's
-         week range was never renumbered when 07 grew underneath it. -->
-    <div style="display:flex;align-items:center;gap:10px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.5);margin-bottom:14px">
-      <span style="color:{{ uColor }}">{{ uNo }}</span><span>&middot;</span><span>{{ uWeeks }}</span><span>&middot;</span><span>{{ uDayBreakdown }}</span>
-    </div>
-    <h1 style="{{ uTitleStyle }}">{{ uName }}</h1>
-    <p style="max-width:720px;margin:0 0 30px;font-size:16.5px;line-height:1.55;color:rgba(238,242,255,.72);text-wrap:pretty">{{ uBlurb }}</p>
-    <div style="{{ uHeroStyle }}">
-      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:{{ uColor }};margin-bottom:10px">{{ uNo }} &middot; The Big Question</div>
-      <div style="font-family:Fredoka,sans-serif;font-size:29px;line-height:1.2;max-width:900px">{{ uBigQ }}</div>
-      <div style="font-size:14px;line-height:1.5;margin-top:12px;color:rgba(238,242,255,.7);max-width:820px">{{ uClosing }}</div>
-    </div>
-
-    <!-- This week's days. The work comes before the briefing, the way Field
-         Notes opens a week onto its investigation. -->
-    <div style="display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:14px">
-      <div style="font-family:Fredoka,sans-serif;font-weight:600;font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.45)">{{ uWeekLabel }}</div>
-      <button onClick="{{ goPractice }}" style="font-family:Fredoka,sans-serif;font-size:13.5px;padding:8px 16px;border-radius:11px;border:1px solid rgba(56,189,248,.45);cursor:pointer;background:rgba(56,189,248,.12);color:#38BDF8" style-hover="filter:brightness(1.2)">All weeks in Practice Bay &rarr;</button>
-    </div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:11px;margin-bottom:40px">
-      <sc-for list="{{ uDays }}" as="d" hint-placeholder-count="5">
-        <button onClick="{{ d.go }}" style="{{ d.style }}" style-hover="filter:brightness(1.25)">
-          <div style="display:flex;align-items:center;justify-content:space-between;gap:8px">
-            <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(238,242,255,.5)">{{ d.label }}</span>
-            <span style="{{ d.markStyle }}">{{ d.mark }}</span>
-          </div>
-          <div style="font-family:Fredoka,sans-serif;font-size:14.5px;line-height:1.25">{{ d.title }}</div>
-        </button>
-      </sc-for>
-    </div>
-
-    <!-- Skills, project, game and badge. These were on the mission map's detail
-         panel, which f933cc1 removed when the planets started navigating. That
-         commit claimed the mission page already showed them; it did not — only
-         the Y5 template did, so for Brock's year they became unreachable, and
-         the badge name and requirement were unreachable anywhere in the app. -->
-    <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:22px;margin-bottom:22px">
-      <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:22px;padding:24px 26px">
-        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.45);margin-bottom:9px">Hands-on project</div>
-        <div style="font-size:14.5px;line-height:1.55;color:rgba(238,242,255,.85)">{{ uProject }}</div>
-      </div>
-      <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:22px;padding:24px 26px">
-        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.45);margin-bottom:9px">Fluency game</div>
-        <div style="font-size:14.5px;line-height:1.55;color:rgba(238,242,255,.85)">{{ uGame }}</div>
-      </div>
-    </div>
-    <div style="display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:22px;margin-bottom:38px">
-      <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:22px;padding:26px 28px">
-        <div style="font-family:Fredoka,sans-serif;font-size:22px">What this mission builds</div>
-        <div style="font-size:13px;color:rgba(238,242,255,.6);margin-top:4px;margin-bottom:18px">Each one is a strand on the pre-assessment and a row on the skip chart.</div>
-        <div style="display:flex;flex-direction:column;gap:9px">
-          <sc-for list="{{ uSkills }}" as="s" hint-placeholder-count="5">
-            <div style="display:flex;align-items:center;gap:14px;background:rgba(0,0,0,.22);border:1px solid rgba(255,255,255,.09);border-radius:12px;padding:12px 16px">
-              <span style="{{ s.dotStyle }}"></span>
-              <span style="font-size:14px;color:rgba(238,242,255,.86)">{{ s.name }}</span>
-            </div>
-          </sc-for>
-        </div>
-      </div>
-      <div style="{{ uBadgeWellStyle }}">
-        <div style="{{ uBigBadgeStyle }}"><span style="font-family:Fredoka,sans-serif;font-weight:600;color:#0B0F24;font-size:{{ uBadgeGlyphSize }}">{{ uBadge }}</span></div>
-        <div style="font-family:Fredoka,sans-serif;font-size:17px;margin-top:22px;text-align:center;color:{{ uColor }}">{{ uBadgeName }}</div>
-        <div style="font-size:13px;line-height:1.5;margin-top:8px;text-align:center;max-width:250px;color:rgba(238,242,255,.6)">{{ uBadgeReq }}</div>
-      </div>
-    </div>
-    <div style="font-family:Fredoka,sans-serif;font-weight:600;font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.45);margin:0 0 16px">Every worksheet has three tiers</div>
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:16px">
-      <sc-for list="{{ tiers }}" as="t" hint-placeholder-count="3">
-        <button onClick="{{ t.open }}" style="{{ t.cardStyle }}" style-hover="filter:brightness(1.25);transform:translateY(-3px)">
-          <div style="display:flex;align-items:center;gap:11px;margin-bottom:10px">
-            <div style="{{ t.iconStyle }}">{{ t.icon }}</div>
-            <div>
-              <div style="font-family:Fredoka,sans-serif;font-size:19px;color:{{ t.color }};line-height:1.1">{{ t.name }}</div>
-              <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(238,242,255,.45);margin-top:3px">{{ t.meta }}</div>
-            </div>
-          </div>
-          <div style="font-size:13.5px;line-height:1.5;color:rgba(238,242,255,.78)">{{ t.desc }}</div>
-          <div style="{{ t.ctaStyle }}">{{ t.cta }}</div>
-        </button>
-      </sc-for>
-    </div>
-
-    <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;background:rgba(0,0,0,.22);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:16px 20px;margin-bottom:44px">
-      <span style="font-size:14px;line-height:1.5;color:rgba(238,242,255,.72);flex:1;min-width:280px">Week 4 is the capstone. Ten stops, one problem per stop in his own handwriting, and every mission of the year has to appear somewhere on the trail.</span>
-      <button onClick="{{ goPractice }}" style="font-family:Fredoka,sans-serif;font-size:15px;padding:11px 20px;border-radius:13px;border:1px solid rgba(56,189,248,.5);cursor:pointer;background:rgba(56,189,248,.16);color:#38BDF8" style-hover="filter:brightness(1.15)">Open Practice Bay →</button>
-      <a href="Unit 8 Print Pack.pdf" style="font-family:Fredoka,sans-serif;font-size:15px;padding:11px 20px;border-radius:13px;border:1px solid rgba(252,211,77,.45);background:rgba(252,211,77,.14);color:#FDE68A">Print pack →</a> <a href="Unit 8 Worksheets.pdf" style="font-family:Fredoka,sans-serif;font-size:15px;padding:11px 20px;border-radius:13px;border:1px solid rgba(252,211,77,.45);background:rgba(252,211,77,.14);color:#FDE68A">Worksheets · all weeks →</a>
-    </div>
-
+    <sc-if value="{{ isUnit8 }}" hint-placeholder-val="{{ false }}">
     <h2 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.45);margin:0 0 20px">The math is the art</h2>
 
     <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:22px;margin-bottom:22px">
@@ -2415,11 +1197,12 @@
         <div style="font-size:12.5px;line-height:1.5;margin-top:18px;color:rgba(238,242,255,.55);font-style:italic">{{ puzzleHint }}</div>
       </div>
     </div>
+    </sc-if>
 
-    <h2 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.45);margin:0 0 20px">Four weeks, gate to gate</h2>
+    <h2 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.45);margin:0 0 20px">{{ uWeekHeading }}</h2>
 
     <div style="display:flex;gap:10px;margin-bottom:22px;flex-wrap:wrap">
-      <sc-for list="{{ weekTabs }}" as="w" hint-placeholder-count="4">
+      <sc-for list="{{ weekTabs }}" as="w" hint-placeholder-count="5">
         <button onClick="{{ w.go }}" style="{{ w.style }}" style-hover="filter:brightness(1.15)">
           <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;opacity:.65">WEEK {{ w.n }}</div>
           <div style="font-family:Fredoka,sans-serif;font-size:15px;margin-top:3px">{{ w.title }}</div>
@@ -2429,7 +1212,7 @@
 
     <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.11);border-radius:22px;padding:28px 30px;margin-bottom:44px">
       <div style="display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:6px">
-        <div style="font-family:Fredoka,sans-serif;font-size:28px;color:#FCD34D">Week {{ wk.n }} · {{ wk.title }}</div>
+        <div style="font-family:Fredoka,sans-serif;font-size:28px;color:{{ uColor }}">Week {{ wk.n }} · {{ wk.title }}</div>
         <span style="{{ wk.gateChip }}">{{ wk.gate }}</span>
       </div>
       <div style="font-size:14.5px;line-height:1.5;color:rgba(238,242,255,.72);max-width:820px;margin-bottom:24px">{{ wk.summary }}</div>
@@ -2449,12 +1232,13 @@
       </div>
       <sc-if value="{{ wk.isFull }}" hint-placeholder-val="{{ true }}">
         <div style="margin-top:22px;padding-top:20px;border-top:1px dashed rgba(255,255,255,.16);display:flex;align-items:center;gap:14px;flex-wrap:wrap">
-          <span style="font-size:13.5px;color:rgba(238,242,255,.7)">Every week is written out in full — printable worksheets with answer keys for the whole mission.</span>
-          <a href="Unit 8 Print Pack.pdf" style="font-family:Fredoka,sans-serif;font-size:14.5px;padding:10px 18px;border-radius:12px;background:rgba(252,211,77,.16);border:1px solid rgba(252,211,77,.45);color:#FDE68A">Open the print pack →</a> <a href="Unit 8 Worksheets.pdf" style="font-family:Fredoka,sans-serif;font-size:14.5px;padding:10px 18px;border-radius:12px;background:rgba(252,211,77,.16);border:1px solid rgba(252,211,77,.45);color:#FDE68A">Worksheets · all weeks →</a>
+          <span style="font-size:13.5px;color:rgba(238,242,255,.7)">{{ uWeeksNote }}</span>
+          <a href="{{ uPackHref }}" style="font-family:Fredoka,sans-serif;font-size:14.5px;padding:10px 18px;border-radius:12px;background:rgba(251,191,36,.16);border:1px solid rgba(251,191,36,.45);color:#FBBF24">Open the print pack →</a> <a href="Unit 1 Worksheets.pdf" style="font-family:Fredoka,sans-serif;font-size:14.5px;padding:10px 18px;border-radius:12px;background:rgba(251,191,36,.16);border:1px solid rgba(251,191,36,.45);color:#FBBF24">Worksheets · all weeks →</a>
         </div>
       </sc-if>
     </div>
 
+    <!-- GATES -->
     <h2 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:rgba(238,242,255,.45);margin:0 0 20px">Mastery gates</h2>
     <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-bottom:26px">
       <sc-for list="{{ gates }}" as="g" hint-placeholder-count="4">
@@ -2467,9 +1251,10 @@
       </sc-for>
     </div>
 
+    <!-- trophy bands -->
     <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.11);border-radius:22px;padding:28px 30px;margin-bottom:44px">
       <div style="font-family:Fredoka,sans-serif;font-size:24px;margin-bottom:4px">Unit Test · Trophy Bands</div>
-      <div style="font-size:13.5px;color:rgba(238,242,255,.62);margin-bottom:22px">12 questions plus the completed Math Trail. The trail is scored on whether the problems are solvable, not on how hard they are.</div>
+      <div style="font-size:13.5px;color:rgba(238,242,255,.62);margin-bottom:22px">{{ uTestNote }}</div>
       <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px">
         <sc-for list="{{ bands }}" as="b" hint-placeholder-count="3">
           <div style="{{ b.style }}">
@@ -2492,13 +1277,12 @@
         </div>
       </div>
       <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.11);border-radius:20px;border-top-left-radius:4px;padding:20px 24px">
-        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#818CF8;margin-bottom:8px">{{ mascot }} · Mission 08 briefing</div>
-        <div style="font-family:Fredoka,sans-serif;font-size:19px;line-height:1.35">“You've been doing algebra since Mission 01 — every time you worked out what number belonged in a gap. This mission just gives it a name and a letter. Last leg. Fly it properly.”</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#818CF8;margin-bottom:8px">{{ mascot }} · {{ uNo }} briefing</div>
+        <div style="font-family:Fredoka,sans-serif;font-size:19px;line-height:1.35">“{{ uQuote }}”</div>
       </div>
     </div>
   </main>
   </sc-if>
-
   <!-- ============ TEACHER FRONT DOOR ============ -->
   <sc-if value="{{ tFront }}" hint-placeholder-val="{{ false }}">
   <div style="position:fixed;inset:0;z-index:80;background:#070B1C;overflow:auto">
@@ -7324,7 +6108,19 @@ class Component extends DCLogic {
       isUnit5:st.view==="unit"&&st.uview===5&&!y5, isUnit6:st.view==="unit"&&st.uview===6&&!y5,
       isUnit7:st.view==="unit"&&st.uview===7&&!y5, isUnit8:st.view==="unit"&&st.uview===8&&!y5,
       isUnitY5:st.view==="unit"&&y5,
+      /* Year One's mission page. The eight isUnitN flags above still gate the
+       * eight per-mission manipulatives inside it — that is the only part of
+       * the page that genuinely differs from one mission to the next. */
+      isUnitY3:st.view==="unit"&&!y5,
       uColor:sel.color, uName:sel.name, uNo:"Mission 0"+sel.n,
+      /* Prose that reads as page furniture but is written per mission: which
+       * of Practice Bay and the print pack carries this mission's work, what
+       * the worksheets file holds, and what the test actually asks for.
+       * Mission 08 is scored on the Math Trail rather than an explanation, and
+       * Mission 01 is the only one whose weeks all have graded sets — details
+       * a single shared sentence would state wrongly for seven missions. */
+      uPractice:sel.practice||"", uWeeksNote:sel.weeksNote||"",
+      uTestNote:sel.testNote||"",
       /* Derived, not stored. UNITS carried a hand-written `weeks` range that
        * had already gone stale: Mission 08 said "33–36" when its own sets run
        * 35–38, because Mission 07 grew by two weeks and nothing followed. A
@@ -7395,7 +6191,15 @@ class Component extends DCLogic {
       uPackStyle:`font-family:Fredoka,sans-serif;font-size:15px;padding:11px 20px;border-radius:13px;border:1px solid ${sel.color}73;background:${sel.color}24;color:${sel.color}`,
       uHeroStyle:`background:linear-gradient(150deg,${sel.color}28,${sel.color}0E);border:1px solid ${sel.color}59;border-radius:22px;padding:26px 30px;margin-bottom:38px`,
       uTitleStyle:`font-family:Fredoka,sans-serif;font-weight:600;font-size:56px;line-height:1;margin:0 0 18px;letter-spacing:-.5px;color:${sel.color}`,
-      uWeekHeading:this.weeksFor(st.uview).length+" weeks, gate to gate",
+      /* Spelled out, because Year One's eight pages each wrote the word —
+       * "Five weeks, gate to gate" — and folding them into one template must
+       * not quietly demote that to "5". Falls back to the numeral past twelve,
+       * which no mission reaches. */
+      uWeekHeading:(function(n){
+        const W=["","One","Two","Three","Four","Five","Six","Seven","Eight",
+                 "Nine","Ten","Eleven","Twelve"];
+        return (W[n]||String(n))+" weeks, gate to gate";
+      })(this.weeksFor(st.uview).length),
       buildStamp: (window.__BUILD__||"dev"),
       courseLine:(CURRICULA[this.curricId()]||CURRICULA.y3).label+" · "
         +(y5?"34 Weeks":"36 Weeks")+" · 8 Missions",

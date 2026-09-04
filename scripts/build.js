@@ -145,6 +145,12 @@ run("node", ["scripts/check-css-tokens.js"], "check-css-tokens");
  * from the printed page while still sitting in the bank, and every other check
  * would stay green because the app and the sheet agree by construction. */
 run("node", ["scripts/check-item-ids.js"], "check-item-ids");
+/* The step between the child's fingers and the grader, which nothing else here
+ * modelled. The answer box stripped everything but 0-9, so a quarter of the
+ * banks — every decimal, every fraction, every worded key like "yes" — could
+ * not be typed at all. Every other check above stayed green throughout, because
+ * the question and the key were correct everywhere they looked. */
+run("node", ["scripts/check-answerable.js"], "check-answerable");
 run("node", ["scripts/qa-verify.js"], "qa-verify");
 
 console.log();

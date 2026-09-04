@@ -26,6 +26,15 @@
        Word Voyagers, which is plainly what was meant. */
     --brick-dark:#8E2C22;
   }
+  /* The one moment this course celebrates. It arrives rather than appearing,
+     which is the whole point of it — but motion is a preference, and a child
+     who has asked their device for less of it still gets the panel, just
+     without the entrance. */
+  .unit-done{animation:unit-in .45s cubic-bezier(.2,.8,.3,1) both}
+  @keyframes unit-in{from{opacity:0;transform:translateY(-8px) scale(.985)}to{opacity:1;transform:none}}
+  @media (prefers-reduced-motion:reduce){
+    .unit-done{animation:none}
+  }
   *{box-sizing:border-box}
   body{margin:0;background:var(--paper);color:var(--ink);font-family:'Public Sans',system-ui,sans-serif;line-height:1.55}
   h1,h2,h3{font-family:'Fraunces',serif;font-weight:600;margin:0}
@@ -71,6 +80,27 @@
   </div>
 
   <div class="wrap" style="padding-top:24px;flex:1">
+
+    <!-- Finishing a unit is the biggest thing that happens in this course and
+         used to pass in silence. Shown at the moment it happens, then closed
+         by hand — see unitJustDone. -->
+    <sc-if value="{{ ucShow }}" hint-placeholder-val="{{ false }}">
+      <div class="unit-done" style="{{ ucStyle }}">
+        <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap">
+          <div style="{{ ucBadgeStyle }}">{{ ucBadge }}</div>
+          <div style="flex:1;min-width:220px">
+            <div style="font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft)">{{ ucKicker }}</div>
+            <h2 style="margin:3px 0 4px">{{ ucName }}</h2>
+            <div class="muted" style="font-size:.92rem">{{ ucLine }}</div>
+          </div>
+          <button onClick="{{ ucClose }}" aria-label="Close" style="background:none;border:0;cursor:pointer;font-size:22px;color:var(--ink-soft);padding:4px 8px">×</button>
+        </div>
+        <div style="margin-top:16px;padding-top:14px;border-top:1px solid var(--rule)">
+          <div style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:5px">You can answer this now</div>
+          <div style="font-family:'Fraunces',serif;font-size:1.12rem;line-height:1.4">{{ ucBigQ }}</div>
+        </div>
+      </div>
+    </sc-if>
 
     <sc-if value="{{ isWeek }}" hint-placeholder-val="{{ true }}">
       <div class="card">
@@ -374,6 +404,14 @@ class Component extends DCLogic {
     kitMode:"all",     // one printable list is what a parent wants first
     resetArmed:false,
     completed:(function(){ try{ return JSON.parse(localStorage.getItem("sci.completed")||"{}"); }catch(e){ return {}; } })(),
+    /* Set to a unit number the moment its last week is finished, and cleared
+     * when the child closes it. Not derived from `completed`, deliberately: a
+     * derived banner would reappear every time they opened a finished unit,
+     * and a thing that congratulates you every visit stops meaning anything.
+     * This marks the moment it happened. */
+    unitJustDone:null,
+    /* Which units have already had their moment, "y3:3" -> true. */
+    unitSeen:(function(){ try{ return JSON.parse(localStorage.getItem("sci.unitSeen")||"{}"); }catch(e){ return {}; } })(),
     q:null
   };
 
@@ -400,17 +438,50 @@ class Component extends DCLogic {
     if(SY) SY.save("sci", {
       grade:st.grade, week:st.week,
       completed:st.completed||{},   // "y3:14" -> {at, score, total}
+      unitSeen:st.unitSeen||{},
     });
   };
+
+  /* The weeks a unit covers. UNITS carry them as a printed range, "5–8", with
+   * an en dash — splitting on a hyphen returns one number and every unit then
+   * looks like a single week that is already finished. */
+  static unitWeeks(u){
+    const m=String((u&&u.weeks)||"").match(/(\d+)\s*[–-]\s*(\d+)/);
+    if(!m) { const one=parseInt((u&&u.weeks),10); return one?[one]:[]; }
+    const out=[]; for(let w=+m[1]; w<=+m[2]; w++) out.push(w);
+    return out;
+  }
 
   markWeekDone=(score, total)=>{
     const k=this.state.grade+":"+this.state.week;
     const completed={...(this.state.completed||{}),
       [k]:{at:Date.now(), score:(score==null?null:score), total:(total==null?null:total)}};
     try{ localStorage.setItem("sci.completed", JSON.stringify(completed)); }catch(e){}
-    this.setState({completed});
-    this.syncSave({completed});
+
+    /* Finishing a week is ordinary. Finishing a UNIT is nine times a year and
+     * about a month of work, and until now the app said nothing at all when it
+     * happened. Checked after `completed` is updated, so the week just marked
+     * counts toward it. */
+    const S=this.S, g=this.state.grade;
+    const unit=S && S.unitOf ? S.unitOf(this.state.week) : null;
+    const weeks=unit ? Component.unitWeeks(unit) : [];
+    const whole=weeks.length>0 && weeks.every(w=>!!completed[g+":"+w]);
+    /* Once per unit, ever — not once per dismissal. Re-finishing a week inside
+     * a unit already done would otherwise pop the panel again, and a thing
+     * that congratulates you every visit stops meaning anything. Stored and
+     * synced so it holds across devices. */
+    let unitSeen=this.state.unitSeen||{};
+    let justDone=this.state.unitJustDone;
+    if(whole && unit && !unitSeen[g+":"+unit.n]){
+      justDone=unit.n;
+      unitSeen={...unitSeen, [g+":"+unit.n]:true};
+      try{ localStorage.setItem("sci.unitSeen", JSON.stringify(unitSeen)); }catch(e){}
+    }
+
+    this.setState({completed, unitJustDone:justDone, unitSeen});
+    this.syncSave({completed, unitSeen});
   };
+  closeUnitDone=()=>this.setState({unitJustDone:null});
 
   /* Same reset as Word Voyagers, and for the same reason: science progress
    * lives on the device AND in the database, so clearing one alone lets the
@@ -419,8 +490,12 @@ class Component extends DCLogic {
   cancelReset=()=>{ this.setState({resetArmed:false}); };
   doReset=()=>{
     this.pullEpoch=(this.pullEpoch||0)+1;   // invalidate any pull in flight
-    ["sci.completed","sci.week"].forEach(function(k){ try{ localStorage.removeItem(k); }catch(e){} });
-    this.setState({completed:{}, week:1, q:null, resetArmed:false});
+    ["sci.completed","sci.week","sci.unitSeen"].forEach(function(k){ try{ localStorage.removeItem(k); }catch(e){} });
+    /* unitSeen goes too. Starting over and then never being told you finished
+     * a unit again would make the reset feel broken in a way that is hard to
+     * describe and easy to notice. */
+    this.setState({completed:{}, week:1, q:null, resetArmed:false,
+                   unitSeen:{}, unitJustDone:null});
     const SY=window.__CURR&&window.__CURR.SYNC;
     if(SY){
       SY.save("sci", {grade:this.state.grade, week:1, completed:{}});
@@ -518,7 +593,40 @@ class Component extends DCLogic {
       }
     }
 
+    /* Finishing a unit — nine times a year, about a month of work each — is
+     * the biggest thing that happens in this course, and the app used to let
+     * it pass in silence. It names what was actually finished and hands back
+     * the Big Question the unit opened with, which he can now answer. */
+    const ucUnit=st.unitJustDone ? S.UNITS[st.unitJustDone-1] : null;
+    const ucWeeks=ucUnit ? Component.unitWeeks(ucUnit) : [];
+    const ucScored=ucWeeks.map(w=>(st.completed||{})[st.grade+":"+w])
+      .filter(r=>r && typeof r.score==="number" && r.total>0);
+    const ucPct=ucScored.length
+      ? Math.round(ucScored.reduce((n,r)=>n+r.score,0)/ucScored.reduce((n,r)=>n+r.total,0)*100)
+      : null;
+
     return Object.assign({
+      ucShow:!!ucUnit,
+      ucBadge:ucUnit?ucUnit.badge:"",
+      ucKicker:ucUnit?("Unit "+ucUnit.n+" of "+S.UNITS.length+" complete"):"",
+      ucName:ucUnit?ucUnit.name:"",
+      ucLine:ucUnit
+        ? (ucWeeks.length+" week"+(ucWeeks.length===1?"":"s")+" of investigations finished"
+           +(ucPct!==null?(" · checks averaged "+ucPct+"%"):"")
+           +" · "+(ucUnit.strand||"")).replace(/ · $/,"")
+        : "",
+      ucBigQ:ucUnit?(ucUnit.bigQ||""):"",
+      ucStyle:ucUnit
+        ? ("background:linear-gradient(150deg,"+ucUnit.color+"22,var(--forest-light));"
+           +"border:1px solid "+ucUnit.color+"66;border-left:5px solid "+ucUnit.color+";"
+           +"border-radius:10px;padding:24px 26px;margin-bottom:20px")
+        : "",
+      ucBadgeStyle:ucUnit
+        ? ("width:52px;height:52px;border-radius:12px;display:grid;place-items:center;font-size:26px;"
+           +"background:"+ucUnit.color+";color:var(--paper)")
+        : "",
+      ucClose:this.closeUnitDone,
+
       /* Shown in the header so "am I on a cached copy?" is answerable on
        * THIS page. It was only on the main page, which meant a stale subject
        * page could not be spotted at all. */

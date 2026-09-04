@@ -19,6 +19,15 @@
     --rule:#D8CDAE; --brick:#B23A2E; --brick-dark:#8E2C22; --gold:#C79319;
     --gold-light:#F3D98B; --forest:#3E6B4F; --forest-light:#E4EEE3;
   }
+  /* The one moment this course celebrates. It arrives rather than appearing,
+     which is the whole point of it — but motion is a preference, and a child
+     who has asked their device for less of it still gets the panel, just
+     without the entrance. */
+  .unit-done{animation:unit-in .45s cubic-bezier(.2,.8,.3,1) both}
+  @keyframes unit-in{from{opacity:0;transform:translateY(-8px) scale(.985)}to{opacity:1;transform:none}}
+  @media (prefers-reduced-motion:reduce){
+    .unit-done{animation:none}
+  }
   *{box-sizing:border-box}
   body{margin:0;background:var(--paper);color:var(--ink);font-family:'Public Sans',system-ui,sans-serif;line-height:1.55}
   h1,h2,h3{font-family:'Fraunces',serif;font-weight:600;margin:0}
@@ -86,6 +95,27 @@
   </div>
 
   <div class="wrap" style="padding-top:24px;flex:1">
+
+    <!-- Finishing a unit study is the largest thing that happens in this
+         course and used to pass without a word. Shown at the moment it
+         happens, then closed by hand — see unitJustDone. -->
+    <sc-if value="{{ ucShow }}" hint-placeholder-val="{{ false }}">
+      <div class="unit-done" style="{{ ucStyle }}">
+        <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap">
+          <div style="{{ ucBadgeStyle }}">{{ ucBadge }}</div>
+          <div style="flex:1;min-width:220px">
+            <div style="font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft)">{{ ucKicker }}</div>
+            <h2 style="margin:3px 0 4px">{{ ucName }}</h2>
+            <div class="muted" style="font-size:.92rem">{{ ucLine }}</div>
+          </div>
+          <button onClick="{{ ucClose }}" aria-label="Close" style="background:none;border:0;cursor:pointer;font-size:22px;color:var(--ink-soft);padding:4px 8px">×</button>
+        </div>
+        <div style="margin-top:16px;padding-top:14px;border-top:1px solid var(--rule)">
+          <div style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:5px">You can answer this now</div>
+          <div style="font-family:'Fraunces',serif;font-size:1.12rem;line-height:1.4">{{ ucBigQ }}</div>
+        </div>
+      </div>
+    </sc-if>
 
     <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
       <div class="card">
@@ -895,6 +925,15 @@
 class Component extends DCLogic {
   state = {
     view:"home",
+    /* Set to a unit number the moment its last day is finished, and cleared
+     * when the child closes it. Deliberately not derived from stepDone: a
+     * derived banner would reappear every time he opened a finished unit, and
+     * a thing that congratulates you on every visit stops meaning anything.
+     * This marks the moment it happened. */
+    unitJustDone:null,
+    /* Which units have already had their moment, "y1:3" -> true. Stored and
+     * synced, so it fires once per unit rather than once per dismissal. */
+    unitSeen:(function(){ try{ return JSON.parse(localStorage.getItem("la.unitSeen")||"{}"); }catch(e){ return {}; } })(),
     // A level passed in the URL is the boy who was just picked on the landing
     // card, so it beats whatever this page stored last time. Accepts the
     // shared y3/y5 ids as well as this page's own y1/y2.
@@ -1199,17 +1238,59 @@ class Component extends DCLogic {
     if(SY) SY.save("la", {
       year:st.year, week:st.week, day:st.day,
       stepDone:st.stepDone, stuck:st.stuck, excused:st.excused, done:st.done,
-      stepResult:st.stepResult, approvals:st.approvals, overrides:st.overrides
+      stepResult:st.stepResult, approvals:st.approvals, overrides:st.overrides,
+      unitSeen:st.unitSeen
     });
     this.setState(patch);
   };
+
+  /* The weeks a unit study covers. UNITS print them as a range, "5–8", with an
+   * en dash — splitting on a hyphen returns one number and every unit then
+   * looks like a single week that is already finished. */
+  static unitWeeks(u){
+    const m=String((u&&u.weeks)||"").match(/(\d+)\s*[–-]\s*(\d+)/);
+    if(!m){ const one=parseInt((u&&u.weeks),10); return one?[one]:[]; }
+    const out=[]; for(let w=+m[1]; w<=+m[2]; w++) out.push(w);
+    return out;
+  }
 
   completeStep=(step)=>{
     const k=this.state.year+":"+this.state.week+":"+this.stepKey(step);
     const stepDone={...this.state.stepDone, [k]:true};
     try{ localStorage.setItem("la.stepDone", JSON.stringify(stepDone)); }catch(e){}
-    this.syncSave({stepDone});
+
+    /* Finishing a day already has its banner. Finishing a UNIT STUDY — nine a
+     * year, four weeks and twenty days each — had nothing at all, which made
+     * the largest thing that happens in this course the quietest one.
+     *
+     * A day counts as finished by its ":end" key OR because a parent excused
+     * it, which is la-mastery's own rule rather than a second opinion — so
+     * this can never disagree with the frontier the child is actually on. */
+    const M=window.__CURR&&window.__CURR.LA_MASTERY;
+    const unit=(this.Y&&this.Y.unitOf)?this.Y.unitOf(this.state.week):null;
+    let justDone=this.state.unitJustDone;
+    let unitSeen=this.state.unitSeen||{};
+    if(M&&M.dayFinished&&unit){
+      const seenKey=this.state.year+":"+unit.n;
+      const weeks=Component.unitWeeks(unit);
+      const DAYS=["Mon","Tue","Wed","Thu","Fri"];
+      const whole=weeks.length>0 && weeks.every(w=>
+        DAYS.every(d=>M.dayFinished(this.state.year,w,d,stepDone,this.state.excused)));
+      /* Once per unit, ever — not once per dismissal. Redoing any step inside
+       * a unit already finished would otherwise pop the panel again, and a
+       * thing that congratulates you every visit stops meaning anything. The
+       * record is stored and synced so it holds across devices too. */
+      if(whole && !unitSeen[seenKey]){
+        justDone=unit.n;
+        unitSeen={...unitSeen, [seenKey]:true};
+        try{ localStorage.setItem("la.unitSeen", JSON.stringify(unitSeen)); }catch(e){}
+      }
+    }
+
+    this.setState({unitJustDone:justDone, unitSeen});
+    this.syncSave({stepDone, unitSeen});
   };
+  closeUnitDone=()=>this.setState({unitJustDone:null});
   markStuck=(step)=>{
     const k=this.state.year+":"+this.state.week+":"+this.stepKey(step);
     const stuck={...this.state.stuck, [k]:true};
@@ -1281,9 +1362,13 @@ class Component extends DCLogic {
   cancelReset=()=>{ this.setState({resetArmed:false}); };
   doReset=()=>{
     this.pullEpoch=(this.pullEpoch||0)+1;   // invalidate any pull in flight
-    const KEYS=["la.stepDone","la.stuck","la.stepResult","la.approvals","la.overrides","la.done","la.excused","la.week","la.day"];
+    /* unitSeen goes too. Starting the year over and then never being told you
+     * finished a unit again would make the reset feel broken in a way that is
+     * hard to describe and easy to notice. */
+    const KEYS=["la.stepDone","la.stuck","la.stepResult","la.approvals","la.overrides","la.done","la.excused","la.week","la.day","la.unitSeen"];
     KEYS.forEach(function(k){ try{ localStorage.removeItem(k); }catch(e){} });
-    const empty={stepDone:{}, stuck:{}, stepResult:{}, approvals:{}, overrides:{}, done:{}, excused:{}, week:1, day:"Mon"};
+    const empty={stepDone:{}, stuck:{}, stepResult:{}, approvals:{}, overrides:{}, done:{}, excused:{}, week:1, day:"Mon",
+                 unitSeen:{}, unitJustDone:null};
     this.setState({...empty, resetArmed:false, started:false, openStep:null,
                    fx:null, gz:null, sq:null, rq:null, rv:null, remediation:null, round:1, lastResult:null});
     const SY=window.__CURR&&window.__CURR.SYNC;
@@ -1635,7 +1720,36 @@ class Component extends DCLogic {
     const cats=[]; const seen={};
     Y.INDEPENDENT.forEach(function(b){ if(!seen[b.cat]){ seen[b.cat]=1; cats.push(b.cat); } });
 
+    /* Finishing a unit study — nine a year, four weeks and twenty days each —
+     * is the largest thing that happens in this course, and it used to pass
+     * without a word. It names what was actually finished and hands back the
+     * Big Question the unit opened with, which he can now answer. */
+    const ucUnit=st.unitJustDone
+      ? (this.Y.UNITS||[]).filter(function(u){ return u.n===st.unitJustDone; })[0]
+      : null;
+    const ucWeeks=ucUnit ? Component.unitWeeks(ucUnit) : [];
+
     const base={
+      ucShow:!!ucUnit,
+      ucBadge:ucUnit?ucUnit.badge:"",
+      ucKicker:ucUnit?("Unit "+ucUnit.n+" of "+(this.Y.UNITS||[]).length+" complete"):"",
+      ucName:ucUnit?ucUnit.name:"",
+      ucLine:ucUnit
+        ? (ucWeeks.length+" week"+(ucWeeks.length===1?"":"s")+", "+(ucWeeks.length*5)+" days finished"
+           +(ucUnit.virtue?(" · "+ucUnit.virtue):""))
+        : "",
+      ucBigQ:ucUnit?(ucUnit.bigQ||""):"",
+      ucStyle:ucUnit
+        ? ("background:linear-gradient(150deg,"+ucUnit.color+"22,var(--forest-light));"
+           +"border:1px solid "+ucUnit.color+"66;border-left:5px solid "+ucUnit.color+";"
+           +"border-radius:8px;padding:24px 26px;margin-bottom:20px")
+        : "",
+      ucBadgeStyle:ucUnit
+        ? ("width:52px;height:52px;border-radius:12px;display:grid;place-items:center;font-size:26px;"
+           +"background:"+ucUnit.color+";color:var(--paper)")
+        : "",
+      ucClose:this.closeUnitDone,
+
       navItems:navItems, steps:steps, unitCards:unitCards,
       // Labelled by boy so each knows which switch is his. Word Voyagers uses
       // y1/y2 internally where the other subjects use y3/y5, so map across.

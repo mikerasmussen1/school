@@ -174,6 +174,39 @@ console.log("\n=== what the panel says is true ===");
   has("hidden when no unit was just finished", v2.ucShow===false, v2.ucShow);
 }
 
+console.log("\n=== the moment does not replay on a second device ===");
+{
+  /* unitSeen was pushed to the record but never read back out of it, so
+   * "once per unit, on any device" was only true on the device that
+   * celebrated. A second device would replay the moment on the same unit.
+   *
+   * Both pages pull a WHITELIST of fields; a writer who adds a field and
+   * forgets the whitelist gets exactly this, silently. So the test asks the
+   * pull path itself, not the state. */
+  const files = ["word-voyagers.dc.html", "field-notes.dc.html"];
+  files.forEach(f => {
+    const src = fs.readFileSync(__dirname + '/../' + f, 'utf8');
+    const pull = src.slice(src.indexOf("SY.pull("), src.indexOf("SY.pull(") + 900);
+    has(f + ": the pull path reads unitSeen back", /d\.unitSeen/.test(pull), "");
+    // and it is still being written, or there would be nothing to read
+    has(f + ": syncSave still writes unitSeen", /unitSeen\s*:\s*st\.unitSeen/.test(src), "");
+  });
+
+  // a record arriving from another device must suppress the moment
+  const C = build('field-notes.dc.html');
+  const S = window.__CURR.SCI_Y3;
+  const unit = S.unitOf(1), weeks = C.unitWeeks(unit);
+  const c = new C();
+  const completed = {};
+  weeks.slice(0, -1).forEach(w => { completed["y3:" + w] = {at:1, score:4, total:5}; });
+  // this device has never celebrated it; the pulled record says otherwise
+  c.state = {...c.state, grade:"y3", completed, week:weeks[weeks.length - 1],
+             unitSeen:{["y3:" + unit.n]: true}};
+  c.markWeekDone(5, 5);
+  has("a unit already celebrated elsewhere does not fire again",
+      c.state.unitJustDone == null, c.state.unitJustDone);
+}
+
 console.log("");
 if(fail.length){ console.log("FAILED "+fail.length+":"); fail.forEach(f=>console.log("  - "+f)); process.exit(1); }
 console.log("all checks passed");

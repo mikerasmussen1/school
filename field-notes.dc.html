@@ -517,7 +517,13 @@ class Component extends DCLogic {
     const epoch=this.pullEpoch;
     SY.pull("sci").then((d)=>{
       if(epoch!==this.pullEpoch) return;
-      if(d && d.completed) this.setState({completed:d.completed});
+      if(!d) return;
+      const patch={};
+      if(d.completed) patch.completed=d.completed;
+      /* unitSeen was pushed but never pulled, so the once-per-unit moment
+       * replayed on a second device. */
+      if(d.unitSeen)  patch.unitSeen=d.unitSeen;
+      if(Object.keys(patch).length) this.setState(patch);
     }).catch(()=>{});
   }
 

@@ -147,6 +147,49 @@ console.log("\n=== the manipulative gates are mutually exclusive ===");
       ![1,2,3,4,5,6,7,8].some(n=>v5["isUnit"+n]));
 }
 
+console.log("\n=== every printable link points at THIS mission ===");
+{
+  /* Caught in review, not by any of this file's other checks.
+   *
+   * The template collapse turned the print-pack href into {{ uPackHref }} and
+   * left the worksheets link beside it hardcoded to "Unit 1 Worksheets.pdf", so
+   * missions 2-8 opened Mission 1's worksheets. Nothing noticed: it is not an
+   * unbound binding, so the render check passed; the build only verifies each
+   * sheet has a fresh PDF, never that the app links to the right one.
+   *
+   * So: no literal Unit-N link may survive in the template, and the bindings
+   * must actually differ per mission. */
+  const literals = region.match(/href="Unit \d[^"]*\.pdf"/g) || [];
+  has("no hardcoded Unit-N pdf link survives in the template"
+      + (literals.length ? " — found " + literals.join(", ") : ""),
+      literals.length === 0, literals.join(","));
+
+  const packs = new Set(), sheets = new Set();
+  for (let u = 1; u <= 8; u++) {
+    const v = vals(u);
+    packs.add(v.uPackHref); sheets.add(v.uWsHref);
+  }
+  has("eight distinct print packs", packs.size === 8, packs.size);
+  has("eight distinct worksheet files", sheets.size === 8, sheets.size);
+  has("mission 5 links Unit 5's worksheets", vals(5).uWsHref === "Unit 5 Worksheets.pdf",
+      vals(5).uWsHref);
+
+  // and both links are actually bound in the markup
+  ["uPackHref", "uWsHref"].forEach(b =>
+    has("the template uses {{ " + b + " }}", region.indexOf("{{ " + b + " }}") >= 0, ""));
+
+  // every file the template links to must exist on disk
+  const missing = [];
+  for (let u = 1; u <= 8; u++) {
+    const v = vals(u);
+    [v.uPackHref, v.uWsHref].forEach(f => {
+      if (!fs.existsSync(__dirname + '/../' + f)) missing.push(f);
+    });
+  }
+  has("every linked pdf exists" + (missing.length ? " — missing " + missing.join(", ") : ""),
+      missing.length === 0, missing.join(","));
+}
+
 console.log("");
 if(fail.length){
   console.log("FAILED "+fail.length+":");

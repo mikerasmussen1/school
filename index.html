@@ -438,7 +438,7 @@
     <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;background:rgba(var(--well-rgb),.22);border:1px solid rgba(var(--line-rgb),.1);border-radius:16px;padding:16px 20px;margin-bottom:44px">
       <span style="font-size:14px;line-height:1.5;color:rgba(var(--ink-rgb),.72);flex:1;min-width:280px">{{ uPractice }}</span>
       <button onClick="{{ goPractice }}" style="font-family:Fredoka,sans-serif;font-size:15px;padding:11px 20px;border-radius:13px;border:1px solid rgba(56,189,248,.5);cursor:pointer;background:rgba(56,189,248,.16);color:var(--sky)" style-hover="filter:brightness(1.15)">Open Practice Bay →</button>
-      <a href="{{ uPackHref }}" style="font-family:Fredoka,sans-serif;font-size:15px;padding:11px 20px;border-radius:13px;border:1px solid rgba(251,191,36,.45);background:rgba(251,191,36,.14);color:var(--amber)">Print pack →</a> <a href="Unit 1 Worksheets.pdf" style="font-family:Fredoka,sans-serif;font-size:15px;padding:11px 20px;border-radius:13px;border:1px solid rgba(251,191,36,.45);background:rgba(251,191,36,.14);color:var(--amber)">Worksheets · all weeks →</a>
+      <a href="{{ uPackHref }}" style="font-family:Fredoka,sans-serif;font-size:15px;padding:11px 20px;border-radius:13px;border:1px solid rgba(251,191,36,.45);background:rgba(251,191,36,.14);color:var(--amber)">Print pack →</a> <a href="{{ uWsHref }}" style="font-family:Fredoka,sans-serif;font-size:15px;padding:11px 20px;border-radius:13px;border:1px solid rgba(251,191,36,.45);background:rgba(251,191,36,.14);color:var(--amber)">Worksheets · all weeks →</a>
     </div>
 
 
@@ -1287,7 +1287,7 @@
       <sc-if value="{{ wk.isFull }}" hint-placeholder-val="{{ true }}">
         <div style="margin-top:22px;padding-top:20px;border-top:1px dashed rgba(var(--line-rgb),.16);display:flex;align-items:center;gap:14px;flex-wrap:wrap">
           <span style="font-size:13.5px;color:rgba(var(--ink-rgb),.7)">{{ uWeeksNote }}</span>
-          <a href="{{ uPackHref }}" style="font-family:Fredoka,sans-serif;font-size:14.5px;padding:10px 18px;border-radius:12px;background:rgba(251,191,36,.16);border:1px solid rgba(251,191,36,.45);color:var(--amber)">Open the print pack →</a> <a href="Unit 1 Worksheets.pdf" style="font-family:Fredoka,sans-serif;font-size:14.5px;padding:10px 18px;border-radius:12px;background:rgba(251,191,36,.16);border:1px solid rgba(251,191,36,.45);color:var(--amber)">Worksheets · all weeks →</a>
+          <a href="{{ uPackHref }}" style="font-family:Fredoka,sans-serif;font-size:14.5px;padding:10px 18px;border-radius:12px;background:rgba(251,191,36,.16);border:1px solid rgba(251,191,36,.45);color:var(--amber)">Open the print pack →</a> <a href="{{ uWsHref }}" style="font-family:Fredoka,sans-serif;font-size:14.5px;padding:10px 18px;border-radius:12px;background:rgba(251,191,36,.16);border:1px solid rgba(251,191,36,.45);color:var(--amber)">Worksheets · all weeks →</a>
         </div>
       </sc-if>
     </div>

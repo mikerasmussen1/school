@@ -1009,6 +1009,11 @@ class Component extends DCLogic {
       if(d.stepResult) patch.stepResult=d.stepResult;
       if(d.approvals)  patch.approvals=d.approvals;
       if(d.overrides)  patch.overrides=d.overrides;
+      /* unitSeen was pushed but never pulled, so "once per unit, on any device"
+       * was only ever true on the device that celebrated it — a second device
+       * would replay the moment. A whitelist that a writer forgets to extend
+       * fails exactly this quietly. */
+      if(d.unitSeen)   patch.unitSeen=d.unitSeen;
       if(Object.keys(patch).length) this.setState(patch);
     }).catch(()=>{});
   }

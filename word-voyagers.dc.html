@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=2026-09-04-1628"></script>
-  <script data-build>window.__BUILD__="2026-09-04-1628";</script>
-  <script src="./curriculum/freshness.js?v=2026-09-04-1628"></script>
+<script src="./support.js?v=2026-09-04-1631"></script>
+  <script data-build>window.__BUILD__="2026-09-04-1631";</script>
+  <script src="./curriculum/freshness.js?v=2026-09-04-1631"></script>
 </head>
 <body>
 <x-dc>
@@ -39,6 +39,8 @@
   .word-chip{background:var(--paper);border:1px solid var(--rule);border-radius:6px;padding:8px 10px;font-size:.92rem;text-align:center}
   .upload-box{border:2px dashed var(--rule);border-radius:8px;padding:20px;text-align:center;background:var(--paper)}
   .box{background:var(--paper);border:1px solid var(--rule);border-radius:6px;padding:16px 18px}
+  /* Preserves the blank lines between paragraphs without needing a loop. */
+  .passage-flow{white-space:pre-wrap;font-size:1.02rem;line-height:1.7;max-width:66ch}
   .passage-box{background:var(--paper);border:1px solid var(--rule);border-radius:6px;padding:18px 20px;font-size:1.02rem;line-height:1.7;max-width:66ch}
   .preview-img{max-width:100%;max-height:300px;border-radius:6px;border:1px solid var(--rule);margin-top:12px}
   .unit-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
@@ -47,27 +49,27 @@
   .book-title{font-family:'Fraunces',serif;font-size:1rem;color:var(--brick-dark);margin:0 0 3px}
   .done-banner{text-align:center;padding:22px;margin-top:6px;background:var(--forest-light);border-radius:8px;color:#2E4E38}
 </style>
-<script src="./curriculum/sync.js?v=2026-09-04-1628"></script>
-<script src="./curriculum/students.js?v=2026-09-04-1628"></script>
-<script src="./curriculum/subjects.js?v=2026-09-04-1628"></script>
-<script src="./curriculum/question-types.js?v=2026-09-04-1628"></script>
-<script src="./curriculum/la-y1-spine.js?v=2026-09-04-1628"></script>
-<script src="./curriculum/la-y1-words.js?v=2026-09-04-1628"></script>
-<script src="./curriculum/la-y1-grammar.js?v=2026-09-04-1628"></script>
-<script src="./curriculum/la-y1-reading.js?v=2026-09-04-1628"></script>
-<script src="./curriculum/la-y1-tasks.js?v=2026-09-04-1628"></script>
-<script src="./curriculum/la-books.js?v=2026-09-04-1628"></script>
-<script src="./curriculum/la-y2-spine.js?v=2026-09-04-1628"></script>
-<script src="./curriculum/la-y2-words.js?v=2026-09-04-1628"></script>
-<script src="./curriculum/la-y2-grammar.js?v=2026-09-04-1628"></script>
-<script src="./curriculum/la-y2-reading.js?v=2026-09-04-1628"></script>
-<script src="./curriculum/la-y2-tasks.js?v=2026-09-04-1628"></script>
-<script src="./curriculum/la-books-y2.js?v=2026-09-04-1628"></script>
-<script src="./curriculum/la-quotes.js?v=2026-09-04-1628"></script>
-<script src="./curriculum/la-daily-fix.js?v=2026-09-04-1628"></script>
-<script src="./curriculum/la-mastery.js?v=2026-09-04-1628"></script>
-<script src="./curriculum/la-calendar.js?v=2026-09-04-1628"></script>
-<script src="./curriculum/la-grader.js?v=2026-09-04-1628"></script>
+<script src="./curriculum/sync.js?v=2026-09-04-1631"></script>
+<script src="./curriculum/students.js?v=2026-09-04-1631"></script>
+<script src="./curriculum/subjects.js?v=2026-09-04-1631"></script>
+<script src="./curriculum/question-types.js?v=2026-09-04-1631"></script>
+<script src="./curriculum/la-y1-spine.js?v=2026-09-04-1631"></script>
+<script src="./curriculum/la-y1-words.js?v=2026-09-04-1631"></script>
+<script src="./curriculum/la-y1-grammar.js?v=2026-09-04-1631"></script>
+<script src="./curriculum/la-y1-reading.js?v=2026-09-04-1631"></script>
+<script src="./curriculum/la-y1-tasks.js?v=2026-09-04-1631"></script>
+<script src="./curriculum/la-books.js?v=2026-09-04-1631"></script>
+<script src="./curriculum/la-y2-spine.js?v=2026-09-04-1631"></script>
+<script src="./curriculum/la-y2-words.js?v=2026-09-04-1631"></script>
+<script src="./curriculum/la-y2-grammar.js?v=2026-09-04-1631"></script>
+<script src="./curriculum/la-y2-reading.js?v=2026-09-04-1631"></script>
+<script src="./curriculum/la-y2-tasks.js?v=2026-09-04-1631"></script>
+<script src="./curriculum/la-books-y2.js?v=2026-09-04-1631"></script>
+<script src="./curriculum/la-quotes.js?v=2026-09-04-1631"></script>
+<script src="./curriculum/la-daily-fix.js?v=2026-09-04-1631"></script>
+<script src="./curriculum/la-mastery.js?v=2026-09-04-1631"></script>
+<script src="./curriculum/la-calendar.js?v=2026-09-04-1631"></script>
+<script src="./curriculum/la-grader.js?v=2026-09-04-1631"></script>
 </helmet>
 
 <div style="min-height:100vh;display:flex;flex-direction:column">
@@ -364,9 +366,11 @@
               <div class="passage-box" style="margin-top:14px">
                 <div style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:6px">This week's passage — read from here</div>
                 <h3 style="margin:0 0 8px">{{ rdTitle }}</h3>
-                <sc-for list="{{ rdParas }}" as="p" hint-placeholder-count="5">
-                  <p style="margin:0 0 0.9em">{{ p.text }}</p>
-                </sc-for>
+                <!-- One binding, not a loop. This block sits three conditionals
+                     deep and the paragraph loop was not appearing; a single
+                     string with the line breaks preserved in CSS has nothing
+                     left to go wrong. -->
+                <div class="passage-flow">{{ rdText }}</div>
                 <div style="margin-top:10px"><button onClick="{{ rdListen }}" style="{{ btnSecondary }}">Read the passage to me</button></div>
               </div>
             </sc-if>

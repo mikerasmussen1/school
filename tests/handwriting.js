@@ -8,9 +8,9 @@ global.SpeechSynthesisUtterance=function(t){ this.text=t; };
 global.URL={createObjectURL:()=>"b",revokeObjectURL:()=>{}};
 global.fetch=async()=>({ok:false,json:async()=>({})});
 global.location={search:""};
-const fs=require('fs'), D='/home/claude/school/curriculum/';
+const fs=require('fs'), D=__dirname+'/../curriculum/';
 window.Subjects={register(){},all:()=>[]};
-const h=fs.readFileSync('/home/claude/school/word-voyagers.dc.html','utf8');
+const h=fs.readFileSync(__dirname+'/../word-voyagers.dc.html','utf8');
 [...h.matchAll(/src="\.\/curriculum\/([^"?]+)\.js(?:\?[^"]*)?"/g)].map(m=>m[1]).forEach(m=>{try{require(D+m+'.js')}catch(e){}});
 class DCLogic{ setState(p){ this.state={...this.state,...p}; } }
 global.DCLogic=DCLogic;

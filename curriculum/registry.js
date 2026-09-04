@@ -55,11 +55,11 @@ window.Subjects.register({
    * tables. A rows-and-flags digest here would restate the drill-down badly
    * and give a parent two numbers to reconcile.
    *
-   * It also cannot yet do better. Maths still writes pHist/pAns/pStreak at the
-   * TOP LEVEL of the slice rather than into its own `data` namespace (see the
-   * note in subjects.js), so `data` arrives empty and only ctx.slice would
-   * reach the real record. When that migration lands, this becomes the natural
-   * place for "reteach this" flags off most-missed. */
+   * `data` now carries maths' twelve bags — pHist, pAns, pChecked and the rest
+   * — since the storage migration, so this is the natural place to grow
+   * "reteach this" flags off most-missed if the drill-down below ever proves
+   * too much to read. Deliberately not done yet: two views of the same record
+   * that can disagree is worse than one view a parent has to scroll to. */
   summary: function(data, ctx){
     if(!ctx || !ctx.opened) return null;
     return {detail:"Full working record below — every set, every attempt."};

@@ -3533,10 +3533,67 @@ class Component extends DCLogic {
     }
     const {profiles,activeId}=this.store;
     const active=profiles.find(x=>x.id===activeId);
-    if(active){ this.setState({profiles,activeId,gate:false,loaded:true,...this.blank(),...(this.store.data[activeId]||{})}); }
+    if(active){ this.setState({profiles,activeId,gate:false,loaded:true,...this.blank(),...Component.unpackMath(this.store.data[activeId]||{})}); }
     else{ this.setState({profiles,gate:true,loaded:true}); }
   }
   blank(){ return {pAns:{},pChecked:{},pRuns:{},pPaper:{},lstep:{},pHist:{},pLog:{},dyn:{},coach:null,skills:{},snooze:{},pStreak:{},sprintHist:{},subjects:{},lastSubject:null,stream:null,sprint:null,pTier:null,pset:"p1"}; }
+
+  /* MATHS' PROGRESS, AND WHERE IT LIVES
+   *
+   * Every other subject writes into slice.subjects[id].data, the namespace
+   * subjects.js defines. Maths never did: its twelve bags sit at the TOP LEVEL
+   * of the child's slice "for historical reasons", which is why Teacher HQ
+   * still has to special-case it and why math's own summary() is handed an
+   * empty `data`.
+   *
+   * These two functions are the whole migration, and they are deliberately the
+   * only place that knows both shapes. Everything between them — the component's
+   * state, every screen, every read — keeps the flat keys it has always used.
+   * Moving the SERIALISATION is the point; moving 3,000 lines of state access
+   * would be a different and much riskier change for no extra benefit.
+   *
+   * IT WRITES BOTH PLACES ON PURPOSE. Brock and Hank are mid-year with real
+   * work in these bags, and a device that has not reloaded yet still runs the
+   * old build. Writing only the new location would make their progress vanish
+   * on that device; writing only the old one would never migrate. So pack()
+   * writes both and unpack() prefers whichever is NEWER — an old build updates
+   * slice.updated and the flat keys but cannot touch subjects.math.data, and
+   * that comparison is what stops its stale namespace copy winning. The flat
+   * keys can be dropped once both boys' records have been rewritten by this
+   * build, and not before.
+   *
+   * THE SIZE COST IS AFFORDABLE, and worth checking because pushStudent packs
+   * the whole slice into one Firestore string field and swallows its errors —
+   * an oversized document would stop a child syncing with nothing on screen to
+   * say so. A saturated year (every item of all 190 sets answered, every set
+   * checked, history and logs for each) measures ~115 KB flat and ~230 KB
+   * written both ways, against a 1 MB document limit. Roughly a fifth of the
+   * budget, so duplication is not what would break it. */
+  static MATH_BAGS = ["pAns","pChecked","pRuns","lstep","pHist","skills","snooze",
+                      "pLog","dyn","pPaper","pStreak","sprintHist"];
+
+  static packMath(flat){
+    const f = flat || {};
+    const bags = {};
+    Component.MATH_BAGS.forEach(k => { if(f[k] !== undefined) bags[k] = f[k]; });
+    const subjects = {...(f.subjects || {})};
+    const prev = subjects.math || {};
+    subjects.math = {...prev, data:{...(prev.data || {}), ...bags, __at:f.updated || Date.now()}};
+    return {...f, subjects};
+  }
+
+  static unpackMath(stored){
+    const s = stored || {};
+    const d = ((s.subjects || {}).math || {}).data || {};
+    const hasNew = Component.MATH_BAGS.some(k => d[k] !== undefined);
+    if(!hasNew) return s;                       // never migrated: flat is all there is
+    // An older build rewrote the flat keys and carried the namespace copy along
+    // untouched. Its stale copy must not win.
+    if((s.updated || 0) > (d.__at || 0)) return s;
+    const out = {...s};
+    Component.MATH_BAGS.forEach(k => { if(d[k] !== undefined) out[k] = d[k]; });
+    return out;
+  }
 
   /* Start the year over for one pilot, keeping WHO they are and WHERE they were
    * placed. blank() is not enough on its own: it drops `subjects` wholesale, and
@@ -3569,7 +3626,7 @@ class Component extends DCLogic {
     this.store.profiles=profiles; this.store.activeId=activeId;
     const keepCurric=(this.store.data[activeId]||{}).curriculum
       || ((profiles.find(p=>p.id===activeId)||{}).curriculum);
-    if(activeId) this.store.data[activeId]={pAns,pChecked,pRuns,lstep,pHist,skills,snooze,pLog:this.state.pLog,dyn:this.trimDyn(this.state.dyn),pPaper:this.state.pPaper,pStreak:this.state.pStreak,sprintHist:this.state.sprintHist,subjects:this.state.subjects,lastSubject:this.state.lastSubject,curriculum:keepCurric,updated:Date.now()};
+    if(activeId) this.store.data[activeId]=Component.packMath({pAns,pChecked,pRuns,lstep,pHist,skills,snooze,pLog:this.state.pLog,dyn:this.trimDyn(this.state.dyn),pPaper:this.state.pPaper,pStreak:this.state.pStreak,sprintHist:this.state.sprintHist,subjects:this.state.subjects,lastSubject:this.state.lastSubject,curriculum:keepCurric,updated:Date.now()});
     Storage.save(this.store); // local first — survives dropped wifi
     if(Remote.enabled && activeId){
       const prof=profiles.find(x=>x.id===activeId);
@@ -3585,7 +3642,7 @@ class Component extends DCLogic {
     this._enterProfile(id);
   };
   _enterProfile(id){
-    const d=this.store.data[id]||{};
+    const d=Component.unpackMath(this.store.data[id]||{});
     this.setState({activeId:id,gate:false,pinFor:null,pinEntry:"",gateErr:"",view:"today",subjectView:null,
       // The other boy's trail is not this boy's. Two children share this page,
       // so a profile switch has to clear where the last one had been, exactly
@@ -3808,15 +3865,20 @@ class Component extends DCLogic {
      * it the review drill-down quietly fell back to THIS device's own pilots,
      * so the same Mission Control showed different people — and a different
      * "show all answers" — depending on which door you came in through. */
+    /* Every slice handed out here is unpacked, so the drill-down below reads
+     * pLog and dyn off it the way it always has, whichever layout the record
+     * came back in. The active pilot's is built from live state and is already
+     * flat. */
     if(st.tView) return [{id:"t:"+st.tView.key, name:st.tView.name,
-      where:"roster", slice:st.tView.slice||{}}];
+      where:"roster", slice:Component.unpackMath(st.tView.slice||{})}];
     const out=(st.profiles||[]).map(p=>({id:p.id, name:p.name, where:"this device",
-      slice: p.id===st.activeId ? {pLog:st.pLog, dyn:st.dyn} : (this.store.data[p.id]||{})}));
+      slice: p.id===st.activeId ? {pLog:st.pLog, dyn:st.dyn}
+                                : Component.unpackMath(this.store.data[p.id]||{})}));
     const seen={}; out.forEach(o=>{ seen[(o.name||"").trim().toLowerCase()]=1; });
     Object.keys(st.hqSlices||{}).forEach(k=>{
       const g=st.hqSlices[k];
       if(seen[(g.name||"").trim().toLowerCase()]) return;
-      out.push({id:"r:"+k, name:g.name, where:"roster", slice:g.slice||{}});
+      out.push({id:"r:"+k, name:g.name, where:"roster", slice:Component.unpackMath(g.slice||{})});
     });
     return out;
   }
@@ -4416,7 +4478,10 @@ class Component extends DCLogic {
    * normal use, so the child's own HQ is untouched. */
   lens(){
     const v=this.state.tView;
-    return v ? (v.slice||{}) : null;
+    /* Unpacked here so every reader downstream — recVals, the review
+     * drill-down, subjectProgress — keeps seeing the flat keys it always has,
+     * whichever layout the fetched record happens to be stored in. */
+    return v ? Component.unpackMath(v.slice||{}) : null;
   }
 
   /* Suggestions for Teacher HQ. Read-only: approving is what changes anything. */
@@ -4431,11 +4496,15 @@ class Component extends DCLogic {
       const v=st.tView; if(!v) return;
       this.setState({tBusy:true});
       const fresh=await Remote.fetchStudent(v.key);
-      const base=(fresh&&fresh.slice)||v.slice||{};
-      const next={...base,
+      /* skills and snooze are two of maths' bags, so this read-modify-write
+       * has to unpack before patching and pack before pushing. Patching the
+       * flat copy alone would leave the namespaced one holding the teacher's
+       * previous decision, and unpack prefers whichever is newer. */
+      const base=Component.unpackMath((fresh&&fresh.slice)||v.slice||{});
+      const next=Component.packMath({...base,
         skills:patch(base.skills||{}),
         snooze:(snoozePatch||(x=>x))(base.snooze||{}),
-        updated:Date.now()};
+        updated:Date.now()});
       await Remote.pushStudent(v.key,{name:(fresh&&fresh.name)||v.name,color:(fresh&&fresh.color)||"#38BDF8"},next);
       this.setState({tBusy:false,tView:{...v,slice:next},tData:next});
     };

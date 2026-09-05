@@ -104,7 +104,61 @@
     },
     all(){ return list.slice(); },
     get(id){ return byId[id] || null; },
-    has(id){ return !!byId[id]; }
+    has(id){ return !!byId[id]; },
+
+    /* ONE STREAK ACROSS EVERY SUBJECT, counted in school days.
+     *
+     * It lives here because it is defined over the shape this file documents —
+     * slice.subjects[<id>].days — and over ALL of them at once. No subject can
+     * answer it alone, and it must not become something a subject can game.
+     *
+     * WHY NOT PER SUBJECT. Field Notes runs once a week by design, so a daily
+     * science streak would break every Tuesday for doing exactly what the course
+     * asks. Word Voyagers deliberately refuses to judge a child against a
+     * schedule at all (the long note in la-calendar.js). Counting school days on
+     * which ANY subject was touched leaves both of those intact.
+     *
+     * THREE RULES, each there to stop it becoming a stick:
+     *
+     *  1. Weekends and holidays are SKIPPED, not counted and not missed, so a
+     *     fortnight off at Christmas costs nothing. The caller supplies the
+     *     school calendar; without one, every day counts as a school day.
+     *  2. Today is never a miss. The day is not over, and a streak that reads
+     *     zero at breakfast is a reproach for not having started yet.
+     *  3. It only counts up. There is deliberately no "you lost it" anywhere —
+     *     a broken streak simply shows a smaller number.
+     *
+     * Work done ON a weekend neither extends the streak nor breaks it: the day
+     * is skipped whatever is in it. Counting it would make "school days in a
+     * row" mean something else, and a child who works on Saturday should not be
+     * setting a pace they then have to keep.
+     */
+    streak(records, isSchoolDay, today, maxLookback){
+      const recs = records || {};
+      const ids = Object.keys(recs);
+      const did = d => ids.some(id => (((recs[id] || {}).days) || []).indexOf(d) >= 0);
+      const school = typeof isSchoolDay === "function" ? isSchoolDay : null;
+      const back = maxLookback || 400;
+      let n = 0;
+      for(let d = today; d > today - back; d--){
+        if(school && !school(Subjects.localDateOf(d))) continue;
+        if(did(d)){ n++; continue; }
+        if(d === today) continue;                  // the day is not over yet
+        break;
+      }
+      return n;
+    },
+
+    /* A day number as a LOCAL midnight.
+     *
+     * Day numbers are floor(ms / 86400000), which is midnight UTC, but a school
+     * calendar asks getDay() in local time. Handed the raw date, a UTC midnight
+     * is the previous evening anywhere west of Greenwich — so every weekend
+     * would land a day early and the streak would break on Mondays. */
+    localDateOf(dayNumber){
+      const u = new Date(dayNumber * 86400000);
+      return new Date(u.getUTCFullYear(), u.getUTCMonth(), u.getUTCDate());
+    }
   };
 
   window.Subjects = Subjects;

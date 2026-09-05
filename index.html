@@ -185,6 +185,15 @@
       <sc-if value="{{ showSubjBack }}" hint-placeholder-val="{{ true }}">
         <button onClick="{{ goBack }}" style="display:flex;align-items:center;gap:8px;font-family:Fredoka,sans-serif;font-size:12.5px;color:rgba(var(--ink-rgb),.72);background:rgba(var(--line-rgb),.05);border:1px solid rgba(var(--line-rgb),.14);border-radius:999px;padding:7px 14px;white-space:nowrap;cursor:pointer" style-hover="filter:brightness(1.4)">← {{ backLabel }}</button>
       </sc-if>
+      <!-- Jump straight to another subject. Glyph-only: this header already
+           carries the maths tabs and the profile chip and has to fit a phone. -->
+      <sc-if value="{{ showSubjSwitch }}" hint-placeholder-val="{{ true }}">
+        <div style="display:flex;gap:6px;flex-wrap:wrap">
+          <sc-for list="{{ subjSwitch }}" as="sw" hint-placeholder-count="3">
+            <button onClick="{{ sw.go }}" title="{{ sw.name }}" style="{{ sw.style }}" style-hover="filter:brightness(1.3)">{{ sw.glyph }}</button>
+          </sc-for>
+        </div>
+      </sc-if>
     </div>
     <!-- Both of these wrap. The header itself already did, but this row and the
          tab strip inside it did not, so on a phone the four maths tabs and the
@@ -273,6 +282,12 @@
             </div>
           </sc-if>
 
+          <!-- What is actually going on inside the subject, in the subject's
+               own words. Absent until there is something true to say. -->
+          <sc-if value="{{ s.hasDetail }}" hint-placeholder-val="{{ true }}">
+            <div style="font-size:13px;line-height:1.5;color:rgba(var(--ink-rgb),.72)">{{ s.detail }}</div>
+          </sc-if>
+
           <div onClick="{{ s.go }}" style="display:flex;align-items:center;justify-content:space-between;gap:12px;border-top:1px solid rgba(var(--line-rgb),.09);padding-top:12px;cursor:pointer">
             <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(var(--ink-rgb),.42)">{{ s.record }}</div>
             <div style="font-family:Fredoka,sans-serif;font-size:14px;color:{{ s.color }}">{{ s.cta }}</div>
@@ -291,6 +306,17 @@
       </sc-for>
       <div style="flex:1;min-width:180px;text-align:right;font-size:12.5px;color:rgba(var(--ink-rgb),.45)">{{ todayWeekNote }}</div>
     </div>
+
+    <!-- One streak for the whole school, not one per subject: science runs once
+         a week by design and would break a daily streak every Tuesday for doing
+         exactly what it asks. Hidden below two days, and there is deliberately
+         no message for losing one. -->
+    <sc-if value="{{ showStreak }}" hint-placeholder-val="{{ true }}">
+      <div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-top:14px;padding:0 4px">
+        <div style="font-family:Fredoka,sans-serif;font-size:15px;color:var(--green)">{{ streakLine }}</div>
+        <div style="font-size:12.5px;color:rgba(var(--ink-rgb),.45)">{{ streakNote }}</div>
+      </div>
+    </sc-if>
 
     <sc-if value="{{ tEnabled }}" hint-placeholder-val="{{ true }}">
       <button onClick="{{ tOpenFront }}" style="margin-top:22px;font-family:Fredoka,sans-serif;font-size:14px;padding:10px 22px;border-radius:12px;cursor:pointer;background:transparent;border:1px solid rgba(var(--line-rgb),.16);color:rgba(var(--ink-rgb),.5)" style-hover="filter:brightness(1.5)">I'm the teacher →</button>
@@ -6215,6 +6241,31 @@ class Component extends DCLogic {
     const dayName=n=>["Sun","Mon","Tue","Wed","Thu","Fri","Sat"][new Date(n*86400000).getUTCDay()];
     const ago=d=>{ if(d===today) return "today"; if(d===today-1) return "yesterday"; return dayName(d); };
 
+    /* WHERE THE CHILD IS IN A SUBJECT, asked of the subject itself.
+     *
+     * The landing page could say when a subject was last opened but never what
+     * was going on inside it, so four courses looked alike apart from a date.
+     * Each subject already answers exactly this for Teacher HQ through the
+     * `summary` contract in subjects.js, and its `detail` line is written to be
+     * the headline. Reusing it means no subject internals are read here, and a
+     * fifth subject needs no change to this file.
+     *
+     * Guarded for the same reason Mission Control guards it: a subject author's
+     * bug must cost that one card its line, not take the landing page down. */
+    const detailOf=(s,r)=>{
+      if(typeof s.summary!=="function") return "";
+      const days=r.days||[];
+      try{
+        const out=s.summary(r.data||{}, {
+          opened:r.opened||0, days:days, level:r.level||null,
+          recent:days.filter(d=>d>today-28).length,
+          lastDay:days.length?Math.max.apply(null,days):null,
+          today:today, slice:st
+        });
+        return (out&&out.detail)?String(out.detail):"";
+      }catch(e){ return ""; }
+    };
+
     const cards=S.map(s=>{
       const r=rec[s.id]||{};
       const soon=s.status==="soon";
@@ -6227,11 +6278,17 @@ class Component extends DCLogic {
         : soon ? "Opening soon"
         : last!=null ? "Last done "+ago(last)+" · "+(r.opened||0)+" session"+((r.opened||0)===1?"":"s")
         : "Not started yet";
+      const det = (needsLevel||soon||last==null) ? "" : detailOf(s,r);
       return {
         id:s.id, name:s.name, tagline:lvName?s.tagline+" · "+lvName:s.tagline, blurb:s.blurb, glyph:s.glyph,
         color:soon?"rgba(var(--ink-rgb),.45)":s.color,
         go:()=>this.openSubject(s.id),
         record,
+        // Only once there is something to report. Before a subject is started
+        // its summary has nothing true to say, and "no progress yet" sitting
+        // under "Not started yet" is the same sentence twice.
+        detail: det,
+        hasDetail: !!det,
         /* The grade control at the top still sets every subject at once, and
          * is still how a child normally chooses — that part was right, and it
          * keeps the common case to one tap with nothing to get out of step.
@@ -6276,6 +6333,29 @@ class Component extends DCLogic {
       week.push({label:dayName(d).slice(0,1)+(d===today?"·":""), marks:marks||"–",
         dotsStyle:"font-family:Fredoka,sans-serif;font-size:14px;line-height:1;color:"+(marks?"#4ADE80":"rgba(var(--ink-rgb),.2)")});
     }
+    /* ONE STREAK FOR THE WHOLE SCHOOL, and three rules that keep it honest.
+     *
+     * A per-subject streak would have been wrong for this curriculum. Science
+     * runs once a week by design, so a daily science streak would break every
+     * Tuesday for doing exactly what the course asks; and Word Voyagers
+     * deliberately refuses to judge a child against a schedule (the long note
+     * in la-calendar.js). Counting school DAYS instead — any subject counts —
+     * leaves both of those decisions intact.
+     *
+     * 1. WEEKENDS AND BREAKS ARE NOT MISSES. They are skipped entirely, so a
+     *    fortnight off at Christmas costs nothing. LA_CALENDAR already knows
+     *    which days are school days and which are holidays.
+     * 2. TODAY IS NEVER A MISS. The day is not over. A streak that reads zero
+     *    at breakfast is a reproach for not having started yet, which is the
+     *    opposite of the point.
+     * 3. IT ONLY EVER COUNTS UP. There is no "you lost it" message anywhere —
+     *    it simply shows a smaller number, or nothing at all below two. */
+    const schoolStreak=(()=>{
+      const CAL=window.__CURR&&window.__CURR.LA_CALENDAR;
+      if(!window.Subjects||typeof window.Subjects.streak!=="function") return 0;
+      return window.Subjects.streak(rec, CAL&&CAL.isSchoolDay, today);
+    })();
+
     const doneToday=S.filter(s=>(rec[s.id]&&rec[s.id].days||[]).indexOf(today)>=0);
     const andList=a=>a.length<2?(a[0]||""):a.slice(0,-1).join(", ")+" and "+a[a.length-1];
 
@@ -6306,6 +6386,38 @@ class Component extends DCLogic {
       })(),
       showMathTabs:st.view!=="today"&&st.view!=="stub",
       showSubjBack:st.view!=="today",
+
+      /* MOVE BETWEEN SUBJECTS WITHOUT LEAVING THE ONE YOU ARE IN.
+       *
+       * Until now the only route from maths to reading was back out to the
+       * landing page and in again, which is why the subjects felt like three
+       * separate apps that happened to share a login. These are glyph-only on
+       * purpose: the header already carries four maths tabs and a profile chip,
+       * and it has to survive a 390px screen.
+       *
+       * Built from Subjects.all(), so a fourth subject appears here by
+       * registering itself and nothing in this file changes. A subject with
+       * levels that the child has not chosen yet is left out — openSubject
+       * would refuse it anyway, and a chip that does nothing when pressed is
+       * worse than no chip. */
+      showSubjSwitch: st.view!=="today",
+      subjSwitch:(()=>{
+        if(st.view==="today") return [];
+        const here = st.view==="stub" ? st.subjectView : "math";
+        return S.filter(x=>x.status!=="soon")
+          .filter(x=>!(x.levels&&x.levels.length) || !!this.levelOf(x.id))
+          .map(x=>{
+            const on = x.id===here;
+            return {
+              key:x.id, glyph:x.glyph, name:x.name,
+              go:()=>{ if(!on) this.openSubject(x.id); },
+              style:"width:34px;height:34px;border-radius:11px;display:grid;place-items:center;"+
+                "font-family:Fredoka,sans-serif;font-size:16px;cursor:pointer;transition:.15s;padding:0;"+
+                "background:"+(on?x.color+"2E":"rgba(var(--line-rgb),.05)")+";border:1px solid "+
+                (on?x.color+"99":"rgba(var(--line-rgb),.14)")+";color:"+(on?x.color:"rgba(var(--ink-rgb),.55)")
+            };
+          });
+      })(),
       subjGlyph:(cur&&st.view==="stub"?cur.glyph:(st.view==="today"?"B":"×")),
       subjGradient:(cur&&st.view==="stub")?cur.gradient
         :(st.view==="today"?"linear-gradient(150deg,var(--indigo),var(--sky))":"linear-gradient(150deg,var(--orange),var(--pink))"),
@@ -6391,6 +6503,11 @@ class Component extends DCLogic {
       todayCards:cards,
       todayWeek:week,
       todayWeekNote:"Every subject keeps its own record for you.",
+      // Below two it is not a streak, it is a day, and saying "1 in a row"
+      // about a single day invites the child to protect a number.
+      showStreak: schoolStreak>=2,
+      streakLine: schoolStreak+" school days in a row",
+      streakNote: "Weekends and breaks don't count against it.",
 
       stubHeading:stub.heading||"Not ready yet.",
       stubLines:(stub.lines||[]).map((t,i)=>({key:"l"+i,text:t})),

@@ -19,11 +19,18 @@
  * grader itself is innocent and always was; QTypes.grade deliberately accepts
  * .6 for 0.6 and 3/6 for 1/2, and short-answer declares input:"text".
  *
+ * EVERY WAY AN ANSWER GETS IN, not just the typed one. There are three: the
+ * practice box, the tutor's coach box, and the photo of the paper sheet. The
+ * paper path kept its own copy of this same bug after the typed box was fixed,
+ * because the first version of this check only knew about boxes — it stripped
+ * to [0-9./-], so a photographed "yes" or "isosceles" became empty and was
+ * dropped without a word to the child.
+ *
  * HOW THIS CHECK AVOIDS GOING STALE
- * It does not hardcode what the box allows. It reads the handler and the input
- * markup back out of index.html and applies whatever it finds to every answer
- * in every bank. Reintroduce a filter and this fails naming the answers it
- * breaks; tighten the length cap and it fails naming what it truncates.
+ * It does not hardcode what any of them allow. It reads the handlers and the
+ * input markup back out of index.html and RUNS them against every answer in
+ * every bank. Reintroduce a filter and this fails naming the answers it breaks;
+ * tighten a length cap and it fails naming what it truncates.
  */
 const fs = require("fs");
 const path = require("path");
@@ -133,6 +140,37 @@ for (const m of page.matchAll(/\bset:\s*e\s*=>\s*\{/g)) {
   const body = bodyAfter(page, m.index);
   if (body == null) continue;
   boxes.push(makeBox(body, page.slice(0, m.index).split("\n").length));
+}
+
+/* THE OTHER WAY AN ANSWER GETS IN: photographed off the paper sheet.
+ *
+ * This check was written for the typed box and found only that, which is how
+ * the paper path kept its own copy of the same bug for a while afterwards — it
+ * stripped to [0-9./-] and cut at 9, so a photographed "yes" or "isosceles"
+ * became empty and was dropped without a word to the child.
+ *
+ * An answer is an answer however it arrives, so the ingestion line is measured
+ * with the same bank and the same rule. Matched on the assignment rather than a
+ * function boundary because it is one statement inside a saveState callback. */
+{
+  const m = page.match(/const\s+v\s*=\s*String\(ansMap\[k\][\s\S]*?;/);
+  if (!m) {
+    console.error("  FAIL  could not find the paper-photo answer line in index.html");
+    console.error("        If it moved, update this check — do not delete it.\n");
+    process.exit(2);
+  }
+  const expr = (m[0].match(/=\s*([\s\S]*);$/) || [])[1];
+  let fn = null;
+  try { fn = new Function("ansMap", "k", ...constNames, "return (" + expr + ");"); }
+  catch (e) { fn = null; }
+  boxes.push(fn ? {
+    line: page.slice(0, m.index).split("\n").length,
+    expr: ("paper photo: " + expr.replace(/\s+/g, " ")).slice(0, 88),
+    apply(raw) { return String(fn({ k: raw }, "k", ...constVals)); }
+  } : {
+    line: page.slice(0, m.index).split("\n").length,
+    error: "the paper-photo answer line would not compile"
+  });
 }
 if (!boxes.length) {
   console.error("  FAIL  found no answer handlers in index.html");

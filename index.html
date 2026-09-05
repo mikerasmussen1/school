@@ -4191,7 +4191,27 @@ class Component extends DCLogic {
         Object.keys(ansMap).forEach(k=>{
           const idx=byN[String(k).replace(/[^0-9]/g,"")];
           if(idx==null) return;
-          const v=String(ansMap[k]==null?"":ansMap[k]).replace(/[^0-9./-]/g,"").slice(0,9);
+          /* WHATEVER WAS READ OFF THE PAGE, not just the digits of it.
+           *
+           * This used to strip to [0-9./-] and cut at 9, which is the same
+           * mistake the typed answer box made. 495 of the bank's 9,300 answers
+           * — 5.3% — could not survive it: 370 worded keys like "yes",
+           * "tenths", "coprime" and "isosceles", plus comma-formatted numbers
+           * like "1,000" and anything over nine characters. Each came back as
+           * an empty string and was then dropped by the `if(v)` below, so the
+           * child's paper work simply vanished for those questions, silently,
+           * and the set looked half-finished.
+           *
+           * (The typed box's 25% is a different and larger number, because that
+           * filter also stripped decimal points and fraction slashes. Carrying
+           * it over to this line was wrong and the review caught it.)
+           *
+           * The reader is Gemini vision, which has no more trouble with "yes"
+           * than with "0.5", so there was never a reading reason for the filter
+           * either. Whitespace is collapsed because handwriting OCR is loose
+           * about it and the grader's norm() would strip it anyway; the 24-cap
+           * matches the typed box, over the longest key in any bank (17). */
+          const v=String(ansMap[k]==null?"":ansMap[k]).replace(/\s+/g," ").trim().slice(0,24);
           if(v){ filled[idx]=v; hits++; }
         });
         return {pAns:{...st.pAns,[setId]:filled},paperFlow:null,

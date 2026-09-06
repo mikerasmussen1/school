@@ -4970,8 +4970,14 @@ class Component extends DCLogic {
                 })),
                 /* "He did this": the teacher's word that the day happened,
                  * for the mornings the app and the child disagreed. Settles
-                 * the day's misses out of the suggestions; colours stay. */
-                hasVouch:col.cells.some(c=>c.status!=="gray") || on,
+                 * the day's misses out of the suggestions; colours stay.
+                 *
+                 * On EVERY day, including all-gray ones — a day with no
+                 * attempts is exactly the day most likely to need vouching,
+                 * since work done off-app during a curriculum change leaves
+                 * no log at all. The first version only offered the button
+                 * where evidence existed, which is backwards. */
+                hasVouch:true,
                 vouchLabel:on ? "✓ he did this" : "He did this",
                 vouchTitle:on
                   ? "Vouched — this day's misses are not suggested. Tap to withdraw."

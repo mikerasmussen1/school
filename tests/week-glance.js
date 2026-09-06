@@ -120,6 +120,50 @@ console.log("\n=== the queue ===");
               {qid:"c",done:false}], D+1).map(e=>e.qid), ["a","c"]);
 }
 
+console.log("\n=== a vouched day is settled ===");
+{
+  // Same grid as above: s1 has a red cell (s1::c), s2 has a red cell (s2::d).
+  is("without a vouch both reds are suggested",
+     G.suggest(grid, LOG, [], D+2).length, 2);
+  is("vouching a day removes ITS misses from suggestions",
+     G.suggest(grid, LOG, [], D+2, {s1:D+1}).map(s=>s.qid), ["s2::d"]);
+  is("vouching every day silences the mill entirely",
+     G.suggest(grid, LOG, [], D+2, {s1:D+1, s2:D+1}), []);
+  is("the grid itself stays honest — a vouch changes no colour",
+     G.weekGrid(SETS, LOG, idFor)[0].cells.map(c=>c.status),
+     ["green","yellow","red"]);
+}
+
+console.log("\n=== bundles and approve-all ===");
+{
+  const sugs=[{qid:"a1",setId:"s1"},{qid:"b1",setId:"s2"},
+              {qid:"a2",setId:"s1"},{qid:"b2",setId:"s2"}];
+  const bs=G.bundle(sugs);
+  is("one bundle per source set, first-seen order",
+     bs.map(b=>b.setId), ["s1","s2"]);
+  is("rank order survives inside a bundle",
+     bs[0].sugs.map(s=>s.qid), ["a1","a2"]);
+  is("bundling never loses a suggestion",
+     bs.reduce((n,b)=>n+b.sugs.length,0), sugs.length);
+
+  let r=G.approveMany([], sugs, D);
+  is("approve-all adds them all", [r.added, G.due(r.queue).length], [4,4]);
+  is("nothing skipped when there is room", r.skipped, []);
+  const again=G.approveMany(r.queue, sugs, D);
+  is("approving the same bundle twice adds nothing",
+     [again.added, again.skipped.length], [0,4]);
+  is("and says why", again.skipped[0].why, "already queued");
+
+  // Fill to one below the cap, then approve a bundle of three: two fit, one
+  // reported — never refused outright, never silently dropped.
+  let q=[]; for(let i=0;i<G.QUEUE_CAP-2;i++) q=G.approve(q,{qid:"x"+i,setId:"s"},D).queue;
+  const part=G.approveMany(q, [{qid:"p1",setId:"s"},{qid:"p2",setId:"s"},{qid:"p3",setId:"s"}], D);
+  is("a bundle bigger than the room fills what fits",
+     [part.added, part.skipped.length], [2,1]);
+  is("and names the one left out",
+     [part.skipped[0].qid, part.skipped[0].why], ["p3","queue full ("+G.QUEUE_CAP+")"]);
+}
+
 console.log();
 if (fail.length) {
   console.error("  " + fail.length + " FAILED: " + fail.join("; ") + "\n");

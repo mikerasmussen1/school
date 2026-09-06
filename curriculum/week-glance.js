@@ -109,13 +109,20 @@
    * Anything already queued, or resolved within the keep window, stays out so
    * approving is idempotent and a fixed item does not nag.
    */
-  function suggest(grid, pLog, queue, today){
+  function suggest(grid, pLog, queue, today, vouched){
     const q = queue||[];
     const blocked = new Set(q
       .filter(e => !e.done || (today - (e.doneAt||0)) < DONE_KEEP_DAYS)
       .map(e => e.qid));
+    const v = vouched||{};
     const out = [];
     grid.forEach(col => col.cells.forEach(c => {
+      /* A VOUCHED day is a teacher's word that the work happened — recorded
+       * when the app and the child disagreed (a curriculum change landed
+       * mid-morning, work done that the log never saw). The grid stays honest
+       * about what the log holds, but a vouched day's misses must not feed
+       * the suggestion mill: the teacher already said the day is settled. */
+      if(v[c.setId]) return;
       if(c.status !== "red" || blocked.has(c.qid)) return;
       const entries = ((pLog||{})[c.setId]||[]).filter(e => e.qid === c.qid && e.ok === false);
       const lastWrong = entries.length ? Math.max.apply(null, entries.map(e => e.d||0)) : 0;
@@ -154,6 +161,35 @@
     return changed ? prune(q, today) : q;
   }
 
+  /* Suggestions grouped into bundles — one per source set, in rank order.
+   * A bundle is the unit a teacher thinks in ("Tuesday's misses"), so it is
+   * the unit they approve in. Grouping never reorders within a bundle. */
+  function bundle(sugs){
+    const by = {}, order = [];
+    (sugs||[]).forEach(s => {
+      if(!by[s.setId]){ by[s.setId] = []; order.push(s.setId); }
+      by[s.setId].push(s);
+    });
+    return order.map(id => ({setId:id, sugs:by[id]}));
+  }
+
+  /* Approve several at once — a bundle, or everything on screen.
+   *
+   * Fills the queue as far as it goes and reports what would not fit, rather
+   * than refusing the lot or silently dropping the tail. Approving a bundle
+   * twice adds nothing the second time, same as single approve. */
+  function approveMany(queue, sugs, today){
+    let q = (queue||[]).slice();
+    let added = 0; const skipped = [];
+    (sugs||[]).forEach(s => {
+      const r = approve(q, s, today);
+      q = r.queue;
+      if(r.added) added++;
+      else skipped.push({qid:s.qid, why:r.why});
+    });
+    return {queue:q, added:added, skipped:skipped};
+  }
+
   function due(queue){ return (queue||[]).filter(e => !e.done); }
 
   function prune(queue, today){
@@ -162,6 +198,6 @@
 
   window.__CURR = window.__CURR || {};
   window.__CURR.WeekGlance = {itemStatus, weekGrid, summarise, suggest,
-                              approve, record, due, prune,
+                              approve, approveMany, bundle, record, due, prune,
                               QUEUE_CAP, SUGGEST_CAP, DONE_KEEP_DAYS};
 })();

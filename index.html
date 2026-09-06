@@ -2024,6 +2024,11 @@
                       <div style="{{ c.style }}" title="{{ c.hint }}">{{ c.label }}</div>
                     </sc-for>
                   </div>
+                  <!-- the teacher's word that the day happened, for mornings
+                       the app and the child disagreed -->
+                  <sc-if value="{{ col.hasVouch }}" hint-placeholder-val="{{ false }}">
+                    <button onClick="{{ col.vouchGo }}" title="{{ col.vouchTitle }}" style="{{ col.vouchStyle }}" style-hover="filter:brightness(1.3)">{{ col.vouchLabel }}</button>
+                  </sc-if>
                 </div>
               </sc-for>
             </div>
@@ -2042,20 +2047,29 @@
             </sc-if>
 
             <sc-if value="{{ p.hasSugs }}" hint-placeholder-val="{{ true }}">
-              <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--sky);margin:16px 0 8px">{{ p.sugHead }}</div>
-              <div style="display:flex;flex-direction:column;gap:8px">
-                <sc-for list="{{ p.sugs }}" as="sg" hint-placeholder-count="3">
-                  <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;background:rgba(var(--well-rgb),.2);border:1px solid rgba(var(--line-rgb),.09);border-radius:12px;padding:10px 14px">
-                    <div style="flex:1;min-width:220px">
-                      <div style="font-size:13px;line-height:1.45">{{ sg.text }}</div>
-                      <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;color:rgba(var(--ink-rgb),.45);margin-top:3px">{{ sg.evidence }}</div>
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:16px 0 8px">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--sky)">{{ p.sugHead }}</div>
+                <sc-if value="{{ p.hasApproveAll }}" hint-placeholder-val="{{ true }}">
+                  <button onClick="{{ p.approveAllGo }}" style="font-family:Fredoka,sans-serif;font-size:13.5px;padding:9px 20px;border-radius:11px;cursor:pointer;background:rgba(56,189,248,.2);border:1px solid rgba(56,189,248,.6);color:var(--sky)" style-hover="filter:brightness(1.2)">{{ p.approveAllLabel }}</button>
+                </sc-if>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:10px">
+                <!-- one bundle per day's set: the unit a teacher thinks in is
+                     the unit they approve in -->
+                <sc-for list="{{ p.bundles }}" as="b" hint-placeholder-count="2">
+                  <div style="background:rgba(var(--well-rgb),.2);border:1px solid rgba(var(--line-rgb),.09);border-radius:12px;padding:12px 14px">
+                    <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:8px">
+                      <div style="font-family:Fredoka,sans-serif;font-size:14.5px;color:rgba(var(--ink-rgb),.85)">{{ b.head }} <span style="font-family:'JetBrains Mono',monospace;font-size:9.5px;color:rgba(var(--ink-rgb),.45)">{{ b.count }}</span></div>
+                      <button onClick="{{ b.go }}" style="font-family:Fredoka,sans-serif;font-size:13px;padding:8px 18px;border-radius:11px;cursor:pointer;background:rgba(56,189,248,.14);border:1px solid rgba(56,189,248,.5);color:var(--sky)" style-hover="filter:brightness(1.2)">{{ b.btnLabel }}</button>
                     </div>
-                    <sc-if value="{{ sg.canApprove }}" hint-placeholder-val="{{ true }}">
-                      <button onClick="{{ sg.approve }}" style="font-family:Fredoka,sans-serif;font-size:13px;padding:8px 18px;border-radius:11px;cursor:pointer;background:rgba(56,189,248,.14);border:1px solid rgba(56,189,248,.5);color:var(--sky)" style-hover="filter:brightness(1.2)">{{ sg.approveLabel }}</button>
-                    </sc-if>
-                    <sc-if value="{{ sg.cantApprove }}" hint-placeholder-val="{{ false }}">
-                      <div style="font-size:11px;color:rgba(var(--ink-rgb),.45)">{{ sg.approveLabel }}</div>
-                    </sc-if>
+                    <div style="display:flex;flex-direction:column;gap:5px">
+                      <sc-for list="{{ b.items }}" as="sg" hint-placeholder-count="2">
+                        <div style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap">
+                          <div style="font-size:13px;line-height:1.45;flex:1;min-width:200px">{{ sg.text }}</div>
+                          <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;color:rgba(var(--ink-rgb),.45)">{{ sg.evidence }}</div>
+                        </div>
+                      </sc-for>
+                    </div>
                   </div>
                 </sc-for>
               </div>
@@ -2531,6 +2545,9 @@
                 <div style="font-size:13px;line-height:1.5;color:rgba(var(--ink-rgb),.68);max-width:560px">{{ r.why }}</div>
               </div>
               <div style="display:flex;flex-direction:column;gap:9px;align-items:stretch">
+                <sc-if value="{{ r.hasQueue }}" hint-placeholder-val="{{ false }}">
+                  <button onClick="{{ r.queueGo }}" style="{{ r.queueStyle }}" style-hover="filter:brightness(1.18)">{{ r.queueLabel }}</button>
+                </sc-if>
                 <button onClick="{{ r.primary }}" style="{{ r.primaryStyle }}" style-hover="filter:brightness(1.18)">{{ r.primaryLabel }}</button>
                 <button onClick="{{ r.secondary }}" style="{{ r.secondaryStyle }}" style-hover="filter:brightness(1.25)">{{ r.secondaryLabel }}</button>
               </div>
@@ -3760,7 +3777,7 @@ class Component extends DCLogic {
            dyn:{}, coach:null, dynBusy:false, dynErr:"",
            hqWho:null, hqUnit:null, hqWeek:null, hqSet:null, hqTier:null,
            hqSlices:{}, hqLoadingRoster:false,
-           pHist:{}, skills:{}, snooze:{}, pFull:{}, pweek:1, pStreak:{}, sprintHist:{}, review:[], reviewAns:{}, reviewMarks:{}, wgSel:{}, stream:null, sprint:null,
+           pHist:{}, skills:{}, snooze:{}, pFull:{}, pweek:1, pStreak:{}, sprintHist:{}, review:[], vouch:{}, reviewAns:{}, reviewMarks:{}, wgSel:{}, stream:null, sprint:null,
            tCode:"", tRoster:null, tKey:null, tSel:"", tData:null, tBusy:false, tErr:"",
            tAddName:"", tAddPin:"", tFront:false, tView:null, tFromGate:false,
            tSubject:"all", pickGrade:false,
@@ -4077,7 +4094,7 @@ class Component extends DCLogic {
     if(active){ this.setState({profiles,activeId,gate:false,loaded:true,...this.blank(),...Component.unpackMath(this.store.data[activeId]||{})}); }
     else{ this.setState({profiles,gate:true,loaded:true}); }
   }
-  blank(){ return {pAns:{},pChecked:{},pRuns:{},pPaper:{},lstep:{},pHist:{},pLog:{},dyn:{},coach:null,skills:{},snooze:{},pStreak:{},sprintHist:{},review:[],reviewAns:{},reviewMarks:{},wgSel:{},subjects:{},lastSubject:null,stream:null,sprint:null,pTier:null,pset:"p1"}; }
+  blank(){ return {pAns:{},pChecked:{},pRuns:{},pPaper:{},lstep:{},pHist:{},pLog:{},dyn:{},coach:null,skills:{},snooze:{},pStreak:{},sprintHist:{},review:[],vouch:{},reviewAns:{},reviewMarks:{},wgSel:{},subjects:{},lastSubject:null,stream:null,sprint:null,pTier:null,pset:"p1"}; }
 
   /* MATHS' PROGRESS, AND WHERE IT LIVES
    *
@@ -4111,7 +4128,7 @@ class Component extends DCLogic {
    * written both ways, against a 1 MB document limit. Roughly a fifth of the
    * budget, so duplication is not what would break it. */
   static MATH_BAGS = ["pAns","pChecked","pRuns","lstep","pHist","skills","snooze",
-                      "pLog","dyn","pPaper","pStreak","sprintHist","review"];
+                      "pLog","dyn","pPaper","pStreak","sprintHist","review","vouch"];
 
   static packMath(flat){
     const f = flat || {};
@@ -4167,7 +4184,7 @@ class Component extends DCLogic {
     this.store.profiles=profiles; this.store.activeId=activeId;
     const keepCurric=(this.store.data[activeId]||{}).curriculum
       || ((profiles.find(p=>p.id===activeId)||{}).curriculum);
-    if(activeId) this.store.data[activeId]=Component.packMath({pAns,pChecked,pRuns,lstep,pHist,skills,snooze,pLog:this.state.pLog,dyn:this.trimDyn(this.state.dyn),pPaper:this.state.pPaper,pStreak:this.state.pStreak,sprintHist:this.state.sprintHist,review:this.state.review,subjects:this.state.subjects,lastSubject:this.state.lastSubject,curriculum:keepCurric,updated:Date.now()});
+    if(activeId) this.store.data[activeId]=Component.packMath({pAns,pChecked,pRuns,lstep,pHist,skills,snooze,pLog:this.state.pLog,dyn:this.trimDyn(this.state.dyn),pPaper:this.state.pPaper,pStreak:this.state.pStreak,sprintHist:this.state.sprintHist,review:this.state.review,vouch:this.state.vouch,subjects:this.state.subjects,lastSubject:this.state.lastSubject,curriculum:keepCurric,updated:Date.now()});
     Storage.save(this.store); // local first — survives dropped wifi
     if(Remote.enabled && activeId){
       const prof=profiles.find(x=>x.id===activeId);
@@ -4372,9 +4389,9 @@ class Component extends DCLogic {
   componentDidUpdate(){
     const {activeId,pAns,pChecked,pRuns,pPaper,lstep}=this.state;
     if(!activeId) return;
-    const prev=this._snap, {pHist,skills,snooze,review}=this.state;
-    if(prev && prev.id===activeId && prev.pAns===pAns && prev.pChecked===pChecked && prev.pRuns===pRuns && prev.pPaper===pPaper && prev.lstep===lstep && prev.pHist===pHist && prev.skills===skills && prev.snooze===snooze && prev.review===review) return;
-    this._snap={id:activeId,pAns,pChecked,pRuns,pPaper,lstep,pHist,skills,snooze,review};
+    const prev=this._snap, {pHist,skills,snooze,review,vouch}=this.state;
+    if(prev && prev.id===activeId && prev.pAns===pAns && prev.pChecked===pChecked && prev.pRuns===pRuns && prev.pPaper===pPaper && prev.lstep===lstep && prev.pHist===pHist && prev.skills===skills && prev.snooze===snooze && prev.review===review && prev.vouch===vouch) return;
+    this._snap={id:activeId,pAns,pChecked,pRuns,pPaper,lstep,pHist,skills,snooze,review,vouch};
     this.persist();
   }
 
@@ -4789,11 +4806,78 @@ class Component extends DCLogic {
     return {all, meta};
   }
 
-  approveReview(sug){
+  /* Approve one or many suggestions into the review queue.
+   *
+   * TWO WRITE PATHS, chosen by who is being viewed. The local child is a
+   * saveState like any other. A VIEWED PILOT is written through the same
+   * read-modify-write seam recVals already uses for skills — fetch fresh,
+   * unpack, patch the queue, pack, push — so approving from Mission Control
+   * works wherever the teacher happens to be standing. The first version of
+   * this feature disabled the button for pilots instead; the seam was sitting
+   * forty lines below it the whole time. */
+  approveReview(sug){ this.approveReviewMany([sug]); }
+  approveReviewMany(sugs){
     const G=(window.__CURR||{}).WeekGlance;
-    if(!G) return;
-    this.saveState(s=>({review:G.approve(s.review||[], sug, dayNo()).queue}));
+    if(!G || !sugs || !sugs.length) return;
+    const L=this.lens&&this.lens();
+    if(!L){
+      this.saveState(s=>({review:G.approveMany(s.review||[], sugs, dayNo()).queue}));
+      return;
+    }
+    this._remoteReviewAdd(sugs);
   }
+  /* "He did this" — the teacher's word that a day's work happened, recorded
+   * against the SET (the sets are the days). Recorded when the app and the
+   * child disagreed — a curriculum change landed mid-morning, or work was
+   * done that the log never saw — so that day's misses stop feeding the
+   * suggestion mill. A second press withdraws it. The grid's colours never
+   * change: the vouch settles the day, it does not rewrite what the log
+   * holds. */
+  vouchDay(setId){
+    const L=this.lens&&this.lens();
+    if(!L){
+      this.saveState(s=>{
+        const v={...(s.vouch||{})};
+        if(v[setId]) delete v[setId]; else v[setId]=dayNo();
+        return {vouch:v};
+      });
+      return;
+    }
+    this._remoteVouch(setId);
+  }
+  _remoteVouch=async(setId)=>{
+    const v=this.state.tView; if(!v) return;
+    this.setState({tBusy:true});
+    try{
+      const fresh=await Remote.fetchStudent(v.key);
+      const base=Component.unpackMath((fresh&&fresh.slice)||v.slice||{});
+      const vch={...(base.vouch||{})};
+      if(vch[setId]) delete vch[setId]; else vch[setId]=dayNo();
+      const next=Component.packMath({...base, vouch:vch, updated:Date.now()});
+      await Remote.pushStudent(v.key,{name:(fresh&&fresh.name)||v.name,color:(fresh&&fresh.color)||"#38BDF8"},next);
+      this.setState({tBusy:false,tView:{...v,slice:next},tData:next});
+    }catch(e){
+      this.setState({tBusy:false,tErr:"Could not record that: "+(e&&e.message||e)});
+    }
+  };
+  _remoteReviewAdd=async(sugs)=>{
+    const G=(window.__CURR||{}).WeekGlance;
+    const v=this.state.tView; if(!v||!G) return;
+    this.setState({tBusy:true});
+    try{
+      const fresh=await Remote.fetchStudent(v.key);
+      // review is a maths bag, so unpack before patching and pack after —
+      // patching the flat copy alone leaves a newer namespaced copy to win.
+      const base=Component.unpackMath((fresh&&fresh.slice)||v.slice||{});
+      const next=Component.packMath({...base,
+        review:G.approveMany(base.review||[], sugs, dayNo()).queue,
+        updated:Date.now()});
+      await Remote.pushStudent(v.key,{name:(fresh&&fresh.name)||v.name,color:(fresh&&fresh.color)||"#38BDF8"},next);
+      this.setState({tBusy:false,tView:{...v,slice:next},tData:next});
+    }catch(e){
+      this.setState({tBusy:false,tErr:"Could not add the review: "+(e&&e.message||e)});
+    }
+  };
 
   weekGlanceVals(){
     const st=this.state;
@@ -4857,7 +4941,8 @@ class Component extends DCLogic {
           const weekSets=all.filter(s=>meta[s.id].u===cur.u && (s.w||1)===cur.w);
           const grid=G.weekGrid(weekSets, slice.pLog||{}, QTypes.idFor);
           const sum=G.summarise(grid);
-          const sugs=G.suggest(grid, slice.pLog||{}, slice.review||[], today);
+          const vouched=slice.vouch||{};
+          const sugs=G.suggest(grid, slice.pLog||{}, slice.review||[], today, vouched);
           const dueNow=G.due(slice.review||[]).length;
           const attempted=sum.attempted>0;
           const isBack=front && (cur.u!==front.u || cur.w!==front.w);
@@ -4874,28 +4959,58 @@ class Component extends DCLogic {
             hasWeekTabs:avail.length>1,
             empty:!attempted,
             emptyNote:"Nothing attempted in this week's sets yet — the grid fills in as work happens.",
-            columns:grid.map(col=>({
-              label:col.label, title:col.title,
-              cells:col.cells.map(c=>({
-                label:String(c.n),
-                hint:"Q"+c.n+" · "+WORD[c.status]+" — "+c.q.slice(0,80),
-                style:cellStyle(c.status)
-              }))
-            })),
+            columns:grid.map(col=>{
+              const on=!!vouched[col.setId];
+              return {
+                label:col.label, title:col.title,
+                cells:col.cells.map(c=>({
+                  label:String(c.n),
+                  hint:"Q"+c.n+" · "+WORD[c.status]+" — "+c.q.slice(0,80),
+                  style:cellStyle(c.status)
+                })),
+                /* "He did this": the teacher's word that the day happened,
+                 * for the mornings the app and the child disagreed. Settles
+                 * the day's misses out of the suggestions; colours stay. */
+                hasVouch:col.cells.some(c=>c.status!=="gray") || on,
+                vouchLabel:on ? "✓ he did this" : "He did this",
+                vouchTitle:on
+                  ? "Vouched — this day's misses are not suggested. Tap to withdraw."
+                  : "Mark this day as done despite what the log shows — its misses stop feeding suggestions.",
+                /* guarded like every sibling remote-write button in this diff — a
+                 * double-tap on a viewed pilot must not race two push cycles */
+                vouchGo:()=>{ if(!st.tBusy) self2.vouchDay(col.setId); },
+                vouchStyle:"font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:.05em;"+
+                  "padding:4px 8px;border-radius:8px;cursor:pointer;white-space:nowrap;transition:.15s;"+
+                  "background:"+(on?"rgba(74,222,128,.16)":"rgba(var(--line-rgb),.05)")+";border:1px solid "+
+                  (on?"rgba(74,222,128,.5)":"rgba(var(--line-rgb),.14)")+";color:"+
+                  (on?"var(--green)":"rgba(var(--ink-rgb),.45)")
+              };
+            }),
             well:sum.well, struggle:sum.struggle,
             hasWell:sum.well.length>0, hasStruggle:sum.struggle.length>0,
-            sugs:sugs.map(sg=>{
-              const label=(meta[sg.setId]&&meta[sg.setId].set.label)||sg.setId;
+            /* Bundled by source day, approved a bundle at a time — six
+             * separate Approve taps was homework about homework. Approve all
+             * takes the lot. Both write to the local child directly, or to a
+             * viewed pilot through the same fetch-patch-push seam skills use,
+             * so Mission Control can add from wherever the teacher stands. */
+            bundles:G.bundle(sugs).map(b=>{
+              const m=meta[b.setId];
               return {
-                text:"Q"+sg.n+" of "+label+" — "+sg.q.slice(0,80),
-                evidence:sg.evidence,
-                canApprove:local, cantApprove:!local,
-                approveLabel:local?"Approve":"Open on the child's profile to add",
-                approve:local?function(){ self2.approveReview(sg); }:function(){}
+                head:((m&&m.set.label)||b.setId)+(m&&m.set.title?" · "+m.set.title:""),
+                count:b.sugs.length+" question"+(b.sugs.length===1?"":"s"),
+                items:b.sugs.map(sg=>({
+                  text:"Q"+sg.n+" — "+sg.q.slice(0,80),
+                  evidence:sg.evidence
+                })),
+                btnLabel:st.tBusy?"Adding…":("Approve these "+b.sugs.length),
+                go:()=>{ if(!st.tBusy) self2.approveReviewMany(b.sugs); }
               };
             }),
             hasSugs:sugs.length>0,
-            sugHead:"Worth another meeting — Approve adds it to the start of practice",
+            hasApproveAll:sugs.length>1,
+            approveAllLabel:st.tBusy?"Adding…":("Approve all "+sugs.length),
+            approveAllGo:()=>{ if(!st.tBusy) self2.approveReviewMany(sugs); },
+            sugHead:"Worth another meeting — approving adds them to the start of practice",
             queueNote:dueNow
               ? dueNow+" review question"+(dueNow===1?"":"s")+" waiting in practice now"
               : ""
@@ -4927,7 +5042,8 @@ class Component extends DCLogic {
          hasWeekTabs:wlist.length>1,
          empty:false, emptyNote:"",
          columns:(g.columns||[]).map(col=>({
-           label:col.label||"", title:"",
+           label:col.label||"", title:"", hasVouch:false,
+           vouchLabel:"", vouchTitle:"", vouchGo:function(){}, vouchStyle:"",
            cells:(col.cells||[]).map(c=>({
              label:"", hint:c.hint||"",
              style:cellStyle(CELL[c.status]?c.status:"gray")
@@ -4935,7 +5051,8 @@ class Component extends DCLogic {
          })),
          well:g.well||[], struggle:g.struggle||[],
          hasWell:(g.well||[]).length>0, hasStruggle:(g.struggle||[]).length>0,
-         sugs:[], hasSugs:false, sugHead:"", queueNote:""
+         bundles:[], hasSugs:false, hasApproveAll:false,
+         approveAllLabel:"", approveAllGo:function(){}, sugHead:"", queueNote:""
        });
      });
 
@@ -5109,7 +5226,11 @@ class Component extends DCLogic {
       restart:()=>restartPilot(x.key,x.name),
       restartStyle:"position:absolute;top:9px;left:9px;width:25px;height:25px;border-radius:50%;border:1px solid rgba(var(--line-rgb),.18);background:rgba(11,15,36,.75);color:rgba(var(--ink-rgb),.62);font-family:Fredoka,sans-serif;font-size:13px;line-height:1;cursor:pointer;display:grid;place-items:center;padding:0",
       dropStyle:"position:absolute;top:9px;right:9px;width:25px;height:25px;border-radius:50%;border:1px solid rgba(var(--line-rgb),.18);background:rgba(11,15,36,.75);color:rgba(var(--ink-rgb),.62);font-family:Fredoka,sans-serif;font-size:15px;line-height:1;cursor:pointer;display:grid;place-items:center;padding:0",
-      cardStyle:"position:relative;background:"+(st.tSel===x.key?"rgba(56,189,248,.14)":"rgba(var(--line-rgb),.05)")+";border:1px solid "+(st.tSel===x.key?"rgba(56,189,248,.55)":"rgba(var(--line-rgb),.12)")+";border-radius:22px;padding:24px 22px;display:flex;flex-direction:column;align-items:center;gap:11px;min-width:186px;cursor:pointer;transition:.15s",
+      /* color set EXPLICITLY because this card is a BUTTON. A div inherits the
+       * page's light ink, but a native button's text defaults to buttontext —
+       * black — so the pilot's name rendered black on the near-black teacher
+       * screen: present, unreadable, and invisible in every div-based test. */
+      cardStyle:"position:relative;background:"+(st.tSel===x.key?"rgba(56,189,248,.14)":"rgba(var(--line-rgb),.05)")+";border:1px solid "+(st.tSel===x.key?"rgba(56,189,248,.55)":"rgba(var(--line-rgb),.12)")+";border-radius:22px;padding:24px 22px;display:flex;flex-direction:column;align-items:center;gap:11px;min-width:186px;cursor:pointer;transition:.15s;color:var(--ink)",
       avatarStyle:"width:72px;height:72px;border-radius:50%;background:radial-gradient(circle at 34% 28%, "+(x.color||"#38BDF8")+", "+(x.color||"#38BDF8")+"AA);color:var(--bg);display:grid;place-items:center;font-family:Fredoka,sans-serif;font-size:29px"
     }));
 
@@ -5275,6 +5396,23 @@ class Component extends DCLogic {
 
     const btn=(bg,bd,fg)=>"font-family:Fredoka,sans-serif;font-size:14px;padding:9px 17px;border-radius:11px;cursor:pointer;background:"+bg+";border:1px solid "+bd+";color:"+fg;
     const ghost=btn("rgba(var(--line-rgb),.05)","rgba(var(--line-rgb),.16)","rgba(var(--ink-rgb),.72)");
+
+    /* A recommendation can now ACT, not only advise: its set's never-corrected
+     * questions, queued for review in one press. Same suggestion machinery as
+     * the weekly glance — same queue, same vouch respect, same dedupe — so a
+     * question approved from either place is one question, once. */
+    const G=(window.__CURR||{}).WeekGlance;
+    const pLogAll=(L?L.pLog:st.pLog)||{};
+    const queueNow=(L?L.review:st.review)||[];
+    const vouchedAll=(L?L.vouch:st.vouch)||{};
+    const missesOf=(set)=>{
+      if(!G||!window.QTypes) return [];
+      try{
+        const grid=G.weekGrid([set], pLogAll, QTypes.idFor);
+        return G.suggest(grid, pLogAll, queueNow, today, vouchedAll);
+      }catch(e){ return []; }
+    };
+    const queueBtn=btn("rgba(56,189,248,.14)","rgba(56,189,248,.5)","var(--sky)");
     const recs=[], active=[];
 
     for(let u=1;u<=8;u++){
@@ -5344,6 +5482,7 @@ class Component extends DCLogic {
             chipStyle:"font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;padding:5px 10px;border-radius:999px;background:rgba(251,191,36,.16);color:var(--amber)",
             detail:sig.detail+"  ·  "+pct+"%",
             why:"Two separate days below the line. Rebuild this one with the lesson walkthrough before moving on.",
+            queueSugs:missesOf(s),
             primaryLabel:"Flag for reteach", primaryStyle:btn("rgba(251,191,36,.18)","rgba(251,191,36,.5)","#FBBF24"),
             primary:()=>setDay(s.id,"reteach"),
             secondaryLabel:"Dismiss", secondaryStyle:ghost, secondary:()=>snoozeIt(s.id)
@@ -5351,6 +5490,18 @@ class Component extends DCLogic {
         }
       });
     }
+
+    /* Any recommendation whose set holds never-corrected questions can now
+     * queue them directly. Pressing it is the same approve as the weekly
+     * glance — one queue, one dedupe — so a question added from either place
+     * is one question, once. */
+    recs.forEach(r=>{
+      const qs=r.queueSugs||[];
+      r.hasQueue=qs.length>0;
+      r.queueLabel=st.tBusy?"Adding…":("Queue "+qs.length+" missed question"+(qs.length===1?"":"s")+" for review");
+      r.queueStyle=queueBtn;
+      r.queueGo=()=>{ if(!st.tBusy) this.approveReviewMany(qs); };
+    });
 
     return {
       recs, recsEmpty:!recs.length, recsAny:!!recs.length,

@@ -30,6 +30,7 @@
  *            The pick is saved as slice.subjects[<id>].level, per child.
  *   stub     {heading, lines:[...], footer} for status:"soon" subjects
  *   summary  optional. What Teacher HQ shows for this subject — see below.
+ *   weekGlance  optional. The teacher's one-look week — see below summary.
  *
  * TELLING TEACHER HQ WHAT YOU KNOW
  * Mission Control cannot read inside your `data` — it does not know what a
@@ -58,6 +59,28 @@
  * This runs inside Mission Control's render. If it throws, that subject's row
  * loses its detail and every other row still draws — but it is your bug and
  * it will be silent, so keep it total and cheap.
+ *
+ * THE WEEKLY GLANCE
+ * The teacher's one-screen week: a grid of coloured cells, then what went
+ * well and what was a struggle. Maths draws its own from the per-item log;
+ * every other subject describes ITS OWN week through this hook:
+ *
+ *   weekGlance(data, ctx) -> null | {
+ *     title:   "Week 3",                      what stretch this describes
+ *     columns: [{label, cells:[{status, hint}]}]
+ *     well:     ["...", ...]                  short factual lines, counted
+ *     struggle: ["...", ...]                  not adjectived
+ *   }
+ *
+ * `status` is one of exactly four words, and each is a claim — use them
+ * honestly for whatever your unit of work is (a question, a day, a week):
+ *   green   done right / finished as asked
+ *   yellow  rough but recovered (fixed, finished late, flagged then cleared)
+ *   red     met and not overcome (a gap the child hit, not one they skipped)
+ *   gray    not reached or not evidenced. NEVER colour absence red.
+ *
+ * Return null when there is nothing yet — the shell words that itself. Same
+ * rules as summary(): total, cheap, and only claims your data proves.
  *
  * PROGRESS IN THE DATABASE
  * Every subject gets its own namespace inside the child's saved record:
@@ -96,7 +119,8 @@
         order: 100,
         levels: null,
         stub: null,
-        summary: null
+        summary: null,
+        weekGlance: null
       }, def);
       list.push(s); byId[s.id] = s;
       list.sort((a,b)=> (a.order-b.order) || a.name.localeCompare(b.name));

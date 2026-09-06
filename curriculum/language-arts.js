@@ -67,6 +67,78 @@
      * a school day he went PAST without finishing, which is a fact about his
      * work rather than a deadline invented for him. Days he has not reached
      * yet are not gaps, and a day a parent excused is not a gap either. */
+    /* The teacher's one-look week — the weekGlance contract in subjects.js.
+     *
+     * A Word Voyagers week is five days, so the cells are days and each cell
+     * is that day's fate. The colours follow this course's own standing
+     * decisions: an EXCUSED day is gray with a note, never red — la-calendar
+     * spent a long comment refusing to judge a child against a schedule, and
+     * a glance must not sneak that judgement back in through a colour. Red is
+     * only a day the child went PAST and left unfinished unexcused, the same
+     * "gap" definition summary() below already uses. */
+    weekGlance: function(data){
+      const DAYS = ["Mon","Tue","Wed","Thu","Fri"];
+      const done = data.stepDone || {}, excused = data.excused || {};
+      const stuck = data.stuck || {}, result = data.stepResult || {};
+      const year = data.year || "y1";
+
+      // The most recent week with a finished day is "the week".
+      let week = 0;
+      Object.keys(done).forEach(function(k){
+        if(!done[k]) return;
+        const p = String(k).split(":");
+        if(p[0] !== year || p.length !== 4 || p[3] !== "end") return;
+        const w = parseInt(p[1], 10);
+        if(w > week) week = w;
+      });
+      if(!week) return null;
+
+      const ended = function(d){ return !!done[year+":"+week+":"+d+":end"]; };
+      const wasStuck = function(d){
+        return Object.keys(stuck).some(function(k){
+          const p = String(k).split(":");
+          return stuck[k] && p[0] === year && parseInt(p[1],10) === week && p[2] === d;
+        });
+      };
+      // Red needs a frontier: a day is only "left behind" once a LATER day of
+      // the same week is finished. Friday unfinished on Wednesday is gray.
+      let lastDone = -1;
+      DAYS.forEach(function(d, i){ if(ended(d)) lastDone = i; });
+
+      const cells = DAYS.map(function(d, i){
+        if(ended(d))
+          return wasStuck(d)
+            ? {status:"yellow", hint:d+" — got stuck, finished anyway"}
+            : {status:"green", hint:d+" — finished"};
+        if(excused[year+":"+week+":"+d+":excused"])
+          return {status:"gray", hint:d+" — excused"};
+        if(i < lastDone) return {status:"red", hint:d+" — passed by, not finished"};
+        return {status:"gray", hint:d+" — not reached"};
+      });
+
+      const finished = cells.filter(function(c){ return c.status==="green"||c.status==="yellow"; }).length;
+      const well = [], struggle = [];
+      if(finished) well.push(finished + " of 5 days finished");
+
+      // This week's graded checks, by their own numbers.
+      Object.keys(result).forEach(function(k){
+        const p = String(k).split(":");
+        if(p[0] !== year || parseInt(p[1],10) !== week) return;
+        const r = result[k];
+        if(!r || typeof r.score !== "number" || !(r.total > 0)) return;
+        const line = p.slice(2).join(" ") + " check: " + r.score + "/" + r.total;
+        if(r.score / r.total >= 0.8) well.push(line);
+        else if(r.score / r.total < 0.6) struggle.push(line);
+      });
+      cells.forEach(function(c){
+        if(c.status === "yellow" || c.status === "red") struggle.push(c.hint);
+      });
+
+      return {title:"Week " + week,
+              columns:[{label:"Week " + week, cells:cells}],
+              well:well, struggle:struggle};
+    },
+
     summary: function(data){
       const DAYS = ["Mon","Tue","Wed","Thu","Fri"];
       const done    = data.stepDone   || {};

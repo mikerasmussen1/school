@@ -32,6 +32,7 @@
 <script src="./curriculum/math-y2.js?v=2026-09-04-1631"></script>
 <script src="./curriculum/extra-banks.js?v=2026-09-04-1631"></script>
 <script src="./curriculum/math-sequence.js?v=2026-09-04-1631"></script>
+<script src="./curriculum/week-glance.js?v=2026-09-06-0900"></script>
 <script src="./curriculum/registry.js?v=2026-09-04-1631"></script>
 <script src="./curriculum/la-y1-spine.js?v=2026-09-04-1631"></script>
 <script src="./curriculum/la-y1-words.js?v=2026-09-04-1631"></script>
@@ -1975,6 +1976,88 @@
     </div>
     <div style="font-size:12.5px;line-height:1.55;color:rgba(var(--ink-rgb),.5);max-width:820px;margin-bottom:44px">{{ tSubjNote }}</div>
 
+    <!-- ═══ The week at a glance ═══
+         Every question the child met this week, one cell each, then the week
+         in words and the questions worth meeting again. Maths cells come from
+         the per-item log; other subjects describe their own week through the
+         weekGlance contract. -->
+    <sc-if value="{{ wgHas }}" hint-placeholder-val="{{ true }}">
+      <h2 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:rgba(var(--ink-rgb),.45);margin:0 0 12px">This week at a glance</h2>
+      <div style="display:flex;gap:16px;flex-wrap:wrap;align-items:center;margin-bottom:16px">
+        <sc-for list="{{ wgLegend }}" as="lg" hint-placeholder-count="4">
+          <div style="display:flex;align-items:center;gap:7px">
+            <div style="{{ lg.style }}"></div>
+            <div style="font-size:11.5px;color:rgba(var(--ink-rgb),.55)">{{ lg.label }}</div>
+          </div>
+        </sc-for>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:14px;margin-bottom:44px">
+        <sc-for list="{{ wgPanels }}" as="p" hint-placeholder-count="3">
+          <div style="background:rgba(var(--line-rgb),.04);border:1px solid rgba(var(--line-rgb),.1);border-radius:18px;padding:20px 24px">
+            <div style="display:flex;justify-content:space-between;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:14px">
+              <div style="font-family:Fredoka,sans-serif;font-size:18px;color:{{ p.color }}">{{ p.name }}</div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:rgba(var(--ink-rgb),.45)">{{ p.title }}</div>
+            </div>
+
+            <sc-if value="{{ p.empty }}" hint-placeholder-val="{{ false }}">
+              <div style="font-size:13px;color:rgba(var(--ink-rgb),.55)">{{ p.emptyNote }}</div>
+            </sc-if>
+
+            <!-- the grid: one column per day's set, cells in question order -->
+            <div style="display:flex;gap:18px;flex-wrap:wrap;margin-bottom:6px">
+              <sc-for list="{{ p.columns }}" as="col" hint-placeholder-count="5">
+                <div style="display:flex;flex-direction:column;gap:6px;align-items:flex-start">
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(var(--ink-rgb),.5)" title="{{ col.title }}">{{ col.label }}</div>
+                  <div style="display:flex;flex-wrap:wrap;gap:4px;max-width:128px">
+                    <sc-for list="{{ col.cells }}" as="c" hint-placeholder-count="13">
+                      <div style="{{ c.style }}" title="{{ c.hint }}">{{ c.label }}</div>
+                    </sc-for>
+                  </div>
+                </div>
+              </sc-for>
+            </div>
+
+            <sc-if value="{{ p.hasWell }}" hint-placeholder-val="{{ true }}">
+              <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:#4ADE80;margin:14px 0 6px">Went well</div>
+              <sc-for list="{{ p.well }}" as="w" hint-placeholder-count="2">
+                <div style="font-size:13px;line-height:1.55;color:rgba(var(--ink-rgb),.78)">{{ w }}</div>
+              </sc-for>
+            </sc-if>
+            <sc-if value="{{ p.hasStruggle }}" hint-placeholder-val="{{ true }}">
+              <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:#FBBF24;margin:14px 0 6px">A struggle</div>
+              <sc-for list="{{ p.struggle }}" as="w" hint-placeholder-count="2">
+                <div style="font-size:13px;line-height:1.55;color:rgba(var(--ink-rgb),.78)">{{ w }}</div>
+              </sc-for>
+            </sc-if>
+
+            <sc-if value="{{ p.hasSugs }}" hint-placeholder-val="{{ true }}">
+              <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--sky);margin:16px 0 8px">{{ p.sugHead }}</div>
+              <div style="display:flex;flex-direction:column;gap:8px">
+                <sc-for list="{{ p.sugs }}" as="sg" hint-placeholder-count="3">
+                  <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;background:rgba(var(--well-rgb),.2);border:1px solid rgba(var(--line-rgb),.09);border-radius:12px;padding:10px 14px">
+                    <div style="flex:1;min-width:220px">
+                      <div style="font-size:13px;line-height:1.45">{{ sg.text }}</div>
+                      <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;color:rgba(var(--ink-rgb),.45);margin-top:3px">{{ sg.evidence }}</div>
+                    </div>
+                    <sc-if value="{{ sg.canApprove }}" hint-placeholder-val="{{ true }}">
+                      <button onClick="{{ sg.approve }}" style="font-family:Fredoka,sans-serif;font-size:13px;padding:8px 18px;border-radius:11px;cursor:pointer;background:rgba(56,189,248,.14);border:1px solid rgba(56,189,248,.5);color:var(--sky)" style-hover="filter:brightness(1.2)">{{ sg.approveLabel }}</button>
+                    </sc-if>
+                    <sc-if value="{{ sg.cantApprove }}" hint-placeholder-val="{{ false }}">
+                      <div style="font-size:11px;color:rgba(var(--ink-rgb),.45)">{{ sg.approveLabel }}</div>
+                    </sc-if>
+                  </div>
+                </sc-for>
+              </div>
+            </sc-if>
+            <sc-if value="{{ p.queueNote }}" hint-placeholder-val="{{ false }}">
+              <div style="font-size:12px;color:var(--sky);margin-top:10px">{{ p.queueNote }}</div>
+            </sc-if>
+          </div>
+        </sc-for>
+      </div>
+    </sc-if>
+
     <!-- roster -->
     <sc-if value="{{ hqNotViewing }}" hint-placeholder-val="{{ true }}">
     <h2 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:rgba(var(--ink-rgb),.45);margin:0 0 20px">Pilots on this device</h2>
@@ -2835,6 +2918,37 @@
       </div>
       <div style="font-size:12.5px;line-height:1.5;color:rgba(var(--ink-rgb),.45);margin-bottom:16px">{{ pDayCalendar }}</div>
     </sc-if>
+    <!-- ═══ Teacher-approved review ═══
+         Questions a grown-up queued from the weekly glance. They sit ABOVE the
+         day's tiers, get answered once each, and a right answer retires the
+         question for good — a wrong one keeps it for another morning. The
+         block does not exist at all when the queue is empty, which is most
+         days. -->
+    <sc-if value="{{ pReviewHas }}" hint-placeholder-val="{{ false }}">
+      <div style="background:rgba(56,189,248,.07);border:1px solid rgba(56,189,248,.3);border-radius:16px;padding:16px 18px;margin-bottom:22px">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:10px">
+          <div style="font-family:Fredoka,sans-serif;font-size:16px;color:var(--sky)">Review from your teacher</div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(var(--ink-rgb),.45)">{{ pReviewCount }}</div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <sc-for list="{{ pReviewRows }}" as="rv" hint-placeholder-count="2">
+            <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+              <div style="flex:1;min-width:220px;font-family:Fredoka,sans-serif;font-size:16px;line-height:1.3">{{ rv.q }}</div>
+              <input value="{{ rv.value }}" onChange="{{ rv.set }}" inputMode="text" placeholder="?" autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck="false" style="{{ rv.inputStyle }}">
+              <span style="font-size:19px;color:{{ rv.markColor }}">{{ rv.mark }}</span>
+            </div>
+            <sc-if value="{{ rv.hint }}" hint-placeholder-val="{{ false }}">
+              <div style="font-size:12px;line-height:1.4;color:var(--amber)">{{ rv.hint }}</div>
+            </sc-if>
+          </sc-for>
+        </div>
+        <button onClick="{{ pReviewCheck }}" style="margin-top:12px;font-family:Fredoka,sans-serif;font-size:14px;padding:10px 22px;border-radius:12px;cursor:pointer;background:rgba(56,189,248,.2);border:1px solid rgba(56,189,248,.55);color:var(--sky)" style-hover="filter:brightness(1.15)">Check review</button>
+        <sc-if value="{{ pReviewNote }}" hint-placeholder-val="{{ false }}">
+          <span style="margin-left:12px;font-size:13px;color:rgba(var(--ink-rgb),.6)">{{ pReviewNote }}</span>
+        </sc-if>
+      </div>
+    </sc-if>
+
     <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:24px">
       <sc-for list="{{ pTierChips }}" as="tc" hint-placeholder-count="4">
         <button onClick="{{ tc.go }}" style="{{ tc.style }}" style-hover="filter:brightness(1.2)">{{ tc.mark }} {{ tc.l }}</button>
@@ -3636,7 +3750,7 @@ class Component extends DCLogic {
            dyn:{}, coach:null, dynBusy:false, dynErr:"",
            hqWho:null, hqUnit:null, hqWeek:null, hqSet:null, hqTier:null,
            hqSlices:{}, hqLoadingRoster:false,
-           pHist:{}, skills:{}, snooze:{}, pFull:{}, pweek:1, pStreak:{}, sprintHist:{}, stream:null, sprint:null,
+           pHist:{}, skills:{}, snooze:{}, pFull:{}, pweek:1, pStreak:{}, sprintHist:{}, review:[], reviewAns:{}, reviewMarks:{}, stream:null, sprint:null,
            tCode:"", tRoster:null, tKey:null, tSel:"", tData:null, tBusy:false, tErr:"",
            tAddName:"", tAddPin:"", tFront:false, tView:null, tFromGate:false,
            tSubject:"all", pickGrade:false,
@@ -3809,7 +3923,10 @@ class Component extends DCLogic {
     : u===8?PUZZLES_U8:u===7?PUZZLES_U7:u===6?PUZZLES_U6:u===5?PUZZLES_U5:u===4?PUZZLES_U4:u===3?PUZZLES_U3:u===2?PUZZLES_U2:PUZZLES; }
   standardsFor(u){ return this.isY5() ? (STANDARDS_Y5[u]||STANDARDS_Y5[1])
     : u===8?STANDARDS_U8:u===7?STANDARDS_U7:u===6?STANDARDS_U6:u===5?STANDARDS_U5:u===4?STANDARDS_U4:u===3?STANDARDS_U3:u===2?STANDARDS_U2:STANDARDS; }
-  fileSetsFor(u){ return this.isY5() ? (PRACTICE_Y5[u]||PRACTICE_Y5[1])
+  // Split from fileSetsFor so the teacher's glance can ask about a viewed
+  // pilot's bank, which is not always the device child's own.
+  fileSetsFor(u){ return this.fileSetsForBank(this.isY5(), u); }
+  fileSetsForBank(y5, u){ return y5 ? (PRACTICE_Y5[u]||PRACTICE_Y5[1])
     : u===8 ? PRACTICE_U8.concat(PRACTICE_U8_W2, PRACTICE_U8_W3, PRACTICE_U8_W4)
     : u===7 ? PRACTICE_U7.concat(PRACTICE_U7_W2, PRACTICE_U7_W3, PRACTICE_U7_W4, PRACTICE_U7_W5)
     : u===6 ? PRACTICE_U6.concat(PRACTICE_U6_W2, PRACTICE_U6_W3, PRACTICE_U6_W4, PRACTICE_U6_W5)
@@ -3950,7 +4067,7 @@ class Component extends DCLogic {
     if(active){ this.setState({profiles,activeId,gate:false,loaded:true,...this.blank(),...Component.unpackMath(this.store.data[activeId]||{})}); }
     else{ this.setState({profiles,gate:true,loaded:true}); }
   }
-  blank(){ return {pAns:{},pChecked:{},pRuns:{},pPaper:{},lstep:{},pHist:{},pLog:{},dyn:{},coach:null,skills:{},snooze:{},pStreak:{},sprintHist:{},subjects:{},lastSubject:null,stream:null,sprint:null,pTier:null,pset:"p1"}; }
+  blank(){ return {pAns:{},pChecked:{},pRuns:{},pPaper:{},lstep:{},pHist:{},pLog:{},dyn:{},coach:null,skills:{},snooze:{},pStreak:{},sprintHist:{},review:[],reviewAns:{},reviewMarks:{},subjects:{},lastSubject:null,stream:null,sprint:null,pTier:null,pset:"p1"}; }
 
   /* MATHS' PROGRESS, AND WHERE IT LIVES
    *
@@ -3984,7 +4101,7 @@ class Component extends DCLogic {
    * written both ways, against a 1 MB document limit. Roughly a fifth of the
    * budget, so duplication is not what would break it. */
   static MATH_BAGS = ["pAns","pChecked","pRuns","lstep","pHist","skills","snooze",
-                      "pLog","dyn","pPaper","pStreak","sprintHist"];
+                      "pLog","dyn","pPaper","pStreak","sprintHist","review"];
 
   static packMath(flat){
     const f = flat || {};
@@ -4040,7 +4157,7 @@ class Component extends DCLogic {
     this.store.profiles=profiles; this.store.activeId=activeId;
     const keepCurric=(this.store.data[activeId]||{}).curriculum
       || ((profiles.find(p=>p.id===activeId)||{}).curriculum);
-    if(activeId) this.store.data[activeId]=Component.packMath({pAns,pChecked,pRuns,lstep,pHist,skills,snooze,pLog:this.state.pLog,dyn:this.trimDyn(this.state.dyn),pPaper:this.state.pPaper,pStreak:this.state.pStreak,sprintHist:this.state.sprintHist,subjects:this.state.subjects,lastSubject:this.state.lastSubject,curriculum:keepCurric,updated:Date.now()});
+    if(activeId) this.store.data[activeId]=Component.packMath({pAns,pChecked,pRuns,lstep,pHist,skills,snooze,pLog:this.state.pLog,dyn:this.trimDyn(this.state.dyn),pPaper:this.state.pPaper,pStreak:this.state.pStreak,sprintHist:this.state.sprintHist,review:this.state.review,subjects:this.state.subjects,lastSubject:this.state.lastSubject,curriculum:keepCurric,updated:Date.now()});
     Storage.save(this.store); // local first — survives dropped wifi
     if(Remote.enabled && activeId){
       const prof=profiles.find(x=>x.id===activeId);
@@ -4245,9 +4362,9 @@ class Component extends DCLogic {
   componentDidUpdate(){
     const {activeId,pAns,pChecked,pRuns,pPaper,lstep}=this.state;
     if(!activeId) return;
-    const prev=this._snap, {pHist,skills,snooze}=this.state;
-    if(prev && prev.id===activeId && prev.pAns===pAns && prev.pChecked===pChecked && prev.pRuns===pRuns && prev.pPaper===pPaper && prev.lstep===lstep && prev.pHist===pHist && prev.skills===skills && prev.snooze===snooze) return;
-    this._snap={id:activeId,pAns,pChecked,pRuns,pPaper,lstep,pHist,skills,snooze};
+    const prev=this._snap, {pHist,skills,snooze,review}=this.state;
+    if(prev && prev.id===activeId && prev.pAns===pAns && prev.pChecked===pChecked && prev.pRuns===pRuns && prev.pPaper===pPaper && prev.lstep===lstep && prev.pHist===pHist && prev.skills===skills && prev.snooze===snooze && prev.review===review) return;
+    this._snap={id:activeId,pAns,pChecked,pRuns,pPaper,lstep,pHist,skills,snooze,review};
     this.persist();
   }
 
@@ -4632,6 +4749,152 @@ class Component extends DCLogic {
     });
   }
 
+  /* ── The week at a glance ─────────────────────────────────────────────────
+   *
+   * One screen per subject: every question the child met this week as a
+   * coloured cell, then what went well, what was a struggle, and which missed
+   * questions are worth meeting again — each with an Approve that queues it
+   * into the child's next practice sessions.
+   *
+   * Maths is drawn here from the per-item log, because the shell owns that
+   * log. Every other subject describes its own week through the weekGlance
+   * contract in subjects.js, so a fourth course appears on this screen by
+   * registering itself and this file does not change.
+   *
+   * APPROVE ONLY REACHES THE CHILD ON THIS DEVICE. A viewed pilot's record
+   * belongs to their device — this app has no write path to it, and a button
+   * that pretended otherwise would silently do nothing. The suggestion still
+   * shows; the button says where to press it.
+   */
+  /* Uncached on purpose: QBank.setsFor prefers the published bank once its
+   * fetch lands, and a cache keyed before that lands would pin the teacher's
+   * screen to the fallback arrays for the whole session. Eight merges per
+   * render of one teacher screen is cheap; a stale week grid is not. */
+  glanceMathSets(bank){
+    const all=[], meta={};
+    for(let u=1; u<=8; u++){
+      const sets=QBank.setsFor(bank, u, this.fileSetsForBank(bank==="y5", u))||[];
+      sets.forEach(s=>{ all.push(s); meta[s.id]={u:u, w:s.w||1, set:s}; });
+    }
+    return {all, meta};
+  }
+
+  approveReview(sug){
+    const G=(window.__CURR||{}).WeekGlance;
+    if(!G) return;
+    this.saveState(s=>({review:G.approve(s.review||[], sug, dayNo()).queue}));
+  }
+
+  weekGlanceVals(){
+    const st=this.state;
+    const G=(window.__CURR||{}).WeekGlance, SEQ=(window.__CURR||{}).MATH_SEQ;
+    const L=this.lens&&this.lens();
+    const slice=L||st;
+    const local=!L;
+    const today=dayNo();
+    const sel=st.tSubject||"all";
+    const S=(window.Subjects&&window.Subjects.all())||[];
+    const self2=this;
+
+    const CELL={green:"#4ADE80", yellow:"#FBBF24", red:"#F87171",
+                gray:"rgba(var(--line-rgb),.16)"};
+    const WORD={green:"right first try", yellow:"fixed after a miss",
+                red:"never corrected", gray:"not answered"};
+    const cellStyle=k=>"width:26px;height:26px;border-radius:7px;display:grid;"+
+      "place-items:center;font-family:'JetBrains Mono',monospace;font-size:10px;"+
+      "background:"+CELL[k]+(k==="gray"?"":"2E")+";border:1px solid "+CELL[k]+
+      (k==="gray"?"":"77")+";color:"+(k==="gray"?"rgba(var(--ink-rgb),.35)":CELL[k]);
+
+    const panels=[];
+
+    // ── Maths, from the per-item log ────────────────────────────────────
+    if((sel==="all"||sel==="math") && G && SEQ && window.QTypes){
+      try{
+        const bank=local ? this.bankId() : (slice.curriculum==="y5" ? "y5" : "y3");
+        const {all, meta}=this.glanceMathSets(bank);
+        const seq=SEQ.summary(all, slice.pChecked||{});
+        // A finished year glances at its last week rather than at nothing.
+        const at=seq.next ? meta[seq.next.id] : null;
+        const cur=at || meta[(all[all.length-1]||{}).id];
+        if(cur){
+          const weekSets=all.filter(s=>meta[s.id].u===cur.u && (s.w||1)===cur.w);
+          const grid=G.weekGrid(weekSets, slice.pLog||{}, QTypes.idFor);
+          const sum=G.summarise(grid);
+          const sugs=G.suggest(grid, slice.pLog||{}, slice.review||[], today);
+          const dueNow=G.due(slice.review||[]).length;
+          const attempted=sum.attempted>0;
+          panels.push({
+            key:"math", name:"Adventures in Big Math", color:"#38BDF8",
+            title:"Mission 0"+cur.u+" · Week "+cur.w,
+            empty:!attempted,
+            emptyNote:"Nothing attempted in this week's sets yet — the grid fills in as work happens.",
+            columns:grid.map(col=>({
+              label:col.label, title:col.title,
+              cells:col.cells.map(c=>({
+                label:String(c.n),
+                hint:"Q"+c.n+" · "+WORD[c.status]+" — "+c.q.slice(0,80),
+                style:cellStyle(c.status)
+              }))
+            })),
+            well:sum.well, struggle:sum.struggle,
+            hasWell:sum.well.length>0, hasStruggle:sum.struggle.length>0,
+            sugs:sugs.map(sg=>{
+              const label=(meta[sg.setId]&&meta[sg.setId].set.label)||sg.setId;
+              return {
+                text:"Q"+sg.n+" of "+label+" — "+sg.q.slice(0,80),
+                evidence:sg.evidence,
+                canApprove:local, cantApprove:!local,
+                approveLabel:local?"Approve":"Open on the child's profile to add",
+                approve:local?function(){ self2.approveReview(sg); }:function(){}
+              };
+            }),
+            hasSugs:sugs.length>0,
+            sugHead:"Worth another meeting — Approve adds it to the start of practice",
+            queueNote:dueNow
+              ? dueNow+" review question"+(dueNow===1?"":"s")+" waiting in practice now"
+              : ""
+          });
+        }
+      }catch(e){ /* a broken glance loses its panel, never the screen */ }
+    }
+
+    // ── Every other subject, in its own words ───────────────────────────
+    S.filter(s=>s.status!=="soon" && s.id!=="math" && typeof s.weekGlance==="function")
+     .filter(s=>sel==="all"||sel===s.id)
+     .forEach(s=>{
+       let g=null;
+       const r=(slice.subjects||{})[s.id]||{};
+       try{ g=s.weekGlance(r.data||{}, {level:r.level||null, today:today}); }
+       catch(e){ g=null; }
+       if(!g) return;
+       panels.push({
+         key:s.id, name:s.name, color:s.color, title:g.title||"",
+         empty:false, emptyNote:"",
+         columns:(g.columns||[]).map(col=>({
+           label:col.label||"", title:"",
+           cells:(col.cells||[]).map(c=>({
+             label:"", hint:c.hint||"",
+             style:cellStyle(CELL[c.status]?c.status:"gray")
+           }))
+         })),
+         well:g.well||[], struggle:g.struggle||[],
+         hasWell:(g.well||[]).length>0, hasStruggle:(g.struggle||[]).length>0,
+         sugs:[], hasSugs:false, sugHead:"", queueNote:""
+       });
+     });
+
+    return {
+      wgHas:panels.length>0,
+      wgPanels:panels,
+      wgLegend:[
+        {label:"right first try", style:cellStyle("green")},
+        {label:"fixed after a miss", style:cellStyle("yellow")},
+        {label:"never corrected", style:cellStyle("red")},
+        {label:"not answered", style:cellStyle("gray")}
+      ]
+    };
+  }
+
   teacherVals(){
     const st=this.state;
     const CURRICULA_LABELS={}; Object.keys(CURRICULA).forEach(k=>{CURRICULA_LABELS[k]=CURRICULA[k].label+" · "+CURRICULA[k].sub;});
@@ -4796,6 +5059,7 @@ class Component extends DCLogic {
 
 
     return {
+      ...this.weekGlanceVals(),
       tEnabled:Remote.enabled,
       tSignedIn:!!st.tRoster, tSignedOut:!st.tRoster,
       tCode:st.tCode, setTCode:e=>this.setState({tCode:e.target.value}),
@@ -5969,6 +6233,103 @@ class Component extends DCLogic {
     });
   }
 
+  /* ── Teacher-approved review, the child's half ──────────────────────────
+   *
+   * The queue holds question IDS (content-derived, see QTypes.idFor), so each
+   * has to be resolved back to a live item before it can be asked. Resolution
+   * can genuinely fail — a question rewritten in the bank gets a new id, which
+   * DETACHES it from the queue on purpose (the same trade item-ids.js tests
+   * the attempt log for: detaching beats misattributing). An unresolvable
+   * entry is skipped silently rather than shown broken, and prunes with age.
+   *
+   * Answers are graded against the SOURCE item and logged against the SOURCE
+   * set with mode "review", so the attempt history reads as one story: the
+   * teacher asked the same question again, and here is how it went.
+   */
+  reviewRows(){
+    const G=(window.__CURR||{}).WeekGlance;
+    if(!G || !window.QTypes) return [];
+    const due=G.due(this.state.review||[]);
+    if(!due.length) return [];
+    const {meta}=this.glanceMathSets(this.bankId());
+    const rows=[];
+    due.forEach(e=>{
+      const m=meta[e.setId];
+      if(!m) return;
+      const items=m.set.items||[];
+      for(let i=0;i<items.length;i++){
+        if(QTypes.idFor(m.set, items[i])===e.qid){
+          rows.push({entry:e, set:m.set, it:items[i], idx:i});
+          return;
+        }
+      }
+    });
+    return rows;
+  }
+
+  checkReview=()=>{
+    const G=(window.__CURR||{}).WeekGlance;
+    if(!G) return;
+    const rows=this.reviewRows();
+    const ans=this.state.reviewAns||{};
+    const today=dayNo();
+    let review=this.state.review||[];
+    const marks={};
+    const toLog=[];
+    rows.forEach(r=>{
+      const given=ans[r.entry.qid];
+      if(given==null || String(given).trim()==="") return;   // unanswered stays due, unmarked
+      const ok=QTypes.grade(r.it, given)===true;
+      marks[r.entry.qid]=ok;
+      toLog.push({i:r.idx, it:r.it, given:given, ok:ok, set:r.set});
+      review=G.record(review, r.entry.qid, ok, today);
+    });
+    if(!toLog.length) return;
+    // One log call per source set, so the history lands where the item lives.
+    const bySet={};
+    toLog.forEach(l=>{ (bySet[l.set.id]=bySet[l.set.id]||{set:l.set,rows:[]}).rows.push(l); });
+    Object.keys(bySet).forEach(k=>this.logAttempts(bySet[k].set, bySet[k].rows, "review"));
+    this.saveState(()=>({review:review}));
+    this.setState({reviewMarks:{...(this.state.reviewMarks||{}), ...marks}});
+  };
+
+  reviewVals(){
+    const st=this.state;
+    const rows=this.reviewRows();
+    const marks=st.reviewMarks||{};
+    const ans=st.reviewAns||{};
+    const checkedCount=Object.keys(marks).length;
+    return {
+      pReviewHas:rows.length>0,
+      pReviewCount:rows.length+" question"+(rows.length===1?"":"s"),
+      pReviewRows:rows.map(r=>{
+        const qid=r.entry.qid;
+        const marked=Object.prototype.hasOwnProperty.call(marks, qid);
+        const right=marks[qid]===true;
+        return {
+          q:r.it.q, value:ans[qid]==null?"":ans[qid],
+          set:e=>{
+            const v=String(e.target.value==null?"":e.target.value).slice(0,24);
+            this.setState(s=>({reviewAns:{...(s.reviewAns||{}),[qid]:v},
+                               reviewMarks:(()=>{const m={...(s.reviewMarks||{})}; delete m[qid]; return m;})()}));
+          },
+          mark:marked?(right?"✓":"✗"):"",
+          markColor:right?"#4ADE80":"#FB7185",
+          hint:marked&&!right&&r.it.hint?("Try: "+r.it.hint):"",
+          inputStyle:"width:88px;height:38px;text-align:center;font-family:Fredoka,sans-serif;"+
+            "font-size:18px;border-radius:10px;outline:none;background:"+
+            (marked?(right?"rgba(74,222,128,.18)":"rgba(251,113,133,.16)"):"rgba(var(--line-rgb),.07)")+
+            ";color:#EEF2FF;border:2px solid "+
+            (marked?(right?"#4ADE80":"#FB7185"):"rgba(var(--line-rgb),.18)")
+        };
+      }),
+      pReviewCheck:this.checkReview,
+      pReviewNote:checkedCount
+        ? "Right answers are done for good. Wrong ones come back another day — that's the point."
+        : ""
+    };
+  }
+
   practiceVals(mascot, studentName){
     const st=this.state;
     const SETS=this.sets();
@@ -6032,7 +6393,7 @@ class Component extends DCLogic {
     const SM=this.streamVals(set,compressed);
     const SPR=this.sprintVals();
 
-    return {...SM, ...SPR,
+    return {...SM, ...SPR, ...this.reviewVals(),
       pUnitLabel:"Practice Bay · Mission 0"+st.uview+" · Week "+(st.pweek||1),
       pBankLine:QBank.statusLine(this.bankId()),
       pWeekTabs:this.weeksWithSets(st.uview).map(w=>{

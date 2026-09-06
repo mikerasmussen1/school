@@ -33,6 +33,61 @@
     ],
     open: {href:"field-notes.dc.html"},
 
+    /* The teacher's one-look stretch — the weekGlance contract in subjects.js.
+     *
+     * Science's unit of work is a WEEK, so the cells are the last eight weeks
+     * up to wherever the child is, not days — a daily grid would paint six
+     * gray cells for every green one on a course that is correctly untouched
+     * six days out of seven. A finished week with no check is green with a
+     * note, not a zero: science-quiz.js is partial by design, and that
+     * decision holds here too.
+     */
+    weekGlance: function(data){
+      const c = data.completed || {};
+      const grade = data.grade || "y3";
+      const doneAt = {};
+      Object.keys(c).forEach(function(k){
+        const p = String(k).split(":");
+        if(p[0] !== grade) return;
+        const w = parseInt(p[1], 10);
+        if(w > 0) doneAt[w] = c[k] || {};
+      });
+      const weeks = Object.keys(doneAt).map(Number).sort(function(a,b){ return a-b; });
+      if(!weeks.length) return null;
+
+      const latest = weeks[weeks.length - 1];
+      /* The window opens at the child's own first finished week, not week 1:
+       * a course begun mid-year has no "skipped" weeks before it began — red
+       * is only for a week passed BETWEEN finished ones. */
+      const from = Math.max(weeks[0], latest - 7);
+      const cells = [];
+      const well = [], struggle = [];
+      for(let w = from; w <= latest; w++){
+        const r = doneAt[w];
+        if(!r){
+          cells.push({status:"red", hint:"Week "+w+" — skipped past"});
+          struggle.push("Week "+w+" skipped past");
+          continue;
+        }
+        const scored = typeof r.score === "number" && r.total > 0;
+        if(!scored){
+          cells.push({status:"green", hint:"Week "+w+" — done (no check that week)"});
+          continue;
+        }
+        const pct = r.score / r.total;
+        const line = "Week "+w+" check: "+r.score+"/"+r.total;
+        if(pct >= 0.8){ cells.push({status:"green", hint:line}); well.push(line); }
+        else if(pct >= 0.6){ cells.push({status:"yellow", hint:line+" — shaky"}); struggle.push(line); }
+        else { cells.push({status:"red", hint:line}); struggle.push(line); }
+      }
+      if(!struggle.length)
+        well.unshift(weeks.length + " week" + (weeks.length===1?"":"s") + " finished, none skipped");
+
+      return {title:"Weeks " + from + "–" + latest,
+              columns:[{label:"W"+from+"–"+latest, cells:cells}],
+              well:well, struggle:struggle};
+    },
+
     /* What Teacher HQ shows for Field Notes. See the `summary` contract in
      * subjects.js; this used to be an `if(s.id==="sci")` branch in index.html.
      *

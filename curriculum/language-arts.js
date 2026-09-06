@@ -76,22 +76,36 @@
      * a glance must not sneak that judgement back in through a colour. Red is
      * only a day the child went PAST and left unfinished unexcused, the same
      * "gap" definition summary() below already uses. */
-    weekGlance: function(data){
+    weekGlance: function(data, ctx){
       const DAYS = ["Mon","Tue","Wed","Thu","Fri"];
       const done = data.stepDone || {}, excused = data.excused || {};
       const stuck = data.stuck || {}, result = data.stepResult || {};
       const year = data.year || "y1";
 
-      // The most recent week with a finished day is "the week".
-      let week = 0;
+      // Every week with a finished day, newest first — the review-able past.
+      // Alongside it, the child's global first and last finished day as
+      // absolute indices (week 1 Monday = 0), because "passed by" is defined
+      // against the whole record, not against one week.
+      const seen = {};
+      let firstAbs = Infinity, lastAbs = -1;
       Object.keys(done).forEach(function(k){
         if(!done[k]) return;
         const p = String(k).split(":");
         if(p[0] !== year || p.length !== 4 || p[3] !== "end") return;
-        const w = parseInt(p[1], 10);
-        if(w > week) week = w;
+        const w = parseInt(p[1], 10), d = DAYS.indexOf(p[2]);
+        if(!(w > 0) || d < 0) return;
+        seen[w] = true;
+        const abs = (w - 1) * 5 + d;
+        if(abs < firstAbs) firstAbs = abs;
+        if(abs > lastAbs) lastAbs = abs;
       });
-      if(!week) return null;
+      const weeks = Object.keys(seen).map(Number).sort(function(a,b){ return b-a; });
+      if(!weeks.length) return null;
+
+      // The teacher's chosen week, if it is one that holds evidence; else the
+      // most recent — an unknown choice must not conjure an empty grid.
+      const asked = ctx && ctx.week;
+      const week = seen[asked] ? asked : weeks[0];
 
       const ended = function(d){ return !!done[year+":"+week+":"+d+":end"]; };
       const wasStuck = function(d){
@@ -100,11 +114,19 @@
           return stuck[k] && p[0] === year && parseInt(p[1],10) === week && p[2] === d;
         });
       };
-      // Red needs a frontier: a day is only "left behind" once a LATER day of
-      // the same week is finished. Friday unfinished on Wednesday is gray.
-      let lastDone = -1;
-      DAYS.forEach(function(d, i){ if(ended(d)) lastDone = i; });
-
+      /* ONE definition of "passed by", and it is summary()'s: an unfinished,
+       * unexcused day strictly between the child's GLOBAL first and last
+       * finished days. Both boundaries matter and both are global. Friday
+       * unfinished on Wednesday sits after the last finished day anywhere, so
+       * it is gray; and in a mid-week first-ever start, that week's Monday
+       * sits before the first finished day anywhere, so it is gray too — the
+       * child had not started, which is not the same as leaving it behind.
+       *
+       * The first version of the look-back used a per-week rule instead
+       * ("in a past week everything unfinished is red") and it contradicted
+       * the summary row on the very same screen: it reddened days from before
+       * the child ever began. Review caught it; sharing summary()'s bounds is
+       * what makes the two incapable of disagreeing again. */
       const cells = DAYS.map(function(d, i){
         if(ended(d))
           return wasStuck(d)
@@ -112,7 +134,9 @@
             : {status:"green", hint:d+" — finished"};
         if(excused[year+":"+week+":"+d+":excused"])
           return {status:"gray", hint:d+" — excused"};
-        if(i < lastDone) return {status:"red", hint:d+" — passed by, not finished"};
+        const abs = (week - 1) * 5 + i;
+        if(abs > firstAbs && abs < lastAbs)
+          return {status:"red", hint:d+" — passed by, not finished"};
         return {status:"gray", hint:d+" — not reached"};
       });
 
@@ -136,7 +160,7 @@
 
       return {title:"Week " + week,
               columns:[{label:"Week " + week, cells:cells}],
-              well:well, struggle:struggle};
+              well:well, struggle:struggle, weeks:weeks};
     },
 
     summary: function(data){

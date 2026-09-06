@@ -2000,6 +2000,16 @@
               <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:rgba(var(--ink-rgb),.45)">{{ p.title }}</div>
             </div>
 
+            <!-- look back at any week that holds evidence; the newest is
+                 marked (now) so the way home is always visible -->
+            <sc-if value="{{ p.hasWeekTabs }}" hint-placeholder-val="{{ false }}">
+              <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px">
+                <sc-for list="{{ p.weekTabs }}" as="wt" hint-placeholder-count="4">
+                  <button onClick="{{ wt.go }}" style="{{ wt.style }}" style-hover="filter:brightness(1.25)">{{ wt.label }}</button>
+                </sc-for>
+              </div>
+            </sc-if>
+
             <sc-if value="{{ p.empty }}" hint-placeholder-val="{{ false }}">
               <div style="font-size:13px;color:rgba(var(--ink-rgb),.55)">{{ p.emptyNote }}</div>
             </sc-if>
@@ -3750,7 +3760,7 @@ class Component extends DCLogic {
            dyn:{}, coach:null, dynBusy:false, dynErr:"",
            hqWho:null, hqUnit:null, hqWeek:null, hqSet:null, hqTier:null,
            hqSlices:{}, hqLoadingRoster:false,
-           pHist:{}, skills:{}, snooze:{}, pFull:{}, pweek:1, pStreak:{}, sprintHist:{}, review:[], reviewAns:{}, reviewMarks:{}, stream:null, sprint:null,
+           pHist:{}, skills:{}, snooze:{}, pFull:{}, pweek:1, pStreak:{}, sprintHist:{}, review:[], reviewAns:{}, reviewMarks:{}, wgSel:{}, stream:null, sprint:null,
            tCode:"", tRoster:null, tKey:null, tSel:"", tData:null, tBusy:false, tErr:"",
            tAddName:"", tAddPin:"", tFront:false, tView:null, tFromGate:false,
            tSubject:"all", pickGrade:false,
@@ -4067,7 +4077,7 @@ class Component extends DCLogic {
     if(active){ this.setState({profiles,activeId,gate:false,loaded:true,...this.blank(),...Component.unpackMath(this.store.data[activeId]||{})}); }
     else{ this.setState({profiles,gate:true,loaded:true}); }
   }
-  blank(){ return {pAns:{},pChecked:{},pRuns:{},pPaper:{},lstep:{},pHist:{},pLog:{},dyn:{},coach:null,skills:{},snooze:{},pStreak:{},sprintHist:{},review:[],reviewAns:{},reviewMarks:{},subjects:{},lastSubject:null,stream:null,sprint:null,pTier:null,pset:"p1"}; }
+  blank(){ return {pAns:{},pChecked:{},pRuns:{},pPaper:{},lstep:{},pHist:{},pLog:{},dyn:{},coach:null,skills:{},snooze:{},pStreak:{},sprintHist:{},review:[],reviewAns:{},reviewMarks:{},wgSel:{},subjects:{},lastSubject:null,stream:null,sprint:null,pTier:null,pset:"p1"}; }
 
   /* MATHS' PROGRESS, AND WHERE IT LIVES
    *
@@ -4800,6 +4810,12 @@ class Component extends DCLogic {
                 gray:"rgba(var(--line-rgb),.16)"};
     const WORD={green:"right first try", yellow:"fixed after a miss",
                 red:"never corrected", gray:"not answered"};
+    const wkTabStyle=on=>"font-family:'JetBrains Mono',monospace;font-size:10px;"+
+      "letter-spacing:.06em;padding:6px 11px;border-radius:999px;cursor:pointer;"+
+      "white-space:nowrap;transition:.15s;background:"+
+      (on?"rgba(56,189,248,.18)":"rgba(var(--line-rgb),.05)")+";border:1px solid "+
+      (on?"rgba(56,189,248,.6)":"rgba(var(--line-rgb),.14)")+";color:"+
+      (on?"var(--sky)":"rgba(var(--ink-rgb),.55)");
     const cellStyle=k=>"width:26px;height:26px;border-radius:7px;display:grid;"+
       "place-items:center;font-family:'JetBrains Mono',monospace;font-size:10px;"+
       "background:"+CELL[k]+(k==="gray"?"":"2E")+";border:1px solid "+CELL[k]+
@@ -4815,7 +4831,28 @@ class Component extends DCLogic {
         const seq=SEQ.summary(all, slice.pChecked||{});
         // A finished year glances at its last week rather than at nothing.
         const at=seq.next ? meta[seq.next.id] : null;
-        const cur=at || meta[(all[all.length-1]||{}).id];
+        const front=at || meta[(all[all.length-1]||{}).id];
+
+        /* EVERY WEEK WITH EVIDENCE, so the teacher can look back. A week is
+         * offered once any of its sets has attempts in the log; the frontier
+         * week is offered even before its first attempt, because that is
+         * where the child is. Newest first — looking back usually means
+         * "last week". */
+        const wkKey=(u,w)=>u+":"+w;
+        const has={};
+        Object.keys(slice.pLog||{}).forEach(id=>{
+          const m=meta[id];
+          if(m && ((slice.pLog||{})[id]||[]).length) has[wkKey(m.u,m.w)]=true;
+        });
+        if(front) has[wkKey(front.u,front.w)]=true;
+        const avail=Object.keys(has).map(k=>{
+          const p=k.split(":"); return {u:+p[0], w:+p[1]};
+        }).sort((a,b)=>(b.u-a.u)||(b.w-a.w));
+
+        const pick=(st.wgSel||{}).math;
+        const cur=(pick && has[pick])
+          ? {u:+pick.split(":")[0], w:+pick.split(":")[1]}
+          : front;
         if(cur){
           const weekSets=all.filter(s=>meta[s.id].u===cur.u && (s.w||1)===cur.w);
           const grid=G.weekGrid(weekSets, slice.pLog||{}, QTypes.idFor);
@@ -4823,9 +4860,18 @@ class Component extends DCLogic {
           const sugs=G.suggest(grid, slice.pLog||{}, slice.review||[], today);
           const dueNow=G.due(slice.review||[]).length;
           const attempted=sum.attempted>0;
+          const isBack=front && (cur.u!==front.u || cur.w!==front.w);
           panels.push({
             key:"math", name:"Adventures in Big Math", color:"#38BDF8",
-            title:"Mission 0"+cur.u+" · Week "+cur.w,
+            title:"Mission 0"+cur.u+" · Week "+cur.w+(isBack?" · looking back":""),
+            weekTabs:avail.length>1 ? avail.map(a=>{
+              const on=a.u===cur.u && a.w===cur.w;
+              const isFront=front && a.u===front.u && a.w===front.w;
+              return {label:"M"+a.u+"·W"+a.w+(isFront?" (now)":""),
+                go:()=>self2.setState(z=>({wgSel:{...(z.wgSel||{}), math:wkKey(a.u,a.w)}})),
+                style:wkTabStyle(on)};
+            }) : [],
+            hasWeekTabs:avail.length>1,
             empty:!attempted,
             emptyNote:"Nothing attempted in this week's sets yet — the grid fills in as work happens.",
             columns:grid.map(col=>({
@@ -4864,11 +4910,21 @@ class Component extends DCLogic {
      .forEach(s=>{
        let g=null;
        const r=(slice.subjects||{})[s.id]||{};
-       try{ g=s.weekGlance(r.data||{}, {level:r.level||null, today:today}); }
+       const askWeek=(st.wgSel||{})[s.id];
+       try{ g=s.weekGlance(r.data||{}, {level:r.level||null, today:today, week:askWeek}); }
        catch(e){ g=null; }
        if(!g) return;
+       const wlist=(g.weeks||[]).filter(w=>w>0);
+       const newest=wlist.length?Math.max.apply(null,wlist):null;
        panels.push({
          key:s.id, name:s.name, color:s.color, title:g.title||"",
+         weekTabs:wlist.length>1 ? wlist.map(w=>{
+           const on=askWeek?w===askWeek:w===newest;
+           return {label:"W"+w+(w===newest?" (now)":""),
+             go:()=>self2.setState(z=>({wgSel:{...(z.wgSel||{}), [s.id]:w}})),
+             style:wkTabStyle(on)};
+         }) : [],
+         hasWeekTabs:wlist.length>1,
          empty:false, emptyNote:"",
          columns:(g.columns||[]).map(col=>({
            label:col.label||"", title:"",

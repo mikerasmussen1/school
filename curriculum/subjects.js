@@ -70,7 +70,15 @@
  *     columns: [{label, cells:[{status, hint}]}]
  *     well:     ["...", ...]                  short factual lines, counted
  *     struggle: ["...", ...]                  not adjectived
+ *     weeks:   [3, 2, 1]                      optional: other stretches a
+ *                                             teacher may look back at
  *   }
+ *
+ * LOOKING BACK. When your glance returns `weeks`, the shell shows them as a
+ * picker and calls you again with ctx.week set to the teacher's choice.
+ * Honour it exactly: ctx.week absent or unknown means your own default (the
+ * most recent stretch with work). List only stretches that actually hold
+ * evidence — an empty week is not something to review.
  *
  * `status` is one of exactly four words, and each is a claim — use them
  * honestly for whatever your unit of work is (a question, a day, a week):

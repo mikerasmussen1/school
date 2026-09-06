@@ -42,7 +42,7 @@
      * note, not a zero: science-quiz.js is partial by design, and that
      * decision holds here too.
      */
-    weekGlance: function(data){
+    weekGlance: function(data, ctx){
       const c = data.completed || {};
       const grade = data.grade || "y3";
       const doneAt = {};
@@ -55,7 +55,12 @@
       const weeks = Object.keys(doneAt).map(Number).sort(function(a,b){ return a-b; });
       if(!weeks.length) return null;
 
-      const latest = weeks[weeks.length - 1];
+      /* Looking back re-anchors the eight-week window on the asked week
+       * instead of the newest. Only finished weeks are offered, and an asked
+       * week that holds no evidence falls back to the newest — the picker must
+       * never conjure an empty stretch. */
+      const asked = ctx && ctx.week;
+      const latest = doneAt[asked] ? asked : weeks[weeks.length - 1];
       /* The window opens at the child's own first finished week, not week 1:
        * a course begun mid-year has no "skipped" weeks before it began — red
        * is only for a week passed BETWEEN finished ones. */
@@ -85,7 +90,8 @@
 
       return {title:"Weeks " + from + "–" + latest,
               columns:[{label:"W"+from+"–"+latest, cells:cells}],
-              well:well, struggle:struggle};
+              well:well, struggle:struggle,
+              weeks:weeks.slice().reverse()};
     },
 
     /* What Teacher HQ shows for Field Notes. See the `summary` contract in

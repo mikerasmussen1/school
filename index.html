@@ -5415,7 +5415,13 @@ class Component extends DCLogic {
       if(!G||!window.QTypes) return [];
       try{
         const grid=G.weekGrid([set], pLogAll, QTypes.idFor);
-        return G.suggest(grid, pLogAll, queueNow, today, vouchedAll);
+        /* Reds only. suggest() also offers wrong-once-then-fixed yellows now,
+         * but this button's label says "missed questions", and a card that
+         * queues fixed ones under that word is lying by a little. The glance
+         * shows yellows with their own honest evidence line; this card keeps
+         * its word. */
+        return G.suggest(grid, pLogAll, queueNow, today, vouchedAll)
+                .filter(x=>x.kind!=="yellow");
       }catch(e){ return []; }
     };
     const queueBtn=btn("rgba(56,189,248,.14)","rgba(56,189,248,.5)","var(--sky)");
@@ -6381,6 +6387,30 @@ class Component extends DCLogic {
         if(!src.length) continue;
         const it=src[Math.floor(Math.random()*src.length)];
         if(!seen[it.q]){ seen[it.q]=1; return {q:it.q,a:it.a,hint:it.hint,setId:s.id,label:s.title}; } } return null; };
+      /* Teacher-queued review, the sprint's share of today's serving: only
+       * Warm-Up-tier questions with keypad-typeable answers come this way
+       * (serve() routes the thinking kind to the practice block). Built
+       * BEFORE the organic draw and seeded into `seen`, because the sprint's
+       * own spiral loves exactly these questions — drawn organically first,
+       * the dedupe would discard the review copy, and only the review copy
+       * carries rv, which is what retires the entry from the same queue the
+       * practice block drains. One queue, two doors. */
+      const reviewItems=[];
+      try{
+        const G=(window.__CURR||{}).WeekGlance;
+        if(G){
+          const served=G.serve(st.review||[], dayNo(), null, this.sprintFit());
+          this.resolveReviewEntries(served.sprint).forEach(r=>{
+            if(seen[r.it.q]) return;
+            seen[r.it.q]=1;
+            reviewItems.push({q:r.it.q,
+              a:Array.isArray(r.it.a)?r.it.a[0]:r.it.a,
+              hint:r.it.hint, setId:r.set.id,
+              label:"Review from your teacher",
+              rv:{qid:r.entry.qid, idx:r.idx, set:r.set, it:r.it}});
+          });
+        }
+      }catch(e){ /* a broken review injection must not cost the sprint */ }
       // Open on three straight facts so the first half-minute is all wins, then
       // alternate facts with prior-unit review. 40 queued: the clock ends the
       // run, not the queue.
@@ -6389,6 +6419,8 @@ class Component extends DCLogic {
         if(!it) break;
         items.push(it);
       }
+      // The review lands right after the three opening wins.
+      reviewItems.forEach((it,k)=>items.splice(Math.min(3+k, items.length), 0, it));
       clearInterval(this._spr);
       this._spr=setInterval(()=>{ const c=this.state.sprint;
         if(!c||c.done){ clearInterval(this._spr); return; }
@@ -6412,6 +6444,15 @@ class Component extends DCLogic {
       // pHist — a fake set id would show up in Teacher HQ as a practice run.
       const perSet={...sp.perSet};
       if(it.setId){ const e=perSet[it.setId]||{r:0,t:0}; perSet[it.setId]={r:e.r+(right?1:0),t:e.t+1}; }
+      /* A review item answered here counts exactly as it would in the
+       * practice block: right retires it for good, wrong keeps it for
+       * another morning, and the attempt logs against its source set so the
+       * teacher's grid tells one story. */
+      if(it.rv){
+        const G=(window.__CURR||{}).WeekGlance;
+        if(G) this.saveState(z=>({review:G.record(z.review||[], it.rv.qid, right, dayNo())}));
+        this.logAttempt(it.rv.set, it.rv.it, it.rv.idx, sp.val, right, "sprint-review");
+      }
       const ns={...sp,rev:true,lastRight:right,att:sp.att+1,right:sp.right+(right?1:0),perSet};
       this.setState({sprint:ns});
       setTimeout(()=>{ const c=this.state.sprint; if(!c||c.done) return;
@@ -6459,14 +6500,13 @@ class Component extends DCLogic {
    * set with mode "review", so the attempt history reads as one story: the
    * teacher asked the same question again, and here is how it went.
    */
-  reviewRows(){
-    const G=(window.__CURR||{}).WeekGlance;
-    if(!G || !window.QTypes) return [];
-    const due=G.due(this.state.review||[]);
-    if(!due.length) return [];
+  /* Resolve queue entries to live items. Shared by the practice block and
+   * the sprint, each of which asks for its own channel of today's serving. */
+  resolveReviewEntries(entries){
+    if(!window.QTypes || !entries || !entries.length) return [];
     const {meta}=this.glanceMathSets(this.bankId());
     const rows=[];
-    due.forEach(e=>{
+    entries.forEach(e=>{
       const m=meta[e.setId];
       if(!m) return;
       const items=m.set.items||[];
@@ -6478,6 +6518,42 @@ class Component extends DCLogic {
       }
     });
     return rows;
+  }
+
+  /* Which queue entries the sprint can physically take: its answer box is a
+   * numeric keypad, so only answers made of digits and . , / - fit. Shared by
+   * both serving call sites so the two channels can never disagree about who
+   * owns an entry. */
+  sprintFit(){
+    if(!window.QTypes) return ()=>false;
+    const {meta}=this.glanceMathSets(this.bankId());
+    return (e)=>{
+      const m=meta[e.setId];
+      if(!m) return false;
+      const items=m.set.items||[];
+      for(let i=0;i<items.length;i++){
+        if(QTypes.idFor(m.set, items[i])===e.qid){
+          const a=items[i].a, first=Array.isArray(a)?a[0]:a;
+          /* Digits, point, comma, minus — and NOT the slash: a fraction like
+           * 3/4 is numeric to a regex but untypeable on the numeric keypad,
+           * which is the exact stranding this predicate exists to prevent.
+           * Fractions think anyway; they belong in the practice block. */
+          return /^[0-9.,-]+$/.test(String(first==null?"":first));
+        }
+      }
+      return false;
+    };
+  }
+
+  reviewRows(){
+    const G=(window.__CURR||{}).WeekGlance;
+    if(!G || !window.QTypes) return [];
+    /* Today's PORTION, not the queue: the queue can hold a week (24), and a
+     * wall of review before the day's own work is what turns twenty a week
+     * from review into punishment. Warm-up-tier entries are the sprint's;
+     * this block gets the rest, a few per morning. */
+    const served=G.serve(this.state.review||[], dayNo(), null, this.sprintFit());
+    return this.resolveReviewEntries(served.warmup);
   }
 
   checkReview=()=>{
@@ -6512,9 +6588,15 @@ class Component extends DCLogic {
     const marks=st.reviewMarks||{};
     const ans=st.reviewAns||{};
     const checkedCount=Object.keys(marks).length;
+    const G=(window.__CURR||{}).WeekGlance;
+    const allDue=G?G.due(st.review||[]).length:rows.length;
+    /* "More this week" must not count what is already going out today through
+     * the other door — the sprint's share is served, not waiting. */
+    const sprintToday=G?G.serve(st.review||[], dayNo(), null, this.sprintFit()).sprint.length:0;
+    const waiting=Math.max(0, allDue-rows.length-sprintToday);
     return {
       pReviewHas:rows.length>0,
-      pReviewCount:rows.length+" question"+(rows.length===1?"":"s"),
+      pReviewCount:rows.length+" today"+(waiting?" · "+waiting+" more this week":""),
       pReviewRows:rows.map(r=>{
         const qid=r.entry.qid;
         const marked=Object.prototype.hasOwnProperty.call(marks, qid);

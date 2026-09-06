@@ -30,9 +30,16 @@
  * does not come straight back next week.
  * ==========================================================================*/
 (function(){
-  const QUEUE_CAP = 10;      // a child's review block must never become a set
-  const SUGGEST_CAP = 6;     // more than this is a list, not a suggestion
+  /* Sized for a WEEK of review, not a morning. Around twenty questions a
+   * week is the target — a real second pass over what last week missed — but
+   * no morning ever sees more than a handful: serve() below paces the queue
+   * out at a few per day across warm-up and sprint, so the queue can be deep
+   * while the child's day stays light. */
+  const QUEUE_CAP = 24;      // room for a full week's approvals plus carryover
+  const SUGGEST_CAP = 20;    // about a week's worth of review, bundled by day
   const DONE_KEEP_DAYS = 28; // how long a resolved item blocks re-suggestion
+  const SERVE_WARMUP = 3;    // review questions per morning in the practice block
+  const SERVE_SPRINT = 2;    // quick-fire review questions folded into the sprint
 
   /* One item's colour, from its attempts oldest-first.
    * `ok:null` entries are ungraded types riding along in the log — they are
@@ -115,7 +122,7 @@
       .filter(e => !e.done || (today - (e.doneAt||0)) < DONE_KEEP_DAYS)
       .map(e => e.qid));
     const v = vouched||{};
-    const out = [];
+    const reds = [], yellows = [];
     grid.forEach(col => col.cells.forEach(c => {
       /* A VOUCHED day is a teacher's word that the work happened — recorded
        * when the app and the child disagreed (a curriculum change landed
@@ -123,17 +130,25 @@
        * about what the log holds, but a vouched day's misses must not feed
        * the suggestion mill: the teacher already said the day is settled. */
       if(v[c.setId]) return;
-      if(c.status !== "red" || blocked.has(c.qid)) return;
+      if(blocked.has(c.qid)) return;
+      if(c.status !== "red" && c.status !== "yellow") return;
       const entries = ((pLog||{})[c.setId]||[]).filter(e => e.qid === c.qid && e.ok === false);
       const lastWrong = entries.length ? Math.max.apply(null, entries.map(e => e.d||0)) : 0;
       const tries = entries.length;
-      out.push({qid:c.qid, setId:c.setId, n:c.n, t:c.t, q:c.q,
-                lastWrong, tries,
-                evidence:tries+" wrong "+(tries===1?"try":"tries")+
-                         ", never corrected"});
+      const sug = {qid:c.qid, setId:c.setId, n:c.n, t:c.t, q:c.q, lastWrong, tries,
+        kind:c.status,          // "red" | "yellow" — consumers may care which
+        evidence: c.status === "red"
+          ? tries+" wrong "+(tries===1?"try":"tries")+", never corrected"
+          : "missed once, then fixed — worth checking it stuck"};
+      (c.status === "red" ? reds : yellows).push(sug);
     }));
-    out.sort((a,b) => (b.lastWrong-a.lastWrong) || (b.tries-a.tries));
-    return out.slice(0, SUGGEST_CAP);
+    /* Never-corrected first, always — a yellow was already fixed once, so it
+     * only fills the space the reds leave. Both ranks run newest-wrong-first
+     * with tries as the tiebreak. A week's suggestions can now genuinely fill
+     * a week of review rather than one morning's. */
+    const rank = (a,b) => (b.lastWrong-a.lastWrong) || (b.tries-a.tries);
+    reds.sort(rank); yellows.sort(rank);
+    return reds.concat(yellows).slice(0, SUGGEST_CAP);
   }
 
   /* Approve: a new queue with this suggestion in it. Refuses quietly past the
@@ -143,7 +158,8 @@
     if(q.some(e => e.qid === sug.qid && !e.done)) return {queue:q, added:false, why:"already queued"};
     const live = q.filter(e => !e.done).length;
     if(live >= QUEUE_CAP) return {queue:q, added:false, why:"queue full ("+QUEUE_CAP+")"};
-    q.push({qid:sug.qid, setId:sug.setId, addedAt:today, tries:0, done:false});
+    q.push({qid:sug.qid, setId:sug.setId, t:(sug.t==null?null:sug.t),
+            addedAt:today, tries:0, done:false});
     return {queue:q, added:true};
   }
 
@@ -156,7 +172,7 @@
       if(e.qid !== qid || e.done) return e;
       changed = true;
       return ok ? {...e, done:true, doneAt:today}
-                : {...e, tries:(e.tries||0)+1};
+                : {...e, tries:(e.tries||0)+1, lastTry:today};
     });
     return changed ? prune(q, today) : q;
   }
@@ -192,12 +208,45 @@
 
   function due(queue){ return (queue||[]).filter(e => !e.done); }
 
+  /* TODAY'S portion of the queue, split across the two places review lives.
+   *
+   * A deep queue must not become a wall: the child sees a few questions per
+   * morning, every morning, until the queue drains — that is what makes
+   * twenty a week feel like review instead of punishment. An entry answered
+   * wrong today does not come back today (lastTry); tomorrow it does.
+   *
+   * CHANNELS. Warm-Up-tier questions (t 0) go to the SPRINT — they are
+   * quick-fire facts and the sprint is the quick-fire place. Everything else
+   * goes to the practice block, where there is room to think. Sprint-bound
+   * entries overflow into the practice block when the sprint's daily slots
+   * are full, never the reverse: a Challenge question fired at sprint pace
+   * is what made the Year-Two sprints harder than the lessons.
+   */
+  function serve(queue, today, caps, sprintFit){
+    const c = caps || {};
+    const wCap = c.warmup != null ? c.warmup : SERVE_WARMUP;
+    const sCap = c.sprint != null ? c.sprint : SERVE_SPRINT;
+    const fresh = due(queue).filter(e => e.lastTry !== today);
+    const sprint = [], warmup = [];
+    fresh.forEach(e => {
+      /* sprintFit is the caller saying which entries the sprint can PHYSICALLY
+       * take — its answer box is a numeric keypad, so "tenths" cannot be typed
+       * there no matter how warm-up-ish the question is. An unfit entry falls
+       * through to the practice block instead of being routed somewhere it can
+       * never be answered, which would strand it in the queue forever. */
+      if(e.t === 0 && (!sprintFit || sprintFit(e)) && sprint.length < sCap) sprint.push(e);
+      else if(warmup.length < wCap) warmup.push(e);
+    });
+    return {sprint, warmup, remaining:fresh.length - sprint.length - warmup.length};
+  }
+
   function prune(queue, today){
     return (queue||[]).filter(e => !e.done || (today-(e.doneAt||0)) < DONE_KEEP_DAYS);
   }
 
   window.__CURR = window.__CURR || {};
   window.__CURR.WeekGlance = {itemStatus, weekGrid, summarise, suggest,
-                              approve, approveMany, bundle, record, due, prune,
-                              QUEUE_CAP, SUGGEST_CAP, DONE_KEEP_DAYS};
+                              approve, approveMany, bundle, record, due, serve, prune,
+                              QUEUE_CAP, SUGGEST_CAP, DONE_KEEP_DAYS,
+                              SERVE_WARMUP, SERVE_SPRINT};
 })();

@@ -75,8 +75,8 @@ console.log("\n=== the summary speaks in counts ===");
 console.log("\n=== suggestions: only red, ranked by recency ===");
 {
   const sugs = G.suggest(grid, LOG, [], D+2);
-  is("only never-corrected questions suggested",
-     sugs.map(s=>s.qid).sort(), ["s1::c","s2::d"].sort());
+  is("reds lead; the fixed-once yellow trails them",
+     sugs.map(s=>s.qid), ["s1::c","s2::d","s1::b"]);
   // Both were last wrong on D+1; at equal recency the one with more failed
   // tries carries more evidence and leads.
   is("at equal recency, more wrong tries first", sugs[0].qid, "s1::c");
@@ -87,9 +87,9 @@ console.log("\n=== suggestions: only red, ranked by recency ===");
   is("evidence states the tries", sugs.find(s=>s.qid==="s1::c").evidence,
      "2 wrong tries, never corrected");
   is("a queued item is not re-suggested",
-     G.suggest(grid, LOG, [{qid:"s1::c",done:false}], D+2).map(s=>s.qid), ["s2::d"]);
+     G.suggest(grid, LOG, [{qid:"s1::c",done:false}], D+2).map(s=>s.qid), ["s2::d","s1::b"]);
   is("a recently resolved item stays out",
-     G.suggest(grid, LOG, [{qid:"s1::c",done:true,doneAt:D}], D+2).map(s=>s.qid), ["s2::d"]);
+     G.suggest(grid, LOG, [{qid:"s1::c",done:true,doneAt:D}], D+2).map(s=>s.qid), ["s2::d","s1::b"]);
   is("an anciently resolved item may return",
      G.suggest(grid, LOG, [{qid:"s1::c",done:true,doneAt:D-40}], D+2).map(s=>s.qid).includes("s1::c"),
      true);
@@ -120,11 +120,18 @@ console.log("\n=== the queue ===");
               {qid:"c",done:false}], D+1).map(e=>e.qid), ["a","c"]);
 }
 
+console.log("\n=== suggestions carry their kind ===");
+{
+  const sugs=G.suggest(grid, LOG, [], D+2);
+  is("reds say red, yellows say yellow",
+     sugs.map(s=>s.kind), ["red","red","yellow"]);
+}
+
 console.log("\n=== a vouched day is settled ===");
 {
   // Same grid as above: s1 has a red cell (s1::c), s2 has a red cell (s2::d).
-  is("without a vouch both reds are suggested",
-     G.suggest(grid, LOG, [], D+2).length, 2);
+  is("without a vouch, both reds and the yellow are suggested",
+     G.suggest(grid, LOG, [], D+2).length, 3);
   is("vouching a day removes ITS misses from suggestions",
      G.suggest(grid, LOG, [], D+2, {s1:D+1}).map(s=>s.qid), ["s2::d"]);
   is("vouching every day silences the mill entirely",
@@ -162,6 +169,51 @@ console.log("\n=== bundles and approve-all ===");
      [part.added, part.skipped.length], [2,1]);
   is("and names the one left out",
      [part.skipped[0].qid, part.skipped[0].why], ["p3","queue full ("+G.QUEUE_CAP+")"]);
+}
+
+console.log("\n=== a week's worth, served a morning at a time ===");
+{
+  is("yellows fill toward the cap after the reds",
+     G.suggest(grid, LOG, [], D+2).map(s=>s.qid),
+     ["s1::c","s2::d","s1::b"]);          // two reds first, then the yellow
+  is("a yellow's evidence says what it is",
+     G.suggest(grid, LOG, [], D+2)[2].evidence,
+     "missed once, then fixed — worth checking it stuck");
+  is("the caps carry a real week", [G.SUGGEST_CAP, G.QUEUE_CAP], [20, 24]);
+
+  // A deep queue: 5 warm-up-tier and 5 core-tier entries.
+  let q=[];
+  for(let i=0;i<5;i++) q=G.approve(q,{qid:"w"+i,setId:"s",t:0},D).queue;
+  for(let i=0;i<5;i++) q=G.approve(q,{qid:"c"+i,setId:"s",t:1},D).queue;
+
+  const day1=G.serve(q, D+1);
+  is("sprint takes warm-up facts, up to its daily slots",
+     day1.sprint.map(e=>e.qid), ["w0","w1"]);
+  is("the practice block takes the rest of today's portion",
+     day1.warmup.map(e=>e.qid), ["w2","w3","w4"]);
+  is("everything else waits for another morning", day1.remaining, 5);
+
+  // The child answers today's five: three right, two wrong.
+  let q2=q;
+  ["w0","w1","w2"].forEach(id=>{ q2=G.record(q2,id,true,D+1); });
+  ["w3","w4"].forEach(id=>{ q2=G.record(q2,id,false,D+1); });
+  const later=G.serve(q2, D+1);
+  is("a wrong answer today does not come back today",
+     later.sprint.concat(later.warmup).every(e=>e.qid[0]==="c"), true);
+  const morrow=G.serve(q2, D+2);
+  is("tomorrow it does",
+     morrow.sprint.concat(morrow.warmup).some(e=>e.qid==="w3"), true);
+  is("with no warm-up facts left, sprint stays empty rather than firing hard questions",
+     G.serve(q2.filter(e=>e.qid[0]==="c"), D+2).sprint, []);
+
+  /* The sprint's answer box is a numeric keypad; an entry whose answer needs
+   * letters must fall to the practice block, not be routed where it can never
+   * be typed — that strands it in the queue forever. */
+  const worded=e=>e.qid!=="w1";                 // pretend w1's answer is "tenths"
+  const fitted=G.serve(q, D+1, null, worded);
+  is("an entry the sprint cannot take falls to the practice block",
+     [fitted.sprint.map(e=>e.qid), fitted.warmup.some(e=>e.qid==="w1")],
+     [["w0","w2"], true]);
 }
 
 console.log();

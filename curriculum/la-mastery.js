@@ -216,6 +216,45 @@
   }
   const TOTAL_DAYS = 36 * 5;
 
+  /* ---- PACE ------------------------------------------------------------
+   * The rule above says there is no cap in front of a child, and that was a
+   * deliberate choice: "a child preparing for a field trip can work as far
+   * forward in one sitting as he has stamina for."
+   *
+   * Eight days of logs say it is being used for something else. One pilot
+   * closed Monday and answered Tuesday's grammar drill NINETY-FOUR SECONDS
+   * later, scoring full marks on both — that is not stamina, it is a week of
+   * work being spent in a couple of minutes because the material is too easy
+   * for him. His mother's report that the lessons finish too quickly is that
+   * number, seen from the kitchen.
+   *
+   * So the cap is not zero and it is not one: DAYS_PER_SITTING days may be
+   * closed per calendar day. Getting ahead still works — at two a day a child
+   * can finish the year in half a year — but a whole week in one sitting stops
+   * being possible. Set it to 0 to restore the old uncapped behaviour exactly.
+   *
+   * It reads a closedAt map the page writes when a day ends; if that map is
+   * missing or empty, nothing is capped, so an older save is never walled out.
+   */
+  let DAYS_PER_SITTING = 2;
+
+  function sameCalendarDay(a, b){
+    const x=new Date(a), y=new Date(b);
+    return x.getFullYear()===y.getFullYear() && x.getMonth()===y.getMonth() && x.getDate()===y.getDate();
+  }
+  /* How many days this grade closed on the calendar day `now` falls in. */
+  function closedToday(grade, closedAt, now){
+    if(!closedAt) return 0;
+    const t = now==null ? Date.now() : now;
+    let n=0;
+    Object.keys(closedAt).forEach(k=>{
+      if(k.indexOf(grade+":")!==0) return;
+      const at=closedAt[k];
+      if(typeof at==="number" && sameCalendarDay(at, t)) n++;
+    });
+    return n;
+  }
+
   function endKey(grade, week, day){ return grade+":"+week+":"+day+":end"; }
   function excuseKey(grade, week, day){ return grade+":"+week+":"+day+":excused"; }
 
@@ -235,11 +274,19 @@
   }
 
   /* "past" already done · "current" the frontier · "ahead" blocked by a gap */
-  function dayStatus(grade, week, day, stepDone, excused){
+  function dayStatus(grade, week, day, stepDone, excused, closedAt, now){
     const idx = absIndex(week, day);
     const frontier = firstIncomplete(grade, stepDone, excused);
     if(idx < frontier)  return {state:"past",    idx, frontier, blocked:false};
-    if(idx === frontier) return {state:"current", idx, frontier, blocked:false};
+    if(idx === frontier){
+      /* At the frontier and already at today's limit: the day is not blocked by
+       * a GAP, it is blocked by PACE, and the page says so differently — "come
+       * back tomorrow", not "go and finish Monday". */
+      const n = DAYS_PER_SITTING>0 ? closedToday(grade, closedAt, now) : 0;
+      if(DAYS_PER_SITTING>0 && n>=DAYS_PER_SITTING)
+        return {state:"paced", idx, frontier, blocked:true, closedToday:n, limit:DAYS_PER_SITTING};
+      return {state:"current", idx, frontier, blocked:false};
+    }
     return {state:"ahead", idx, frontier, blocked:true, mustFinish:fromAbs(frontier)};
   }
 
@@ -328,7 +375,11 @@
     MASTERY, MAX_ROUNDS, DAYS, DAY_NAME, PLANS,
     dayPlan, passed, neededFor,
     TOTAL_DAYS, absIndex, fromAbs, endKey, excuseKey,
-    dayFinished, firstIncomplete, dayStatus,
+    dayFinished, firstIncomplete, dayStatus, closedToday,
+    /* Pace is tunable without a deploy: LA_MASTERY.setPace(0) restores the
+     * original uncapped behaviour, setPace(1) makes it strictly one a day. */
+    get DAYS_PER_SITTING(){ return DAYS_PER_SITTING; },
+    setPace(n){ DAYS_PER_SITTING = Math.max(0, Number(n)||0); return DAYS_PER_SITTING; },
     extraGrammarItems, extraSpellingItems, remediationRound, stuckMessage
   };
 })();

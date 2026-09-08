@@ -149,10 +149,12 @@
         <!-- BLOCKED: unfinished work behind this day -->
         <sc-if value="{{ showBlocked }}" hint-placeholder-val="{{ false }}">
           <div style="border:2px solid var(--gold);border-radius:10px;padding:18px;margin:16px 0;background:var(--gold-light);text-align:center">
-            <div style="font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#7A5A0C;margin-bottom:6px">Unfinished work behind you</div>
+            <div style="font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#7A5A0C;margin-bottom:6px">{{ blockedEyebrow }}</div>
             <div style="font-family:'Fraunces',serif;font-size:1.1rem;margin-bottom:6px;color:#7A5A0C">{{ blockedHeading }}</div>
             <div class="muted" style="max-width:48ch;margin:0 auto 12px">{{ blockedText }}</div>
-            <button onClick="{{ goToFrontier }}" style="{{ btnSecondary }}">{{ blockedBtnLabel }}</button>
+            <sc-if value="{{ showBlockedBtn }}" hint-placeholder-val="{{ true }}">
+              <button onClick="{{ goToFrontier }}" style="{{ btnSecondary }}">{{ blockedBtnLabel }}</button>
+            </sc-if>
           </div>
         </sc-if>
 
@@ -970,6 +972,7 @@ class Component extends DCLogic {
     openStep:null,          // which assignment is open inline on Today
     started:false,          // has START TODAY been pressed
     stepDone:(function(){ try{ return JSON.parse(localStorage.getItem("la.stepDone")||"{}"); }catch(e){ return {}; } })(),
+    closedAt:(function(){ try{ return JSON.parse(localStorage.getItem("la.closedAt")||"{}"); }catch(e){ return {}; } })(),
     round:1,                // which attempt of the current scored step
     lastResult:null,        // {kind, score, total, passed, missed:[], seen:[]}
     remediation:null,       // {items, note, round, isFinalRound}
@@ -1017,6 +1020,7 @@ class Component extends DCLogic {
       if(!d) return;
       const patch={};
       if(d.stepDone) patch.stepDone=d.stepDone;
+      if(d.closedAt) patch.closedAt=d.closedAt;
       if(d.stuck)    patch.stuck=d.stuck;
       if(d.excused)  patch.excused=d.excused;
       if(d.done)      patch.done=d.done;
@@ -1057,6 +1061,17 @@ class Component extends DCLogic {
   }
 
   shuffle(a){ a=[...a]; for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); const t=a[i]; a[i]=a[j]; a[j]=t; } return a; }
+
+  /* Grammar items from the last `weeks` weeks, this one included. Week 1 has
+   * only itself to draw on, which is correct — there is nothing behind it. */
+  cumulativeBank(weeks){
+    const out=[]; const seen={};
+    for(let w=this.state.week; w>this.state.week-weeks && w>=1; w--){
+      const set=this.Y.grammarSetFor(w);
+      (set && set.items || []).forEach(it=>{ if(!seen[it.id]){ seen[it.id]=1; out.push(it); } });
+    }
+    return out;
+  }
 
   prepMC(bank,n){
     const pool = n ? this.shuffle(bank).slice(0,Math.min(n,bank.length)) : bank;
@@ -1182,7 +1197,11 @@ class Component extends DCLogic {
   sqStart=(overrideItems, seenBefore)=>{
     const items = overrideItems && overrideItems.length
       ? overrideItems
-      : this.shuffle(this.Y.spellingSetFor(this.state.week).items).slice(0,8);
+      /* THE WHOLE LIST, not eight of it. The lists are written as twelve at
+       * grade level plus two stretch words, and slicing to eight threw away
+       * the stretch every single week — the pilots were scoring 8/8 on a drill
+       * that had six more words waiting in it. */
+      : this.shuffle(this.Y.spellingSetFor(this.state.week).items);
     this.setState({sq:{items:items, idx:0, score:0, value:"", answered:false, ok:null,
       missed:[], seenBefore:seenBefore||[]}});
     this.speak(items[0].a[0]);
@@ -1256,7 +1275,7 @@ class Component extends DCLogic {
     const SY=window.__CURR&&window.__CURR.SYNC;
     if(SY) SY.save("la", {
       year:st.year, week:st.week, day:st.day,
-      stepDone:st.stepDone, stuck:st.stuck, excused:st.excused, done:st.done,
+      stepDone:st.stepDone, closedAt:st.closedAt, stuck:st.stuck, excused:st.excused, done:st.done,
       stepResult:st.stepResult, approvals:st.approvals, overrides:st.overrides,
       unitSeen:st.unitSeen
     });
@@ -1277,6 +1296,17 @@ class Component extends DCLogic {
     const k=this.state.year+":"+this.state.week+":"+this.stepKey(step);
     const stepDone={...this.state.stepDone, [k]:true};
     try{ localStorage.setItem("la.stepDone", JSON.stringify(stepDone)); }catch(e){}
+
+    /* When a DAY closes, stamp the time. That stamp is the whole input to the
+     * pace rule in la-mastery (how many days were closed today), and nothing
+     * else reads it. Days closed before this shipped simply have no stamp,
+     * which counts as none-today and caps nobody retroactively. */
+    let closedAt=this.state.closedAt||{};
+    if(/:end$/.test(k)){
+      closedAt={...closedAt, [k.replace(/:end$/,"")]:Date.now()};
+      this.setState({closedAt});
+      try{ localStorage.setItem("la.closedAt", JSON.stringify(closedAt)); }catch(e){}
+    }
 
     /* Finishing a day already has its banner. Finishing a UNIT STUDY — nine a
      * year, four weeks and twenty days each — had nothing at all, which made
@@ -1360,18 +1390,23 @@ class Component extends DCLogic {
       Object.keys(bag||{}).forEach(function(k){ if(k.indexOf(prefix)!==0) out[k]=bag[k]; });
       return out;
     };
-    const stepDone=strip(st.stepDone), stuck=strip(st.stuck),
+    const stepDone=strip(st.stepDone), closedAtS=strip(st.closedAt), stuck=strip(st.stuck),
           stepResult=strip(st.stepResult), approvals=strip(st.approvals);
     try{
       localStorage.setItem("la.stepDone", JSON.stringify(stepDone));
+      localStorage.setItem("la.closedAt", JSON.stringify(closedAtS));
       localStorage.setItem("la.stuck", JSON.stringify(stuck));
       localStorage.setItem("la.stepResult", JSON.stringify(stepResult));
       localStorage.setItem("la.approvals", JSON.stringify(approvals));
     }catch(e){}
-    this.setState({stepDone, stuck, stepResult, approvals,
+    /* Resetting a day drops its close stamp too. Without that, a day redone
+     * after a reset would still be counted against today's pace and the child
+     * would be told to come back tomorrow for work he has not been credited
+     * with — punished for the reset. */
+    this.setState({stepDone, closedAt:closedAtS, stuck, stepResult, approvals,
       started:false, openStep:null, dayResetArmed:false,
       fx:null, gz:null, sq:null, rq:null, rv:null, remediation:null, round:1, lastResult:null});
-    this.syncSave({stepDone, stuck, stepResult, approvals});
+    this.syncSave({stepDone, closedAt:closedAtS, stuck, stepResult, approvals});
     window.scrollTo(0,0);
   };
   armDayReset=()=>{ this.setState({dayResetArmed:true}); };
@@ -1525,7 +1560,17 @@ class Component extends DCLogic {
     return (this.state.stepResult||{})[k]||null;
   }
 
-  startDay=()=>{ this.setState({started:true, round:1, lastResult:null, remediation:null}); window.scrollTo(0,0); };
+  startDay=()=>{
+    /* The button is hidden while paced; this guards the action as well, so a
+     * stale render or a keyboard activation cannot start a day the pace rule
+     * has closed. */
+    const MS=window.__CURR.LA_MASTERY, st=this.state;
+    if(MS && MS.dayStatus){
+      const seq=MS.dayStatus(st.year, st.week, st.day, st.stepDone, st.excused, st.closedAt);
+      if(seq.state==="paced") return;
+    }
+    this.setState({started:true, round:1, lastResult:null, remediation:null}); window.scrollTo(0,0);
+  };
 
   setDay=(d)=>{
     try{ localStorage.setItem("la.day", d); }catch(e){}
@@ -1639,7 +1684,7 @@ class Component extends DCLogic {
     const plan=MS.dayPlan(st.year, st.week, st.day);
 
     /* Sequencing: no gaps behind, no cap ahead. */
-    const seq = MS.dayStatus ? MS.dayStatus(st.year, st.week, st.day, st.stepDone, st.excused)
+    const seq = MS.dayStatus ? MS.dayStatus(st.year, st.week, st.day, st.stepDone, st.excused, st.closedAt)
                              : {state:"current", blocked:false, frontier:0, idx:0};
     const frontierPos = MS.fromAbs ? MS.fromAbs(seq.frontier) : {week:st.week, day:st.day};
     const yearFinished = MS.TOTAL_DAYS ? seq.frontier >= MS.TOTAL_DAYS : false;
@@ -1792,7 +1837,7 @@ class Component extends DCLogic {
       weekFocusLine:"Spelling pattern: "+wk.spelling+" \u00b7 Standard "+wk.standard,
       unitLine:"Unit "+unit.n+" \u00b7 "+unit.name+" \u00b7 "+unit.virtue,
       dayPicker: MS.DAYS.map(function(d){
-        const stt = MS.dayStatus ? MS.dayStatus(st.year, st.week, d, st.stepDone, st.excused)
+        const stt = MS.dayStatus ? MS.dayStatus(st.year, st.week, d, st.stepDone, st.excused, st.closedAt)
                                  : {state:"current"};
         const isSel = st.day===d;
         const bg = isSel ? "var(--gold)"
@@ -2069,23 +2114,47 @@ class Component extends DCLogic {
                    : function(){};
       })(),
 
-      showStart: !st.started && !dayComplete,
+      /* PACED DAYS HIDE THE START BUTTON, which is the difference between a
+       * cap and a suggestion. A banner the child can simply press past would
+       * not have stopped the sitting that prompted this — two days closed
+       * ninety-four seconds apart.
+       *
+       * Deliberately NOT applied to the "ahead" gap-block, which has always
+       * been advisory: that one says "you can still do today's work", and a
+       * child who skipped a day should not also lose today. And there is a way
+       * through here too — a grown-up excuses the day (the same valve the
+       * sequencing rules already use), so this is a closed door with a key, not
+       * a wall. */
+      showStart: !st.started && !dayComplete && seq.state!=="paced",
       showChecklist: st.started && !dayComplete,
       showDayComplete: dayComplete,
       showBlocked: seq.blocked && !st.started && !dayComplete,
-      blockedHeading: seq.blocked
+      /* TWO DIFFERENT BLOCKS, which must never wear each other's words.
+       * "ahead"  there is unfinished work BEHIND you — go back and do it.
+       * "paced"  you are caught up and have already closed today's allowance;
+       *          the frontier IS this day, so the go-back button would point
+       *          at the page you are standing on. Different heading, different
+       *          text, no button. */
+      blockedEyebrow: seq.state==="paced" ? "Enough for today" : "Unfinished work behind you",
+      showBlockedBtn: seq.blocked && seq.state!=="paced",
+      blockedHeading: seq.state==="paced"
+        ? "That is "+seq.closedToday+" days finished today"
+        : seq.blocked
         ? (MS.DAY_NAME[frontierPos.day]||frontierPos.day)+" of week "+frontierPos.week+" is still unfinished"
         : "",
-      blockedText: seq.blocked
+      blockedText: seq.state==="paced"
+        ? "Good work \u2014 that is a proper stretch for one sitting. The next day opens tomorrow. If there is a real reason to keep going today, ask a grown-up."
+        : seq.blocked
         ? "You have unfinished work behind this day. You can still do today's work, but the skipped day will not fill itself in \u2014 go back to it when you can."
         : "",
-      blockedBtnLabel: seq.blocked
+      blockedBtnLabel: seq.state==="paced" ? ""
+        : seq.blocked
         ? "Go back and finish "+(MS.DAY_NAME[frontierPos.day]||frontierPos.day)+", week "+frontierPos.week
         : "",
       goToFrontier: function(){ self.jumpTo(frontierPos.week, frontierPos.day); },
       // Working ahead is the same mechanism seen from the other side.
       showAheadNote: !seq.blocked && seq.state==="current" && !dayComplete && !st.started,
-      aheadNote: "You are caught up. Finish today and the next day opens straight away \u2014 you can work as far ahead as you like, which is how to cover a day you will be away for.",
+      aheadNote: "You are caught up. Finish today and the next day opens straight away \u2014 you can work a day or two ahead, which is how to cover a day you will be away for.",
       daySteps: daySteps,
       progressLabel:"Today's checklist",
       progressCount: doneCount+" of "+plan.steps.length+" done",
@@ -2237,7 +2306,14 @@ class Component extends DCLogic {
 
     const rq=this.quizVals("rq","rq","reading",function(){ self.quizStart("rq", self.prepMC(passage.questions)); });
     const gz=this.quizVals("gz","gz","grammar",function(){ self.quizStart("gz", self.prepMC(grammarSet.items)); });
-    const rv=this.quizVals("rv","rv",null,function(){ self.quizStart("rv", self.prepMC(grammarSet.items,4)); });
+    /* FRIDAY IS THE REVIEW DAY, so it should look back further than Tuesday.
+     * It used to draw four questions from THIS week's grammar — the same eight
+     * items the child had already answered on Tuesday, which is a re-read
+     * rather than a review and left Friday the emptiest day of the week.
+     * Now: ten questions spread over the last four weeks, this week included,
+     * which is the one place in the LA week where spaced practice fits without
+     * lengthening any other day. */
+    const rv=this.quizVals("rv","rv",null,function(){ self.quizStart("rv", self.prepMC(self.cumulativeBank(4), 10)); });
 
     base.fixSentence  = fixItem?fixItem.sentence:"";
     /* Which stage the child is on, so the box above the question says what he

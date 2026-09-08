@@ -33,6 +33,7 @@
 <script src="./curriculum/extra-banks.js?v=2026-09-04-1631"></script>
 <script src="./curriculum/math-sequence.js?v=2026-09-04-1631"></script>
 <script src="./curriculum/week-glance.js?v=2026-09-06-0900"></script>
+<script src="./curriculum/mix.js?v=2026-09-08-1200"></script>
 <script src="./curriculum/registry.js?v=2026-09-04-1631"></script>
 <script src="./curriculum/la-y1-spine.js?v=2026-09-04-1631"></script>
 <script src="./curriculum/la-y1-words.js?v=2026-09-04-1631"></script>
@@ -3224,6 +3225,10 @@
         <button onClick="{{ pOnPaper }}" style="font-family:Fredoka,sans-serif;font-size:15px;padding:12px 22px;border-radius:13px;cursor:pointer;background:rgba(167,139,250,.16);border:1px solid rgba(167,139,250,.5);color:var(--violet-light)" style-hover="filter:brightness(1.15)">I did this on paper</button>
         <button onClick="{{ pReset }}" style="font-family:Fredoka,sans-serif;font-size:15px;padding:12px 22px;border-radius:13px;cursor:pointer;background:transparent;border:1px solid rgba(var(--line-rgb),.18);color:rgba(var(--ink-rgb),.65)" style-hover="filter:brightness(1.3)">Clear the page</button>
       </div>
+
+      <sc-if value="{{ pHasBlankMsg }}" hint-placeholder-val="{{ false }}">
+        <div style="margin-top:14px;padding:12px 15px;border-radius:13px;background:rgba(251,191,36,.13);border:1px solid rgba(251,191,36,.45);color:var(--amber);font-size:14px;line-height:1.5">{{ pBlankMsg }}</div>
+      </sc-if>
       </sc-if>
 
       <input ref="{{ paperFileRef }}" onChange="{{ paperPickedCb }}" type="file" accept="image/*" style="display:none">
@@ -3984,7 +3989,21 @@ class Component extends DCLogic {
   // database wins; the arrays above are the fallback when it is unreachable or
   // has nothing to say about this unit yet (see curriculum/qbank.js).
   bankId(){ return this.isY5() ? "y5" : "y3"; }
-  setsFor(u){ return QBank.setsFor(this.bankId(), u, this.fileSetsFor(u)); }
+  /* Served sets carry the daily mix: the base set, then review items from
+   * earlier work, then challenge items from the extra bank (curriculum/mix.js).
+   * allFileSets() is the ordering source and reads the FILE sets directly, so
+   * it cannot recurse back through here. */
+  setsFor(u){
+    const sets=QBank.setsFor(this.bankId(), u, this.fileSetsFor(u));
+    const MIX=(window.__CURR||{}).MIX;
+    return MIX ? MIX.applyAll(sets, this.allFileSets(), this.activeName()) : sets;
+  }
+  /* The pilot's name, which is how the mix is tuned per child (mix.js BY_NAME).
+   * Empty for a signed-out or unknown profile, which lands on the defaults. */
+  activeName(){
+    const p=(this.state.profiles||[]).find(x=>x.id===this.state.activeId);
+    return p ? p.name : "";
+  }
   allFileSets(){ let out=[]; for(let u=1;u<=8;u++){ const g=this.fileSetsFor(u)||[];
     g.forEach(s=>out.push(s.u?s:{...s,u})); } return out; }
   loadBank(){
@@ -4909,9 +4928,10 @@ class Component extends DCLogic {
     const self2=this;
 
     const CELL={green:"#4ADE80", yellow:"#FBBF24", red:"#F87171",
-                gray:"rgba(var(--line-rgb),.16)"};
+                pending:"#38BDF8", gray:"rgba(var(--line-rgb),.16)"};
     const WORD={green:"right first try", yellow:"fixed after a miss",
-                red:"never corrected", gray:"not answered"};
+                red:"never corrected", pending:"answered — not checked yet",
+                gray:"not answered"};
     const wkTabStyle=on=>"font-family:'JetBrains Mono',monospace;font-size:10px;"+
       "letter-spacing:.06em;padding:6px 11px;border-radius:999px;cursor:pointer;"+
       "white-space:nowrap;transition:.15s;background:"+
@@ -4964,7 +4984,7 @@ class Component extends DCLogic {
           : newest;
         if(cur){
           const weekSets=all.filter(s=>meta[s.id].u===cur.u && (s.w||1)===cur.w);
-          const grid=G.weekGrid(weekSets, slice.pLog||{}, QTypes.idFor);
+          const grid=G.weekGrid(weekSets, slice.pLog||{}, QTypes.idFor, slice.pAns||{});
           const sum=G.summarise(grid);
           const vouched=slice.vouch||{};
           const sugs=G.suggest(grid, slice.pLog||{}, slice.review||[], today, vouched);
@@ -5004,6 +5024,13 @@ class Component extends DCLogic {
                 if(!cells.length) return null;
                 const tickOn=checked[col.setId+"|"+tIdx]===true
                           || checked[col.setId+"|all"]===true;
+                /* EACH TIER CAN BE BEATEN ON ITS OWN. The Streak Run is
+                 * scoped to the tier on screen and stores under setId|tier,
+                 * so Warm-Up, Core and Challenge each carry their own ⚡. A
+                 * streak outranks a plain graded tick — beaten says more
+                 * than finished — and its tooltip carries the run. */
+                const tstk=(slice.pStreak||{})[col.setId+"|"+tIdx];
+                const tBeat=!!(tstk&&tstk.closed);
                 return {
                   chip:(TIERS[tIdx]?TIERS[tIdx].icon:"")+" "+(TIERS[tIdx]?TIERS[tIdx].name:""),
                   chipStyle:"font-family:'JetBrains Mono',monospace;font-size:8px;"+
@@ -5011,17 +5038,24 @@ class Component extends DCLogic {
                     ((TIERS[tIdx]&&TIERS[tIdx].color)||"rgba(var(--ink-rgb),.5)")+
                     ";opacity:.85;white-space:nowrap",
                   cells:cells.map(mkCell),
-                  mark:tickOn?"✓":"",
-                  markTitle:tickOn?"Graded — this tier was checked":"",
+                  mark:tBeat?"⚡":(tickOn?"✓":""),
+                  markTitle:tBeat
+                    ? "Beaten with a streak · "+(tstk.right||0)+"/"+(tstk.att||0)+" right, "+
+                      (tstk.goal||"?")+" in a row — mastered, not skipped"
+                    : (tickOn?"Graded — this tier was checked":""),
                   markStyle:"font-size:11px;color:"+
-                    ((TIERS[tIdx]&&TIERS[tIdx].color)||"var(--green)")
+                    (tBeat?"var(--amber)":((TIERS[tIdx]&&TIERS[tIdx].color)||"var(--green)"))
                 };
               }).filter(Boolean);
               /* MASTERED, NOT SKIPPED. The Streak Run closes only on five
                * right IN A ROW — pStreak[set].closed — which is the difference
                * between "he finished it" and "he beat it". The badge says so
                * where the teacher is already looking. */
-              const stk=(slice.pStreak||{})[col.setId];
+              /* Combined-run records: old bare-setId entries, and any run
+               * done in the "all tiers" view. Shown at the day level since
+               * they speak for the whole set. */
+              const stk=(slice.pStreak||{})[col.setId]
+                     || (slice.pStreak||{})[col.setId+"|all"];
               return {
                 label:col.label, title:col.title,
                 groups:groups,
@@ -5057,8 +5091,11 @@ class Component extends DCLogic {
                   (on?"var(--green)":"rgba(var(--ink-rgb),.45)")
               };
             }),
-            well:sum.well, struggle:sum.struggle,
-            hasWell:sum.well.length>0, hasStruggle:sum.struggle.length>0,
+            well:sum.pending
+              ? sum.well.concat(sum.pending+" answered and waiting for Check")
+              : sum.well,
+            struggle:sum.struggle,
+            hasWell:sum.well.length>0||sum.pending>0, hasStruggle:sum.struggle.length>0,
             /* Bundled by source day, approved a bundle at a time — six
              * separate Approve taps was homework about homework. Approve all
              * takes the lot. Both write to the local child directly, or to a
@@ -5136,6 +5173,7 @@ class Component extends DCLogic {
         {label:"right first try", style:cellStyle("green")},
         {label:"fixed after a miss", style:cellStyle("yellow")},
         {label:"never corrected", style:cellStyle("red")},
+        {label:"answered, not checked yet", style:cellStyle("pending")},
         {label:"not answered", style:cellStyle("gray")}
       ]
     };
@@ -6229,6 +6267,11 @@ class Component extends DCLogic {
       qid:QTypes.idFor(set,r.it), q:String(r.it.q||"").slice(0,160),
       exp:String(QTypes.answerText(r.it)).slice(0,80),
       given:String(r.given==null?"":r.given).slice(0,80),
+      /* An empty box is NOT a wrong answer, and recording it as one made the
+       * logs unreadable: 63% of one pilot's "attempts" were blank submissions,
+       * which dragged his apparent accuracy from 91% down to 34% and hid the
+       * fact that the work was too easy for him rather than too hard. */
+      blank:String(r.given==null?"":r.given).trim()==="" || undefined,
       ok:r.ok===null?null:!!r.ok, t:r.it.t==null?null:r.it.t, m:mode||"grid"}));
     this.saveState(s=>{
       const log={...(s.pLog||{})};
@@ -6257,20 +6300,42 @@ class Component extends DCLogic {
   // Before this, the run simply ended when the bank ran out, so a child who
   // kept missing got FEWER chances to reach mastery, not more. MAX_ATT stops a
   // struggling run going on forever.
-  streamVals(set, compressed){
+  streamVals(set, compressed, tf){
     const st=this.state;
-    const s = st.stream && st.stream.setId===set.id ? st.stream : null;
     const items=set.items;
-    const STREAK_GOAL=5, MIN_ATT=5, MAX_ATT=Math.max(items.length+12, 30);
-    // Banks are authored easy-first, so walking them in order meant five in a
-    // row was five Warm-Up items. Every run now gets its own mixed order:
-    // repeating windows of 1 Warm-Up, 2 Core, 2 Challenge (QTypes.mixOrder).
-    const start=()=>{ this.setState({stream:{setId:set.id,t0:Date.now(),order:QTypes.mixOrder(items),pos:0,streak:0,att:0,right:0,val:"",rev:false,lastRight:false,done:false,recycle:[]}}); this.focusStreak(); };
+    /* THE RUN IS SCOPED TO THE TIER ON SCREEN. Each tier can now be beaten on
+     * its own — a Warm-Up streak, a Core streak, a Challenge streak — because
+     * "he mastered the facts" and "he mastered the hard ones" are different
+     * claims and the teacher's glance wants to make each one separately.
+     *
+     * (The old combined run mixed tiers to stop five-in-a-row meaning five
+     * easy ones. Scoping to one tier removes that hazard a different way:
+     * within a tier, every item is the same kind of work.)
+     *
+     * THE GOAL BENDS TO THE TIER. Challenge holds two or three items; five in
+     * a row is arithmetic nonsense there. The bar is min(5, what the tier
+     * holds): beat everything the tier has, in a row, and it is beaten. */
+    const tfKey=(tf==null?"all":tf);
+    const runIdx=items.map((it,i)=>({it,i}))
+      .filter(x=>tf==null || x.it.t===tf).map(x=>x.i);
+    const STREAK_GOAL=Math.max(1, Math.min(5, runIdx.length));
+    const MIN_ATT=STREAK_GOAL, MAX_ATT=Math.max(runIdx.length+12, 30);
+    const shuffle=a=>{ const r=a.slice();
+      for(let i=r.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1));
+        const t=r[i]; r[i]=r[j]; r[j]=t; } return r; };
+    // A run belongs to one set AND one tier; switching the tier chip mid-run
+    // abandons the old run rather than serving its questions under the new
+    // tier's banner.
+    const s = st.stream && st.stream.setId===set.id && st.stream.tf===tfKey
+      ? st.stream : null;
+    const start=()=>{ this.setState({stream:{setId:set.id, tf:tfKey, t0:Date.now(),
+      order:(tf==null?QTypes.mixOrder(items):shuffle(runIdx)),
+      pos:0,streak:0,att:0,right:0,val:"",rev:false,lastRight:false,done:false,recycle:[]}}); this.focusStreak(); };
     if(!s) return {pStreamOn:false, pGridOn:true, smStart:start, smLive:false, smDone:false, smDots:[], smProgress:"", smUnrevealed:false, smRevealed:false};
     // Past the end of the bank, re-ask whatever was missed.
-    const ord=(s.order&&s.order.length)?s.order:items.map((_,i)=>i);
+    const ord=(s.order&&s.order.length)?s.order:runIdx;
     const idxFor=(x)=>{
-      const o=(x.order&&x.order.length)?x.order:items.map((_,i)=>i);
+      const o=(x.order&&x.order.length)?x.order:runIdx;
       if(x.pos < o.length) return o[x.pos];
       const q=x.recycle||[];
       return q.length ? q[(x.pos-o.length)%q.length] : o[o.length-1];
@@ -6281,8 +6346,13 @@ class Component extends DCLogic {
         pct:Math.round(100*str.right/Math.max(1,str.att)), why:"70% no longer reachable"});
       const done={...str,done:true};
       this.saveState(prev=>({stream:done,
-        pHist:logRun(prev.pHist||{},set.id,str.right,str.att,null),
-        pStreak:{...(prev.pStreak||{}),[set.id]:{att:str.att,right:str.right,d:dayNo(),closed:str.streak>=STREAK_GOAL}}}));
+        pHist:logRun(prev.pHist||{},set.id,str.right,str.att,(tf==null?null:tf)),
+        /* Keyed by tier, so each tier's mastery is its own fact. goal is
+         * stored with it because the bar bends to small tiers, and a closed
+         * badge should be explainable later ("2-in-a-row of 2"). Old records
+         * keyed by bare setId stay readable as a combined run. */
+        pStreak:{...(prev.pStreak||{}),[set.id+"|"+tfKey]:{att:str.att,right:str.right,d:dayNo(),
+          goal:STREAK_GOAL, closed:str.streak>=STREAK_GOAL}}}));
       // Below the bar → read the run and, if it needs it, teach it again.
       // A run that ends on a full streak still gets bonus content — they fought
       // back to it, and the tutor is told so it reads as consolidation rather
@@ -6752,7 +6822,7 @@ class Component extends DCLogic {
 
     const patch=(key,id,val)=>this.setState(s=>({[key]:{...s[key],[id]:val}}));
 
-    const SM=this.streamVals(set,compressed);
+    const SM=this.streamVals(set,compressed,tf);
     const SPR=this.sprintVals();
 
     return {...SM, ...SPR, ...this.reviewVals(),
@@ -6823,6 +6893,16 @@ class Component extends DCLogic {
               : "Look again at the ones marked ✗. ")+
             "Fix them and check again — there's no limit on tries.",
       pStatusColor: onPaper ? "#A78BFA" : !checked ? "rgba(var(--ink-rgb),.6)" : allRight ? "#4ADE80" : "#FBBF24",
+      /* The empty-page notice. Shown only between the first Check on an
+       * unfinished page and the second — see pCheck. */
+      pHasBlankMsg: !!((st.pBlankWarn||{})[key]) &&
+        visible.filter(({i})=>String((st.pAns[set.id]||{})[i]==null?"":(st.pAns[set.id]||{})[i]).trim()==="").length>=3,
+      pBlankMsg: (()=>{
+        const n=visible.filter(({i})=>String((st.pAns[set.id]||{})[i]==null?"":(st.pAns[set.id]||{})[i]).trim()==="").length;
+        return n===1
+          ? "One box is still empty. Have a go at it — a guess counts. Press Check again if you are truly stuck."
+          : n+" boxes are still empty. Have a go at them — a guess counts. Press Check again if you are truly stuck.";
+      })(),
       /* THE DAY, named. Field Notes says "1 Investigate, 2 Explain, 3 Check";
        * Word Voyagers hands over an ordered checklist. Maths had a Mission
        * number, a week tab and a set chip, and left the child to assemble
@@ -6908,7 +6988,38 @@ class Component extends DCLogic {
         };
       }),
       pCheck:()=>{const t0=Date.now();
-        this.saveState(s=>({pChecked:{...s.pChecked,[key]:true,[legacy]:false},pRuns:{...s.pRuns,[key]:(s.pRuns[key]||s.pRuns[legacy]||0)+1,[legacy]:0},pHist:logRun(s.pHist||{},set.id,score,visible.length,compressed?null:tf)}));
+        /* THE EMPTY PAGE. Pressing Check with boxes still empty used to grade
+         * the blanks wrong, tick the section done and move the pilot on — which
+         * is how a whole set could be "completed" in seconds without a single
+         * answer typed. It is the mechanism behind the fast finishes Brittany
+         * reported, and it also poisons the record the difficulty is judged from.
+         *
+         * So the first press on an unfinished page does not grade. It says what
+         * is missing and waits.
+         *
+         * IT DOES NOT LOCK. Pressing Check again grades exactly as before,
+         * blanks and all — the same reasoning as the LA stuck valve: a child who
+         * genuinely cannot do a question must never be trapped in front of it,
+         * and three refusals would teach him to hate the page. The second press
+         * is a deliberate act, and the run is flagged so a grown-up sees it. */
+        /* THE THRESHOLD. Not "any blank" — a page is now 30-40 questions and
+         * stopping a child over one skipped hard item would be nagging, which
+         * is how a guard gets ignored. Three or more empty boxes is the
+         * behaviour actually seen in the logs (60 to 146 blanks in a sitting),
+         * and it is far outside "I could not do that one". */
+        const empty=visible.filter(({i})=>String(ans[i]==null?"":ans[i]).trim()==="");
+        const warned=(this.state.pBlankWarn||{})[key];
+        if(empty.length>=3 && !warned){
+          this.saveState(s=>({pBlankWarn:{...(s.pBlankWarn||{}), [key]:true}}));
+          return;
+        }
+        this.saveState(s=>({pChecked:{...s.pChecked,[key]:true,[legacy]:false},pRuns:{...s.pRuns,[key]:(s.pRuns[key]||s.pRuns[legacy]||0)+1,[legacy]:0},pHist:logRun(s.pHist||{},set.id,score,visible.length,compressed?null:tf),
+          pBlankWarn:{...(s.pBlankWarn||{}), [key]:false},
+          /* Graded with half the page empty: worth a grown-up's eye, the same
+           * way LA raises "needs a look" rather than failing silently. */
+          pBlankRuns: empty.length >= Math.ceil(visible.length/2)
+            ? {...(s.pBlankRuns||{}), [set.id]:((s.pBlankRuns||{})[set.id]||0)+1}
+            : (s.pBlankRuns||{})}));
         this.logAttempts(set, visible.map(({it,i})=>({i,it,given:ans[i],ok:verdictOf(i,it)})), "grid");
         setTimeout(()=>this.maybeDynamic(set, t0, score/Math.max(1,visible.length)), 80);},
       pRetry:()=>{

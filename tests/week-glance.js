@@ -64,7 +64,22 @@ console.log("\n=== the summary speaks in counts ===");
      sum.struggle.length >= 1 && sum.struggle[0].includes("1 never corrected"), true);
   is("nothing attempted contributes nothing",
      G.summarise(G.weekGrid([{id:"s9",label:"9",title:"x",items:[{q:"z"}]}], {}, idFor)),
-     {well:[], struggle:[], attempted:0, firstTryRight:0});
+     {well:[], struggle:[], pending:0, attempted:0, firstTryRight:0});
+
+  // ── answered but not yet checked ──
+  const halfway=G.weekGrid(
+    [{id:"h1",label:"2.1",title:"x",items:[{q:"a",t:0},{q:"b",t:1},{q:"c",t:2}]}],
+    {h1:[{qid:"h1::a",ok:true,d:D}]}, idFor,
+    {h1:{0:"999", 1:"42", 2:"  "}});
+  is("a typed-but-unchecked answer shows as pending, in real time",
+     halfway[0].cells.map(c=>c.status), ["green","pending","gray"]);
+  is("a graded attempt outranks the typed value — green stays green",
+     halfway[0].cells[0].status, "green");
+  is("whitespace alone is not an answer", halfway[0].cells[2].status, "gray");
+  is("pending is effort, counted apart from evidence",
+     G.summarise(halfway).pending, 1);
+  is("pending never becomes a suggestion",
+     G.suggest(halfway, {h1:[{qid:"h1::a",ok:true,d:D}]}, [], D+1), []);
   const allGreen = G.weekGrid(
     [{id:"g",label:"1.3",title:"Rounding",items:[{q:"p"},{q:"r"},{q:"s"}]}],
     {g:[{qid:"g::p",ok:true,d:D},{qid:"g::r",ok:true,d:D},{qid:"g::s",ok:true,d:D}]}, idFor);

@@ -60,16 +60,26 @@
    * bank order and numbered from 1, matching how the child and the printed
    * sheet both count.
    */
-  function weekGrid(sets, pLog, idFor){
+  function weekGrid(sets, pLog, idFor, pAns){
     return (sets||[]).map(set => {
       const byQid = {};
       ((pLog||{})[set.id]||[]).forEach(e => {
         (byQid[e.qid] = byQid[e.qid] || []).push(e);
       });
+      const typed = (pAns||{})[set.id]||{};
       const cells = (set.items||[]).map((it, i) => {
         const qid = idFor(set, it);
+        let status = itemStatus(byQid[qid]);
+        /* ANSWERED BUT NOT YET CHECKED. pAns holds what the child has typed,
+         * saved as they type it — so work in progress is visible on the
+         * teacher's glance in real time, before Check is ever pressed. It is
+         * its own colour, not green: an unchecked answer is evidence of
+         * effort, not of correctness, and a glance that pre-judged it either
+         * way would be guessing. Any graded attempt outranks it. */
+        if(status === "gray" && String(typed[i]==null?"":typed[i]).trim() !== "")
+          status = "pending";
         return {n:i+1, qid, setId:set.id, t:(it.t==null?null:it.t),
-                q:String(it.q||""), status:itemStatus(byQid[qid])};
+                q:String(it.q||""), status};
       });
       return {setId:set.id, label:set.label||set.id, title:set.title||"", cells};
     });
@@ -85,8 +95,10 @@
     const well = [], struggle = [];
     let weekGreen = 0, weekTried = 0;
     const redByTier = {};
+    let pending = 0;
     grid.forEach(col => {
-      const tried = col.cells.filter(c => c.status !== "gray");
+      pending += col.cells.filter(c => c.status === "pending").length;
+      const tried = col.cells.filter(c => c.status !== "gray" && c.status !== "pending");
       if(!tried.length) return;
       const green = tried.filter(c => c.status === "green").length;
       const yellow = tried.filter(c => c.status === "yellow").length;
@@ -105,7 +117,7 @@
     // not a header — a day that earned its own line should lead with it.
     if(weekTried && !struggle.length && well.length === 0)
       well.push(weekGreen+" of "+weekTried+" attempted questions right first try");
-    return {well, struggle,
+    return {well, struggle, pending,
             attempted:weekTried, firstTryRight:weekGreen};
   }
 

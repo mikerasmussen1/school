@@ -2018,12 +2018,30 @@
             <div style="display:flex;gap:18px;flex-wrap:wrap;margin-bottom:6px">
               <sc-for list="{{ p.columns }}" as="col" hint-placeholder-count="5">
                 <div style="display:flex;flex-direction:column;gap:6px;align-items:flex-start">
-                  <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(var(--ink-rgb),.5)" title="{{ col.title }}">{{ col.label }}</div>
-                  <div style="display:flex;flex-wrap:wrap;gap:4px;max-width:128px">
-                    <sc-for list="{{ col.cells }}" as="c" hint-placeholder-count="13">
-                      <div style="{{ c.style }}" title="{{ c.hint }}">{{ c.label }}</div>
-                    </sc-for>
+                  <div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap">
+                    <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(var(--ink-rgb),.5)" title="{{ col.title }}">{{ col.label }}</div>
+                    <!-- closed with five in a row: mastered, not skipped -->
+                    <sc-if value="{{ col.hasStreak }}" hint-placeholder-val="{{ false }}">
+                      <div style="{{ col.streakStyle }}" title="{{ col.streakTitle }}">{{ col.streakLabel }}</div>
+                    </sc-if>
                   </div>
+                  <!-- one row per tier: the kind of work, its questions, and
+                       whether that tier has been graded -->
+                  <sc-for list="{{ col.groups }}" as="tg" hint-placeholder-count="3">
+                    <div style="display:flex;align-items:center;gap:6px">
+                      <sc-if value="{{ tg.chip }}" hint-placeholder-val="{{ true }}">
+                        <div style="{{ tg.chipStyle }}">{{ tg.chip }}</div>
+                      </sc-if>
+                      <div style="display:flex;flex-wrap:wrap;gap:4px;max-width:128px">
+                        <sc-for list="{{ tg.cells }}" as="c" hint-placeholder-count="6">
+                          <div style="{{ c.style }}" title="{{ c.hint }}">{{ c.label }}</div>
+                        </sc-for>
+                      </div>
+                      <sc-if value="{{ tg.mark }}" hint-placeholder-val="{{ false }}">
+                        <div style="{{ tg.markStyle }}" title="{{ tg.markTitle }}">{{ tg.mark }}</div>
+                      </sc-if>
+                    </div>
+                  </sc-for>
                   <!-- the teacher's word that the day happened, for mornings
                        the app and the child disagreed -->
                   <sc-if value="{{ col.hasVouch }}" hint-placeholder-val="{{ false }}">
@@ -4934,9 +4952,16 @@ class Component extends DCLogic {
         }).sort((a,b)=>(b.u-a.u)||(b.w-a.w));
 
         const pick=(st.wgSel||{}).math;
+        /* DEFAULT TO THE NEWEST WEEK WITH EVIDENCE, not the frontier. These
+         * differ exactly when a child worked ahead — Hank partway into M1-W2
+         * while the sequencer still called W1 current — and defaulting to the
+         * frontier hid every answer he had given behind an untapped tab. The
+         * teacher's question is "what happened", so the glance opens where
+         * the work is; the frontier keeps its (now) tag on the picker. */
+        const newest=avail[0] ? {u:avail[0].u, w:avail[0].w} : front;
         const cur=(pick && has[pick])
           ? {u:+pick.split(":")[0], w:+pick.split(":")[1]}
-          : front;
+          : newest;
         if(cur){
           const weekSets=all.filter(s=>meta[s.id].u===cur.u && (s.w||1)===cur.w);
           const grid=G.weekGrid(weekSets, slice.pLog||{}, QTypes.idFor);
@@ -4945,10 +4970,11 @@ class Component extends DCLogic {
           const sugs=G.suggest(grid, slice.pLog||{}, slice.review||[], today, vouched);
           const dueNow=G.due(slice.review||[]).length;
           const attempted=sum.attempted>0;
-          const isBack=front && (cur.u!==front.u || cur.w!==front.w);
+          const rel=!front ? 0 : (cur.u-front.u)||(cur.w-front.w);
           panels.push({
             key:"math", name:"Adventures in Big Math", color:"#38BDF8",
-            title:"Mission 0"+cur.u+" · Week "+cur.w+(isBack?" · looking back":""),
+            title:"Mission 0"+cur.u+" · Week "+cur.w
+              +(rel<0?" · looking back":rel>0?" · worked ahead":""),
             weekTabs:avail.length>1 ? avail.map(a=>{
               const on=a.u===cur.u && a.w===cur.w;
               const isFront=front && a.u===front.u && a.w===front.w;
@@ -4961,13 +4987,52 @@ class Component extends DCLogic {
             emptyNote:"Nothing attempted in this week's sets yet — the grid fills in as work happens.",
             columns:grid.map(col=>{
               const on=!!vouched[col.setId];
+              const mkCell=c=>({
+                label:String(c.n),
+                hint:"Q"+c.n+" · "+WORD[c.status]+" — "+c.q.slice(0,80),
+                style:cellStyle(c.status)
+              });
+              /* THE DAY, BROKEN OUT BY TIER. A set is three kinds of work —
+               * Warm-Up, Core, Challenge — and "he did the easy six and
+               * stopped" is a different morning from "he got through Core".
+               * Each tier row carries its own graded tick (pChecked stores
+               * per-tier under setId|tierIndex, with setId|all as the legacy
+               * combined key). */
+              const checked=slice.pChecked||{};
+              const groups=[0,1,2].map(tIdx=>{
+                const cells=col.cells.filter(c=>c.t===tIdx);
+                if(!cells.length) return null;
+                const tickOn=checked[col.setId+"|"+tIdx]===true
+                          || checked[col.setId+"|all"]===true;
+                return {
+                  chip:(TIERS[tIdx]?TIERS[tIdx].icon:"")+" "+(TIERS[tIdx]?TIERS[tIdx].name:""),
+                  chipStyle:"font-family:'JetBrains Mono',monospace;font-size:8px;"+
+                    "letter-spacing:.08em;text-transform:uppercase;color:"+
+                    ((TIERS[tIdx]&&TIERS[tIdx].color)||"rgba(var(--ink-rgb),.5)")+
+                    ";opacity:.85;white-space:nowrap",
+                  cells:cells.map(mkCell),
+                  mark:tickOn?"✓":"",
+                  markTitle:tickOn?"Graded — this tier was checked":"",
+                  markStyle:"font-size:11px;color:"+
+                    ((TIERS[tIdx]&&TIERS[tIdx].color)||"var(--green)")
+                };
+              }).filter(Boolean);
+              /* MASTERED, NOT SKIPPED. The Streak Run closes only on five
+               * right IN A ROW — pStreak[set].closed — which is the difference
+               * between "he finished it" and "he beat it". The badge says so
+               * where the teacher is already looking. */
+              const stk=(slice.pStreak||{})[col.setId];
               return {
                 label:col.label, title:col.title,
-                cells:col.cells.map(c=>({
-                  label:String(c.n),
-                  hint:"Q"+c.n+" · "+WORD[c.status]+" — "+c.q.slice(0,80),
-                  style:cellStyle(c.status)
-                })),
+                groups:groups,
+                hasStreak:!!(stk&&stk.closed),
+                streakLabel:"⚡ streak",
+                streakTitle:stk&&stk.closed
+                  ? "Closed with a 5-in-a-row streak · "+(stk.right||0)+"/"+(stk.att||0)+" right — mastered, not skipped"
+                  : "",
+                streakStyle:"font-family:'JetBrains Mono',monospace;font-size:8.5px;"+
+                  "letter-spacing:.05em;padding:3px 8px;border-radius:8px;white-space:nowrap;"+
+                  "background:rgba(251,191,36,.16);border:1px solid rgba(251,191,36,.5);color:var(--amber)",
                 /* "He did this": the teacher's word that the day happened,
                  * for the mornings the app and the child disagreed. Settles
                  * the day's misses out of the suggestions; colours stay.
@@ -5050,10 +5115,12 @@ class Component extends DCLogic {
          columns:(g.columns||[]).map(col=>({
            label:col.label||"", title:"", hasVouch:false,
            vouchLabel:"", vouchTitle:"", vouchGo:function(){}, vouchStyle:"",
-           cells:(col.cells||[]).map(c=>({
-             label:"", hint:c.hint||"",
-             style:cellStyle(CELL[c.status]?c.status:"gray")
-           }))
+           hasStreak:false, streakLabel:"", streakTitle:"", streakStyle:"",
+           groups:[{chip:"", chipStyle:"", mark:"", markTitle:"", markStyle:"",
+             cells:(col.cells||[]).map(c=>({
+               label:"", hint:c.hint||"",
+               style:cellStyle(CELL[c.status]?c.status:"gray")
+             }))}]
          })),
          well:g.well||[], struggle:g.struggle||[],
          hasWell:(g.well||[]).length>0, hasStruggle:(g.struggle||[]).length>0,

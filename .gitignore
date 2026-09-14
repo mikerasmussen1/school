@@ -8,3 +8,9 @@
 
 # wrangler writes account state and build caches here
 worker/.wrangler/
+
+# scripts/check-responsive.js writes this harness page, loads it in a headless
+# browser and deletes it again. A run that is interrupted before the cleanup
+# leaves it behind, where it reads as a source file and can be swept into a
+# commit by `git add -A`.
+.rwd-probe.html

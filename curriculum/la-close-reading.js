@@ -1,109 +1,156 @@
 /* ============================================================================
- * WORD VOYAGERS — CLOSE READING, EVERY DAY
+ * WORD VOYAGERS — THE DAILY LESSON
  * ----------------------------------------------------------------------------
- * Comprehension used to happen on Monday and nowhere else. Four days of the
- * week touched the passage not at all, and a day ran ten or twelve minutes.
- * This adds a close-reading step to every day: the same passage, read again
- * for a different purpose, finishing in a written claim backed by a line from
- * the text.
+ * One passage a week, read again each day for a different purpose. Each day is
+ * laid out in the order a lesson is actually done:
  *
- * WHY RE-READING THE SAME PASSAGE RATHER THAN FIVE NEW ONES. Re-reading with a
- * stated purpose is the practice comprehension research keeps landing on, and
- * it is what a strong reader does naturally: the first pass is for the story,
- * and every pass after it is for something. A new passage each day would give
- * five first passes and no second ones, which trains speed rather than
- * understanding.
+ *   LESSON      what today is about, named
+ *   LOOK FOR    what to watch for, given BEFORE the passage rather than after.
+ *               A purpose stated afterwards is not a purpose, it is a quiz. A
+ *               child who knows what he is hunting reads differently.
+ *   the passage
+ *   NOTEBOOK    numbered tasks, written the same way every day
+ *   FOR PARENTS what to check when the notebook comes to you
  *
- * It is also honest about what could be built well. Five new passages a week
- * across two grades is 360 passages; five purposes written carefully is ten
- * frames. The frames are reusable because the QUESTION is the constant and the
- * passage is the variable, which is the right way round.
+ * WHY THE NOTEBOOK TASKS ARE NUMBERED AND IDENTICAL IN SHAPE. A notebook is
+ * only a record if it can be read back. "Write about the passage" produces a
+ * page nobody can check six weeks later; a dated entry with Task 1, Task 2 and
+ * Task 3 produces a page a parent can open at any point in the year and
+ * follow. The date line is the same every day for the same reason: it is what
+ * makes the book a chronology rather than a pile.
  *
- * THE WRITING IS NOT MACHINE-GRADED, deliberately. A claim supported by
- * evidence cannot be marked by matching strings, and pretending otherwise
- * would teach a child to write for the matcher. It is written by hand and a
- * grown-up reads it. Each day carries a self-check so most of what would be
- * corrected, the child corrects first.
+ * TASK 3 IS ALWAYS THE SELF-CHECK, both grades, all five days. It is last
+ * because it is done last, and it is a numbered task rather than a footnote
+ * because a child skips notes and does tasks.
  *
- * FORMAT  day: {focus, look, write, check}
+ * FORMAT  day: {lesson, look:[...], tasks:[...], parent}
  * ==========================================================================*/
 (function(){
 
-  /* Third grade. The purposes are concrete and the written task is short —
-   * one or two sentences with a line copied out to support them. */
+  /* The line that opens every notebook entry, in both grades. Identical
+   * wording every day so it becomes automatic. */
+  const DATE_LINE = "Write today's date at the top, like this: September 14, 2026";
+
+  /* Third grade. Concrete purposes, short written tasks. */
   const Y1 = {
     Mon: {
-      focus: "What it actually says",
-      look:  "Read it again slowly. This time you are not reading for the story \u2014 you already know it. Find the three sentences that tell you the most important things that happen.",
-      write: "Copy out the ONE sentence you think matters most in the whole passage. Underneath, write one sentence saying why you chose it.",
-      check: "Did I copy the sentence exactly, with its punctuation? Did I say why, and not just say it again?"
+      lesson: "What the passage actually says",
+      look: ["You already know the story, so this time read for the facts.",
+             "Watch for the sentences that carry the important events.",
+             "Notice any sentence you could not leave out without losing the story."],
+      tasks: ["Copy out the ONE sentence you think matters most in the whole passage. Copy it exactly, with its punctuation.",
+              "Write one sentence saying why you chose it.",
+              "Check your work: did I use my best handwriting, and did I copy every mark of punctuation correctly?"],
+      parent: "Task 1 should be copied exactly \u2014 check it against the passage word for word, including the full stop. Task 2 should give a reason, not repeat the sentence in different words. If he has written \u201cbecause it is important\u201d, ask what it tells you that the other sentences do not."
     },
     Tue: {
-      focus: "Words you had to work out",
-      look:  "Find two words you were not certain of. Do not look them up. Read the sentence before and after each one and see what the passage itself tells you.",
-      write: "For each word: write the word, then what you think it means, then the words in the passage that made you think so.",
-      check: "Did I use the passage to work it out, rather than a guess? Did I point at the actual words that helped?"
+      lesson: "Words you had to work out",
+      look: ["Find two words you were not certain of.",
+             "Do not look them up. Read the sentence before and the sentence after.",
+             "Watch for the words nearby that hint at the meaning."],
+      tasks: ["Write the two words, one under the other.",
+              "Under each word, write what you think it means, then the words from the passage that made you think so.",
+              "Check your work: did I use my best handwriting, and did I use the passage rather than a guess?"],
+      parent: "The meaning does not have to be right. What matters is the evidence in Task 2: it must come from the passage and he must be able to point at it. A guess dressed up as a definition is the thing to catch."
     },
     Wed: {
-      focus: "What it shows without saying",
-      look:  "Find one thing the passage lets you know that it never states outright \u2014 about a person, or why something happened.",
-      write: "Write: 'I can tell that ___ because the passage says ___.' Copy the part after 'says' exactly.",
-      check: "Is my evidence really in the passage? Would someone else reading it agree with me?"
+      lesson: "What the passage shows without saying",
+      look: ["Look for something the passage lets you know but never states.",
+             "It might be about a person, or about why something happened.",
+             "Watch for what people do, not what they say about themselves."],
+      tasks: ["Write: I can tell that ___ because the passage says ___.",
+              "Copy the part after \u201csays\u201d exactly, with its punctuation.",
+              "Check your work: did I use my best handwriting, and is my evidence really in the passage?"],
+      parent: "Check the quoted half against the passage. The common mistake is evidence that is nearly there \u2014 remembered rather than copied. Ask him to show you the line."
     },
     Thu: {
-      focus: "Why the writer put that there",
-      look:  "Find one small detail \u2014 a word, an object, something someone does \u2014 that the passage would be worse without.",
-      write: "Name the detail, then write one sentence saying what it does for the passage. What would be lost if it were cut?",
-      check: "Did I say what the detail DOES, rather than just describe it again?"
+      lesson: "Why the writer put that there",
+      look: ["Find one small detail: a word, an object, something someone does.",
+             "Choose one the passage would be worse without.",
+             "Watch for details that seem small but change how you feel about someone."],
+      tasks: ["Name the detail in a few words.",
+              "Write one sentence saying what it does for the passage \u2014 what would be lost if it were cut.",
+              "Check your work: did I use my best handwriting, and did I say what the detail DOES rather than just describe it?"],
+      parent: "Task 2 is the whole exercise. Describing the detail again is the easy mistake; saying what it does for the reader is the skill. \u201cIt shows he was poor\u201d is doing the work. \u201cIt was a brown coat\u201d is not."
     },
     Fri: {
-      focus: "What it is really about",
-      look:  "Think past what happens. What is this passage saying about people, or about doing the right thing?",
-      write: "Write what the passage is really about in one sentence \u2014 not what happens in it. Then copy one line that shows it.",
-      check: "Is my sentence about an idea rather than a plot? Does my line actually show that idea?"
+      lesson: "What the passage is really about",
+      look: ["Think past what happens in the passage.",
+             "Ask what it is saying about people, or about doing the right thing.",
+             "Watch for a line that carries the whole idea."],
+      tasks: ["Write what the passage is really about in one sentence \u2014 not what happens in it.",
+              "Copy one line from the passage that shows it.",
+              "Check your work: did I use my best handwriting, and is my sentence about an idea rather than about the plot?"],
+      parent: "Task 1 should be a statement about people or about right and wrong, not a summary. If it begins \u201cA boy fed some chickens\u201d, that is a retelling \u2014 ask him what the story is saying."
     }
   };
 
-  /* Fifth grade. Same five purposes, pitched harder: the tasks ask for
-   * comparison, structure, and the argument against. */
+  /* Fifth grade. The same five purposes, asking for comparison, structure and
+   * the argument against. */
   const Y2 = {
     Mon: {
-      focus: "Stated and unstated",
-      look:  "Read it again and separate the two: what the passage states outright, and what it only lets you infer.",
-      write: "Write two lines. One: something the passage states, with the sentence quoted. Two: something you infer, with the sentence that supports the inference and a note on why it is an inference and not a statement.",
-      check: "Have I kept the two genuinely apart? Could I defend calling the second one an inference?"
+      lesson: "Stated and unstated",
+      look: ["Separate two things as you read: what the passage states outright, and what it only lets you infer.",
+             "Watch for sentences you believe but cannot point to.",
+             "Those are inferences, and they are the ones to test."],
+      tasks: ["Write one thing the passage STATES, with the sentence quoted exactly.",
+              "Write one thing you INFER, with the sentence that supports it, and one line on why it is an inference and not a statement.",
+              "Check your work: did I use my best handwriting, and have I kept the two genuinely apart?"],
+      parent: "The test is the last line of Task 2. He should be able to say why the text does not state his inference outright. If he cannot, he has quoted a statement and called it an inference."
     },
     Tue: {
-      focus: "The writer's word choices",
-      look:  "Find two words or phrases the writer chose where a plainer one would have done. Ask what the choice adds.",
-      write: "For each: quote the phrase, name the plainer word that could have replaced it, and write one sentence on what is gained or lost by the choice.",
-      check: "Am I writing about the effect of the word, or only its meaning? Those are different things."
+      lesson: "The writer's word choices",
+      look: ["Find two words or phrases where a plainer one would have done.",
+             "Ask what the writer's choice adds that the plain word would not.",
+             "Watch for words that carry a feeling as well as a meaning."],
+      tasks: ["Quote the two phrases, one under the other.",
+              "Under each, name the plainer word that could have replaced it, then write one sentence on what is gained or lost by the choice.",
+              "Check your work: did I use my best handwriting, and am I writing about the EFFECT of the word rather than its meaning?"],
+      parent: "Meaning and effect are different, and the second is the exercise. \u201cTrudged means walked slowly\u201d is a definition. \u201cTrudged makes him sound worn out\u201d is the answer."
     },
     Wed: {
-      focus: "The strongest evidence",
-      look:  "Decide what the passage is arguing or showing. Then find the line that supports it best \u2014 and the line that supports it most weakly.",
-      write: "Quote both. Write one sentence on why the strong one is stronger. Then write what someone who disagreed with the passage would point at.",
-      check: "Did I find the strongest line or just the first one? Did I take the opposing point seriously?"
+      lesson: "The strongest evidence",
+      look: ["Decide what the passage is arguing or showing.",
+             "Find the line that supports it best, and the line that supports it most weakly.",
+             "Watch for what someone who disagreed would seize on."],
+      tasks: ["Quote the strongest line and the weakest line, each labelled.",
+              "Write one sentence on why the strong one is stronger, then one sentence on what someone who disagreed with the passage would point at.",
+              "Check your work: did I use my best handwriting, and did I find the STRONGEST line rather than the first one?"],
+      parent: "The second half of Task 2 is the one to read closely. Taking the opposing point seriously, rather than dismissing it, is the habit being built and it is rare at this age."
     },
     Thu: {
-      focus: "How it is built",
-      look:  "Look at the order of it. What comes first, what is held back, where does it turn? A writer who saves something for the end wants it to land there.",
-      write: "Describe the shape of the passage in two or three sentences. Name the place where it turns, and say what the turn does.",
-      check: "Am I describing the structure, or retelling the content? Retelling is the easier mistake."
+      lesson: "How the passage is built",
+      look: ["Look at the order of it: what comes first, what is held back.",
+             "Find the point where it turns \u2014 the sentence after which it is doing something different.",
+             "A writer who saves something for the end wants it to land there."],
+      tasks: ["Describe the shape of the passage in two or three sentences.",
+              "Name the place where it turns, and write one sentence on what the turn does.",
+              "Check your work: did I use my best handwriting, and am I describing the STRUCTURE rather than retelling the content?"],
+      parent: "Retelling is the easy mistake and it looks like work. If the entry could have been written by someone who only skimmed the passage in order, it is a summary, not a structure."
     },
     Fri: {
-      focus: "Theme, and the case against it",
-      look:  "Work out what the passage says about life, not what happens in it. Then test it: is there anything in the passage that complicates or resists that reading?",
-      write: "State the theme in one sentence. Support it with a quoted line. Then write one sentence on anything in the passage that does not fit neatly.",
-      check: "Is my theme a claim about life rather than a summary? Did I look honestly for what resists it?"
+      lesson: "Theme, and the case against it",
+      look: ["Work out what the passage says about life, not what happens in it.",
+             "Then test it: is there anything in the passage that resists that reading?",
+             "Watch for the detail that does not fit neatly."],
+      tasks: ["State the theme in one sentence, then quote a line that supports it.",
+              "Write one sentence on anything in the passage that complicates or does not fit that theme.",
+              "Check your work: did I use my best handwriting, and is my theme a claim about life rather than a summary?"],
+      parent: "Task 2 is where an honest reader shows. \u201cNothing\u201d is almost never true and usually means he did not look. Ask him for the hardest line to fit."
     }
   };
 
   const ORDER = ["Mon","Tue","Wed","Thu","Fri"];
 
-  function closeFor(grade, day){
+  function lessonFor(grade, day){
     const bank = (grade==="y2") ? Y2 : Y1;
     return bank[day] || bank.Mon;
+  }
+
+  /* Kept for anything still using the old shape. */
+  function closeFor(grade, day){
+    const L = lessonFor(grade, day);
+    return {focus:L.lesson, look:L.look.join(" "), write:L.tasks.join(" "), check:L.tasks[2]};
   }
 
   /* Roughly how long each part of a day should take, in minutes.
@@ -126,5 +173,7 @@
   }
 
   window.__CURR = window.__CURR || {};
-  window.__CURR.LA_CLOSE = {Y1, Y2, ORDER, closeFor, MINUTES, minutesFor, dayMinutes};
+  window.__CURR.LA_CLOSE = {
+    Y1, Y2, ORDER, DATE_LINE, lessonFor, closeFor, MINUTES, minutesFor, dayMinutes
+  };
 })();

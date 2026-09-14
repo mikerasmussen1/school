@@ -69,9 +69,13 @@ console.log("\n=== the panel renders the whole step ===");
       c.startDay(); c.openAssignment("close");
       const v=c.renderVals();
       if(!v.aClose) fail.push(g+" "+d+" w"+w+" close panel does not open");
-      ["closeFocus","closeLook","closeWrite","closeCheck"].forEach(k=>{
+      ["lessonName","lessonDateLine","lessonParent"].forEach(k=>{
         if(!v[k]) fail.push(g+" "+d+" w"+w+" missing "+k);
       });
+      if((v.lessonLook||[]).length<2) fail.push(g+" "+d+" w"+w+" has fewer than two things to look for");
+      if((v.lessonTasks||[]).length!==3) fail.push(g+" "+d+" w"+w+" does not have three numbered tasks");
+      v.lessonTasks.forEach((t,i)=>{ if(t.n!=="Task #"+(i+1)) fail.push(g+" "+d+" task "+i+" is labelled "+t.n); });
+      if(!/Check your work/.test(v.lessonTasks[2].text)) fail.push(g+" "+d+" Task #3 is not the self-check");
       if(String(v.rdText||"").length<150) fail.push(g+" "+d+" w"+w+" no passage to re-read");
       if(!v.dayMinutes) fail.push(g+" "+d+" w"+w+" no time estimate shown");
     }
@@ -83,9 +87,17 @@ console.log("\n=== the markup binds them ===");
 { const src=fs.readFileSync(__dirname+'/../word-voyagers.dc.html','utf8');
   const i=src.indexOf('{{ aClose }}');
   const seg=src.slice(i, src.indexOf('{{ aRead }}', i));
-  ["closeFocus","closeLook","closeWrite","closeCheck","rdText"].forEach(k=>{
-    if(seg.indexOf("{{ "+k+" }}")<0) fail.push("the close panel does not bind "+k);
+  ["lessonName","lessonDateLine","rdText"].forEach(k=>{
+    if(seg.indexOf("{{ "+k+" }}")<0) fail.push("the lesson panel does not bind "+k);
   });
+  ["lessonLook","lessonTasks"].forEach(k=>{
+    if(seg.indexOf("{{ "+k+" }}")<0) fail.push("the lesson panel does not loop over "+k);
+  });
+  // what to look for must come BEFORE the passage, or it is a quiz not a purpose
+  if(seg.indexOf("{{ lessonLook }}") > seg.indexOf("{{ rdText }}"))
+    fail.push("the things to look for are printed AFTER the passage");
+  if(seg.indexOf("{{ rdText }}") > seg.indexOf("{{ lessonTasks }}"))
+    fail.push("the notebook tasks are printed BEFORE the passage");
   if(src.indexOf("{{ s.mins }}")<0)     fail.push("step times are not shown on the checklist");
   if(src.indexOf("{{ dayMinutes }}")<0) fail.push("the day total is not shown");
   console.log("  purpose, passage, task, self-check, per-step and per-day times all bound");

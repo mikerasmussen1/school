@@ -42,8 +42,11 @@ const CONTENT={
   // paragraph aloud", and without text on screen there is nothing to read
   // the passage is rendered from rdText, one binding, so that is what must be
   // present and substantial - not the paragraph array the panel no longer uses
+  // the passage shown on Friday is skPassage, which differs by grade: third
+  // grade gets the week it has just had, fifth gets the next one, cold
   speak: v=>v.skTitle && v.skPrompt && String(v.skPrompt).length>20
-            && !!v.rdTitle && String(v.rdText||"").length>150,
+            && !!(v.skPassage && v.skPassage.title)
+            && String((v.skPassage||{}).text||"").length>150,
   approve: v=>Array.isArray(v.approveGrades) && v.approveGrades.length===4 && !!v.approveFocus,
   rv:    v=>v.rvNotStarted===true || v.rvActive===true
 };
@@ -79,8 +82,8 @@ console.log(checked+" step-assignments checked across 2 grades x 36 weeks x 5 da
 { const src=fs.readFileSync(__dirname+'/../word-voyagers.dc.html','utf8');
   const i=src.indexOf('{{ aSpeak }}');
   const seg=src.slice(i, src.indexOf('</sc-if>', src.indexOf('passage-box', i)));
-  if(seg.indexOf('{{ rdText }}')<0) fail.push("the speaking panel does not bind the passage text");
-  if(seg.indexOf('{{ rdTitle }}')<0) fail.push("the speaking panel does not bind the passage title");
+  if(seg.indexOf('{{ skPassage.text }}')<0) fail.push("the speaking panel does not bind the passage text");
+  if(seg.indexOf('{{ skPassage.title }}')<0) fail.push("the speaking panel does not bind the passage title");
   if(!/passage-flow/.test(seg)) fail.push("the speaking passage has no whitespace-preserving class");
   if(!/\.passage-flow\s*\{[^}]*white-space:\s*pre-wrap/.test(src))
     fail.push("passage-flow does not preserve the line breaks");

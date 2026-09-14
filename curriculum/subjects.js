@@ -90,6 +90,28 @@
  * Return null when there is nothing yet — the shell words that itself. Same
  * rules as summary(): total, cheap, and only claims your data proves.
  *
+ * QUESTION BY QUESTION
+ * A summary says how much; this says what. Maths has always let a grown-up open
+ * a day and read every question with the child's answer laid over it, and that
+ * is the view a parent actually uses when something looks wrong. Any subject
+ * that grades questions can offer the same thing:
+ *
+ *   questionLog(data, ctx) -> null | [{
+ *     where:  "Week 3 · Tuesday · Grammar drill"   what this group is
+ *     when:   1756...,                             ms, for ordering
+ *     done:   true | false                         finished, or still open
+ *     right:  4, marked: 6,                        the score so far
+ *     rows: [{q, answer, correct, ok}]             ok: true | false | null
+ *   }]
+ *
+ * IN PROGRESS IS THE POINT. Report a group as soon as its first question is
+ * answered, with done:false — a child who stopped half way through has done
+ * real work, and a view that only appears on completion hides exactly the days
+ * a parent most needs to see. That means writing each answer down as it
+ * happens rather than at the end of the drill.
+ *
+ * Newest first is the shell's job, not yours; return them in any order.
+ *
  * PROGRESS IN THE DATABASE
  * Every subject gets its own namespace inside the child's saved record:
  *

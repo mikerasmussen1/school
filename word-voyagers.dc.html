@@ -920,6 +920,38 @@
       </div>
 
       <div class="card">
+        <h2>Question by question</h2>
+        <p class="muted">Every question your child has answered, newest first — what was asked, what they typed, and whether it counted. A drill appears here as soon as the first question is answered, so a day that was not finished still shows the work that was done.</p>
+        <sc-if value="{{ hasQuestionLog }}" hint-placeholder-val="{{ false }}">
+          <sc-for list="{{ questionGroups }}" as="g" hint-placeholder-count="3">
+            <div style="border:1px solid var(--rule);border-radius:8px;padding:12px 14px;margin-bottom:10px">
+              <div style="display:flex;gap:10px;align-items:baseline;flex-wrap:wrap">
+                <div style="font-family:'Fraunces',serif;font-size:.95rem;flex:1;min-width:0">{{ g.where }}</div>
+                <div style="{{ g.stateStyle }}">{{ g.state }}</div>
+                <div class="muted" style="font-size:.82rem;white-space:nowrap">{{ g.when }}</div>
+              </div>
+              <div class="muted" style="font-size:.85rem;margin:2px 0 8px">{{ g.score }}</div>
+              <sc-for list="{{ g.rows }}" as="r" hint-placeholder-count="5">
+                <div style="display:flex;gap:9px;align-items:baseline;padding:6px 0;border-top:1px solid var(--rule)">
+                  <div style="{{ r.markStyle }}">{{ r.mark }}</div>
+                  <div style="flex:1;min-width:0">
+                    <div style="font-size:.9rem">{{ r.q }}</div>
+                    <div class="muted" style="font-size:.85rem">Answered: {{ r.resp }}</div>
+                    <sc-if value="{{ r.showA }}" hint-placeholder-val="{{ false }}">
+                      <div style="font-size:.85rem;color:var(--brick-dark)">Correct answer: {{ r.a }}</div>
+                    </sc-if>
+                  </div>
+                </div>
+              </sc-for>
+            </div>
+          </sc-for>
+        </sc-if>
+        <sc-if value="{{ noQuestionLog }}" hint-placeholder-val="{{ true }}">
+          <div class="muted">Nothing answered yet. Every graded question your child works through is recorded here as it happens.</div>
+        </sc-if>
+      </div>
+
+      <div class="card">
         <h2>Handwriting you have marked</h2>
         <p class="muted">Every page a grown-up looked at, most recent first. "Not yet" is not a failure — it records that the page is worth doing again.</p>
         <sc-if value="{{ hasApprovals }}" hint-placeholder-val="{{ false }}">
@@ -1015,6 +1047,18 @@ class Component extends DCLogic {
     ovStep:null, ovReason:"",
     approveGrade:null, approveNote:"",
     excused:(function(){ try{ return JSON.parse(localStorage.getItem("la.excused")||"{}"); }catch(e){ return {}; } })(),
+    /* EVERY QUESTION THE CHILD ANSWERS, AS THEY ANSWER IT.
+     *
+     * Maths has kept this from the start (pLog) and Teacher HQ reads it to show
+     * a grown-up question-by-question what happened. Language Arts kept only a
+     * score per step, and only once the whole drill was finished — so a child
+     * who answered six of ten questions and stopped left no trace at all, and a
+     * grown-up looking at the day saw "not started".
+     *
+     * Same shape as pLog so the two read alike: keyed by year:week:day:slot,
+     * each entry one attempt. Written the moment a question is answered, not
+     * when the drill ends. */
+    laLog:(function(){ try{ return JSON.parse(localStorage.getItem("la.laLog")||"{}"); }catch(e){ return {}; } })(),
     fx:null, gz:null, sq:null, rq:null, rv:null,
     asKind:"handwriting", asImage:null, asStatus:"idle", asResult:null, asError:""
   };
@@ -1064,6 +1108,37 @@ class Component extends DCLogic {
        * would replay the moment. A whitelist that a writer forgets to extend
        * fails exactly this quietly. */
       if(d.unitSeen)   patch.unitSeen=d.unitSeen;
+      /* The per-question log MERGES PER QUESTION, not per drill.
+       *
+       * This device may hold answers from a drill still in progress that the
+       * record has not seen, and the record may hold answers from a drill done
+       * on another device. Taking whichever side had more rows and dropping the
+       * other threw away real graded work whenever the two were disjoint — two
+       * devices part way through the same drill is exactly when that happens.
+       *
+       * So it is a union keyed by question, and where both sides hold the same
+       * question the LATER answer wins: that is the one that reflects where the
+       * child actually got to. */
+      if(d.laLog){
+        const merged={};
+        const keys={};
+        Object.keys(d.laLog||{}).forEach(k=>{ keys[k]=1; });
+        Object.keys(this.state.laLog||{}).forEach(k=>{ keys[k]=1; });
+        Object.keys(keys).forEach(k=>{
+          const byQ={};
+          const put=e=>{
+            if(!e) return;
+            const id=e.qid || ("q:"+e.q+" "+e.a);
+            const had=byQ[id];
+            if(!had || (e.ts||0) >= (had.ts||0)) byQ[id]=e;
+          };
+          ((d.laLog||{})[k]||[]).forEach(put);
+          ((this.state.laLog||{})[k]||[]).forEach(put);
+          const rows=Object.keys(byQ).map(id=>byQ[id]).sort((a,b)=>(a.ts||0)-(b.ts||0));
+          if(rows.length) merged[k]=rows;
+        });
+        patch.laLog=merged;
+      }
       if(Object.keys(patch).length) this.setState(patch);
     }).catch(()=>{});
   }
@@ -1078,11 +1153,52 @@ class Component extends DCLogic {
     window.scrollTo(0,0);
   };
 
+  /* markDone wrote localStorage and state and stopped there, so a finished
+   * step was recorded on the device that finished it and nowhere else — it
+   * never reached the record a grown-up reads, or the child's other device.
+   * syncSave is the one writer that does both; everything else already goes
+   * through it. */
   markDone=(key)=>{
     const w=this.state.year+":"+this.state.week;
     const done={...this.state.done, [w]:{...(this.state.done[w]||{}), [key]:true}};
     try{ localStorage.setItem("la.done", JSON.stringify(done)); }catch(e){}
-    this.setState({done});
+    this.syncSave({done});
+  };
+
+  /* ---- the per-question record ------------------------------------------
+   * Called once per answered question, from every drill. It writes on the spot
+   * — local first, then the record — because the whole point is that a day
+   * abandoned half way through still shows a grown-up what was done. */
+  logKey(slot){ return this.state.year+":"+this.state.week+":"+this.state.day+":"+slot; }
+  logAnswer=(slot, item, resp, ok)=>{
+    const k=this.logKey(slot);
+    const log={...(this.state.laLog||{})};
+    const entry={
+      qid: (window.QTypes && window.QTypes.idFor) ? window.QTypes.idFor({id:k}, item) : (item&&item.id)||"",
+      q: String((item&&item.q)||""),
+      a: (window.QTypes && window.QTypes.answerText) ? window.QTypes.answerText(item)
+         : String((item&&item.a)||""),
+      resp: String(resp==null?"":resp),
+      ok: ok===null?null:!!ok,
+      ts: Date.now()
+    };
+    /* Re-answering the same question in a later round replaces the earlier
+     * attempt rather than stacking, so the list reads as "where they are now".
+     *
+     * KEYED BY qid, NEVER BY THE QUESTION TEXT. Every item in a spelling drill
+     * asks the identical thing — "Spell the word you hear: ___" — and only the
+     * answer differs, so deduping on the prompt collapsed a fourteen-word
+     * spelling test into ONE row: each new word deleted every word before it.
+     * qid comes from QTypes.idFor, which is the authored item id where there is
+     * one and otherwise a fingerprint of the question AND its answer, so it
+     * tells those fourteen apart. The fallback only applies when there is no
+     * qid at all, and compares the answer too for the same reason. */
+    const same = e => entry.qid ? e.qid === entry.qid
+                                : (!e.qid && e.q === entry.q && e.a === entry.a);
+    const kept=(log[k]||[]).filter(e=>!same(e));
+    log[k]=kept.concat([entry]);
+    try{ localStorage.setItem("la.laLog", JSON.stringify(log)); }catch(e){}
+    this.syncSave({laLog:log});
   };
 
   speak(text){
@@ -1149,6 +1265,7 @@ class Component extends DCLogic {
     const p={}; p[slot]={...q, answered:true, chosen:text, ok:ok,
       score:q.score+(ok?1:0), missed:missed};
     this.setState(p);
+    this.logAnswer(slot, it, text, ok);   // recorded now, not when the drill ends
   }
   quizNext(slot, doneKey){
     const q=this.state[slot]; if(!q||!q.answered) return;
@@ -1246,6 +1363,7 @@ class Component extends DCLogic {
     const missed=(s.missed||[]).slice();
     if(!ok) missed.push(it);
     this.setState({sq:{...s, answered:true, ok:ok, score:s.score+(ok?1:0), missed:missed}});
+    this.logAnswer("sq", it, s.value, ok);   // recorded now, not when the drill ends
   };
   sqNext=()=>{
     const s=this.state.sq; if(!s||!s.answered) return;
@@ -1309,7 +1427,7 @@ class Component extends DCLogic {
       year:st.year, week:st.week, day:st.day,
       stepDone:st.stepDone, closedAt:st.closedAt, stuck:st.stuck, excused:st.excused, done:st.done,
       stepResult:st.stepResult, approvals:st.approvals, overrides:st.overrides,
-      unitSeen:st.unitSeen
+      unitSeen:st.unitSeen, laLog:st.laLog
     });
     this.setState(patch);
   };
@@ -1423,22 +1541,26 @@ class Component extends DCLogic {
       return out;
     };
     const stepDone=strip(st.stepDone), closedAtS=strip(st.closedAt), stuck=strip(st.stuck),
-          stepResult=strip(st.stepResult), approvals=strip(st.approvals);
+          stepResult=strip(st.stepResult), approvals=strip(st.approvals),
+          /* The per-question log is keyed year:week:day:slot, so the same
+           * prefix strip clears exactly this day's answers and no others. */
+          laLog=strip(st.laLog);
     try{
       localStorage.setItem("la.stepDone", JSON.stringify(stepDone));
       localStorage.setItem("la.closedAt", JSON.stringify(closedAtS));
       localStorage.setItem("la.stuck", JSON.stringify(stuck));
       localStorage.setItem("la.stepResult", JSON.stringify(stepResult));
       localStorage.setItem("la.approvals", JSON.stringify(approvals));
+      localStorage.setItem("la.laLog", JSON.stringify(laLog));
     }catch(e){}
     /* Resetting a day drops its close stamp too. Without that, a day redone
      * after a reset would still be counted against today's pace and the child
      * would be told to come back tomorrow for work he has not been credited
      * with — punished for the reset. */
-    this.setState({stepDone, closedAt:closedAtS, stuck, stepResult, approvals,
+    this.setState({stepDone, closedAt:closedAtS, stuck, stepResult, approvals, laLog,
       started:false, openStep:null, dayResetArmed:false,
       fx:null, gz:null, sq:null, rq:null, rv:null, remediation:null, round:1, lastResult:null});
-    this.syncSave({stepDone, closedAt:closedAtS, stuck, stepResult, approvals});
+    this.syncSave({stepDone, closedAt:closedAtS, stuck, stepResult, approvals, laLog});
     window.scrollTo(0,0);
   };
   armDayReset=()=>{ this.setState({dayResetArmed:true}); };
@@ -1451,10 +1573,10 @@ class Component extends DCLogic {
     /* unitSeen goes too. Starting the year over and then never being told you
      * finished a unit again would make the reset feel broken in a way that is
      * hard to describe and easy to notice. */
-    const KEYS=["la.stepDone","la.stuck","la.stepResult","la.approvals","la.overrides","la.done","la.excused","la.week","la.day","la.unitSeen"];
+    const KEYS=["la.stepDone","la.stuck","la.stepResult","la.approvals","la.overrides","la.done","la.excused","la.week","la.day","la.unitSeen","la.laLog"];
     KEYS.forEach(function(k){ try{ localStorage.removeItem(k); }catch(e){} });
     const empty={stepDone:{}, stuck:{}, stepResult:{}, approvals:{}, overrides:{}, done:{}, excused:{}, week:1, day:"Mon",
-                 unitSeen:{}, unitJustDone:null};
+                 unitSeen:{}, unitJustDone:null, laLog:{}};
     this.setState({...empty, resetArmed:false, started:false, openStep:null,
                    fx:null, gz:null, sq:null, rq:null, rv:null, remediation:null, round:1, lastResult:null});
     const SY=window.__CURR&&window.__CURR.SYNC;
@@ -2369,6 +2491,54 @@ class Component extends DCLogic {
       })(),
       hasApprovals: Object.keys(st.approvals||{}).length>0,
       noApprovals: Object.keys(st.approvals||{}).length===0,
+
+      /* QUESTION BY QUESTION — the same thing Teacher HQ shows for maths.
+       *
+       * Grouped by the drill, newest first, and a group appears the moment the
+       * first question in it is answered. That is the point: a day the child
+       * walked away from half way through shows the half that was done, with
+       * "still working" against it, instead of showing nothing at all. */
+      ...(function(){
+        const LOG=st.laLog||{};
+        const NAMES={rq:"Reading comprehension", gz:"Grammar drill", sq:"Spelling drill",
+                     fx:"Find the mistake", rv:"Week review"};
+        const groups=Object.keys(LOG).filter(function(k){ return (LOG[k]||[]).length; })
+          .map(function(k){
+            const p=k.split(":");                  // year:week:day:slot
+            const rows=(LOG[k]||[]).slice();
+            const marked=rows.filter(function(e){ return e.ok!==null; });
+            const right=marked.filter(function(e){ return e.ok; }).length;
+            const at=Math.max.apply(null, rows.map(function(e){ return e.ts||0; }));
+            const finished=!!(st.stepDone||{})[p[0]+":"+p[1]+":"+p[2]+":"+p[3]];
+            return {
+              at:at,
+              where:(p[0]==="y2"?"5th Grade":"3rd Grade")+" · Week "+p[1]+" · "+
+                    (MS.DAY_NAME[p[2]]||p[2])+" · "+(NAMES[p[3]]||p[3]),
+              score:right+" of "+marked.length+" correct",
+              state:finished?"Finished":"Still working",
+              stateStyle:"font-family:'Public Sans',sans-serif;font-size:.78rem;font-weight:600;"+
+                "padding:3px 10px;border-radius:999px;white-space:nowrap;"+
+                (finished?"background:var(--forest-light);color:#2E4E38"
+                         :"background:var(--gold-light);color:#7A5A0C"),
+              when:new Date(at).toLocaleDateString(),
+              rows:rows.map(function(e){
+                return {
+                  q:e.q,
+                  resp:String(e.resp||"").trim()==="" ? "—" : e.resp,
+                  a:e.a,
+                  /* The right answer is only worth printing when they got it
+                   * wrong; beside a correct answer it is just noise. */
+                  showA:e.ok===false,
+                  mark:e.ok===null?"·":(e.ok?"✓":"✗"),
+                  markStyle:"flex:none;width:20px;font-weight:700;color:"+
+                    (e.ok===null?"var(--ink-soft)":(e.ok?"var(--forest)":"var(--brick)"))
+                };
+              })
+            };
+          }).sort(function(x,y){ return y.at-x.at; });
+        return {questionGroups:groups, hasQuestionLog:groups.length>0,
+                noQuestionLog:groups.length===0};
+      })(),
       flagList: Object.keys(st.stuck).filter(function(k){ return st.stuck[k]; }).map(function(k){
         const parts=k.split(":");   // year:week:day:stepkey
         const NAMES={rq:"Reading comprehension", gz:"Grammar drill", sq:"Spelling drill", rv:"Week review"};

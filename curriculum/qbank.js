@@ -132,13 +132,41 @@
      * Callers pass their compiled-in sets every time, so a screen renders
      * correctly before the load resolves and after it fails.
      * ------------------------------------------------------------------ */
+    /* NORMALISING IS PURE, SO THE RESULT — AND ITS IDENTITY — IS KEPT.
+     *
+     * This is a render path. Drawing one day header resolves setsFor() 18
+     * times, and React re-renders the whole component on every keystroke, so
+     * this ran ~18 times per character typed.
+     *
+     * The cost was never the normalising itself. It is that mix.js caches a
+     * composed set against the SOURCE OBJECT IT CAME FROM (`hit.from === set`).
+     * Handing back a freshly mapped object every call meant that cache could
+     * never hit once — so every keystroke recomposed the unit, and composing
+     * shuffles every item of every earlier set. A child 240 days in was paying
+     * a few thousand shuffled items per letter.
+     *
+     * The memo is validated by element identity rather than a version counter:
+     * if the caller's file sets change in any way, it misses and recomputes.
+     * That makes it correct without needing to be invalidated from anywhere. */
+    _norm:{},
+    _normalised(bankId, unit, fileSets){
+      const src=fileSets||[];
+      const key=bankId+"|"+unit;
+      const hit=this._norm[key];
+      if(hit && hit.src.length===src.length && hit.src.every((s,i)=>s===src[i]))
+        return hit.out;
+      const out=src.map((s,i)=>Q().normalizeSet(s,i)).filter(Boolean);
+      this._norm[key]={src:src.slice(), out:out};
+      return out;
+    },
+
     setsFor(bankId, unit, fileSets){
       const b=this.banks[bankId];
-      if(!b || b.source==="files") return (fileSets||[]).map((s,i)=>Q().normalizeSet(s,i)).filter(Boolean);
+      if(!b || b.source==="files") return this._normalised(bankId, unit, fileSets);
       const got=b.byUnit[Number(unit)]||[];
       // A published bank that says nothing about this unit keeps the file
       // version of that unit rather than showing the child an empty week.
-      if(!got.length) return (fileSets||[]).map((s,i)=>Q().normalizeSet(s,i)).filter(Boolean);
+      if(!got.length) return this._normalised(bankId, unit, fileSets);
       return got;
     },
     set(bankId, setId, fileSets){

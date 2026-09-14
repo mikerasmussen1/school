@@ -70,10 +70,96 @@
   const isFraction = s => /^\s*-?\d+\s*\/\s*\d+\s*$/.test(String(s==null?"":s));
   const wantsForm = it => /simplest|lowest term|simplify|reduce/i.test(String((it&&it.q)||""));
 
+  /* ---- Does the child's answer SPELL the same as the key? ----------------
+   *
+   * Place value is asked by NAME — "which place is the 7 in?" — and the name
+   * is where a child's spelling is least reliable and least relevant. Marking
+   * "hundreths" wrong teaches nothing about place value; it teaches that the
+   * box is fussy.
+   *
+   * The one thing that must NOT be forgiven is the -th. "tens" and "tenths"
+   * are different places on opposite sides of the decimal point, and a matcher
+   * that ran them together would call a real error correct. So place names go
+   * through an explicit table instead of a fuzzy compare: singular/plural is
+   * forgiven, spelling is forgiven, the -th never is.
+   *
+   * Compounds are read word by word, so "ten thousands" stays distinct from
+   * both "thousands" and "ten". */
+  const PLACE_WORDS = {
+    one:"1", ones:"1", unit:"1", units:"1",
+    ten:"10", tens:"10",
+    hundred:"h", hundreds:"h", hundered:"h", hundereds:"h", hunderd:"h",
+      hunderds:"h", hundread:"h", hundreads:"h", hunred:"h", hunreds:"h",
+    thousand:"k", thousands:"k", thousend:"k", thousends:"k", thousnd:"k",
+      thousnds:"k", thosand:"k", thosands:"k",
+    million:"m", millions:"m", milion:"m", milions:"m", millon:"m", millons:"m",
+    billion:"b", billions:"b", bilion:"b", bilions:"b",
+    tenth:".1", tenths:".1", tenthes:".1",
+    hundredth:".01", hundredths:".01", hundreth:".01", hundreths:".01",
+      hunderdth:".01", hunderdths:".01", hundreadth:".01", hundreadths:".01",
+    thousandth:".001", thousandths:".001", thousanth:".001", thousanths:".001",
+      thousandeth:".001", thousandeths:".001", thousenth:".001", thousenths:".001",
+    millionth:".000001", millionths:".000001"
+  };
+
+  /* The canonical form of a place name, or null if this is not one. Words that
+   * only ever decorate the name — "place", "column", "the" — are dropped so
+   * "the hundreds place" and "hundreds" land together. */
+  const placeKey = s => {
+    const t = String(s==null?"":s).toLowerCase()
+      .replace(/[^a-z\s-]+/g, " ").replace(/-/g, " ")
+      .replace(/\b(the|a|an|in|is|it|of|its)\b/g, " ")
+      .replace(/\b(place|places|column|columns|digit|digits|value|position|spot)\b/g, " ")
+      .replace(/\s+/g, " ").trim();
+    if(!t) return null;
+    const parts = t.split(" ");
+    if(parts.length > 3 || !parts.every(w => PLACE_WORDS[w])) return null;
+    return parts.map(w => PLACE_WORDS[w]).join("*");
+  };
+
+  /* Common misspellings, in general. A single slip in a word answer is a
+   * spelling mistake, not a maths one — but the tolerance has to be narrow
+   * enough that it can never turn one real answer into a different real one.
+   * Three guards do that, each chosen against the actual answer vocabulary in
+   * the banks rather than in the abstract:
+   *
+   *   - digits must match exactly, so "1kg" can never answer "2kg"
+   *   - the first letter must agree, which is where typos almost never land
+   *   - short words are left alone, so "mode" can never answer "more"
+   *
+   * With those three in place, no two distinct answers anywhere in the banks
+   * are close enough to collapse — tests/answer-matching.js checks that against
+   * the real banks rather than trusting this comment. */
+  const MIN_FUZZY = 5;
+  const digitsOf = s => (String(s).match(/\d/g) || []).join("");
+  function within(a, b, max){
+    if(Math.abs(a.length - b.length) > max) return false;
+    let prev = Array.from({length: b.length + 1}, (_, i) => i);
+    for(let i=1; i<=a.length; i++){
+      const cur = [i];
+      for(let j=1; j<=b.length; j++)
+        cur[j] = Math.min(prev[j] + 1, cur[j-1] + 1, prev[j-1] + (a[i-1] === b[j-1] ? 0 : 1));
+      if(Math.min.apply(null, cur) > max) return false;   // whole row already too far
+      prev = cur;
+    }
+    return prev[b.length] <= max;
+  }
+  const typoMatch = (key, resp) => {
+    const a = norm(key), b = norm(resp);
+    if(a.length < MIN_FUZZY || b.length < MIN_FUZZY) return false;
+    if(digitsOf(a) !== digitsOf(b)) return false;
+    if(a[0] !== b[0]) return false;
+    return within(a, b, a.length >= 8 ? 2 : 1);           // longer word, more room to slip
+  };
+
   const sameValue = (it, key, resp) => {
     if(norm(key) === norm(resp)) return true;               // exact, as before
+    /* Place names are settled here and never reach the typo tolerance below:
+     * they are the one vocabulary where a near-miss is a different answer. */
+    const pk = placeKey(key);
+    if(pk) return pk === placeKey(resp);
     const a = valueOf(key), b = valueOf(resp);
-    if(isNaN(a) || isNaN(b)) return false;
+    if(isNaN(a) || isNaN(b)) return typoMatch(key, resp);   // two words — spelling
     // A question about form is answered by the form, not the value.
     if(wantsForm(it)) return false;
     // Do not let a decimal answer a question that asked for a fraction.
@@ -154,7 +240,10 @@
       grade:(it,r)=>{
         const want=arr(it.a), got=arr(r);
         if(got.length<want.length) return false;
-        return want.every((w,i)=> arr(w).some(alt=>norm(alt)===norm(got[i])));
+        /* Blanks compared as raw strings, so "the ___ place" refused .6 for 0.6
+         * and "hundreths" for "hundredths" — the same two ways short-answer
+         * used to be wrong, in a type that had never been brought along. */
+        return want.every((w,i)=> arr(w).some(alt=>sameValue(it,alt,got[i])));
       },
       text:it=> arr(it.a).map(w=>arr(w)[0]).join(" · "),
       check:it=>{

@@ -249,6 +249,41 @@
         rows: rows,
         flags: flags
       };
+    },
+
+    /* Question by question — the contract in subjects.js.
+     *
+     * laLog is written one answer at a time, as the child answers, so a drill
+     * still in progress is already here. `done` comes from stepDone rather than
+     * from counting answers: a drill can be finished with questions missed, and
+     * a drill can hold a full set of answers and still be open. */
+    questionLog: function(data){
+      const LOG = data.laLog || {}, DONE = data.stepDone || {};
+      const NAMES = {rq:"Reading comprehension", gz:"Grammar drill", sq:"Spelling drill",
+                     fx:"Find the mistake", rv:"Week review"};
+      const DAY_NAME = {Mon:"Monday", Tue:"Tuesday", Wed:"Wednesday",
+                        Thu:"Thursday", Fri:"Friday"};
+      const out = [];
+      Object.keys(LOG).forEach(function(k){
+        const rows = LOG[k] || [];
+        if(!rows.length) return;
+        const p = String(k).split(":");            // year:week:day:slot
+        if(p.length !== 4) return;
+        const marked = rows.filter(function(e){ return e && e.ok !== null; });
+        out.push({
+          where: "Week " + p[1] + " · " + (DAY_NAME[p[2]] || p[2]) + " · " +
+                 (NAMES[p[3]] || p[3]),
+          when: Math.max.apply(null, rows.map(function(e){ return (e && e.ts) || 0; })),
+          done: !!DONE[k],
+          right: marked.filter(function(e){ return e.ok; }).length,
+          marked: marked.length,
+          rows: rows.map(function(e){
+            return {q: e.q || "", answer: e.resp == null ? "" : String(e.resp),
+                    correct: e.correct || e.a || "", ok: e.ok === null ? null : !!e.ok};
+          })
+        });
+      });
+      return out.length ? out : null;
     }
   });
 })();

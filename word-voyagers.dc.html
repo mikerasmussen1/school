@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=2026-09-14-1949"></script>
-  <script data-build>window.__BUILD__="2026-09-14-1949";</script>
-  <script src="./curriculum/freshness.js?v=2026-09-14-1949"></script>
+<script src="./support.js?v=2026-09-14-1951"></script>
+  <script data-build>window.__BUILD__="2026-09-14-1951";</script>
+  <script src="./curriculum/freshness.js?v=2026-09-14-1951"></script>
 </head>
 <body>
 <x-dc>
@@ -49,29 +49,29 @@
   .book-title{font-family:'Fraunces',serif;font-size:1rem;color:var(--brick-dark);margin:0 0 3px}
   .done-banner{text-align:center;padding:22px;margin-top:6px;background:var(--forest-light);border-radius:8px;color:#2E4E38}
 </style>
-<script src="./curriculum/sync.js?v=2026-09-14-1949"></script>
-<script src="./curriculum/students.js?v=2026-09-14-1949"></script>
-<script src="./curriculum/subjects.js?v=2026-09-14-1949"></script>
-<script src="./curriculum/question-types.js?v=2026-09-14-1949"></script>
-<script src="./curriculum/la-y1-spine.js?v=2026-09-14-1949"></script>
-<script src="./curriculum/la-y1-words.js?v=2026-09-14-1949"></script>
-<script src="./curriculum/la-y1-grammar.js?v=2026-09-14-1949"></script>
-<script src="./curriculum/la-y1-reading.js?v=2026-09-14-1949"></script>
-<script src="./curriculum/la-y1-tasks.js?v=2026-09-14-1949"></script>
-<script src="./curriculum/la-books.js?v=2026-09-14-1949"></script>
-<script src="./curriculum/la-y2-spine.js?v=2026-09-14-1949"></script>
-<script src="./curriculum/la-y2-words.js?v=2026-09-14-1949"></script>
-<script src="./curriculum/la-y2-grammar.js?v=2026-09-14-1949"></script>
-<script src="./curriculum/la-y2-reading.js?v=2026-09-14-1949"></script>
-<script src="./curriculum/la-y2-tasks.js?v=2026-09-14-1949"></script>
-<script src="./curriculum/la-books-y2.js?v=2026-09-14-1949"></script>
-<script src="./curriculum/la-quotes.js?v=2026-09-14-1949"></script>
-<script src="./curriculum/la-daily-fix.js?v=2026-09-14-1949"></script>
-<script src="./curriculum/la-skill-notes.js?v=2026-09-14-1949"></script>
-<script src="./curriculum/la-close-reading.js?v=2026-09-14-1949"></script>
-<script src="./curriculum/la-mastery.js?v=2026-09-14-1949"></script>
-<script src="./curriculum/la-calendar.js?v=2026-09-14-1949"></script>
-<script src="./curriculum/la-grader.js?v=2026-09-14-1949"></script>
+<script src="./curriculum/sync.js?v=2026-09-14-1951"></script>
+<script src="./curriculum/students.js?v=2026-09-14-1951"></script>
+<script src="./curriculum/subjects.js?v=2026-09-14-1951"></script>
+<script src="./curriculum/question-types.js?v=2026-09-14-1951"></script>
+<script src="./curriculum/la-y1-spine.js?v=2026-09-14-1951"></script>
+<script src="./curriculum/la-y1-words.js?v=2026-09-14-1951"></script>
+<script src="./curriculum/la-y1-grammar.js?v=2026-09-14-1951"></script>
+<script src="./curriculum/la-y1-reading.js?v=2026-09-14-1951"></script>
+<script src="./curriculum/la-y1-tasks.js?v=2026-09-14-1951"></script>
+<script src="./curriculum/la-books.js?v=2026-09-14-1951"></script>
+<script src="./curriculum/la-y2-spine.js?v=2026-09-14-1951"></script>
+<script src="./curriculum/la-y2-words.js?v=2026-09-14-1951"></script>
+<script src="./curriculum/la-y2-grammar.js?v=2026-09-14-1951"></script>
+<script src="./curriculum/la-y2-reading.js?v=2026-09-14-1951"></script>
+<script src="./curriculum/la-y2-tasks.js?v=2026-09-14-1951"></script>
+<script src="./curriculum/la-books-y2.js?v=2026-09-14-1951"></script>
+<script src="./curriculum/la-quotes.js?v=2026-09-14-1951"></script>
+<script src="./curriculum/la-daily-fix.js?v=2026-09-14-1951"></script>
+<script src="./curriculum/la-skill-notes.js?v=2026-09-14-1951"></script>
+<script src="./curriculum/la-close-reading.js?v=2026-09-14-1951"></script>
+<script src="./curriculum/la-mastery.js?v=2026-09-14-1951"></script>
+<script src="./curriculum/la-calendar.js?v=2026-09-14-1951"></script>
+<script src="./curriculum/la-grader.js?v=2026-09-14-1951"></script>
 </helmet>
 
 <div style="min-height:100vh;display:flex;flex-direction:column">
@@ -145,6 +145,12 @@
         <div style="{{ pacingStyle }}">{{ pacingText }}</div>
         <div style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)">{{ unitLine }}</div>
         <h2 style="margin:4px 0 2px">{{ dayHeading }}</h2>
+        <sc-if value="{{ datesSame }}" hint-placeholder-val="{{ true }}">
+          <div class="muted" style="font-size:.86rem;margin-bottom:2px">{{ lessonDate }}</div>
+        </sc-if>
+        <sc-if value="{{ datesDiffer }}" hint-placeholder-val="{{ false }}">
+          <div class="muted" style="font-size:.86rem;margin-bottom:2px">This lesson is for {{ lessonDate }} &nbsp;&middot;&nbsp; today is {{ todayDate }}</div>
+        </sc-if>
         <p class="muted" style="margin-top:2px">{{ dayDateLine }}</p>
         <p class="muted" style="margin-top:2px">{{ weekFocusLine }}</p>
 
@@ -2271,6 +2277,44 @@ class Component extends DCLogic {
 
       // --- daily checklist: clear start, gated steps, clear end ---
       dayHeading: plan.dayName+" \u00b7 Day "+plan.dayNumber+" of "+plan.totalDays,
+
+      /* THE LESSON'S DATE, AND TODAY'S.
+       *
+       * These are two different things and they drift apart on purpose. The
+       * lesson date is which school day this is - week 3 Tuesday is the 12th
+       * school day, whatever the calendar says - and holidays push it later
+       * than you would guess: after Labor Day alone, the Nth school day stops
+       * matching the Nth weekday. A child working ahead or catching up is
+       * somewhere other than today, and both numbers should be on screen so
+       * nobody has to work out which.
+       *
+       * When they are the same day, only one line is shown. Saying it twice
+       * would be noise. */
+      lessonDate:(function(){
+        const CAL=window.__CURR.LA_CALENDAR;
+        if(!CAL) return "";
+        const idx=(st.week-1)*5+["Mon","Tue","Wed","Thu","Fri"].indexOf(st.day);
+        const dt=CAL.dateForIndex(idx);
+        return dt ? CAL.longDate(dt) : "";
+      })(),
+      todayDate:(function(){
+        const CAL=window.__CURR.LA_CALENDAR;
+        return CAL ? CAL.longDate(new Date()) : "";
+      })(),
+      datesDiffer:(function(){
+        const CAL=window.__CURR.LA_CALENDAR;
+        if(!CAL) return false;
+        const idx=(st.week-1)*5+["Mon","Tue","Wed","Thu","Fri"].indexOf(st.day);
+        const dt=CAL.dateForIndex(idx);
+        return !!dt && CAL.longDate(dt)!==CAL.longDate(new Date());
+      })(),
+      datesSame:(function(){
+        const CAL=window.__CURR.LA_CALENDAR;
+        if(!CAL) return false;
+        const idx=(st.week-1)*5+["Mon","Tue","Wed","Thu","Fri"].indexOf(st.day);
+        const dt=CAL.dateForIndex(idx);
+        return !!dt && CAL.longDate(dt)===CAL.longDate(new Date());
+      })(),
       dayDateLine: (function(){
         if(!CAL) return "";
         const dt=CAL.dateForIndex(seq.idx);

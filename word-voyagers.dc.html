@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=2026-09-08-1645"></script>
-  <script data-build>window.__BUILD__="2026-09-08-1645";</script>
-  <script src="./curriculum/freshness.js?v=2026-09-08-1645"></script>
+<script src="./support.js?v=2026-09-14-0056"></script>
+  <script data-build>window.__BUILD__="2026-09-14-0056";</script>
+  <script src="./curriculum/freshness.js?v=2026-09-14-0056"></script>
 </head>
 <body>
 <x-dc>
@@ -49,27 +49,28 @@
   .book-title{font-family:'Fraunces',serif;font-size:1rem;color:var(--brick-dark);margin:0 0 3px}
   .done-banner{text-align:center;padding:22px;margin-top:6px;background:var(--forest-light);border-radius:8px;color:#2E4E38}
 </style>
-<script src="./curriculum/sync.js?v=2026-09-08-1645"></script>
-<script src="./curriculum/students.js?v=2026-09-08-1645"></script>
-<script src="./curriculum/subjects.js?v=2026-09-08-1645"></script>
-<script src="./curriculum/question-types.js?v=2026-09-08-1645"></script>
-<script src="./curriculum/la-y1-spine.js?v=2026-09-08-1645"></script>
-<script src="./curriculum/la-y1-words.js?v=2026-09-08-1645"></script>
-<script src="./curriculum/la-y1-grammar.js?v=2026-09-08-1645"></script>
-<script src="./curriculum/la-y1-reading.js?v=2026-09-08-1645"></script>
-<script src="./curriculum/la-y1-tasks.js?v=2026-09-08-1645"></script>
-<script src="./curriculum/la-books.js?v=2026-09-08-1645"></script>
-<script src="./curriculum/la-y2-spine.js?v=2026-09-08-1645"></script>
-<script src="./curriculum/la-y2-words.js?v=2026-09-08-1645"></script>
-<script src="./curriculum/la-y2-grammar.js?v=2026-09-08-1645"></script>
-<script src="./curriculum/la-y2-reading.js?v=2026-09-08-1645"></script>
-<script src="./curriculum/la-y2-tasks.js?v=2026-09-08-1645"></script>
-<script src="./curriculum/la-books-y2.js?v=2026-09-08-1645"></script>
-<script src="./curriculum/la-quotes.js?v=2026-09-08-1645"></script>
-<script src="./curriculum/la-daily-fix.js?v=2026-09-08-1645"></script>
-<script src="./curriculum/la-mastery.js?v=2026-09-08-1645"></script>
-<script src="./curriculum/la-calendar.js?v=2026-09-08-1645"></script>
-<script src="./curriculum/la-grader.js?v=2026-09-08-1645"></script>
+<script src="./curriculum/sync.js?v=2026-09-14-0056"></script>
+<script src="./curriculum/students.js?v=2026-09-14-0056"></script>
+<script src="./curriculum/subjects.js?v=2026-09-14-0056"></script>
+<script src="./curriculum/question-types.js?v=2026-09-14-0056"></script>
+<script src="./curriculum/la-y1-spine.js?v=2026-09-14-0056"></script>
+<script src="./curriculum/la-y1-words.js?v=2026-09-14-0056"></script>
+<script src="./curriculum/la-y1-grammar.js?v=2026-09-14-0056"></script>
+<script src="./curriculum/la-y1-reading.js?v=2026-09-14-0056"></script>
+<script src="./curriculum/la-y1-tasks.js?v=2026-09-14-0056"></script>
+<script src="./curriculum/la-books.js?v=2026-09-14-0056"></script>
+<script src="./curriculum/la-y2-spine.js?v=2026-09-14-0056"></script>
+<script src="./curriculum/la-y2-words.js?v=2026-09-14-0056"></script>
+<script src="./curriculum/la-y2-grammar.js?v=2026-09-14-0056"></script>
+<script src="./curriculum/la-y2-reading.js?v=2026-09-14-0056"></script>
+<script src="./curriculum/la-y2-tasks.js?v=2026-09-14-0056"></script>
+<script src="./curriculum/la-books-y2.js?v=2026-09-14-0056"></script>
+<script src="./curriculum/la-quotes.js?v=2026-09-14-0056"></script>
+<script src="./curriculum/la-daily-fix.js?v=2026-09-14-0056"></script>
+<script src="./curriculum/la-skill-notes.js?v=2026-09-14-0056"></script>
+<script src="./curriculum/la-mastery.js?v=2026-09-14-0056"></script>
+<script src="./curriculum/la-calendar.js?v=2026-09-14-0056"></script>
+<script src="./curriculum/la-grader.js?v=2026-09-14-0056"></script>
 </helmet>
 
 <div style="min-height:100vh;display:flex;flex-direction:column">
@@ -280,7 +281,15 @@
             </sc-if>
 
             <sc-if value="{{ aSkill }}" hint-placeholder-val="{{ false }}">
-              <div class="box"><h3 style="margin-bottom:4px">{{ gzTitle }}</h3><p class="muted" style="margin:0">{{ gzStandard }}</p></div>
+              <div class="box">
+                <h3 style="margin-bottom:2px">{{ gzTitle }}</h3>
+                <p class="muted" style="margin:0 0 12px;font-size:.84rem">{{ gzStandard }} &middot; {{ gzCount }}</p>
+                <div style="font-size:1.02rem;line-height:1.65">{{ skillTeach }}</div>
+                <div class="q-box" style="border-left:4px solid var(--forest);margin-top:12px">
+                  <span style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft)">For example</span><br>{{ skillExample }}
+                </div>
+                <div style="margin-top:12px"><button onClick="{{ skillListen }}" style="{{ btnSecondary }}">Read it to me</button></div>
+              </div>
             </sc-if>
 
             <sc-if value="{{ aGz }}" hint-placeholder-val="{{ false }}">
@@ -1886,6 +1895,30 @@ class Component extends DCLogic {
       rdListen:function(){ self.speak(passage.text.replace(/\n+/g," ")); },
 
       gzTitle:grammarSet.title, gzStandard:"Standard "+(grammarSet.standard||""),
+      /* The number of questions comes from the set, never from prose. The note
+       * used to say "Six questions"; third grade later went to eight and the
+       * note stayed, and correcting it by hand then made fifth grade wrong in
+       * the same edit. A count written in a sentence will always drift from
+       * the array it describes. */
+      gzCount:(grammarSet.items||[]).length + " questions.",
+      /* The skill step used to show a title and a standard code and nothing
+       * else. The step tells the child to read the note under the name, and
+       * there was no note — a code from a state document teaches nobody
+       * anything. Each week now has a plain explanation and one example. */
+      skillTeach:(function(){
+        const N=window.__CURR.LA_SKILL_NOTES;
+        return N ? N.noteFor(st.year, st.week).teach : "";
+      })(),
+      skillExample:(function(){
+        const N=window.__CURR.LA_SKILL_NOTES;
+        return N ? N.noteFor(st.year, st.week).example : "";
+      })(),
+      skillListen:function(){
+        const N=window.__CURR.LA_SKILL_NOTES;
+        if(!N) return;
+        const n=N.noteFor(st.year, st.week);
+        self.speak(grammarSet.title+". "+n.teach+" For example. "+n.example);
+      },
 
       spTitle:spellingSet.title,
       spWords:spellingSet.words.map(function(w){ return {text:w}; }),

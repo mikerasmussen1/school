@@ -320,7 +320,7 @@
     return {
       id:"la-y2-w"+week+"-grammar", w:week, label:"W"+week,
       title:(wk?wk.title:"Week "+week),
-      note:"Six questions. At this level, read the whole option list before choosing.",
+      note:"At this level, read the whole option list before choosing.",
       standard: wk?wk.standard:"",
       items: rows.map((r,i)=>({
         id:"la-y2-gr-w"+week+"-"+(i+1),

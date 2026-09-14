@@ -407,7 +407,7 @@
       w: week,
       label: "W"+week,
       title: "Grammar — " + (wk ? wk.title : "Week "+week),
-      note: "Six questions. Read each one twice before you answer.",
+      note: "Read each one twice before you answer.",
       standard: wk ? wk.standard : "",
       items: rows.map((r,i)=>({
         id: "la-y1-gr-w"+week+"-"+(i+1),

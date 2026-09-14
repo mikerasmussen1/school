@@ -63,7 +63,7 @@
       pattern, words,
       items: words.map((word,i)=>({
         id:"la-y2-sp-w"+week+"-"+(i+1),
-        type:"fill-blank",
+        type:"spelling",
         t: i<4 ? 0 : i<9 ? 1 : 2,
         q:"Spell the word you hear: ___",
         a:[word]

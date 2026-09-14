@@ -81,7 +81,7 @@
       words,
       items: words.map((word,i)=>({
         id: "la-y1-sp-w"+week+"-"+(i+1),
-        type: "fill-blank",
+        type: "spelling",
         // Tier rises through the list: first four warm-up, next five core,
         // last three challenge — the lists are written easiest-first.
         t: i<4 ? 0 : i<9 ? 1 : 2,

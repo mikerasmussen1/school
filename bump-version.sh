@@ -72,3 +72,19 @@ open("build.json", "w").write('{"build":"%s"}\n' % ver)
 print("  wrote build.json =", ver)
 print("  %d script tags now at version %s" % (n, ver))
 PY
+
+# index.html is stamped by scripts/stamp-version.js, not by this script.
+#
+# Two versioning systems ended up on main: this one writes a timestamp, that
+# one writes a hash of the curriculum CONTENT. Both were rewriting the same
+# ?v= tokens, so whichever ran last won and lesson-visuals.js failed whenever
+# that was this script.
+#
+# The content hash is the better tool for index.html and it wins outright: a
+# timestamp changes on every run and busts caches that did not need busting,
+# while a hash changes only when a curriculum file actually changes. This
+# script keeps the standalone .dc.html pages and the build stamp, then hands
+# index.html back.
+if [ -f scripts/stamp-version.js ]; then
+  node scripts/stamp-version.js >/dev/null 2>&1 && echo "  index.html stamped by scripts/stamp-version.js (content hash)"
+fi

@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=2026-09-14-0120"></script>
-  <script data-build>window.__BUILD__="2026-09-14-0120";</script>
-  <script src="./curriculum/freshness.js?v=2026-09-14-0120"></script>
+<script src="./support.js?v=2026-09-14-0158"></script>
+  <script data-build>window.__BUILD__="2026-09-14-0158";</script>
+  <script src="./curriculum/freshness.js?v=2026-09-14-0158"></script>
 </head>
 <body>
 <x-dc>
@@ -49,28 +49,29 @@
   .book-title{font-family:'Fraunces',serif;font-size:1rem;color:var(--brick-dark);margin:0 0 3px}
   .done-banner{text-align:center;padding:22px;margin-top:6px;background:var(--forest-light);border-radius:8px;color:#2E4E38}
 </style>
-<script src="./curriculum/sync.js?v=2026-09-14-0120"></script>
-<script src="./curriculum/students.js?v=2026-09-14-0120"></script>
-<script src="./curriculum/subjects.js?v=2026-09-14-0120"></script>
-<script src="./curriculum/question-types.js?v=2026-09-14-0120"></script>
-<script src="./curriculum/la-y1-spine.js?v=2026-09-14-0120"></script>
-<script src="./curriculum/la-y1-words.js?v=2026-09-14-0120"></script>
-<script src="./curriculum/la-y1-grammar.js?v=2026-09-14-0120"></script>
-<script src="./curriculum/la-y1-reading.js?v=2026-09-14-0120"></script>
-<script src="./curriculum/la-y1-tasks.js?v=2026-09-14-0120"></script>
-<script src="./curriculum/la-books.js?v=2026-09-14-0120"></script>
-<script src="./curriculum/la-y2-spine.js?v=2026-09-14-0120"></script>
-<script src="./curriculum/la-y2-words.js?v=2026-09-14-0120"></script>
-<script src="./curriculum/la-y2-grammar.js?v=2026-09-14-0120"></script>
-<script src="./curriculum/la-y2-reading.js?v=2026-09-14-0120"></script>
-<script src="./curriculum/la-y2-tasks.js?v=2026-09-14-0120"></script>
-<script src="./curriculum/la-books-y2.js?v=2026-09-14-0120"></script>
-<script src="./curriculum/la-quotes.js?v=2026-09-14-0120"></script>
-<script src="./curriculum/la-daily-fix.js?v=2026-09-14-0120"></script>
-<script src="./curriculum/la-skill-notes.js?v=2026-09-14-0120"></script>
-<script src="./curriculum/la-mastery.js?v=2026-09-14-0120"></script>
-<script src="./curriculum/la-calendar.js?v=2026-09-14-0120"></script>
-<script src="./curriculum/la-grader.js?v=2026-09-14-0120"></script>
+<script src="./curriculum/sync.js?v=2026-09-14-0158"></script>
+<script src="./curriculum/students.js?v=2026-09-14-0158"></script>
+<script src="./curriculum/subjects.js?v=2026-09-14-0158"></script>
+<script src="./curriculum/question-types.js?v=2026-09-14-0158"></script>
+<script src="./curriculum/la-y1-spine.js?v=2026-09-14-0158"></script>
+<script src="./curriculum/la-y1-words.js?v=2026-09-14-0158"></script>
+<script src="./curriculum/la-y1-grammar.js?v=2026-09-14-0158"></script>
+<script src="./curriculum/la-y1-reading.js?v=2026-09-14-0158"></script>
+<script src="./curriculum/la-y1-tasks.js?v=2026-09-14-0158"></script>
+<script src="./curriculum/la-books.js?v=2026-09-14-0158"></script>
+<script src="./curriculum/la-y2-spine.js?v=2026-09-14-0158"></script>
+<script src="./curriculum/la-y2-words.js?v=2026-09-14-0158"></script>
+<script src="./curriculum/la-y2-grammar.js?v=2026-09-14-0158"></script>
+<script src="./curriculum/la-y2-reading.js?v=2026-09-14-0158"></script>
+<script src="./curriculum/la-y2-tasks.js?v=2026-09-14-0158"></script>
+<script src="./curriculum/la-books-y2.js?v=2026-09-14-0158"></script>
+<script src="./curriculum/la-quotes.js?v=2026-09-14-0158"></script>
+<script src="./curriculum/la-daily-fix.js?v=2026-09-14-0158"></script>
+<script src="./curriculum/la-skill-notes.js?v=2026-09-14-0158"></script>
+<script src="./curriculum/la-close-reading.js?v=2026-09-14-0158"></script>
+<script src="./curriculum/la-mastery.js?v=2026-09-14-0158"></script>
+<script src="./curriculum/la-calendar.js?v=2026-09-14-0158"></script>
+<script src="./curriculum/la-grader.js?v=2026-09-14-0158"></script>
 </helmet>
 
 <div style="min-height:100vh;display:flex;flex-direction:column">
@@ -176,13 +177,13 @@
         <sc-if value="{{ showChecklist }}" hint-placeholder-val="{{ false }}">
           <div style="display:flex;justify-content:space-between;align-items:center;margin:16px 0 8px">
             <div style="font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft)">{{ progressLabel }}</div>
-            <div style="font-size:.86rem;color:var(--forest);font-weight:600">{{ progressCount }}</div>
+            <div style="font-size:.86rem;color:var(--forest);font-weight:600">{{ progressCount }} <span style="color:var(--ink-soft);font-weight:400">&middot; {{ dayMinutes }}</span></div>
           </div>
           <sc-for list="{{ daySteps }}" as="s" hint-placeholder-count="4">
             <div style="{{ s.rowStyle }}">
               <div style="{{ s.markStyle }}">{{ s.mark }}</div>
               <div style="flex:1;min-width:0">
-                <h3 style="margin:0 0 2px;font-size:1rem">{{ s.label }}</h3>
+                <h3 style="margin:0 0 2px;font-size:1rem">{{ s.label }} <span style="opacity:.45;font-size:.78em;font-weight:400">{{ s.mins }}</span></h3>
                 <p style="margin:0;font-size:.87rem;color:var(--ink-soft)">{{ s.detail }}</p>
                 <p style="{{ s.doneNoteStyle }}">{{ s.doneNote }}</p>
               </div>
@@ -239,6 +240,27 @@
                 </div>
                 <div style="margin-top:12px"><button onClick="{{ fxAgain }}" style="{{ btnSecondary }}">Try it again</button></div>
               </sc-if>
+            </sc-if>
+
+            <sc-if value="{{ aClose }}" hint-placeholder-val="{{ false }}">
+              <div class="box">
+                <div style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--brick-dark);margin-bottom:4px">Today you are reading for</div>
+                <h3 style="margin:0 0 8px">{{ closeFocus }}</h3>
+                <div style="font-size:1.02rem;line-height:1.65">{{ closeLook }}</div>
+              </div>
+              <div class="passage-box" style="margin-top:14px">
+                <h3 style="margin:0 0 8px">{{ rdTitle }}</h3>
+                <div class="passage-flow">{{ rdText }}</div>
+                <div style="margin-top:10px"><button onClick="{{ rdListen }}" style="{{ btnSecondary }}">Read it to me</button></div>
+              </div>
+              <div class="box" style="margin-top:14px;border-left:4px solid var(--brick)">
+                <div style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--brick-dark);margin-bottom:5px">Now write this by hand</div>
+                <div style="font-size:1.04rem;line-height:1.65">{{ closeWrite }}</div>
+              </div>
+              <div class="box" style="margin-top:12px">
+                <div style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:5px">Check your own answer first</div>
+                <div style="font-size:.96rem;line-height:1.6">{{ closeCheck }}</div>
+              </div>
             </sc-if>
 
             <sc-if value="{{ aRead }}" hint-placeholder-val="{{ false }}">
@@ -1761,6 +1783,8 @@ class Component extends DCLogic {
       return {
         label:x.step.n+". "+x.step.label,
         detail: locked ? (x.step.detail+" (Step "+(currentIdx+1)+" comes first, but you can do this now if you need to.)") : x.step.detail,
+        mins: (function(){ const C=window.__CURR.LA_CLOSE;
+          return C ? (C.minutesFor(x.step.key)+" min") : ""; })(),
         doneNote: (done||x.overridden)
           ? (x.overridden ? "Passed by a grown-up because something was not working."
              : x.stuck ? "Marked for a grown-up to look at."
@@ -1882,6 +1906,15 @@ class Component extends DCLogic {
       photoGrading: false,
       noPhotoGrading: true,
       noPhotoNote: "No photo needed. Write the page by hand, then take the paper to a grown-up on Thursday \u2014 they mark the page itself, which tells you more than a photograph of it can.",
+      /* The daily close read: same passage, a different purpose each day. */
+      closeFocus:(function(){ const C=window.__CURR.LA_CLOSE;
+        return C?C.closeFor(st.year, st.day).focus:""; })(),
+      closeLook:(function(){ const C=window.__CURR.LA_CLOSE;
+        return C?C.closeFor(st.year, st.day).look:""; })(),
+      closeWrite:(function(){ const C=window.__CURR.LA_CLOSE;
+        return C?C.closeFor(st.year, st.day).write:""; })(),
+      closeCheck:(function(){ const C=window.__CURR.LA_CLOSE;
+        return C?C.closeFor(st.year, st.day).check:""; })(),
       rdText:passage.text, rdReadAloud:passage.readAloud,
       /* Paragraphs as real elements rather than one string relying on a CSS
        * white-space rule. The Today tab was using a class that does not exist
@@ -2121,6 +2154,7 @@ class Component extends DCLogic {
        * tick rather than repeating the card. */
       aQuote: openStep==="quote",
       aFix:   openStep==="fix",
+      aClose: openStep==="close",
       aRead:  openStep==="read",
       aRq:    openStep==="rq",
       aSkill: openStep==="skill",
@@ -2225,6 +2259,12 @@ class Component extends DCLogic {
       daySteps: daySteps,
       progressLabel:"Today's checklist",
       progressCount: doneCount+" of "+plan.steps.length+" done",
+      /* An estimate, shown so a child can see what he is in for. Built by
+       * adding the parts - a 200-word passage read aloud is about two minutes,
+       * a multiple-choice item about forty seconds, a hand-written paragraph
+       * about eight. Not a quota: finishing sooner is fine. */
+      dayMinutes:(function(){ const C=window.__CURR.LA_CLOSE;
+        return C ? ("about "+C.dayMinutes(plan.steps)+" minutes") : ""; })(),
       endHeading: plan.day==="Fri" ? ("Week "+st.week+" complete") : (plan.dayName+" complete"),
       endSummary: plan.day==="Fri"
         ? "Every step this week is finished. Next week is waiting."

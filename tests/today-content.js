@@ -24,6 +24,8 @@ let fail=[], checked=0;
 const ALLWEEKS=Array.from({length:36},(_,i)=>i+1);
 const CONTENT={
   quote: v=>v.qText && v.qThink,
+  close: v=>v.closeFocus && v.closeLook && v.closeWrite && v.closeCheck
+            && String(v.rdText||"").length>150,
   fix:   v=>v.fixSentence && (v.fxNotStarted===true || v.fxActive===true),
   read:  v=>v.rdTitle && v.rdText && v.rdText.length>80,
   rq:    v=>v.rqNotStarted===true || v.rqActive===true,
@@ -50,7 +52,7 @@ const CONTENT={
   approve: v=>Array.isArray(v.approveGrades) && v.approveGrades.length===4 && !!v.approveFocus,
   rv:    v=>v.rvNotStarted===true || v.rvActive===true
 };
-const BLOCK={quote:"aQuote",fix:"aFix",read:"aRead",rq:"aRq",skill:"aSkill",gz:"aGz",
+const BLOCK={quote:"aQuote",fix:"aFix",close:"aClose",read:"aRead",rq:"aRq",skill:"aSkill",gz:"aGz",
              study:"aStudy",sq:"aSq",prompt:"aTask",write:"aTask",photo:"aPhoto",
              speak:"aSpeak",rv:"aRv",approve:"aApprove"};
 
@@ -65,7 +67,7 @@ for(const y of ['y1','y2']){
         const v=c.renderVals();
         checked++;
         const want=BLOCK[step.key];
-        const shown=["aQuote","aFix","aRead","aRq","aSkill","aGz","aStudy","aSq","aTask","aPhoto","aSpeak","aRv","aApprove"].filter(k=>v[k]);
+        const shown=["aQuote","aFix","aClose","aRead","aRq","aSkill","aGz","aStudy","aSq","aTask","aPhoto","aSpeak","aRv","aApprove"].filter(k=>v[k]);
         if(shown.length!==1 || shown[0]!==want)
           fail.push(y+" w"+w+" "+d+" "+step.key+": showed "+(shown.join(",")||"nothing")+", expected "+want);
         else if(!CONTENT[step.key](v))

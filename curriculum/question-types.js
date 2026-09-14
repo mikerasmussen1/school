@@ -152,6 +152,23 @@
     return within(a, b, a.length >= 8 ? 2 : 1);           // longer word, more room to slip
   };
 
+  /* WHERE THE TYPO TOLERANCE APPLIES, and where it must not.
+   *
+   * A word answer is forgiven one wrong letter, two if it is eight letters or
+   * more. That is deliberate and tested: a child who answers "triangel" on a
+   * geometry question knows the shape, and the question was about shapes. The
+   * same goes for "perimiter" and "trapazoid".
+   *
+   * It is exactly wrong for a spelling test, where the letters ARE the
+   * question — it marked "visable" correct for visible. Spelling is therefore
+   * its own type with its own exact grader, and does not come through here at
+   * all.
+   *
+   * An item may also set {fuzzy:false} to insist on exactness without being a
+   * spelling item.
+   */
+  const wantsFuzzy = (it) => !(it && it.fuzzy === false);
+
   const sameValue = (it, key, resp) => {
     if(norm(key) === norm(resp)) return true;               // exact, as before
     /* Place names are settled here and never reach the typo tolerance below:
@@ -159,7 +176,7 @@
     const pk = placeKey(key);
     if(pk) return pk === placeKey(resp);
     const a = valueOf(key), b = valueOf(resp);
-    if(isNaN(a) || isNaN(b)) return typoMatch(key, resp);   // two words — spelling
+    if(isNaN(a) || isNaN(b)) return wantsFuzzy(it) && typoMatch(key, resp);
     // A question about form is answered by the form, not the value.
     if(wantsForm(it)) return false;
     // Do not let a decimal answer a question that asked for a fraction.

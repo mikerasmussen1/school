@@ -5,7 +5,7 @@
  * high-frequency third-grade words folded in rather than taught separately.
  *
  * Each list becomes a gradeable set by the same route the Unit 1 pilot used:
- * a fill-blank item whose whole answer is the word. The page speaks the word
+ * a spelling item whose whole answer is the word. The page speaks the word
  * aloud and the child types it, so the drill is a real spelling test rather
  * than a word-recognition test — nothing on screen shows them the answer.
  *

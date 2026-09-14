@@ -112,8 +112,15 @@
  *     when:   1756...,                             ms, for ordering
  *     done:   true | false                         finished, or still open
  *     right:  4, marked: 6,                        the score so far
+ *     detail: true | false                         are the questions themselves kept?
  *     rows: [{q, answer, correct, ok}]             ok: true | false | null
  *   }]
+ *
+ * `detail:false` with an empty `rows` means "this was scored, but the
+ * questions were not recorded" — work finished before your course started
+ * keeping them. Report it rather than omitting it: a day that plainly had work
+ * in it must not open empty, because that reads as nothing having happened.
+ * The shell says so in words; you only have to be honest about which it is.
  *
  * IN PROGRESS IS THE POINT. Report a group as soon as its first question is
  * answered, with done:false — a child who stopped half way through has done

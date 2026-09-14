@@ -159,11 +159,24 @@
        * opening an empty panel. */
       /* Keyed by year:week:day, not by day. The teacher can look back at any
        * week, and a bare day name would light Tuesday's square in every week
-       * of the year because one Tuesday somewhere had answers in it. */
+       * of the year because one Tuesday somewhere had answers in it.
+       *
+       * stepResult counts as evidence as well as laLog. Every day finished
+       * before the per-question log existed has a SCORE and no questions, and
+       * a square that sat inert on those days was the wrong answer twice over:
+       * the day plainly had work in it, and the one place that says so — its
+       * own record — is what the parent was trying to open. It opens, and says
+       * honestly that the questions themselves were not kept. */
       const answered = {};
       Object.keys(data.laLog || {}).forEach(function(k){
         const p = String(k).split(":");
         if(p.length === 4 && ((data.laLog || {})[k] || []).length)
+          answered[p[0] + ":" + p[1] + ":" + p[2]] = true;
+      });
+      Object.keys(result).forEach(function(k){
+        const p = String(k).split(":");
+        const r = result[k];
+        if(p.length === 4 && r && typeof r.score === "number" && r.total > 0)
           answered[p[0] + ":" + p[1] + ":" + p[2]] = true;
       });
 
@@ -302,8 +315,14 @@
      * a drill can hold a full set of answers and still be open. */
     questionLog: function(data, ctx){
       const LOG = data.laLog || {}, DONE = data.stepDone || {};
+      const RESULT = data.stepResult || {};
+      /* The drill slot and the checklist step key are not always the same word
+       * — the find-the-mistake drill runs in slot "fx" and its step is "fix" —
+       * so both spellings are named here. A log entry and a score for the same
+       * drill must land on the same name or the day shows it twice. */
       const NAMES = {rq:"Reading comprehension", gz:"Grammar drill", sq:"Spelling drill",
-                     fx:"Find the mistake", rv:"Week review"};
+                     fx:"Find the mistake", fix:"Find the mistake", rv:"Week review"};
+      const SLOT_OF = {fix:"fx"};
       const DAY_NAME = {Mon:"Monday", Tue:"Tuesday", Wed:"Wednesday",
                         Thu:"Thursday", Fri:"Friday"};
       /* ctx.cell is the square the teacher clicked in the glance — a
@@ -321,6 +340,7 @@
         const marked = rows.filter(function(e){ return e && e.ok !== null; });
         out.push({
           cell: cell,
+          slot: p[3],
           day: DAY_NAME[p[2]] || p[2],
           where: "Week " + p[1] + " · " + (DAY_NAME[p[2]] || p[2]) + " · " +
                  (NAMES[p[3]] || p[3]),
@@ -329,12 +349,51 @@
           done: !!DONE[k],
           right: marked.filter(function(e){ return e.ok; }).length,
           marked: marked.length,
+          detail: true,
           rows: rows.map(function(e){
             return {q: e.q || "", answer: e.resp == null ? "" : String(e.resp),
                     correct: e.correct || e.a || "", ok: e.ok === null ? null : !!e.ok};
           })
         });
       });
+
+      /* WORK DONE BEFORE THE PER-QUESTION LOG EXISTED.
+       *
+       * Those drills left a score and nothing else. Reporting only what laLog
+       * holds meant a day that plainly had work in it opened empty, which
+       * reads as "nothing happened here" — the opposite of the truth. So the
+       * score is reported with detail:false, and the view says the questions
+       * themselves were not kept rather than implying there were none.
+       *
+       * A drill that HAS a log is skipped here: the log is the better record
+       * of the same work, and counting both would show the day twice. */
+      const seenSlot = {};
+      out.forEach(function(g){ seenSlot[g.cell + ":" + g.slot] = true; });
+      Object.keys(RESULT).forEach(function(k){
+        const r = RESULT[k];
+        if(!r || typeof r.score !== "number" || !(r.total > 0)) return;
+        const p = String(k).split(":");            // year:week:day:stepkey
+        if(p.length !== 4) return;
+        const cell = p[0] + ":" + p[1] + ":" + p[2];
+        if(only && cell !== only) return;
+        const slot = SLOT_OF[p[3]] || p[3];
+        if(seenSlot[cell + ":" + slot]) return;    // the log already has it
+        out.push({
+          cell: cell,
+          slot: slot,
+          day: DAY_NAME[p[2]] || p[2],
+          where: "Week " + p[1] + " · " + (DAY_NAME[p[2]] || p[2]) + " · " +
+                 (NAMES[p[3]] || p[3]),
+          what: NAMES[p[3]] || p[3],
+          when: r.at || 0,
+          done: true,                              // a score only exists once it finished
+          right: r.score,
+          marked: r.total,
+          detail: false,
+          rows: []
+        });
+      });
+
       return out.length ? out : null;
     }
   });

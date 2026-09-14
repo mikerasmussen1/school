@@ -420,8 +420,66 @@ console.log("Teacher HQ turns the log into rows");
     app2.pickGlanceCell("la", "y1:1:Mon");
     ok((app2.state.wgPick || {}).la === "", "clicking it again closes it");
 
+    /* ── WORK DONE BEFORE THE LOG EXISTED ───────────────────────────────
+     * The real case on Mike's screen: Monday finished, "Mon fix check: 2/2"
+     * and "Mon rq check: 2/4" in the glance, and laLog empty because the work
+     * predates per-question saving. The square sat inert and the day could not
+     * be opened at all — a day with obvious work in it behaving as if it had
+     * none. It must open and say what it knows. */
+    const legacy = {
+      laLog: {},
+      stepDone: {"y1:1:Mon:end":true, "y1:1:Mon:fix":true, "y1:1:Mon:rq":true},
+      stepResult: {
+        "y1:1:Mon:fix": {score:2, total:2, at:1000},
+        "y1:1:Mon:rq":  {score:2, total:4, at:1001}
+      },
+      week: 1, year: "y1"
+    };
+    const lg = la.weekGlance(legacy, {week:1});
+    ok(!!lg, "a week with only scores still draws a glance");
+    const lgCells = ((lg.columns||[])[0]||{}).cells||[];
+    ok(lgCells[0].id === "y1:1:Mon",
+       "and its Monday IS clickable on a score alone (" + (lgCells[0].id||"none") + ")");
+    ok(!lgCells[1].id, "while a day with nothing at all still is not");
+
+    const openLegacy = app2.pickedDayVals(la, legacy, null, "y1:1:Mon");
+    ok(openLegacy.hasPicked === true, "it opens");
+    ok(openLegacy.pickedDrills.length === 2,
+       "both scored drills are listed (" + openLegacy.pickedDrills.length + ")");
+    const byName = {};
+    openLegacy.pickedDrills.forEach(d => { byName[d.what] = d; });
+    ok(!!byName["Find the mistake"], "the fix drill is named properly, not 'fix'");
+    ok(byName["Find the mistake"] && byName["Find the mistake"].score === "2 of 2 correct",
+       "with its real score");
+    ok(byName["Reading comprehension"] && byName["Reading comprehension"].score === "2 of 4 correct",
+       "and so is the reading check");
+    ok(openLegacy.pickedDrills.every(d => d.noDetail === true),
+       "each says the questions themselves were not kept");
+    ok(openLegacy.pickedDrills.every(d => /only the score was saved/.test(d.noDetailNote||"")),
+       "in words a parent can read");
+
+    /* And the two records must not double up once both exist for one drill. */
+    const kid3 = fresh();
+    kid3.state.week = 1; kid3.state.day = "Mon";
+    kid3.logAnswer("fx", {id:"f1", q:"Find the mistake here", a:"their"}, "their", true);
+    const mixed = {
+      laLog: kid3.state.laLog,
+      stepDone: {},
+      stepResult: {"y1:1:Mon:fix": {score:1, total:1, at:1000},
+                   "y1:1:Mon:rq":  {score:2, total:4, at:1001}},
+      week: 1, year: "y1"
+    };
+    const openMixed = app2.pickedDayVals(la, mixed, null, "y1:1:Mon");
+    ok(openMixed.pickedDrills.length === 2,
+       "a drill with a log and a score appears once, not twice (" +
+       openMixed.pickedDrills.length + " drills)");
+    const fx = openMixed.pickedDrills.filter(d => d.what === "Find the mistake")[0];
+    ok(fx && fx.noDetail === false, "and it is the detailed record that survives");
+    ok(fx && (fx.rows||[]).length === 1, "with its question in it");
+
     ok(/\{\{ c\.pick \}\}/.test(page), "the template wires the click");
     ok(/\{\{ p\.pickedDrills \}\}/.test(page), "and draws the opened day");
+    ok(/\{\{ d\.noDetailNote \}\}/.test(page), "and prints the no-detail note");
   }
 }
 

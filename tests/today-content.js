@@ -27,7 +27,11 @@ const CONTENT={
   fix:   v=>v.fixSentence && (v.fxNotStarted===true || v.fxActive===true),
   read:  v=>v.rdTitle && v.rdText && v.rdText.length>80,
   rq:    v=>v.rqNotStarted===true || v.rqActive===true,
-  skill: v=>v.gzTitle && v.gzStandard,
+  // a title and a standard code teach nobody anything: the skill step must
+  // carry a real explanation and a concrete example
+  skill: v=>v.gzTitle && v.gzStandard
+            && String(v.skillTeach||"").length>40
+            && String(v.skillExample||"").length>8,
   gz:    v=>v.gzNotStarted===true || v.gzActive===true,
   study: v=>Array.isArray(v.spWords) && v.spWords.length>0,
   sq:    v=>v.sqNotStarted===true || v.sqActive===true,
@@ -81,6 +85,25 @@ console.log(checked+" step-assignments checked across 2 grades x 36 weeks x 5 da
   if(!/\.passage-flow\s*\{[^}]*white-space:\s*pre-wrap/.test(src))
     fail.push("passage-flow does not preserve the line breaks");
   console.log("speaking panel binds the passage title and text, with breaks preserved");
+
+  const j=src.indexOf('{{ aSkill }}');
+  const sk=src.slice(j, src.indexOf('</sc-if>', j));
+  if(sk.indexOf('{{ skillTeach }}')<0)   fail.push("the skill panel does not bind its explanation");
+  if(sk.indexOf('{{ skillExample }}')<0) fail.push("the skill panel does not bind its example");
+  console.log("skill panel binds the explanation and the example");
+
+  // and no drill note may misstate how many questions it has
+  const G=window.__CURR;
+  ["LA_Y1","LA_Y2"].forEach(k=>{
+    const Y=G[k]; if(!Y) return;
+    for(let w=1;w<=36;w++){
+      const g=Y.grammarSetFor(w);
+      // no prose anywhere may state a question count; the page derives it
+      if(/\d+ questions|(Six|Seven|Eight|Nine|Ten) questions/i.test(String(g.note||"")))
+        fail.push(k+" w"+w+" note hardcodes a question count instead of leaving it to the set");
+    }
+  });
+  console.log("no drill note hardcodes a question count");
 }
 
 // spot-check the ones that were wrong, and show they now differ

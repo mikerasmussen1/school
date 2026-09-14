@@ -64,12 +64,29 @@ console.log("\n=== no typed-answer drill still uses the lenient grader ===");
   });
 }
 
-console.log("\n=== the tolerance still exists for the drills that want it ===");
-{ const geo={type:"fill-blank", a:["Mississippi"]};
-  const near=T.grade(geo,"Missisippi");
-  console.log("  fill-blank still forgives \"Missisippi\": "+near);
-  if(!near) fail.push("the typo tolerance was removed from fill-blank, not just from spelling");
+console.log("\n=== the tolerance stays where it was deliberately wanted ===");
+{ const geo={type:"fill-blank", a:["triangle"]};
+  const strict={type:"fill-blank", a:["triangle"], fuzzy:false};
+  const lenient=T.grade(geo,"triangel");
+  console.log("  a geometry answer still forgives \"triangel\" : "+lenient);
+  console.log("  fuzzy:false insists on exactness            : "+!T.grade(strict,"triangel"));
+  if(!lenient) fail.push("math vocabulary lost a tolerance that tests/answer-matching.js requires");
+  if(T.grade(strict,"triangel")) fail.push("fuzzy:false does not force exactness");
+  if(!T.grade({type:"short-answer",a:["12"]},"12.0")) fail.push("number matching was broken");
 }
 
-console.log(fail.length?("\nFAILURES:\n  "+fail.slice(0,6).join("\n  ")):"\nRESULT: spelling is graded exactly; nothing else lost its tolerance.");
+console.log("\n=== no item anywhere in Word Voyagers opts in ===");
+{ let opted=0;
+  [["LA_Y1","3rd"],["LA_Y2","5th"]].forEach(([k])=>{
+    const Y=window.__CURR[k];
+    for(let w=1;w<=36;w++){
+      Y.spellingSetFor(w).items.forEach(i=>{ if(i.fuzzy) opted++; });
+      Y.grammarSetFor(w).items.forEach(i=>{ if(i.fuzzy) opted++; });
+    }
+  });
+  console.log("  items carrying fuzzy:true : "+opted);
+  if(opted) fail.push(opted+" Word Voyagers items opt in to the typo tolerance");
+}
+
+console.log(fail.length?("\nFAILURES:\n  "+fail.slice(0,6).join("\n  ")):"\nRESULT: spelling is exact; the tolerance stays only where it was wanted.");
 process.exit(fail.length?1:0);

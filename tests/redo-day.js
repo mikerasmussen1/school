@@ -32,7 +32,24 @@ function finish(c,g,w,d){
 }
 const count=(bag,pre)=>Object.keys(bag||{}).filter(k=>k.indexOf(pre)===0).length;
 
-console.log("=== the picker reaches every day of the year, both grades ===");
+// It must be the FIRST card on the tab. It was pushed to third when the
+// override cards were added, below two other cards that also show rows of
+// buttons, and became effectively invisible - reported twice as "not
+// showing" while rendering perfectly.
+console.log("=== it is the first card on the For Parents tab ===");
+{ const src=require('fs').readFileSync(__dirname+'/../word-voyagers.dc.html','utf8');
+  const i=src.indexOf('{{ isParent }}');
+  const heads=[...src.slice(i, i+16000).matchAll(/<h2>([^<]{0,60})/g)].map(m=>m[1]);
+  console.log("  " + heads.slice(0,4).join("  |  "));
+  if(!/redo a day/i.test(heads[0]||"")) fail.push("the redo card is not first, it is: "+heads[0]);
+  const seg=src.slice(src.indexOf("redo a day"), src.indexOf("Let him past"));
+  if(seg.indexOf("{{ redoWeekItems }}")<0) fail.push("the week picker is not inside the redo card");
+  if(seg.indexOf("{{ redoDayItems }}")<0)  fail.push("the day picker is not inside the redo card");
+  if(!/Pick the week/.test(seg) || !/Pick the day/.test(seg))
+    fail.push("the pickers are not labelled as pickers");
+}
+
+console.log("\n=== the picker reaches every day of the year, both grades ===");
 ["y1","y2"].forEach(g=>{
   const c=parent(g);
   let v=c.renderVals();

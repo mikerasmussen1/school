@@ -53,6 +53,61 @@
     try{ window.location.reload(); }catch(e){}
   }
 
+  /* A SECOND CHECK, WHILE THE PAGE IS OPEN.
+   *
+   * Checking only at load is not enough for the way this app is actually used.
+   * A page opened before a fix is deployed keeps the old code for the whole
+   * session, however long that is — which is how three spelling words were
+   * reported one after another, all of them already fixed and deployed, none
+   * of them reaching the screen.
+   *
+   * So the check repeats every three minutes. But a later check must NOT
+   * reload on its own: the child may be halfway through a drill, and throwing
+   * that away to deliver a fix he did not ask for is a worse bug than the one
+   * being fixed. It offers instead, and he chooses when.
+   */
+  const EVERY = 3*60*1000;
+
+  function offerReload(build){
+    if(typeof document==="undefined" || !document.body) return;
+    if(document.getElementById("build-stale")) return;
+    const bar=document.createElement("div");
+    bar.id="build-stale";
+    bar.setAttribute("style",
+      "position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:9999;"+
+      "background:#1F2937;color:#fff;border-radius:999px;padding:10px 16px;"+
+      "font-family:'Public Sans',system-ui,sans-serif;font-size:14px;display:flex;"+
+      "gap:12px;align-items:center;box-shadow:0 6px 24px rgba(0,0,0,.28)");
+    const msg=document.createElement("span");
+    msg.textContent="An update is ready.";
+    const go=document.createElement("button");
+    go.textContent="Reload";
+    go.setAttribute("style",
+      "background:#4ADE80;color:#0B1220;border:0;border-radius:999px;padding:6px 14px;"+
+      "font-weight:700;cursor:pointer;font-size:14px");
+    go.onclick=function(){ markTried(build); try{ window.location.reload(); }catch(e){} };
+    const no=document.createElement("button");
+    no.textContent="Not now";
+    no.setAttribute("style",
+      "background:transparent;color:rgba(255,255,255,.65);border:0;cursor:pointer;font-size:13px");
+    no.onclick=function(){ try{ bar.remove(); }catch(e){} };
+    bar.appendChild(msg); bar.appendChild(go); bar.appendChild(no);
+    document.body.appendChild(bar);
+  }
+
+  async function recheck(){
+    const mine=currentBuild();
+    if(!mine) return;
+    let latest=null;
+    try{
+      const r=await fetch("build.json?t="+Date.now(), {cache:"no-store"});
+      if(!r.ok) return;
+      latest=(await r.json()).build;
+    }catch(e){ return; }
+    if(!latest || latest===mine) return;
+    offerReload(latest);
+  }
+
   if(typeof window!=="undefined"){
     if(typeof document!=="undefined" && document.addEventListener){
       // after load, so a slow check never delays the page appearing
@@ -61,8 +116,10 @@
     } else {
       check();
     }
+    // and then keep looking, offering rather than reloading
+    if(typeof setInterval!=="undefined") setInterval(recheck, EVERY);
   }
 
   window.__CURR = window.__CURR || {};
-  window.__CURR.FRESHNESS = {check, currentBuild};
+  window.__CURR.FRESHNESS = {check, recheck, offerReload, currentBuild, EVERY};
 })();

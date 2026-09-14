@@ -228,15 +228,18 @@
    * for him. His mother's report that the lessons finish too quickly is that
    * number, seen from the kitchen.
    *
-   * So the cap is not zero and it is not one: DAYS_PER_SITTING days may be
-   * closed per calendar day. Getting ahead still works — at two a day a child
-   * can finish the year in half a year — but a whole week in one sitting stops
-   * being possible. Set it to 0 to restore the old uncapped behaviour exactly.
+   * REMOVED AT THE PARENT'S REQUEST. The cap is now 0, which is the documented
+   * "no limit" setting and restores the original uncapped behaviour exactly: a
+   * child may close as many days in a sitting as he has the appetite for.
    *
-   * It reads a closedAt map the page writes when a day ends; if that map is
-   * missing or empty, nothing is capped, so an older save is never walled out.
+   * The reasoning above is left standing because it was real — a week of work
+   * can be spent in a few minutes when the material is too easy, and a parent
+   * watching that happen may want the brake back. The machinery is intact, so
+   * restoring it is one number here, or a call to setPace(2) from anywhere.
+   * What the cap should NOT do is stop a child who genuinely wants to keep
+   * going, and that is what it was doing.
    */
-  let DAYS_PER_SITTING = 2;
+  let DAYS_PER_SITTING = 0;   // 0 = no cap
 
   function sameCalendarDay(a, b){
     const x=new Date(a), y=new Date(b);

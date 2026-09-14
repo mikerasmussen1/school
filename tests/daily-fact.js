@@ -23,6 +23,7 @@ console.log("=== a fact for every day of the year, both grades ===");
     const f=F.factFor(g,w,d);
     if(!f.fact || f.fact.length<40) fail.push(g+" w"+w+" "+d+" has no fact");
     if(!f.tie || f.tie.length<20)   fail.push(g+" w"+w+" "+d+" has no tie back to the lesson");
+    if(!f.topic || f.topic.length<3) fail.push(g+" w"+w+" "+d+" has no topic label");
   });
 });
 console.log("  360 grade-days covered by "+F.count()+" facts on a "+F.CYCLE+"-week cycle");
@@ -43,6 +44,24 @@ console.log("  Mon says | Tue words | Wed shows | Thu why | Fri theme");
   console.log("  the five fact purposes map onto the five lesson days");
 }
 
+console.log("\n=== the facts cover more than etymology ===");
+{ const topics={};
+  Object.keys(F.FACTS).forEach(k=>F.FACTS[k].forEach(r=>{ topics[r[0]]=(topics[r[0]]||0)+1; }));
+  const names=Object.keys(topics).sort();
+  console.log("  "+names.length+" topics: "+names.join(", "));
+  if(names.length<15) fail.push("only "+names.length+" topics; the point was variety");
+  const etym=topics["Etymology"]||0;
+  if(etym > F.count()*0.35) fail.push("etymology is "+etym+" of "+F.count()+" facts, still dominating");
+  ["Mascot","Colours","Pok\u00e9 Balls","Legendaries","Villains","Backstory","Phrases","Evolution","Rivals","Starters"]
+    .forEach(t=>{ if(!topics[t]) fail.push("no facts tagged "+t); });
+  // no single lesson day may be all one topic
+  Object.keys(F.FACTS).forEach(k=>{
+    const t={}; F.FACTS[k].forEach(r=>t[r[0]]=1);
+    if(Object.keys(t).length<4) fail.push(k+" draws on only "+Object.keys(t).length+" topics");
+  });
+  console.log("  every lesson day draws on at least four different topics");
+}
+
 console.log("\n=== the brothers never get the same fact on the same day ===");
 { let clashes=0;
   for(let w=1;w<=36;w++) ["Mon","Tue","Wed","Thu","Fri"].forEach(d=>{
@@ -52,15 +71,15 @@ console.log("\n=== the brothers never get the same fact on the same day ===");
   if(clashes) fail.push(clashes+" days give both boys the same fact");
 }
 
-console.log("\n=== each boy still sees all twelve of each kind ===");
+console.log("\n=== each boy still sees all eighteen of each kind ===");
 ["y1","y2"].forEach(g=>{
   ["Mon","Tue","Wed","Thu","Fri"].forEach(d=>{
     const seen={};
     for(let w=1;w<=36;w++) seen[F.factFor(g,w,d).fact]=1;
-    if(Object.keys(seen).length!==12) fail.push(g+" "+d+" shows "+Object.keys(seen).length+" distinct facts, not 12");
+    if(Object.keys(seen).length!==18) fail.push(g+" "+d+" shows "+Object.keys(seen).length+" distinct facts, not 18");
   });
 });
-console.log("  12 distinct facts per weekday per grade over 36 weeks");
+console.log("  18 distinct facts per weekday per grade over 36 weeks");
 
 console.log("\n=== it is a reward: nothing until the day is finished ===");
 ["y1","y2"].forEach(g=>{
@@ -93,6 +112,7 @@ console.log("\n=== the banner binds it ===");
   const seg=src.slice(i, i+1400);
   if(seg.indexOf('{{ factText }}')<0) fail.push("the end-of-day banner does not bind the fact");
   if(seg.indexOf('{{ factTie }}')<0)  fail.push("the banner does not bind the tie back to the lesson");
+  if(seg.indexOf('{{ factTopic }}')<0) fail.push("the banner does not show the topic label");
   if(!/Pok/.test(seg)) fail.push("the fact block is not labelled");
   console.log("  fact and its tie both printed in the end-of-day banner");
 }

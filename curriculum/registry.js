@@ -15,7 +15,18 @@ const CURRICULA = {  y3:{id:"y3", label:"3rd Grade Math", sub:"Year One · Missi
  * is Week 1, which keeps every previously authored set working untouched. */
 const lessonFor = id => ALL_LESSONS[id] || LESSONS_WEEKLY[String(id).replace(/p\d+$/,"")];
 
-const ALL_LESSONS = Object.assign({}, LESSONS, LESSONS_U2, LESSONS_U3, LESSONS_U4, LESSONS_U5, LESSONS_U6, LESSONS_U7, LESSONS_U8,
+/* LESSONS_DAILY goes in FIRST so every hand-authored lesson that follows
+ * overwrites its generated stand-in. The generated ones are a floor: authoring
+ * a real lesson for any day simply wins. */
+/* Three tiers, weakest first so the stronger ones overwrite:
+ *   LESSONS_DAILY    generated floor — a title and three worked examples
+ *   LESSONS_AUTHORED real teaching, written a day at a time (growing)
+ *   LESSONS, LESSONS_U2...  the original per-day week-1 lessons
+ * Adding a day to the middle tier needs no other change. */
+const ALL_LESSONS = Object.assign({},
+  (window.__CURR&&window.__CURR.LESSONS_DAILY)||{},
+  (window.__CURR&&window.__CURR.LESSONS_AUTHORED)||{},
+  LESSONS, LESSONS_U2, LESSONS_U3, LESSONS_U4, LESSONS_U5, LESSONS_U6, LESSONS_U7, LESSONS_U8,
   LESSONS_Y5_U1, LESSONS_Y5_U2, LESSONS_Y5_U3, LESSONS_Y5_U4, LESSONS_Y5_U5, LESSONS_Y5_U6, LESSONS_Y5_U7, LESSONS_Y5_U8);
 
 // Year Two sets join the global lookup list once both years have loaded.
@@ -27,7 +38,7 @@ ALL_SETS.push(...ALL_SETS_Y5);
 window.Subjects.register({
   id: "math",
   name: "Adventures in Big Math",
-  tagline: "Missions · Practice Bay · Streak Runs",
+  tagline: "Missions · Today · Streak Runs",
   color: "#FF9F1C",
   glyph: "×",
   gradient: "linear-gradient(150deg,#FF9F1C,#F472B6)",

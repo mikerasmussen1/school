@@ -47,8 +47,8 @@
   const SECTIONS = [
     {key:"lesson",    name:"Lesson",    from:"today's concept, plus review concepts carried forward",
      tier:null, blurb:"What today is about."},
-    {key:"review",    name:"Review",    from:"the teacher-approved review queue",
-     tier:null, blurb:"Questions chosen from what you have missed before."},
+    {key:"review",    name:"Review",    from:"what you have missed, picked automatically each morning",
+     tier:null, blurb:"The things you got wrong before, back for another go."},
     {key:"sprint",    name:"Sprint",    from:"number facts below the current lesson",
      tier:null, blurb:"Fast and timed. Facts you already own."},
     {key:"warmup",    name:"Warm-Up",   from:"this day's own tier-0 questions",
@@ -98,6 +98,55 @@
   function coreOptional(counts, done){
     const c = counts || {}, d = done || {};
     return (c.challenge | 0) >= CHALLENGE_SKIP_MIN && !!d.challenge && !d.core;
+  }
+
+  /* REVIEW BUILDS ITSELF.
+   *
+   * Review used to require a teacher: the mill suggested, a grown-up approved,
+   * the approved questions queued, the queue served a few a morning. Two things
+   * were wrong with that. It put a daily adult step between a child and the
+   * work they most needed — miss the step and review simply stopped. And the
+   * queue had a hard cap of 24, which, once full, silently refused every new
+   * approval: the teacher pressed "add these 20" and nothing happened, with no
+   * message, because the refusal reason was discarded by the caller.
+   *
+   * So the approval is gone. Review is now assembled every morning from the
+   * same evidence the mill always used — what was missed and never corrected,
+   * newest first — and served straight to the child.
+   *
+   * WHAT IT WILL NOT DO:
+   *   - repeat a question already answered today (that is a re-test, not review)
+   *   - resurrect a question a teacher vouched away (their word still settles it)
+   *   - serve more than DAILY_REVIEW in one morning, however deep the backlog;
+   *     a wall of corrections is a punishment, and the backlog is not going
+   *     anywhere.
+   *
+   * Anything a teacher HAS explicitly queued is served first, so the manual
+   * route still works for anyone who wants it — it is just no longer required
+   * for review to happen at all.                                            */
+  const DAILY_REVIEW = 5;
+
+  function autoReview(suggestions, queued, answeredToday, cap){
+    const n = (cap == null ? DAILY_REVIEW : Math.max(0, cap | 0));
+    if(!n) return [];
+    const seen = {}, out = [];
+    const answered = answeredToday || {};
+
+    const take = list => {
+      (list || []).forEach(s => {
+        if(out.length >= n) return;
+        const qid = s && s.qid;
+        if(!qid || seen[qid] || answered[qid]) return;
+        seen[qid] = 1;
+        out.push(s);
+      });
+    };
+
+    // A teacher's explicit pick outranks the mill's — they know something it
+    // does not. Everything else is filled from the evidence.
+    take(queued);
+    take(suggestions);
+    return out;
   }
 
   /* WHICH SET IS TODAY.
@@ -236,7 +285,8 @@
   }
 
   window.__CURR = window.__CURR || {};
-  window.__CURR.MATH_DAY = {SECTIONS, KEYS, CHALLENGE_SKIP_MIN, resolveDay,
+  window.__CURR.MATH_DAY = {SECTIONS, KEYS, CHALLENGE_SKIP_MIN, DAILY_REVIEW,
+                            autoReview, resolveDay,
                             anchorIsRedundant, skippedBehind, coreOptional,
                             sectionsFor, nextSection, dayComplete, progress};
 })();

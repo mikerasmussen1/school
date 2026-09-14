@@ -37,7 +37,7 @@
  *    A child who answers six questions, closes the iPad and comes back must
  *    find the same six questions, not a fresh draw.
  *
- * Tiers keep their existing meaning, which is what the Practice Bay renders as
+ * Tiers keep their existing meaning, which is what Today renders as
  * sections: review lands in Warm-Up (tier 0), where recalling something you
  * already know belongs, and challenge lands in tier 2.
  *

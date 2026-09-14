@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=2026-09-14-1910"></script>
-  <script data-build>window.__BUILD__="2026-09-14-1910";</script>
-  <script src="./curriculum/freshness.js?v=2026-09-14-1910"></script>
+<script src="./support.js?v=2026-09-14-1949"></script>
+  <script data-build>window.__BUILD__="2026-09-14-1949";</script>
+  <script src="./curriculum/freshness.js?v=2026-09-14-1949"></script>
 </head>
 <body>
 <x-dc>
@@ -49,29 +49,29 @@
   .book-title{font-family:'Fraunces',serif;font-size:1rem;color:var(--brick-dark);margin:0 0 3px}
   .done-banner{text-align:center;padding:22px;margin-top:6px;background:var(--forest-light);border-radius:8px;color:#2E4E38}
 </style>
-<script src="./curriculum/sync.js?v=2026-09-14-1910"></script>
-<script src="./curriculum/students.js?v=2026-09-14-1910"></script>
-<script src="./curriculum/subjects.js?v=2026-09-14-1910"></script>
-<script src="./curriculum/question-types.js?v=2026-09-14-1910"></script>
-<script src="./curriculum/la-y1-spine.js?v=2026-09-14-1910"></script>
-<script src="./curriculum/la-y1-words.js?v=2026-09-14-1910"></script>
-<script src="./curriculum/la-y1-grammar.js?v=2026-09-14-1910"></script>
-<script src="./curriculum/la-y1-reading.js?v=2026-09-14-1910"></script>
-<script src="./curriculum/la-y1-tasks.js?v=2026-09-14-1910"></script>
-<script src="./curriculum/la-books.js?v=2026-09-14-1910"></script>
-<script src="./curriculum/la-y2-spine.js?v=2026-09-14-1910"></script>
-<script src="./curriculum/la-y2-words.js?v=2026-09-14-1910"></script>
-<script src="./curriculum/la-y2-grammar.js?v=2026-09-14-1910"></script>
-<script src="./curriculum/la-y2-reading.js?v=2026-09-14-1910"></script>
-<script src="./curriculum/la-y2-tasks.js?v=2026-09-14-1910"></script>
-<script src="./curriculum/la-books-y2.js?v=2026-09-14-1910"></script>
-<script src="./curriculum/la-quotes.js?v=2026-09-14-1910"></script>
-<script src="./curriculum/la-daily-fix.js?v=2026-09-14-1910"></script>
-<script src="./curriculum/la-skill-notes.js?v=2026-09-14-1910"></script>
-<script src="./curriculum/la-close-reading.js?v=2026-09-14-1910"></script>
-<script src="./curriculum/la-mastery.js?v=2026-09-14-1910"></script>
-<script src="./curriculum/la-calendar.js?v=2026-09-14-1910"></script>
-<script src="./curriculum/la-grader.js?v=2026-09-14-1910"></script>
+<script src="./curriculum/sync.js?v=2026-09-14-1949"></script>
+<script src="./curriculum/students.js?v=2026-09-14-1949"></script>
+<script src="./curriculum/subjects.js?v=2026-09-14-1949"></script>
+<script src="./curriculum/question-types.js?v=2026-09-14-1949"></script>
+<script src="./curriculum/la-y1-spine.js?v=2026-09-14-1949"></script>
+<script src="./curriculum/la-y1-words.js?v=2026-09-14-1949"></script>
+<script src="./curriculum/la-y1-grammar.js?v=2026-09-14-1949"></script>
+<script src="./curriculum/la-y1-reading.js?v=2026-09-14-1949"></script>
+<script src="./curriculum/la-y1-tasks.js?v=2026-09-14-1949"></script>
+<script src="./curriculum/la-books.js?v=2026-09-14-1949"></script>
+<script src="./curriculum/la-y2-spine.js?v=2026-09-14-1949"></script>
+<script src="./curriculum/la-y2-words.js?v=2026-09-14-1949"></script>
+<script src="./curriculum/la-y2-grammar.js?v=2026-09-14-1949"></script>
+<script src="./curriculum/la-y2-reading.js?v=2026-09-14-1949"></script>
+<script src="./curriculum/la-y2-tasks.js?v=2026-09-14-1949"></script>
+<script src="./curriculum/la-books-y2.js?v=2026-09-14-1949"></script>
+<script src="./curriculum/la-quotes.js?v=2026-09-14-1949"></script>
+<script src="./curriculum/la-daily-fix.js?v=2026-09-14-1949"></script>
+<script src="./curriculum/la-skill-notes.js?v=2026-09-14-1949"></script>
+<script src="./curriculum/la-close-reading.js?v=2026-09-14-1949"></script>
+<script src="./curriculum/la-mastery.js?v=2026-09-14-1949"></script>
+<script src="./curriculum/la-calendar.js?v=2026-09-14-1949"></script>
+<script src="./curriculum/la-grader.js?v=2026-09-14-1949"></script>
 </helmet>
 
 <div style="min-height:100vh;display:flex;flex-direction:column">
@@ -822,8 +822,20 @@
 
       <div class="card">
         <h2>Redo one day</h2>
-        <p class="muted">Clears just the day you are looking at — its ticks, its drill scores, and the mark you gave it. Everything else stays. Use the day buttons at the top to pick a different one.</p>
+        <p class="muted">Pick any day of the year and clear it — its ticks, its drill scores, and the mark you gave it. Everything else stays. It starts on the day being viewed, so the common case is one press.</p>
         <div class="box" style="margin-top:10px">
+          <div style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:5px">Week</div>
+          <div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:12px">
+            <sc-for list="{{ redoWeekItems }}" as="rw" hint-placeholder-count="36">
+              <button onClick="{{ rw.onClick }}" style="{{ rw.style }}">{{ rw.label }}</button>
+            </sc-for>
+          </div>
+          <div style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:5px">Day</div>
+          <div style="display:flex;gap:7px;flex-wrap:wrap;margin-bottom:14px">
+            <sc-for list="{{ redoDayItems }}" as="rd" hint-placeholder-count="5">
+              <button onClick="{{ rd.onClick }}" style="{{ rd.style }}">{{ rd.label }}</button>
+            </sc-for>
+          </div>
           <div style="font-family:'Fraunces',serif;font-size:1.02rem">{{ dayResetTarget }}</div>
           <div class="muted" style="font-size:.88rem">{{ dayResetState }}</div>
         </div>
@@ -1031,6 +1043,7 @@ class Component extends DCLogic {
     day:(function(){ try{ const d=localStorage.getItem("la.day"); if(d) return d; }catch(e){}
       return ["Mon","Mon","Tue","Wed","Thu","Fri","Fri"][new Date().getDay()]; })(),
     landed:false,           // has the opening jump-to-frontier happened yet
+    redoWeek:null, redoDay:null,   // which day the parent is redoing
     resetArmed:false,       // reset needs two presses
     dayResetArmed:false,    // and so does the single-day one
     openStep:null,          // which assignment is open inline on Today
@@ -1534,11 +1547,23 @@ class Component extends DCLogic {
    * step ticks, its drill scores, and the grown-up's mark if there was one.
    * Nothing else is touched, and it syncs like every other write so it holds
    * on the other devices too. */
+  /* Which day the parent is about to redo. Defaults to the one being viewed,
+   * but can be moved anywhere in the year without dragging the child's page
+   * there first — a parent fixing Tuesday of week 3 should not have to
+   * navigate Brock's screen to Tuesday of week 3 to do it. */
+  setRedoWeek=(n)=>this.setState({redoWeek:Math.min(36,Math.max(1,Number(n)||1))});
+  setRedoDay=(d)=>this.setState({redoDay:d});
+  redoTarget(){
+    const st=this.state;
+    return {week: st.redoWeek || st.week, day: st.redoDay || st.day};
+  }
+
   resetOneDay=()=>{
     const st=this.state;
     const M=window.__CURR.LA_MASTERY;
-    const plan=M.dayPlan(st.year, st.week, st.day);
-    const prefix=st.year+":"+st.week+":"+st.day+":";
+    const t=this.redoTarget();
+    const plan=M.dayPlan(st.year, t.week, t.day);
+    const prefix=st.year+":"+t.week+":"+t.day+":";
     const strip=(bag)=>{
       const out={};
       Object.keys(bag||{}).forEach(function(k){ if(k.indexOf(prefix)!==0) out[k]=bag[k]; });
@@ -2444,18 +2469,49 @@ class Component extends DCLogic {
       hasOverrides: Object.keys(st.overrides||{}).length>0,
       noOverrides: Object.keys(st.overrides||{}).length===0,
 
+      /* Week and day pickers, so any day of the year can be reached from here. */
+      redoWeekItems:(function(){
+        const t=self.redoTarget();
+        return Array.from({length:36},function(_,i){ return i+1; }).map(function(n){
+          const on=t.week===n;
+          return {label:String(n), onClick:function(){ self.setRedoWeek(n); },
+            style:"font-family:'JetBrains Mono',monospace;font-size:.78rem;padding:5px 9px;"+
+              "border-radius:6px;cursor:pointer;border:1px solid "+(on?"var(--brick)":"var(--rule)")+
+              ";background:"+(on?"var(--brick)":"transparent")+";color:"+(on?"#fff":"var(--ink)")};
+        });
+      })(),
+      redoDayItems:(function(){
+        const t=self.redoTarget();
+        return [["Mon","Monday"],["Tue","Tuesday"],["Wed","Wednesday"],["Thu","Thursday"],["Fri","Friday"]]
+          .map(function(d){
+            const on=t.day===d[0];
+            return {label:d[1], onClick:function(){ self.setRedoDay(d[0]); },
+              style:"font-family:'Public Sans',sans-serif;font-weight:600;font-size:.85rem;padding:7px 13px;"+
+                "border-radius:999px;cursor:pointer;border:1px solid "+(on?"var(--brick)":"var(--rule)")+
+                ";background:"+(on?"var(--brick)":"transparent")+";color:"+(on?"#fff":"var(--ink)")};
+          });
+      })(),
       dayResetTarget:(function(){
         const CAL=window.__CURR.LA_CALENDAR;
-        const idx=(st.week-1)*5+["Mon","Tue","Wed","Thu","Fri"].indexOf(st.day);
+        const t=self.redoTarget();
+        const idx=(t.week-1)*5+["Mon","Tue","Wed","Thu","Fri"].indexOf(t.day);
         const dt=CAL?CAL.dateForIndex(idx):null;
-        const name={Mon:"Monday",Tue:"Tuesday",Wed:"Wednesday",Thu:"Thursday",Fri:"Friday"}[st.day]||st.day;
-        return (dt?CAL.longDate(dt):name)+" \u00b7 week "+st.week+" \u00b7 "+
-               ((window.__CURR.STUDENTS&&window.__CURR.STUDENTS.levelLabel(st.year==="y2"?"y5":"y3"))||"");
+        const name={Mon:"Monday",Tue:"Tuesday",Wed:"Wednesday",Thu:"Thursday",Fri:"Friday"}[t.day]||t.day;
+        const who=(window.__CURR.STUDENTS&&window.__CURR.STUDENTS.levelLabel(st.year==="y2"?"y5":"y3"))||"";
+        /* The lesson day and the calendar date are two different things, and
+         * printing only the date made them look contradictory: week 20's
+         * THURSDAY lesson falls on Friday 5 February, because holidays remove
+         * school days and the Nth school day stops matching the Nth weekday
+         * after the first one. Early in the year they agree, so the fault only
+         * appears months in. Both are named now, and which is which. */
+        return name+" of week "+t.week+" \u00b7 "+who +
+               (dt ? ("  \u2014 falls on "+CAL.longDate(dt)) : "");
       })(),
       dayResetState:(function(){
         const M=window.__CURR.LA_MASTERY;
-        const plan=M.dayPlan(st.year, st.week, st.day);
-        const pre=st.year+":"+st.week+":"+st.day+":";
+        const t=self.redoTarget();
+        const plan=M.dayPlan(st.year, t.week, t.day);
+        const pre=st.year+":"+t.week+":"+t.day+":";
         const ticks=Object.keys(st.stepDone||{}).filter(function(k){ return k.indexOf(pre)===0; }).length;
         const scores=Object.keys(st.stepResult||{}).filter(function(k){ return k.indexOf(pre)===0; }).length;
         const marks=Object.keys(st.approvals||{}).filter(function(k){ return k.indexOf(pre)===0; }).length;
@@ -2466,8 +2522,9 @@ class Component extends DCLogic {
       })(),
       dayResetLabel:"Redo this day",
       dayResetConfirm:(function(){
-        const name={Mon:"Monday",Tue:"Tuesday",Wed:"Wednesday",Thu:"Thursday",Fri:"Friday"}[st.day]||st.day;
-        return "Clear "+name+" of week "+st.week+" and start it again?";
+        const t=self.redoTarget();
+        const name={Mon:"Monday",Tue:"Tuesday",Wed:"Wednesday",Thu:"Thursday",Fri:"Friday"}[t.day]||t.day;
+        return "Clear "+name+" of week "+t.week+" and start it again?";
       })(),
       dayResetIdle: !st.dayResetArmed,
       dayResetArmed: !!st.dayResetArmed,

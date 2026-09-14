@@ -117,6 +117,19 @@
         const w = parseInt(p[1], 10);
         if(w > 0) seen[w] = true;
       });
+      /* A graded check is evidence too. Without this, a week whose only record
+       * is a drill scored on a day that was never closed out returns null from
+       * here — and null is not one empty cell, it is the whole panel missing.
+       * The child did the work, the score is sitting in the record, and the
+       * screen that exists to show it does not appear. */
+      Object.keys(result).forEach(function(k){
+        const p = String(k).split(":");
+        const r = result[k];
+        if(p[0] !== year || p.length !== 4) return;
+        if(!r || typeof r.score !== "number" || !(r.total > 0)) return;
+        const w = parseInt(p[1], 10);
+        if(w > 0) seen[w] = true;
+      });
 
       const weeks = Object.keys(seen).map(Number).sort(function(a,b){ return b-a; });
       if(!weeks.length) return null;

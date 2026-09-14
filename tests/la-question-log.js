@@ -477,6 +477,27 @@ console.log("Teacher HQ turns the log into rows");
     ok(fx && fx.noDetail === false, "and it is the detailed record that survives");
     ok(fx && (fx.rows||[]).length === 1, "with its question in it");
 
+    /* A week whose ONLY evidence is a scored drill on a day that was never
+     * closed out. `seen` decides whether the panel exists at all, so getting
+     * this wrong loses the whole week, not one square. */
+    const scoredOnly = {
+      laLog: {}, stepDone: {}, excused: {},
+      stepResult: {"y1:4:Wed:gz": {score:3, total:5, at:2000}},
+      week: 4, year: "y1"
+    };
+    const sg = la.weekGlance(scoredOnly, {week:4});
+    ok(!!sg, "a week evidenced only by a score still draws its panel");
+    if(sg){
+      const sc = ((sg.columns||[])[0]||{}).cells||[];
+      ok(sc[2] && sc[2].id === "y1:4:Wed",
+         "with that day clickable (" + ((sc[2]||{}).id||"none") + ")");
+      ok(sc.every(c => c.status !== "red"),
+         "and nothing turned red on the strength of a score alone");
+      const openScored = app2.pickedDayVals(la, scoredOnly, null, "y1:4:Wed");
+      ok(openScored.pickedDrills.length === 1, "opening it shows the drill");
+      ok(openScored.pickedDrills[0].score === "3 of 5 correct", "with its score");
+    }
+
     ok(/\{\{ c\.pick \}\}/.test(page), "the template wires the click");
     ok(/\{\{ p\.pickedDrills \}\}/.test(page), "and draws the opened day");
     ok(/\{\{ d\.noDetailNote \}\}/.test(page), "and prints the no-detail note");

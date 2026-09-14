@@ -1128,7 +1128,11 @@ class Component extends DCLogic {
           const byQ={};
           const put=e=>{
             if(!e) return;
-            const id=e.qid || ("q:"+e.q+" "+e.a);
+            /* Falling back to the text, the question and the answer are joined
+             * by a separator that cannot occur inside either — written as an
+             * escape so the file stays plain text and grep keeps working on it
+             * (a raw NUL byte landed here once and silently broke both). */
+            const id=e.qid || ("q:"+e.q+"\u0000"+e.a);
             const had=byQ[id];
             if(!had || (e.ts||0) >= (had.ts||0)) byQ[id]=e;
           };

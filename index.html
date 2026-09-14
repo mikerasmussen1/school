@@ -32,6 +32,7 @@
 <script src="./curriculum/math-y2.js?v=2026-09-14-0120"></script>
 <script src="./curriculum/extra-banks.js?v=2026-09-14-0120"></script>
 <script src="./curriculum/math-sequence.js?v=2026-09-14-0120"></script>
+<script src="./curriculum/math-day.js?v=2026-09-14-0120"></script>
 <script src="./curriculum/week-glance.js?v=2026-09-14-0120"></script>
 <script src="./curriculum/mix.js?v=2026-09-14-0120"></script>
 <script src="./curriculum/registry.js?v=2026-09-14-0120"></script>
@@ -343,6 +344,60 @@
   </sc-if>
 
   <!-- ============ MISSION MAP ============ -->
+  <!-- ══ TODAY ═══════════════════════════════════════════════════════════
+       One screen, seven sections, in the order a child meets them. This
+       replaces "mission, then week, then set, then tier" as the way into
+       maths: the app decides which day it is (curriculum/math-day.js) and
+       the child either works down the list or moves a day with the arrows.
+       The order and the completion rules are the module's, not this page's. -->
+  <sc-if value="{{ isDay }}" hint-placeholder-val="{{ true }}">
+  <main style="position:relative;padding:34px var(--gutter) 72px">
+    <div style="max-width:700px;margin:0 auto">
+
+      <div style="display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--amber)">Today</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.1em;color:rgba(var(--ink-rgb),.45)">{{ dayPinNote }}</div>
+      </div>
+
+      <h1 style="font-family:Fredoka,sans-serif;font-weight:600;font-size:40px;line-height:1.05;margin:8px 0 4px;letter-spacing:-.4px">{{ dayName }}</h1>
+      <p style="margin:0 0 4px;font-size:16px;line-height:1.5;color:rgba(var(--ink-rgb),.72)">{{ dayTitle }}</p>
+
+      <!-- The one line that answers "am I finished?" without reading the list. -->
+      <div style="display:flex;align-items:center;gap:12px;margin:18px 0 22px;padding:13px 17px;border-radius:13px;background:rgba(var(--line-rgb),.05);border:1px solid rgba(var(--line-rgb),.12)">
+        <div style="font-family:Fredoka,sans-serif;font-size:20px;color:var(--sky);line-height:1">{{ dayProgress }}</div>
+        <div style="font-size:13.5px;color:rgba(var(--ink-rgb),.7)">{{ dayNote }}</div>
+      </div>
+
+      <sc-for list="{{ daySections }}" as="s" hint-placeholder-count="7">
+        <button onClick="{{ s.go }}" style="{{ s.rowStyle }}" style-hover="transform:translateX(3px)">
+          <div>
+            <div style="font-family:Fredoka,sans-serif;font-size:17px;color:{{ s.tone }};line-height:1.2">{{ s.name }}</div>
+            <div style="font-size:12.5px;line-height:1.45;color:rgba(var(--ink-rgb),.6);margin-top:3px">{{ s.blurb }}</div>
+          </div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.08em;color:rgba(var(--ink-rgb),.45);white-space:nowrap">{{ s.countLabel }}</div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:{{ s.tone }};white-space:nowrap">{{ s.action }}</div>
+        </button>
+      </sc-for>
+
+      <!-- Moving day to day, and saying which day is actually today. The pin
+           never rewrites the record of what was answered; it only changes
+           where the counting starts. -->
+      <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:26px;padding-top:20px;border-top:1px dashed rgba(var(--line-rgb),.16)">
+        <button onClick="{{ dayPrev }}" style="{{ dayPrevStyle }}">&#8592; {{ dayPrevLabel }}</button>
+        <button onClick="{{ dayNext }}" style="{{ dayNextStyle }}">{{ dayNextLabel }} &#8594;</button>
+        <div style="flex:1"></div>
+        <button onClick="{{ dayPinHere }}" style="font-family:Fredoka,sans-serif;font-size:13.5px;padding:9px 15px;border-radius:11px;cursor:pointer;background:rgba(56,189,248,.14);border:1px solid rgba(56,189,248,.5);color:var(--sky)">This is my day for today</button>
+        <button onClick="{{ dayClearPin }}" style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:9px 13px;border-radius:11px;cursor:pointer;background:transparent;border:1px solid rgba(var(--line-rgb),.16);color:rgba(var(--ink-rgb),.5)">Clear</button>
+      </div>
+
+      <div style="margin-top:14px">
+        <button onClick="{{ dayOpenMap }}" style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;padding:8px 0;background:transparent;border:none;cursor:pointer;color:rgba(var(--ink-rgb),.45)">Browse all missions &#8594;</button>
+      </div>
+
+    </div>
+  </main>
+  </sc-if>
+
   <sc-if value="{{ isMap }}" hint-placeholder-val="{{ true }}">
   <main style="position:relative;padding:34px var(--gutter) 72px">
 
@@ -3800,7 +3855,7 @@ class Component extends DCLogic {
            dyn:{}, coach:null, dynBusy:false, dynErr:"",
            hqWho:null, hqUnit:null, hqWeek:null, hqSet:null, hqTier:null,
            hqSlices:{}, hqLoadingRoster:false,
-           pHist:{}, skills:{}, snooze:{}, pFull:{}, pweek:1, pStreak:{}, sprintHist:{}, review:[], vouch:{}, reviewAns:{}, reviewMarks:{}, wgSel:{}, stream:null, sprint:null,
+           pHist:{}, skills:{}, snooze:{}, pFull:{}, pweek:1, mathAnchor:null, pStreak:{}, sprintHist:{}, review:[], vouch:{}, reviewAns:{}, reviewMarks:{}, wgSel:{}, stream:null, sprint:null,
            tCode:"", tRoster:null, tKey:null, tSel:"", tData:null, tBusy:false, tErr:"",
            tAddName:"", tAddPin:"", tFront:false, tView:null, tFromGate:false,
            tSubject:"all", pickGrade:false,
@@ -4081,7 +4136,12 @@ class Component extends DCLogic {
       const href=s.open.href+(lv?((s.open.href.indexOf("?")<0?"?":"&")+"level="+encodeURIComponent(lv)):"");
       setTimeout(()=>{ window.location.href=href; },80); return;
     }
-    if(s.open==="builtin"){ this.nav({view:"map",subjectView:null}); return; }
+    if(s.open==="builtin"){
+      /* The day view is the front door, but it cannot draw without its module.
+       * If math-day.js failed to load, fall back to the Mission Map — the way
+       * in before this rework — rather than showing a blank page. */
+      const hasDay=!!((window.__CURR||{}).MATH_DAY);
+      this.nav({view:hasDay?"day":"map",subjectView:null}); return; }
     this.nav({view:"stub",subjectView:id});
   };
   /* BACK MEANS THE SCREEN YOU CAME FROM, not the top of the app.
@@ -4131,7 +4191,7 @@ class Component extends DCLogic {
     if(active){ this.setState({profiles,activeId,gate:false,loaded:true,...this.blank(),...Component.unpackMath(this.store.data[activeId]||{})}); }
     else{ this.setState({profiles,gate:true,loaded:true}); }
   }
-  blank(){ return {pAns:{},pChecked:{},pRuns:{},pPaper:{},lstep:{},pHist:{},pLog:{},dyn:{},coach:null,skills:{},snooze:{},pStreak:{},sprintHist:{},review:[],vouch:{},reviewAns:{},reviewMarks:{},wgSel:{},subjects:{},lastSubject:null,stream:null,sprint:null,pTier:null,pset:"p1"}; }
+  blank(){ return {mathAnchor:null,pAns:{},pChecked:{},pRuns:{},pPaper:{},lstep:{},pHist:{},pLog:{},dyn:{},coach:null,skills:{},snooze:{},pStreak:{},sprintHist:{},review:[],vouch:{},reviewAns:{},reviewMarks:{},wgSel:{},subjects:{},lastSubject:null,stream:null,sprint:null,pTier:null,pset:"p1"}; }
 
   /* MATHS' PROGRESS, AND WHERE IT LIVES
    *
@@ -4165,7 +4225,8 @@ class Component extends DCLogic {
    * written both ways, against a 1 MB document limit. Roughly a fifth of the
    * budget, so duplication is not what would break it. */
   static MATH_BAGS = ["pAns","pChecked","pRuns","lstep","pHist","skills","snooze",
-                      "pLog","dyn","pPaper","pStreak","sprintHist","review","vouch"];
+                      "pLog","dyn","pPaper","pStreak","sprintHist","review","vouch",
+                      "mathAnchor"];
 
   static packMath(flat){
     const f = flat || {};
@@ -4221,7 +4282,7 @@ class Component extends DCLogic {
     this.store.profiles=profiles; this.store.activeId=activeId;
     const keepCurric=(this.store.data[activeId]||{}).curriculum
       || ((profiles.find(p=>p.id===activeId)||{}).curriculum);
-    if(activeId) this.store.data[activeId]=Component.packMath({pAns,pChecked,pRuns,lstep,pHist,skills,snooze,pLog:this.state.pLog,dyn:this.trimDyn(this.state.dyn),pPaper:this.state.pPaper,pStreak:this.state.pStreak,sprintHist:this.state.sprintHist,review:this.state.review,vouch:this.state.vouch,subjects:this.state.subjects,lastSubject:this.state.lastSubject,curriculum:keepCurric,updated:Date.now()});
+    if(activeId) this.store.data[activeId]=Component.packMath({pAns,pChecked,pRuns,lstep,pHist,skills,snooze,pLog:this.state.pLog,dyn:this.trimDyn(this.state.dyn),pPaper:this.state.pPaper,pStreak:this.state.pStreak,sprintHist:this.state.sprintHist,review:this.state.review,vouch:this.state.vouch,mathAnchor:this.state.mathAnchor||null,subjects:this.state.subjects,lastSubject:this.state.lastSubject,curriculum:keepCurric,updated:Date.now()});
     Storage.save(this.store); // local first — survives dropped wifi
     if(Remote.enabled && activeId){
       const prof=profiles.find(x=>x.id===activeId);
@@ -7233,7 +7294,7 @@ class Component extends DCLogic {
       // Name the destination so the button says where it goes, not just "back".
       backLabel:(()=>{
         const prev=(st.navStack||[])[(st.navStack||[]).length-1];
-        const NAMES={today:"All subjects", map:"Mission Map", unit:"Mission 0"+st.uview,
+        const NAMES={today:"All subjects", day:"Today", map:"Mission Map", unit:"Mission 0"+st.uview,
                      practice:"Practice Bay", coach:"Coach", hq:"Teacher HQ", stub:"Subject"};
         if(!prev) return "All subjects";
         return NAMES[prev.view] || "Back";
@@ -7378,6 +7439,160 @@ class Component extends DCLogic {
     else if(st.view==="stub"&&cur) out.courseLine=cur.name+" · "+cur.tagline;
     return out;
   }
+
+  /* THE DAY — maths' answer to "what do I do now".
+   *
+   * Word Voyagers opens on the day. Maths opened on a browser — mission, then
+   * week, then set, then tier — with the child left to work out where they had
+   * got to. This is the other half of that: one screen, seven sections in a
+   * fixed order, and a header that says whether the day is finished.
+   *
+   * The ORDER and the COMPLETION RULES are not decided here. They live in
+   * curriculum/math-day.js, which is pure and tested. This method only reads
+   * the stores the counts come from and hands them over — anything about what
+   * a day IS belongs in the module, not in the view.                        */
+  dayVals(){
+    const st=this.state;
+    const D=(window.__CURR||{}).MATH_DAY, G=(window.__CURR||{}).WeekGlance;
+    const SEQ=(window.__CURR||{}).MATH_SEQ;
+    if(!D||!SEQ) return {isDay:false, daySections:[], dayHasSet:false};
+
+    /* allSetsForCurriculum already walks the eight missions in order; this
+     * used to keep its own copy of that loop for no reason. */
+    const sets=this.allSetsForCurriculum()||[];
+    const anchor=st.mathAnchor||null;
+    const r=D.resolveDay(sets, st.pChecked||{}, anchor);
+    const set=r.set ? (sets.find(s=>s.id===r.set.id)||null) : null;
+    const id=set?set.id:null;
+    const items=(set&&set.items)||[];
+
+    /* ---- counts: one source each ------------------------------------- */
+    const steps=(id&&(lessonFor(id)||{}).steps)||[];
+    const tierCount=t=>items.filter(x=>x.t===t).length;
+
+    /* REVIEW is its own block now. It used to be served INTO the sprint and
+     * the warm-up, so one question could appear twice under two names. */
+    let servedLen=0, dueTotal=0;
+    try{
+      const q=st.review||[];
+      dueTotal=G?G.due(q).length:0;
+      if(G){ const s=G.serve(q, dayNo(), null, this.sprintFit&&this.sprintFit());
+             servedLen=((s&&s.sprint)||[]).length+((s&&s.warmup)||[]).length; }
+    }catch(e){ servedLen=0; }
+
+    const sprintDone=!!((st.sprintHist||{})[dayNo()]);
+    const checked=k=>!!((st.pChecked||{})[id+"|"+k]||(st.pChecked||{})[id+"|all"]);
+    const rounds=(((st.dyn||{})[id])||{}).rounds||[];
+
+    const counts={
+      lesson:    steps.length?1:0,
+      // servedLen 0 with a non-empty queue means today's share is answered.
+      review:    servedLen>0?servedLen:(dueTotal>0?1:0),
+      sprint:    set?1:0,
+      warmup:    tierCount(0),
+      challenge: tierCount(2),
+      core:      tierCount(1),
+      bonus:     rounds.length
+    };
+    const done={
+      lesson:    steps.length>0 && ((st.lstep||{})[id]||0)>=steps.length-1,
+      review:    dueTotal>0 && servedLen===0,
+      sprint:    sprintDone,
+      warmup:    checked(0),
+      challenge: checked(2),
+      core:      checked(1),
+      // Bonus is generated FROM the work, so it cannot open before any of it.
+      bonusUnlocked: checked(0)||checked(1)||checked(2)
+    };
+
+    const sections=D.sectionsFor(counts, done);
+    const prog=D.progress(sections);
+    const next=D.nextSection(sections);
+    const skipped=anchor?D.skippedBehind(sets, st.pChecked||{}, anchor):0;
+
+    const TONE={ready:"var(--sky)", done:"var(--green)", optional:"var(--amber)",
+                empty:"rgba(var(--ink-rgb),.30)", locked:"rgba(var(--ink-rgb),.30)"};
+    const WORD={ready:"Start", done:"Done", optional:"Optional",
+                empty:"Nothing today", locked:"After the work above"};
+
+    /* ---- moving day to day ------------------------------------------- */
+    const ord=SEQ.orderedIds(sets);
+    const at=id?ord.findIndex(x=>x.id===id):-1;
+    const step=n=>{ const i=at+n; return (at<0||i<0||i>=ord.length)?null:ord[i]; };
+    const prev=step(-1), nxt=step(1);
+    const goTo=sid=>this.saveState(()=>({mathAnchor:sid}));
+
+    return {
+      isDay:st.view==="day",
+      dayHasSet:!!set,
+      dayCourseDone:!!r.complete,
+      dayDone:prog.complete,
+      /* A finished course is a state every successful child reaches. Binding
+       * an empty string here left a blank headline under a "Next up: Sprint"
+       * line that was no longer true — a broken-looking page as the reward for
+       * finishing the year. */
+      dayName:set?((r.set&&r.set.fullLabel)||set.label||set.id)
+              :(r.complete?"Every day is finished.":"No day to open."),
+      dayTitle:set?(set.title||"")
+               :(r.complete
+                 ?(anchor?"Everything from the day you set onward is done. Clear the pin to look further back."
+                         :"You have finished the whole course.")
+                 :"There is nothing in this course yet."),
+      dayProgress:prog.done+" of "+prog.total,
+      dayNote:!set
+        ? (r.complete?"Nothing left to do here.":"")
+        : prog.complete
+          ? (prog.extra?"Finished. Optional work is still open below.":"Finished for today.")
+          : (next?("Next up: "+next.name):"Nothing left to open."),
+      dayPinned:r.source==="anchor",
+      dayPinNote:r.source==="anchor"
+        ? ("Counting from a day you set."+(skipped?" "+skipped+" earlier day"+(skipped===1?"":"s")+" skipped.":""))
+        : "Following your own progress.",
+      daySections:sections.map(s=>({
+        key:s.key, name:s.name, blurb:s.note||s.blurb,
+        countLabel:s.key==="sprint"?"timed"
+          :(s.count?(s.count+(s.key==="lesson"?(" part"+(s.count===1?"":"s")):" q")):"—"),
+        tone:TONE[s.state]||TONE.empty,
+        action:WORD[s.state]||"",
+        rowStyle:"display:grid;grid-template-columns:1fr auto auto;gap:14px;align-items:center;"
+          +"width:100%;text-align:left;padding:15px 18px;border-radius:14px;margin-bottom:10px;cursor:"
+          +((s.state==="empty"||s.state==="locked")?"default":"pointer")
+          +";border:1px solid "+(s.state==="ready"?"rgba(56,189,248,.45)":"rgba(var(--line-rgb),.14)")
+          +";background:"+(s.state==="ready"?"rgba(56,189,248,.07)":"rgba(var(--line-rgb),.04)")
+          +((s.state==="empty"||s.state==="locked")?";opacity:.45":""),
+        go:()=>{ if(s.state==="empty"||s.state==="locked") return; this.openDaySection(s.key, id); }
+      })),
+      dayPrevLabel:prev?prev.fullLabel:"Start of the course",
+      dayNextLabel:nxt?nxt.fullLabel:"End of the course",
+      /* At either end there is nowhere to go. The click is already a no-op;
+       * this stops the button LOOKING live while doing nothing. */
+      dayPrevStyle:"font-family:Fredoka,sans-serif;font-size:13.5px;padding:9px 15px;border-radius:11px;"
+        +(prev?"cursor:pointer;opacity:1;":"cursor:default;opacity:.35;")
+        +"background:rgba(var(--line-rgb),.05);border:1px solid rgba(var(--line-rgb),.16);color:rgba(var(--ink-rgb),.72)",
+      dayNextStyle:"font-family:Fredoka,sans-serif;font-size:13.5px;padding:9px 15px;border-radius:11px;"
+        +(nxt?"cursor:pointer;opacity:1;":"cursor:default;opacity:.35;")
+        +"background:rgba(var(--line-rgb),.05);border:1px solid rgba(var(--line-rgb),.16);color:rgba(var(--ink-rgb),.72)",
+      dayCanPrev:!!prev, dayCanNext:!!nxt,
+      dayPrev:()=>{ if(prev) goTo(prev.id); },
+      dayNext:()=>{ if(nxt) goTo(nxt.id); },
+      dayPinHere:()=>{ if(id) goTo(id); },
+      dayClearPin:()=>this.saveState(()=>({mathAnchor:null})),
+      dayOpenMap:()=>this.nav({view:"map"})
+    };
+  }
+
+  /* Open one section of the day. Each already has a home in the app; the day
+   * view is a front door to them, not a reimplementation of them. */
+  openDaySection=(key,setId)=>{
+    if(!setId) return;
+    const TIER={warmup:0, core:1, challenge:2};
+    if(TIER[key]!=null){ this.nav({view:"practice", pset:setId, pTier:TIER[key]}); return; }
+    /* lesson / review / sprint / bonus all live on the practice page, which
+     * renders them unconditionally — so opening it IS opening them. A key was
+     * passed here to scroll to the right one; nothing read it, so it is not
+     * pretended at. */
+    this.nav({view:"practice", pset:setId, pTier:null});
+  };
 
   renderVals(){
     const st=this.state;
@@ -8020,6 +8235,7 @@ class Component extends DCLogic {
       ...this.teacherVals(),
       ...this.profileVals(),
       ...this.subjectVals(),
+      ...this.dayVals(),
       showStandards:this.props.showStandards ?? true,
       goPractice:this.goPracticeHere,
 

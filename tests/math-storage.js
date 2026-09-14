@@ -142,6 +142,25 @@ console.log("\n=== the component hydrates a migrated record ===");
       JSON.stringify(back.pChecked).includes("live-pChecked"));
 }
 
+/* THE GAP THAT ROUND-TRIPPING CANNOT SEE.
+ *
+ * packMath/unpackMath are symmetrical, so every bag above passes whether or
+ * not anything ever WRITES it. persist() builds its argument to packMath by
+ * hand, one key at a time, so a bag can be declared, round-trip perfectly, and
+ * still never reach storage. mathAnchor shipped exactly that way: declared in
+ * state and in blank(), absent from persist(), so the "this is my day" pin
+ * silently reset on every reload. This asserts the hand-built object keeps up
+ * with the declared list — for every bag, not just that one. */
+console.log("\n=== persist() actually writes every declared bag ===");
+{
+  const page = require("fs").readFileSync(__dirname + "/../index.html", "utf8");
+  const i = page.indexOf("  persist(){");
+  const body = page.slice(i, page.indexOf("Storage.save(this.store)", i));
+  const missing = BAGS.filter(b => body.indexOf(b + ":") < 0 && body.indexOf(b + ",") < 0);
+  has("persist() carries all " + BAGS.length + " bags"
+      + (missing.length ? " — MISSING " + missing.join(", ") : ""), missing.length === 0);
+}
+
 console.log("");
 if(fail.length){
   console.log("FAILED "+fail.length+":");

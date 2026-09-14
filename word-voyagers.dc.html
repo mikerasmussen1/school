@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=2026-09-14-2049"></script>
-  <script data-build>window.__BUILD__="2026-09-14-2049";</script>
-  <script src="./curriculum/freshness.js?v=2026-09-14-2049"></script>
+<script src="./support.js?v=2026-09-14-2201"></script>
+  <script data-build>window.__BUILD__="2026-09-14-2201";</script>
+  <script src="./curriculum/freshness.js?v=2026-09-14-2201"></script>
 </head>
 <body>
 <x-dc>
@@ -49,30 +49,30 @@
   .book-title{font-family:'Fraunces',serif;font-size:1rem;color:var(--brick-dark);margin:0 0 3px}
   .done-banner{text-align:center;padding:22px;margin-top:6px;background:var(--forest-light);border-radius:8px;color:#2E4E38}
 </style>
-<script src="./curriculum/sync.js?v=2026-09-14-2049"></script>
-<script src="./curriculum/students.js?v=2026-09-14-2049"></script>
-<script src="./curriculum/subjects.js?v=2026-09-14-2049"></script>
-<script src="./curriculum/question-types.js?v=2026-09-14-2049"></script>
-<script src="./curriculum/la-y1-spine.js?v=2026-09-14-2049"></script>
-<script src="./curriculum/la-y1-words.js?v=2026-09-14-2049"></script>
-<script src="./curriculum/la-y1-grammar.js?v=2026-09-14-2049"></script>
-<script src="./curriculum/la-y1-reading.js?v=2026-09-14-2049"></script>
-<script src="./curriculum/la-y1-tasks.js?v=2026-09-14-2049"></script>
-<script src="./curriculum/la-books.js?v=2026-09-14-2049"></script>
-<script src="./curriculum/la-y2-spine.js?v=2026-09-14-2049"></script>
-<script src="./curriculum/la-y2-words.js?v=2026-09-14-2049"></script>
-<script src="./curriculum/la-y2-grammar.js?v=2026-09-14-2049"></script>
-<script src="./curriculum/la-y2-reading.js?v=2026-09-14-2049"></script>
-<script src="./curriculum/la-y2-tasks.js?v=2026-09-14-2049"></script>
-<script src="./curriculum/la-books-y2.js?v=2026-09-14-2049"></script>
-<script src="./curriculum/la-quotes.js?v=2026-09-14-2049"></script>
-<script src="./curriculum/la-daily-fix.js?v=2026-09-14-2049"></script>
-<script src="./curriculum/la-skill-notes.js?v=2026-09-14-2049"></script>
-<script src="./curriculum/la-facts.js?v=2026-09-14-2049"></script>
-<script src="./curriculum/la-close-reading.js?v=2026-09-14-2049"></script>
-<script src="./curriculum/la-mastery.js?v=2026-09-14-2049"></script>
-<script src="./curriculum/la-calendar.js?v=2026-09-14-2049"></script>
-<script src="./curriculum/la-grader.js?v=2026-09-14-2049"></script>
+<script src="./curriculum/sync.js?v=2026-09-14-2201"></script>
+<script src="./curriculum/students.js?v=2026-09-14-2201"></script>
+<script src="./curriculum/subjects.js?v=2026-09-14-2201"></script>
+<script src="./curriculum/question-types.js?v=2026-09-14-2201"></script>
+<script src="./curriculum/la-y1-spine.js?v=2026-09-14-2201"></script>
+<script src="./curriculum/la-y1-words.js?v=2026-09-14-2201"></script>
+<script src="./curriculum/la-y1-grammar.js?v=2026-09-14-2201"></script>
+<script src="./curriculum/la-y1-reading.js?v=2026-09-14-2201"></script>
+<script src="./curriculum/la-y1-tasks.js?v=2026-09-14-2201"></script>
+<script src="./curriculum/la-books.js?v=2026-09-14-2201"></script>
+<script src="./curriculum/la-y2-spine.js?v=2026-09-14-2201"></script>
+<script src="./curriculum/la-y2-words.js?v=2026-09-14-2201"></script>
+<script src="./curriculum/la-y2-grammar.js?v=2026-09-14-2201"></script>
+<script src="./curriculum/la-y2-reading.js?v=2026-09-14-2201"></script>
+<script src="./curriculum/la-y2-tasks.js?v=2026-09-14-2201"></script>
+<script src="./curriculum/la-books-y2.js?v=2026-09-14-2201"></script>
+<script src="./curriculum/la-quotes.js?v=2026-09-14-2201"></script>
+<script src="./curriculum/la-daily-fix.js?v=2026-09-14-2201"></script>
+<script src="./curriculum/la-skill-notes.js?v=2026-09-14-2201"></script>
+<script src="./curriculum/la-facts.js?v=2026-09-14-2201"></script>
+<script src="./curriculum/la-close-reading.js?v=2026-09-14-2201"></script>
+<script src="./curriculum/la-mastery.js?v=2026-09-14-2201"></script>
+<script src="./curriculum/la-calendar.js?v=2026-09-14-2201"></script>
+<script src="./curriculum/la-grader.js?v=2026-09-14-2201"></script>
 </helmet>
 
 <div style="min-height:100vh;display:flex;flex-direction:column">
@@ -508,6 +508,16 @@
               </div>
               <div style="font-size:1.02rem;line-height:1.6">{{ factText }}</div>
               <div class="muted" style="margin-top:8px;font-size:.88rem">{{ factTie }}</div>
+            </div>
+            <div class="box" style="text-align:left;margin-bottom:14px;border-left:4px solid var(--forest)">
+              <div style="font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:5px">And a joke</div>
+              <div style="font-size:1.02rem;line-height:1.6">{{ jokeSetup }}</div>
+              <sc-if value="{{ jokeHidden }}" hint-placeholder-val="{{ true }}">
+                <div style="margin-top:10px"><button onClick="{{ jokeReveal }}" style="{{ btnSecondary }}">Tell me</button></div>
+              </sc-if>
+              <sc-if value="{{ jokeShown }}" hint-placeholder-val="{{ false }}">
+                <div style="margin-top:8px;font-family:'Fraunces',serif;font-size:1.08rem;color:var(--forest)">{{ jokePunchline }}</div>
+              </sc-if>
             </div>
             <button onClick="{{ goNextDay }}" style="{{ btnPrimary }}">{{ nextDayLabel }}</button>
           </div>
@@ -1114,7 +1124,7 @@ class Component extends DCLogic {
      * each entry one attempt. Written the moment a question is answered, not
      * when the drill ends. */
     laLog:(function(){ try{ return JSON.parse(localStorage.getItem("la.laLog")||"{}"); }catch(e){ return {}; } })(),
-    fx:null, gz:null, sq:null, rq:null, rv:null,
+    fx:null, gz:null, sq:null, rq:null, rv:null, jokeOpen:false,
     asKind:"handwriting", asImage:null, asStatus:"idle", asResult:null, asError:""
   };
 
@@ -1630,7 +1640,7 @@ class Component extends DCLogic {
      * with — punished for the reset. */
     this.setState({stepDone, closedAt:closedAtS, stuck, stepResult, approvals, laLog,
       started:false, openStep:null, dayResetArmed:false,
-      fx:null, gz:null, sq:null, rq:null, rv:null, remediation:null, round:1, lastResult:null});
+      fx:null, gz:null, sq:null, rq:null, rv:null, jokeOpen:false, remediation:null, round:1, lastResult:null});
     this.syncSave({stepDone, closedAt:closedAtS, stuck, stepResult, approvals, laLog});
     window.scrollTo(0,0);
   };
@@ -1649,7 +1659,7 @@ class Component extends DCLogic {
     const empty={stepDone:{}, stuck:{}, stepResult:{}, approvals:{}, overrides:{}, done:{}, excused:{}, week:1, day:"Mon",
                  unitSeen:{}, unitJustDone:null, laLog:{}};
     this.setState({...empty, resetArmed:false, started:false, openStep:null,
-                   fx:null, gz:null, sq:null, rq:null, rv:null, remediation:null, round:1, lastResult:null});
+                   fx:null, gz:null, sq:null, rq:null, rv:null, jokeOpen:false, remediation:null, round:1, lastResult:null});
     const SY=window.__CURR&&window.__CURR.SYNC;
     if(SY){
       // Push the cleared state up, and only reload once it has landed, so the
@@ -1800,7 +1810,7 @@ class Component extends DCLogic {
   setDay=(d)=>{
     try{ localStorage.setItem("la.day", d); }catch(e){}
     this.setState({day:d, started:false, round:1, lastResult:null, remediation:null,
-      fx:null, gz:null, sq:null, rq:null, rv:null, asImage:null, asStatus:"idle", asResult:null, asError:""});
+      fx:null, gz:null, sq:null, rq:null, rv:null, jokeOpen:false, asImage:null, asStatus:"idle", asResult:null, asError:""});
     window.scrollTo(0,0);
   };
 
@@ -2471,6 +2481,20 @@ class Component extends DCLogic {
         const F=window.__CURR.LA_FACTS;
         return (F && dayComplete) ? F.factFor(st.year, st.week, st.day).fact : "";
       })(),
+      /* The joke, with the punchline held back until asked for. A punchline
+       * printed under its own setup is not a joke, it is a sentence. */
+      jokeSetup:(function(){
+        const F=window.__CURR.LA_FACTS;
+        return (F && dayComplete) ? F.jokeFor(st.year, st.week, st.day).setup : "";
+      })(),
+      jokePunchline:(function(){
+        const F=window.__CURR.LA_FACTS;
+        return (F && dayComplete) ? F.jokeFor(st.year, st.week, st.day).punchline : "";
+      })(),
+      jokeHidden: !st.jokeOpen,
+      jokeShown: !!st.jokeOpen,
+      jokeReveal: function(){ self.setState({jokeOpen:true}); },
+
       factTopic:(function(){
         const F=window.__CURR.LA_FACTS;
         return (F && dayComplete) ? F.factFor(st.year, st.week, st.day).topic : "";

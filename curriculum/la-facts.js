@@ -155,6 +155,72 @@
     ]
   };
 
+  /* [setup, punchline] — written for this curriculum. Puns, because a
+   * nine-year-old and an eleven-year-old will both groan at a pun and only one
+   * of them will admit to enjoying it. */
+  const JOKES = [
+    ["Why did Magikarp fail its spelling test?","It only knew how to make a Splash."],
+    ["What do you call a Snorlax that has finished all its work?","Rested."],
+    ["Why is Onix bad at keeping secrets?","Everything it says is set in stone."],
+    ["Why did Geodude go to school?","To be a little boulder."],
+    ["What does Pikachu say when it gets the answer right?","That's shocking."],
+    ["Why did Psyduck stop reading?","All the thinking was giving it a headache."],
+    ["What is Ditto's favourite school subject?","Copying."],
+    ["Why did Machop join the library?","To lift its reading level."],
+    ["What do you call a Squirtle that reads all day?","A bookworm in a shell."],
+    ["Why was Charmander always warm at school?","It kept its tail on the radiator."],
+    ["Why did Bulbasaur do well in the plants unit?","It already knew how to grow."],
+    ["What do you call a lazy Rapidash?","A slow burn."],
+    ["Why did Meowth never finish its homework?","Too many shiny distractions."],
+    ["What is Gengar's favourite kind of story?","One with a twist you never saw coming."],
+    ["Why is Abra bad at hide and seek?","It always teleports somewhere obvious."],
+    ["Why did Eevee struggle to choose a topic?","There were too many ways to go."],
+    ["What do you call a Pidgey that reads too quickly?","A skimmer."],
+    ["Why did Caterpie do well at handwriting?","It took everything one line at a time."],
+    ["What is Jigglypuff's least favourite part of a lesson?","The bit where everyone stays awake."],
+    ["Why did Diglett get a good mark in geography?","It really understood the ground."],
+    ["What do you call a Slowpoke that finishes early?","Unlikely."],
+    ["Why did Growlithe make a good study partner?","It was loyal to the end of the chapter."],
+    ["Why was Voltorb banned from the library?","It kept going off in the quiet section."],
+    ["What do you call a Rattata with a big vocabulary?","Surprisingly well read."],
+    ["Why did Krabby fail comprehension?","It kept going sideways."],
+    ["What does Mewtwo write in its notebook?","Everything, twice, in case."],
+    ["Why did Zubat do badly on the reading test?","It never looked at the page."],
+    ["What do you call a Ponyta that loves poems?","A verse, of course."],
+    ["Why was Cubone good at inference?","It had learned a lot from very little."],
+    ["Why did Electrode agree with everything?","It was very well grounded."],
+    ["What is Snorlax's favourite punctuation?","The full stop."],
+    ["Why did Farfetch'd bring a leek to school?","For a well-seasoned argument."],
+    ["What do you call a Weedle with neat handwriting?","A fine point."],
+    ["Why is Arcanine good at spelling?","Excellent recall."],
+    ["Why did Seel enjoy the ocean passage?","It felt right at home."],
+    ["What did the Gym Leader say about the essay?","It earned its badge."],
+    ["Why was Hitmonlee good at grammar?","It knew where to put the stress."],
+    ["Why did Exeggcute work well in groups?","There were six of them already."],
+    ["What do you call a Golem that reads fast?","Rolling through it."],
+    ["Why did Tangela never finish a sentence?","It kept getting tied up."],
+    ["Why was Kadabra confident at the quiz?","A spoon-fed advantage."],
+    ["What do you call a Lapras that gives good summaries?","A smooth crossing."],
+    ["Why did Nidoran do well at research?","It always went straight to the point."],
+    ["Why was Vulpix good at storytelling?","Nine tales to choose from."],
+    ["What did Oddish say about the long passage?","A bit of a stretch."],
+    ["Why was Poliwag confused by the map?","It kept going round in circles."],
+    ["What is Scyther's favourite editing tool?","Anything that cuts."],
+    ["Why did Magnemite always agree?","It was strongly attracted to the point."],
+    ["Why was Dodrio good at debate?","Three heads, three opinions."],
+    ["What do you call a Kangaskhan that helps with homework?","Carrying the class."],
+    ["Why did Horsea write short sentences?","Only a small pen."],
+    ["Why was Rhyhorn bad at revision?","It only ever charged straight through."],
+    ["What did Chansey say about the hard test?","Take your time. I brought an egg."],
+    ["Why did Tauros struggle with library rules?","Too much china, not enough shop."],
+    ["Why is Gyarados touchy about spelling?","It used to be a Magikarp and nobody lets it forget."],
+    ["What do you call an Articuno that proofreads?","Ice cold and never misses."],
+    ["Why did Zapdos finish first?","It works in flashes."],
+    ["Why was Moltres good at endings?","It knows how to finish strong."],
+    ["What did Mew say about the whole curriculum?","I could do all of it. I just do not want to."],
+    ["Why did the trainer bring a notebook to the Gym?","To take down some notes."]
+  ];
+
   /* Which purpose belongs to which day. Matches la-close-reading.js. */
   const DAY_PURPOSE = {Mon:"says", Tue:"words", Wed:"shows", Thu:"why", Fri:"theme"};
   const CYCLE = 18;
@@ -169,10 +235,30 @@
     return {purpose: purpose, topic: row[0], fact: row[1], tie: row[2]};
   }
 
+  /* A joke a day, on its own cycle. It carries no tie back to the lesson on
+   * purpose: the fact already does that work, and a joke that has to justify
+   * itself is not a joke.
+   *
+   * Sixty of them, so the cycle is twelve weeks, and the two boys are offset
+   * by thirty. That offset matters more for jokes than for facts - the whole
+   * pleasure of a joke is telling it to somebody who has not heard it, and two
+   * brothers handed the same one at the same moment have nothing to trade. */
+  const JOKE_CYCLE = JOKES.length;
+
+  function jokeFor(grade, week, day){
+    const d = ["Mon","Tue","Wed","Thu","Fri"].indexOf(day);
+    const slot = (week - 1) * 5 + (d < 0 ? 0 : d);
+    const offset = (grade === "y2") ? 30 : 0;
+    const row = JOKES[((slot + offset) % JOKE_CYCLE + JOKE_CYCLE) % JOKE_CYCLE];
+    return {setup: row[0], punchline: row[1]};
+  }
+
+  function jokeCount(){ return JOKES.length; }
+
   function count(){
     return Object.keys(FACTS).reduce(function(n,k){ return n + FACTS[k].length; }, 0);
   }
 
   window.__CURR = window.__CURR || {};
-  window.__CURR.LA_FACTS = {FACTS, DAY_PURPOSE, CYCLE, factFor, count};
+  window.__CURR.LA_FACTS = {FACTS, JOKES, DAY_PURPOSE, CYCLE, JOKE_CYCLE, factFor, jokeFor, count, jokeCount};
 })();

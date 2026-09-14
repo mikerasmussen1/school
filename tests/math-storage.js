@@ -161,6 +161,60 @@ console.log("\n=== persist() actually writes every declared bag ===");
       + (missing.length ? " — MISSING " + missing.join(", ") : ""), missing.length === 0);
 }
 
+/* ── PROGRESS MUST NEVER BE WRITTEN WITH setState ─────────────────────────
+ *
+ * setState updates memory. saveState updates memory, writes localStorage, and
+ * queues the remote push the teacher's view reads. A progress bag written with
+ * setState survives until reload and then vanishes — and, because the child
+ * SEES it work, nobody notices until a teacher asks where the work went.
+ *
+ * Four lesson-step writes shipped this way: autoplay, the step pips, replay and
+ * play all used setState while the next/prev arrows beside them used saveState,
+ * so whether a child's place in a lesson survived depended on which control
+ * they happened to press.
+ *
+ * A deliberate exception must say so with a `progress-write-exempt` comment —
+ * the demo/fixture rounds are genuinely not meant to be recorded. */
+console.log("\n=== progress is never written with setState ===");
+{
+  const page = require("fs").readFileSync(__dirname + "/../index.html", "utf8");
+  const offenders = [];
+  /* ANY receiver, not just `this`. The file already calls setState through an
+   * alias (`self2.setState`) in two places — today only for a non-progress
+   * key, but a guard that keys on the literal text `this.setState(` would not
+   * see it if that ever changed. */
+  const re = /\b[A-Za-z_$][\w$]*\.setState\(/g;
+  let m;
+  while((m = re.exec(page))){
+    /* Scope to the ARGUMENT of this setState, not a fixed character window.
+     * A 300-char window ran past the call into neighbouring code and reported
+     * four calls that write no progress at all. */
+    let d = 0, end = m.index + m[0].length - 1;
+    for(let k = end; k < page.length && k < end + 4000; k++){
+      if(page[k] === "(") d++;
+      else if(page[k] === ")"){ d--; if(d === 0){ end = k; break; } }
+    }
+    const seg = page.slice(m.index, end + 1);
+    // A load is not a write: restoring a record spreads the unpacked slice.
+    if(/unpackMath|\.\.\.this\.blank\(\)/.test(seg)) continue;
+    // Deliberate, documented exceptions.
+    const before = page.slice(Math.max(0, m.index - 400), m.index);
+    if(/progress-write-exempt/.test(before)) continue;
+    /* `key:` AND the ES6 shorthand `{key}` / `{key,}`. Shorthand is how this
+     * guard would most plausibly be bypassed by accident — `setState({pAns})`
+     * reads perfectly naturally and writes the bag just the same. */
+    const hit = BAGS.find(b =>
+      new RegExp("[{,]\\s*" + b + "\\s*:").test(seg) ||
+      new RegExp("[{,]\\s*" + b + "\\s*[,}]").test(seg));
+    if(hit){
+      const line = page.slice(0, m.index).split("\n").length;
+      offenders.push("line " + line + " writes " + hit);
+    }
+  }
+  has("no progress bag is written with setState"
+      + (offenders.length ? " — " + offenders.join("; ") : ""), offenders.length === 0);
+}
+
 console.log("");
 if(fail.length){
   console.log("FAILED "+fail.length+":");

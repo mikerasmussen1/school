@@ -4551,7 +4551,12 @@ class Component extends DCLogic {
       const id=this.curSet().id, steps=(lessonFor(id)||{}).steps||[];
       const cur=this.state.lstep[id]||0;
       if(cur>=steps.length-1){ this.setState({playing:false}); return; }
-      this.setState(s=>({lstep:{...s.lstep,[id]:cur+1}}));
+      /* saveState, not setState: a lesson played through IS progress.
+       * These four writes (autoplay, the step pips, replay, play) kept the
+       * child's place in memory only, while the next/prev arrows beside them
+       * saved it — so whether your position survived a reload depended on
+       * which control you happened to use. */
+      this.saveState(s=>({lstep:{...s.lstep,[id]:cur+1}}));
     },2600);
   }
   // The level a child picks decides which bank to pull, and the level is picked
@@ -4861,14 +4866,14 @@ class Component extends DCLogic {
       lCells:cells,
       lDotsRows:step.dots?step.dots.r:0,
       lPips:L.steps.map((s,k)=>({
-        go:()=>this.setState(z=>({lstep:{...z.lstep,[id]:k},playing:false})),
+        go:()=>this.saveState(z=>({lstep:{...z.lstep,[id]:k},playing:false})),
         style:`width:${k===i?22:9}px;height:9px;box-sizing:content-box;border-radius:999px;border:12px solid transparent;background-clip:padding-box;cursor:pointer;padding:0;transition:.3s;background-color:${k===i?"#38BDF8":k<i?"rgba(56,189,248,.4)":"rgba(var(--line-rgb),.16)"}`
       })),
       lNext:()=>this.saveState(s=>({lstep:{...s.lstep,[id]:Math.min(n-1,(s.lstep[id]||0)+1)},playing:false})),
       lPrev:()=>this.saveState(s=>({lstep:{...s.lstep,[id]:Math.max(0,(s.lstep[id]||0)-1)},playing:false})),
-      lReplay:()=>this.setState(s=>({lstep:{...s.lstep,[id]:0},playing:true})),
+      lReplay:()=>this.saveState(s=>({lstep:{...s.lstep,[id]:0},playing:true})),
       lPlayLabel:st.playing?"Pause":"Play it",
-      lPlay:()=>this.setState(s=>({playing:!s.playing, lstep:{...s.lstep,[id]:(s.lstep[id]||0)>=n-1?0:(s.lstep[id]||0)}})),
+      lPlay:()=>this.saveState(s=>({playing:!s.playing, lstep:{...s.lstep,[id]:(s.lstep[id]||0)>=n-1?0:(s.lstep[id]||0)}})),
       lAtEnd:i===n-1, setStage:this.setStage
     };
   }
@@ -6213,6 +6218,7 @@ class Component extends DCLogic {
     setTimeout(()=>{
       // setState, NOT saveState: a fixture must not end up in the child's
       // record or get pushed to the cloud as real work.
+      // progress-write-exempt: demo fixture, deliberately not recorded.
       this.setState(s=>({dyn:{...(s.dyn||{}),[setId]:{rounds:[round],flagged:false}}}),
         ()=>this.openCoach(setId,1));
     },400);
@@ -6254,6 +6260,7 @@ class Component extends DCLogic {
       const done=rec.rounds.length>=3 && !won;
       // A demo round exercises the screen without writing anything down.
       if(r.demo){
+        // progress-write-exempt: demo fixture, deliberately not recorded.
         this.setState(prev=>{
           const cur=((prev.dyn||{})[c.setId])||{rounds:[],flagged:false};
           return {coach:{...c, checked:true}, dyn:{...(prev.dyn||{}),[c.setId]:{...cur,

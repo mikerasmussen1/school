@@ -50,6 +50,7 @@
   /* What step `i` of this lesson puts on screen.
    *
    * kind  "dots"  a dot diagram
+   *       "fig"   a teaching figure (curriculum/lesson-figures.js)
    *       "rooms" an area model / magnitude bar
    *       "none"  nothing — the visual pane is empty
    * draws is the question worth asking: will the child see a picture? */
@@ -58,6 +59,8 @@
     const step = steps[i];
     if(!step) return {kind:"none", w:0, h:0, cells:0, draws:false};
     const {u} = unitFor(lesson, stageW);
+    if(step.fig)
+      return {kind:"fig", w:0, h:0, cells:1, draws:!!step.fig.k};
     if(step.dots)
       return {kind:"dots", w:0, h:0, cells:(step.dots.r||0)*(step.dots.c||0),
               draws:(step.dots.r||0) > 0 && (step.dots.c||0) > 0};

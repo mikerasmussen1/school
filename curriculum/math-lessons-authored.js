@@ -181,5 +181,16 @@ const LESSONS_AUTHORED = {
 
 };
 
+/* MERGE, DO NOT ASSIGN.
+ *
+ * The authored lessons arrive in several files now — this one, plus
+ * math-lessons-y3-u1, y3-u2, y5-u2 and whatever comes next — and every other
+ * one of them merges. This file assigned, so it only worked because it happens
+ * to be listed first: reorder the script tags, alphabetise them, add a new file
+ * above it, and fifty-five hand-written lessons would disappear with no error
+ * anywhere, each day quietly falling back to its generated floor.
+ *
+ * Merging here makes the order stop mattering. */
 window.__CURR = window.__CURR || {};
-window.__CURR.LESSONS_AUTHORED = LESSONS_AUTHORED;
+window.__CURR.LESSONS_AUTHORED =
+  Object.assign(window.__CURR.LESSONS_AUTHORED || {}, LESSONS_AUTHORED);

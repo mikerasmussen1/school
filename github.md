@@ -3,6 +3,23 @@ branch: main
 
 ## Last sync
 
+date: 2026-09-14T14:25:36Z
+tree: d34ed7086382
+
+### Updated in this project
+
+- **Pulled main wholesale (113 files).** Upstream is two weeks ahead of the last pull and carries everything this project had locally, so the local copies were replaced rather than merged. `index.html` is now 610,357 bytes (was 444,388) and stamped build `2026-09-14-0158`.
+- **Word Voyagers is a real subject, not a stub.** Twenty `curriculum/la-*.js` files — Y1/Y2 spines, words, grammar, reading, tasks, book lists, quotes, close reading, daily fix, mastery, a dedicated `la-grader.js` — plus a standalone `word-voyagers.dc.html` page.
+- **Science is a new subject**: `science.js` registers it, with Y3/Y5 spines, lessons, quizzes, plus `science-shopping.js` and `science-autonomy.js`. `field-notes.dc.html` is a new printable page.
+- **Maths restructured around the day, not the unit.** `math-day.js` (pure, tested) owns day order and completion rules, `math-sequence.js` the ordering, `math-lessons-daily.js` + `math-lessons-authored.js` the walkthroughs, `mix.js` the daily review/challenge mix, `week-glance.js` the week strip. The unit-square maths lives once, in `lesson-view.js`.
+- **New shared plumbing**: `sync.js`, `students.js` (one grade-to-track mapping), `freshness.js`, `la-calendar.js` — the 180-day calendar both subjects read.
+- **Model calls can go through a Worker.** New `worker/tutor-proxy.js` + `wrangler.toml`. The Gemini key is no longer in the repo: it is read from a `config/{hash-of-teacher-code}` document or localStorage (see BACKEND.md), and `firestore.rules` gained a `config` block — read-by-unguessable-id, writes denied.
+- **Versioned builds**: `build.json`, `bump-version.sh`, `scripts/build.js`, `scripts/stamp-version.js`; every `<script src>` in index.html is cache-busted off one hash.
+- **A test suite exists** — 24 files under `tests/` (math-day, la-question-log, render-cost, responsive, thirty-minutes, handwriting, …) and ten new `scripts/check-*.js` gates.
+- Note: upstream's `github.md` was still the 2026-09-01 copy, so these notes are read off the code, not off an upstream changelog. Nothing local was ahead; the stale `changed/` drafts were removed.
+
+## Sync history
+
 date: 2026-09-01T17:49:05Z
 
 ### Updated in this project
@@ -12,7 +29,6 @@ date: 2026-09-01T17:49:05Z
 - Consequence, handled: a generated lesson no longer tries to publish itself. It is stored inline in the child's own record and teaches them there; promoting one into the shared reuse pool is an admin step, and Teacher HQ grew a "Copy lesson JSON" button per generated round to hand the object over for the Firebase console.
 - `LessonBank.publish`/`score` kept and re-documented as admin-only — the validation is the part worth having.
 
-## Sync history
 
 date: 2026-09-01T17:05:00Z
 
@@ -66,11 +82,15 @@ date: 2026-08-22T16:06:43Z · commit e25c0114a253 — pulled full repo (18 files
 Live, and deliberately client-side. Do not "fix" these without reading `BACKEND.md` first.
 
 - `REMOTE_PROJECT_ID = "big-math-adventures"` (`index.html` ~3703) turns Firestore sync on. Empty string = local-only.
-- `GEMINI_API_KEY` is **not in the repo**. It was, it leaked, Google disabled it.
-  It now lives in localStorage per device — see BACKEND.md. Do not re-commit it.
-- `firestore.rules` is committed and byte-identical to the deployed ruleset (verified Aug 12).
-  `list` and `delete` are denied everywhere; `get`/`create`/`update` are open, with unguessable
-  name+code doc ids acting as the login.
+- The model key is **not in the repo** — it leaked once and was disabled. It now comes from a
+  `config/{sha of teacher code}` document or from that device's localStorage; the provider is
+  inferred from the key (`sk-ant-` → Anthropic, otherwise Gemini). See BACKEND.md before touching
+  it. `worker/tutor-proxy.js` is the proxy option if the key ever needs to leave the client.
+- `firestore.rules` (5,493 bytes) is the source of truth for the deployed ruleset.
+  `list` and `delete` denied everywhere; `students`/`paperlog`/`names`/`rosters` open by
+  unguessable id; `questionbanks`, `lessons`, `config` read-only to clients, writes admin-only.
+- Versioned builds: `build.json` holds the build stamp, `bump-version.sh` / `scripts/stamp-version.js`
+  push it into `index.html` and every `<script src>` query string. Current build `2026-09-14-0158`.
 
 ## Screen map
 
@@ -86,9 +106,14 @@ Live, and deliberately client-side. Do not "fix" these without reading `BACKEND.
 | Printable sheets from the live bank | `Worksheet Builder.dc.html`, `doc-page.js` |
 | Landing page (subject picker) + subject registry | `index.html` — `subjectVals`, `openSubject`; `curriculum/subjects.js` |
 | Math subject (mission map, Practice Bay, Teacher HQ) | `index.html`, `support.js`, `vendor/react*.js`, `curriculum/registry.js` |
-| Word Voyagers (language arts, stub) | `curriculum/language-arts.js` |
+| Word Voyagers (language arts) | `curriculum/language-arts.js`, `la-*.js` (20 files), `word-voyagers.dc.html` |
+| Science | `curriculum/science.js`, `science-y3-spine.js`, `science-y5-spine.js`, `science-lessons.js`, `science-quiz.js`, `science-shopping.js`, `science-autonomy.js`, `field-notes.dc.html` |
+| Day/week structure for maths | `curriculum/math-day.js`, `math-sequence.js`, `mix.js`, `week-glance.js`, `lesson-view.js` |
+| Shared plumbing | `curriculum/sync.js`, `students.js`, `freshness.js`, `la-calendar.js` |
+| Model-call proxy (optional) | `worker/tutor-proxy.js`, `worker/wrangler.toml` |
+| Tests + build gates | `tests/` (24 files), `scripts/check-*.js`, `scripts/build.js`, `bump-version.sh` |
 | Cloud progress sync seam | `index.html` — `REMOTE_PROJECT_ID`, `Remote` (~3703–3770) |
-| Photo-homework reader + diagnostics | `index.html` — `GEMINI_API_KEY`, `PaperReader` (~3773+), `paperlog/` |
+| Photo-homework reader + diagnostics | `index.html` — `PaperReader`, `paperlog/`; key from `config/` or localStorage |
 | Account gate (name + secret code) | `index.html` — `Remote` account key helpers |
 | Print packs, Missions 01–08 both years | `Unit N Print Pack.dc.html`, `Y2 Unit N Print Pack.dc.html`, `doc-page.js`, `print-fit.js` |
 | Worksheets, all weeks both years (two-page sheets) | `Unit N Worksheets.dc.html`, `Y2 Unit N Worksheets.dc.html`, banks in `curriculum/` |

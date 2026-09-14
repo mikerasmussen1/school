@@ -99,6 +99,25 @@
         if(abs < firstAbs) firstAbs = abs;
         if(abs > lastAbs) lastAbs = abs;
       });
+      /* A WEEK WITH ANSWERS IN IT IS ALSO WORTH LOOKING AT.
+       *
+       * `seen` used to mean "a week with a FINISHED day", so a child who
+       * worked through half of Monday and stopped produced no glance at all —
+       * the panel a parent would look at to find exactly that is the one that
+       * did not appear. Answered questions are evidence.
+       *
+       * Deliberately NOT folded into firstAbs/lastAbs: those bound the "passed
+       * by, not finished" red, and that definition is shared with summary() so
+       * the two cannot disagree. Letting an unfinished day move those bounds
+       * would start reddening days on the strength of work in progress. */
+      Object.keys(data.laLog || {}).forEach(function(k){
+        if(!((data.laLog || {})[k] || []).length) return;
+        const p = String(k).split(":");
+        if(p[0] !== year || p.length !== 4) return;
+        const w = parseInt(p[1], 10);
+        if(w > 0) seen[w] = true;
+      });
+
       const weeks = Object.keys(seen).map(Number).sort(function(a,b){ return b-a; });
       if(!weeks.length) return null;
 
@@ -127,17 +146,41 @@
        * the summary row on the very same screen: it reddened days from before
        * the child ever began. Review caught it; sharing summary()'s bounds is
        * what makes the two incapable of disagreeing again. */
+      /* Each cell carries its day INITIAL and its day ID.
+       *
+       * The initial because five anonymous squares in a row tell a parent
+       * nothing about which day they are looking at — the fate was legible and
+       * the subject of it was not.
+       *
+       * The id because the square is the natural thing to click: it is the day.
+       * The shell hands the id back to questionLog as ctx.cell, and the groups
+       * below carry the same id, so clicking Tuesday opens Tuesday's questions.
+       * A day with no answers recorded gets no id and stays inert rather than
+       * opening an empty panel. */
+      /* Keyed by year:week:day, not by day. The teacher can look back at any
+       * week, and a bare day name would light Tuesday's square in every week
+       * of the year because one Tuesday somewhere had answers in it. */
+      const answered = {};
+      Object.keys(data.laLog || {}).forEach(function(k){
+        const p = String(k).split(":");
+        if(p.length === 4 && ((data.laLog || {})[k] || []).length)
+          answered[p[0] + ":" + p[1] + ":" + p[2]] = true;
+      });
+
       const cells = DAYS.map(function(d, i){
+        const key = year + ":" + week + ":" + d;
+        const id = answered[key] ? key : "";
+        const at = {label: d.charAt(0), id: id, day: d};
         if(ended(d))
           return wasStuck(d)
-            ? {status:"yellow", hint:d+" — got stuck, finished anyway"}
-            : {status:"green", hint:d+" — finished"};
+            ? {...at, status:"yellow", hint:d+" — got stuck, finished anyway"}
+            : {...at, status:"green", hint:d+" — finished"};
         if(excused[year+":"+week+":"+d+":excused"])
-          return {status:"gray", hint:d+" — excused"};
+          return {...at, status:"gray", hint:d+" — excused"};
         const abs = (week - 1) * 5 + i;
         if(abs > firstAbs && abs < lastAbs)
-          return {status:"red", hint:d+" — passed by, not finished"};
-        return {status:"gray", hint:d+" — not reached"};
+          return {...at, status:"red", hint:d+" — passed by, not finished"};
+        return {...at, status:"gray", hint:d+" — not reached"};
       });
 
       const finished = cells.filter(function(c){ return c.status==="green"||c.status==="yellow"; }).length;
@@ -257,22 +300,31 @@
      * still in progress is already here. `done` comes from stepDone rather than
      * from counting answers: a drill can be finished with questions missed, and
      * a drill can hold a full set of answers and still be open. */
-    questionLog: function(data){
+    questionLog: function(data, ctx){
       const LOG = data.laLog || {}, DONE = data.stepDone || {};
       const NAMES = {rq:"Reading comprehension", gz:"Grammar drill", sq:"Spelling drill",
                      fx:"Find the mistake", rv:"Week review"};
       const DAY_NAME = {Mon:"Monday", Tue:"Tuesday", Wed:"Wednesday",
                         Thu:"Thursday", Fri:"Friday"};
+      /* ctx.cell is the square the teacher clicked in the glance — a
+       * year:week:day handle this course minted itself. When it is set, only
+       * that day's drills are wanted. */
+      const only = ctx && ctx.cell ? String(ctx.cell) : null;
       const out = [];
       Object.keys(LOG).forEach(function(k){
         const rows = LOG[k] || [];
         if(!rows.length) return;
         const p = String(k).split(":");            // year:week:day:slot
         if(p.length !== 4) return;
+        const cell = p[0] + ":" + p[1] + ":" + p[2];
+        if(only && cell !== only) return;
         const marked = rows.filter(function(e){ return e && e.ok !== null; });
         out.push({
+          cell: cell,
+          day: DAY_NAME[p[2]] || p[2],
           where: "Week " + p[1] + " · " + (DAY_NAME[p[2]] || p[2]) + " · " +
                  (NAMES[p[3]] || p[3]),
+          what: NAMES[p[3]] || p[3],
           when: Math.max.apply(null, rows.map(function(e){ return (e && e.ts) || 0; })),
           done: !!DONE[k],
           right: marked.filter(function(e){ return e.ok; }).length,

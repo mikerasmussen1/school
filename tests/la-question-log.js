@@ -331,6 +331,98 @@ console.log("Teacher HQ turns the log into rows");
   ok(/\{\{ hqQGroups \}\}/.test(page), "the template lists the groups");
   ok(/questionLog/.test(fs.readFileSync(D + "subjects.js", "utf8")),
      "the hook is documented in the subject contract");
+
+  /* ── CLICKING A DAY IN THE GLANCE ──────────────────────────────────────
+   * The squares were five anonymous cells that did nothing. A parent's
+   * instinct is to click the day, so the day is what opens. */
+  if(M){
+    const la = window.Subjects.get("la");
+
+    // Monday answered, Tuesday not touched at all.
+    const kid = fresh();
+    kid.state.week = 1; kid.state.day = "Mon";
+    kid.logAnswer("gz", {id:"m1", q:"Which word is the verb?", a:"ran"}, "ran", true);
+    kid.logAnswer("gz", {id:"m2", q:"Which word is the noun?",  a:"dog"}, "cat", false);
+    const data = {laLog: kid.state.laLog, stepDone: {}, week: 1, year: "y1"};
+
+    const glance = la.weekGlance(data, {week: 1});
+    const cells = ((glance.columns || [])[0] || {}).cells || [];
+    ok(cells.length === 5, "the week still draws five days (" + cells.length + ")");
+    ok(cells.map(c => c.label).join("") === "MTWTF",
+       "each square says which day it is (" + cells.map(c => c.label).join("") + ")");
+
+    const mon = cells[0], tue = cells[1];
+    ok(mon.id === "y1:1:Mon", "Monday carries its day id (" + mon.id + ")");
+    ok(!tue.id, "a day with nothing recorded is not clickable");
+
+    // Clicking Monday must produce Monday's questions, and only Monday's.
+    const app2 = new M({});
+    app2.props = {}; app2.state = {};
+    if(app2.initState) Object.assign(app2.state, app2.initState() || {});
+    const v = app2.pickedDayVals(la, data, null, mon.id);
+    ok(v.hasPicked === true, "clicking it opens a panel");
+    ok(/Week 1/.test(v.pickedLabel) && /Monday/.test(v.pickedLabel),
+       "headed by the week and day: " + v.pickedLabel);
+    ok(v.pickedDrills.length === 1, "one drill that day (" + v.pickedDrills.length + ")");
+    const d0 = v.pickedDrills[0] || {};
+    ok((d0.rows || []).length === 2, "both questions (" + (d0.rows || []).length + ")");
+    ok((d0.rows || []).some(r => r.q === "Which word is the verb?"), "the question asked");
+    ok((d0.rows || []).some(r => r.answer === "cat"), "and what was answered");
+    const miss = (d0.rows || []).filter(r => r.mark === "✗")[0];
+    ok(miss && miss.correct === "dog", "with the right answer against the miss");
+
+    // A different day must not leak into it.
+    kid.state.day = "Wed";
+    kid.logAnswer("gz", {id:"w1", q:"Wednesday question", a:"x"}, "x", true);
+    const both = {laLog: kid.state.laLog, stepDone: {}, week: 1, year: "y1"};
+    const monOnly = app2.pickedDayVals(la, both, null, "y1:1:Mon");
+    const qs = monOnly.pickedDrills.flatMap(d => d.rows.map(r => r.q));
+    ok(!qs.some(q => /Wednesday/.test(q)),
+       "Monday's panel holds no other day's questions");
+    ok(app2.pickedDayVals(la, both, null, "y1:1:Wed").pickedDrills.length === 1,
+       "and Wednesday opens its own");
+
+    /* Same day name, different week, must not collide. Week 2 has to hold
+     * evidence of its own to be viewable at all — an unknown week falls back
+     * to the newest rather than drawing an empty grid, which is deliberate. */
+    kid.state.week = 2; kid.state.day = "Tue";
+    kid.logAnswer("gz", {id:"t2", q:"Week two question", a:"y"}, "y", true);
+    const twoWeeks = {laLog: kid.state.laLog, stepDone: {}, week: 2, year: "y1"};
+
+    const w1 = ((la.weekGlance(twoWeeks, {week:1}).columns||[])[0]||{}).cells||[];
+    const w2 = ((la.weekGlance(twoWeeks, {week:2}).columns||[])[0]||{}).cells||[];
+    ok(w1[0].id === "y1:1:Mon", "week 1's Monday is week 1's (" + w1[0].id + ")");
+    ok(!w1[1].id, "and week 1's Tuesday has nothing behind it");
+    ok(!w2[0].id, "week 2's Monday has nothing behind it");
+    ok(w2[1].id === "y1:2:Tue", "week 2's Tuesday is week 2's (" + w2[1].id + ")");
+
+    /* Both layers filter, so test both. The shell re-filters defensively by
+     * the `cell` each group carries, which means a subject that ignored
+     * ctx.cell would still look right on screen — and its own contract would
+     * be quietly broken for the next course that copies it. */
+    const askedMon = la.questionLog(twoWeeks, {cell:"y1:1:Mon"});
+    ok((askedMon||[]).length === 1,
+       "the hook itself honours ctx.cell (" + (askedMon||[]).length + " groups)");
+    ok((askedMon||[]).every(g => g.cell === "y1:1:Mon"),
+       "and returns only that day");
+    ok((la.questionLog(twoWeeks, {}) || []).length === 3,
+       "with no cell asked for, it still returns everything");
+
+    const openW2 = app2.pickedDayVals(la, twoWeeks, null, "y1:2:Tue");
+    const w2qs = openW2.pickedDrills.flatMap(d => d.rows.map(r => r.q));
+    ok(w2qs.length === 1 && /Week two/.test(w2qs[0]),
+       "and it opens only its own question");
+
+    // The toggle.
+    app2.state.wgPick = {};
+    app2.pickGlanceCell("la", "y1:1:Mon");
+    ok((app2.state.wgPick || {}).la === "y1:1:Mon", "clicking selects the day");
+    app2.pickGlanceCell("la", "y1:1:Mon");
+    ok((app2.state.wgPick || {}).la === "", "clicking it again closes it");
+
+    ok(/\{\{ c\.pick \}\}/.test(page), "the template wires the click");
+    ok(/\{\{ p\.pickedDrills \}\}/.test(page), "and draws the opened day");
+  }
 }
 
 Promise.all(pending).then(()=>{

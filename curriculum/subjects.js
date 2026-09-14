@@ -67,7 +67,7 @@
  *
  *   weekGlance(data, ctx) -> null | {
  *     title:   "Week 3",                      what stretch this describes
- *     columns: [{label, cells:[{status, hint}]}]
+ *     columns: [{label, cells:[{status, hint, label, id}]}]
  *     well:     ["...", ...]                  short factual lines, counted
  *     struggle: ["...", ...]                  not adjectived
  *     weeks:   [3, 2, 1]                      optional: other stretches a
@@ -79,6 +79,17 @@
  * Honour it exactly: ctx.week absent or unknown means your own default (the
  * most recent stretch with work). List only stretches that actually hold
  * evidence — an empty week is not something to review.
+ *
+ * A cell's optional `label` is one or two characters drawn inside it — a day
+ * initial, a question number. Without one the grid is a row of anonymous
+ * squares and a parent cannot tell which day they are looking at.
+ *
+ * A cell's optional `id` MAKES IT CLICKABLE. It is an opaque handle: the shell
+ * hands it straight back to questionLog() as `ctx.cell`, and you decide what it
+ * selects. Give the same id to the questionLog groups that belong to that cell
+ * (as their `cell` field) and clicking the square opens exactly that day's
+ * questions underneath it. Omit `id` and the cell simply does not respond,
+ * which is the right answer for a cell with nothing behind it.
  *
  * `status` is one of exactly four words, and each is a claim — use them
  * honestly for whatever your unit of work is (a question, a day, a week):

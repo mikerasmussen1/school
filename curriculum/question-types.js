@@ -181,6 +181,26 @@
       check:it=> answers(it.a).length ? null : "needs an answer"
     },
 
+    /* SPELLING IS EXACT, and it is its own type for that reason.
+     *
+     * Spelling items were authored as fill-blank, which routes through the
+     * typo tolerance: a word of eight letters or more is allowed two wrong
+     * letters, shorter words one. That is sensible for a geography answer and
+     * exactly wrong for a spelling test, where the letters ARE the question.
+     * It marked "visable" and "perspectiv" correct.
+     *
+     * Case and surrounding space are still forgiven. Nothing else is. */
+    "spelling": {
+      label:"Spelling", input:"text", graded:true,
+      grade:(it,r)=>{
+        const got=norm(r);
+        if(got==="") return false;
+        return arr(it.a).some(a=>norm(a)===got);
+      },
+      text:it=> arr(it.a).join(" or "),
+      check:it=> answers(it.a).length ? null : "needs an answer"
+    },
+
     "number-units": {
       label:"Number with units", input:"text", graded:true,
       // 3.50 == 3.5, and the unit must match if the item names one.

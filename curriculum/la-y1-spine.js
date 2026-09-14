@@ -43,35 +43,31 @@
 (function(){
 
   /* ------------------------------------------------------------------------
-   * THE LEVEL THIS YEAR IS PITCHED AT: between average and gifted, in one
-   * place so the strands can be checked against each other rather than
-   * drifting apart.
+   * THE LEVEL THIS YEAR IS PITCHED AT, in one place, so the three strands can
+   * be checked against each other rather than drifting apart.
    *
-   *              typical 3rd    HERE      5th grade
-   *   passage     120-150 w     183 w      209 w
-   *   questions       3          4          4
-   *   spelling       12         13         12
-   *   grammar         6          7          6
+   * Third grade standards, taught properly, with a short stretch tail on every
+   * strand. Not a fourth-grade course wearing a third-grade label.
    *
-   * Above grade level on every dial and below fifth on passage length, which
-   * is the shape "between" should have.
+   *   READING   5 questions a passage (was 3). Detail, vocabulary in context
+   *             and central message, then two harder ones: inference and why
+   *             the writer put a particular detail there. Passages average
+   *             ~178 words, up from 145.
+   *   SPELLING  14 words a week (was 12). Twelve on the week's pattern, then
+   *             two that follow the same pattern one step further.
+   *   GRAMMAR   8 items a week (was 6). Six on the skill, then one applying it
+   *             to a longer sentence and one asking the child to say the rule
+   *             back.
    *
-   * A DRIFT THIS PASS CORRECTED. Third grade had been carrying MORE items than
-   * fifth - 5 questions to its 4, 14 spelling words to its 12, 8 grammar items
-   * to its 6 - because stretch was added here and never there. A younger child
-   * doing more work than an older one is not a harder course, it is an
-   * incoherent one. One item came off each strand.
+   * The shape is deliberately identical across all three: keep the core at
+   * grade level, add roughly a quarter more as stretch. A child who does only
+   * the core is doing third grade properly. A child who takes the tail is
+   * being extended without being moved up a year.
    *
-   * WHAT IS STILL AT FIFTH GRADE LEVEL, and is not fixed by counting. Sentence
-   * length averages 13 words here and 13 in fifth grade; a typical third grade
-   * passage runs 10-12. Sixty-five sentences are 23 words or longer. Only four
-   * contain a semicolon, so there is no safe mechanical split - bringing this
-   * down means rewriting prose, sentence by sentence, not adjusting a number.
-   * It is the one lever left and it is deliberately not pulled here rather
-   * than pulled badly.
-   *
-   * Vocabulary is already right: 4.2% of words run to nine letters or more
-   * against fifth grade's 8.8%.
+   * An earlier pass went further than this — six comprehension questions,
+   * 240-word passages, words like gabelle and miasma. That was a fourth or
+   * fifth grade reading experience with a third grade label on it, and it was
+   * pulled back to here on purpose.
    * --------------------------------------------------------------------- */
 
   /* ---- The nine unit studies ------------------------------------------- */

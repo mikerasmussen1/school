@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=2026-09-14-1954"></script>
-  <script data-build>window.__BUILD__="2026-09-14-1954";</script>
-  <script src="./curriculum/freshness.js?v=2026-09-14-1954"></script>
+<script src="./support.js?v=2026-09-14-2030"></script>
+  <script data-build>window.__BUILD__="2026-09-14-2030";</script>
+  <script src="./curriculum/freshness.js?v=2026-09-14-2030"></script>
 </head>
 <body>
 <x-dc>
@@ -49,29 +49,29 @@
   .book-title{font-family:'Fraunces',serif;font-size:1rem;color:var(--brick-dark);margin:0 0 3px}
   .done-banner{text-align:center;padding:22px;margin-top:6px;background:var(--forest-light);border-radius:8px;color:#2E4E38}
 </style>
-<script src="./curriculum/sync.js?v=2026-09-14-1954"></script>
-<script src="./curriculum/students.js?v=2026-09-14-1954"></script>
-<script src="./curriculum/subjects.js?v=2026-09-14-1954"></script>
-<script src="./curriculum/question-types.js?v=2026-09-14-1954"></script>
-<script src="./curriculum/la-y1-spine.js?v=2026-09-14-1954"></script>
-<script src="./curriculum/la-y1-words.js?v=2026-09-14-1954"></script>
-<script src="./curriculum/la-y1-grammar.js?v=2026-09-14-1954"></script>
-<script src="./curriculum/la-y1-reading.js?v=2026-09-14-1954"></script>
-<script src="./curriculum/la-y1-tasks.js?v=2026-09-14-1954"></script>
-<script src="./curriculum/la-books.js?v=2026-09-14-1954"></script>
-<script src="./curriculum/la-y2-spine.js?v=2026-09-14-1954"></script>
-<script src="./curriculum/la-y2-words.js?v=2026-09-14-1954"></script>
-<script src="./curriculum/la-y2-grammar.js?v=2026-09-14-1954"></script>
-<script src="./curriculum/la-y2-reading.js?v=2026-09-14-1954"></script>
-<script src="./curriculum/la-y2-tasks.js?v=2026-09-14-1954"></script>
-<script src="./curriculum/la-books-y2.js?v=2026-09-14-1954"></script>
-<script src="./curriculum/la-quotes.js?v=2026-09-14-1954"></script>
-<script src="./curriculum/la-daily-fix.js?v=2026-09-14-1954"></script>
-<script src="./curriculum/la-skill-notes.js?v=2026-09-14-1954"></script>
-<script src="./curriculum/la-close-reading.js?v=2026-09-14-1954"></script>
-<script src="./curriculum/la-mastery.js?v=2026-09-14-1954"></script>
-<script src="./curriculum/la-calendar.js?v=2026-09-14-1954"></script>
-<script src="./curriculum/la-grader.js?v=2026-09-14-1954"></script>
+<script src="./curriculum/sync.js?v=2026-09-14-2030"></script>
+<script src="./curriculum/students.js?v=2026-09-14-2030"></script>
+<script src="./curriculum/subjects.js?v=2026-09-14-2030"></script>
+<script src="./curriculum/question-types.js?v=2026-09-14-2030"></script>
+<script src="./curriculum/la-y1-spine.js?v=2026-09-14-2030"></script>
+<script src="./curriculum/la-y1-words.js?v=2026-09-14-2030"></script>
+<script src="./curriculum/la-y1-grammar.js?v=2026-09-14-2030"></script>
+<script src="./curriculum/la-y1-reading.js?v=2026-09-14-2030"></script>
+<script src="./curriculum/la-y1-tasks.js?v=2026-09-14-2030"></script>
+<script src="./curriculum/la-books.js?v=2026-09-14-2030"></script>
+<script src="./curriculum/la-y2-spine.js?v=2026-09-14-2030"></script>
+<script src="./curriculum/la-y2-words.js?v=2026-09-14-2030"></script>
+<script src="./curriculum/la-y2-grammar.js?v=2026-09-14-2030"></script>
+<script src="./curriculum/la-y2-reading.js?v=2026-09-14-2030"></script>
+<script src="./curriculum/la-y2-tasks.js?v=2026-09-14-2030"></script>
+<script src="./curriculum/la-books-y2.js?v=2026-09-14-2030"></script>
+<script src="./curriculum/la-quotes.js?v=2026-09-14-2030"></script>
+<script src="./curriculum/la-daily-fix.js?v=2026-09-14-2030"></script>
+<script src="./curriculum/la-skill-notes.js?v=2026-09-14-2030"></script>
+<script src="./curriculum/la-close-reading.js?v=2026-09-14-2030"></script>
+<script src="./curriculum/la-mastery.js?v=2026-09-14-2030"></script>
+<script src="./curriculum/la-calendar.js?v=2026-09-14-2030"></script>
+<script src="./curriculum/la-grader.js?v=2026-09-14-2030"></script>
 </helmet>
 
 <div style="min-height:100vh;display:flex;flex-direction:column">
@@ -250,22 +250,29 @@
 
             <sc-if value="{{ aClose }}" hint-placeholder-val="{{ false }}">
               <div class="box">
-                <div style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--brick-dark);margin-bottom:4px">Today you are reading for</div>
-                <h3 style="margin:0 0 8px">{{ closeFocus }}</h3>
-                <div style="font-size:1.02rem;line-height:1.65">{{ closeLook }}</div>
+                <div style="font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--brick-dark);margin-bottom:4px">Lesson</div>
+                <h3 style="margin:0 0 10px;font-size:1.15rem">{{ lessonName }}</h3>
+                <div style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:6px">Look for this while you read</div>
+                <sc-for list="{{ lessonLook }}" as="lk" hint-placeholder-count="3">
+                  <div style="display:flex;gap:9px;padding:3px 0;font-size:1rem;line-height:1.55"><span style="color:var(--brick)">&bull;</span><span>{{ lk.text }}</span></div>
+                </sc-for>
               </div>
+
               <div class="passage-box" style="margin-top:14px">
                 <h3 style="margin:0 0 8px">{{ rdTitle }}</h3>
                 <div class="passage-flow">{{ rdText }}</div>
                 <div style="margin-top:10px"><button onClick="{{ rdListen }}" style="{{ btnSecondary }}">Read it to me</button></div>
               </div>
+
               <div class="box" style="margin-top:14px;border-left:4px solid var(--brick)">
-                <div style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--brick-dark);margin-bottom:5px">Now write this by hand</div>
-                <div style="font-size:1.04rem;line-height:1.65">{{ closeWrite }}</div>
-              </div>
-              <div class="box" style="margin-top:12px">
-                <div style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:5px">Check your own answer first</div>
-                <div style="font-size:.96rem;line-height:1.6">{{ closeCheck }}</div>
+                <div style="font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--brick-dark);margin-bottom:6px">In your notebook</div>
+                <div style="font-size:1rem;line-height:1.55;margin-bottom:10px">{{ lessonDateLine }}</div>
+                <sc-for list="{{ lessonTasks }}" as="tk" hint-placeholder-count="3">
+                  <div style="display:flex;gap:10px;padding:6px 0;border-top:1px solid var(--rule)">
+                    <div style="flex:none;font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--brick-dark);padding-top:2px">{{ tk.n }}</div>
+                    <div style="font-size:1.02rem;line-height:1.6">{{ tk.text }}</div>
+                  </div>
+                </sc-for>
               </div>
             </sc-if>
 
@@ -784,6 +791,26 @@
     </sc-if>
 
     <sc-if value="{{ isParent }}" hint-placeholder-val="{{ false }}">
+      <div class="card">
+        <h2>Checking the notebook</h2>
+        <p class="muted">Every lesson ends with three numbered tasks under the date. Below is what each day asks for and what to look at when the book comes to you — Task 3 is always his own check, so most of what you would correct he should have caught first.</p>
+        <div style="margin-top:12px">
+          <sc-for list="{{ notebookGuide }}" as="ng" hint-placeholder-count="5">
+            <div style="padding:12px 0;border-top:1px solid var(--rule)">
+              <div style="display:flex;gap:10px;align-items:baseline;flex-wrap:wrap">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);min-width:82px">{{ ng.day }}</div>
+                <div style="font-family:'Fraunces',serif;font-size:1.02rem">{{ ng.lesson }}</div>
+              </div>
+              <div style="margin-top:7px;font-size:.93rem;line-height:1.55">{{ ng.parent }}</div>
+              <div class="muted" style="margin-top:6px;font-size:.86rem">Asks for: {{ ng.asks }}</div>
+            </div>
+          </sc-for>
+        </div>
+        <div class="box" style="margin-top:14px">
+          <strong>Every entry, every day:</strong> the date at the top written out in full, three tasks numbered, and handwriting he would be willing to show you. A page that cannot be read back in June was not worth writing in September.
+        </div>
+      </div>
+
       <div class="card">
         <h2>Go back and redo a day</h2>
         <p class="muted">Pick any day of the year and clear it — its ticks, its drill scores, and the mark you gave it. Everything else stays. It starts on the day being viewed, so the common case is one press.</p>
@@ -2063,15 +2090,19 @@ class Component extends DCLogic {
       photoGrading: false,
       noPhotoGrading: true,
       noPhotoNote: "No photo needed. Write the page by hand, then take the paper to a grown-up on Thursday \u2014 they mark the page itself, which tells you more than a photograph of it can.",
-      /* The daily close read: same passage, a different purpose each day. */
-      closeFocus:(function(){ const C=window.__CURR.LA_CLOSE;
-        return C?C.closeFor(st.year, st.day).focus:""; })(),
-      closeLook:(function(){ const C=window.__CURR.LA_CLOSE;
-        return C?C.closeFor(st.year, st.day).look:""; })(),
-      closeWrite:(function(){ const C=window.__CURR.LA_CLOSE;
-        return C?C.closeFor(st.year, st.day).write:""; })(),
-      closeCheck:(function(){ const C=window.__CURR.LA_CLOSE;
-        return C?C.closeFor(st.year, st.day).check:""; })(),
+      /* The daily lesson, in the order it is done: what it is, what to look
+       * for BEFORE the passage, then the numbered notebook tasks. */
+      lessonName:(function(){ const C=window.__CURR.LA_CLOSE;
+        return C?C.lessonFor(st.year, st.day).lesson:""; })(),
+      lessonLook:(function(){ const C=window.__CURR.LA_CLOSE;
+        return C?C.lessonFor(st.year, st.day).look.map(function(t){ return {text:t}; }):[]; })(),
+      lessonDateLine:(function(){ const C=window.__CURR.LA_CLOSE;
+        return C?C.DATE_LINE:""; })(),
+      lessonTasks:(function(){ const C=window.__CURR.LA_CLOSE;
+        return C?C.lessonFor(st.year, st.day).tasks.map(function(t,i){
+          return {n:"Task #"+(i+1), text:t}; }):[]; })(),
+      lessonParent:(function(){ const C=window.__CURR.LA_CLOSE;
+        return C?C.lessonFor(st.year, st.day).parent:""; })(),
       rdText:passage.text, rdReadAloud:passage.readAloud,
       /* Paragraphs as real elements rather than one string relying on a CSS
        * white-space rule. The Today tab was using a class that does not exist
@@ -2514,6 +2545,18 @@ class Component extends DCLogic {
       noOverrides: Object.keys(st.overrides||{}).length===0,
 
       /* Week and day pickers, so any day of the year can be reached from here. */
+      /* What each day's notebook entry should contain, and what to check. */
+      notebookGuide:(function(){
+        const C=window.__CURR.LA_CLOSE;
+        if(!C) return [];
+        const name={Mon:"Monday",Tue:"Tuesday",Wed:"Wednesday",Thu:"Thursday",Fri:"Friday"};
+        return C.ORDER.map(function(d){
+          const L=C.lessonFor(st.year, d);
+          return {day:name[d], lesson:L.lesson, parent:L.parent,
+                  asks:L.tasks[0].replace(/\s+/g," ").slice(0,88)+"\u2026"};
+        });
+      })(),
+
       redoWeekItems:(function(){
         const t=self.redoTarget();
         return Array.from({length:36},function(_,i){ return i+1; }).map(function(n){

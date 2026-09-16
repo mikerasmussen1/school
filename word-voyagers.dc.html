@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=2026-09-14-2201"></script>
-  <script data-build>window.__BUILD__="2026-09-14-2201";</script>
-  <script src="./curriculum/freshness.js?v=2026-09-14-2201"></script>
+<script src="./support.js?v=2026-09-16-1819"></script>
+  <script data-build>window.__BUILD__="2026-09-16-1819";</script>
+  <script src="./curriculum/freshness.js?v=2026-09-16-1819"></script>
 </head>
 <body>
 <x-dc>
@@ -49,30 +49,31 @@
   .book-title{font-family:'Fraunces',serif;font-size:1rem;color:var(--brick-dark);margin:0 0 3px}
   .done-banner{text-align:center;padding:22px;margin-top:6px;background:var(--forest-light);border-radius:8px;color:#2E4E38}
 </style>
-<script src="./curriculum/sync.js?v=2026-09-14-2201"></script>
-<script src="./curriculum/students.js?v=2026-09-14-2201"></script>
-<script src="./curriculum/subjects.js?v=2026-09-14-2201"></script>
-<script src="./curriculum/question-types.js?v=2026-09-14-2201"></script>
-<script src="./curriculum/la-y1-spine.js?v=2026-09-14-2201"></script>
-<script src="./curriculum/la-y1-words.js?v=2026-09-14-2201"></script>
-<script src="./curriculum/la-y1-grammar.js?v=2026-09-14-2201"></script>
-<script src="./curriculum/la-y1-reading.js?v=2026-09-14-2201"></script>
-<script src="./curriculum/la-y1-tasks.js?v=2026-09-14-2201"></script>
-<script src="./curriculum/la-books.js?v=2026-09-14-2201"></script>
-<script src="./curriculum/la-y2-spine.js?v=2026-09-14-2201"></script>
-<script src="./curriculum/la-y2-words.js?v=2026-09-14-2201"></script>
-<script src="./curriculum/la-y2-grammar.js?v=2026-09-14-2201"></script>
-<script src="./curriculum/la-y2-reading.js?v=2026-09-14-2201"></script>
-<script src="./curriculum/la-y2-tasks.js?v=2026-09-14-2201"></script>
-<script src="./curriculum/la-books-y2.js?v=2026-09-14-2201"></script>
-<script src="./curriculum/la-quotes.js?v=2026-09-14-2201"></script>
-<script src="./curriculum/la-daily-fix.js?v=2026-09-14-2201"></script>
-<script src="./curriculum/la-skill-notes.js?v=2026-09-14-2201"></script>
-<script src="./curriculum/la-facts.js?v=2026-09-14-2201"></script>
-<script src="./curriculum/la-close-reading.js?v=2026-09-14-2201"></script>
-<script src="./curriculum/la-mastery.js?v=2026-09-14-2201"></script>
-<script src="./curriculum/la-calendar.js?v=2026-09-14-2201"></script>
-<script src="./curriculum/la-grader.js?v=2026-09-14-2201"></script>
+<script src="./curriculum/sync.js?v=2026-09-16-1819"></script>
+<script src="./curriculum/students.js?v=2026-09-16-1819"></script>
+<script src="./curriculum/subjects.js?v=2026-09-16-1819"></script>
+<script src="./curriculum/question-types.js?v=2026-09-16-1819"></script>
+<script src="./curriculum/la-y1-spine.js?v=2026-09-16-1819"></script>
+<script src="./curriculum/la-y1-words.js?v=2026-09-16-1819"></script>
+<script src="./curriculum/la-y1-grammar.js?v=2026-09-16-1819"></script>
+<script src="./curriculum/la-y1-reading.js?v=2026-09-16-1819"></script>
+<script src="./curriculum/la-y1-tasks.js?v=2026-09-16-1819"></script>
+<script src="./curriculum/la-books.js?v=2026-09-16-1819"></script>
+<script src="./curriculum/la-y2-spine.js?v=2026-09-16-1819"></script>
+<script src="./curriculum/la-y2-words.js?v=2026-09-16-1819"></script>
+<script src="./curriculum/la-y2-grammar.js?v=2026-09-16-1819"></script>
+<script src="./curriculum/la-y2-reading.js?v=2026-09-16-1819"></script>
+<script src="./curriculum/la-y2-tasks.js?v=2026-09-16-1819"></script>
+<script src="./curriculum/la-books-y2.js?v=2026-09-16-1819"></script>
+<script src="./curriculum/la-quotes.js?v=2026-09-16-1819"></script>
+<script src="./curriculum/la-daily-fix.js?v=2026-09-16-1819"></script>
+<script src="./curriculum/la-skill-notes.js?v=2026-09-16-1819"></script>
+<script src="./curriculum/la-challenge.js?v=2026-09-16-1819"></script>
+<script src="./curriculum/la-facts.js?v=2026-09-16-1819"></script>
+<script src="./curriculum/la-close-reading.js?v=2026-09-16-1819"></script>
+<script src="./curriculum/la-mastery.js?v=2026-09-16-1819"></script>
+<script src="./curriculum/la-calendar.js?v=2026-09-16-1819"></script>
+<script src="./curriculum/la-grader.js?v=2026-09-16-1819"></script>
 </helmet>
 
 <div style="min-height:100vh;display:flex;flex-direction:column">
@@ -265,16 +266,28 @@
                 <div style="margin-top:10px"><button onClick="{{ rdListen }}" style="{{ btnSecondary }}">Read it to me</button></div>
               </div>
 
-              <div class="box" style="margin-top:14px;border-left:4px solid var(--brick)">
-                <div style="font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--brick-dark);margin-bottom:6px">In your notebook</div>
-                <div style="font-size:1rem;line-height:1.55;margin-bottom:10px">{{ lessonDateLine }}</div>
-                <sc-for list="{{ lessonTasks }}" as="tk" hint-placeholder-count="3">
-                  <div style="display:flex;gap:10px;padding:6px 0;border-top:1px solid var(--rule)">
-                    <div style="flex:none;font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--brick-dark);padding-top:2px">{{ tk.n }}</div>
-                    <div style="font-size:1.02rem;line-height:1.6">{{ tk.text }}</div>
-                  </div>
-                </sc-for>
-              </div>
+              <sc-if value="{{ hasChallenge }}" hint-placeholder-val="{{ true }}">
+                <div class="box" style="margin-top:14px;border-left:4px solid var(--brick)">
+                  <div style="font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--brick-dark);margin-bottom:6px">The challenge</div>
+                  <div style="font-size:1.02rem;line-height:1.6;margin-bottom:10px">{{ challengeAsk }}</div>
+                  <div class="q-box" style="margin-bottom:8px"><strong>A.</strong> {{ challengeA }}</div>
+                  <div class="q-box"><strong>B.</strong> {{ challengeB }}</div>
+                </div>
+
+                <div class="box" style="margin-top:14px;border-left:4px solid var(--forest)">
+                  <div style="font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--brick-dark);margin-bottom:6px">In your notebook</div>
+                  <div style="display:flex;gap:10px;padding:6px 0"><div style="flex:none;font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--brick-dark);padding-top:2px">1</div><div style="font-size:1.02rem;line-height:1.6">{{ lessonDateLine }}</div></div>
+                  <div style="display:flex;gap:10px;padding:6px 0;border-top:1px solid var(--rule)"><div style="flex:none;font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--brick-dark);padding-top:2px">2</div><div style="font-size:1.02rem;line-height:1.6">Decide between A and B, then copy your chosen sentence out neatly, exactly as it is written, with its punctuation.</div></div>
+                  <div style="display:flex;gap:10px;padding:6px 0;border-top:1px solid var(--rule)"><div style="flex:none;font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--brick-dark);padding-top:2px">3</div><div style="font-size:1.02rem;line-height:1.6">{{ challengeThink }}</div></div>
+                </div>
+              </sc-if>
+
+              <sc-if value="{{ noChallenge }}" hint-placeholder-val="{{ false }}">
+                <div class="box" style="margin-top:14px;border-left:4px solid var(--gold)">
+                  <div style="font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--brick-dark);margin-bottom:6px">Not written yet</div>
+                  <div style="font-size:1.02rem;line-height:1.6">{{ noChallengeNote }}</div>
+                </div>
+              </sc-if>
             </sc-if>
 
             <sc-if value="{{ aRead }}" hint-placeholder-val="{{ false }}">
@@ -821,7 +834,10 @@
                 <div style="font-family:'Fraunces',serif;font-size:1.02rem">{{ ng.lesson }}</div>
               </div>
               <div style="margin-top:7px;font-size:.93rem;line-height:1.55">{{ ng.parent }}</div>
-              <div class="muted" style="margin-top:6px;font-size:.86rem">Asks for: {{ ng.asks }}</div>
+              <div class="muted" style="margin-top:6px;font-size:.86rem">{{ ng.asks }}</div>
+              <sc-if value="{{ ng.hasAnswer }}" hint-placeholder-val="{{ false }}">
+                <div class="box" style="margin-top:7px;font-size:.9rem"><strong>Correct choice: {{ ng.answer }}</strong> — {{ ng.answerText }}</div>
+              </sc-if>
             </div>
           </sc-for>
         </div>
@@ -2117,6 +2133,28 @@ class Component extends DCLogic {
         return C?C.lessonFor(st.year, st.day).look.map(function(t){ return {text:t}; }):[]; })(),
       lessonDateLine:(function(){ const C=window.__CURR.LA_CLOSE;
         return C?C.DATE_LINE:""; })(),
+      /* The day's challenge: two named sentences, a decision, and one
+       * critical-thinking question. Weeks not yet written say so rather than
+       * falling back to a vague task. */
+      hasChallenge:(function(){ const C=window.__CURR.LA_CHALLENGE;
+        return !!(C && C.challengeFor(st.year, st.week, st.day)); })(),
+      noChallenge:(function(){ const C=window.__CURR.LA_CHALLENGE;
+        return !(C && C.challengeFor(st.year, st.week, st.day)); })(),
+      challengeAsk:(function(){ const C=window.__CURR.LA_CHALLENGE;
+        const c=C&&C.challengeFor(st.year, st.week, st.day); return c?c.ask:""; })(),
+      challengeA:(function(){ const C=window.__CURR.LA_CHALLENGE;
+        const c=C&&C.challengeFor(st.year, st.week, st.day); return c?c.a:""; })(),
+      challengeB:(function(){ const C=window.__CURR.LA_CHALLENGE;
+        const c=C&&C.challengeFor(st.year, st.week, st.day); return c?c.b:""; })(),
+      challengeThink:(function(){ const C=window.__CURR.LA_CHALLENGE;
+        const c=C&&C.challengeFor(st.year, st.week, st.day); return c?c.think:""; })(),
+      noChallengeNote:(function(){ const C=window.__CURR.LA_CHALLENGE;
+        if(!C) return "";
+        const done=C.weeksWritten(st.year);
+        return "This week's challenge sentences have not been written yet. Weeks "+
+               done[0]+" to "+done[done.length-1]+" are ready. For today, read the passage "+
+               "again for the purpose above and write the date and one paragraph about what you noticed.";
+      })(),
       lessonTasks:(function(){ const C=window.__CURR.LA_CLOSE;
         return C?C.lessonFor(st.year, st.day).tasks.map(function(t,i){
           return {n:"Task #"+(i+1), text:t}; }):[]; })(),
@@ -2598,10 +2636,18 @@ class Component extends DCLogic {
         const C=window.__CURR.LA_CLOSE;
         if(!C) return [];
         const name={Mon:"Monday",Tue:"Tuesday",Wed:"Wednesday",Thu:"Thursday",Fri:"Friday"};
+        const CH=window.__CURR.LA_CHALLENGE;
         return C.ORDER.map(function(d){
           const L=C.lessonFor(st.year, d);
+          /* The parent needs the ANSWER, not a description of the task. Two
+           * candidate sentences and one right choice can be checked in ten
+           * seconds; a paragraph of guidance cannot. */
+          const c=CH?CH.challengeFor(st.year, st.week, d):null;
           return {day:name[d], lesson:L.lesson, parent:L.parent,
-                  asks:L.tasks[0].replace(/\s+/g," ").slice(0,88)+"\u2026"};
+                  asks: c ? c.ask : "Challenge sentences not written for this week yet.",
+                  hasAnswer: !!c,
+                  answer: c ? c.pick.toUpperCase() : "",
+                  answerText: c ? c[c.pick] : ""};
         });
       })(),
 

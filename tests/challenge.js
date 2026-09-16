@@ -33,8 +33,12 @@ console.log("\n=== each has a real decision and a thinking question ===");
     if(!/\?$/.test(c.think)) fail.push(label+" w"+w+" "+d+" the thinking task is not a question");
     if(c.think.length<40)    fail.push(label+" w"+w+" "+d+" thinking question is too thin");
     // it must be about THIS passage, not a frame that would fit any text
-    if(/one thing|something|any sentence/i.test(c.think))
-      fail.push(label+" w"+w+" "+d+" thinking question is generic");
+    // A generic question is one that would fit ANY passage — "find one thing
+    // that...", "any sentence which...". Matching the bare word "something"
+    // flagged ordinary prose like "finding something sad", so match the
+    // frames themselves.
+    if(/\bfind (one thing|something|a sentence)\b|\bany sentence\b|\bone thing the passage\b/i.test(c.think))
+      fail.push(label+" w"+w+" "+d+" thinking question is a generic frame");
   }));
 });
 console.log("  every decision and every thinking question is specific to its passage");

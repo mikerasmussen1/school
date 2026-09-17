@@ -37,7 +37,7 @@ console.log("=== the notebook is one numbered sequence of six ===");
   t.forEach((x,i)=>{ if(x.n!=="Task #"+(i+1)) fail.push("quote task "+i+" is labelled "+x.n); });
   if(!/date/i.test(t[0].text))                 fail.push("Task 1 is not the date");
   const WANT={1:"Copy today's quote word for word, exactly as it is written.",
-              2:"Write where it came from underneath.",
+              2:"Write where it came from to give proper credit to the author.",
               3:"Write what this quote's translation means to you (or what you think it means.) One or two sentences is sufficient."};
   [1,2,3].forEach(i=>{ if(!t[i] || t[i].text!==WANT[i]) fail.push("Task #"+(i+1)+" is not the agreed wording: "+(t[i]||{}).text); });
   const TASK3="Write what this quote's translation means to you (or what you think it means.) One or two sentences is sufficient.";

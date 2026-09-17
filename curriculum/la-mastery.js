@@ -388,11 +388,26 @@
            "You can carry on with the rest of the day.";
   }
 
+  /* PACE, SHOWN NOT ENFORCED. The date he would finish if he did one lesson
+   * every weekday, Monday to Friday, starting today. No holidays and no
+   * schedule: it only turns "lessons left" into a date so he can see his pace.
+   *   lessonsLeft  lessons still to do, counting today's
+   *   from         today; a Saturday or Sunday starts counting on Monday */
+  function isWeekday(d){ const w=d.getDay(); return w!==0 && w!==6; }
+  function finishDate(lessonsLeft, from){
+    const d = new Date(from.getFullYear(), from.getMonth(), from.getDate());
+    while(!isWeekday(d)) d.setDate(d.getDate()+1);
+    for(let n=Math.max(1, lessonsLeft); n>1; n--){
+      do { d.setDate(d.getDate()+1); } while(!isWeekday(d));
+    }
+    return d;
+  }
+
   window.__CURR = window.__CURR || {};
   window.__CURR.LA_MASTERY = {
     MASTERY, MAX_ROUNDS, DAYS, DAY_NAME, PLANS,
     dayPlan, passed, neededFor,
-    TOTAL_DAYS, absIndex, fromAbs, endKey, excuseKey,
+    TOTAL_DAYS, absIndex, fromAbs, endKey, excuseKey, finishDate,
     dayFinished, firstIncomplete, dayStatus, closedToday,
     /* Pace is tunable without a deploy: LA_MASTERY.setPace(0) restores the
      * original uncapped behaviour, setPace(1) makes it strictly one a day. */

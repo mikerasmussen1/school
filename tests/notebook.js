@@ -63,34 +63,22 @@ console.log("\n=== three numbered tasks, the third always the self-check ===");
 });
 console.log("  all 10 grade-days: Task 1, Task 2, Task 3 = check your work");
 
-console.log("\n=== the date to write is the lesson's scheduled date, every day, both grades ===");
-{ // Task 1 used to show one fixed example date all year. It must name the
-  // school day the calendar assigns to that lesson, which is also the date in
-  // the lesson header, so the notebook and the schedule agree.
-  const CAL=window.__CURR.LA_CALENDAR;
-  const MONTHS=["January","February","March","April","May","June","July","August","September","October","November","December"];
-  const seen=new Set();
+console.log("\n=== Task 1 asks for today's date as Month Day, Year, every day, both grades ===");
+{ // The course is self-paced, so Task 1 asks for the day the work is done and
+  // gives the format, not a date: no fixed example, no scheduled date.
+  console.log("  " + CL.DATE_LINE);
   ["y1","y2"].forEach(g=>{
-    for(let w=1;w<=36;w++) CL.ORDER.forEach((d,i)=>{
-      const dt=CAL.dateForIndex((w-1)*5+i);
-      const want=MONTHS[dt.getMonth()]+" "+dt.getDate()+", "+dt.getFullYear();
+    for(let w=1;w<=36;w++) CL.ORDER.forEach(d=>{
       const c=new C(); c.state.landed=true; c.state.year=g; c.state.week=w; c.state.day=d;
-      const v=c.renderVals();
-      const line=(v.quoteTasks||[])[0] ? v.quoteTasks[0].text : "";
-      if(!/date at the top/.test(line)) fail.push(g+" w"+w+" "+d+" Task 1 does not ask for the date");
-      if(!line.endsWith(": "+want)) fail.push(g+" w"+w+" "+d+" Task 1 says '"+line.split(": ").pop()+"', schedule says "+want);
-      if(v.lessonDate!==CAL.longDate(dt)) fail.push(g+" w"+w+" "+d+" header date and notebook date come from different days");
-      if(g==="y1") seen.add(want);
+      const line=((c.renderVals().quoteTasks||[])[0]||{}).text||"";
+      if(line!==CL.DATE_LINE) fail.push(g+" w"+w+" "+d+" Task 1 differs: "+line);
     });
   });
-  if(seen.size!==180) fail.push("the 180 lessons produce "+seen.size+" distinct notebook dates, not 180");
-  // Days that prove it follows the calendar, not a count of weekdays.
-  [[1,"Mon","August 31, 2026"],[2,"Mon","September 8, 2026"],[36,"Fri","June 8, 2027"]].forEach(([w,d,want])=>{
-    const line=CL.dateLineFor(w,d);
-    console.log("  week "+String(w).padStart(2)+" "+d+"  ->  "+line.split(": ").pop());
-    if(!line.endsWith(": "+want)) fail.push("week "+w+" "+d+" should be "+want+", got "+line);
-  });
-  console.log("  360 grade-days: Task 1 matches the scheduled date and the lesson header");
+  if(!/today's date/.test(CL.DATE_LINE)) fail.push("Task 1 does not ask for today's date");
+  if(!/Month Day, Year/.test(CL.DATE_LINE)) fail.push("Task 1 does not give the Month Day, Year format");
+  if(/\d/.test(CL.DATE_LINE) || /(January|February|March|April|May|June|July|August|September|October|November|December) \d/.test(CL.DATE_LINE))
+    fail.push("Task 1 still shows a date: "+CL.DATE_LINE);
+  console.log("  360 grade-days: the same Task 1, asking for today's date with no date shown");
 }
 
 console.log("\n=== the panel prints them in lesson order ===");

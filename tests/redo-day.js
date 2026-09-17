@@ -60,7 +60,7 @@ console.log("\n=== the picker reaches every day of the year, both grades ===");
 });
 console.log("  36 weeks x 5 days offered, defaulting to the day on screen");
 
-console.log("\n=== choosing a far-off day names the right date ===");
+console.log("\n=== choosing a far-off day names that lesson, with no date ===");
 { const c=parent("y1");
   let v=c.renderVals();
   v.redoWeekItems[19].onClick();          // week 20
@@ -76,10 +76,9 @@ console.log("\n=== choosing a far-off day names the right date ===");
   // that contradicts the confirmation
   if(!/^Thursday of week 20/.test(v.dayResetTarget))
     fail.push("the card leads with something other than the lesson day: "+v.dayResetTarget);
-  if(!/falls on/.test(v.dayResetTarget))
-    fail.push("the card does not give the calendar date");
-  if(!/Friday 5 February 2027/.test(v.dayResetTarget))
-    fail.push("the calendar date is wrong or missing");
+  // Self-paced: the card names the lesson, never a calendar date for it.
+  if(/falls on|2026|2027/.test(v.dayResetTarget))
+    fail.push("the card still gives a calendar date: "+v.dayResetTarget);
 }
 
 console.log("\n=== it clears the chosen day, not the one on screen ===");

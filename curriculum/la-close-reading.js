@@ -36,6 +36,11 @@
    * (It once showed "like this: September 14, 2026" on every lesson, and then
    * a scheduled date per lesson; both implied a pace the course does not set.) */
   const DATE_LINE = "Write today's date at the top in this format: Month Day, Year";
+  /* Fifth grade has its own wording, with the weekday and a worked example.
+   * The example date is fixed on purpose: it shows the format, and it is a
+   * date that matters to the family, not a lesson date. */
+  const DATE_LINE_Y2 = "Write today's date in your notebook following this format: Weekday, Month, Day, Year.  Example: Saturday, March 5, 2016 (one of the best days of Nana's life!)";
+  function dateLineFor(grade){ return grade === "y2" ? DATE_LINE_Y2 : DATE_LINE; }
 
   /* Third grade. Concrete purposes, short written tasks. */
   const Y1 = {
@@ -180,6 +185,6 @@
 
   window.__CURR = window.__CURR || {};
   window.__CURR.LA_CLOSE = {
-    Y1, Y2, ORDER, DATE_LINE, lessonFor, closeFor, MINUTES, minutesFor, dayMinutes
+    Y1, Y2, ORDER, DATE_LINE, DATE_LINE_Y2, dateLineFor, lessonFor, closeFor, MINUTES, minutesFor, dayMinutes
   };
 })();

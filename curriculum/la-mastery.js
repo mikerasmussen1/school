@@ -80,7 +80,7 @@
       {key:"rq",    label:"Comprehension questions",         gate:"score",
        detail:"Answer using evidence from the text. You need 80% to pass.",
        done:"You scored 80% or better."},
-      {key:"end",   label:"Finish this lesson",                   gate:"end",
+      {key:"end",   label:"Finish this lesson and get your reward!",                   gate:"end",
        detail:"Reading lesson complete.", done:"Lesson closed."}
     ],
     Tue: [
@@ -99,7 +99,7 @@
       {key:"gz",    label:"Grammar drill",                   gate:"score",
        detail:"Six questions. You need 80% to pass.",
        done:"You scored 80% or better."},
-      {key:"end",   label:"Finish this lesson",                  gate:"end",
+      {key:"end",   label:"Finish this lesson and get your reward!",                  gate:"end",
        detail:"Grammar lesson complete.", done:"Lesson closed."}
     ],
     Wed: [
@@ -118,7 +118,7 @@
       {key:"sq",    label:"Spelling drill",                  gate:"score",
        detail:"Listen and type. You need 80% to pass.",
        done:"You scored 80% or better."},
-      {key:"end",   label:"Finish this lesson",                gate:"end",
+      {key:"end",   label:"Finish this lesson and get your reward!",                gate:"end",
        detail:"Spelling lesson complete.", done:"Lesson closed."}
     ],
     Thu: [
@@ -143,7 +143,7 @@
       {key:"approve", label:"Take it to a grown-up to mark", gate:"approve",
        detail:"Carry the paper to a grown-up. They look at the real page, and provide feedback here. Make any changes to address their feedback.",
        done:"A grown-up has marked it."},
-      {key:"end",   label:"Finish this lesson",                 gate:"end",
+      {key:"end",   label:"Finish this lesson and get your reward!",                 gate:"end",
        detail:"Handwriting lesson complete.", done:"Lesson closed."}
     ],
     Fri: [
@@ -162,7 +162,7 @@
       {key:"rv",    label:"Week review drill",               gate:"score",
        detail:"Four mixed questions from this week. You need 80% to pass.",
        done:"You scored 80% or better."},
-      {key:"end",   label:"Finish this lesson and the week",      gate:"end",
+      {key:"end",   label:"Finish this lesson and the week, and get your reward!",      gate:"end",
        detail:"Week complete.", done:"Week closed."}
     ]
   };

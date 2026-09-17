@@ -52,7 +52,15 @@ console.log("\n=== the labels that replaced them ===");
   Object.keys(want).forEach(k=>{ console.log("  "+k.padEnd(13)+" "+v[k]); if(v[k]!==want[k]) fail.push(k+" is '"+v[k]+"', want '"+want[k]+"'"); });
   // The last checklist step's button names the lesson, not the day, whether
   // the child reaches it in order or jumps to it early.
-  const endBtn=(v.daySteps||[]).filter(x=>/Finish this lesson/.test(x.label||"")).map(x=>x.btnLabel);
+  // The last step promises the reward it unlocks: the Pokémon fact and joke.
+  const endRow=(v.daySteps||[]).filter(x=>/Finish this lesson/.test(x.label||""));
+  if(!endRow.length || !/^\d+\. Finish this lesson and get your reward!$/.test(endRow[0].label)) fail.push("the last step is labelled: "+(endRow[0]||{}).label);
+  const M2=window.__CURR.LA_MASTERY;
+  ["y1","y2"].forEach(g=>["Mon","Tue","Wed","Thu","Fri"].forEach(d=>{
+    const e=M2.dayPlan(g,20,d).steps.slice(-1)[0];
+    if(!/get your reward!$/.test(e.label)) fail.push(g+" "+d+" last step: "+e.label);
+  }));
+  const endBtn=endRow.map(x=>x.btnLabel);
   console.log("  end button    "+endBtn.join(", "));
   if(!endBtn.length || endBtn.some(b=>b!=="Finish this lesson")) fail.push("the last step's button reads: "+endBtn.join(", "));
   if(/Finish the day/.test(h)) fail.push("the page still has a Finish the day button");

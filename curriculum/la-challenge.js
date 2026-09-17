@@ -25,15 +25,14 @@
  * edited, the check fails loudly instead of the task quietly pointing at
  * nothing.
  *
- * WHAT GOES IN THE NOTEBOOK: one entry of three numbered tasks per lesson.
+ * WHAT GOES IN THE NOTEBOOK: one entry of five numbered tasks per lesson.
  *   1  the date                      (with the quote, at the start)
  *   2  the day's quote, copied       (with the quote)
  *   3  what the quote means          (with the quote)
- * The challenge in this file is decided on screen; nothing from it is written
- * in the notebook any more (Tasks 4 and 5, copying the chosen sentence and
- * answering `think`, were removed). `think` is kept in the data but not shown.
+ *   4  the chosen challenge sentence, copied exactly   <- this file
+ *   5  the answer to the critical-thinking question    <- this file
  *
- * Every a/b must still be a WHOLE sentence, because the page quotes it:
+ * Because Task 4 says "copied exactly", every a/b must be a WHOLE sentence:
  * starting where the passage's sentence starts (watch Mr./Mrs./Dr.) and with
  * its quotation marks balanced. tests/challenge.js checks both.
  *

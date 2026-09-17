@@ -111,7 +111,8 @@ console.log("a half-finished drill still holds its answers");
   ok(g.marked === 2 && g.right === 1, "with the score so far (" + g.right + " of " + g.marked + ")");
   ok(g.rows.length === 2, "both answers are there");
   ok(g.rows[1].ok === false && g.rows[1].answer === "9", "including the wrong one, with what was typed");
-  ok(/Week 3/.test(g.where) && /Tuesday/.test(g.where), "labelled by week and day: " + g.where);
+  ok(/Week 3/.test(g.where) && /Lesson 12\b/.test(g.where) && !/day\b/i.test(g.where.replace(/Week \d+/,"")),
+     "labelled by week and lesson number, never a weekday: " + g.where);
 }
 
 console.log("a finished drill says so");
@@ -348,8 +349,8 @@ console.log("Teacher HQ turns the log into rows");
     const glance = la.weekGlance(data, {week: 1});
     const cells = ((glance.columns || [])[0] || {}).cells || [];
     ok(cells.length === 5, "the week still draws five days (" + cells.length + ")");
-    ok(cells.map(c => c.label).join("") === "MTWTF",
-       "each square says which day it is (" + cells.map(c => c.label).join("") + ")");
+    ok(cells.map(c => c.label).join(",") === "1,2,3,4,5",
+       "each square says which lesson it is (" + cells.map(c => c.label).join(",") + ")");
 
     const mon = cells[0], tue = cells[1];
     ok(mon.id === "y1:1:Mon", "Monday carries its day id (" + mon.id + ")");
@@ -361,8 +362,8 @@ console.log("Teacher HQ turns the log into rows");
     if(app2.initState) Object.assign(app2.state, app2.initState() || {});
     const v = app2.pickedDayVals(la, data, null, mon.id);
     ok(v.hasPicked === true, "clicking it opens a panel");
-    ok(/Week 1/.test(v.pickedLabel) && /Monday/.test(v.pickedLabel),
-       "headed by the week and day: " + v.pickedLabel);
+    ok(/Week 1/.test(v.pickedLabel) && /Lesson 1\b/.test(v.pickedLabel),
+       "headed by the week and lesson number: " + v.pickedLabel);
     ok(v.pickedDrills.length === 1, "one drill that day (" + v.pickedDrills.length + ")");
     const d0 = v.pickedDrills[0] || {};
     ok((d0.rows || []).length === 2, "both questions (" + (d0.rows || []).length + ")");

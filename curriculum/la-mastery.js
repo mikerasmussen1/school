@@ -80,8 +80,8 @@
       {key:"rq",    label:"Comprehension questions",         gate:"score",
        detail:"Answer using evidence from the text. You need 80% to pass.",
        done:"You scored 80% or better."},
-      {key:"end",   label:"Finish Monday",                   gate:"end",
-       detail:"Reading day complete.", done:"Day closed."}
+      {key:"end",   label:"Finish this lesson",                   gate:"end",
+       detail:"Reading lesson complete.", done:"Lesson closed."}
     ],
     Tue: [
       {key:"quote", label:"Quote of the day",                gate:"ack",
@@ -99,8 +99,8 @@
       {key:"gz",    label:"Grammar drill",                   gate:"score",
        detail:"Six questions. You need 80% to pass.",
        done:"You scored 80% or better."},
-      {key:"end",   label:"Finish Tuesday",                  gate:"end",
-       detail:"Grammar day complete.", done:"Day closed."}
+      {key:"end",   label:"Finish this lesson",                  gate:"end",
+       detail:"Grammar lesson complete.", done:"Lesson closed."}
     ],
     Wed: [
       {key:"quote", label:"Quote of the day",                gate:"ack",
@@ -118,8 +118,8 @@
       {key:"sq",    label:"Spelling drill",                  gate:"score",
        detail:"Listen and type. You need 80% to pass.",
        done:"You scored 80% or better."},
-      {key:"end",   label:"Finish Wednesday",                gate:"end",
-       detail:"Spelling day complete.", done:"Day closed."}
+      {key:"end",   label:"Finish this lesson",                gate:"end",
+       detail:"Spelling lesson complete.", done:"Lesson closed."}
     ],
     Thu: [
       {key:"quote", label:"Quote of the day",                gate:"ack",
@@ -143,8 +143,8 @@
       {key:"approve", label:"Take it to a grown-up to mark", gate:"approve",
        detail:"Carry the paper to a grown-up. They look at the real page, not the photo, and mark it here.",
        done:"A grown-up has marked it."},
-      {key:"end",   label:"Finish Thursday",                 gate:"end",
-       detail:"Handwriting day complete.", done:"Day closed."}
+      {key:"end",   label:"Finish this lesson",                 gate:"end",
+       detail:"Handwriting lesson complete.", done:"Lesson closed."}
     ],
     Fri: [
       {key:"quote", label:"Quote of the day",                gate:"ack",
@@ -162,7 +162,7 @@
       {key:"rv",    label:"Week review drill",               gate:"score",
        detail:"Four mixed questions from this week. You need 80% to pass.",
        done:"You scored 80% or better."},
-      {key:"end",   label:"Finish Friday and the week",      gate:"end",
+      {key:"end",   label:"Finish this lesson and the week",      gate:"end",
        detail:"Week complete.", done:"Week closed."}
     ]
   };
@@ -393,6 +393,12 @@
    * schedule: it only turns "lessons left" into a date so he can see his pace.
    *   lessonsLeft  lessons still to do, counting today's
    *   from         today; a Saturday or Sunday starts counting on Monday */
+  /* Lessons are named by number, 1 to 180, never by a weekday. The course is
+   * stored as 36 weeks of five slots (Mon..Fri keys), but those keys are
+   * storage, not labels: a self-paced child is not on "Monday". */
+  function lessonNumber(week, day){ return (week-1)*5 + Math.max(0, DAYS.indexOf(day)) + 1; }
+  function lessonLabel(week, day){ return "Lesson " + lessonNumber(week, day); }
+
   function isWeekday(d){ const w=d.getDay(); return w!==0 && w!==6; }
   function finishDate(lessonsLeft, from){
     const d = new Date(from.getFullYear(), from.getMonth(), from.getDate());
@@ -407,7 +413,7 @@
   window.__CURR.LA_MASTERY = {
     MASTERY, MAX_ROUNDS, DAYS, DAY_NAME, PLANS,
     dayPlan, passed, neededFor,
-    TOTAL_DAYS, absIndex, fromAbs, endKey, excuseKey, finishDate,
+    TOTAL_DAYS, absIndex, fromAbs, endKey, excuseKey, finishDate, lessonNumber, lessonLabel,
     dayFinished, firstIncomplete, dayStatus, closedToday,
     /* Pace is tunable without a deploy: LA_MASTERY.setPace(0) restores the
      * original uncapped behaviour, setPace(1) makes it strictly one a day. */

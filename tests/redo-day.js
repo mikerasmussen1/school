@@ -70,12 +70,13 @@ console.log("\n=== choosing a far-off day names that lesson, with no date ===");
   console.log("  " + v.dayResetTarget);
   console.log("  " + v.dayResetConfirm);
   if(!/week 20/.test(v.dayResetTarget))  fail.push("the card does not name week 20");
-  if(!/Thursday/.test(v.dayResetConfirm)) fail.push("the confirm does not name Thursday");
+  if(!/Lesson 99\b/.test(v.dayResetConfirm)) fail.push("the confirm does not name Lesson 99: "+v.dayResetConfirm);
   // the LESSON day and the CALENDAR date differ once holidays have shifted
   // things; the card must name the lesson day, not silently show a weekday
   // that contradicts the confirmation
-  if(!/^Thursday of week 20/.test(v.dayResetTarget))
-    fail.push("the card leads with something other than the lesson day: "+v.dayResetTarget);
+  // Lessons are named by number; week 20's fourth lesson is Lesson 99.
+  if(!/^Lesson 99 · week 20/.test(v.dayResetTarget))
+    fail.push("the card leads with something other than the lesson number: "+v.dayResetTarget);
   // Self-paced: the card names the lesson, never a calendar date for it.
   if(/falls on|2026|2027/.test(v.dayResetTarget))
     fail.push("the card still gives a calendar date: "+v.dayResetTarget);

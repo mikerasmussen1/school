@@ -193,25 +193,29 @@
           answered[p[0] + ":" + p[1] + ":" + p[2]] = true;
       });
 
+      const lessonOfWeek = function(w, d){
+        return "Lesson " + ((parseInt(w,10)-1)*5 + Math.max(0, DAYS.indexOf(d)) + 1);
+      };
       const cells = DAYS.map(function(d, i){
         const key = year + ":" + week + ":" + d;
         const id = answered[key] ? key : "";
-        const at = {label: d.charAt(0), id: id, day: d};
+        const abs = (week - 1) * 5 + i;
+        const name = "Lesson " + (abs + 1);           // a number, not a weekday
+        const at = {label: String(abs + 1), id: id, day: d};
         if(ended(d))
           return wasStuck(d)
-            ? {...at, status:"yellow", hint:d+" — got stuck, finished anyway"}
-            : {...at, status:"green", hint:d+" — finished"};
+            ? {...at, status:"yellow", hint:name+" — got stuck, finished anyway"}
+            : {...at, status:"green", hint:name+" — finished"};
         if(excused[year+":"+week+":"+d+":excused"])
-          return {...at, status:"gray", hint:d+" — excused"};
-        const abs = (week - 1) * 5 + i;
+          return {...at, status:"gray", hint:name+" — excused"};
         if(abs > firstAbs && abs < lastAbs)
-          return {...at, status:"red", hint:d+" — passed by, not finished"};
-        return {...at, status:"gray", hint:d+" — not reached"};
+          return {...at, status:"red", hint:name+" — passed by, not finished"};
+        return {...at, status:"gray", hint:name+" — not reached"};
       });
 
       const finished = cells.filter(function(c){ return c.status==="green"||c.status==="yellow"; }).length;
       const well = [], struggle = [];
-      if(finished) well.push(finished + " of 5 days finished");
+      if(finished) well.push(finished + " of 5 lessons finished");
 
       // This week's graded checks, by their own numbers.
       Object.keys(result).forEach(function(k){
@@ -219,7 +223,7 @@
         if(p[0] !== year || parseInt(p[1],10) !== week) return;
         const r = result[k];
         if(!r || typeof r.score !== "number" || !(r.total > 0)) return;
-        const line = p.slice(2).join(" ") + " check: " + r.score + "/" + r.total;
+        const line = lessonOfWeek(p[1], p[2]) + " " + p[3] + " check: " + r.score + "/" + r.total;
         if(r.score / r.total >= 0.8) well.push(line);
         else if(r.score / r.total < 0.6) struggle.push(line);
       });
@@ -336,8 +340,10 @@
       const NAMES = {rq:"Reading comprehension", gz:"Grammar drill", sq:"Spelling drill",
                      fx:"Find the mistake", fix:"Find the mistake", rv:"Week review"};
       const SLOT_OF = {fix:"fx"};
-      const DAY_NAME = {Mon:"Monday", Tue:"Tuesday", Wed:"Wednesday",
-                        Thu:"Thursday", Fri:"Friday"};
+      /* Word Voyagers names lessons by number, never by a weekday slot. */
+      const lessonOf = function(week, day){
+        return "Lesson " + ((parseInt(week,10)-1)*5 + Math.max(0, ["Mon","Tue","Wed","Thu","Fri"].indexOf(day)) + 1);
+      };
       /* ctx.cell is the square the teacher clicked in the glance — a
        * year:week:day handle this course minted itself. When it is set, only
        * that day's drills are wanted. */
@@ -354,8 +360,8 @@
         out.push({
           cell: cell,
           slot: p[3],
-          day: DAY_NAME[p[2]] || p[2],
-          where: "Week " + p[1] + " · " + (DAY_NAME[p[2]] || p[2]) + " · " +
+          day: lessonOf(p[1], p[2]),
+          where: "Week " + p[1] + " · " + lessonOf(p[1], p[2]) + " · " +
                  (NAMES[p[3]] || p[3]),
           what: NAMES[p[3]] || p[3],
           when: Math.max.apply(null, rows.map(function(e){ return (e && e.ts) || 0; })),
@@ -394,8 +400,8 @@
         out.push({
           cell: cell,
           slot: slot,
-          day: DAY_NAME[p[2]] || p[2],
-          where: "Week " + p[1] + " · " + (DAY_NAME[p[2]] || p[2]) + " · " +
+          day: lessonOf(p[1], p[2]),
+          where: "Week " + p[1] + " · " + lessonOf(p[1], p[2]) + " · " +
                  (NAMES[p[3]] || p[3]),
           what: NAMES[p[3]] || p[3],
           when: r.at || 0,

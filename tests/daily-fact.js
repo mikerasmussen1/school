@@ -106,14 +106,60 @@ console.log("\n=== it is a reward: nothing until the day is finished ===");
   if(!v.factTie)  fail.push(g+" no tie back to the lesson after finishing");
 });
 
+console.log("\n=== a joke too, with the punchline held back ===");
+{ let clashes=0, seen={};
+  for(let w=1;w<=36;w++) ["Mon","Tue","Wed","Thu","Fri"].forEach(d=>{
+    const a=F.jokeFor("y1",w,d), b=F.jokeFor("y2",w,d);
+    if(!a.setup || !a.punchline) fail.push("y1 w"+w+" "+d+" joke is incomplete");
+    if(a.setup===b.setup) clashes++;
+    seen[a.setup]=1;
+  });
+  console.log("  "+F.jokeCount()+" jokes, "+Object.keys(seen).length+" distinct over the year, clashes between brothers: "+clashes);
+  if(clashes) fail.push(clashes+" days tell both boys the same joke");
+  if(F.jokeCount()<40) fail.push("only "+F.jokeCount()+" jokes; the cycle repeats too soon");
+  // every joke must actually have two parts
+  F.JOKES.forEach((j,i)=>{
+    if(j[0].length<12 || j[1].length<4) fail.push("joke "+i+" is missing a half");
+    if(j[0]===j[1]) fail.push("joke "+i+" has the same setup and punchline");
+  });
+}
+
+{ Object.keys(store).forEach(k=>delete store[k]);
+  const c=new C(); c.state.landed=true; c.state.year="y1"; c.state.week=1; c.state.day="Mon";
+  c.startDay();
+  const done={}, res={};
+  M.dayPlan("y1",1,"Mon").steps.forEach(s2=>{
+    done["y1:1:Mon:"+s2.key]=true;
+    if(s2.gate==="score") res["y1:1:Mon:"+s2.key]={score:1,total:1,at:Date.now()};
+  });
+  c.setState({stepDone:done, stepResult:res});
+  let v=c.renderVals();
+  console.log("  setup shown    : "+JSON.stringify(v.jokeSetup));
+  if(!v.jokeSetup) fail.push("no joke after finishing the day");
+  if(!v.jokeHidden) fail.push("the punchline is showing before it is asked for");
+  if(v.jokeShown)   fail.push("the joke opens already revealed");
+  v.jokeReveal();
+  v=c.renderVals();
+  console.log("  punchline after: "+JSON.stringify(v.jokePunchline));
+  if(!v.jokeShown) fail.push("Tell me did not reveal the punchline");
+  // and it closes again on the next day
+  c.setDay("Tue");
+  if(c.state.jokeOpen) fail.push("the punchline stays revealed into the next day");
+  console.log("  closes again on the next day: yes");
+}
+
 console.log("\n=== the banner binds it ===");
 { const src=fs.readFileSync(__dirname+'/../word-voyagers.dc.html','utf8');
   const i=src.indexOf('{{ showDayComplete }}');
-  const seg=src.slice(i, i+1400);
+  // the banner holds the fact AND the joke, so the slice has to reach both
+  const seg=src.slice(i, src.indexOf('{{ showNeedsLook }}', i));
   if(seg.indexOf('{{ factText }}')<0) fail.push("the end-of-day banner does not bind the fact");
   if(seg.indexOf('{{ factTie }}')<0)  fail.push("the banner does not bind the tie back to the lesson");
   if(seg.indexOf('{{ factTopic }}')<0) fail.push("the banner does not show the topic label");
   if(!/Pok/.test(seg)) fail.push("the fact block is not labelled");
+  if(seg.indexOf('{{ jokeSetup }}')<0)     fail.push("the banner does not bind the joke");
+  if(seg.indexOf('{{ jokePunchline }}')<0) fail.push("the banner does not bind the punchline");
+  if(seg.indexOf('{{ jokeReveal }}')<0)    fail.push("there is no way to ask for the punchline");
   console.log("  fact and its tie both printed in the end-of-day banner");
 }
 

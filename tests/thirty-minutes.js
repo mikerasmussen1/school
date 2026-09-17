@@ -87,17 +87,21 @@ console.log("\n=== the markup binds them ===");
 { const src=fs.readFileSync(__dirname+'/../word-voyagers.dc.html','utf8');
   const i=src.indexOf('{{ aClose }}');
   const seg=src.slice(i, src.indexOf('{{ aRead }}', i));
-  ["lessonName","lessonDateLine","rdText"].forEach(k=>{
+  ["lessonName","rdText","challengeAsk"].forEach(k=>{
     if(seg.indexOf("{{ "+k+" }}")<0) fail.push("the lesson panel does not bind "+k);
   });
-  ["lessonLook","lessonTasks"].forEach(k=>{
+  ["lessonLook"].forEach(k=>{
     if(seg.indexOf("{{ "+k+" }}")<0) fail.push("the lesson panel does not loop over "+k);
   });
+  // The date is Task #1 of the day's notebook entry and is printed with the quote.
+  if(src.indexOf('sc-for list="{{ quoteTasks }}"')<0)
+    fail.push("the date line (Task #1) is not printed with the quote");
   // what to look for must come BEFORE the passage, or it is a quiz not a purpose
   if(seg.indexOf("{{ lessonLook }}") > seg.indexOf("{{ rdText }}"))
     fail.push("the things to look for are printed AFTER the passage");
-  if(seg.indexOf("{{ rdText }}") > seg.indexOf("{{ lessonTasks }}"))
-    fail.push("the notebook tasks are printed BEFORE the passage");
+  // the notebook challenge (Tasks #4 and #5) comes after the passage
+  if(seg.indexOf("{{ rdText }}") > seg.indexOf("{{ challengeAsk }}"))
+    fail.push("the notebook challenge is printed BEFORE the passage");
   if(src.indexOf("{{ s.mins }}")<0)     fail.push("step times are not shown on the checklist");
   if(src.indexOf("{{ dayMinutes }}")<0) fail.push("the day total is not shown");
   console.log("  purpose, passage, task, self-check, per-step and per-day times all bound");

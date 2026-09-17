@@ -17,7 +17,31 @@ const C=eval("(function(){ "+h.split('data-dc-script>')[1].split('</script>')[0]
 const CL=window.__CURR.LA_CLOSE;
 let fail=[];
 
-console.log("=== every lesson is named and says what to look for ===");
+console.log("=== the notebook is one numbered sequence of five ===");
+{ const fs2=require('fs');
+  const src=fs2.readFileSync(__dirname+'/../word-voyagers.dc.html','utf8');
+  const qi=src.indexOf('{{ quoteTasks }}');
+  if(qi<0) fail.push("the quote card does not carry notebook tasks");
+  const ci=src.indexOf('{{ aClose }}');
+  const cseg=src.slice(ci, src.indexOf('{{ aRead }}', ci));
+  ["Task #4","Task #5"].forEach(t=>{ if(cseg.indexOf(t)<0) fail.push("the lesson panel is missing "+t); });
+  ["Task #1","Task #2","Task #3"].forEach(t=>{ if(cseg.indexOf(t)>=0) fail.push(t+" is repeated after the passage"); });
+  if(cseg.indexOf('{{ lessonDateLine }}')>=0) fail.push("the date is still asked for twice");
+  // the quote card must carry 1 to 3, in order
+  const c=new C(); c.state.landed=true; c.state.year="y1"; c.state.week=1; c.state.day="Mon";
+  const v=c.renderVals();
+  const t=v.quoteTasks||[];
+  if(t.length!==3) fail.push("the quote offers "+t.length+" tasks, not 3");
+  t.forEach((x,i)=>{ if(x.n!=="Task #"+(i+1)) fail.push("quote task "+i+" is labelled "+x.n); });
+  if(!/date/i.test(t[0].text))                 fail.push("Task 1 is not the date");
+  if(!/word for word/i.test(t[1].text))        fail.push("Task 2 does not ask for the quote word for word");
+  if(!/where it came from/i.test(t[1].text))   fail.push("Task 2 does not ask where the quote came from");
+  if(!/means/i.test(t[2].text))                fail.push("Task 3 does not ask what the quote means");
+  console.log("  quote card: Task 1 date, Task 2 quote and source, Task 3 meaning");
+  console.log("  lesson panel: Task 4 challenge sentence, Task 5 critical thinking");
+}
+
+console.log("\n=== every lesson is named and says what to look for ===");
 ["y1","y2"].forEach(g=>{
   CL.ORDER.forEach(d=>{
     const L=CL.lessonFor(g,d);
@@ -48,7 +72,10 @@ console.log("\n=== the panel prints them in lesson order ===");
 { const src=fs.readFileSync(__dirname+'/../word-voyagers.dc.html','utf8');
   const i=src.indexOf('{{ aClose }}');
   const seg=src.slice(i, src.indexOf('{{ aRead }}', i));
-  const order=["lessonName","lessonLook","rdText","lessonDateLine","lessonTasks"];
+  // The date is now Task 1 on the quote card, and the old generic task list
+  // was replaced by the challenge. What must still be in order here is the
+  // lesson name, what to look for, the passage, then the challenge.
+  const order=["lessonName","lessonLook","rdText","challengeAsk","challengeThink"];
   let last=-1;
   order.forEach(k=>{
     const at=seg.indexOf("{{ "+k+" }}");
@@ -59,7 +86,9 @@ console.log("\n=== the panel prints them in lesson order ===");
   if(!/>Lesson</.test(seg)) fail.push("the panel is not labelled LESSON");
   if(!/Look for this while you read/.test(seg)) fail.push("the look-for block is not labelled");
   if(!/In your notebook/.test(seg)) fail.push("the notebook block is not labelled");
-  console.log("  LESSON -> look for -> passage -> date line -> numbered tasks");
+  if(seg.indexOf("{{ challengeA }}")<0 || seg.indexOf("{{ challengeB }}")<0)
+    fail.push("the lesson panel does not name both candidate sentences");
+  console.log("  LESSON -> look for -> passage -> challenge -> critical thinking");
 }
 
 console.log("\n=== the parent tab says what to check, for all five days ===");

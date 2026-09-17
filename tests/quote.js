@@ -38,18 +38,18 @@ console.log("\n=== Thursday 3 September specifically ===");
   c.startDay();
   let v=c.renderVals();
   console.log("  quote: "+v.qText.slice(0,58));
-  console.log("  card button present: "+(typeof v.quoteMarkRead==="function")+"  label shown: I have read it");
-  // and the panel route still works, for anyone who opens it
+  // The quote card is revealed by opening its checklist step, and ticks from
+  // its own "Done - tasks 1 to 3 written" button; there is no second tick.
   v.daySteps[0].onClick();
   v=c.renderVals();
   if(!v.aQuote) fail.push("quote panel does not open");
   if(!v.qText) fail.push("quote panel shows no quote");
-  console.log("  opening from the checklist also shows the quote: "+!!v.aQuote);
-  if(!v.assignCanTick) fail.push("panel tick missing");
-  v.assignTick();
+  console.log("  opening Quote of the day from the checklist shows the card: "+!!v.aQuote);
+  if(v.assignCanTick) fail.push("the quote panel shows a second, generic tick");
+  v.quoteMarkRead();
   v=c.renderVals();
-  console.log("  panel tick works too: "+(v.daySteps[0].btnLabel==="Done"));
-  if(v.daySteps[0].btnLabel!=="Done") fail.push("panel tick did not complete the step");
+  console.log("  its Done button ticks the step: "+(v.daySteps[0].btnLabel==="Done"));
+  if(v.daySteps[0].btnLabel!=="Done") fail.push("the card's Done button did not complete the step");
 }
 
 console.log("\n=== opening an assignment no longer jumps the page away ===");

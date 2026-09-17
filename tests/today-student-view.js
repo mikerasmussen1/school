@@ -42,5 +42,31 @@ const text=seg.replace(/<script[\s\S]*?<\/script>/g,"").replace(/<[^>]+>/g," ");
 if(/Spelling pattern|Standard/.test(text)) fail.push("the Today markup itself still says Spelling pattern or Standard");
 console.log("  "+keys.length+" Today bindings, both grades, every fifth week, all five lessons");
 
+console.log("\n=== the Today tab opens on progress, lesson and Start, with the quote behind its step ===");
+{ // Everything before the checklist, in this order. The quote of the day and its
+  // notebook Tasks 1-3 appear only inside the "Quote of the day" step.
+  const start=seg.indexOf('{{ pacingText }}');
+  const order=["pacingText","unitLine","todayFull","lessonLine","finishLine","startDay","aheadNote"];
+  let last=-1;
+  order.forEach(k=>{ const at=seg.indexOf("{{ "+k+" }}", Math.max(0,last));
+    if(at<0) fail.push("the opening view does not show "+k+" in order"); else last=at; });
+  const panel=seg.indexOf('{{ showAssignment }}'), aq=seg.indexOf('{{ aQuote }}');
+  ["{{ qText }}","{{ quoteTasks }}","{{ quoteMarkRead }}","{{ qListen }}"].forEach(k=>{
+    const at=seg.indexOf(k);
+    if(at<0) fail.push("the quote card lost "+k);
+    else if(at<panel || at<aq) fail.push(k+" is shown before the quote step is opened");
+  });
+  if(start<0 || (seg.indexOf("{{ qText }}")>=0 && seg.indexOf("{{ qText }}")<start)) fail.push("the quote still sits above the progress line");
+  ["y1","y2"].forEach(g=>{
+    const c=new C(); c.state.landed=true; c.state.year=g; c.state.week=1; c.state.day="Mon"; c.state.view="home";
+    const v=c.renderVals();
+    if(v.aQuote) fail.push(g+" the quote card is open before its step is chosen");
+    c.startDay(); c.renderVals().daySteps[0].onClick();
+    if(!c.renderVals().aQuote) fail.push(g+" opening Quote of the day does not reveal the card");
+  });
+  console.log("  progress \u2192 unit \u2192 date \u2192 lesson \u2192 finish date \u2192 Start here \u2192 caught-up note");
+  console.log("  quote, translation and Tasks 1-3 appear when Quote of the day is opened");
+}
+
 console.log(fail.length?("\nFAILURES:\n  "+fail.slice(0,6).join("\n  ")):"\nRESULT: the Today tab shows the child's work, not the curriculum's bookkeeping.");
 process.exit(fail.length?1:0);

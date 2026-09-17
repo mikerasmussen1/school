@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=2026-09-17-1505"></script>
-  <script data-build>window.__BUILD__="2026-09-17-1505";</script>
-  <script src="./curriculum/freshness.js?v=2026-09-17-1505"></script>
+<script src="./support.js?v=2026-09-17-1516"></script>
+  <script data-build>window.__BUILD__="2026-09-17-1516";</script>
+  <script src="./curriculum/freshness.js?v=2026-09-17-1516"></script>
 </head>
 <body>
 <x-dc>
@@ -49,31 +49,30 @@
   .book-title{font-family:'Fraunces',serif;font-size:1rem;color:var(--brick-dark);margin:0 0 3px}
   .done-banner{text-align:center;padding:22px;margin-top:6px;background:var(--forest-light);border-radius:8px;color:#2E4E38}
 </style>
-<script src="./curriculum/sync.js?v=2026-09-17-1505"></script>
-<script src="./curriculum/students.js?v=2026-09-17-1505"></script>
-<script src="./curriculum/subjects.js?v=2026-09-17-1505"></script>
-<script src="./curriculum/question-types.js?v=2026-09-17-1505"></script>
-<script src="./curriculum/la-y1-spine.js?v=2026-09-17-1505"></script>
-<script src="./curriculum/la-y1-words.js?v=2026-09-17-1505"></script>
-<script src="./curriculum/la-y1-grammar.js?v=2026-09-17-1505"></script>
-<script src="./curriculum/la-y1-reading.js?v=2026-09-17-1505"></script>
-<script src="./curriculum/la-y1-tasks.js?v=2026-09-17-1505"></script>
-<script src="./curriculum/la-books.js?v=2026-09-17-1505"></script>
-<script src="./curriculum/la-y2-spine.js?v=2026-09-17-1505"></script>
-<script src="./curriculum/la-y2-words.js?v=2026-09-17-1505"></script>
-<script src="./curriculum/la-y2-grammar.js?v=2026-09-17-1505"></script>
-<script src="./curriculum/la-y2-reading.js?v=2026-09-17-1505"></script>
-<script src="./curriculum/la-y2-tasks.js?v=2026-09-17-1505"></script>
-<script src="./curriculum/la-books-y2.js?v=2026-09-17-1505"></script>
-<script src="./curriculum/la-quotes.js?v=2026-09-17-1505"></script>
-<script src="./curriculum/la-daily-fix.js?v=2026-09-17-1505"></script>
-<script src="./curriculum/la-skill-notes.js?v=2026-09-17-1505"></script>
-<script src="./curriculum/la-challenge.js?v=2026-09-17-1505"></script>
-<script src="./curriculum/la-facts.js?v=2026-09-17-1505"></script>
-<script src="./curriculum/la-close-reading.js?v=2026-09-17-1505"></script>
-<script src="./curriculum/la-mastery.js?v=2026-09-17-1505"></script>
-<script src="./curriculum/la-calendar.js?v=2026-09-17-1505"></script>
-<script src="./curriculum/la-grader.js?v=2026-09-17-1505"></script>
+<script src="./curriculum/sync.js?v=2026-09-17-1516"></script>
+<script src="./curriculum/students.js?v=2026-09-17-1516"></script>
+<script src="./curriculum/subjects.js?v=2026-09-17-1516"></script>
+<script src="./curriculum/question-types.js?v=2026-09-17-1516"></script>
+<script src="./curriculum/la-y1-spine.js?v=2026-09-17-1516"></script>
+<script src="./curriculum/la-y1-words.js?v=2026-09-17-1516"></script>
+<script src="./curriculum/la-y1-grammar.js?v=2026-09-17-1516"></script>
+<script src="./curriculum/la-y1-reading.js?v=2026-09-17-1516"></script>
+<script src="./curriculum/la-y1-tasks.js?v=2026-09-17-1516"></script>
+<script src="./curriculum/la-books.js?v=2026-09-17-1516"></script>
+<script src="./curriculum/la-y2-spine.js?v=2026-09-17-1516"></script>
+<script src="./curriculum/la-y2-words.js?v=2026-09-17-1516"></script>
+<script src="./curriculum/la-y2-grammar.js?v=2026-09-17-1516"></script>
+<script src="./curriculum/la-y2-reading.js?v=2026-09-17-1516"></script>
+<script src="./curriculum/la-y2-tasks.js?v=2026-09-17-1516"></script>
+<script src="./curriculum/la-books-y2.js?v=2026-09-17-1516"></script>
+<script src="./curriculum/la-quotes.js?v=2026-09-17-1516"></script>
+<script src="./curriculum/la-daily-fix.js?v=2026-09-17-1516"></script>
+<script src="./curriculum/la-skill-notes.js?v=2026-09-17-1516"></script>
+<script src="./curriculum/la-challenge.js?v=2026-09-17-1516"></script>
+<script src="./curriculum/la-facts.js?v=2026-09-17-1516"></script>
+<script src="./curriculum/la-close-reading.js?v=2026-09-17-1516"></script>
+<script src="./curriculum/la-mastery.js?v=2026-09-17-1516"></script>
+<script src="./curriculum/la-grader.js?v=2026-09-17-1516"></script>
 </helmet>
 
 <div style="min-height:100vh;display:flex;flex-direction:column">
@@ -1922,7 +1921,9 @@ class Component extends DCLogic {
     /* On the first render of a session, land on the frontier — the first
      * unfinished day — rather than whatever day was stored last time. That is
      * always the actionable one, whether he is behind or working ahead. */
-    const CAL=window.__CURR.LA_CALENDAR;
+    /* Word Voyagers has no calendar: no holiday or break schedule, no school
+     * days, no dates for lessons. It is self-paced and finishes when all 180
+     * lessons are done. The only date it knows is today's. */
     /* Today's date as Month Day, Year, e.g. "September 17, 2026". The only
      * date Word Voyagers shows: the course is self-paced, so no lesson is
      * tied to a day of the calendar. */
@@ -2380,10 +2381,8 @@ class Component extends DCLogic {
         ? "All 180 lessons are finished. That is the whole course."
         : seq.frontier+" of 180 lessons finished. Work at your own pace \u2014 the course is done when every lesson is.",
       // One neutral style. There is no good or bad state to colour any more.
-      pacingStyle: CAL
-        ? "background:var(--paper);border:1px solid var(--rule);color:var(--ink-soft);"+
-          "border-radius:8px;padding:9px 13px;margin-bottom:12px;font-size:.88rem"
-        : "display:none",
+      pacingStyle: "background:var(--paper);border:1px solid var(--rule);color:var(--ink-soft);"+
+        "border-radius:8px;padding:9px 13px;margin-bottom:12px;font-size:.88rem",
       startSummary: plan.steps.length+" steps today. Each one unlocks the next, and the "+
         "drills need "+Math.round(MS.MASTERY*100)+"% to count as done.",
       startDay: this.startDay,

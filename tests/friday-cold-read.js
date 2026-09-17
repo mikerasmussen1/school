@@ -75,5 +75,22 @@ console.log("\n=== Monday still reads the week's own passage in both grades ==="
 });
 console.log("  reading step untouched");
 
+console.log("\n=== the Speak & Show tab shows the paragraph too, not just the task ===");
+{ const src=require('fs').readFileSync(__dirname+'/../word-voyagers.dc.html','utf8');
+  const a=src.indexOf('<sc-if value="{{ isSpeaking }}"'), b=src.indexOf('<sc-if value="{{ isBooks }}"');
+  const seg=src.slice(a,b);
+  ["{{ skPassage.label }}","{{ skPassage.title }}","{{ skPassage.text }}","{{ skPassageListen }}"].forEach(k=>{
+    if(seg.indexOf(k)<0) fail.push("the Speak & Show tab does not show "+k);
+  });
+  if(seg.indexOf("{{ skPassage.text }}")>seg.indexOf("{{ skDoneLabel }}")) fail.push("the passage comes after the done button");
+  ["y1","y2"].forEach(g=>{
+    const c=new C(); c.state.landed=true; c.state.year=g; c.state.week=1; c.state.day="Fri"; c.state.view="speaking";
+    const v=c.renderVals();
+    if(!v.skPassage || String(v.skPassage.text||"").length<150) fail.push(g+" Speak & Show week 1 has no paragraph to read");
+    if(!v.skPassage.title) fail.push(g+" Speak & Show week 1 passage has no title");
+  });
+  console.log("  both grades, week 1: the paragraph is on the tab, above the done button");
+}
+
 console.log(fail.length?("\nFAILURES:\n  "+fail.slice(0,5).join("\n  ")):"\nRESULT: Hank reads ahead on Friday; Brock reads the week he has just had.");
 process.exit(fail.length?1:0);

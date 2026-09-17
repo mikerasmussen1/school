@@ -176,3 +176,7 @@ if (skipped.length) {
 console.log("-".repeat(52));
 if (fails) { console.log(`RESULT: ${fails} page(s) MISMATCHED — scanned answers would land on the wrong problems`); process.exit(1); }
 console.log("RESULT: printed numbering matches the app's mapping on every page");
+// Explicit: the curriculum scripts run above reach Node's real timers through the
+// sandbox and keep the event loop alive, so a PASS otherwise never returns —
+// build.js --check sat on this script for eleven minutes after it had printed RESULT.
+process.exit(0);

@@ -1,7 +1,10 @@
 # Baskin School tests
 
-Run any of these with `node tests/<file>.js` from the repository root. Each
-exits non-zero on failure and prints what it checked.
+Run the whole suite with `node tests/run-all.js` from the repository root
+(`node tests/run-all.js math la` runs only the files whose names contain those
+words), or any one file with `node tests/<file>.js`. Each exits non-zero on
+failure and prints what it checked. CLAUDE.md lists the gates that must pass
+before a push and the rules for writing a test that can actually fail.
 
 Most of these are Word Voyagers, which is where the suite started.
 `subject-summary.js` is the first that spans every subject.

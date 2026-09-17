@@ -54,3 +54,6 @@ if (bad) {
   process.exit(2);
 }
 console.log(`  ${checked} file(s) checked, every token defined where it is used\n`);
+
+// Explicit exit: scripts that load the curriculum into a fake window can leave Node's timers alive.
+process.exit(0);

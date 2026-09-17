@@ -422,3 +422,6 @@ if (capped.length) {
   if (capped.length > 6) console.log(`     … +${capped.length - 6} more`);
 }
 if (!WRITE) console.log("  re-run with --write to apply");
+
+// Explicit exit: scripts that load the curriculum into a fake window can leave Node's timers alive.
+process.exit(0);

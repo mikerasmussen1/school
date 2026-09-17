@@ -232,3 +232,6 @@ for (const f of PROTECTED) {
 console.log("\n" + "-".repeat(52));
 if (fails) { console.log(`RESULT: ${fails} FAILURE(S)${warns ? `, ${warns} warning(s)` : ""}`); process.exit(1); }
 console.log(`RESULT: all checks passed${warns ? ` (${warns} warning(s))` : ""}`);
+
+// Explicit exit: scripts that load the curriculum into a fake window can leave Node's timers alive.
+process.exit(0);

@@ -154,7 +154,7 @@
            :                        "Speak & Show — Week "+week,
       prompt: r[i],
       instructions: kind==="handwriting"
-        ? "Write this out by hand on paper, as neatly as you can. Then take a photo of the page and press Grade this work."
+        ? "Write this out by hand on paper, as neatly as you can. Then take the page to a grown-up for feedback."
         : kind==="writing"
         ? "Write this on paper or type it. If you write it by hand, photograph it for feedback."
         : "This one is done out loud with another person. Nothing here is graded by the computer — do it, then mark it done.",

@@ -101,5 +101,17 @@ console.log("\n=== Thursday still completes for a 3rd grader ===");
   if(!v.showDayComplete) fail.push("a 3rd grader cannot finish Thursday");
 }
 
+console.log("\n=== and the handwriting instructions do not mention a photo ===");
+{ ["y1","y2"].forEach(g=>{
+    const Y=window.__CURR[g==="y2"?"LA_Y2":"LA_Y1"];
+    for(let w=1;w<=36;w++){
+      const t=Y.taskFor(w,"handwriting");
+      if(/photograph|take a photo|Grade this work/i.test(t.instructions||""))
+        fail.push(g+" week "+w+" handwriting still says to photograph the page");
+    }
+  });
+  console.log("  both grades, 36 weeks: \"take the page to a grown-up for feedback\"");
+}
+
 console.log(fail.length?("\nFAILURES:\n  "+fail.join("\n  ")):"\nRESULT: no photo step or buttons in either grade; the grown-up marks the page.");
 process.exit(fail.length?1:0);

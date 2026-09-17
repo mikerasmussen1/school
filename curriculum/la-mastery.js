@@ -185,12 +185,22 @@
    * no gap where the removed step was. */
   const SKIP = { y1: ["photo"], y2: ["photo"] };
 
+  /* READ IT BEFORE YOU READ IT AGAIN. The first lesson of each week is the
+   * only one with "Read the passage out loud", and it came AFTER "Read it
+   * again, looking for one thing" - a re-read before the first reading. In
+   * 5th grade the first reading now comes first, every week of the year.
+   * Progress is stored by step key, not position, so reordering loses nothing. */
+  const ORDER = { y2: { Mon: ["quote","fix","read","close","rq","end"] } };
+
   function dayPlan(grade, week, day){
     const Y = curr(grade);
     const wk = Y.WEEKS.find(w=>w.n===week);
     const skip = SKIP[grade] || [];
+    const order = (ORDER[grade]||{})[day];
     const steps = (PLANS[day]||PLANS.Mon)
       .filter(s => skip.indexOf(s.key) < 0)
+      .slice()
+      .sort((a,b) => order ? order.indexOf(a.key) - order.indexOf(b.key) : 0)
       .map((s,i)=>({...s, n:i+1}));
     return {
       day, dayName: DAY_NAME[day]||day,

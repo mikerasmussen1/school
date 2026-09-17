@@ -37,7 +37,14 @@ console.log("=== the notebook is one numbered sequence of five ===");
   if(!/word for word/i.test(t[1].text))        fail.push("Task 2 does not ask for the quote word for word");
   if(!/where it came from/i.test(t[1].text))   fail.push("Task 2 does not ask where the quote came from");
   if(!/means/i.test(t[2].text))                fail.push("Task 3 does not ask what the quote means");
-  console.log("  quote card: Task 1 date, Task 2 quote and source, Task 3 meaning");
+  const TASK3="Write what this quote's translation means to you (or what you think it means.) One or two sentences is sufficient.";
+  ["y1","y2"].forEach(g=>{ const c2=new C(); c2.state.landed=true; c2.state.year=g; c2.state.week=20; c2.state.day="Thu";
+    const t3=((c2.renderVals().quoteTasks||[])[2]||{}).text;
+    if(t3!==TASK3) fail.push(g+" Task 3 is not the agreed wording: "+t3); });
+  // The line under the quote's source is labelled "Translation:", in both places the quote is shown.
+  { const labels=(fs2.readFileSync(__dirname+'/../word-voyagers.dc.html','utf8').match(/>(\w+): <\/span>\{\{ qThink \}\}/g)||[]);
+    if(labels.length!==2 || labels.some(x=>x.indexOf(">Translation: <")!==0)) fail.push("the line under the quote is not labelled Translation: "+labels.join(", ")); }
+  console.log("  quote card: Task 1 date, Task 2 quote and source, Task 3 what the translation means; \"Translation:\" under the source");
   console.log("  lesson panel: Task 4 challenge sentence, Task 5 critical thinking");
 }
 

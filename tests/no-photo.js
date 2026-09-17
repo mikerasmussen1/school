@@ -35,7 +35,7 @@ function doStep(c, key){
   if(step.gate==="ack"){ v.assignTick(); return true; }
   if(step.gate==="approve"){ v.approveGrades[2].onClick(); c.renderVals().approveSubmit(); return true; }
   if(step.gate==="end"){ v.daySteps[i].onClick(); return true; }
-  if(step.gate==="photo"){ c.markStuck(step); return true; }
+  if(step.gate==="photo"){ c.completeStep(step); return true; }
   // scored: answer every question correctly
   const slot={fix:"fx",rq:"rq",gz:"gz",sq:"sq",rv:"rv"}[key];
   if(!slot) return false;

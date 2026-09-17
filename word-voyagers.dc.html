@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=2026-09-17-1718"></script>
-  <script data-build>window.__BUILD__="2026-09-17-1718";</script>
-  <script src="./curriculum/freshness.js?v=2026-09-17-1718"></script>
+<script src="./support.js?v=2026-09-17-1726"></script>
+  <script data-build>window.__BUILD__="2026-09-17-1726";</script>
+  <script src="./curriculum/freshness.js?v=2026-09-17-1726"></script>
 </head>
 <body>
 <x-dc>
@@ -49,31 +49,31 @@
   .book-title{font-family:'Fraunces',serif;font-size:1rem;color:var(--brick-dark);margin:0 0 3px}
   .done-banner{text-align:center;padding:22px;margin-top:6px;background:var(--forest-light);border-radius:8px;color:#2E4E38}
 </style>
-<script src="./curriculum/sync.js?v=2026-09-17-1718"></script>
-<script src="./curriculum/students.js?v=2026-09-17-1718"></script>
-<script src="./curriculum/subjects.js?v=2026-09-17-1718"></script>
-<script src="./curriculum/question-types.js?v=2026-09-17-1718"></script>
-<script src="./curriculum/la-y1-spine.js?v=2026-09-17-1718"></script>
-<script src="./curriculum/la-y1-words.js?v=2026-09-17-1718"></script>
-<script src="./curriculum/la-y1-grammar.js?v=2026-09-17-1718"></script>
-<script src="./curriculum/la-y1-reading.js?v=2026-09-17-1718"></script>
-<script src="./curriculum/la-y1-tasks.js?v=2026-09-17-1718"></script>
-<script src="./curriculum/la-books.js?v=2026-09-17-1718"></script>
-<script src="./curriculum/la-y2-spine.js?v=2026-09-17-1718"></script>
-<script src="./curriculum/la-y2-words.js?v=2026-09-17-1718"></script>
-<script src="./curriculum/la-y2-grammar.js?v=2026-09-17-1718"></script>
-<script src="./curriculum/la-y2-reading.js?v=2026-09-17-1718"></script>
-<script src="./curriculum/la-y2-tasks.js?v=2026-09-17-1718"></script>
-<script src="./curriculum/la-books-y2.js?v=2026-09-17-1718"></script>
-<script src="./curriculum/la-quotes.js?v=2026-09-17-1718"></script>
-<script src="./curriculum/la-daily-fix.js?v=2026-09-17-1718"></script>
-<script src="./curriculum/la-skill-notes.js?v=2026-09-17-1718"></script>
-<script src="./curriculum/la-challenge.js?v=2026-09-17-1718"></script>
-<script src="./curriculum/la-facts.js?v=2026-09-17-1718"></script>
-<script src="./curriculum/la-close-reading.js?v=2026-09-17-1718"></script>
-<script src="./curriculum/la-look-y2.js?v=2026-09-17-1718"></script>
-<script src="./curriculum/la-mastery.js?v=2026-09-17-1718"></script>
-<script src="./curriculum/la-grader.js?v=2026-09-17-1718"></script>
+<script src="./curriculum/sync.js?v=2026-09-17-1726"></script>
+<script src="./curriculum/students.js?v=2026-09-17-1726"></script>
+<script src="./curriculum/subjects.js?v=2026-09-17-1726"></script>
+<script src="./curriculum/question-types.js?v=2026-09-17-1726"></script>
+<script src="./curriculum/la-y1-spine.js?v=2026-09-17-1726"></script>
+<script src="./curriculum/la-y1-words.js?v=2026-09-17-1726"></script>
+<script src="./curriculum/la-y1-grammar.js?v=2026-09-17-1726"></script>
+<script src="./curriculum/la-y1-reading.js?v=2026-09-17-1726"></script>
+<script src="./curriculum/la-y1-tasks.js?v=2026-09-17-1726"></script>
+<script src="./curriculum/la-books.js?v=2026-09-17-1726"></script>
+<script src="./curriculum/la-y2-spine.js?v=2026-09-17-1726"></script>
+<script src="./curriculum/la-y2-words.js?v=2026-09-17-1726"></script>
+<script src="./curriculum/la-y2-grammar.js?v=2026-09-17-1726"></script>
+<script src="./curriculum/la-y2-reading.js?v=2026-09-17-1726"></script>
+<script src="./curriculum/la-y2-tasks.js?v=2026-09-17-1726"></script>
+<script src="./curriculum/la-books-y2.js?v=2026-09-17-1726"></script>
+<script src="./curriculum/la-quotes.js?v=2026-09-17-1726"></script>
+<script src="./curriculum/la-daily-fix.js?v=2026-09-17-1726"></script>
+<script src="./curriculum/la-skill-notes.js?v=2026-09-17-1726"></script>
+<script src="./curriculum/la-challenge.js?v=2026-09-17-1726"></script>
+<script src="./curriculum/la-facts.js?v=2026-09-17-1726"></script>
+<script src="./curriculum/la-close-reading.js?v=2026-09-17-1726"></script>
+<script src="./curriculum/la-look-y2.js?v=2026-09-17-1726"></script>
+<script src="./curriculum/la-mastery.js?v=2026-09-17-1726"></script>
+<script src="./curriculum/la-grader.js?v=2026-09-17-1726"></script>
 </helmet>
 
 <div style="min-height:100vh;display:flex;flex-direction:column">
@@ -248,6 +248,9 @@
                   <div style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:5px">Put right</div>
                   <div style="font-size:1.06rem;line-height:1.6">{{ fixCorrected }}</div>
                 </div>
+                <sc-if value="{{ fxNotPassed }}" hint-placeholder-val="{{ false }}">
+                  <div style="background:var(--gold-light);color:#7A5A0C;border-radius:8px;padding:13px;margin-top:12px">Not finished yet — this step ticks off when you get it right. Read the sentence again and try it again.</div>
+                </sc-if>
                 <div style="margin-top:12px"><button onClick="{{ fxAgain }}" style="{{ btnSecondary }}">Try it again</button></div>
               </sc-if>
             </sc-if>
@@ -323,7 +326,7 @@
                   <div style="font-family:'Fraunces',serif;font-size:2rem;color:var(--forest);font-weight:700">{{ rqFinal }}</div>
                   <div class="muted">{{ rqPct }}</div>
                   <sc-if value="{{ rqFailed }}" hint-placeholder-val="{{ false }}">
-                    <div style="background:var(--gold-light);color:#7A5A0C;border-radius:8px;padding:13px;margin-top:12px;text-align:left">{{ rqRemNote }}</div>
+                    <div style="background:var(--gold-light);color:#7A5A0C;border-radius:8px;padding:13px;margin-top:12px;text-align:left">Not finished yet — this step ticks off when you reach 80%. Keep going: {{ rqRemNote }}</div>
                     <button onClick="{{ rqRemStart }}" style="{{ btnPrimary }}margin-top:12px">{{ rqRemLabel }}</button>
                   </sc-if>
                 </div>
@@ -364,7 +367,7 @@
                   <div style="font-family:'Fraunces',serif;font-size:2rem;color:var(--forest);font-weight:700">{{ gzFinal }}</div>
                   <div class="muted">{{ gzPct }}</div>
                   <sc-if value="{{ gzFailed }}" hint-placeholder-val="{{ false }}">
-                    <div style="background:var(--gold-light);color:#7A5A0C;border-radius:8px;padding:13px;margin-top:12px;text-align:left">{{ gzRemNote }}</div>
+                    <div style="background:var(--gold-light);color:#7A5A0C;border-radius:8px;padding:13px;margin-top:12px;text-align:left">Not finished yet — this step ticks off when you reach 80%. Keep going: {{ gzRemNote }}</div>
                     <button onClick="{{ gzRemStart }}" style="{{ btnPrimary }}margin-top:12px">{{ gzRemLabel }}</button>
                   </sc-if>
                 </div>
@@ -401,6 +404,10 @@
                 <div style="text-align:center;padding:18px 10px">
                   <div style="font-family:'Fraunces',serif;font-size:2rem;color:var(--forest);font-weight:700">{{ sqFinal }}</div>
                   <div class="muted">{{ sqPct }}</div>
+                  <sc-if value="{{ sqFailed }}" hint-placeholder-val="{{ false }}">
+                    <div style="background:var(--gold-light);color:#7A5A0C;border-radius:8px;padding:13px;margin-top:12px;text-align:left">Not finished yet — this step ticks off when you reach 80%. Keep going: {{ sqRemNote }}</div>
+                    <button onClick="{{ sqRemStart }}" style="{{ btnPrimary }}margin-top:12px">{{ sqRemLabel }}</button>
+                  </sc-if>
                 </div>
               </sc-if>
             </sc-if>
@@ -459,6 +466,10 @@
                 <div style="text-align:center;padding:18px 10px">
                   <div style="font-family:'Fraunces',serif;font-size:2rem;color:var(--forest);font-weight:700">{{ rvFinal }}</div>
                   <div class="muted">{{ rvPct }}</div>
+                  <sc-if value="{{ rvFailed }}" hint-placeholder-val="{{ false }}">
+                    <div style="background:var(--gold-light);color:#7A5A0C;border-radius:8px;padding:13px;margin-top:12px;text-align:left">Not finished yet — this step ticks off when you reach 80%. Keep going: {{ rvRemNote }}</div>
+                    <button onClick="{{ rvRemStart }}" style="{{ btnPrimary }}margin-top:12px">{{ rvRemLabel }}</button>
+                  </sc-if>
                 </div>
               </sc-if>
             </sc-if>
@@ -604,7 +615,7 @@
               <button onClick="{{ goHome }}" style="{{ btnPrimary }}margin-top:12px">Back to today's checklist</button>
             </sc-if>
             <sc-if value="{{ rqFailed }}" hint-placeholder-val="{{ false }}">
-              <div style="background:var(--gold-light);color:#7A5A0C;border-radius:8px;padding:13px;margin-top:12px;text-align:left">This step is ticked off either way — but you came in under 80%, and it is worth another round while it is fresh. {{ rqRemNote }}</div>
+              <div style="background:var(--gold-light);color:#7A5A0C;border-radius:8px;padding:13px;margin-top:12px;text-align:left">Not finished yet — this step ticks off when you reach 80%. Keep going: {{ rqRemNote }}</div>
               <button onClick="{{ rqRemStart }}" style="{{ btnPrimary }}margin-top:12px">{{ rqRemLabel }}</button>
             </sc-if>
           </div>
@@ -642,7 +653,7 @@
               <button onClick="{{ goHome }}" style="{{ btnPrimary }}margin-top:12px">Back to today's checklist</button>
             </sc-if>
             <sc-if value="{{ gzFailed }}" hint-placeholder-val="{{ false }}">
-              <div style="background:var(--gold-light);color:#7A5A0C;border-radius:8px;padding:13px;margin-top:12px;text-align:left">This step is ticked off either way — but you came in under 80%, and it is worth another round while it is fresh. {{ gzRemNote }}</div>
+              <div style="background:var(--gold-light);color:#7A5A0C;border-radius:8px;padding:13px;margin-top:12px;text-align:left">Not finished yet — this step ticks off when you reach 80%. Keep going: {{ gzRemNote }}</div>
               <button onClick="{{ gzRemStart }}" style="{{ btnPrimary }}margin-top:12px">{{ gzRemLabel }}</button>
             </sc-if>
           </div>
@@ -697,7 +708,7 @@
               <button onClick="{{ goHome }}" style="{{ btnPrimary }}margin-top:12px">Back to today's checklist</button>
             </sc-if>
             <sc-if value="{{ sqFailed }}" hint-placeholder-val="{{ false }}">
-              <div style="background:var(--gold-light);color:#7A5A0C;border-radius:8px;padding:13px;margin-top:12px;text-align:left">This step is ticked off either way — but you came in under 80%, and it is worth another round while it is fresh. {{ sqRemNote }}</div>
+              <div style="background:var(--gold-light);color:#7A5A0C;border-radius:8px;padding:13px;margin-top:12px;text-align:left">Not finished yet — this step ticks off when you reach 80%. Keep going: {{ sqRemNote }}</div>
               <button onClick="{{ sqRemStart }}" style="{{ btnPrimary }}margin-top:12px">{{ sqRemLabel }}</button>
             </sc-if>
           </div>
@@ -785,7 +796,7 @@
               <button onClick="{{ goHome }}" style="{{ btnPrimary }}margin-top:12px">Back to today's checklist</button>
             </sc-if>
             <sc-if value="{{ rvFailed }}" hint-placeholder-val="{{ false }}">
-              <div style="background:var(--gold-light);color:#7A5A0C;border-radius:8px;padding:13px;margin-top:12px;text-align:left">This step is ticked off either way — but you came in under 80%, and it is worth another round while it is fresh. {{ rvRemNote }}</div>
+              <div style="background:var(--gold-light);color:#7A5A0C;border-radius:8px;padding:13px;margin-top:12px;text-align:left">Not finished yet — this step ticks off when you reach 80%. Keep going: {{ rvRemNote }}</div>
               <button onClick="{{ rvRemStart }}" style="{{ btnPrimary }}margin-top:12px">{{ rvRemLabel }}</button>
             </sc-if>
           </div>
@@ -982,7 +993,7 @@
 
       <div class="card">
         <h2>Catching up and working ahead</h2>
-        <p class="muted">Nothing is locked anywhere in this curriculum. Every day and every step is open, in any order, and a drill that comes in under 80% still ticks its step off. What the app does instead is <strong>tell</strong> him: a day with unfinished work behind it opens with a warning naming that day and a button back to it, and a short score offers another round rather than demanding one. He can also work as far ahead as he likes.</p>
+        <p class="muted">Nothing is locked anywhere in this curriculum. Every day and every step is open, in any order, but a drill only ticks its step off at 80% or better: under that, it offers another round built from what was missed, as many rounds as it takes. After three short rounds it is also flagged for you below, and you can pass the step yourself if something is genuinely wrong. What the app does instead is <strong>tell</strong> him: a day with unfinished work behind it opens with a warning naming that day and a button back to it, and a short score offers another round rather than demanding one. He can also work as far ahead as he likes.</p>
         <p class="muted">The trade is deliberate and yours to reverse: he cannot be walled out of school by a bad morning, and he also cannot be stopped from skipping something. The two lists below are how you see what actually happened.</p>
         <div style="background:var(--paper);border:1px solid var(--rule);border-radius:6px;padding:13px 15px;margin-top:10px">
           <div style="font-family:'Fraunces',serif;font-size:.95rem;margin-bottom:3px">{{ frontierLabel }}</div>
@@ -1317,7 +1328,11 @@ class Component extends DCLogic {
 
   prepMC(bank,n){
     const pool = n ? this.shuffle(bank).slice(0,Math.min(n,bank.length)) : bank;
-    return pool.map(it=>({...it, a: it.options[it.a], options: this.shuffle(it.options)}));
+    /* A bank item stores its answer as an index into options. A retry round
+     * re-serves items the child MISSED, which were prepared already and hold
+     * the answer as text; indexing again turned it into undefined, so nothing
+     * in a retry round could ever be marked right. Only resolve an index. */
+    return pool.map(it=>({...it, a: (typeof it.a==="number") ? it.options[it.a] : it.a, options: this.shuffle(it.options)}));
   }
 
   fbStyle(ok){ return "margin-top:10px;padding:10px 12px;border-radius:6px;font-size:.9rem;"+
@@ -1584,12 +1599,14 @@ class Component extends DCLogic {
     this.syncSave({stepDone, unitSeen});
   };
   closeUnitDone=()=>this.setState({unitJustDone:null});
-  markStuck=(step)=>{
+  /* Flag a drill for a grown-up. It does NOT tick the step: drills finish at
+   * 80%, however many rounds that takes. */
+  flagStuck=(step)=>{
     const k=this.state.year+":"+this.state.week+":"+this.stepKey(step);
+    if(this.state.stuck[k]) return;
     const stuck={...this.state.stuck, [k]:true};
     try{ localStorage.setItem(LAK("la.stuck"), JSON.stringify(stuck)); }catch(e){}
     this.syncSave({stuck});
-    this.completeStep(step);   // the valve: do not trap the child
   };
 
   toggleExcused=(grade, week, day)=>{
@@ -1853,12 +1870,15 @@ class Component extends DCLogic {
     const ok=M.passed(score,total);
     this.setState({lastResult:{kind, score, total, passed:ok,
       missed:missedItems||[], seen:seenIds||[]}});
-    // Nothing is withheld: the step completes either way. Falling short offers
-    // a practice round and is recorded for the parent, but never bars the day.
-    this.completeStep(step);
-    if(ok){ this.setState({remediation:null, round:1}); return true; }
+    /* KEEP GOING UNTIL 80%. A drill's step ticks off only when a round clears
+     * the bar. Falling short builds another round from what was missed, with
+     * no limit on rounds. After MAX_ROUNDS short rounds the drill is flagged
+     * for a grown-up (For Parents, "needs a look") - but the step still waits
+     * for 80%. A parent can pass it from the For Parents tab if something is
+     * genuinely wrong. Other steps and lessons stay open meanwhile. */
+    if(ok){ this.completeStep(step); this.setState({remediation:null, round:1}); return true; }
     const round=this.state.round+1;
-    if(round > M.MAX_ROUNDS){ this.markStuck(step); this.setState({remediation:null}); return false; }
+    if(round > M.MAX_ROUNDS) this.flagStuck(step);
     const rem=M.remediationRound(this.state.year, this.state.week, kind,
       missedItems||[], seenIds||[], round);
     this.setState({round, remediation:rem});
@@ -2263,7 +2283,7 @@ class Component extends DCLogic {
       sqPassed: !!(st.sq && st.sq.idx>=st.sq.items.length && MS.passed(st.sq.score,st.sq.items.length)),
       sqFailed: !!(st.sq && st.sq.idx>=st.sq.items.length && !MS.passed(st.sq.score,st.sq.items.length) && st.remediation),
       sqRemNote: st.remediation?st.remediation.note:"",
-      sqRemLabel: st.remediation?("Try again \u00b7 round "+st.remediation.round+" of "+MS.MAX_ROUNDS):"",
+      sqRemLabel: st.remediation?("Try again \u00b7 round "+st.remediation.round):"",
       sqRemStart: st.remediation?function(){
         self.sqStart(st.remediation.items, ((st.sq&&st.sq.seenBefore)||[]).concat((st.sq?st.sq.items:[]).map(function(i){return i.id;})));
       }:function(){},
@@ -2797,7 +2817,7 @@ class Component extends DCLogic {
         const parts=k.split(":");   // year:week:day:stepkey
         const NAMES={rq:"Reading comprehension", gz:"Grammar drill", sq:"Spelling drill", rv:"Week review"};
         return {where:(parts[0]==="y2"?"5th Grade":"3rd Grade")+" \u00b7 Week "+parts[1]+" \u00b7 "+MS.lessonLabel(parseInt(parts[1],10), parts[2]),
-                what:(NAMES[parts[3]]||parts[3])+" \u2014 three attempts did not clear 80%. Worth sitting down with."};
+                what:(NAMES[parts[3]]||parts[3])+" \u2014 three rounds have not reached 80% yet, and it stays open until it does. Worth sitting down with."};
       }),
       hasFlags: Object.keys(st.stuck).filter(function(k){ return st.stuck[k]; }).length>0,
       noFlags: Object.keys(st.stuck).filter(function(k){ return st.stuck[k]; }).length===0,
@@ -2861,6 +2881,7 @@ class Component extends DCLogic {
     /* Which stage the child is on, so the box above the question says what he
      * is looking at rather than the same words at both stages. */
     base.fxAgain      = function(){ self.setState({fx:null}); };
+    base.fxNotPassed  = !!(st.fx && st.fx.idx>=st.fx.items.length && !(window.__CURR.LA_MASTERY||MS).passed(st.fx.score, st.fx.items.length));
     base.fixBoxLabel  = (st.fx && st.fx.idx===1) ? "The sentence you are repairing"
                                                  : "This sentence has a mistake";
     base.fixCorrected = fixItem?fixItem.corrected:"";

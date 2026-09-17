@@ -148,6 +148,27 @@ console.log("\n=== a joke too, with the punchline held back ===");
   console.log("  closes again on the next day: yes");
 }
 
+console.log("\n=== each joke belongs to the fact it follows ===");
+{ // The joke is written for the fact: same row, shown straight after it.
+  let n=0;
+  ["y1","y2"].forEach(g=>{ for(let w=1;w<=36;w++) ["Mon","Tue","Wed","Thu","Fri"].forEach(d=>{
+    const f=F.factFor(g,w,d), j=F.jokeFor(g,w,d);
+    const row=F.FACTS[f.purpose].find(r=>r[1]===f.fact);
+    if(!row || !row[3] || row[3][0]!==j.setup || row[3][1]!==j.punchline) fail.push(g+" w"+w+" "+d+" joke is not the one written for its fact");
+    n++;
+  }); });
+  Object.keys(F.FACTS).forEach(p=>F.FACTS[p].forEach((r,i)=>{
+    if(!Array.isArray(r[3]) || r[3].length!==2) fail.push(p+" fact "+i+" has no joke of its own");
+  }));
+  if(new Set(F.JOKES.map(x=>x[0])).size!==F.JOKES.length) fail.push("two facts share a joke");
+  const h=require('fs').readFileSync(__dirname+'/../word-voyagers.dc.html','utf8');
+  if(h.indexOf('{{ factText }}')<0 || h.indexOf('{{ jokeSetup }}')<h.indexOf('{{ factText }}')) fail.push("the joke is not shown after the fact");
+  const eg=F.factFor("y1",3,"Mon"), ej=F.jokeFor("y1",3,"Mon");
+  console.log("  "+n+" grade-days: joke written for that fact, shown after it");
+  console.log("  e.g. fact: "+eg.fact.slice(0,60)+"...");
+  console.log("       joke: "+ej.setup+" / "+ej.punchline);
+}
+
 console.log("\n=== the banner binds it ===");
 { const src=fs.readFileSync(__dirname+'/../word-voyagers.dc.html','utf8');
   const i=src.indexOf('{{ showDayComplete }}');

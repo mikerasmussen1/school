@@ -65,13 +65,17 @@ console.log("\n=== the page prints the challenge, not a generic task ===");
   const src=fs.readFileSync(__dirname+'/../word-voyagers.dc.html','utf8');
   const i=src.indexOf('{{ aClose }}');
   const seg=src.slice(i, src.indexOf('{{ aRead }}', i));
-  ["challengeAsk","challengeA","challengeB","challengeThink","lessonDateLine"].forEach(k=>{
+  ["challengeAsk","challengeA","challengeB","challengeThink"].forEach(k=>{
     if(seg.indexOf("{{ "+k+" }}")<0) fail.push("the lesson panel does not bind "+k);
   });
   if(seg.indexOf("{{ lessonTasks }}")>=0)
     fail.push("the old generic task list is still being printed");
   if(seg.indexOf("{{ noChallengeNote }}")<0)
     fail.push("there is no notice for weeks that are not written");
+  // The date is Task #1 of the notebook entry, so it now lives with the quote
+  // at the start of the lesson rather than in the closing panel.
+  if(src.indexOf('sc-for list="{{ quoteTasks }}"')<0 || src.indexOf("C.DATE_LINE")<0)
+    fail.push("the date line is not printed as Task #1 with the quote");
   if(!/curriculum\/la-challenge\.js/.test(src))
     fail.push("the page does not load the challenge module");
   console.log("  challenge, both sentences, date line and thinking question all bound");

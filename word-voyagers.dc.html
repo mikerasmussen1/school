@@ -143,6 +143,7 @@
                 <div style="font-size:1.02rem;line-height:1.6">{{ qt.text }}</div>
               </div>
             </sc-for>
+            <p class="muted" style="margin:9px 0 0;font-size:.86rem">Tasks 4 and 5 come later, after the reading passage.</p>
           </div>
           <div style="margin-top:13px">
             <sc-if value="{{ quoteNotRead }}" hint-placeholder-val="{{ true }}">
@@ -281,6 +282,12 @@
                   <div style="font-size:1.02rem;line-height:1.6;margin-bottom:10px">{{ challengeAsk }}</div>
                   <div class="q-box" style="margin-bottom:8px"><strong>A.</strong> {{ challengeA }}</div>
                   <div class="q-box"><strong>B.</strong> {{ challengeB }}</div>
+                </div>
+
+                <div class="box" style="margin-top:14px;border-left:4px solid var(--forest)">
+                  <div style="font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--brick-dark);margin-bottom:6px">In your notebook, carrying on from this morning</div>
+                  <div style="display:flex;gap:10px;padding:6px 0"><div style="flex:none;font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--brick-dark);padding-top:2px">Task #4</div><div style="font-size:1.02rem;line-height:1.6">Decide between A and B, then copy your chosen sentence out neatly, exactly as it is written, with its punctuation.</div></div>
+                  <div style="display:flex;gap:10px;padding:6px 0;border-top:1px solid var(--rule)"><div style="flex:none;font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--brick-dark);padding-top:2px">Task #5</div><div style="font-size:1.02rem;line-height:1.6">{{ challengeThink }}</div></div>
                 </div>
               </sc-if>
 
@@ -827,13 +834,15 @@
     <sc-if value="{{ isParent }}" hint-placeholder-val="{{ false }}">
       <div class="card">
         <h2>Checking the notebook</h2>
-        <p class="muted">Every lesson makes one notebook entry of three numbered tasks, written with the quote at the start of the lesson.</p>
+        <p class="muted">Every lesson makes one notebook entry of five numbered tasks, written in order across the day.</p>
         <div class="box" style="margin-top:10px">
           <div style="display:flex;gap:10px;padding:4px 0"><div style="flex:none;font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--brick-dark);min-width:56px">Task 1</div><div style="font-size:.93rem">The date, written out in full.</div></div>
           <div style="display:flex;gap:10px;padding:4px 0"><div style="flex:none;font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--brick-dark);min-width:56px">Task 2</div><div style="font-size:.93rem">The day's quote, copied word for word, with where it came from.</div></div>
           <div style="display:flex;gap:10px;padding:4px 0"><div style="flex:none;font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--brick-dark);min-width:56px">Task 3</div><div style="font-size:.93rem">What the quote means, in his own words.</div></div>
+          <div style="display:flex;gap:10px;padding:4px 0"><div style="flex:none;font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--brick-dark);min-width:56px">Task 4</div><div style="font-size:.93rem">The challenge sentence he chose, copied exactly. The correct choice is shown below for each day.</div></div>
+          <div style="display:flex;gap:10px;padding:4px 0"><div style="flex:none;font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--brick-dark);min-width:56px">Task 5</div><div style="font-size:.93rem">His answer to the critical-thinking question.</div></div>
         </div>
-        <p class="muted" style="margin-top:10px">Task 2 is copying, so it is either exact or it is not — check it against the screen. Task 3 is his thinking, and there is no single right answer; what you are looking for is whether he has understood the quote rather than repeated it.</p>
+        <p class="muted" style="margin-top:10px">Tasks 2 and 4 are copying, so they are either exact or they are not — check them against the screen. Tasks 3 and 5 are his thinking, and there is no single right answer; what you are looking for is whether he has used the text rather than his own opinion of it.</p>
         <div style="margin-top:12px">
           <sc-for list="{{ notebookGuide }}" as="ng" hint-placeholder-count="5">
             <div style="padding:12px 0;border-top:1px solid var(--rule)">
@@ -850,7 +859,7 @@
           </sc-for>
         </div>
         <div class="box" style="margin-top:14px">
-          <strong>Every entry, every day:</strong> the lesson's scheduled date at the top written out in full (the same date as the lesson header, even if the lesson is done on a different day), three tasks numbered, and handwriting he would be willing to show you. A page that cannot be read back in June was not worth writing in September.
+          <strong>Every entry, every day:</strong> the lesson's scheduled date at the top written out in full (the same date as the lesson header, even if the lesson is done on a different day), five tasks numbered, and handwriting he would be willing to show you. A page that cannot be read back in June was not worth writing in September.
         </div>
       </div>
 
@@ -2808,10 +2817,9 @@ class Component extends DCLogic {
        * opening a panel from the checklist, which is an odd thing to ask when
        * the quote is already on screen — and if that panel opened below the
        * fold it looked as though the button had done nothing. */
-      /* The whole notebook entry: three tasks, all with the quote. Tasks 4
-       * and 5 (copying the challenge sentence and answering the thinking
-       * question) were removed; the challenge is still on screen to decide,
-       * but nothing from it is written in the notebook. */
+      /* Tasks 1 to 3 belong to the quote; 4 and 5 come after the passage.
+       * One numbered sequence across the whole lesson, so the notebook reads
+       * as one entry rather than two unrelated halves. */
       quoteTasks:(function(){
         const C=window.__CURR.LA_CLOSE;
         return [

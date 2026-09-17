@@ -80,7 +80,7 @@ console.log("\n=== the page prints the challenge, not a generic task ===");
   const src=fs.readFileSync(__dirname+'/../word-voyagers.dc.html','utf8');
   const i=src.indexOf('{{ aClose }}');
   const seg=src.slice(i, src.indexOf('{{ aRead }}', i));
-  ["challengeAsk","challengeA","challengeB"].forEach(k=>{
+  ["challengeAsk","challengeA","challengeB","challengeThink"].forEach(k=>{
     if(seg.indexOf("{{ "+k+" }}")<0) fail.push("the lesson panel does not bind "+k);
   });
   if(seg.indexOf("{{ lessonTasks }}")>=0)
@@ -93,7 +93,7 @@ console.log("\n=== the page prints the challenge, not a generic task ===");
     fail.push("the date line is not printed as Task #1 with the quote");
   if(!/curriculum\/la-challenge\.js/.test(src))
     fail.push("the page does not load the challenge module");
-  console.log("  challenge and both sentences bound, date line with the quote");
+  console.log("  challenge, both sentences, date line and thinking question all bound");
 }
 
 console.log("\n=== the parent tab gives the answer, not a description ===");

@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=2026-09-17-1622"></script>
-  <script data-build>window.__BUILD__="2026-09-17-1622";</script>
-  <script src="./curriculum/freshness.js?v=2026-09-17-1622"></script>
+<script src="./support.js?v=2026-09-17-1636"></script>
+  <script data-build>window.__BUILD__="2026-09-17-1636";</script>
+  <script src="./curriculum/freshness.js?v=2026-09-17-1636"></script>
 </head>
 <body>
 <x-dc>
@@ -49,30 +49,30 @@
   .book-title{font-family:'Fraunces',serif;font-size:1rem;color:var(--brick-dark);margin:0 0 3px}
   .done-banner{text-align:center;padding:22px;margin-top:6px;background:var(--forest-light);border-radius:8px;color:#2E4E38}
 </style>
-<script src="./curriculum/sync.js?v=2026-09-17-1622"></script>
-<script src="./curriculum/students.js?v=2026-09-17-1622"></script>
-<script src="./curriculum/subjects.js?v=2026-09-17-1622"></script>
-<script src="./curriculum/question-types.js?v=2026-09-17-1622"></script>
-<script src="./curriculum/la-y1-spine.js?v=2026-09-17-1622"></script>
-<script src="./curriculum/la-y1-words.js?v=2026-09-17-1622"></script>
-<script src="./curriculum/la-y1-grammar.js?v=2026-09-17-1622"></script>
-<script src="./curriculum/la-y1-reading.js?v=2026-09-17-1622"></script>
-<script src="./curriculum/la-y1-tasks.js?v=2026-09-17-1622"></script>
-<script src="./curriculum/la-books.js?v=2026-09-17-1622"></script>
-<script src="./curriculum/la-y2-spine.js?v=2026-09-17-1622"></script>
-<script src="./curriculum/la-y2-words.js?v=2026-09-17-1622"></script>
-<script src="./curriculum/la-y2-grammar.js?v=2026-09-17-1622"></script>
-<script src="./curriculum/la-y2-reading.js?v=2026-09-17-1622"></script>
-<script src="./curriculum/la-y2-tasks.js?v=2026-09-17-1622"></script>
-<script src="./curriculum/la-books-y2.js?v=2026-09-17-1622"></script>
-<script src="./curriculum/la-quotes.js?v=2026-09-17-1622"></script>
-<script src="./curriculum/la-daily-fix.js?v=2026-09-17-1622"></script>
-<script src="./curriculum/la-skill-notes.js?v=2026-09-17-1622"></script>
-<script src="./curriculum/la-challenge.js?v=2026-09-17-1622"></script>
-<script src="./curriculum/la-facts.js?v=2026-09-17-1622"></script>
-<script src="./curriculum/la-close-reading.js?v=2026-09-17-1622"></script>
-<script src="./curriculum/la-mastery.js?v=2026-09-17-1622"></script>
-<script src="./curriculum/la-grader.js?v=2026-09-17-1622"></script>
+<script src="./curriculum/sync.js?v=2026-09-17-1636"></script>
+<script src="./curriculum/students.js?v=2026-09-17-1636"></script>
+<script src="./curriculum/subjects.js?v=2026-09-17-1636"></script>
+<script src="./curriculum/question-types.js?v=2026-09-17-1636"></script>
+<script src="./curriculum/la-y1-spine.js?v=2026-09-17-1636"></script>
+<script src="./curriculum/la-y1-words.js?v=2026-09-17-1636"></script>
+<script src="./curriculum/la-y1-grammar.js?v=2026-09-17-1636"></script>
+<script src="./curriculum/la-y1-reading.js?v=2026-09-17-1636"></script>
+<script src="./curriculum/la-y1-tasks.js?v=2026-09-17-1636"></script>
+<script src="./curriculum/la-books.js?v=2026-09-17-1636"></script>
+<script src="./curriculum/la-y2-spine.js?v=2026-09-17-1636"></script>
+<script src="./curriculum/la-y2-words.js?v=2026-09-17-1636"></script>
+<script src="./curriculum/la-y2-grammar.js?v=2026-09-17-1636"></script>
+<script src="./curriculum/la-y2-reading.js?v=2026-09-17-1636"></script>
+<script src="./curriculum/la-y2-tasks.js?v=2026-09-17-1636"></script>
+<script src="./curriculum/la-books-y2.js?v=2026-09-17-1636"></script>
+<script src="./curriculum/la-quotes.js?v=2026-09-17-1636"></script>
+<script src="./curriculum/la-daily-fix.js?v=2026-09-17-1636"></script>
+<script src="./curriculum/la-skill-notes.js?v=2026-09-17-1636"></script>
+<script src="./curriculum/la-challenge.js?v=2026-09-17-1636"></script>
+<script src="./curriculum/la-facts.js?v=2026-09-17-1636"></script>
+<script src="./curriculum/la-close-reading.js?v=2026-09-17-1636"></script>
+<script src="./curriculum/la-mastery.js?v=2026-09-17-1636"></script>
+<script src="./curriculum/la-grader.js?v=2026-09-17-1636"></script>
 </helmet>
 
 <div style="min-height:100vh;display:flex;flex-direction:column">
@@ -933,13 +933,13 @@
 
       <div class="card">
         <h2>Start the year again</h2>
-        <p class="muted">Marks every day in both grades as not started: step ticks, drill scores, flagged items and excused days. Useful for testing a change, or for genuinely restarting. It cannot be undone.</p>
+        <p class="muted">Marks every lesson in both grades as not started for <strong>{{ resetWho }}</strong> only: step ticks, drill scores, flagged items and excused lessons. Other children's progress is not touched. Useful for testing a change, or for genuinely restarting. It cannot be undone.</p>
         <sc-if value="{{ resetIdle }}" hint-placeholder-val="{{ true }}">
-          <div style="margin-top:10px"><button onClick="{{ armReset }}" style="{{ btnSecondary }}">Reset all progress</button></div>
+          <div style="margin-top:10px"><button onClick="{{ armReset }}" style="{{ btnSecondary }}">{{ resetButtonLabel }}</button></div>
         </sc-if>
         <sc-if value="{{ resetArmed }}" hint-placeholder-val="{{ false }}">
           <div style="background:#F3DCD5;color:var(--brick-dark);border-radius:8px;padding:14px 16px;margin-top:10px">
-            <div style="font-weight:600;margin-bottom:8px">This erases every tick and score for both 3rd and 5th grade, on every device. Sure?</div>
+            <div style="font-weight:600;margin-bottom:8px">{{ resetConfirmText }}</div>
             <div style="display:flex;gap:9px;flex-wrap:wrap">
               <button onClick="{{ doReset }}" style="{{ btnPrimary }}">Yes, erase it all</button>
               <button onClick="{{ cancelReset }}" style="{{ btnSecondary }}">Keep my progress</button>
@@ -1082,6 +1082,16 @@
 </div>
 </x-dc>
 <script type="text/x-dc" data-dc-script>
+/* Every Word Voyagers key on this device belongs to the signed-in child:
+ * "la.stepDone" is stored as "la.<child>.stepDone". Two children share the
+ * iPad, and one unnamespaced copy meant one child's ticks - or a reset - could
+ * be carried into the other child's record. Signed out, keys are unchanged. */
+function LAK(k){
+  try{
+    const s=JSON.parse(localStorage.getItem("abm.session.v1")||"null");
+    return (s&&s.key) ? String(k).replace(/^la\./, "la."+s.key+".") : k;
+  }catch(e){ return k; }
+}
 class Component extends DCLogic {
   state = {
     view:"home",
@@ -1093,7 +1103,7 @@ class Component extends DCLogic {
     unitJustDone:null,
     /* Which units have already had their moment, "y1:3" -> true. Stored and
      * synced, so it fires once per unit rather than once per dismissal. */
-    unitSeen:(function(){ try{ return JSON.parse(localStorage.getItem("la.unitSeen")||"{}"); }catch(e){ return {}; } })(),
+    unitSeen:(function(){ try{ return JSON.parse(localStorage.getItem(LAK("la.unitSeen"))||"{}"); }catch(e){ return {}; } })(),
     // A level passed in the URL is the boy who was just picked on the landing
     // card, so it beats whatever this page stored last time. Accepts the
     // shared y3/y5 ids as well as this page's own y1/y2.
@@ -1104,11 +1114,11 @@ class Component extends DCLogic {
           if(v==="y2"||v==="y5") return "y2";
           if(v==="y1"||v==="y3") return "y1"; }
       }catch(e){}
-      try{ return localStorage.getItem("la.year")==="y2" ? "y2" : "y1"; }catch(e){ return "y1"; }
+      try{ return localStorage.getItem(LAK("la.year"))==="y2" ? "y2" : "y1"; }catch(e){ return "y1"; }
     })(),
-    week:(()=>{ try{ return Math.min(36,Math.max(1,parseInt(localStorage.getItem("la.week")||"1",10)||1)); }catch(e){ return 1; } })(),
-    done:(()=>{ try{ return JSON.parse(localStorage.getItem("la.done")||"{}"); }catch(e){ return {}; } })(),
-    day:(function(){ try{ const d=localStorage.getItem("la.day"); if(d) return d; }catch(e){}
+    week:(()=>{ try{ return Math.min(36,Math.max(1,parseInt(localStorage.getItem(LAK("la.week"))||"1",10)||1)); }catch(e){ return 1; } })(),
+    done:(()=>{ try{ return JSON.parse(localStorage.getItem(LAK("la.done"))||"{}"); }catch(e){ return {}; } })(),
+    day:(function(){ try{ const d=localStorage.getItem(LAK("la.day")); if(d) return d; }catch(e){}
       return ["Mon","Mon","Tue","Wed","Thu","Fri","Fri"][new Date().getDay()]; })(),
     landed:false,           // has the opening jump-to-frontier happened yet
     redoWeek:null, redoDay:null,   // which day the parent is redoing
@@ -1116,18 +1126,18 @@ class Component extends DCLogic {
     dayResetArmed:false,    // and so does the single-day one
     openStep:null,          // which assignment is open inline on Today
     started:false,          // has START TODAY been pressed
-    stepDone:(function(){ try{ return JSON.parse(localStorage.getItem("la.stepDone")||"{}"); }catch(e){ return {}; } })(),
-    closedAt:(function(){ try{ return JSON.parse(localStorage.getItem("la.closedAt")||"{}"); }catch(e){ return {}; } })(),
+    stepDone:(function(){ try{ return JSON.parse(localStorage.getItem(LAK("la.stepDone"))||"{}"); }catch(e){ return {}; } })(),
+    closedAt:(function(){ try{ return JSON.parse(localStorage.getItem(LAK("la.closedAt"))||"{}"); }catch(e){ return {}; } })(),
     round:1,                // which attempt of the current scored step
     lastResult:null,        // {kind, score, total, passed, missed:[], seen:[]}
     remediation:null,       // {items, note, round, isFinalRound}
-    stuck:(function(){ try{ return JSON.parse(localStorage.getItem("la.stuck")||"{}"); }catch(e){ return {}; } })(),
-    stepResult:(function(){ try{ return JSON.parse(localStorage.getItem("la.stepResult")||"{}"); }catch(e){ return {}; } })(),
-    approvals:(function(){ try{ return JSON.parse(localStorage.getItem("la.approvals")||"{}"); }catch(e){ return {}; } })(),
-    overrides:(function(){ try{ return JSON.parse(localStorage.getItem("la.overrides")||"{}"); }catch(e){ return {}; } })(),
+    stuck:(function(){ try{ return JSON.parse(localStorage.getItem(LAK("la.stuck"))||"{}"); }catch(e){ return {}; } })(),
+    stepResult:(function(){ try{ return JSON.parse(localStorage.getItem(LAK("la.stepResult"))||"{}"); }catch(e){ return {}; } })(),
+    approvals:(function(){ try{ return JSON.parse(localStorage.getItem(LAK("la.approvals"))||"{}"); }catch(e){ return {}; } })(),
+    overrides:(function(){ try{ return JSON.parse(localStorage.getItem(LAK("la.overrides"))||"{}"); }catch(e){ return {}; } })(),
     ovStep:null, ovReason:"",
     approveGrade:null, approveNote:"",
-    excused:(function(){ try{ return JSON.parse(localStorage.getItem("la.excused")||"{}"); }catch(e){ return {}; } })(),
+    excused:(function(){ try{ return JSON.parse(localStorage.getItem(LAK("la.excused"))||"{}"); }catch(e){ return {}; } })(),
     /* EVERY QUESTION THE CHILD ANSWERS, AS THEY ANSWER IT.
      *
      * Maths has kept this from the start (pLog) and Teacher HQ reads it to show
@@ -1139,7 +1149,7 @@ class Component extends DCLogic {
      * Same shape as pLog so the two read alike: keyed by year:week:day:slot,
      * each entry one attempt. Written the moment a question is answered, not
      * when the drill ends. */
-    laLog:(function(){ try{ return JSON.parse(localStorage.getItem("la.laLog")||"{}"); }catch(e){ return {}; } })(),
+    laLog:(function(){ try{ return JSON.parse(localStorage.getItem(LAK("la.laLog"))||"{}"); }catch(e){ return {}; } })(),
     fx:null, gz:null, sq:null, rq:null, rv:null, jokeOpen:false,
     asKind:"handwriting", asImage:null, asStatus:"idle", asResult:null, asError:""
   };
@@ -1150,7 +1160,7 @@ class Component extends DCLogic {
   get Y(){ return this.state.year==="y2" ? window.__CURR.LA_Y2 : window.__CURR.LA_Y1; }
 
   setYear=(y)=>{
-    try{ localStorage.setItem("la.year", y); localStorage.setItem("la.week","1"); }catch(e){}
+    try{ localStorage.setItem(LAK("la.year"), y); localStorage.setItem(LAK("la.week"),"1"); }catch(e){}
     this.setState({year:y, week:1, fx:null, gz:null, sq:null, rq:null, rv:null,
       asImage:null, asStatus:"idle", asResult:null, asError:""});
     window.scrollTo(0,0);
@@ -1232,7 +1242,7 @@ class Component extends DCLogic {
 
   setWeek=(w)=>{
     const week=Math.min(36,Math.max(1,w));
-    try{ localStorage.setItem("la.week",String(week)); }catch(e){}
+    try{ localStorage.setItem(LAK("la.week"),String(week)); }catch(e){}
     this.setState({week, fx:null, gz:null, sq:null, rq:null, rv:null,
       asImage:null, asStatus:"idle", asResult:null, asError:""});
     window.scrollTo(0,0);
@@ -1246,7 +1256,7 @@ class Component extends DCLogic {
   markDone=(key)=>{
     const w=this.state.year+":"+this.state.week;
     const done={...this.state.done, [w]:{...(this.state.done[w]||{}), [key]:true}};
-    try{ localStorage.setItem("la.done", JSON.stringify(done)); }catch(e){}
+    try{ localStorage.setItem(LAK("la.done"), JSON.stringify(done)); }catch(e){}
     this.syncSave({done});
   };
 
@@ -1282,7 +1292,7 @@ class Component extends DCLogic {
                                 : (!e.qid && e.q === entry.q && e.a === entry.a);
     const kept=(log[k]||[]).filter(e=>!same(e));
     log[k]=kept.concat([entry]);
-    try{ localStorage.setItem("la.laLog", JSON.stringify(log)); }catch(e){}
+    try{ localStorage.setItem(LAK("la.laLog"), JSON.stringify(log)); }catch(e){}
     this.syncSave({laLog:log});
   };
 
@@ -1530,7 +1540,7 @@ class Component extends DCLogic {
   completeStep=(step)=>{
     const k=this.state.year+":"+this.state.week+":"+this.stepKey(step);
     const stepDone={...this.state.stepDone, [k]:true};
-    try{ localStorage.setItem("la.stepDone", JSON.stringify(stepDone)); }catch(e){}
+    try{ localStorage.setItem(LAK("la.stepDone"), JSON.stringify(stepDone)); }catch(e){}
 
     /* When a DAY closes, stamp the time. That stamp is the whole input to the
      * pace rule in la-mastery (how many days were closed today), and nothing
@@ -1540,7 +1550,7 @@ class Component extends DCLogic {
     if(/:end$/.test(k)){
       closedAt={...closedAt, [k.replace(/:end$/,"")]:Date.now()};
       this.setState({closedAt});
-      try{ localStorage.setItem("la.closedAt", JSON.stringify(closedAt)); }catch(e){}
+      try{ localStorage.setItem(LAK("la.closedAt"), JSON.stringify(closedAt)); }catch(e){}
     }
 
     /* Finishing a day already has its banner. Finishing a UNIT STUDY — nine a
@@ -1567,7 +1577,7 @@ class Component extends DCLogic {
       if(whole && !unitSeen[seenKey]){
         justDone=unit.n;
         unitSeen={...unitSeen, [seenKey]:true};
-        try{ localStorage.setItem("la.unitSeen", JSON.stringify(unitSeen)); }catch(e){}
+        try{ localStorage.setItem(LAK("la.unitSeen"), JSON.stringify(unitSeen)); }catch(e){}
       }
     }
 
@@ -1578,7 +1588,7 @@ class Component extends DCLogic {
   markStuck=(step)=>{
     const k=this.state.year+":"+this.state.week+":"+this.stepKey(step);
     const stuck={...this.state.stuck, [k]:true};
-    try{ localStorage.setItem("la.stuck", JSON.stringify(stuck)); }catch(e){}
+    try{ localStorage.setItem(LAK("la.stuck"), JSON.stringify(stuck)); }catch(e){}
     this.syncSave({stuck});
     this.completeStep(step);   // the valve: do not trap the child
   };
@@ -1588,7 +1598,7 @@ class Component extends DCLogic {
     const k=M.excuseKey(grade, week, day);
     const excused={...this.state.excused};
     if(excused[k]) delete excused[k]; else excused[k]=true;
-    try{ localStorage.setItem("la.excused", JSON.stringify(excused)); }catch(e){}
+    try{ localStorage.setItem(LAK("la.excused"), JSON.stringify(excused)); }catch(e){}
     this.syncSave({excused});
   };
 
@@ -1643,12 +1653,12 @@ class Component extends DCLogic {
            * prefix strip clears exactly this day's answers and no others. */
           laLog=strip(st.laLog);
     try{
-      localStorage.setItem("la.stepDone", JSON.stringify(stepDone));
-      localStorage.setItem("la.closedAt", JSON.stringify(closedAtS));
-      localStorage.setItem("la.stuck", JSON.stringify(stuck));
-      localStorage.setItem("la.stepResult", JSON.stringify(stepResult));
-      localStorage.setItem("la.approvals", JSON.stringify(approvals));
-      localStorage.setItem("la.laLog", JSON.stringify(laLog));
+      localStorage.setItem(LAK("la.stepDone"), JSON.stringify(stepDone));
+      localStorage.setItem(LAK("la.closedAt"), JSON.stringify(closedAtS));
+      localStorage.setItem(LAK("la.stuck"), JSON.stringify(stuck));
+      localStorage.setItem(LAK("la.stepResult"), JSON.stringify(stepResult));
+      localStorage.setItem(LAK("la.approvals"), JSON.stringify(approvals));
+      localStorage.setItem(LAK("la.laLog"), JSON.stringify(laLog));
     }catch(e){}
     /* Resetting a day drops its close stamp too. Without that, a day redone
      * after a reset would still be counted against today's pace and the child
@@ -1671,7 +1681,7 @@ class Component extends DCLogic {
      * finished a unit again would make the reset feel broken in a way that is
      * hard to describe and easy to notice. */
     const KEYS=["la.stepDone","la.stuck","la.stepResult","la.approvals","la.overrides","la.done","la.excused","la.week","la.day","la.unitSeen","la.laLog"];
-    KEYS.forEach(function(k){ try{ localStorage.removeItem(k); }catch(e){} });
+    KEYS.forEach(function(k){ try{ localStorage.removeItem(LAK(k)); }catch(e){} });
     const empty={stepDone:{}, stuck:{}, stepResult:{}, approvals:{}, overrides:{}, done:{}, excused:{}, week:1, day:"Mon",
                  unitSeen:{}, unitJustDone:null, laLog:{}};
     this.setState({...empty, resetArmed:false, started:false, openStep:null,
@@ -1740,7 +1750,7 @@ class Component extends DCLogic {
     const k=st.year+":"+st.week+":"+this.stepKey(step);
     const approvals={...(st.approvals||{}),
       [k]:{grade:st.approveGrade, note:(st.approveNote||"").slice(0,200), at:Date.now()}};
-    try{ localStorage.setItem("la.approvals", JSON.stringify(approvals)); }catch(e){}
+    try{ localStorage.setItem(LAK("la.approvals"), JSON.stringify(approvals)); }catch(e){}
     this.setState({approvals, approveGrade:null, approveNote:"", openStep:null});
     this.syncSave({approvals});
     this.completeStep(step);
@@ -1780,8 +1790,8 @@ class Component extends DCLogic {
            label:step.label, day:st.day, week:st.week, year:st.year}};
     const stepDone={...(st.stepDone||{}), [k]:true};
     try{
-      localStorage.setItem("la.overrides", JSON.stringify(overrides));
-      localStorage.setItem("la.stepDone", JSON.stringify(stepDone));
+      localStorage.setItem(LAK("la.overrides"), JSON.stringify(overrides));
+      localStorage.setItem(LAK("la.stepDone"), JSON.stringify(stepDone));
     }catch(e){}
     this.setState({overrides, stepDone, ovReason:"", ovStep:null});
     this.syncSave({overrides, stepDone});
@@ -1789,7 +1799,7 @@ class Component extends DCLogic {
   clearOverride=(key)=>{
     const overrides={...(this.state.overrides||{})};
     delete overrides[key];
-    try{ localStorage.setItem("la.overrides", JSON.stringify(overrides)); }catch(e){}
+    try{ localStorage.setItem(LAK("la.overrides"), JSON.stringify(overrides)); }catch(e){}
     this.setState({overrides});
     this.syncSave({overrides});
   };
@@ -1803,7 +1813,7 @@ class Component extends DCLogic {
   recordResult=(step, score, total)=>{
     const k=this.state.year+":"+this.state.week+":"+this.stepKey(step);
     const stepResult={...(this.state.stepResult||{}), [k]:{score:score, total:total, at:Date.now()}};
-    try{ localStorage.setItem("la.stepResult", JSON.stringify(stepResult)); }catch(e){}
+    try{ localStorage.setItem(LAK("la.stepResult"), JSON.stringify(stepResult)); }catch(e){}
     this.syncSave({stepResult});
   };
   resultFor(step){
@@ -1824,7 +1834,7 @@ class Component extends DCLogic {
   };
 
   setDay=(d)=>{
-    try{ localStorage.setItem("la.day", d); }catch(e){}
+    try{ localStorage.setItem(LAK("la.day"), d); }catch(e){}
     this.setState({day:d, started:false, round:1, lastResult:null, remediation:null,
       fx:null, gz:null, sq:null, rq:null, rv:null, jokeOpen:false, asImage:null, asStatus:"idle", asResult:null, asError:""});
     window.scrollTo(0,0);
@@ -2692,6 +2702,24 @@ class Component extends DCLogic {
       cancelDayReset: this.cancelDayReset,
       resetOneDay: this.resetOneDay,
 
+      /* Whose progress the reset clears: the signed-in child, by name. */
+      resetWho:(function(){
+        const SY=window.__CURR&&window.__CURR.SYNC;
+        const p=SY&&SY.profile ? SY.profile() : null;
+        return (p&&p.name) ? p.name : "this device";
+      })(),
+      resetButtonLabel:(function(){
+        const SY=window.__CURR&&window.__CURR.SYNC;
+        const p=SY&&SY.profile ? SY.profile() : null;
+        return (p&&p.name) ? ("Erase "+p.name+"'s Word Voyagers progress") : "Reset this device's progress";
+      })(),
+      resetConfirmText:(function(){
+        const SY=window.__CURR&&window.__CURR.SYNC;
+        const p=SY&&SY.profile ? SY.profile() : null;
+        return (p&&p.name)
+          ? ("This erases every tick and score for "+p.name+", 3rd and 5th grade, on every device. No other child's progress changes. Sure?")
+          : "Nobody is signed in, so this erases the Word Voyagers progress saved on this device only. Sure?";
+      })(),
       resetIdle: !st.resetArmed,
       resetArmed: !!st.resetArmed,
       armReset: this.armReset,

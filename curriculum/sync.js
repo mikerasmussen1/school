@@ -96,13 +96,28 @@
 
   /* ---- the API a subject page actually uses ---------------------------- */
 
+  /* ONE LOCAL COPY PER CHILD. Two children share a device, so the local copy
+   * is keyed by whoever is signed in. It used to be one "sync.<subject>" for
+   * the whole browser: work done as one child sat in the same slot the other
+   * child then signed into, and because pull() keeps whichever copy is newer,
+   * that newer-looking copy was pushed over the other child's record. A reset
+   * on one profile could erase a brother's year that way.
+   *
+   * Signed out, the key is the old "sync.<subject>", so a device nobody signs
+   * in to behaves exactly as before. A signed-in child never reads that
+   * unowned copy: nothing says whose it is, so the record wins. */
+  function localKey(subjectId){
+    const key = studentKey();
+    return "sync." + subjectId + (key ? "." + key : "");
+  }
   const local = {
+    key: localKey,
     get(subjectId){
-      try{ return JSON.parse(localStorage.getItem("sync."+subjectId)||"{}"); }
+      try{ return JSON.parse(localStorage.getItem(localKey(subjectId))||"{}"); }
       catch(e){ return {}; }
     },
     set(subjectId, data){
-      try{ localStorage.setItem("sync."+subjectId, JSON.stringify(data||{})); }catch(e){}
+      try{ localStorage.setItem(localKey(subjectId), JSON.stringify(data||{})); }catch(e){}
     }
   };
 

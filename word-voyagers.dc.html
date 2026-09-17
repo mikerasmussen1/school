@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=2026-09-17-1613"></script>
-  <script data-build>window.__BUILD__="2026-09-17-1613";</script>
-  <script src="./curriculum/freshness.js?v=2026-09-17-1613"></script>
+<script src="./support.js?v=2026-09-17-1622"></script>
+  <script data-build>window.__BUILD__="2026-09-17-1622";</script>
+  <script src="./curriculum/freshness.js?v=2026-09-17-1622"></script>
 </head>
 <body>
 <x-dc>
@@ -49,30 +49,30 @@
   .book-title{font-family:'Fraunces',serif;font-size:1rem;color:var(--brick-dark);margin:0 0 3px}
   .done-banner{text-align:center;padding:22px;margin-top:6px;background:var(--forest-light);border-radius:8px;color:#2E4E38}
 </style>
-<script src="./curriculum/sync.js?v=2026-09-17-1613"></script>
-<script src="./curriculum/students.js?v=2026-09-17-1613"></script>
-<script src="./curriculum/subjects.js?v=2026-09-17-1613"></script>
-<script src="./curriculum/question-types.js?v=2026-09-17-1613"></script>
-<script src="./curriculum/la-y1-spine.js?v=2026-09-17-1613"></script>
-<script src="./curriculum/la-y1-words.js?v=2026-09-17-1613"></script>
-<script src="./curriculum/la-y1-grammar.js?v=2026-09-17-1613"></script>
-<script src="./curriculum/la-y1-reading.js?v=2026-09-17-1613"></script>
-<script src="./curriculum/la-y1-tasks.js?v=2026-09-17-1613"></script>
-<script src="./curriculum/la-books.js?v=2026-09-17-1613"></script>
-<script src="./curriculum/la-y2-spine.js?v=2026-09-17-1613"></script>
-<script src="./curriculum/la-y2-words.js?v=2026-09-17-1613"></script>
-<script src="./curriculum/la-y2-grammar.js?v=2026-09-17-1613"></script>
-<script src="./curriculum/la-y2-reading.js?v=2026-09-17-1613"></script>
-<script src="./curriculum/la-y2-tasks.js?v=2026-09-17-1613"></script>
-<script src="./curriculum/la-books-y2.js?v=2026-09-17-1613"></script>
-<script src="./curriculum/la-quotes.js?v=2026-09-17-1613"></script>
-<script src="./curriculum/la-daily-fix.js?v=2026-09-17-1613"></script>
-<script src="./curriculum/la-skill-notes.js?v=2026-09-17-1613"></script>
-<script src="./curriculum/la-challenge.js?v=2026-09-17-1613"></script>
-<script src="./curriculum/la-facts.js?v=2026-09-17-1613"></script>
-<script src="./curriculum/la-close-reading.js?v=2026-09-17-1613"></script>
-<script src="./curriculum/la-mastery.js?v=2026-09-17-1613"></script>
-<script src="./curriculum/la-grader.js?v=2026-09-17-1613"></script>
+<script src="./curriculum/sync.js?v=2026-09-17-1622"></script>
+<script src="./curriculum/students.js?v=2026-09-17-1622"></script>
+<script src="./curriculum/subjects.js?v=2026-09-17-1622"></script>
+<script src="./curriculum/question-types.js?v=2026-09-17-1622"></script>
+<script src="./curriculum/la-y1-spine.js?v=2026-09-17-1622"></script>
+<script src="./curriculum/la-y1-words.js?v=2026-09-17-1622"></script>
+<script src="./curriculum/la-y1-grammar.js?v=2026-09-17-1622"></script>
+<script src="./curriculum/la-y1-reading.js?v=2026-09-17-1622"></script>
+<script src="./curriculum/la-y1-tasks.js?v=2026-09-17-1622"></script>
+<script src="./curriculum/la-books.js?v=2026-09-17-1622"></script>
+<script src="./curriculum/la-y2-spine.js?v=2026-09-17-1622"></script>
+<script src="./curriculum/la-y2-words.js?v=2026-09-17-1622"></script>
+<script src="./curriculum/la-y2-grammar.js?v=2026-09-17-1622"></script>
+<script src="./curriculum/la-y2-reading.js?v=2026-09-17-1622"></script>
+<script src="./curriculum/la-y2-tasks.js?v=2026-09-17-1622"></script>
+<script src="./curriculum/la-books-y2.js?v=2026-09-17-1622"></script>
+<script src="./curriculum/la-quotes.js?v=2026-09-17-1622"></script>
+<script src="./curriculum/la-daily-fix.js?v=2026-09-17-1622"></script>
+<script src="./curriculum/la-skill-notes.js?v=2026-09-17-1622"></script>
+<script src="./curriculum/la-challenge.js?v=2026-09-17-1622"></script>
+<script src="./curriculum/la-facts.js?v=2026-09-17-1622"></script>
+<script src="./curriculum/la-close-reading.js?v=2026-09-17-1622"></script>
+<script src="./curriculum/la-mastery.js?v=2026-09-17-1622"></script>
+<script src="./curriculum/la-grader.js?v=2026-09-17-1622"></script>
 </helmet>
 
 <div style="min-height:100vh;display:flex;flex-direction:column">
@@ -158,7 +158,6 @@
         <h2 style="margin:4px 0 2px">{{ todayFull }}</h2>
         <div style="font-size:1.02rem;margin-bottom:2px">{{ lessonLine }}</div>
         <div class="muted" style="font-size:.86rem;margin-bottom:2px">{{ finishLine }}</div>
-        <p class="muted" style="margin-top:2px">{{ weekFocusLine }}</p>
 
         <!-- BLOCKED: unfinished work behind this day -->
         <sc-if value="{{ showBlocked }}" hint-placeholder-val="{{ false }}">
@@ -335,7 +334,7 @@
             <sc-if value="{{ aSkill }}" hint-placeholder-val="{{ false }}">
               <div class="box">
                 <h3 style="margin-bottom:2px">{{ gzTitle }}</h3>
-                <p class="muted" style="margin:0 0 12px;font-size:.84rem">{{ gzStandard }} &middot; {{ gzCount }}</p>
+                <p class="muted" style="margin:0 0 12px;font-size:.84rem">{{ gzCount }}</p>
                 <div style="font-size:1.02rem;line-height:1.65">{{ skillTeach }}</div>
                 <div class="q-box" style="border-left:4px solid var(--forest);margin-top:12px">
                   <span style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft)">For example</span><br>{{ skillExample }}
@@ -2110,7 +2109,6 @@ class Component extends DCLogic {
       weekLabel:"Week "+st.week+" of 36",
       weekNum:st.week,
       weekTitle:wk.title,
-      weekFocusLine:"Spelling pattern: "+wk.spelling+" \u00b7 Standard "+wk.standard,
       unitLine:"Unit "+unit.n+" \u00b7 "+unit.name+" \u00b7 "+unit.virtue,
       dayPicker: MS.DAYS.map(function(d){
         const stt = MS.dayStatus ? MS.dayStatus(st.year, st.week, d, st.stepDone, st.excused, st.closedAt)

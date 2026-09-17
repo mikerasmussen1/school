@@ -19,7 +19,9 @@ for(let w=1;w<=36;w++){
 console.log("  "+M.dayPlan("y2",1,"Mon").steps.map(s=>s.n+". "+s.label).join("\n  "));
 
 console.log("\n=== the other lessons, and 3rd grade, keep their order ===");
-["Tue","Wed","Thu","Fri"].forEach(d=>{
+// (5th grade's 4th lesson merges its assignment and writing steps - see
+//  tests/assignment-one-step.js - so it is compared there, not here.)
+["Tue","Wed","Fri"].forEach(d=>{
   if(keys("y2",1,d).join(">")!==keys("y1",1,d).join(">")) fail.push("5th grade "+d+" order changed: "+keys("y2",1,d).join(" > "));
 });
 if(keys("y1",1,"Mon").join(">")!=="quote>fix>close>read>rq>end") fail.push("3rd grade first lesson order changed: "+keys("y1",1,"Mon").join(" > "));

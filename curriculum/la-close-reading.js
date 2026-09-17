@@ -180,7 +180,7 @@
   function minutesFor(key){ return MINUTES[key] || 3; }
 
   function dayMinutes(steps){
-    return (steps||[]).reduce(function(n,s){ return n + minutesFor(s.key); }, 0);
+    return (steps||[]).reduce(function(n,s){ return n + (s.minutes || minutesFor(s.key)); }, 0);
   }
 
   window.__CURR = window.__CURR || {};

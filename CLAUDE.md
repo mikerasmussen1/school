@@ -53,8 +53,10 @@ These were each learned from a bug that shipped past a green suite.
 - A changed `.dc.html` ships with its re-exported `.pdf` in the same change.
   Freshness is judged by git commit time, not mtime, so re-export after the
   sheet is committed. Every Print Pack is 15 pages.
-- `index.html` loads every `curriculum/*.js`, with `registry.js` last: it
-  destructures `window.__CURR` at parse time and cannot see later files.
+- `index.html` loads every `curriculum/*.js`. `registry.js` destructures the
+  maths exports off `window.__CURR` at parse time, so any file whose exports it
+  reads must be loaded before it; subjects that register their own card
+  (`Subjects.register`) may load after it and do.
 - Progress is written with `saveState`, never `setState` (memory only; it
   vanishes on reload while the child watches it work).
 - Set and lesson counts never drop silently: compare counts, not impressions.

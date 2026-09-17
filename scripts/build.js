@@ -131,6 +131,12 @@ function pageCount(pdf) {
 // ── 3. the checkers get the final say ───────────────────────────────────
 step("3. Verify");
 run("node", ["scripts/check-paper-mapping.js"], "check-paper-mapping");
+/* Two checkers that were written and never wired in, so nothing ran them:
+ * daily-mix guards attempt-history positions and duplicate questions, la-pace
+ * the pace-rule contract. Both are the silent-failure class this build exists
+ * to catch. la-pace failed the day it was wired in (pre-existing). */
+run("node", ["scripts/check-daily-mix.js"], "check-daily-mix");
+run("node", ["scripts/check-la-pace.js"], "check-la-pace");
 /* Reads the tier off the printed styling instead of rebuilding the generator's
  * array, so it can disagree with the generator — which the other two cannot,
  * since they share its ordering code. It is a ratchet against a known backlog,

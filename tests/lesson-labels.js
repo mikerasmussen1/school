@@ -50,6 +50,12 @@ console.log("\n=== the labels that replaced them ===");
   const v=c.renderVals();
   const want={qDayLabel:"Lesson 99", endHeading:"Lesson 99 complete", nextDayLabel:"Start Lesson 100"};
   Object.keys(want).forEach(k=>{ console.log("  "+k.padEnd(13)+" "+v[k]); if(v[k]!==want[k]) fail.push(k+" is '"+v[k]+"', want '"+want[k]+"'"); });
+  // The last checklist step's button names the lesson, not the day, whether
+  // the child reaches it in order or jumps to it early.
+  const endBtn=(v.daySteps||[]).filter(x=>/Finish this lesson/.test(x.label||"")).map(x=>x.btnLabel);
+  console.log("  end button    "+endBtn.join(", "));
+  if(!endBtn.length || endBtn.some(b=>b!=="Finish this lesson")) fail.push("the last step's button reads: "+endBtn.join(", "));
+  if(/Finish the day/.test(h)) fail.push("the page still has a Finish the day button");
   const pick=v.dayPicker.map(x=>x.label.replace("\u00b7","")).join(", ");
   console.log("  dayPicker     "+pick);
   if(pick!=="Lesson 96, Lesson 97, Lesson 98, Lesson 99, Lesson 100") fail.push("the lesson buttons read: "+pick);

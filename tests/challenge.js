@@ -66,9 +66,12 @@ console.log("\n=== the two grades never share a challenge ===");
 }
 
 console.log("\n=== weeks not yet written say so, rather than going vague ===");
-{ const c=CH.challengeFor("y1",30,"Mon");
-  console.log("  3rd week 30: "+(c===null?"null, so the page shows the not-written notice":"HAS DATA"));
-  if(c!==null) fail.push("week 30 unexpectedly has data");
+{ const c=CH.challengeFor("y1",37,"Mon");
+  console.log("  3rd week 37: "+(c===null?"null, so the page shows the not-written notice":"HAS DATA"));
+  if(c!==null) fail.push("week 37 unexpectedly has data");
+  // All 36 weeks are written for both grades; a week going missing is silent
+  // loss, so say so loudly.
+  ["y1","y2"].forEach(g=>{ if(CH.weeksWritten(g).length!==36) fail.push(g+" has "+CH.weeksWritten(g).length+" weeks written, not 36"); });
   console.log("  written so far: 3rd "+CH.weeksWritten("y1").join(",")+" | 5th "+CH.weeksWritten("y2").join(","));
 }
 

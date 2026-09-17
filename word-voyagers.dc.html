@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=2026-09-17-1729"></script>
-  <script data-build>window.__BUILD__="2026-09-17-1729";</script>
-  <script src="./curriculum/freshness.js?v=2026-09-17-1729"></script>
+<script src="./support.js?v=2026-09-17-1737"></script>
+  <script data-build>window.__BUILD__="2026-09-17-1737";</script>
+  <script src="./curriculum/freshness.js?v=2026-09-17-1737"></script>
 </head>
 <body>
 <x-dc>
@@ -49,31 +49,31 @@
   .book-title{font-family:'Fraunces',serif;font-size:1rem;color:var(--brick-dark);margin:0 0 3px}
   .done-banner{text-align:center;padding:22px;margin-top:6px;background:var(--forest-light);border-radius:8px;color:#2E4E38}
 </style>
-<script src="./curriculum/sync.js?v=2026-09-17-1729"></script>
-<script src="./curriculum/students.js?v=2026-09-17-1729"></script>
-<script src="./curriculum/subjects.js?v=2026-09-17-1729"></script>
-<script src="./curriculum/question-types.js?v=2026-09-17-1729"></script>
-<script src="./curriculum/la-y1-spine.js?v=2026-09-17-1729"></script>
-<script src="./curriculum/la-y1-words.js?v=2026-09-17-1729"></script>
-<script src="./curriculum/la-y1-grammar.js?v=2026-09-17-1729"></script>
-<script src="./curriculum/la-y1-reading.js?v=2026-09-17-1729"></script>
-<script src="./curriculum/la-y1-tasks.js?v=2026-09-17-1729"></script>
-<script src="./curriculum/la-books.js?v=2026-09-17-1729"></script>
-<script src="./curriculum/la-y2-spine.js?v=2026-09-17-1729"></script>
-<script src="./curriculum/la-y2-words.js?v=2026-09-17-1729"></script>
-<script src="./curriculum/la-y2-grammar.js?v=2026-09-17-1729"></script>
-<script src="./curriculum/la-y2-reading.js?v=2026-09-17-1729"></script>
-<script src="./curriculum/la-y2-tasks.js?v=2026-09-17-1729"></script>
-<script src="./curriculum/la-books-y2.js?v=2026-09-17-1729"></script>
-<script src="./curriculum/la-quotes.js?v=2026-09-17-1729"></script>
-<script src="./curriculum/la-daily-fix.js?v=2026-09-17-1729"></script>
-<script src="./curriculum/la-skill-notes.js?v=2026-09-17-1729"></script>
-<script src="./curriculum/la-challenge.js?v=2026-09-17-1729"></script>
-<script src="./curriculum/la-facts.js?v=2026-09-17-1729"></script>
-<script src="./curriculum/la-close-reading.js?v=2026-09-17-1729"></script>
-<script src="./curriculum/la-look-y2.js?v=2026-09-17-1729"></script>
-<script src="./curriculum/la-mastery.js?v=2026-09-17-1729"></script>
-<script src="./curriculum/la-grader.js?v=2026-09-17-1729"></script>
+<script src="./curriculum/sync.js?v=2026-09-17-1737"></script>
+<script src="./curriculum/students.js?v=2026-09-17-1737"></script>
+<script src="./curriculum/subjects.js?v=2026-09-17-1737"></script>
+<script src="./curriculum/question-types.js?v=2026-09-17-1737"></script>
+<script src="./curriculum/la-y1-spine.js?v=2026-09-17-1737"></script>
+<script src="./curriculum/la-y1-words.js?v=2026-09-17-1737"></script>
+<script src="./curriculum/la-y1-grammar.js?v=2026-09-17-1737"></script>
+<script src="./curriculum/la-y1-reading.js?v=2026-09-17-1737"></script>
+<script src="./curriculum/la-y1-tasks.js?v=2026-09-17-1737"></script>
+<script src="./curriculum/la-books.js?v=2026-09-17-1737"></script>
+<script src="./curriculum/la-y2-spine.js?v=2026-09-17-1737"></script>
+<script src="./curriculum/la-y2-words.js?v=2026-09-17-1737"></script>
+<script src="./curriculum/la-y2-grammar.js?v=2026-09-17-1737"></script>
+<script src="./curriculum/la-y2-reading.js?v=2026-09-17-1737"></script>
+<script src="./curriculum/la-y2-tasks.js?v=2026-09-17-1737"></script>
+<script src="./curriculum/la-books-y2.js?v=2026-09-17-1737"></script>
+<script src="./curriculum/la-quotes.js?v=2026-09-17-1737"></script>
+<script src="./curriculum/la-daily-fix.js?v=2026-09-17-1737"></script>
+<script src="./curriculum/la-skill-notes.js?v=2026-09-17-1737"></script>
+<script src="./curriculum/la-challenge.js?v=2026-09-17-1737"></script>
+<script src="./curriculum/la-facts.js?v=2026-09-17-1737"></script>
+<script src="./curriculum/la-close-reading.js?v=2026-09-17-1737"></script>
+<script src="./curriculum/la-look-y2.js?v=2026-09-17-1737"></script>
+<script src="./curriculum/la-mastery.js?v=2026-09-17-1737"></script>
+<script src="./curriculum/la-grader.js?v=2026-09-17-1737"></script>
 </helmet>
 
 <div style="min-height:100vh;display:flex;flex-direction:column">
@@ -1385,15 +1385,13 @@ class Component extends DCLogic {
     if(idx>=q.items.length){
       if(doneKey) this.markDone(doneKey);
       // Record the actual score against the step, then report to the gate.
-      const M=window.__CURR.LA_MASTERY;
-      const plan=M.dayPlan(this.state.year, this.state.week, this.state.day);
       /* The drill slot and the checklist step key are not always the same
        * word: the find-the-mistake drill runs in slot "fx" while its step is
        * "fix". Without this map the lookup silently found nothing and the step
        * never ticked, even though the drill had been completed correctly. */
       const SLOT_STEP={fx:"fix"};
       const wantKey=SLOT_STEP[slot]||slot;
-      const step=plan.steps.filter(function(x){ return x.key===wantKey; })[0];
+      const step=this.drillStep(wantKey);
       if(step){
         const missed=(q.missed||[]);
         const seen=q.items.map(function(i){ return i.id; }).concat(q.seenBefore||[]);
@@ -1481,9 +1479,7 @@ class Component extends DCLogic {
     this.setState({sq:{...s, idx:idx, value:"", answered:false, ok:null}});
     if(idx<s.items.length){ this.speak(s.items[idx].a[0]); return; }
     this.markDone("spelling");
-    const M=window.__CURR.LA_MASTERY;
-    const plan=M.dayPlan(this.state.year, this.state.week, this.state.day);
-    const step=plan.steps.filter(function(x){ return x.key==="sq"; })[0];
+    const step=this.drillStep("sq");
     if(step){
       const seen=s.items.map(function(i){ return i.id; }).concat(s.seenBefore||[]);
       this.recordResult(step, s.score, s.items.length);
@@ -1516,7 +1512,26 @@ class Component extends DCLogic {
    * A step is available only when every step before it is done. A scored step
    * is done only when it clears the mastery bar, or when attempts run out and
    * the stuck valve opens it deliberately. */
-  stepKey(step){ return this.state.day+":"+step.key; }
+  stepKey(step){ return (step.day||this.state.day)+":"+step.key; }
+
+  /* The step a drill reports to. Every tab can run this week's drills, but
+   * each drill belongs to one lesson (reading to the week's 1st, grammar to
+   * its 2nd, spelling to its 3rd, the week review to its 5th). Looking only
+   * at the lesson on screen found nothing whenever another lesson was
+   * selected, so the score was not recorded and no retry round was offered -
+   * a grammar drill taken from the Grammar tab on Lesson 1 stopped at 0/6.
+   * The step carries its own lesson (day) so it ticks the right one. */
+  drillStep(key){
+    const M=window.__CURR.LA_MASTERY;
+    const here=M.dayPlan(this.state.year, this.state.week, this.state.day).steps.filter(function(x){ return x.key===key; })[0];
+    if(here) return here;
+    for(let i=0;i<M.DAYS.length;i++){
+      const d=M.DAYS[i];
+      const s=M.dayPlan(this.state.year, this.state.week, d).steps.filter(function(x){ return x.key===key; })[0];
+      if(s) return {...s, day:d};
+    }
+    return null;
+  }
 
   isStepDone(step){
     const k=this.state.year+":"+this.state.week+":"+this.stepKey(step);

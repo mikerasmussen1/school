@@ -15,6 +15,10 @@ const h=fs.readFileSync(__dirname+'/../word-voyagers.dc.html','utf8');
 class DCLogic{ setState(p){ this.state={...this.state,...p}; } }
 global.DCLogic=DCLogic;
 const C=eval("(function(){ "+h.split('data-dc-script>')[1].split('</script>')[0]+"\n return Component; })()");
+// Word Voyagers no longer loads the calendar. Load it here only to know the
+// dates the old schedule would have given each lesson, so the test can prove
+// none of them appears.
+require(D+'la-calendar.js');
 const CAL=window.__CURR.LA_CALENDAR;
 let fail=[];
 
@@ -70,6 +74,18 @@ console.log("\n=== the markup shows today's date and no schedule ===");
   ["{{ lessonDate }}","{{ datesSame }}","{{ datesDiffer }}","{{ dayDateLine }}","{{ calFirstDay }}","{{ calLastDay }}","{{ calBreaks }}","Scheduled breaks"]
     .forEach(k=>{ if(h.indexOf(k)>=0) fail.push("the page still shows "+k); });
   console.log("  header binds today's date; no lesson date, school-day line, year end or break schedule");
+}
+
+console.log("\n=== no holiday schedule or calendar in Word Voyagers ===");
+{ if(/la-calendar\.js/.test(h)) fail.push("word-voyagers.dc.html still loads la-calendar.js");
+  if(/LA_CALENDAR/.test(h)) fail.push("word-voyagers.dc.html still reads LA_CALENDAR");
+  const all=JSON.stringify(view("y2",14,"Wed","parent"), (k,x)=>typeof x==="function"?undefined:x)+
+            JSON.stringify(view("y1",14,"Wed"), (k,x)=>typeof x==="function"?undefined:x);
+  const shown=h.replace(/<script[\s\S]*?<\/script>/g,"")+all;
+  CAL.BREAKS.map(b=>b.name).concat(["Scheduled breaks","holiday","no school today","It is the weekend"]).forEach(w=>{
+    if(shown.toLowerCase().indexOf(w.toLowerCase())>=0) fail.push("Word Voyagers still shows '"+w+"'");
+  });
+  console.log("  the page does not load the calendar, and names no holiday or break");
 }
 
 console.log(fail.length?("\nFAILURES:\n  "+fail.slice(0,6).join("\n  ")):"\nRESULT: every lesson shows today's date, and nothing sets a pace.");

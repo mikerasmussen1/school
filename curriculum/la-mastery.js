@@ -192,13 +192,29 @@
    * Progress is stored by step key, not position, so reordering loses nothing. */
   const ORDER = { y2: { Mon: ["quote","fix","read","close","rq","end"] } };
 
+  /* ONE WRITING ASSIGNMENT, NOT TWO STEPS. In 5th grade the week's 4th lesson
+   * had "Read today's assignment" and then "Write it by hand on paper" as two
+   * ticks for one piece of work. They are one step now, every week: read the
+   * assignment (or listen to it), then write it out. It keeps the "write" key,
+   * so a page already ticked stays ticked, and its minutes are the two added
+   * together. */
+  const MERGE = { y2: { Thu: {drop:"prompt", into:"write",
+    label:"Read today's assignment and write it by hand on paper",
+    detail:"Read the assignment, or press the listen button. Then write the whole thing out on paper. Take your time with your letters.",
+    done:"Your page is finished.", minutes:12} } };
+
   function dayPlan(grade, week, day){
     const Y = curr(grade);
     const wk = Y.WEEKS.find(w=>w.n===week);
     const skip = SKIP[grade] || [];
     const order = (ORDER[grade]||{})[day];
+    const merge = (MERGE[grade]||{})[day];
     const steps = (PLANS[day]||PLANS.Mon)
       .filter(s => skip.indexOf(s.key) < 0)
+      .filter(s => !merge || s.key !== merge.drop)
+      .map(s => (merge && s.key === merge.into)
+        ? {...s, label:merge.label, detail:merge.detail, done:merge.done, minutes:merge.minutes}
+        : s)
       .slice()
       .sort((a,b) => order ? order.indexOf(a.key) - order.indexOf(b.key) : 0)
       .map((s,i)=>({...s, n:i+1}));

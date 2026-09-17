@@ -25,10 +25,16 @@
  * edited, the check fails loudly instead of the task quietly pointing at
  * nothing.
  *
- * WHAT GOES IN THE NOTEBOOK, and only this:
- *   1  the date
- *   2  the chosen challenge sentence, copied neatly
- *   3  the answer to one critical-thinking question tied to the day's lesson
+ * WHAT GOES IN THE NOTEBOOK: one entry of five numbered tasks per lesson.
+ *   1  the date                      (with the quote, at the start)
+ *   2  the day's quote, copied       (with the quote)
+ *   3  what the quote means          (with the quote)
+ *   4  the chosen challenge sentence, copied exactly   <- this file
+ *   5  the answer to the critical-thinking question    <- this file
+ *
+ * Because Task 4 says "copied exactly", every a/b must be a WHOLE sentence:
+ * starting where the passage's sentence starts (watch Mr./Mrs./Dr.) and with
+ * its quotation marks balanced. tests/challenge.js checks both.
  *
  * General comprehension stays in the digital drill, where it is marked
  * automatically. A notebook full of questions a computer could have marked is
@@ -119,7 +125,7 @@
             ask:"Which detail is there to tell you how much the woman's gift cost her?",
             think:"What would be lost from the story if the writer had simply said she was poor?"},
       Fri: {a:"They had eyes.",
-            b:"\"She gave out of what she needed.",
+            b:"She gave out of what she needed.",
             pick:"b",
             ask:"Which sentence contains the idea the whole passage is built on?",
             think:"The teacher measures giving differently from the students. What is he measuring?"}
@@ -210,7 +216,7 @@
             b:"Naaman turned his chariot around in a rage.",
             pick:"a",
             ask:"One of these tells you exactly what was said. The other tells you how somebody felt. Which tells you what was said?",
-            think:"Elisha sent seven words and did not come out himself. Why might that have made Naaman angrier than the errand did?"},
+            think:"Elisha sent a short message by a servant and did not come out himself. Why might that have made Naaman angrier than the errand did?"},
       Tue: {a:"One of them spoke carefully, the way you speak to a powerful man who is angry.",
             b:"Elisha did not come out.",
             pick:"a",
@@ -226,7 +232,7 @@
             pick:"a",
             ask:"Which sentence contains the detail that makes obeying cost him something?",
             think:"Why does the writer add 'in front of everyone'? What would be lost without it?"},
-      Fri: {a:"How much more, then, when he says simply, wash and be clean?\"",
+      Fri: {a:"How much more, then, when he says simply, wash and be clean?",
             b:"He arrived at the prophet's house with horses, chariots and a fortune in silver, and he expected to be met.",
             pick:"a",
             ask:"Which sentence contains the argument the whole passage turns on?",
@@ -275,7 +281,7 @@
             pick:"a",
             ask:"Which sentence shows you what speaking up cost her, without saying it cost anything?",
             think:"Why does the writer add that one of the people laughing was a friend?"},
-      Thu: {a:"Barrow looked at her for a long second and then wrote something on his clipboard and said nothing at all.",
+      Thu: {a:"Mr. Barrow looked at her for a long second and then wrote something on his clipboard and said nothing at all.",
             b:"A new boy named Ezra had joined in September.",
             pick:"a",
             ask:"Which detail is placed to make you wonder what the teacher decided?",
@@ -292,9 +298,9 @@
             pick:"a",
             ask:"One of these gives you a size you could measure. The other is what people say about it. Which is the measurement?",
             think:"Why does the writer give you the badger's size before telling you what it does?"},
-      Tue: {a:"It has one strategy, and the strategy is persistence.",
-            b:"The honey badger does not appear to calculate the odds.",
-            pick:"a",
+      Tue: {a:"The honey badger does not appear to calculate the odds.",
+            b:"The badger keeps returning, snarling, taking the blows, until the larger animal decides the meal is not worth the trouble.",
+            pick:"b",
             ask:"Which sentence tells you what 'persistence' means by showing it in action?",
             think:"Using the passage, what is the difference between persistence and simply being strong?"},
       Wed: {a:"Not by strength \u2014 a lion outweighs a honey badger many times over \u2014 but by refusing to leave.",
@@ -479,7 +485,7 @@
             think:"The passage says both operations need 'honesty'. Honest about what, exactly?"}
     },
     5: {
-      Mon: {a:"Okonkwo put a lamp in her front window at dusk.",
+      Mon: {a:"For forty-one years, Mrs. Okonkwo put a lamp in her front window at dusk.",
             b:"The village found it sad at first.",
             pick:"a",
             ask:"One of these is an action anyone could have watched. The other is how people felt about it. Which is the action?",
@@ -495,7 +501,7 @@
             ask:"Which sentence shows you how long the lamp had been burning, without giving a number?",
             think:"The passage gives the number of years elsewhere. Why is a whole childhood a stronger way to say it?"},
       Thu: {a:"A midwife delivering a baby in the dark set her bag down by it.",
-            b:"Okonkwo died in November, and the village argued about the lamp for a week.",
+            b:"Mrs. Okonkwo died in November, and the village argued about the lamp for a week.",
             pick:"a",
             ask:"Which detail is there to show the lamp had uses she never intended, and would be missed if cut?",
             think:"The lamp was lit for one person. Why does the writer list the strangers it helped instead?"},
@@ -598,7 +604,7 @@
             ask:"Which sentence gives you the details you need to judge how reliable the letter is?",
             think:"What does knowing her age, her job and her distance from town tell you about what she could see?"},
       Wed: {a:"Two of them are about the cold.",
-            b:"Emil Brandt, the county physician, writing to a colleague in Chicago.",
+            b:"The second is from Dr. Emil Brandt, the county physician, writing to a colleague in Chicago.",
             pick:"a",
             ask:"Which sentence shows you what mattered most to the writer of that letter, without saying so?",
             think:"Anna never says the cold was the worst part. How does the passage let you work it out?"},
@@ -647,8 +653,8 @@
             ask:"One of these explains a method. The other is a judgement about two records. Which explains the method?",
             think:"The surveyor's method decided his answer before he counted anything. How?"},
       Tue: {a:"A historian using only the ledger would describe a larger weaving community.",
-            b:"Both would be citing a real document and both would be wrong about the village.",
-            pick:"a",
+            b:"The village's own record, kept in a ledger by the schoolmaster, listed 412 people and described the principal industry as weaving.",
+            pick:"b",
             ask:"Which sentence lets you work out what a 'ledger' must be?",
             think:"What kind of document is a ledger, and what would it record that a survey would not?"},
       Wed: {a:"Both would be citing a real document and both would be wrong about the village.",

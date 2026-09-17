@@ -202,7 +202,7 @@
     ["Why was Kadabra confident at the quiz?","A spoon-fed advantage."],
     ["What do you call a Lapras that gives good summaries?","A smooth crossing."],
     ["Why did Nidoran do well at research?","It always went straight to the point."],
-    ["Why was Vulpix good at storytelling?","Nine tales to choose from."],
+    ["Why was Vulpix good at storytelling?","It had six tales to choose from."],
     ["What did Oddish say about the long passage?","A bit of a stretch."],
     ["Why was Poliwag confused by the map?","It kept going round in circles."],
     ["What is Scyther's favourite editing tool?","Anything that cuts."],

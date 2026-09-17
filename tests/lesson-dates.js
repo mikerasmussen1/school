@@ -50,7 +50,7 @@ console.log("=== every lesson shows today's date, both grades ===");
     // unless the schedule happens to fall on today.
     const dt=CAL.dateForIndex((w-1)*5+i);
     if(dt && !sameDay(dt,now)){
-      const all=JSON.stringify(v, (k,x)=>typeof x==="function"?undefined:x);
+      const all=JSON.stringify(v, (k,x)=>typeof x==="function"||k==="finishLine"?undefined:x);
       spellings(dt).forEach(sp=>{ if(all.indexOf(sp)>=0) fail.push(g+" w"+w+" "+d+" still shows its scheduled date: "+sp); });
     }
   });
@@ -67,10 +67,43 @@ console.log("\n=== nothing says which lesson he should be on ===");
   console.log("  year tab      : "+v.calToday+" / "+v.calPace);
 }
 
+console.log("\n=== the title: today's date, the lesson number, and the finish date at one a weekday ===");
+{ const W=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+  const full=d=>W[d.getDay()]+", "+MONTHS[d.getMonth()]+" "+d.getDate()+", "+d.getFullYear();
+  const MS=window.__CURR.LA_MASTERY;
+  // the finish-date rule on fixed dates, independent of today
+  const f=(y,m,d)=>new Date(y,m-1,d);
+  [[1,f(2026,9,18),"Friday, September 18, 2026"],   // today's lesson is the last: finish today
+   [2,f(2026,9,18),"Monday, September 21, 2026"],   // skips the weekend
+   [1,f(2026,9,19),"Monday, September 21, 2026"],   // a Saturday starts counting on Monday
+   [180,f(2026,8,31),"Friday, May 7, 2027"]]        // 36 full weeks, no holidays
+    .forEach(([n,from,want])=>{ const got=full(MS.finishDate(n,from));
+      if(got!==want) fail.push("finishDate("+n+", "+from.toDateString()+") is "+got+", want "+want); });
+  // an independent count for every lesson on screen, from today
+  function expect(left){ const d=new Date(now.getFullYear(),now.getMonth(),now.getDate());
+    const wk=x=>x.getDay()!==0&&x.getDay()!==6; while(!wk(d)) d.setDate(d.getDate()+1);
+    let c=1; while(c<left){ d.setDate(d.getDate()+1); if(wk(d)) c++; } return full(d); }
+  ["y1","y2"].forEach(g=>{
+    for(let w=1;w<=36;w++) ["Mon","Tue","Wed","Thu","Fri"].forEach((d,i)=>{
+      const n=(w-1)*5+i+1, v=view(g,w,d);
+      if(v.todayFull!==full(now)) fail.push(g+" w"+w+" "+d+" title date is '"+v.todayFull+"'");
+      if(v.lessonLine!=="Today you will complete Lesson "+n+" out of 180 lessons") fail.push(g+" w"+w+" "+d+" lesson line: "+v.lessonLine);
+      const want="At one lesson every weekday, Monday to Friday, you will finish all 180 lessons on "+expect(180-n+1)+".";
+      if(v.finishLine!==want) fail.push(g+" w"+w+" "+d+" finish line: "+v.finishLine);
+      if(/Day \d of 5/.test(JSON.stringify(v, (k,x)=>typeof x==="function"?undefined:x))) fail.push(g+" w"+w+" "+d+" still shows 'Day N of 5'");
+    });
+  });
+  const v=view("y1",1,"Mon"), v2=view("y2",20,"Thu");
+  console.log("  "+v.todayFull+"  |  "+v.lessonLine+"  |  "+v.finishLine);
+  console.log("  "+v2.todayFull+"  |  "+v2.lessonLine+"  |  "+v2.finishLine);
+}
+
 console.log("\n=== the markup shows today's date and no schedule ===");
-{ const i=h.indexOf('{{ dayHeading }}');
+{ const i=h.indexOf('{{ todayFull }}');
   const seg=h.slice(i, i+600);
-  if(seg.indexOf('Today is {{ todayDate }}')<0) fail.push("the lesson header does not show today's date");
+  if(i<0 || !/<h2[^>]*>\{\{ todayFull \}\}<\/h2>/.test(h)) fail.push("the Today title is not today's date");
+  if(seg.indexOf('{{ lessonLine }}')<0 || seg.indexOf('{{ finishLine }}')<0) fail.push("the title does not carry the lesson line and finish date");
+  if(h.indexOf('{{ dayHeading }}')>=0) fail.push("the old 'Monday · Day 1 of 5' heading is still bound");
   ["{{ lessonDate }}","{{ datesSame }}","{{ datesDiffer }}","{{ dayDateLine }}","{{ calFirstDay }}","{{ calLastDay }}","{{ calBreaks }}","Scheduled breaks"]
     .forEach(k=>{ if(h.indexOf(k)>=0) fail.push("the page still shows "+k); });
   console.log("  header binds today's date; no lesson date, school-day line, year end or break schedule");
@@ -88,5 +121,5 @@ console.log("\n=== no holiday schedule or calendar in Word Voyagers ===");
   console.log("  the page does not load the calendar, and names no holiday or break");
 }
 
-console.log(fail.length?("\nFAILURES:\n  "+fail.slice(0,6).join("\n  ")):"\nRESULT: every lesson shows today's date, and nothing sets a pace.");
+console.log(fail.length?("\nFAILURES:\n  "+fail.slice(0,6).join("\n  ")):"\nRESULT: the title shows today's date, the lesson number and the weekday finish date, and no schedule.");
 process.exit(fail.length?1:0);

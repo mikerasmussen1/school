@@ -24,12 +24,14 @@ console.log("=== both grades, every week: one step for the assignment and the wr
 ["y1","y2"].forEach(g=>{ for(let w=1;w<=36;w++){
   const p=M.dayPlan(g,w,"Thu");
   const keys=p.steps.map(s=>s.key).join(">");
-  if(keys!=="quote>fix>close>write>approve>end") fail.push(g+" week "+w+" lesson 4 steps are "+keys);
+  const want = g==="y2" ? "quote>fix>close>challenge>write>approve>end" : "quote>fix>close>write>approve>end";
+  if(keys!==want) fail.push(g+" week "+w+" lesson 4 steps are "+keys);
   const s=p.steps.find(x=>x.key==="write")||{};
   if(s.label!==LABEL) fail.push("week "+w+" writing step is labelled "+s.label);
   if(!/Read the assignment, or press the listen button\./.test(s.detail||"") || !/write the whole thing out on paper/.test(s.detail||""))
     fail.push("week "+w+" writing step does not say to read the assignment and write it out");
-  if(p.steps.map(x=>x.n).join(",")!=="1,2,3,4,5,6") fail.push("week "+w+" steps are not numbered 1 to 6");
+  const nums=p.steps.map((x,i)=>i+1).join(",");
+  if(p.steps.map(x=>x.n).join(",")!==nums) fail.push(g+" week "+w+" steps are not numbered in order");
 }});
 { const p=M.dayPlan("y2",4,"Thu");
   p.steps.forEach(s=>console.log("  "+s.n+". "+s.label+" · "+(s.minutes||CL.minutesFor(s.key))+" min"));

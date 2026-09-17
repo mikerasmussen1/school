@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=2026-09-17-1812"></script>
-  <script data-build>window.__BUILD__="2026-09-17-1812";</script>
-  <script src="./curriculum/freshness.js?v=2026-09-17-1812"></script>
+<script src="./support.js?v=2026-09-17-2007"></script>
+  <script data-build>window.__BUILD__="2026-09-17-2007";</script>
+  <script src="./curriculum/freshness.js?v=2026-09-17-2007"></script>
 </head>
 <body>
 <x-dc>
@@ -49,31 +49,31 @@
   .book-title{font-family:'Fraunces',serif;font-size:1rem;color:var(--brick-dark);margin:0 0 3px}
   .done-banner{text-align:center;padding:22px;margin-top:6px;background:var(--forest-light);border-radius:8px;color:#2E4E38}
 </style>
-<script src="./curriculum/sync.js?v=2026-09-17-1812"></script>
-<script src="./curriculum/students.js?v=2026-09-17-1812"></script>
-<script src="./curriculum/subjects.js?v=2026-09-17-1812"></script>
-<script src="./curriculum/question-types.js?v=2026-09-17-1812"></script>
-<script src="./curriculum/la-y1-spine.js?v=2026-09-17-1812"></script>
-<script src="./curriculum/la-y1-words.js?v=2026-09-17-1812"></script>
-<script src="./curriculum/la-y1-grammar.js?v=2026-09-17-1812"></script>
-<script src="./curriculum/la-y1-reading.js?v=2026-09-17-1812"></script>
-<script src="./curriculum/la-y1-tasks.js?v=2026-09-17-1812"></script>
-<script src="./curriculum/la-books.js?v=2026-09-17-1812"></script>
-<script src="./curriculum/la-y2-spine.js?v=2026-09-17-1812"></script>
-<script src="./curriculum/la-y2-words.js?v=2026-09-17-1812"></script>
-<script src="./curriculum/la-y2-grammar.js?v=2026-09-17-1812"></script>
-<script src="./curriculum/la-y2-reading.js?v=2026-09-17-1812"></script>
-<script src="./curriculum/la-y2-tasks.js?v=2026-09-17-1812"></script>
-<script src="./curriculum/la-books-y2.js?v=2026-09-17-1812"></script>
-<script src="./curriculum/la-quotes.js?v=2026-09-17-1812"></script>
-<script src="./curriculum/la-daily-fix.js?v=2026-09-17-1812"></script>
-<script src="./curriculum/la-skill-notes.js?v=2026-09-17-1812"></script>
-<script src="./curriculum/la-challenge.js?v=2026-09-17-1812"></script>
-<script src="./curriculum/la-facts.js?v=2026-09-17-1812"></script>
-<script src="./curriculum/la-close-reading.js?v=2026-09-17-1812"></script>
-<script src="./curriculum/la-look-y2.js?v=2026-09-17-1812"></script>
-<script src="./curriculum/la-mastery.js?v=2026-09-17-1812"></script>
-<script src="./curriculum/la-grader.js?v=2026-09-17-1812"></script>
+<script src="./curriculum/sync.js?v=2026-09-17-2007"></script>
+<script src="./curriculum/students.js?v=2026-09-17-2007"></script>
+<script src="./curriculum/subjects.js?v=2026-09-17-2007"></script>
+<script src="./curriculum/question-types.js?v=2026-09-17-2007"></script>
+<script src="./curriculum/la-y1-spine.js?v=2026-09-17-2007"></script>
+<script src="./curriculum/la-y1-words.js?v=2026-09-17-2007"></script>
+<script src="./curriculum/la-y1-grammar.js?v=2026-09-17-2007"></script>
+<script src="./curriculum/la-y1-reading.js?v=2026-09-17-2007"></script>
+<script src="./curriculum/la-y1-tasks.js?v=2026-09-17-2007"></script>
+<script src="./curriculum/la-books.js?v=2026-09-17-2007"></script>
+<script src="./curriculum/la-y2-spine.js?v=2026-09-17-2007"></script>
+<script src="./curriculum/la-y2-words.js?v=2026-09-17-2007"></script>
+<script src="./curriculum/la-y2-grammar.js?v=2026-09-17-2007"></script>
+<script src="./curriculum/la-y2-reading.js?v=2026-09-17-2007"></script>
+<script src="./curriculum/la-y2-tasks.js?v=2026-09-17-2007"></script>
+<script src="./curriculum/la-books-y2.js?v=2026-09-17-2007"></script>
+<script src="./curriculum/la-quotes.js?v=2026-09-17-2007"></script>
+<script src="./curriculum/la-daily-fix.js?v=2026-09-17-2007"></script>
+<script src="./curriculum/la-skill-notes.js?v=2026-09-17-2007"></script>
+<script src="./curriculum/la-challenge.js?v=2026-09-17-2007"></script>
+<script src="./curriculum/la-facts.js?v=2026-09-17-2007"></script>
+<script src="./curriculum/la-close-reading.js?v=2026-09-17-2007"></script>
+<script src="./curriculum/la-look-y2.js?v=2026-09-17-2007"></script>
+<script src="./curriculum/la-mastery.js?v=2026-09-17-2007"></script>
+<script src="./curriculum/la-grader.js?v=2026-09-17-2007"></script>
 </helmet>
 
 <div style="min-height:100vh;display:flex;flex-direction:column">
@@ -271,6 +271,7 @@
                 <div style="margin-top:10px"><button onClick="{{ rdListen }}" style="{{ btnSecondary }}">Read it to me</button></div>
               </div>
 
+              <sc-if value="{{ challengeInClose }}" hint-placeholder-val="{{ true }}">
               <sc-if value="{{ hasChallenge }}" hint-placeholder-val="{{ true }}">
                 <div class="box" style="margin-top:14px;border-left:4px solid var(--brick)">
                   <div style="font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--brick-dark);margin-bottom:6px">The challenge</div>
@@ -285,7 +286,38 @@
                   <div style="display:flex;gap:10px;padding:6px 0;border-top:1px solid var(--rule)"><div style="flex:none;font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--brick-dark);padding-top:2px">Task #6</div><div style="font-size:1.02rem;line-height:1.6">{{ challengeThink }}</div></div>
                 </div>
               </sc-if>
+              </sc-if>
 
+              <sc-if value="{{ noChallenge }}" hint-placeholder-val="{{ false }}">
+                <div class="box" style="margin-top:14px;border-left:4px solid var(--gold)">
+                  <div style="font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--brick-dark);margin-bottom:6px">Not written yet</div>
+                  <div style="font-size:1.02rem;line-height:1.6">{{ noChallengeNote }}</div>
+                </div>
+              </sc-if>
+            </sc-if>
+
+            <!-- THE CHALLENGE STEP (5th grade): the same challenge and the
+                 same Tasks 5 and 6, on their own step after the re-read. -->
+            <sc-if value="{{ aChallenge }}" hint-placeholder-val="{{ false }}">
+              <div class="box" style="margin-bottom:14px">
+                <div style="font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--brick-dark);margin-bottom:4px">The passage</div>
+                <h3 style="margin:0 0 6px;font-size:1.06rem">{{ rdTitle }}</h3>
+                <p class="muted" style="margin:0;font-size:.88rem">Look back at it while you decide. It is on the step before this one.</p>
+              </div>
+              <sc-if value="{{ hasChallenge }}" hint-placeholder-val="{{ true }}">
+                <div class="box" style="margin-top:14px;border-left:4px solid var(--brick)">
+                  <div style="font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--brick-dark);margin-bottom:6px">The challenge</div>
+                  <div style="font-size:1.02rem;line-height:1.6;margin-bottom:10px">{{ challengeAsk }}</div>
+                  <div class="q-box" style="margin-bottom:8px"><strong>A.</strong> {{ challengeA }}</div>
+                  <div class="q-box"><strong>B.</strong> {{ challengeB }}</div>
+                </div>
+
+                <div class="box" style="margin-top:14px;border-left:4px solid var(--forest)">
+                  <div style="font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--brick-dark);margin-bottom:6px">In your notebook, carrying on from this morning</div>
+                  <div style="display:flex;gap:10px;padding:6px 0"><div style="flex:none;font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--brick-dark);padding-top:2px">Task #5</div><div style="font-size:1.02rem;line-height:1.6">Decide between A and B, then copy your chosen sentence out neatly, exactly as it is written, with its punctuation.</div></div>
+                  <div style="display:flex;gap:10px;padding:6px 0;border-top:1px solid var(--rule)"><div style="flex:none;font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--brick-dark);padding-top:2px">Task #6</div><div style="font-size:1.02rem;line-height:1.6">{{ challengeThink }}</div></div>
+                </div>
+              </sc-if>
               <sc-if value="{{ noChallenge }}" hint-placeholder-val="{{ false }}">
                 <div class="box" style="margin-top:14px;border-left:4px solid var(--gold)">
                   <div style="font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--brick-dark);margin-bottom:6px">Not written yet</div>
@@ -2490,6 +2522,10 @@ class Component extends DCLogic {
       aQuote: openStep==="quote",
       aFix:   openStep==="fix",
       aClose: openStep==="close",
+      /* 5th grade answers the challenge on its own step; 3rd grade still does
+       * it at the end of the re-read. */
+      aChallenge: openStep==="challenge",
+      challengeInClose: st.year!=="y2",
       aRead:  openStep==="read",
       aRq:    openStep==="rq",
       aSkill: openStep==="skill",

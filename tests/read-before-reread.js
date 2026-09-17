@@ -11,18 +11,23 @@ const keys=(g,w,d)=>M.dayPlan(g,w,d).steps.map(s=>s.key);
 
 console.log("=== both grades: read aloud, then read again, every first lesson of the week ===");
 ["y1","y2"].forEach(g=>{ for(let w=1;w<=36;w++){
+  // 5th grade answers the challenge on its own step, straight after the re-read.
+  const want = g==="y2" ? "quote>fix>read>close>challenge>rq>end" : "quote>fix>read>close>rq>end";
   const k=keys(g,w,"Mon");
-  if(k.join(">")!=="quote>fix>read>close>rq>end") fail.push(g+" week "+w+" first lesson order is "+k.join(" > "));
+  if(k.join(">")!==want) fail.push(g+" week "+w+" first lesson order is "+k.join(" > "));
   const n=M.dayPlan(g,w,"Mon").steps.map(s=>s.n).join(",");
-  if(n!=="1,2,3,4,5,6") fail.push(g+" week "+w+" steps are numbered "+n);
+  if(n!==(g==="y2"?"1,2,3,4,5,6,7":"1,2,3,4,5,6")) fail.push(g+" week "+w+" steps are numbered "+n);
 }});
 console.log("  "+M.dayPlan("y1",1,"Mon").steps.map(s=>s.n+". "+s.label).join("\n  "));
 
 console.log("\n=== the other lessons keep their order ===");
 // (5th grade's 4th lesson merges its assignment and writing steps - see
 //  tests/assignment-one-step.js - so it is compared there, not here.)
+// Apart from 5th grade's own challenge step (tests/challenge-step.js), the
+// other lessons run in the same order in both grades.
 ["Tue","Wed","Fri"].forEach(d=>{
-  if(keys("y2",1,d).join(">")!==keys("y1",1,d).join(">")) fail.push("5th grade "+d+" order changed: "+keys("y2",1,d).join(" > "));
+  const y2=keys("y2",1,d).filter(k=>k!=="challenge").join(">");
+  if(y2!==keys("y1",1,d).join(">")) fail.push("5th grade "+d+" order changed: "+y2);
 });
 console.log("  the other four lessons match in both grades");
 

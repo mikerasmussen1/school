@@ -41,9 +41,10 @@ console.log("=== the notebook is one numbered sequence of five ===");
   ["y1","y2"].forEach(g=>{ const c2=new C(); c2.state.landed=true; c2.state.year=g; c2.state.week=20; c2.state.day="Thu";
     const t3=((c2.renderVals().quoteTasks||[])[2]||{}).text;
     if(t3!==TASK3) fail.push(g+" Task 3 is not the agreed wording: "+t3); });
-  // The line under the quote's source is labelled "Translation:", in both places the quote is shown.
+  // The line under the quote's source is labelled "Translation:". The quote is
+  // shown in one place: the quote step's panel.
   { const labels=(fs2.readFileSync(__dirname+'/../word-voyagers.dc.html','utf8').match(/>(\w+): <\/span>\{\{ qThink \}\}/g)||[]);
-    if(labels.length!==2 || labels.some(x=>x.indexOf(">Translation: <")!==0)) fail.push("the line under the quote is not labelled Translation: "+labels.join(", ")); }
+    if(labels.length!==1 || labels[0].indexOf(">Translation: <")!==0) fail.push("the line under the quote is not labelled Translation: "+labels.join(", ")); }
   console.log("  quote card: Task 1 date, Task 2 quote and source, Task 3 what the translation means; \"Translation:\" under the source");
   console.log("  lesson panel: Task 4 challenge sentence, Task 5 critical thinking");
 }

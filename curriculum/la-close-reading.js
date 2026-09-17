@@ -28,8 +28,26 @@
 (function(){
 
   /* The line that opens every notebook entry, in both grades. Identical
-   * wording every day so it becomes automatic. */
-  const DATE_LINE = "Write today's date at the top, like this: September 14, 2026";
+   * wording every day so it becomes automatic; only the date changes.
+   *
+   * THE DATE IS THE LESSON'S SCHEDULED DATE, from la-calendar.js. It used to
+   * be a fixed example ("September 14, 2026") on every lesson of the year, so
+   * the notebook's dates matched nothing. Each entry now carries the school
+   * day that lesson belongs to, the same date the lesson header shows, so the
+   * notebook lines up with the schedule even when a lesson is done late.
+   *
+   * The calendar is looked up when the line is built, not when this file
+   * loads, because la-calendar.js is loaded after this file. */
+  const MONTHS = ["January","February","March","April","May","June","July",
+                  "August","September","October","November","December"];
+  function dateLineFor(week, day){
+    const CAL = window.__CURR && window.__CURR.LA_CALENDAR;
+    const i = ORDER.indexOf(day);
+    const dt = (CAL && week >= 1 && i >= 0) ? CAL.dateForIndex((week-1)*5 + i) : null;
+    if(!dt) return "Write this lesson's date at the top.";
+    return "Write this lesson's date at the top, exactly like this: " +
+           MONTHS[dt.getMonth()] + " " + dt.getDate() + ", " + dt.getFullYear();
+  }
 
   /* Third grade. Concrete purposes, short written tasks. */
   const Y1 = {
@@ -174,6 +192,6 @@
 
   window.__CURR = window.__CURR || {};
   window.__CURR.LA_CLOSE = {
-    Y1, Y2, ORDER, DATE_LINE, lessonFor, closeFor, MINUTES, minutesFor, dayMinutes
+    Y1, Y2, ORDER, dateLineFor, lessonFor, closeFor, MINUTES, minutesFor, dayMinutes
   };
 })();

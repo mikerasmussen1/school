@@ -24,8 +24,14 @@ let fail=[], checked=0;
 const ALLWEEKS=Array.from({length:36},(_,i)=>i+1);
 const CONTENT={
   quote: v=>v.qText && v.qThink,
-  close: v=>v.closeFocus && v.closeLook && v.closeWrite && v.closeCheck
+  /* The re-read step: the lesson named, what to look for, and the passage.
+   * (It used to check closeFocus/closeLook/closeWrite/closeCheck, bindings the
+   * panel stopped using when the challenge replaced the old task list - the
+   * check had been failing on all 360 grade-days ever since.) */
+  close: v=>v.lessonName && Array.isArray(v.lessonLook) && v.lessonLook.length>1
             && String(v.rdText||"").length>150,
+  // 5th grade's own step: the challenge, its two sentences, and Tasks 5 and 6
+  challenge: v=>v.challengeAsk && v.challengeA && v.challengeB && v.challengeThink,
   fix:   v=>v.fixSentence && (v.fxNotStarted===true || v.fxActive===true),
   read:  v=>v.rdTitle && v.rdText && v.rdText.length>80,
   rq:    v=>v.rqNotStarted===true || v.rqActive===true,
@@ -52,7 +58,7 @@ const CONTENT={
   approve: v=>Array.isArray(v.approveGrades) && v.approveGrades.length===4 && !!v.approveFocus,
   rv:    v=>v.rvNotStarted===true || v.rvActive===true
 };
-const BLOCK={quote:"aQuote",fix:"aFix",close:"aClose",read:"aRead",rq:"aRq",skill:"aSkill",gz:"aGz",
+const BLOCK={quote:"aQuote",fix:"aFix",close:"aClose",challenge:"aChallenge",read:"aRead",rq:"aRq",skill:"aSkill",gz:"aGz",
              study:"aStudy",sq:"aSq",prompt:"aTask",write:"aTask",photo:"aPhoto",
              speak:"aSpeak",rv:"aRv",approve:"aApprove"};
 
@@ -67,7 +73,7 @@ for(const y of ['y1','y2']){
         const v=c.renderVals();
         checked++;
         const want=BLOCK[step.key];
-        const shown=["aQuote","aFix","aClose","aRead","aRq","aSkill","aGz","aStudy","aSq","aTask","aPhoto","aSpeak","aRv","aApprove"].filter(k=>v[k]);
+        const shown=["aQuote","aFix","aClose","aChallenge","aRead","aRq","aSkill","aGz","aStudy","aSq","aTask","aPhoto","aSpeak","aRv","aApprove"].filter(k=>v[k]);
         if(shown.length!==1 || shown[0]!==want)
           fail.push(y+" w"+w+" "+d+" "+step.key+": showed "+(shown.join(",")||"nothing")+", expected "+want);
         else if(!CONTENT[step.key](v))

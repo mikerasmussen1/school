@@ -205,20 +205,39 @@
     done:"Your page is finished.", minutes:12};
   const MERGE = { y1: { Thu: MERGED_WRITE }, y2: { Thu: MERGED_WRITE } };
 
+  /* THE CHALLENGE IS ITS OWN STEP. "Read it again, looking for one thing" was
+   * one step doing two things: re-read the passage for a purpose, and then
+   * answer the challenge and write Tasks 5 and 6. In 5th grade the writing is
+   * now its own step straight after the re-read, so the checklist says what is
+   * actually being asked. The re-read keeps its key, so nothing already ticked
+   * is lost, and the two steps share the old twelve minutes. */
+  const CHALLENGE_STEP = {key:"challenge", label:"Today's challenge, and Tasks 5 and 6", gate:"ack",
+    detail:"Decide between the two sentences, then write Tasks 5 and 6 in your notebook.",
+    done:"You chose a sentence and wrote both tasks.", minutes:5};
+  const SPLIT = { y2: {after:"close", step:CHALLENGE_STEP, shorten:{close:7},
+    /* the re-read is now only the re-read: the writing moved to the new step */
+    reword:{close:{detail:"The same passage, read again for a different purpose.",
+                   done:"You read it again with the lesson in mind."}}} };
+
   function dayPlan(grade, week, day){
     const Y = curr(grade);
     const wk = Y.WEEKS.find(w=>w.n===week);
     const skip = SKIP[grade] || [];
     const order = (ORDER[grade]||{})[day];
     const merge = (MERGE[grade]||{})[day];
+    const split = SPLIT[grade];
     const steps = (PLANS[day]||PLANS.Mon)
       .filter(s => skip.indexOf(s.key) < 0)
       .filter(s => !merge || s.key !== merge.drop)
       .map(s => (merge && s.key === merge.into)
         ? {...s, label:merge.label, detail:merge.detail, done:merge.done, minutes:merge.minutes}
         : s)
+      .map(s => (split && split.shorten[s.key]) ? {...s, minutes:split.shorten[s.key], ...(split.reword[s.key]||{})} : s)
       .slice()
+      // order first, then insert - a step the order does not name would sort to the front
       .sort((a,b) => order ? order.indexOf(a.key) - order.indexOf(b.key) : 0)
+      .reduce((out, s) => out.concat(
+        (split && s.key === split.after) ? [s, {...split.step}] : [s]), [])
       .map((s,i)=>({...s, n:i+1}));
     return {
       day, dayName: DAY_NAME[day]||day,

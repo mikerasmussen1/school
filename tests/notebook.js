@@ -63,10 +63,35 @@ console.log("\n=== three numbered tasks, the third always the self-check ===");
 });
 console.log("  all 10 grade-days: Task 1, Task 2, Task 3 = check your work");
 
-console.log("\n=== the date line is identical every day, both grades ===");
-console.log("  " + CL.DATE_LINE);
-if(!/date at the top/.test(CL.DATE_LINE)) fail.push("the date line does not ask for the date");
-if(!/[A-Z][a-z]+ \d+, \d{4}/.test(CL.DATE_LINE)) fail.push("the date line does not show the Month day, year format");
+console.log("\n=== the date to write is the lesson's scheduled date, every day, both grades ===");
+{ // Task 1 used to show one fixed example date all year. It must name the
+  // school day the calendar assigns to that lesson, which is also the date in
+  // the lesson header, so the notebook and the schedule agree.
+  const CAL=window.__CURR.LA_CALENDAR;
+  const MONTHS=["January","February","March","April","May","June","July","August","September","October","November","December"];
+  const seen=new Set();
+  ["y1","y2"].forEach(g=>{
+    for(let w=1;w<=36;w++) CL.ORDER.forEach((d,i)=>{
+      const dt=CAL.dateForIndex((w-1)*5+i);
+      const want=MONTHS[dt.getMonth()]+" "+dt.getDate()+", "+dt.getFullYear();
+      const c=new C(); c.state.landed=true; c.state.year=g; c.state.week=w; c.state.day=d;
+      const v=c.renderVals();
+      const line=(v.quoteTasks||[])[0] ? v.quoteTasks[0].text : "";
+      if(!/date at the top/.test(line)) fail.push(g+" w"+w+" "+d+" Task 1 does not ask for the date");
+      if(!line.endsWith(": "+want)) fail.push(g+" w"+w+" "+d+" Task 1 says '"+line.split(": ").pop()+"', schedule says "+want);
+      if(v.lessonDate!==CAL.longDate(dt)) fail.push(g+" w"+w+" "+d+" header date and notebook date come from different days");
+      if(g==="y1") seen.add(want);
+    });
+  });
+  if(seen.size!==180) fail.push("the 180 lessons produce "+seen.size+" distinct notebook dates, not 180");
+  // Days that prove it follows the calendar, not a count of weekdays.
+  [[1,"Mon","August 31, 2026"],[2,"Mon","September 8, 2026"],[36,"Fri","June 8, 2027"]].forEach(([w,d,want])=>{
+    const line=CL.dateLineFor(w,d);
+    console.log("  week "+String(w).padStart(2)+" "+d+"  ->  "+line.split(": ").pop());
+    if(!line.endsWith(": "+want)) fail.push("week "+w+" "+d+" should be "+want+", got "+line);
+  });
+  console.log("  360 grade-days: Task 1 matches the scheduled date and the lesson header");
+}
 
 console.log("\n=== the panel prints them in lesson order ===");
 { const src=fs.readFileSync(__dirname+'/../word-voyagers.dc.html','utf8');

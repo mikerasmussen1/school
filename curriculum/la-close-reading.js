@@ -35,10 +35,10 @@
    * a scheduled date, so the notebook records when each entry was written.
    * (It once showed "like this: September 14, 2026" on every lesson, and then
    * a scheduled date per lesson; both implied a pace the course does not set.) */
-  const DATE_LINE = "Write today's date at the top in this format: Month Day, Year";
-  /* Fifth grade has its own wording, with the weekday and a worked example.
-   * The example date is fixed on purpose: it shows the format, and it is a
-   * date that matters to the family, not a lesson date. */
+  const DATE_LINE = "Write today's date in your notebook following this format: Weekday, Month, Day, Year.  Example: Friday, January 5, 2018 (one of the best days of Nana's life!)";
+  /* Each grade has its own wording: the same weekday format with a worked
+   * example. The example dates are fixed on purpose: they show the format,
+   * and each is a date that matters to the family, not a lesson date. */
   const DATE_LINE_Y2 = "Write today's date in your notebook following this format: Weekday, Month, Day, Year.  Example: Saturday, March 5, 2016 (one of the best days of Nana's life!)";
   function dateLineFor(grade){ return grade === "y2" ? DATE_LINE_Y2 : DATE_LINE; }
 

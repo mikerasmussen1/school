@@ -65,10 +65,10 @@ console.log("  all 10 grade-days: Task 1, Task 2, Task 3 = check your work");
 
 console.log("\n=== Task 1 asks for today's date, in each grade's own wording, every day ===");
 { // Self-paced course: Task 1 asks for the day the work is done, never a
-  // lesson's scheduled date. 3rd grade gives the format with no date; 5th
-  // grade gives the weekday format and one fixed example date.
+  // lesson's scheduled date. Both grades give the weekday format with one
+  // fixed example date each.
   const WANT={
-    y1:"Write today's date at the top in this format: Month Day, Year",
+    y1:"Write today's date in your notebook following this format: Weekday, Month, Day, Year.  Example: Friday, January 5, 2018 (one of the best days of Nana's life!)",
     y2:"Write today's date in your notebook following this format: Weekday, Month, Day, Year.  Example: Saturday, March 5, 2016 (one of the best days of Nana's life!)"
   };
   ["y1","y2"].forEach(g=>{
@@ -82,10 +82,10 @@ console.log("\n=== Task 1 asks for today's date, in each grade's own wording, ev
     });
     const c=new C(); c.state.landed=true; c.state.year=g; c.state.week=1; c.state.day="Mon"; c.state.view="parent";
     const p=c.renderVals().dateTaskParent||"";
-    if(g==="y2" ? !/Weekday, Month Day, Year/.test(p) : !/^Today's date, written as Month Day, Year\.$/.test(p))
+    if(!/Weekday, Month Day, Year/.test(p) || !(g==="y2" ? /March 5, 2016/ : /January 5, 2018/).test(p))
       fail.push(g+" parent tab describes Task 1 as: "+p);
   });
-  if(/\d/.test(WANT.y1)) fail.push("3rd grade Task 1 shows a date");
+  if((WANT.y1.match(/\d{4}/g)||[]).join()!=="2018") fail.push("3rd grade Task 1 shows a date other than the example");
   if((WANT.y2.match(/\d{4}/g)||[]).join()!=="2016") fail.push("5th grade Task 1 shows a date other than the example");
   console.log("  360 grade-days: each grade's Task 1 exactly as agreed, and the parent tab matches");
 }

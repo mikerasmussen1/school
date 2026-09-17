@@ -54,6 +54,14 @@ console.log("\n=== the merged step opens the assignment, and ticking it finishes
   if(c.renderVals().daySteps.some(x=>/^\d+\. Read today's assignment$/.test(x.label))) fail.push("a separate Read today's assignment row is still shown");
 }
 
+console.log("\n=== the grown-up step asks for feedback and changes, both grades ===");
+["y1","y2"].forEach(g=>{
+  const a=M.dayPlan(g,4,"Thu").steps.find(x=>x.key==="approve")||{};
+  if(a.detail!=="Carry the paper to a grown-up. They look at the real page, and provide feedback here. Make any changes to address their feedback.")
+    fail.push(g+" the grown-up step reads: "+a.detail);
+});
+console.log("  "+(M.dayPlan("y2",4,"Thu").steps.find(x=>x.key==="approve")||{}).label+": "+(M.dayPlan("y2",4,"Thu").steps.find(x=>x.key==="approve")||{}).detail);
+
 console.log("\n=== 3rd grade keeps its two steps ===");
 { const keys=M.dayPlan("y1",4,"Thu").steps.map(s=>s.key).join(">");
   if(keys!=="quote>fix>close>prompt>write>approve>end") fail.push("3rd grade lesson 4 changed: "+keys);

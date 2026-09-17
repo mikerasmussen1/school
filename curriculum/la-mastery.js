@@ -27,14 +27,14 @@
  *             the honest remediation here, and the page says so plainly rather
  *             than pretending it has generated new material.
  *
- * THE STUCK VALVE — the part that matters most for a self-led curriculum.
- * A child who cannot clear the bar must not be trapped in a loop. After
- * MAX_ROUNDS attempts the gate opens anyway, the day is marked "needs a look",
- * and the child is told plainly to go get a grown-up. Three failures in a row
- * is not a discipline problem, it is a signal that something was not taught
- * well enough, and no amount of re-serving the same items fixes that. Locking
- * a nine-year-old out of their whole school day over it would be cruel and
- * would teach them to hate the subject.
+ * DRILLS CONTINUE UNTIL 80%. A scored step ticks off only when a round
+ * clears the bar, however many rounds that takes; each short round builds the
+ * next from what was missed. After MAX_ROUNDS short rounds the drill is
+ * flagged "needs a look" and the child is told to get a grown-up - three
+ * short rounds usually means something was not taught well enough - but the
+ * step stays open until 80%. Nothing else is locked meanwhile: other steps and
+ * lessons stay open, and a parent can pass the step from For Parents if
+ * something is genuinely broken.
  *
  * The "needs a look" flag is surfaced on the For Parents tab, which is the
  * point: minimal parent engagement should mean the parent is called when they
@@ -395,7 +395,7 @@
     return "You have given "+what+" a really good try. This one needs a grown-up, "+
            "not more attempts on your own — go and get someone, show them this screen, "+
            "and work through it together. That is the right move, not a failure. "+
-           "You can carry on with the rest of the day.";
+           "This step stays open until you reach 80%, and you can carry on with the rest of the lesson meanwhile.";
   }
 
   /* PACE, SHOWN NOT ENFORCED. The date he would finish if he did one lesson

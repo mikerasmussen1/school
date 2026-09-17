@@ -127,3 +127,6 @@ if (fails.length) {
   process.exit(1);
 }
 console.log("  PASS  pace rule behaves, drills serve their full banks, review is cumulative\n");
+
+// Explicit exit: scripts that load the curriculum into a fake window can leave Node's timers alive.
+process.exit(0);

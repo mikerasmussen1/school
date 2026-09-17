@@ -46,12 +46,14 @@ let failed = false;
 const step = t => console.log(`\n── ${t} ${"─".repeat(Math.max(0, 58 - t.length))}`);
 const die = m => { console.error("  FAIL  " + m); failed = true; };
 
+const STEP_TIMEOUT_MS = 20 * 60 * 1000; // a checker that never exits must fail the build, not hang it
 function run(cmd, args, label) {
-  const r = spawnSync(cmd, args, { encoding: "utf8", stdio: ["ignore", "pipe", "pipe"] });
+  const r = spawnSync(cmd, args, { encoding: "utf8", stdio: ["ignore", "pipe", "pipe"], timeout: STEP_TIMEOUT_MS });
   const out = (r.stdout || "") + (r.stderr || "");
   process.stdout.write(out.split("\n").map(l => l ? "  " + l : l).join("\n"));
-  if (r.status !== 0) die(`${label} exited ${r.status}`);
-  return { ok: r.status === 0, out };
+  if (r.error) die(`${label} ${r.error.code === "ETIMEDOUT" ? "did not exit within 20 minutes" : "could not run: " + r.error.message}`);
+  else if (r.status !== 0) die(`${label} exited ${r.status}`);
+  return { ok: !r.error && r.status === 0, out };
 }
 
 // ── 1. sheets follow the bank ───────────────────────────────────────────

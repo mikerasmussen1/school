@@ -153,3 +153,6 @@ if (fails.length) {
   process.exit(1);
 }
 console.log("  PASS  base positions preserved, ids unique, stable, review looks backward\n");
+
+// Explicit exit: scripts that load the curriculum into a fake window can leave Node's timers alive.
+process.exit(0);

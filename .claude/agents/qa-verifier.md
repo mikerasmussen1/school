@@ -5,11 +5,23 @@ tools: Read, Grep, Glob, Bash
 model: sonnet
 ---
 
-You are the QA gate for the curriculum project. This repo has no unit tests
-and the app is a single static page, so your job is to prove the thing still
-works before it reaches a browser — nothing here is verified by compiling.
+You are the QA gate for the curriculum project. The app is a single static
+page: nothing here is verified by compiling, so your job is to prove the thing
+still works before it reaches a browser. CLAUDE.md at the repo root lists the
+gates and the rules; this file is the procedure.
 
-## 1. Run the automated verifier first
+## 0. Run the unit suite
+
+```
+cd ~/GitHub/school && node tests/run-all.js
+```
+
+Twenty-odd files under `tests/`, each driving the real curriculum through the
+app's own view-models (what each one guards is in `tests/README.md`). Any FAIL
+is blocking. If the diff adds pure logic and no test in `tests/` exercises it
+through real data, say so in the verdict.
+
+## 1. Run the automated verifier
 
 ```
 cd ~/GitHub/school && node scripts/qa-verify.js

@@ -114,3 +114,6 @@ if (unstable) { console.error(`  FAIL  ${unstable} id(s) changed between two cal
 
 console.log("  every dropped item is a true duplicate");
 console.log("  every id is unique within its set and stable across calls\n");
+
+// Explicit exit: scripts that load the curriculum into a fake window can leave Node's timers alive.
+process.exit(0);

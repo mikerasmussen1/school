@@ -89,7 +89,7 @@ console.log("\n=== the page prints the challenge, not a generic task ===");
     fail.push("there is no notice for weeks that are not written");
   // The date is Task #1 of the notebook entry, so it now lives with the quote
   // at the start of the lesson rather than in the closing panel.
-  if(src.indexOf('sc-for list="{{ quoteTasks }}"')<0 || src.indexOf("C.DATE_LINE")<0)
+  if(src.indexOf('sc-for list="{{ quoteTasks }}"')<0 || src.indexOf("C.dateLineFor(st.year)")<0)
     fail.push("the date line is not printed as Task #1 with the quote");
   if(!/curriculum\/la-challenge\.js/.test(src))
     fail.push("the page does not load the challenge module");

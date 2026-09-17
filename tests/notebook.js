@@ -63,22 +63,31 @@ console.log("\n=== three numbered tasks, the third always the self-check ===");
 });
 console.log("  all 10 grade-days: Task 1, Task 2, Task 3 = check your work");
 
-console.log("\n=== Task 1 asks for today's date as Month Day, Year, every day, both grades ===");
-{ // The course is self-paced, so Task 1 asks for the day the work is done and
-  // gives the format, not a date: no fixed example, no scheduled date.
-  console.log("  " + CL.DATE_LINE);
+console.log("\n=== Task 1 asks for today's date, in each grade's own wording, every day ===");
+{ // Self-paced course: Task 1 asks for the day the work is done, never a
+  // lesson's scheduled date. 3rd grade gives the format with no date; 5th
+  // grade gives the weekday format and one fixed example date.
+  const WANT={
+    y1:"Write today's date at the top in this format: Month Day, Year",
+    y2:"Write today's date in your notebook following this format: Weekday, Month, Day, Year.  Example: Saturday, March 5, 2016 (one of the best days of Nana's life!)"
+  };
   ["y1","y2"].forEach(g=>{
+    console.log("  "+g+": "+CL.dateLineFor(g));
+    if(CL.dateLineFor(g)!==WANT[g]) fail.push(g+" Task 1 wording is not the agreed text: "+CL.dateLineFor(g));
     for(let w=1;w<=36;w++) CL.ORDER.forEach(d=>{
       const c=new C(); c.state.landed=true; c.state.year=g; c.state.week=w; c.state.day=d;
-      const line=((c.renderVals().quoteTasks||[])[0]||{}).text||"";
-      if(line!==CL.DATE_LINE) fail.push(g+" w"+w+" "+d+" Task 1 differs: "+line);
+      const v=c.renderVals();
+      const line=((v.quoteTasks||[])[0]||{}).text||"";
+      if(line!==WANT[g]) fail.push(g+" w"+w+" "+d+" Task 1 differs: "+line);
     });
+    const c=new C(); c.state.landed=true; c.state.year=g; c.state.week=1; c.state.day="Mon"; c.state.view="parent";
+    const p=c.renderVals().dateTaskParent||"";
+    if(g==="y2" ? !/Weekday, Month Day, Year/.test(p) : !/^Today's date, written as Month Day, Year\.$/.test(p))
+      fail.push(g+" parent tab describes Task 1 as: "+p);
   });
-  if(!/today's date/.test(CL.DATE_LINE)) fail.push("Task 1 does not ask for today's date");
-  if(!/Month Day, Year/.test(CL.DATE_LINE)) fail.push("Task 1 does not give the Month Day, Year format");
-  if(/\d/.test(CL.DATE_LINE) || /(January|February|March|April|May|June|July|August|September|October|November|December) \d/.test(CL.DATE_LINE))
-    fail.push("Task 1 still shows a date: "+CL.DATE_LINE);
-  console.log("  360 grade-days: the same Task 1, asking for today's date with no date shown");
+  if(/\d/.test(WANT.y1)) fail.push("3rd grade Task 1 shows a date");
+  if((WANT.y2.match(/\d{4}/g)||[]).join()!=="2016") fail.push("5th grade Task 1 shows a date other than the example");
+  console.log("  360 grade-days: each grade's Task 1 exactly as agreed, and the parent tab matches");
 }
 
 console.log("\n=== the panel prints them in lesson order ===");

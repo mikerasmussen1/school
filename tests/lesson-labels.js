@@ -62,11 +62,14 @@ console.log("\n=== the labels that replaced them ===");
 }
 { const src=h.slice(0, h.indexOf("data-dc-script>"));
   if(/>End of day</.test(src)) fail.push("the end banner still says End of day");
-  if(!/>End of lesson</.test(src)) fail.push("the end banner does not say End of lesson");
+  if(!/>\{\{ endEyebrow \}\}</.test(src)) fail.push("the end banner does not bind its label");
+  const eb=g=>{ const c=new C(); c.state.landed=true; c.state.year=g; c.state.week=20; c.state.day="Thu"; c.startDay(); return c.renderVals().endEyebrow; };
+  if(eb("y2")!=="End of lesson reward!") fail.push("5th grade end banner reads: "+eb("y2"));
+  if(eb("y1")!=="End of lesson") fail.push("3rd grade end banner reads: "+eb("y1"));
   const text=src.replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>/g,"").replace(/<[^>]+>/g," ");
   const m=text.match(/[^.]{0,40}\b(Monday|Tuesday|Wednesday|Thursday|Friday)s?\b[^.]{0,40}/g)||[];
   m.filter(x=>!ALLOWED.test(x)).forEach(x=>fail.push("page text still names a weekday: "+x.trim()));
-  console.log("  end banner    End of lesson");
+  console.log("  end banner    5th: "+eb("y2")+"  \u00b7  3rd: "+eb("y1"));
 }
 
 console.log(fail.length?("\nFAILURES:\n  "+fail.slice(0,8).join("\n  ")):"\nRESULT: every Word Voyagers label names a lesson number, never a weekday.");

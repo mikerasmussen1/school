@@ -38,7 +38,7 @@
     1:["Copy this sentence exactly, including every mark of punctuation: \u201cWhatsoever thy hand findeth to do, do it with thy might.\u201d Then cover it, write it a second time from memory, and set the two versions side by side. Mark every difference you find, however small.",
        "Choose one paragraph from this week's passage. Write three claims about it, each followed by an exact quotation in quotation marks.",
        "Read a paragraph aloud to someone, then have them summarize it back. Correct anything they got wrong by pointing at the actual words."],
-    2:["Write out five sentences from this week's passage that state something explicitly. Under each, write one inference you can reasonably draw.",
+    2:["Write out one sentence from this week's passage that states something explicitly. Under it, write one inference you can reasonably draw.",
        "Write a paragraph about a character, making one inference and quoting the exact evidence that supports it.",
        "Make an inference aloud about someone in a story and defend it when a listener challenges you."],
     3:["Copy three sentences from this week's passage that give evidence. Under each, write what claim it supports.",
@@ -171,7 +171,7 @@
            :                        "Speak & Show — Week "+week,
       prompt:r[i],
       instructions: kind==="handwriting"
-        ? "Write this by hand on paper. Then photograph the page and press Grade this work."
+        ? "Write this by hand on paper. Then take the page to a grown-up for feedback."
         : kind==="writing"
         ? (bigPiece
             ? "This is a unit piece. Write it, photograph it for feedback on structure and conventions — then give it to a person to read. The model can tell you whether the parts are there; only a reader can tell you whether it lands."

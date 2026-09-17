@@ -141,7 +141,7 @@
        detail:"Take a picture of your page and press Grade this work.",
        done:"You have read your feedback."},
       {key:"approve", label:"Take it to a grown-up to mark", gate:"approve",
-       detail:"Carry the paper to a grown-up. They look at the real page, not the photo, and mark it here.",
+       detail:"Carry the paper to a grown-up. They look at the real page, and provide feedback here. Make any changes to address their feedback.",
        done:"A grown-up has marked it."},
       {key:"end",   label:"Finish this lesson",                 gate:"end",
        detail:"Handwriting lesson complete.", done:"Lesson closed."}

@@ -17,36 +17,39 @@ const C=eval("(function(){ "+h.split('data-dc-script>')[1].split('</script>')[0]
 const CL=window.__CURR.LA_CLOSE;
 let fail=[];
 
-console.log("=== the notebook is one numbered sequence of five ===");
+console.log("=== the notebook is one numbered sequence of six ===");
 { const fs2=require('fs');
   const src=fs2.readFileSync(__dirname+'/../word-voyagers.dc.html','utf8');
   const qi=src.indexOf('{{ quoteTasks }}');
   if(qi<0) fail.push("the quote card does not carry notebook tasks");
   const ci=src.indexOf('{{ aClose }}');
   const cseg=src.slice(ci, src.indexOf('{{ aRead }}', ci));
-  ["Task #4","Task #5"].forEach(t=>{ if(cseg.indexOf(t)<0) fail.push("the lesson panel is missing "+t); });
-  ["Task #1","Task #2","Task #3"].forEach(t=>{ if(cseg.indexOf(t)>=0) fail.push(t+" is repeated after the passage"); });
+  ["Task #5","Task #6"].forEach(t=>{ if(cseg.indexOf(t)<0) fail.push("the lesson panel is missing "+t); });
+  ["Task #1","Task #2","Task #3","Task #4"].forEach(t=>{ if(cseg.indexOf(t)>=0) fail.push(t+" is repeated after the passage"); });
+  if(!/Tasks 5 and 6 come later, after the reading passage\./.test(src)) fail.push("the quote card does not say Tasks 5 and 6 come later");
+  if(!/Done \u2014 tasks 1 to 4 written/.test(src)) fail.push("the quote card's button does not say tasks 1 to 4");
   if(cseg.indexOf('{{ lessonDateLine }}')>=0) fail.push("the date is still asked for twice");
   // the quote card must carry 1 to 3, in order
   const c=new C(); c.state.landed=true; c.state.year="y1"; c.state.week=1; c.state.day="Mon";
   const v=c.renderVals();
   const t=v.quoteTasks||[];
-  if(t.length!==3) fail.push("the quote offers "+t.length+" tasks, not 3");
+  if(t.length!==4) fail.push("the quote offers "+t.length+" tasks, not 4");
   t.forEach((x,i)=>{ if(x.n!=="Task #"+(i+1)) fail.push("quote task "+i+" is labelled "+x.n); });
   if(!/date/i.test(t[0].text))                 fail.push("Task 1 is not the date");
-  if(!/word for word/i.test(t[1].text))        fail.push("Task 2 does not ask for the quote word for word");
-  if(!/where it came from/i.test(t[1].text))   fail.push("Task 2 does not ask where the quote came from");
-  if(!/means/i.test(t[2].text))                fail.push("Task 3 does not ask what the quote means");
+  const WANT={1:"Copy today's quote word for word, exactly as it is written.",
+              2:"Write where it came from underneath.",
+              3:"Write what this quote's translation means to you (or what you think it means.) One or two sentences is sufficient."};
+  [1,2,3].forEach(i=>{ if(!t[i] || t[i].text!==WANT[i]) fail.push("Task #"+(i+1)+" is not the agreed wording: "+(t[i]||{}).text); });
   const TASK3="Write what this quote's translation means to you (or what you think it means.) One or two sentences is sufficient.";
   ["y1","y2"].forEach(g=>{ const c2=new C(); c2.state.landed=true; c2.state.year=g; c2.state.week=20; c2.state.day="Thu";
-    const t3=((c2.renderVals().quoteTasks||[])[2]||{}).text;
-    if(t3!==TASK3) fail.push(g+" Task 3 is not the agreed wording: "+t3); });
+    const t4=((c2.renderVals().quoteTasks||[])[3]||{}).text;
+    if(t4!==TASK3) fail.push(g+" Task 4 is not the agreed wording: "+t4); });
   // The line under the quote's source is labelled "Translation:". The quote is
   // shown in one place: the quote step's panel.
   { const labels=(fs2.readFileSync(__dirname+'/../word-voyagers.dc.html','utf8').match(/>(\w+): <\/span>\{\{ qThink \}\}/g)||[]);
     if(labels.length!==1 || labels[0].indexOf(">Translation: <")!==0) fail.push("the line under the quote is not labelled Translation: "+labels.join(", ")); }
-  console.log("  quote card: Task 1 date, Task 2 quote and source, Task 3 what the translation means; \"Translation:\" under the source");
-  console.log("  lesson panel: Task 4 challenge sentence, Task 5 critical thinking");
+  console.log("  quote card: Task 1 date, Task 2 the quote, Task 3 where it came from, Task 4 what the translation means");
+  console.log("  lesson panel: Task 5 challenge sentence, Task 6 critical thinking");
 }
 
 console.log("\n=== every lesson is named and says what to look for ===");

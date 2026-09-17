@@ -39,7 +39,7 @@ console.log("\n=== Thursday 3 September specifically ===");
   let v=c.renderVals();
   console.log("  quote: "+v.qText.slice(0,58));
   // The quote card is revealed by opening its checklist step, and ticks from
-  // its own "Done - tasks 1 to 3 written" button; there is no second tick.
+  // its own "Done - tasks 1 to 4 written" button; there is no second tick.
   v.daySteps[0].onClick();
   v=c.renderVals();
   if(!v.aQuote) fail.push("quote panel does not open");

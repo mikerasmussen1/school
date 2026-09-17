@@ -18,7 +18,7 @@ console.log("=== every quoted sentence is verbatim in its passage ===");
       ["a","b"].forEach(x=>{
         if(text.indexOf(c[x])<0) fail.push(label+" w"+w+" "+d+" ("+x+") is not in the passage: "+c[x].slice(0,40));
       });
-      // Task 4 says "copy it exactly", so each must be a WHOLE sentence: it
+      // Task 5 says "copy it exactly", so each must be a WHOLE sentence: it
       // starts where a passage sentence starts (not after "Mr." / "Mrs." /
       // "Dr.", which is how "Okonkwo put a lamp..." lost its opening), ends on
       // sentence punctuation, and does not leave a quotation mark open.

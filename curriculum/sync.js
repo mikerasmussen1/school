@@ -110,10 +110,46 @@
     const key = studentKey();
     return "sync." + subjectId + (key ? "." + key : "");
   }
+  /* THE COPY FROM BEFORE THIS DEVICE KNEW WHOSE IT WAS.
+   *
+   * Until progress was keyed by child, a device kept one "sync.<subject>" for
+   * everybody. A child signing in after that change looked at their own empty
+   * key and appeared to be back at the first lesson, with the old copy sitting
+   * untouched beside it. So the first signed-in child to open the subject
+   * adopts that copy, and the device records who took it: one child, once,
+   * never the brother as well. A child whose record already holds work keeps
+   * the record - pull() decides that - so this only ever fills an empty slot. */
+  function claimKey(subjectId){ return "sync." + subjectId + ".claimedBy"; }
+  function adoptLegacy(subjectId){
+    const key = studentKey();
+    if(!key) return null;
+    try{
+      const mine = localStorage.getItem(localKey(subjectId));
+      if(mine && Object.keys(JSON.parse(mine)||{}).length) return null;   // already has its own
+      const claimed = localStorage.getItem(claimKey(subjectId));
+      if(claimed && claimed !== key) return null;                          // the other child took it
+      const legacy = localStorage.getItem("sync." + subjectId);
+      if(!legacy) return null;
+      const data = JSON.parse(legacy);
+      if(!data || !Object.keys(data).length) return null;
+      localStorage.setItem(localKey(subjectId), legacy);
+      localStorage.setItem(claimKey(subjectId), key);
+      return data;
+    }catch(e){ return null; }
+  }
+
   const local = {
     key: localKey,
+    adoptLegacy,
     get(subjectId){
-      try{ return JSON.parse(localStorage.getItem(localKey(subjectId))||"{}"); }
+      try{
+        const raw = localStorage.getItem(localKey(subjectId));
+        if(!raw || !Object.keys(JSON.parse(raw)||{}).length){
+          const taken = adoptLegacy(subjectId);
+          if(taken) return taken;
+        }
+        return JSON.parse(raw||"{}");
+      }
       catch(e){ return {}; }
     },
     set(subjectId, data){
